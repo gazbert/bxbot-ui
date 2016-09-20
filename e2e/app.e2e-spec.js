@@ -1,5 +1,5 @@
-describe('QuickStart E2E Tests', function () {
-    var expectedMsg = 'BX-Bot UI';
+describe('BX-bot Admin E2E Tests', function () {
+    var expectedMsg = 'BX-bot Admin';
     beforeEach(function () {
         browser.get('');
     });

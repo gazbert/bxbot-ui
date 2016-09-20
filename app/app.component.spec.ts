@@ -1,9 +1,7 @@
 /* tslint:disable:no-unused-variable */
-import {AppComponent} from './app.component';
-
-import {TestBed} from '@angular/core/testing';
-
-import {By}             from '@angular/platform-browser';
+import {AppComponent} from "./app.component";
+import {TestBed} from "@angular/core/testing";
+import {By} from "@angular/platform-browser";
 
 ////////  SPECS  /////////////
 
@@ -17,6 +15,7 @@ describe('Smoke test', () => {
 describe('AppComponent with TCB', function () {
     beforeEach(() => {
         TestBed.configureTestingModule({declarations: [AppComponent]});
+        TestBed.compileComponents();
     });
 
     it('should instantiate component', () => {
@@ -32,6 +31,6 @@ describe('AppComponent with TCB', function () {
 
         h1 = fixture.debugElement.query(By.css('h1')).nativeElement;            // preferred
 
-        expect(h1.innerText).toMatch(/BX-Bot UI/i, '<h1> should say something about "BX-Bot UI"');
+        expect(h1.innerText).toMatch(/BX-bot Admin/i, '<h1> should say something about "BX-bot Admin"');
     });
 });
