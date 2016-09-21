@@ -1,0 +1,12 @@
+<div *ngIf="exchange">
+    <h2>{{exchange.id}} Exchange Details</h2>
+    <div>
+        <label>Id: </label>{{exchange.id}}
+    </div>
+    <div>
+        <label>Adapter: </label>
+        <input [(ngModel)]="exchange.adapter" placeholder="adapter" size="50"/>
+    </div>
+    <button (click)="goBack()">Back</button>
+
+</div>

@@ -11,10 +11,11 @@ import {AppComponent} from "./app.component";
 import {ExchangeRestClientService} from "./exchange-rest-client.service";
 import {routing} from "./app.routing";
 import {DashboardComponent} from "./dashboard.component";
+import {ExchangeDetailComponent} from "./exchange-detail.component";
 
 @NgModule({
     imports: [BrowserModule, FormsModule, HttpModule, InMemoryWebApiModule.forRoot(InMemoryDataService), routing],
-    declarations: [AppComponent, DashboardComponent],
+    declarations: [AppComponent, DashboardComponent, ExchangeDetailComponent],
     providers: [ExchangeRestClientService],
     bootstrap: [AppComponent]
 })

@@ -36,7 +36,7 @@ h3 {
     color: #eee;
     max-height: 120px;
     min-width: 120px;
-    background-color: #607D8B;
+    background-color: #518b83;
     border-radius: 2px;
 }
 
@@ -47,7 +47,7 @@ h4 {
 .module:hover {
     background-color: #EEE;
     cursor: pointer;
-    color: #607d8b;
+    color: #518b83;
 }
 
 .grid-pad {

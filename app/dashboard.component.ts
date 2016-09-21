@@ -20,4 +20,9 @@ export class DashboardComponent implements OnInit {
         this.exchangeRestClientService.getExchanges()
             .then(exchanges => this.exchanges = exchanges.slice(1, 9));
     }
+
+    gotoDetail(exchange: Exchange): void {
+        let link = ['/detail', exchange.id];
+        this.router.navigate(link);
+    }
 }

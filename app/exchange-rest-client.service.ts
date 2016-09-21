@@ -18,7 +18,7 @@ export class ExchangeRestClientService {
             .catch(this.handleError);
     }
 
-    getExchange(id: number): Promise<Exchange> {
+    getExchange(id: string): Promise<Exchange> {
         return this.getExchanges().then(exchanges => exchanges.find(exchange => exchange.id === id));
     }
 
