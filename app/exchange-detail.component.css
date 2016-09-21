@@ -1,8 +1,20 @@
+.module {
+    padding: 20px;
+    text-align: left;
+    color: #444;
+    max-height: 400px;
+    max-width: 600px;
+    #background-color: rgba(226, 221, 220, 0.9);
+    #background-color: rgba(81, 139, 131, 0.9);
+    background-color: rgba(238, 238, 238, 0.95);
+    border-radius: 2px;
+}
+
 label {
     display: inline-block;
     width: 5em;
     margin: .5em 0;
-    color: #607D8B;
+    color: #444;
     font-weight: bold;
 }
 
@@ -32,3 +44,6 @@ button:disabled {
     color: #ccc;
     cursor: auto;
 }
+
+
+
