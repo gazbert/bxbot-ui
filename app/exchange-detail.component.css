@@ -2,18 +2,18 @@
     padding: 20px;
     text-align: left;
     color: #444;
-    max-height: 400px;
-    max-width: 600px;
+    max-height: 1000px;
+    max-width: 820px;
     #background-color: rgba(226, 221, 220, 0.9);
     #background-color: rgba(81, 139, 131, 0.9);
-    background-color: rgba(238, 238, 238, 0.95);
+    background-color: rgba(238, 238, 238, 0.9);
     border-radius: 2px;
     margin-top: 10px;
 }
 
 label {
     display: inline-block;
-    width: 5em;
+    width: 15em;
     margin: .5em 0;
     color: #444;
     font-weight: bold;
@@ -46,5 +46,69 @@ button:disabled {
     cursor: auto;
 }
 
+/* Need to clean these up */
+
+.selected {
+    background-color: #CFD8DC !important;
+    color: white;
+}
+
+.items {
+    margin: 0 0 0.5em 0;
+    list-style-type: none;
+    padding: 0;
+    width: 15em;
+}
+
+.items li {
+    cursor: pointer;
+    position: relative;
+    left: 15em;
+    background-color: #EEE;
+    margin: .5em;
+    padding: .3em 0;
+    height: 1.6em;
+    border-radius: 4px;
+}
+
+.items li.selected:hover {
+    background-color: #BBD8DC !important;
+    color: white;
+}
+
+.items li:hover {
+    color: #607D8B;
+    background-color: #DDD;
+    /*left: .1em;*/
+    width: 15em;
+}
+
+.items .text {
+    position: relative;
+    top: -3px;
+}
+
+.items .badge {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    background-color: #607D8B;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    top: -4px;
+    height: 1.8em;
+    margin-right: .8em;
+    border-radius: 4px 0 0 4px;
+}
+
+button.delete {
+    float:right;
+    margin-top: 2px;
+    margin-right: .8em;
+    background-color: gray !important;
+    color:white;
+}
 
 
