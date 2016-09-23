@@ -27,5 +27,11 @@ export class ExchangeDetailComponent implements OnInit {
     goBack(): void {
         window.history.back();
     }
+
+    save(): void {
+        this.exchangeRestClientService.update(this.exchange)
+            .then(this.goBack);
+    }
+
 }
 
