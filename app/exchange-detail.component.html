@@ -19,7 +19,7 @@
         <label>Non Fatal HTTP Error Codes:</label>
         <ul class="items" *ngFor="let errorCode of exchange.networkConfig.nonFatalErrorHttpStatusCodes; let i=index;">
             <li>
-                <input [(ngModel)]="exchange.networkConfig.nonFatalErrorHttpStatusCodes[i]" placeholder="Connection reset" size="5">
+                <input [(ngModel)]="exchange.networkConfig.nonFatalErrorHttpStatusCodes[i].value" placeholder="501" size="5">
             </li>
         </ul>
     </div>
@@ -28,8 +28,7 @@
         <label>Non Fatal Error Messages:</label>
         <ul class="items" *ngFor="let errorMsg of exchange.networkConfig.nonFatalErrorMessages; let i = index">
             <li>
-                <input [(ngModel)]="exchange.networkConfig.nonFatalErrorMessages[i]" placeholder="Connection reset"
-                       size="50"/>
+                <input [(ngModel)]="exchange.networkConfig.nonFatalErrorMessages[i].value" placeholder="Connection reset" size="50"/>
             </li>
         </ul>
     </div>
