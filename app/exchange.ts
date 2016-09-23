@@ -7,8 +7,8 @@ export class Exchange {
 
 export class NetworkConfig{
     connectionTimeout: number;
-    nonFatalErrorHttpStatusCodes: ErrorCode[];
-    errorMessages: ErrorMessage[];
+    nonFatalErrorHttpStatusCodes: Array<ErrorCode>;
+    errorMessages: Array<ErrorMessage>;
 }
 
 export class ErrorCode {
