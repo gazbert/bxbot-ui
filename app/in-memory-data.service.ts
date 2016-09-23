@@ -29,11 +29,11 @@ export class InMemoryDataService implements InMemoryDbService {
                 networkConfig: {
                     connectionTimeout: 120,
                     nonFatalErrorHttpStatusCodes: [
-                        {value: 502},
-                        {value: 503},
-                        {value: 504},
-                        {value: 530},
-                        {value: 522},
+                        {id: 1, value: 502},
+                        {id: 2, value: 503},
+                        {id: 3, value: 503},
+                        {id: 4, value: 525},
+                        {id: 5, value: 530},
                     ],
                     nonFatalErrorMessages: [
                         {value: "Connection reset"},
@@ -49,11 +49,21 @@ export class InMemoryDataService implements InMemoryDbService {
                 networkConfig: {
                     connectionTimeout: 90,
                     nonFatalErrorHttpStatusCodes: [
-                        {value: 502},
-                        {value: 503},
-                        {value: 504},
-                        {value: 530},
-                        {value: 522},
+                        {
+                            code: {id: 1, value: 502}
+                        },
+                        {
+                            code: {id: 2, value: 503}
+                        },
+                        {
+                            code: {id: 3, value: 503}
+                        },
+                        {
+                            code: {id: 4, value: 525}
+                        },
+                        {
+                            code: {id: 5, value: 530}
+                        }
                     ],
                     nonFatalErrorMessages: [
                         {value: "Connection reset"},
@@ -69,11 +79,21 @@ export class InMemoryDataService implements InMemoryDbService {
                 networkConfig: {
                     connectionTimeout: 30,
                     nonFatalErrorHttpStatusCodes: [
-                        {value: 502},
-                        {value: 503},
-                        {value: 504},
-                        {value: 530},
-                        {value: 522},
+                        {
+                            code: {id: 1, value: 502}
+                        },
+                        {
+                            code: {id: 2, value: 503}
+                        },
+                        {
+                            code: {id: 3, value: 503}
+                        },
+                        {
+                            code: {id: 4, value: 525}
+                        },
+                        {
+                            code: {id: 5, value: 530}
+                        }
                     ],
                     nonFatalErrorMessages: [
                         {value: "Connection reset"},
@@ -89,11 +109,21 @@ export class InMemoryDataService implements InMemoryDbService {
                 networkConfig: {
                     connectionTimeout: 45,
                     nonFatalErrorHttpStatusCodes: [
-                        {value: 502},
-                        {value: 503},
-                        {value: 504},
-                        {value: 530},
-                        {value: 522},
+                        {
+                            code: {id: 1, value: 502}
+                        },
+                        {
+                            code: {id: 2, value: 503}
+                        },
+                        {
+                            code: {id: 3, value: 503}
+                        },
+                        {
+                            code: {id: 4, value: 525}
+                        },
+                        {
+                            code: {id: 5, value: 530}
+                        }
                     ],
                     nonFatalErrorMessages: [
                         {value: "Connection reset"},
@@ -109,11 +139,21 @@ export class InMemoryDataService implements InMemoryDbService {
                 networkConfig: {
                     connectionTimeout: 50,
                     nonFatalErrorHttpStatusCodes: [
-                        {value: 502},
-                        {value: 503},
-                        {value: 504},
-                        {value: 530},
-                        {value: 522},
+                        {
+                            code: {id: 1, value: 502}
+                        },
+                        {
+                            code: {id: 2, value: 503}
+                        },
+                        {
+                            code: {id: 3, value: 503}
+                        },
+                        {
+                            code: {id: 4, value: 525}
+                        },
+                        {
+                            code: {id: 5, value: 530}
+                        }
                     ],
                     nonFatalErrorMessages: [
                         {value: "Connection reset"},
@@ -129,11 +169,21 @@ export class InMemoryDataService implements InMemoryDbService {
                 networkConfig: {
                     connectionTimeout: 20,
                     nonFatalErrorHttpStatusCodes: [
-                        {value: 502},
-                        {value: 503},
-                        {value: 504},
-                        {value: 530},
-                        {value: 522},
+                        {
+                            code: {id: 1, value: 502}
+                        },
+                        {
+                            code: {id: 2, value: 503}
+                        },
+                        {
+                            code: {id: 3, value: 503}
+                        },
+                        {
+                            code: {id: 4, value: 525}
+                        },
+                        {
+                            code: {id: 5, value: 530}
+                        }
                     ],
                     nonFatalErrorMessages: [
                         {value: "Connection reset"},
@@ -149,11 +199,21 @@ export class InMemoryDataService implements InMemoryDbService {
                 networkConfig: {
                     connectionTimeout: 10,
                     nonFatalErrorHttpStatusCodes: [
-                        {value: 502},
-                        {value: 503},
-                        {value: 504},
-                        {value: 530},
-                        {value: 522},
+                        {
+                            code: {id: 1, value: 502}
+                        },
+                        {
+                            code: {id: 2, value: 503}
+                        },
+                        {
+                            code: {id: 3, value: 503}
+                        },
+                        {
+                            code: {id: 4, value: 525}
+                        },
+                        {
+                            code: {id: 5, value: 530}
+                        }
                     ],
                     nonFatalErrorMessages: [
                         "Connection reset",
@@ -168,11 +228,21 @@ export class InMemoryDataService implements InMemoryDbService {
                 networkConfig: {
                     connectionTimeout: 60,
                     nonFatalErrorHttpStatusCodes: [
-                        {value: 502},
-                        {value: 503},
-                        {value: 504},
-                        {value: 530},
-                        {value: 522},
+                        {
+                            code: {id: 1, value: 502}
+                        },
+                        {
+                            code: {id: 2, value: 503}
+                        },
+                        {
+                            code: {id: 3, value: 503}
+                        },
+                        {
+                            code: {id: 4, value: 525}
+                        },
+                        {
+                            code: {id: 5, value: 530}
+                        }
                     ],
                     nonFatalErrorMessages: [
                         {value: "Connection reset"},

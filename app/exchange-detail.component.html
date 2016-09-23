@@ -17,17 +17,19 @@
 
     <div>
         <label>Non Fatal HTTP Error Codes:</label>
-        <ul class="items" *ngFor="let errorCode of exchange.networkConfig.nonFatalErrorHttpStatusCodes; let i=index;">
-            <li>
+        <ul class="items">
+            <li *ngFor="let errorCode of exchange.networkConfig.nonFatalErrorHttpStatusCodes; let i=index;"
+                (click)="onSelectErrorCode(exchange.networkConfig.nonFatalErrorHttpStatusCodes[i])" [class.selected]="exchange.networkConfig.nonFatalErrorHttpStatusCodes[i] === selectedErrorCode">
                 <input [(ngModel)]="exchange.networkConfig.nonFatalErrorHttpStatusCodes[i].value" placeholder="501" size="5">
+                <button class="delete" (click)="deleteErrorCode(exchange.networkConfig.nonFatalErrorHttpStatusCodes[i]); $event.stopPropagation()">x</button>
             </li>
         </ul>
     </div>
 
     <div>
         <label>Non Fatal Error Messages:</label>
-        <ul class="items" *ngFor="let errorMsg of exchange.networkConfig.nonFatalErrorMessages; let i = index">
-            <li>
+        <ul class="items">
+            <li *ngFor="let errorMsg of exchange.networkConfig.nonFatalErrorMessages; let i = index">
                 <input [(ngModel)]="exchange.networkConfig.nonFatalErrorMessages[i].value" placeholder="Connection reset" size="50"/>
             </li>
         </ul>

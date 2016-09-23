@@ -2,9 +2,21 @@ export class Exchange {
 
     id: string;
     adapter: string;
-    networkConfig: {
-        connectionTimeout: number,
-        nonFatalErrorHttpStatusCodes: number[]
-        nonFatalErrorMessages: string[]
-    }
+    networkConfig: NetworkConfig;
+}
+
+export class NetworkConfig{
+    connectionTimeout: number;
+    nonFatalErrorHttpStatusCodes: ErrorCode[];
+    errorMessages: ErrorMessage[];
+}
+
+export class ErrorCode {
+    id: number;
+    value: number;
+}
+
+class ErrorMessage {
+    id: number;
+    value: string;
 }
