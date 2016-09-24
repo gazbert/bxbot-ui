@@ -8,7 +8,6 @@ import {Router} from "@angular/router";
     templateUrl: 'app/dashboard.component.html',
     styleUrls: ['app/dashboard.component.css']
 })
-
 export class DashboardComponent implements OnInit {
 
     exchanges: Exchange[] = [];
@@ -18,7 +17,7 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit(): void {
         this.exchangeRestClientService.getExchanges()
-            .then(exchanges => this.exchanges = exchanges.slice(1, 9));
+            .then(exchanges => this.exchanges = exchanges.slice(0, 8));
     }
 
     gotoDetail(exchange: Exchange): void {

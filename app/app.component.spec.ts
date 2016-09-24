@@ -3,14 +3,7 @@ import {AppComponent} from "./app.component";
 import {TestBed} from "@angular/core/testing";
 import {By} from "@angular/platform-browser";
 
-////////  SPECS  /////////////
-
-/// Delete this
-describe('Smoke test', () => {
-    it('should run a passing test', () => {
-        expect(true).toEqual(true, 'should pass');
-    });
-});
+////////  TODO - Write some SPECS!!  /////////////
 
 describe('AppComponent with TCB', function () {
     beforeEach(() => {
@@ -28,9 +21,8 @@ describe('AppComponent with TCB', function () {
         fixture.detectChanges();
 
         let h1 = fixture.debugElement.query(el => el.name === 'h1').nativeElement;  // it works
+        h1 = fixture.debugElement.query(By.css('h1')).nativeElement;                // preferred
 
-        h1 = fixture.debugElement.query(By.css('h1')).nativeElement;            // preferred
-
-        expect(h1.innerText).toMatch(/BX-bot Admin/i, '<h1> should say something about "BX-bot Admin"');
+        expect(h1.innerText).toMatch(/BX-bot Admin Console/i, '<h1> should say something about "BX-bot Admin Console"');
     });
 });

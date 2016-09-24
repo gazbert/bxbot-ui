@@ -1,5 +1,4 @@
 export class Exchange {
-
     id: string;
     adapter: string;
     networkConfig: NetworkConfig;
@@ -8,15 +7,21 @@ export class Exchange {
 export class NetworkConfig{
     connectionTimeout: number;
     nonFatalErrorHttpStatusCodes: Array<ErrorCode>;
-    errorMessages: Array<ErrorMessage>;
+    nonFatalErrorMessages: Array<ErrorMessage>;
 }
 
 export class ErrorCode {
-    id: number;
     value: number;
+
+    constructor(value: number) {
+        this.value = value;
+    }
 }
 
-class ErrorMessage {
-    id: number;
+export class ErrorMessage {
     value: string;
+
+    constructor(value: string) {
+        this.value = value;
+    }
 }
