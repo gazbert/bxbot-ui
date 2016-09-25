@@ -13,6 +13,7 @@ export class ExchangeDetailComponent implements OnInit {
     exchange: Exchange;
     selectedErrorCode: ErrorCode;
     selectedErrorMessage: ErrorMessage;
+    active = true;
 
     constructor(private exchangeRestClientService: ExchangeRestClientService, private route: ActivatedRoute) {
     }
@@ -54,6 +55,10 @@ export class ExchangeDetailComponent implements OnInit {
 
         this.exchange.networkConfig.nonFatalErrorHttpStatusCodes.push(new ErrorCode(code));
         this.selectedErrorCode = null;
+
+        // TODO check this works
+        this.active = false;
+        setTimeout(() => this.active = true, 0);
     }
 
     onSelectErrorMessage(selectedErrorMessage: ErrorMessage): void {
@@ -76,6 +81,10 @@ export class ExchangeDetailComponent implements OnInit {
 
         this.exchange.networkConfig.nonFatalErrorMessages.push(new ErrorMessage(message));
         this.selectedErrorMessage = null;
+
+        // TODO check this works
+        this.active = false;
+        setTimeout(() => this.active = true, 0);
     }
 }
 

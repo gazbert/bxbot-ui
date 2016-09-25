@@ -1,68 +1,116 @@
-<div *ngIf="exchange" class="module">
+<!--<div *ngIf="exchange" class=module>-->
+<div *ngIf="exchange" class="container module-bootstrap">
     <h2>{{exchange.id}} Exchange Details</h2>
-    <div>
-        <label>Id:</label>
-        <label>{{exchange.id}}</label>
-    </div>
-    <div>
-        <label>Adapter:</label>
-        <input [(ngModel)]="exchange.adapter" placeholder="adapter" size="50"/>
-    </div>
 
-    <h3>Network Config</h3>
-    <div>
-        <label>Connection Timeout (secs):</label>
-        <input [(ngModel)]="exchange.networkConfig.connectionTimeout" placeholder="adapter" size="5"/>
-    </div>
+    <!--<form *ngIf="exchange" (ngSubmit)="save()" #exchangeDetailsForm="ngForm">-->
+    <form *ngIf="active" #exchangeDetailsForm="ngForm">
 
-    <div>
-        <label>Non Fatal HTTP Error Codes:</label>
-        <input #httpStatusCode
-               (keyup.enter)="addErrorCode(httpStatusCode.value); httpStatusCode.value=''"
-               (blur)="addErrorCode(httpStatusCode.value); httpStatusCode.value=''"
-               size="5"/>
-        <button (click)="addErrorCode(httpStatusCode.value); httpStatusCode.value=''">
-            Add
-        </button>
-        <ul class="items">
-            <li *ngFor="let errorCode of exchange.networkConfig.nonFatalErrorHttpStatusCodes; let i=index;"
-                (click)="onSelectErrorCode(exchange.networkConfig.nonFatalErrorHttpStatusCodes[i])"
-                [class.selected]="exchange.networkConfig.nonFatalErrorHttpStatusCodes[i] === selectedErrorCode">
-                <input [(ngModel)]="exchange.networkConfig.nonFatalErrorHttpStatusCodes[i].value" placeholder="501"
-                       size="5">
-                <button class="delete"
-                        (click)="deleteErrorCode(exchange.networkConfig.nonFatalErrorHttpStatusCodes[i]); $event.stopPropagation()">
-                    x
-                </button>
-            </li>
-        </ul>
-    </div>
+        <div class="form-group">
+            <label for="exchangeId">Id:</label>
+            <input [(ngModel)]="exchange.id" name="exchangeId" placeholder="ExchangeId123" id="exchangeId" type="text"
+                   class="form-control" size="20" disabled/>
+        </div>
 
-    <div>
-        <label>Non Fatal Error Messages:</label>
-        <input #errorMessage
-               (keyup.enter)="addErrorMessage(errorMessage.value); errorMessage.value=''"
-               (blur)="addErrorMessage(errorMessage.value); errorMessage.value=''"
-               size="40"/>
-        <button (click)="addErrorMessage(errorMessage.value); errorMessage.value=''">
-            Add
-        </button>
-        <ul class="items">
-            <li *ngFor="let errorCode of exchange.networkConfig.nonFatalErrorMessages; let i=index;"
-                (click)="onSelectErrorMessage(exchange.networkConfig.nonFatalErrorMessages[i])"
-                [class.selected]="exchange.networkConfig.nonFatalErrorMessages[i] === selectedErrorMessage">
-                <input [(ngModel)]="exchange.networkConfig.nonFatalErrorMessages[i].value"
-                       placeholder="Connection reset" size="40">
-                <button class="delete"
-                        (click)="deleteErrorMessage(exchange.networkConfig.nonFatalErrorMessages[i]); $event.stopPropagation()">
-                    x
-                </button>
-            </li>
-        </ul>
-    </div>
+        <div class="form-group">
+            <label for="adapter">Adapter:</label>
+            <input [(ngModel)]="exchange.adapter" name="adapter" placeholder="MyExchangeAdapter" id="adapter"
+                   type="text" class="form-control" required size="50" #adapter="ngModel"/>
+            <div [hidden]="adapter.valid || adapter.pristine"
+                 class="alert alert-danger">
+                Exchange Adapter name is required.
+            </div>
+        </div>
 
-    <hr>
-    <button (click)="goBack()">Back</button>
-    <button (click)="save()">Save</button>
+        <h3>Network Config</h3>
+        <div class="form-group">
+            <label for="connectionTimeout">Connection Timeout (secs):</label>
+            <input [(ngModel)]="exchange.networkConfig.connectionTimeout" id="connectionTimeout"
+                   name="connectionTimeout" type="text" class="form-control" placeholder="60" required size="5"
+                   #connectionTimeout="ngModel"/>
+            <div [hidden]="connectionTimeout.valid || connectionTimeout.pristine"
+                 class="alert alert-danger">
+                Connection timeout is required.
+            </div>
+        </div>
 
+        <div class="form-group">
+            <label>Non Fatal HTTP Error Codes:</label>
+            <!--<input #httpStatusCode-->
+            <!--(keyup.enter)="addErrorCode(httpStatusCode.value); httpStatusCode.value=''"-->
+            <!--(blur)="addErrorCode(httpStatusCode.value); httpStatusCode.value=''"-->
+            <!--type="text" class="form-control" placeholder="522" size="3">-->
+            <!--<button (click)="addErrorCode(httpStatusCode.value); httpStatusCode.value=''">-->
+            <!--Add-->
+            <!--</button>-->
+
+            <ul class="items">
+                <li *ngFor="let errorCode of exchange.networkConfig.nonFatalErrorHttpStatusCodes; let i=index;"
+                    (click)="onSelectErrorCode(exchange.networkConfig.nonFatalErrorHttpStatusCodes[i])"
+                    [class.selected]="exchange.networkConfig.nonFatalErrorHttpStatusCodes[i] === selectedErrorCode">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <input [(ngModel)]="exchange.networkConfig.nonFatalErrorHttpStatusCodes[i].value"
+                                   placeholder="501"
+                                   size="5" type="text" class="form-control" id="errorCode_ + {{i}}"
+                                   name="errorCode_ + {{i}}" required #errorCode="ngModel">
+                        </div>
+                        <div>
+                            <button class="btn btn-danger btn-xs"
+                                    (click)="deleteErrorCode(exchange.networkConfig.nonFatalErrorHttpStatusCodes[i]); $event.stopPropagation()">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div [hidden]="errorCode.valid || errorCode.pristine"
+                             class="col-sm-6 alert alert-danger">
+                            HTTP error code must be set. Otherwise, please delete it.
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="form-group">
+            <label>Non Fatal Error Messages:</label>
+            <!--<input #errorMessage-->
+            <!--(keyup.enter)="addErrorMessage(errorMessage.value); errorMessage.value=''"-->
+            <!--(blur)="addErrorMessage(errorMessage.value); errorMessage.value=''"-->
+            <!--size="40"/>-->
+            <!--<button (click)="addErrorMessage(errorMessage.value); errorMessage.value=''">-->
+            <!--Add-->
+            <!--</button>-->
+            <ul class="items">
+                <li *ngFor="let errorCode of exchange.networkConfig.nonFatalErrorMessages; let i=index;"
+                    (click)="onSelectErrorMessage(exchange.networkConfig.nonFatalErrorMessages[i])"
+                    [class.selected]="exchange.networkConfig.nonFatalErrorMessages[i] === selectedErrorMessage">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <input [(ngModel)]="exchange.networkConfig.nonFatalErrorMessages[i].value"
+                                   placeholder="Connection reset" size="40" type="text" class="form-control"
+                                   id="errorMsg_ + {{i}}" name="errorMsg_ + {{i}}" required #errorMsg="ngModel">
+                        </div>
+                        <div>
+                            <button class="btn btn-danger btn-xs"
+                                    (click)="deleteErrorMessage(exchange.networkConfig.nonFatalErrorMessages[i]); $event.stopPropagation()">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div [hidden]="errorMsg.valid || errorMsg.pristine"
+                             class="col-sm-6 alert alert-danger">
+                            Error message must be set. Otherwise, please delete it.
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <hr class="">
+        <div>
+            <button (click)="goBack()" class="btn btn-default">Back</button>
+            <button (click)="save()" class="btn btn-primary" [disabled]="!exchangeDetailsForm.form.valid">Save</button>
+        </div>
+    </form>
 </div>

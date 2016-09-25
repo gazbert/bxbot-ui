@@ -14,6 +14,10 @@
     margin-top: 10px;
 }
 
+.module-bootstrap {
+    background-color: rgba(247, 247, 247, 0.88);
+}
+
 label {
     display: inline-block;
     width: 15em;
@@ -28,26 +32,26 @@ input {
     padding-left: .4em;
 }
 
-button {
-    margin-top: 20px;
-    font-family: Arial;
-    background-color: #eee;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    cursor: hand;
-}
+/*button {*/
+    /*margin-top: 20px;*/
+    /*font-family: Arial;*/
+    /*background-color: #eee;*/
+    /*border: none;*/
+    /*padding: 5px 10px;*/
+    /*border-radius: 4px;*/
+    /*cursor: pointer;*/
+    /*cursor: hand;*/
+/*}*/
 
-button:hover {
-    background-color: #cfd8dc;
-}
+/*button:hover {*/
+    /*background-color: #cfd8dc;*/
+/*}*/
 
-button:disabled {
-    background-color: #eee;
-    color: #ccc;
-    cursor: auto;
-}
+/*button:disabled {*/
+    /*background-color: #eee;*/
+    /*color: #ccc;*/
+    /*cursor: auto;*/
+/*}*/
 
 /* Need to clean these up */
 
@@ -59,19 +63,19 @@ button:disabled {
 .items {
     margin: 0 0 0.5em 0;
     list-style-type: none;
-    padding: 0;
-    width: 31em;
+    /*padding: 0;*/
+    /*width: 31em;*/
 }
 
 .items li {
-    cursor: pointer;
-    position: relative;
-    left: 14.8em;
-    background-color: #EEE;
+    /*cursor: pointer;*/
+    /*position: relative;*/
+    /*left: 14.8em;*/
+    /*background-color: #EEE;*/
     margin: .5em;
-    padding: .3em 0;
-    height: 1.6em;
-    border-radius: 4px;
+    /*padding: .3em 0;*/
+    /*height: 1.6em;*/
+    /*border-radius: 4px;*/
 }
 
 /*.items li.selected:hover {*/
@@ -79,39 +83,39 @@ button:disabled {
     /*color: white;*/
 /*}*/
 
-.items li:hover {
-    color: #607D8B;
-    background-color: #DDD;
-    /*left: .1em;*/
-    /*width: 15em;*/
-}
+/*.items li:hover {*/
+    /*color: #607D8B;*/
+    /*background-color: #DDD;*/
+    /*!*left: .1em;*!*/
+    /*!*width: 15em;*!*/
+/*}*/
 
 .items .text {
     position: relative;
     top: -3px;
 }
 
-.items .badge {
-    display: inline-block;
-    font-size: small;
-    color: white;
-    padding: 0.8em 0.7em 0 0.7em;
-    background-color: #607D8B;
-    line-height: 1em;
-    position: relative;
-    left: -1px;
-    top: -4px;
-    height: 1.8em;
-    margin-right: .8em;
-    border-radius: 4px 0 0 4px;
-}
+/*.items .badge {*/
+    /*display: inline-block;*/
+    /*font-size: small;*/
+    /*color: white;*/
+    /*padding: 0.8em 0.7em 0 0.7em;*/
+    /*background-color: #607D8B;*/
+    /*line-height: 1em;*/
+    /*position: relative;*/
+    /*left: -1px;*/
+    /*top: -4px;*/
+    /*height: 1.8em;*/
+    /*margin-right: .8em;*/
+    /*border-radius: 4px 0 0 4px;*/
+/*}*/
 
-button.delete {
-    float:right;
-    margin-top: 2px;
-    margin-right: .8em;
-    background-color: gray !important;
-    color:white;
-}
+/*button.delete {*/
+    /*float:right;*/
+    /*margin-top: 2px;*/
+    /*margin-right: .8em;*/
+    /*background-color: gray !important;*/
+    /*color:white;*/
+/*}*/
 
 
