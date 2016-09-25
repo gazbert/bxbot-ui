@@ -17,7 +17,10 @@
 
     <div>
         <label>Non Fatal HTTP Error Codes:</label>
-        <input #httpStatusCode size="5"/>
+        <input #httpStatusCode
+               (keyup.enter)="addErrorCode(httpStatusCode.value); httpStatusCode.value=''"
+               (blur)="addErrorCode(httpStatusCode.value); httpStatusCode.value=''"
+               size="5"/>
         <button (click)="addErrorCode(httpStatusCode.value); httpStatusCode.value=''">
             Add
         </button>
@@ -37,7 +40,10 @@
 
     <div>
         <label>Non Fatal Error Messages:</label>
-        <input #errorMessage size="40"/>
+        <input #errorMessage
+               (keyup.enter)="addErrorMessage(errorMessage.value); errorMessage.value=''"
+               (blur)="addErrorMessage(errorMessage.value); errorMessage.value=''"
+               size="40"/>
         <button (click)="addErrorMessage(errorMessage.value); errorMessage.value=''">
             Add
         </button>

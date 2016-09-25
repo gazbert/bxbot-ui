@@ -11,16 +11,16 @@ export class NetworkConfig{
 }
 
 export class ErrorCode {
-    value: number;
 
-    constructor(value: number) {
-        this.value = value;
+    // the Angular constructor shortcut creates and initialises the value property var
+    constructor(public value: number) {
     }
 }
 
 export class ErrorMessage {
-    value: string;
 
+    // the traditional way of doing things
+    value: string;
     constructor(value: string) {
         this.value = value;
     }

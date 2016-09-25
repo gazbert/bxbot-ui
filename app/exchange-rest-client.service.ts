@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Http, Headers} from "@angular/http";
 import "rxjs/add/operator/toPromise";
-import {Exchange} from "./exchange";
+import {Exchange} from "./exchange.model";
 
 @Injectable()
 export class ExchangeRestClientService {

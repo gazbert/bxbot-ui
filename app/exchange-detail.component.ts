@@ -1,4 +1,4 @@
-import {Exchange, ErrorCode, ErrorMessage} from "./exchange";
+import {Exchange, ErrorCode, ErrorMessage} from "./exchange.model";
 import {ActivatedRoute, Params} from "@angular/router";
 import {ExchangeRestClientService} from "./exchange-rest-client.service";
 import {OnInit, Component} from "@angular/core";

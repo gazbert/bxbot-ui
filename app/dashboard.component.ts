@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {ExchangeRestClientService} from "./exchange-rest-client.service";
-import {Exchange} from "./exchange";
+import {Exchange} from "./exchange.model";
 import {Router} from "@angular/router";
 
 @Component({
