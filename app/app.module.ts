@@ -5,10 +5,10 @@ import {HttpModule}    from '@angular/http';
 
 // Imports for loading & configuring the in-memory web api
 import {InMemoryWebApiModule} from 'angular2-in-memory-web-api';
-import {InMemoryDataService}  from './other/in-memory-data.service';
+import {InMemoryDataService}  from './shared/in-memory-data.service';
 
 import {AppComponent} from "./app.component";
-import {ExchangeRestClientService} from "./exchange/exchange-rest-client.service";
+import {ExchangeRestClientService} from "./shared/exchange-rest-client.service";
 import {routing} from "./app.routing";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {ExchangeDetailComponent} from "./exchange/exchange-detail.component";

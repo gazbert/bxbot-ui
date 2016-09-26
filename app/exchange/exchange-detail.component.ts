@@ -1,7 +1,7 @@
 import {OnInit, Component} from "@angular/core";
 import {ActivatedRoute, Params} from "@angular/router";
-import {Exchange, ErrorCode, ErrorMessage} from "./exchange.model";
-import {ExchangeRestClientService} from "./exchange-rest-client.service";
+import {Exchange, ErrorCode, ErrorMessage} from "../shared/exchange.model";
+import {ExchangeRestClientService} from "../shared/exchange-rest-client.service";
 
 @Component({
     selector: 'bx-exchange-detail',
