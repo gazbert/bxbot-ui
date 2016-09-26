@@ -1,5 +1,5 @@
 describe('BX-bot Admin E2E Tests', function () {
-    var expectedMsg = 'BX-bot Admin';
+    var expectedMsg = 'BX-bot Admin Console';
     beforeEach(function () {
         browser.get('');
     });
