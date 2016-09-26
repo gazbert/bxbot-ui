@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 
 @Component({
-    selector: 'my-app',
+    selector: 'bxbot-ui',
     template: `
     <h1>{{title}}</h1>
     <nav>

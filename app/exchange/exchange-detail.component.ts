@@ -1,12 +1,12 @@
-import {Exchange, ErrorCode, ErrorMessage} from "./exchange.model";
-import {ActivatedRoute, Params} from "@angular/router";
-import {ExchangeRestClientService} from "./exchange-rest-client.service";
 import {OnInit, Component} from "@angular/core";
+import {ActivatedRoute, Params} from "@angular/router";
+import {Exchange, ErrorCode, ErrorMessage} from "./exchange.model";
+import {ExchangeRestClientService} from "./exchange-rest-client.service";
 
 @Component({
-    selector: 'my-exchange-detail',
-    templateUrl: 'app/exchange-detail.component.html',
-    styleUrls: ['app/exchange-detail.component.css']
+    selector: 'bx-exchange-detail',
+    templateUrl: 'app/exchange/exchange-detail.component.html',
+    styleUrls: ['app/exchange/exchange-detail.component.css']
 })
 export class ExchangeDetailComponent implements OnInit {
 

@@ -1,12 +1,12 @@
-import {Component, OnInit} from "@angular/core";
-import {ExchangeRestClientService} from "./exchange-rest-client.service";
-import {Exchange} from "./exchange.model";
 import {Router} from "@angular/router";
+import {Component, OnInit} from "@angular/core";
+import {ExchangeRestClientService} from "../exchange/exchange-rest-client.service";
+import {Exchange} from "../exchange/exchange.model";
 
 @Component({
-    selector: 'my-dashboard',
-    templateUrl: 'app/dashboard.component.html',
-    styleUrls: ['app/dashboard.component.css']
+    selector: 'bx-dashboard',
+    templateUrl: 'app/dashboard/dashboard.component.html',
+    styleUrls: ['app/dashboard/dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
 

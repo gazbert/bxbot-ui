@@ -1,7 +1,7 @@
 import {ModuleWithProviders} from "@angular/core";
 import {Routes, RouterModule} from "@angular/router";
-import {DashboardComponent} from "./dashboard.component";
-import {ExchangeDetailComponent} from "./exchange-detail.component";
+import {DashboardComponent} from "./dashboard/dashboard.component";
+import {ExchangeDetailComponent} from "./exchange/exchange-detail.component";
 
 const appRoutes: Routes = [
     {
