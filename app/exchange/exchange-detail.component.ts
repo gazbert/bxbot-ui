@@ -1,5 +1,6 @@
-import {OnInit, Component} from "@angular/core";
+import {OnInit, Component, ViewChild} from "@angular/core";
 import {ActivatedRoute, Params} from "@angular/router";
+import {NgForm} from "@angular/forms";
 import {Exchange, ErrorCode, ErrorMessage} from "../shared/exchange.model";
 import {ExchangeRestClientService} from "../shared/exchange-rest-client.service";
 
@@ -56,9 +57,9 @@ export class ExchangeDetailComponent implements OnInit {
         this.exchange.networkConfig.nonFatalErrorHttpStatusCodes.push(new ErrorCode(code));
         this.selectedErrorCode = null;
 
-        // TODO check this works
-        this.active = false;
-        setTimeout(() => this.active = true, 0);
+        // TODO check this works - form reset hack until Google add this feature
+        // this.active = false;
+        // setTimeout(() => this.active = true, 0);
     }
 
     onSelectErrorMessage(selectedErrorMessage: ErrorMessage): void {
@@ -82,9 +83,67 @@ export class ExchangeDetailComponent implements OnInit {
         this.exchange.networkConfig.nonFatalErrorMessages.push(new ErrorMessage(message));
         this.selectedErrorMessage = null;
 
-        // TODO check this works
-        this.active = false;
-        setTimeout(() => this.active = true, 0);
+        // TODO check this works - form reset hack until Google add this feature
+        // this.active = false;
+        // setTimeout(() => this.active = true, 0);
     }
+
+    // ------------------------------------------------------------------
+    // Form validation
+    // ------------------------------------------------------------------
+
+    exchangeDetailsForm: NgForm;
+    @ViewChild('exchangeDetailsForm') currentForm: NgForm;
+
+    ngAfterViewChecked() {
+        this.formChanged();
+    }
+
+    formChanged() {
+        if (this.currentForm === this.exchangeDetailsForm) {
+            return;
+        }
+        this.exchangeDetailsForm = this.currentForm;
+        if (this.exchangeDetailsForm) {
+            this.exchangeDetailsForm.valueChanges
+                .subscribe(data => this.onValueChanged(data));
+        }
+    }
+
+    onValueChanged(data?: any) {
+        if (!this.exchangeDetailsForm) {
+            return;
+        }
+        const form = this.exchangeDetailsForm.form;
+
+        for (const field in this.formErrors) {
+            // clear previous error message (if any)
+            this.formErrors[field] = '';
+            const control = form.get(field);
+
+            if (control && control.dirty && !control.valid) {
+                const messages = this.validationMessages[field];
+                for (const key in control.errors) {
+                    this.formErrors[field] += messages[key] + ' ';
+                }
+            }
+        }
+    }
+
+    formErrors = {
+        'adapter': '',
+        'connectionTimeout': ''
+    };
+
+    validationMessages = {
+        'adapter': {
+            'required': 'Adapter Name is required.',
+            'maxlength': 'Adapter Name cannot be more than 120 characters long.'
+        },
+        'connectionTimeout': {
+            'required': 'Connection timeout is required.',
+            'pattern': 'Connection timeout must be a whole number.'
+        }
+    };
 }
 

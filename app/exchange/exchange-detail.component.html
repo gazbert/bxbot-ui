@@ -1,8 +1,6 @@
-<!--<div *ngIf="exchange" class=module>-->
 <div *ngIf="exchange" class="container module-bootstrap">
     <h2>{{exchange.id}} Exchange Details</h2>
 
-    <!--<form *ngIf="exchange" (ngSubmit)="save()" #exchangeDetailsForm="ngForm">-->
     <form *ngIf="active" #exchangeDetailsForm="ngForm">
 
         <div class="form-group">
@@ -14,23 +12,16 @@
         <div class="form-group">
             <label for="adapter">Adapter:</label>
             <input [(ngModel)]="exchange.adapter" name="adapter" placeholder="MyExchangeAdapter" id="adapter"
-                   type="text" class="form-control" required size="50" #adapter="ngModel"/>
-            <div [hidden]="adapter.valid || adapter.pristine"
-                 class="alert alert-danger">
-                Exchange Adapter name is required.
-            </div>
+                   type="text" class="form-control" required maxlength="120"/>
+            <div *ngIf="formErrors.adapter" class="alert alert-danger">{{ formErrors.adapter }}</div>
         </div>
-
         <h3>Network Config</h3>
         <div class="form-group">
             <label for="connectionTimeout">Connection Timeout (secs):</label>
             <input [(ngModel)]="exchange.networkConfig.connectionTimeout" id="connectionTimeout"
-                   name="connectionTimeout" type="text" class="form-control" placeholder="60" required size="5"
-                   #connectionTimeout="ngModel"/>
-            <div [hidden]="connectionTimeout.valid || connectionTimeout.pristine"
-                 class="alert alert-danger">
-                Connection timeout is required.
-            </div>
+                   name="connectionTimeout" type="text" class="form-control" placeholder="60" required
+                   pattern="\d+"/>
+            <div *ngIf="formErrors.connectionTimeout" class="alert alert-danger">{{formErrors.connectionTimeout }}</div>
         </div>
 
         <div class="form-group">
@@ -42,7 +33,7 @@
                             <input #httpStatusCode
                                    (keyup.enter)="addErrorCode(httpStatusCode.value); httpStatusCode.value=''"
                                    (blur)="addErrorCode(httpStatusCode.value); httpStatusCode.value=''"
-                                   type="text" class="form-control" placeholder="522" size="3"
+                                   type="text" class="form-control" placeholder="522" pattern="\d{3}"
                                    name="newErrorCode" id="newErrorCode">
                         </div>
                         <div>
@@ -58,10 +49,10 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <input [(ngModel)]="exchange.networkConfig.nonFatalErrorHttpStatusCodes[i].value"
-                                   size="5" type="text" class="form-control" id="errorCode_ + {{i}}"
-                                   name="errorCode_ + {{i}}" required #errorCode="ngModel">
+                                   type="text" class="form-control" id="errorCode_ + {{i}}"
+                                   name="errorCode_ + {{i}}" required #errorCode="ngModel" pattern="\d{3}">
                         </div>
-                        <div>
+                        <div class="col-sm-offset-6">
                             <button class="btn btn-danger btn-xs"
                                     (click)="deleteErrorCode(exchange.networkConfig.nonFatalErrorHttpStatusCodes[i]); $event.stopPropagation()">
                                 Delete
@@ -69,9 +60,8 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div [hidden]="errorCode.valid || errorCode.pristine"
-                             class="col-sm-6 alert alert-danger">
-                            HTTP error code must be set. Otherwise, please delete it.
+                        <div [hidden]="errorCode.valid || errorCode.pristine" class="col-sm-6 alert alert-danger">
+                            HTTP error code must be a 3 digit number.
                         </div>
                     </div>
                 </li>
