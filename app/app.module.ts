@@ -8,10 +8,10 @@ import {InMemoryWebApiModule} from 'angular2-in-memory-web-api';
 import {InMemoryDataService}  from './shared/in-memory-data.service';
 
 import {AppComponent} from "./app.component";
-import {ExchangeRestClientService} from "./shared/exchange-rest-client.service";
 import {routing} from "./app.routing";
-import {DashboardComponent} from "./dashboard/dashboard.component";
-import {ExchangeDetailComponent} from "./exchange/exchange-detail.component";
+import {ExchangeRestClientService} from "./shared/index";
+import {DashboardComponent} from "./dashboard/index";
+import {ExchangeDetailComponent} from "./exchange/index";
 
 @NgModule({
     imports: [BrowserModule, FormsModule, HttpModule, InMemoryWebApiModule.forRoot(InMemoryDataService), routing],
