@@ -1,7 +1,7 @@
 import {ModuleWithProviders} from "@angular/core";
 import {Routes, RouterModule} from "@angular/router";
 import {DashboardComponent} from "./dashboard/index";
-import {ExchangeDetailComponent} from "./exchange/index";
+import {ExchangeDetailComponent, ExchangeDetailRxComponent} from "./exchange/index";
 
 const appRoutes: Routes = [
     {
@@ -15,7 +15,8 @@ const appRoutes: Routes = [
     },
     {
         path: 'detail/:id',
-        component: ExchangeDetailComponent
+        // component: ExchangeDetailComponent
+        component: ExchangeDetailRxComponent
     }
 ];
 

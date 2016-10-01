@@ -1,12 +1,15 @@
+<!--
+    Template-driven version of the Exchange Details form so I can decide which I like best.
+ -->
 <div *ngIf="exchange" class="container module-bootstrap">
     <h2>{{exchange.id}} Exchange Details</h2>
 
-    <form *ngIf="active" #exchangeDetailsForm="ngForm">
+    <form *ngIf="active" #exchangeDetailsForm="ngForm" (ngSubmit)="save()">
 
         <div class="form-group">
             <label for="exchangeId">Id:</label>
-            <input [(ngModel)]="exchange.id" name="exchangeId" placeholder="ExchangeId123" id="exchangeId" type="text"
-                   class="form-control" size="20" disabled/>
+            <input [(ngModel)]="exchange.id" name="exchangeId" id="exchangeId" type="text" class="form-control"
+                   disabled/>
         </div>
 
         <div class="form-group">
@@ -37,7 +40,8 @@
                                    name="newErrorCode" id="newErrorCode">
                         </div>
                         <div>
-                            <button class="btn btn-success btn-xs" (click)="addErrorCode(httpStatusCode.value); httpStatusCode.value=''">
+                            <button class="btn btn-success btn-xs"
+                                    (click)="addErrorCode(httpStatusCode.value); httpStatusCode.value=''">
                                 Add
                             </button>
                         </div>
@@ -77,11 +81,12 @@
                             <input #errorMessage
                                    (keyup.enter)="addErrorMessage(errorMessage.value); errorMessage.value=''"
                                    (blur)="addErrorMessage(errorMessage.value); errorMessage.value=''"
-                                   type="text" class="form-control" size="40" name="newErrorMessage" id="newErrorMessage"
+                                   type="text" class="form-control" name="newErrorMessage" id="newErrorMessage"
                                    placeholder="A new error message"/>
                         </div>
                         <div>
-                            <button class="btn btn-success btn-xs" (click)="addErrorMessage(errorMessage.value); errorMessage.value=''">
+                            <button class="btn btn-success btn-xs"
+                                    (click)="addErrorMessage(errorMessage.value); errorMessage.value=''">
                                 Add
                             </button>
                         </div>
@@ -92,9 +97,8 @@
                     [class.selected]="exchange.networkConfig.nonFatalErrorMessages[i] === selectedErrorMessage">
                     <div class="row">
                         <div class="col-sm-6">
-                            <input [(ngModel)]="exchange.networkConfig.nonFatalErrorMessages[i].value"
-                                   size="40" type="text" class="form-control"
-                                   id="errorMsg_ + {{i}}" name="errorMsg_ + {{i}}" required #errorMsg="ngModel">
+                            <input [(ngModel)]="exchange.networkConfig.nonFatalErrorMessages[i].value" type="text"
+                                   class="form-control" id="errorMsg_ + {{i}}" name="errorMsg_ + {{i}}" required #errorMsg="ngModel">
                         </div>
                         <div>
                             <button class="btn btn-danger btn-xs"

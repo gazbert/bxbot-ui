@@ -1,0 +1,142 @@
+<!--
+    Reactive version of the Exchange Details form so I can decide which I like best.
+ -->
+<div *ngIf="exchange" class="container module-bootstrap">
+    <h2>{{exchange.id}} Exchange Details</h2>
+
+    <form *ngIf="active" novalidate [formGroup]="exchangeDetailsForm" (ngSubmit)="save()">
+
+        <div class="form-group">
+            <label for="exchangeId">Id:</label>
+            <input formControlName="exchangeId" id="exchangeId" type="text" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for="adapter">Adapter:</label>
+            <input formControlName="adapter" placeholder="MyExchangeAdapter" id="adapter" type="text"
+                   class="form-control" required/>
+            <div *ngIf="!exchangeDetailsForm.controls.adapter.valid" class="alert alert-danger">
+                Adapter name is required.
+            </div>
+            <!--<div *ngIf="formErrors.adapter" class="alert alert-danger">{{ formErrors.adapter }}</div>-->
+        </div>
+        <!--<h3>Network Config</h3>-->
+        <div class="form-group">
+            <label for="connectionTimeout">Connection Timeout (secs):</label>
+            <input id="connectionTimeout" ngControlGroup="networkConfig" formControlName="connectionTimeout" type="text"
+                   class="form-control" placeholder="60" required/>
+            <div *ngIf="!exchangeDetailsForm.controls.connectionTimeout.valid" class="alert alert-danger">
+                Connection timeout must be a whole number.
+            </div>
+            <!--<small *ngIf="!exchangeDetailsForm.controls.connectionTimeout.valid" class="text-danger">-->
+            <!--Connection timeout must be a whole number.-->
+            <!--</small>-->
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6" formArrayName="nonFatalErrorHttpStatusCodes">
+                <h4>Non Fatal Error Codes</h4>
+                <div *ngFor="let nonFatalErrorHttpStatusCode of nonFatalErrorHttpStatusCodes.controls; let i=index"
+                     class="panel panel-default">
+                    <div class="panel-heading">
+                        <span>Code {{i + 1}}</span>
+                        <span class="glyphicon glyphicon-remove pull-right"
+                              *ngIf="nonFatalErrorHttpStatusCodes.controls.length > 1"
+                              (click)="deleteErrorCode(i)"></span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label>HTTP Status Code:</label>
+                            <input type="text" [formControlName]="i" required>
+                            <!--<small [hidden]="nonFatalErrorHttpStatusCodes.controls[i].valid" class="text-danger">-->
+                            <!--Error Code must be 3 digit number.-->
+                            <!--</small>-->
+                            <div *ngIf="!nonFatalErrorHttpStatusCodes.controls[i].valid" class="alert alert-danger">
+                                Error Code must be 3 digit number.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="margin-20">
+                    <a (click)="addErrorCode()" style="cursor: default">
+                        Add error code +
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-sm-6" formArrayName="nonFatalErrorHttpStatusCodes">
+                <h4>Non Fatal Error Messages</h4>
+                <div *ngFor="let nonFatalErrorHttpStatusCode of nonFatalErrorHttpStatusCodes.controls; let i=index"
+                     class="panel panel-default">
+                    <div class="panel-heading">
+                        <span>Message {{i + 1}}</span>
+                        <span class="glyphicon glyphicon-remove pull-right"
+                              *ngIf="nonFatalErrorHttpStatusCodes.controls.length > 1"
+                              (click)="deleteErrorCode(i)"></span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label>Error Message:</label>
+                            <input type="text" [formControlName]="i" required>
+                            <div *ngIf="!nonFatalErrorHttpStatusCodes.controls[i].valid" class="alert alert-danger">
+                                Error message must be set. Otherwise, please delete it.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="margin-20">
+                    <a (click)="addErrorCode()" style="cursor: default">
+                        Add error message +
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!--<div class="form-group">-->
+        <!--<label>Non Fatal Error Messages:</label>-->
+        <!--<ul class="items">-->
+        <!--<li >-->
+        <!--<div class="row">-->
+        <!--<div class="col-sm-6">-->
+        <!--<input #errorMessage-->
+        <!--(keyup.enter)="addErrorMessage(errorMessage.value); errorMessage.value=''"-->
+        <!--(blur)="addErrorMessage(errorMessage.value); errorMessage.value=''"-->
+        <!--type="text" class="form-control" name="newErrorMessage" id="newErrorMessage"-->
+        <!--placeholder="A new error message"/>-->
+        <!--</div>-->
+        <!--<div>-->
+        <!--<button class="btn btn-success btn-xs"-->
+        <!--(click)="addErrorMessage(errorMessage.value); errorMessage.value=''">-->
+        <!--Add-->
+        <!--</button>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</li>-->
+        <!--<li *ngFor="let errorCode of exchange.networkConfig.nonFatalErrorMessages; let i=index;"-->
+        <!--(click)="onSelectErrorMessage(exchange.networkConfig.nonFatalErrorMessages[i])"-->
+        <!--[class.selected]="exchange.networkConfig.nonFatalErrorMessages[i] === selectedErrorMessage">-->
+        <!--<div class="row">-->
+        <!--<div class="col-sm-6">-->
+        <!--<input type="text" class="form-control" id="errorMsg_ + {{i}}" name="errorMsg_ + {{i}}" required>-->
+        <!--</div>-->
+        <!--<div>-->
+        <!--<button class="btn btn-danger btn-xs"-->
+        <!--(click)="deleteErrorMessage(exchange.networkConfig.nonFatalErrorMessages[i]); $event.stopPropagation()">-->
+        <!--Delete-->
+        <!--</button>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</li>-->
+        <!--</ul>-->
+        <!--</div>-->
+        <div>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-sm-2 col-sm-offset-0">
+                <button (click)="goBack()" class="btn btn-default">Cancel</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!exchangeDetailsForm.valid">Save</button>
+            </div>
+        </div>
+    </form>
+</div>

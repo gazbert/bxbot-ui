@@ -17,3 +17,6 @@ _temp
 !systemjs.config.js
 !typings/typings.d.ts
 !wallaby.js
+
+# node logs
+npm-debug.log

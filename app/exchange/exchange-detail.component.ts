@@ -3,6 +3,9 @@ import {ActivatedRoute, Params} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import {Exchange, ErrorCode, ErrorMessage, ExchangeRestClientService} from "../shared/index";
 
+/**
+ * Template-driven version of the Exchange Details form so I can decide which I like best.
+ */
 @Component({
     selector: 'bx-exchange-detail',
     templateUrl: 'app/exchange/exchange-detail.component.html',
