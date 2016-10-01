@@ -53,11 +53,14 @@ export class ExchangeDetailRxComponent implements OnInit {
         this.exchange.networkConfig.connectionTimeout = this.exchangeDetailsForm.get('connectionTimeout').value;
 
         // hack for now til I sort the JSON integration spec out with Boot app
-        this.exchange.networkConfig.nonFatalErrorHttpStatusCodes.length =   0;
+        this.exchange.networkConfig.nonFatalErrorHttpStatusCodes.length = 0;
         this.exchangeDetailsForm.get('nonFatalErrorHttpStatusCodes').value.forEach(
-            (c) => this.exchange.networkConfig.nonFatalErrorHttpStatusCodes.push({"value":parseInt(c)}));
+            (c) => this.exchange.networkConfig.nonFatalErrorHttpStatusCodes.push({"value": parseInt(c)}));
 
-        this.exchange.networkConfig.nonFatalErrorMessages = this.exchangeDetailsForm.get('nonFatalErrorMessages').value;
+        // hack for now til I sort the JSON integration spec out with Boot app
+        this.exchange.networkConfig.nonFatalErrorMessages.length = 0;
+        this.exchangeDetailsForm.get('nonFatalErrorMessages').value.forEach(
+            (m) => this.exchange.networkConfig.nonFatalErrorMessages.push({"value": m}));
 
         this.exchangeRestClientService.update(this.exchange)
             .then(this.goBack);
@@ -102,7 +105,7 @@ export class ExchangeDetailRxComponent implements OnInit {
         // this.exchange.networkConfig.nonFatalErrorMessages =
         //     this.exchange.networkConfig.nonFatalErrorMessages.filter(m => m !== message);
 
-        const control = <FormArray>this.exchangeDetailsForm.controls['nonFatalErrorHttpStatusCodes'];
+        const control = <FormArray>this.exchangeDetailsForm.controls['nonFatalErrorMessages'];
         control.removeAt(i);
 
 
@@ -112,14 +115,10 @@ export class ExchangeDetailRxComponent implements OnInit {
         // }
     }
 
-    addErrorMessage(message: string): void {
+    addErrorMessage(): void {
 
-        if (!message) {
-            return;
-        }
-
-        const control = <FormArray>this.exchangeDetailsForm.controls['nonFatalErrorHttpStatusCodes'];
-        // control.push(this.initErrorCode());
+        const control = <FormArray>this.exchangeDetailsForm.controls['nonFatalErrorMessages'];
+        control.push(this.createNewErrorMessageGroup());
 
         // this.exchange.networkConfig.nonFatalErrorMessages.push(new ErrorMessage(message));
         // this.selectedErrorMessage = null;
@@ -147,7 +146,7 @@ export class ExchangeDetailRxComponent implements OnInit {
                 Validators.pattern('\\d+')
             ]],
             nonFatalErrorHttpStatusCodes: new FormArray([]),
-            nonFatalErrorMessages: this.fb.array([])
+            nonFatalErrorMessages: new FormArray([]),
         });
 
         // TODO Must be better way to automatically init the arrays from the model??
@@ -155,8 +154,30 @@ export class ExchangeDetailRxComponent implements OnInit {
             (code) => this.nonFatalErrorHttpStatusCodes.push(this.createErrorCodeGroup(code))
         );
 
-        // this.exchangeDetailsForm.valueChanges.subscribe(data => this.onValueChanged(data));
-        // this.onValueChanged(); // (re)set validation messages now
+        // TODO Must be better way to automatically init the arrays from the model??
+        this.exchange.networkConfig.nonFatalErrorMessages.forEach(
+            (msg) => this.nonFatalErrorMessages.push(this.createErrorMessageGroup(msg))
+        );
+
+        this.exchangeDetailsForm.valueChanges.subscribe(data => this.onValueChanged(data));
+        this.onValueChanged(); // (re)set validation messages now
+    }
+
+    createErrorMessageGroup(errorMsg: ErrorMessage) {
+        console.log("** errorMessage", errorMsg);
+        return new FormControl(errorMsg.value, [
+            Validators.required,
+            Validators.minLength(1),
+            Validators.maxLength(120),
+        ])
+    }
+
+    createNewErrorMessageGroup() {
+        return new FormControl('', [
+            Validators.required,
+            Validators.minLength(1),
+            Validators.maxLength(120),
+        ])
     }
 
     createErrorCodeGroup(code: ErrorCode) {
@@ -182,6 +203,10 @@ export class ExchangeDetailRxComponent implements OnInit {
         return this.exchangeDetailsForm.get('nonFatalErrorHttpStatusCodes') as FormArray;
     }
 
+    get nonFatalErrorMessages(): FormArray {
+        return this.exchangeDetailsForm.get('nonFatalErrorMessages') as FormArray;
+    }
+
     initErrorCode() {
         return this.fb.group({
             value: ['',
@@ -197,43 +222,65 @@ export class ExchangeDetailRxComponent implements OnInit {
     //     });
     // }
 
-    // onValueChanged(data?: any) {
-    //
-    //     if (!this.exchangeDetailsForm) {
-    //         return;
-    //     }
-    //
-    //     const form = this.exchangeDetailsForm;
-    //
-    //     for (const field in this.formErrors) {
-    //         // clear previous error message (if any)
-    //         this.formErrors[field] = '';
-    //         const control = form.get(field);
-    //
-    //         if (control && control.dirty && !control.valid) {
-    //             const messages = this.validationMessages[field];
-    //             for (const key in control.errors) {
-    //                 this.formErrors[field] += messages[key] + ' ';
-    //             }
-    //         }
-    //     }
-    // }
+    onValueChanged(data?: any) {
 
-    // formErrors = {
-    //     'adapter': '',
-    //     'connectionTimeout': ''
-    // };
+        if (!this.exchangeDetailsForm) {
+            return;
+        }
 
-    // validationMessages = {
-    //     'adapter': {
-    //         'required': 'Adapter Name is required.',
-    //         'maxlength': 'Adapter Name cannot be more than 120 characters long.'
-    //     },
-    //     'connectionTimeout': {
-    //         'required': 'Connection timeout is required.',
-    //         'pattern': 'Connection timeout must be a whole number.'
-    //     }
-    // };
+        const form = this.exchangeDetailsForm;
+
+        for (const field in this.formErrors) {
+            // clear previous error message (if any)
+            this.formErrors[field] = '';
+            const control = form.get(field);
+
+            if (control && control.dirty && !control.valid) {
+                const messages = this.validationMessages[field];
+                for (const key in control.errors) {
+                    this.formErrors[field] += messages[key] + ' ';
+                }
+            }
+        }
+
+        // TODO hack to go though 'unknown' fields in error codes - must be better way?
+        const errorCodeControl = <FormArray>this.exchangeDetailsForm.controls['nonFatalErrorHttpStatusCodes'];
+        if (errorCodeControl && errorCodeControl.dirty && !errorCodeControl.valid) {
+            const messages = this.validationMessages['nonFatalErrorHttpStatusCodes'];
+            this.formErrors['nonFatalErrorHttpStatusCodes'] += messages['required'] + ' ';
+        }
+
+        // TODO hack to go though 'unknown' fields in error messages - must be better way?
+        const errorMessageControl = <FormArray>this.exchangeDetailsForm.controls['nonFatalErrorMessages'];
+        if (errorMessageControl && errorMessageControl.dirty && !errorMessageControl.valid) {
+            const messages = this.validationMessages['nonFatalErrorMessages'];
+            this.formErrors['nonFatalErrorMessages'] += messages['required'] + ' ';
+        }
+    }
+
+    formErrors = {
+        'adapter': '',
+        'connectionTimeout': '',
+        'nonFatalErrorHttpStatusCodes': '',
+        'nonFatalErrorMessages': ''
+    };
+
+    validationMessages = {
+        'adapter': {
+            'required': 'Adapter name is required.',
+            'maxlength': 'Adapter name cannot be more than 120 characters long.'
+        },
+        'connectionTimeout': {
+            'required': 'Connection timeout is required.',
+            'pattern': 'Connection timeout must be a whole number.'
+        },
+        'nonFatalErrorHttpStatusCodes': {
+            'required': 'Code must be a number.'
+        },
+        'nonFatalErrorMessages': {
+            'required': 'Message must not be empty.'
+        }
+    };
 }
 
 
