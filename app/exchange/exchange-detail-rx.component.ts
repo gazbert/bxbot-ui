@@ -146,13 +146,13 @@ export class ExchangeDetailRxComponent implements OnInit {
                 Validators.required,
                 Validators.pattern('\\d+')
             ]],
-            nonFatalErrorHttpStatusCodes: this.fb.array([]),
+            nonFatalErrorHttpStatusCodes: new FormArray([]),
             nonFatalErrorMessages: this.fb.array([])
         });
 
         // TODO Must be better way to automatically init the arrays from the model??
         this.exchange.networkConfig.nonFatalErrorHttpStatusCodes.forEach(
-            (code) => this.exchangeDetailsForm.controls.nonFatalErrorHttpStatusCodes.push(this.createErrorCodeGroup(code))
+            (code) => this.nonFatalErrorHttpStatusCodes.push(this.createErrorCodeGroup(code))
         );
 
         // this.exchangeDetailsForm.valueChanges.subscribe(data => this.onValueChanged(data));
