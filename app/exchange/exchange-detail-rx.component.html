@@ -14,7 +14,7 @@
         <div class="form-group">
             <label for="adapter">Adapter:</label>
             <input formControlName="adapter" placeholder="MyExchangeAdapter" id="adapter" type="text"
-                   class="form-control" required/>
+                   class="form-control" maxlength="121" required/>
 
             <!--<div *ngIf="!exchangeDetailsForm.controls.adapter.valid" class="alert alert-danger">-->
             <!--Adapter name is required.-->
@@ -27,7 +27,7 @@
         <div class="form-group">
             <label for="connectionTimeout">Connection Timeout (secs):</label>
             <input id="connectionTimeout" ngControlGroup="networkConfig" formControlName="connectionTimeout" type="text"
-                   class="form-control" placeholder="60" required/>
+                   class="form-control" placeholder="60" maxlength="8" required/>
 
             <!--<div *ngIf="!exchangeDetailsForm.controls.connectionTimeout.valid" class="alert alert-danger">-->
             <!--Connection timeout must be a whole number.-->
@@ -86,7 +86,7 @@
                     <div class="panel-body">
                         <div class="form-group">
                             <label class="col-sm-5">Error Message:</label>
-                            <input class="col-sm-7" type="text" [formControlName]="i" required>
+                            <input class="col-sm-7" type="text" [formControlName]="i" maxlength="121" required>
                             <div *ngIf="!nonFatalErrorMessages.controls[i].valid" class="alert alert-danger col-sm-7">
                                 {{ formErrors.nonFatalErrorMessages }}
                             </div>

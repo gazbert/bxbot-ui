@@ -184,18 +184,14 @@ export class ExchangeDetailRxComponent implements OnInit {
         console.log("** errorCode", code);
         return new FormControl(code.value, [
             Validators.required,
-            Validators.minLength(3),
-            Validators.maxLength(3),
-            Validators.pattern('\\d+'),
+            Validators.pattern('\\d{3}'),
         ])
     }
 
     createNewErrorCodeGroup() {
         return new FormControl('', [
             Validators.required,
-            Validators.minLength(3),
-            Validators.maxLength(3),
-            Validators.pattern('\\d+'),
+            Validators.pattern('\\d{3}'),
         ])
     }
 
@@ -207,14 +203,14 @@ export class ExchangeDetailRxComponent implements OnInit {
         return this.exchangeDetailsForm.get('nonFatalErrorMessages') as FormArray;
     }
 
-    initErrorCode() {
-        return this.fb.group({
-            value: ['',
-                Validators.required,
-                Validators.pattern('\\d+')
-            ],
-        });
-    }
+    // initErrorCode() {
+    //     return this.fb.group({
+    //         value: ['',
+    //             Validators.required,
+    //             Validators.pattern('\\d+')
+    //         ],
+    //     });
+    // }
 
     // initErrorCode() {
     //     return this.fb.group({
@@ -245,17 +241,25 @@ export class ExchangeDetailRxComponent implements OnInit {
 
         // TODO hack to go though 'unknown' fields in error codes - must be better way?
         const errorCodeControl = <FormArray>this.exchangeDetailsForm.controls['nonFatalErrorHttpStatusCodes'];
-        if (errorCodeControl && errorCodeControl.dirty && !errorCodeControl.valid) {
-            const messages = this.validationMessages['nonFatalErrorHttpStatusCodes'];
-            this.formErrors['nonFatalErrorHttpStatusCodes'] += messages['required'] + ' ';
-        }
+        errorCodeControl.controls.forEach((code) => {
+            if (code && code.dirty && !code.valid) {
+                const messages = this.validationMessages['nonFatalErrorHttpStatusCodes'];
+                for (const key in code.errors) {
+                    this.formErrors['nonFatalErrorHttpStatusCodes'] += messages[key] + ' ';
+                }
+            }
+        });
 
         // TODO hack to go though 'unknown' fields in error messages - must be better way?
         const errorMessageControl = <FormArray>this.exchangeDetailsForm.controls['nonFatalErrorMessages'];
-        if (errorMessageControl && errorMessageControl.dirty && !errorMessageControl.valid) {
-            const messages = this.validationMessages['nonFatalErrorMessages'];
-            this.formErrors['nonFatalErrorMessages'] += messages['required'] + ' ';
-        }
+        errorMessageControl.controls.forEach((msg) => {
+            if (msg && msg.dirty && !msg.valid) {
+                const messages = this.validationMessages['nonFatalErrorMessages'];
+                for (const key in msg.errors) {
+                    this.formErrors['nonFatalErrorMessages'] += messages[key] + ' ';
+                }
+            }
+        });
     }
 
     formErrors = {
@@ -275,10 +279,12 @@ export class ExchangeDetailRxComponent implements OnInit {
             'pattern': 'Connection timeout must be a whole number.'
         },
         'nonFatalErrorHttpStatusCodes': {
-            'required': 'Code must be a number.'
+            'required': 'Code must not be empty.',
+            'pattern': 'Code must be a 3 digit number.'
         },
         'nonFatalErrorMessages': {
-            'required': 'Message must not be empty.'
+            'required': 'Message must not be empty.',
+            'maxlength': 'Message length cannot be more than 120 characters long.'
         }
     };
 }
