@@ -84,8 +84,8 @@
                     <div class="panel-body">
                         <div class="form-group">
                             <label class="col-sm-5">Error Message:</label>
-                            <input class="col-sm-7" type="text" [formControlName]="i" maxlength="121" required #errorMsg>
-                            <div *ngIf="errorMsg.className.includes('ng-dirty') && !nonFatalErrorMessages.controls[i].valid" class="alert alert-danger col-sm-7">
+                            <input class="col-sm-7" type="text" [formControlName]="i" maxlength="121" required>
+                            <div *ngIf="!nonFatalErrorMessages.controls[i].valid" class="alert alert-danger col-sm-7">
                                 {{ formErrors.nonFatalErrorMessages }}
                             </div>
                         </div>
