@@ -176,10 +176,11 @@ export class ExchangeDetailRxComponent implements OnInit {
             }
         }
 
-        // TODO hack to go though 'unknown' fields in error codes - must be better way?
+        // TODO hack to go though error codes - FIX needed to id individual inputs else we duplicate validation messages!
         const errorCodeControl = <FormArray>this.exchangeDetailsForm.controls['nonFatalErrorHttpStatusCodes'];
         errorCodeControl.controls.forEach((code) => {
             if (code && code.dirty && !code.valid) {
+                this.formErrors['nonFatalErrorHttpStatusCodes'] = '';
                 const messages = this.validationMessages['nonFatalErrorHttpStatusCodes'];
                 for (const key in code.errors) {
                     this.formErrors['nonFatalErrorHttpStatusCodes'] += messages[key] + ' ';
@@ -187,10 +188,11 @@ export class ExchangeDetailRxComponent implements OnInit {
             }
         });
 
-        // TODO hack to go though 'unknown' fields in error messages - must be better way?
+        // TODO hack to go though error messages - FIX needed to id individual inputs else we duplicate validation messages!
         const errorMessageControl = <FormArray>this.exchangeDetailsForm.controls['nonFatalErrorMessages'];
         errorMessageControl.controls.forEach((msg) => {
             if (msg && msg.dirty && !msg.valid) {
+                this.formErrors['nonFatalErrorMessages'] = '';
                 const messages = this.validationMessages['nonFatalErrorMessages'];
                 for (const key in msg.errors) {
                     this.formErrors['nonFatalErrorMessages'] += messages[key] + ' ';
