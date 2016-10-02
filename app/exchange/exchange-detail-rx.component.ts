@@ -32,9 +32,8 @@ export class ExchangeDetailRxComponent implements OnInit {
         });
     }
 
-    goBack(): void {
-        window.history.back();
-        // this.router.navigate(['/dashboard']);
+    goToDashboard(): void {
+         this.router.navigate(['dashboard']);
     }
 
     save(): void {
@@ -55,7 +54,9 @@ export class ExchangeDetailRxComponent implements OnInit {
             (m) => this.exchange.networkConfig.nonFatalErrorMessages.push({"value": m}));
 
         this.exchangeRestClientService.update(this.exchange)
-            .then(this.goBack);
+            .then(exchange => {
+                this.goToDashboard();
+            });
     }
 
     addErrorCode(): void {

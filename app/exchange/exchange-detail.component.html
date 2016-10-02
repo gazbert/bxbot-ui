@@ -94,8 +94,11 @@
             <hr>
         </div>
         <div>
-            <button (click)="goBack()" class="btn btn-default">Cancel</button>
-            <button (click)="save()" class="btn btn-primary" [disabled]="!exchangeDetailsForm.form.valid">Save</button>
+            <!-- Must have type for button else Chrome reloads entire app on Cancel click!
+                 http://stackoverflow.com/questions/38120756/angular2-router-navigate-refresh-page
+             -->
+            <button type="button" (click)="goToDashboard()" class="btn btn-default">Cancel</button>
+            <button type="submit" (click)="save()" class="btn btn-primary" [disabled]="!exchangeDetailsForm.form.valid">Save</button>
         </div>
     </form>
 </div>

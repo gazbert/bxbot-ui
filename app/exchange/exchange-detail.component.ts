@@ -28,15 +28,15 @@ export class ExchangeDetailComponent implements OnInit {
         });
     }
 
-    goBack() {
-        window.history.back();
-        // this.router.navigate(['/dashboard']);
+    goToDashboard() {
+        this.router.navigate(['dashboard']);
     }
 
     save(): void {
-        var that = this;
         this.exchangeRestClientService.update(this.exchange).then(
-            that.goBack);
+            exchange => {
+                this.goToDashboard();
+            });
     }
 
     addErrorCode(code: number): void {

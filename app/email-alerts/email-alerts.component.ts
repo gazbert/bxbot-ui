@@ -34,8 +34,7 @@ export class EmailAlertsComponent implements OnInit {
         console.log(model, isValid);
     }
 
-    goBack(): void {
-        window.history.back();
-        // this.router.navigate(['/dashboard']);
+    goToDashboard(): void {
+        this.router.navigate(['/dashboard']);
     }
 }
