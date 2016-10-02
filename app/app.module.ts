@@ -13,10 +13,11 @@ import {routing} from "./app.routing";
 import {ExchangeRestClientService} from "./shared/index";
 import {DashboardComponent} from "./dashboard/index";
 import {ExchangeDetailComponent, ExchangeDetailRxComponent} from "./exchange/index";
+import {EmailAlertsComponent, EqualValidator} from "./email-alerts/index";
 
 @NgModule({
     imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpModule, InMemoryWebApiModule.forRoot(InMemoryDataService), routing],
-    declarations: [AppComponent, DashboardComponent, ExchangeDetailComponent, ExchangeDetailRxComponent],
+    declarations: [AppComponent, DashboardComponent, ExchangeDetailComponent, ExchangeDetailRxComponent, EmailAlertsComponent, EqualValidator],
     providers: [ExchangeRestClientService],
     bootstrap: [AppComponent]
 })

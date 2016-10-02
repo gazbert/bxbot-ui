@@ -1,10 +1,10 @@
 import {OnInit, Component} from "@angular/core";
-import {ActivatedRoute, Params} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 import {FormGroup, FormBuilder, Validators, FormControl, FormArray} from "@angular/forms";
 import {Exchange, ErrorCode, ErrorMessage, ExchangeRestClientService} from "../shared/index";
 
 /**
- * Reactive version of the Exchange Details form so I can decide which I like best.
+ * Reactive version of the Exchange Details form.
  */
 @Component({
     selector: 'bx-exchange-detail-rx',
@@ -14,15 +14,11 @@ import {Exchange, ErrorCode, ErrorMessage, ExchangeRestClientService} from "../s
 export class ExchangeDetailRxComponent implements OnInit {
 
     exchange: Exchange;
-    selectedErrorCode: ErrorCode;
-    selectedErrorMessage: ErrorMessage;
     active = true;
-    saveClicked = false;
-
     public exchangeDetailsForm: FormGroup;
 
     constructor(private exchangeRestClientService: ExchangeRestClientService, private route: ActivatedRoute,
-                private fb: FormBuilder) {
+                private fb: FormBuilder, private router: Router) {
     }
 
     ngOnInit(): void {
@@ -34,20 +30,16 @@ export class ExchangeDetailRxComponent implements OnInit {
                     this.buildForm();
                 });
         });
-
-        this.saveClicked = false;
     }
 
     goBack(): void {
         window.history.back();
+        // this.router.navigate(['/dashboard']);
     }
 
     save(): void {
 
-        this.saveClicked = true;
-
-        // update form model before save
-        // TODO Must be better way to adapt/map domain model <-> form model?
+        // TODO Must be better way to adapt/map domain model <-> form UI model?
         this.exchange.id = this.exchangeDetailsForm.get('exchangeId').value;
         this.exchange.adapter = this.exchangeDetailsForm.get('adapter').value;
         this.exchange.networkConfig.connectionTimeout = this.exchangeDetailsForm.get('connectionTimeout').value;
@@ -66,70 +58,28 @@ export class ExchangeDetailRxComponent implements OnInit {
             .then(this.goBack);
     }
 
-    onSelectErrorCode(selectedErrorCode: ErrorCode): void {
-        this.selectedErrorCode = selectedErrorCode;
+    addErrorCode(): void {
+        const control = <FormArray>this.exchangeDetailsForm.controls['nonFatalErrorHttpStatusCodes'];
+        control.push(this.createNewErrorCodeGroup());
     }
 
     deleteErrorCode(i: number): void {
-
         const control = <FormArray>this.exchangeDetailsForm.controls['nonFatalErrorHttpStatusCodes'];
         control.removeAt(i);
-
-        // this.exchange.networkConfig.nonFatalErrorHttpStatusCodes =
-        //     this.exchange.networkConfig.nonFatalErrorHttpStatusCodes.filter(c => c !== code);
-
-        // if (this.selectedErrorCode === code) {
-        //     this.selectedErrorCode = null;
-        // }
-    }
-
-    addErrorCode(): void {
-
-        const control = <FormArray>this.exchangeDetailsForm.controls['nonFatalErrorHttpStatusCodes'];
-        // control.push(this.initErrorCode());
-        control.push(this.createNewErrorCodeGroup());
-
-        // this.exchange.networkConfig.nonFatalErrorHttpStatusCodes.push(new ErrorCode(code));
-        // this.selectedErrorCode = null;
-
-        // // TODO check this works - form reset hack until Google add this feature
-        // this.active = false;
-        // setTimeout(() => this.active = true, 0);
-    }
-
-    onSelectErrorMessage(selectedErrorMessage: ErrorMessage): void {
-        this.selectedErrorMessage = selectedErrorMessage;
-    }
-
-    deleteErrorMessage(i: number): void {
-        // this.exchange.networkConfig.nonFatalErrorMessages =
-        //     this.exchange.networkConfig.nonFatalErrorMessages.filter(m => m !== message);
-
-        const control = <FormArray>this.exchangeDetailsForm.controls['nonFatalErrorMessages'];
-        control.removeAt(i);
-
-
-        // TODO null off selected message
-        // if (this.selectedErrorMessage === message) {
-        //     this.selectedErrorMessage = null;
-        // }
     }
 
     addErrorMessage(): void {
-
         const control = <FormArray>this.exchangeDetailsForm.controls['nonFatalErrorMessages'];
         control.push(this.createNewErrorMessageGroup());
+    }
 
-        // this.exchange.networkConfig.nonFatalErrorMessages.push(new ErrorMessage(message));
-        // this.selectedErrorMessage = null;
-
-        // TODO check this works - form reset hack until Google add this feature
-        // this.active = false;
-        // setTimeout(() => this.active = true, 0);
+    deleteErrorMessage(i: number): void {
+        const control = <FormArray>this.exchangeDetailsForm.controls['nonFatalErrorMessages'];
+        control.removeAt(i);
     }
 
     // ------------------------------------------------------------------
-    // Form validation
+    // Form validation stuff
     // ------------------------------------------------------------------
 
     buildForm(): void {
@@ -164,15 +114,14 @@ export class ExchangeDetailRxComponent implements OnInit {
         this.onValueChanged(); // (re)set validation messages now
     }
 
+    // TODO merge these 2 creates
     createErrorMessageGroup(errorMsg: ErrorMessage) {
-        console.log("** errorMessage", errorMsg);
         return new FormControl(errorMsg.value, [
             Validators.required,
             Validators.minLength(1),
             Validators.maxLength(120),
         ])
     }
-
     createNewErrorMessageGroup() {
         return new FormControl('', [
             Validators.required,
@@ -181,15 +130,14 @@ export class ExchangeDetailRxComponent implements OnInit {
         ])
     }
 
+    // TODO merge these 2 creates
     createErrorCodeGroup(code: ErrorCode) {
-        console.log("** errorCode", code);
         return new FormControl(code.value, [
             Validators.required,
             Validators.pattern('\\d{3}'),
             this.httpCodeWhitelistChecker,
         ])
     }
-
     createNewErrorCodeGroup() {
         return new FormControl('', [
             Validators.required,
@@ -205,21 +153,6 @@ export class ExchangeDetailRxComponent implements OnInit {
     get nonFatalErrorMessages(): FormArray {
         return this.exchangeDetailsForm.get('nonFatalErrorMessages') as FormArray;
     }
-
-    // initErrorCode() {
-    //     return this.fb.group({
-    //         value: ['',
-    //             Validators.required,
-    //             Validators.pattern('\\d+')
-    //         ],
-    //     });
-    // }
-
-    // initErrorCode() {
-    //     return this.fb.group({
-    //         value: [this.exchange.networkConfig.nonFatalErrorHttpStatusCodes]
-    //     });
-    // }
 
     onValueChanged(data?: any) {
 
@@ -264,15 +197,6 @@ export class ExchangeDetailRxComponent implements OnInit {
             }
         });
     }
-
-    // function validateEmail(c: FormControl) {
-    // let EMAIL_REGEXP = ...
-    //
-    // return EMAIL_REGEXP.test(c.value) ? null : {
-    //     validateEmail: {
-    //         valid: false
-    //     }
-    // };
 
     httpCodeWhitelistChecker(control: FormControl) {
         // TODO get from config or wherever

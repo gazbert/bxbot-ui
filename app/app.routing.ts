@@ -2,6 +2,7 @@ import {ModuleWithProviders} from "@angular/core";
 import {Routes, RouterModule} from "@angular/router";
 import {DashboardComponent} from "./dashboard/index";
 import {ExchangeDetailComponent, ExchangeDetailRxComponent} from "./exchange/index";
+import {EmailAlertsComponent} from "./email-alerts/index";
 
 const appRoutes: Routes = [
     {
@@ -17,6 +18,10 @@ const appRoutes: Routes = [
         path: 'detail/:id',
         // component: ExchangeDetailComponent
         component: ExchangeDetailRxComponent
+    },
+    {
+        path: 'emailalerts',
+        component: EmailAlertsComponent
     }
 ];
 
