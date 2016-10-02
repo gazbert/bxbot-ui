@@ -92,7 +92,7 @@ export class ExchangeDetailRxComponent implements OnInit {
         // this.exchange.networkConfig.nonFatalErrorHttpStatusCodes.push(new ErrorCode(code));
         // this.selectedErrorCode = null;
 
-        // TODO check this works - form reset hack until Google add this feature
+        // // TODO check this works - form reset hack until Google add this feature
         // this.active = false;
         // setTimeout(() => this.active = true, 0);
     }
@@ -139,7 +139,8 @@ export class ExchangeDetailRxComponent implements OnInit {
             adapter: [this.exchange.adapter, [
                 Validators.required,
                 Validators.minLength(1),
-                Validators.maxLength(120)
+                Validators.maxLength(120),
+                Validators.pattern('([a-zA-Z_$][a-zA-Z\\d_$]*\.)*[a-zA-Z_$][a-zA-Z\\d_$]*')
             ]],
             connectionTimeout: [this.exchange.networkConfig.connectionTimeout, [
                 Validators.required,
@@ -185,6 +186,7 @@ export class ExchangeDetailRxComponent implements OnInit {
         return new FormControl(code.value, [
             Validators.required,
             Validators.pattern('\\d{3}'),
+            this.httpCodeWhitelistChecker,
         ])
     }
 
@@ -192,6 +194,7 @@ export class ExchangeDetailRxComponent implements OnInit {
         return new FormControl('', [
             Validators.required,
             Validators.pattern('\\d{3}'),
+            this.httpCodeWhitelistChecker,
         ])
     }
 
@@ -262,6 +265,27 @@ export class ExchangeDetailRxComponent implements OnInit {
         });
     }
 
+    // function validateEmail(c: FormControl) {
+    // let EMAIL_REGEXP = ...
+    //
+    // return EMAIL_REGEXP.test(c.value) ? null : {
+    //     validateEmail: {
+    //         valid: false
+    //     }
+    // };
+
+    httpCodeWhitelistChecker(control: FormControl) {
+        // TODO get from config or wherever
+        const httpCodeWhitelist = ['501', '502', '503', '504'];
+        if (control && control.dirty) {
+            const httpStatusCode = control.value;
+            const validCode = httpCodeWhitelist.includes(httpStatusCode);
+            return validCode ? null : {'httpCodeWhitelistChecker': {httpStatusCode}};
+        } else {
+            return null;
+        }
+    }
+
     formErrors = {
         'adapter': '',
         'connectionTimeout': '',
@@ -272,7 +296,8 @@ export class ExchangeDetailRxComponent implements OnInit {
     validationMessages = {
         'adapter': {
             'required': 'Adapter name is required.',
-            'maxlength': 'Adapter name cannot be more than 120 characters long.'
+            'maxlength': 'Adapter name cannot be more than 120 characters long.',
+            'pattern': 'Not a valid fully qualified Java class name.'
         },
         'connectionTimeout': {
             'required': 'Connection timeout is required.',
@@ -280,7 +305,8 @@ export class ExchangeDetailRxComponent implements OnInit {
         },
         'nonFatalErrorHttpStatusCodes': {
             'required': 'Code must not be empty.',
-            'pattern': 'Code must be a 3 digit number.'
+            'pattern': 'Code must be a 3 digit number.',
+            'httpCodeWhitelistChecker': 'HTTP Status Code not in whitelist.'
         },
         'nonFatalErrorMessages': {
             'required': 'Message must not be empty.',
