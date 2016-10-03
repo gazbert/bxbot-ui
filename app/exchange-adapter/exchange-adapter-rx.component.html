@@ -6,37 +6,42 @@
 
     <form *ngIf="active" novalidate [formGroup]="exchangeDetailsForm" (ngSubmit)="save()">
 
-        <div class="form-group">
-            <label for="exchangeId">Id:</label>
-            <input formControlName="exchangeId" id="exchangeId" type="text" class="form-control"/>
-        </div>
-
-        <div class="form-group">
-            <label for="adapter">Adapter:</label>
-            <input formControlName="adapter" placeholder="com.my.ExchangeAdapter" id="adapter" type="text"
-                   class="form-control" maxlength="121" required/>
-
-            <!--<div *ngIf="!exchangeDetailsForm.controls.adapter.valid" class="alert alert-danger">-->
-            <!--Adapter name is required.-->
-            <!--</div>-->
-            <div *ngIf="formErrors.adapter" class="alert alert-danger">{{ formErrors.adapter }}</div>
-
-        </div>
-        <!--<h3>Network Config</h3>-->
-        <div class="form-group">
-            <label for="connectionTimeout">Connection Timeout (secs):</label>
-            <input id="connectionTimeout" ngControlGroup="networkConfig" formControlName="connectionTimeout"
-                   type="text"
-                   class="form-control" placeholder="60" maxlength="8" required/>
-
-            <!--<div *ngIf="!exchangeDetailsForm.controls.connectionTimeout.valid" class="alert alert-danger">-->
-            <!--Connection timeout must be a whole number.-->
-            <!--</div>-->
-            <div *ngIf="formErrors.connectionTimeout" class="alert alert-danger">{{ formErrors.connectionTimeout }}
+        <div class="row">
+            <div class="form-group col-sm-12">
+                <label for="exchangeId">Id:</label>
+                <input formControlName="exchangeId" id="exchangeId" type="text" class="form-control"/>
             </div>
-            <!--<small *ngIf="!exchangeDetailsForm.controls.connectionTimeout.valid" class="text-danger">-->
-            <!--Connection timeout must be a whole number.-->
-            <!--</small>-->
+        </div>
+
+        <div class="row">
+            <div class="form-group col-sm-12">
+                <label for="adapter">Adapter:</label>
+                <input formControlName="adapter" placeholder="com.my.ExchangeAdapter" id="adapter" type="text"
+                       class="form-control" maxlength="121" required/>
+
+                <!--<div *ngIf="!exchangeDetailsForm.controls.adapter.valid" class="alert alert-danger">-->
+                <!--Adapter name is required.-->
+                <!--</div>-->
+                <div *ngIf="formErrors.adapter" class="alert alert-danger">{{ formErrors.adapter }}</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-sm-12">
+                <label for="connectionTimeout">Connection Timeout (secs):</label>
+                <input id="connectionTimeout" ngControlGroup="networkConfig" formControlName="connectionTimeout"
+                       type="text"
+                       class="form-control" placeholder="60" maxlength="8" required/>
+
+                <!--<div *ngIf="!exchangeDetailsForm.controls.connectionTimeout.valid" class="alert alert-danger">-->
+                <!--Connection timeout must be a whole number.-->
+                <!--</div>-->
+                <div *ngIf="formErrors.connectionTimeout" class="alert alert-danger">{{ formErrors.connectionTimeout }}
+                </div>
+                <!--<small *ngIf="!exchangeDetailsForm.controls.connectionTimeout.valid" class="text-danger">-->
+                <!--Connection timeout must be a whole number.-->
+                <!--</small>-->
+            </div>
         </div>
 
         <div class="row">

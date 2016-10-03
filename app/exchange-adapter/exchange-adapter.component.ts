@@ -8,8 +8,8 @@ import {Exchange, ErrorCode, ErrorMessage, ExchangeRestClientService} from "../s
  */
 @Component({
     selector: 'bx-exchange-adapter',
-    templateUrl: 'app/adapter/exchange-adapter.component.html',
-    styleUrls: ['app/adapter/exchange-adapter.component.css']
+    templateUrl: 'app/exchange-adapter/exchange-adapter.component.html',
+    styleUrls: ['app/exchange-adapter/exchange-adapter.component.css']
 })
 export class ExchangeAdapterComponent implements OnInit {
 

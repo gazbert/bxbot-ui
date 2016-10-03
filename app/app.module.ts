@@ -9,7 +9,7 @@ import {AppComponent} from "./app.component";
 import {routing} from "./app.routing";
 import {ExchangeRestClientService} from "./shared/index";
 import {DashboardComponent} from "./dashboard/index";
-import {ExchangeAdapterComponent, ExchangeAdapterRxComponent} from "./adapter/index";
+import {ExchangeAdapterComponent, ExchangeAdapterRxComponent} from "./exchange-adapter/index";
 import {EmailAlertsComponent, EqualValidator} from "./email-alerts/index";
 import {ExchangeDetailsComponent, Tabs, Tab} from "./exchange-details/index";
 
