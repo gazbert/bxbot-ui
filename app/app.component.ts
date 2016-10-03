@@ -3,11 +3,11 @@ import {Component} from "@angular/core";
 @Component({
     selector: 'bxbot-ui',
     template: `
-    <div class="container">
+    <div class="container module-bootstrap">
         <h1>{{title}}</h1>
         <nav>
             <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-            <a routerLink="/emailalerts" routerLinkActive="active">Email Alerts</a>  
+            <a routerLink="/emailalerts" routerLinkActive="active">Email Alerts</a>             
         </nav>
         <router-outlet></router-outlet>
     </div>

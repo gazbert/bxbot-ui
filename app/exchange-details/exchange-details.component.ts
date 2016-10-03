@@ -4,14 +4,14 @@ import {NgForm} from "@angular/forms";
 import {Exchange, ErrorCode, ErrorMessage, ExchangeRestClientService} from "../shared/index";
 
 /**
- * Template-driven version of the Exchange Details form.
+ * Wrapper for Exchange Details.
  */
 @Component({
-    selector: 'bx-exchange-detail',
-    templateUrl: 'app/exchange/exchange-detail.component.html',
-    styleUrls: ['app/exchange/exchange-detail.component.css']
+    selector: 'bx-exchange-details',
+    templateUrl: 'app/exchange-details/exchange-details.component.html',
+    styleUrls: ['app/exchange-details/exchange-details.component.css']
 })
-export class ExchangeDetailComponent implements OnInit {
+export class ExchangeDetailsComponent implements OnInit {
 
     exchange: Exchange;
     active = true;

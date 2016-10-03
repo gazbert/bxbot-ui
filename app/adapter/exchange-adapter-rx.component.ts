@@ -4,14 +4,14 @@ import {FormGroup, FormBuilder, Validators, FormControl, FormArray} from "@angul
 import {Exchange, ErrorCode, ErrorMessage, ExchangeRestClientService} from "../shared/index";
 
 /**
- * Reactive version of the Exchange Details form.
+ * Reactive version of the Exchange Adapter form.
  */
 @Component({
-    selector: 'bx-exchange-detail-rx',
-    templateUrl: 'app/exchange/exchange-detail-rx.component.html',
-    styleUrls: ['app/exchange/exchange-detail.component.css']
+    selector: 'bx-exchange-adapter-rx',
+    templateUrl: 'app/adapter/exchange-adapter-rx.component.html',
+    styleUrls: ['app/adapter/exchange-adapter.component.css']
 })
-export class ExchangeDetailRxComponent implements OnInit {
+export class ExchangeAdapterRxComponent implements OnInit {
 
     exchange: Exchange;
     active = true;

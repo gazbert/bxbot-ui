@@ -1,8 +1,8 @@
 <!--
-    Reactive version of the Exchange Details form.
+    Reactive version of the Exchange Adapter form.
  -->
-<div *ngIf="exchange" class="container module-bootstrap">
-    <h2>{{exchange.id}} Exchange Details</h2>
+<div *ngIf="exchange" class="">
+    <!--<h2>Exchange Adapter</h2>-->
 
     <form *ngIf="active" novalidate [formGroup]="exchangeDetailsForm" (ngSubmit)="save()">
 
@@ -25,7 +25,8 @@
         <!--<h3>Network Config</h3>-->
         <div class="form-group">
             <label for="connectionTimeout">Connection Timeout (secs):</label>
-            <input id="connectionTimeout" ngControlGroup="networkConfig" formControlName="connectionTimeout" type="text"
+            <input id="connectionTimeout" ngControlGroup="networkConfig" formControlName="connectionTimeout"
+                   type="text"
                    class="form-control" placeholder="60" maxlength="8" required/>
 
             <!--<div *ngIf="!exchangeDetailsForm.controls.connectionTimeout.valid" class="alert alert-danger">-->
@@ -85,7 +86,8 @@
                         <div class="form-group">
                             <label class="col-sm-5">Error Message:</label>
                             <input class="col-sm-7" type="text" [formControlName]="i" maxlength="121" required>
-                            <div *ngIf="!nonFatalErrorMessages.controls[i].valid" class="alert alert-danger col-sm-7">
+                            <div *ngIf="!nonFatalErrorMessages.controls[i].valid"
+                                 class="alert alert-danger col-sm-7">
                                 {{ formErrors.nonFatalErrorMessages }}
                             </div>
                         </div>

@@ -1,23 +1,44 @@
 import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
-import {FormsModule} from "@angular/forms";
-import {HttpModule}    from '@angular/http';
-import {ReactiveFormsModule} from '@angular/forms';
-
-// Imports for loading & configuring the in-memory web api
-import {InMemoryWebApiModule} from 'angular2-in-memory-web-api';
-import {InMemoryDataService}  from './shared/in-memory-data.service';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HttpModule} from "@angular/http";
+import {InMemoryWebApiModule} from "angular2-in-memory-web-api";
+import {InMemoryDataService} from "./shared/in-memory-data.service";
 
 import {AppComponent} from "./app.component";
 import {routing} from "./app.routing";
 import {ExchangeRestClientService} from "./shared/index";
 import {DashboardComponent} from "./dashboard/index";
-import {ExchangeDetailComponent, ExchangeDetailRxComponent} from "./exchange/index";
+import {ExchangeAdapterComponent, ExchangeAdapterRxComponent} from "./adapter/index";
 import {EmailAlertsComponent, EqualValidator} from "./email-alerts/index";
+import {ExchangeDetailsComponent, ExchangeDetailsTabsComponent, Tabs, Tab} from "./exchange-details/index";
 
+/**
+ * BX-bot UI main module.
+ *
+ * @author gazbert
+ */
 @NgModule({
-    imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpModule, InMemoryWebApiModule.forRoot(InMemoryDataService), routing],
-    declarations: [AppComponent, DashboardComponent, ExchangeDetailComponent, ExchangeDetailRxComponent, EmailAlertsComponent, EqualValidator],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpModule,
+        InMemoryWebApiModule.forRoot(InMemoryDataService),
+        routing
+    ],
+    declarations: [
+        AppComponent,
+        DashboardComponent,
+        ExchangeAdapterComponent,
+        ExchangeAdapterRxComponent,
+        EmailAlertsComponent,
+        EqualValidator,
+        ExchangeDetailsComponent,
+        ExchangeDetailsTabsComponent,
+        Tabs,
+        Tab
+    ],
     providers: [ExchangeRestClientService],
     bootstrap: [AppComponent]
 })
