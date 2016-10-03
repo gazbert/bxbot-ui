@@ -11,8 +11,8 @@ import {Tab} from "./tab.component";
     selector: 'tabs',
     template: `
     <ul class="nav nav-pills">
-      <li *ngFor="let tab of tabs" (click)="selectTab(tab)" [class.active]="tab.active">
-        <a href="detail/GDAX#">{{tab.title}}</a>
+      <li *ngFor="let tab of tabs" (click)="selectTab(tab)" [class.active]="tab.active">            
+        <a href="detail/{{tab.exchangeId}}#">{{tab.title}}</a>
       </li>
     </ul>
     <ng-content></ng-content>

@@ -11,7 +11,7 @@ import {ExchangeRestClientService} from "./shared/index";
 import {DashboardComponent} from "./dashboard/index";
 import {ExchangeAdapterComponent, ExchangeAdapterRxComponent} from "./adapter/index";
 import {EmailAlertsComponent, EqualValidator} from "./email-alerts/index";
-import {ExchangeDetailsComponent, ExchangeDetailsTabsComponent, Tabs, Tab} from "./exchange-details/index";
+import {ExchangeDetailsComponent, Tabs, Tab} from "./exchange-details/index";
 
 /**
  * BX-bot UI main module.
@@ -35,7 +35,6 @@ import {ExchangeDetailsComponent, ExchangeDetailsTabsComponent, Tabs, Tab} from 
         EmailAlertsComponent,
         EqualValidator,
         ExchangeDetailsComponent,
-        ExchangeDetailsTabsComponent,
         Tabs,
         Tab
     ],
