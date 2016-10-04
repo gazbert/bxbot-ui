@@ -11,7 +11,7 @@ import {Tab} from "./tab.component";
     selector: 'tabs',
     template: `
     <ul class="nav nav-pills">
-      <li *ngFor="let tab of tabs" (click)="selectTab(tab)" [class.active]="tab.active">            
+      <li *ngFor="let tab of tabs; trackBy:trackByTabTitle" (click)="selectTab(tab)" [class.active]="tab.active">            
         <a href="detail/{{tab.exchangeId}}#">{{tab.title}}</a>
       </li>
     </ul>
@@ -40,4 +40,6 @@ export class Tabs implements AfterContentInit {
         // activate the tab the user has clicked on.
         tab.active = true;
     }
+
+    trackByTabTitle(index: number, title: string) { return title; }
 }

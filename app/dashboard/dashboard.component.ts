@@ -23,4 +23,6 @@ export class DashboardComponent implements OnInit {
         let link = ['/detail', exchange.id];
         this.router.navigate(link);
     }
+
+    trackByExchangeId(index: number, exchange: Exchange) { return exchange.id; }
 }
