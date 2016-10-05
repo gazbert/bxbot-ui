@@ -39,7 +39,13 @@
             'angular2-in-memory-web-api': {
                 main: './index.js',
                 defaultExtension: 'js'
-            }
+            },
+
+            // TODO move these into systemjs.config.extras.js ?
+            // barrels
+            'app/shared': {main:'index.js', defaultExtension:'js'},
+            // 'app/model/testing': {main:'index.js', defaultExtension:'js'},
+
         }
     });
 })(this);

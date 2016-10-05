@@ -1,6 +1,6 @@
 import {Router} from "@angular/router";
 import {Component, OnInit} from "@angular/core";
-import {ExchangeRestClientService, Exchange} from "../shared/index";
+import {ExchangeRestClientService, Exchange} from "../shared";
 
 @Component({
     selector: 'bx-dashboard',

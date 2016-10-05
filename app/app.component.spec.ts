@@ -1,28 +1,47 @@
-/* tslint:disable:no-unused-variable */
-import {AppComponent} from "./app.component";
-import {TestBed} from "@angular/core/testing";
+import {TestBed, ComponentFixture, async} from "@angular/core/testing";
 import {By} from "@angular/platform-browser";
+import {DebugElement} from "@angular/core";
+import {AppComponent} from "./app.component";
 
-////////  TODO - Write some SPECS!!  /////////////
+let appComponentUnderTest: AppComponent;
+let fixture: ComponentFixture<AppComponent>;
+let de: DebugElement;
+let el: HTMLElement;
 
-describe('AppComponent with TCB', function () {
-    beforeEach(() => {
-        TestBed.configureTestingModule({declarations: [AppComponent]});
-        TestBed.compileComponents();
-    });
+describe('Tests the main app component behaviour', function () {
 
-    it('should instantiate component', () => {
-        let fixture = TestBed.createComponent(AppComponent);
-        expect(fixture.componentInstance instanceof AppComponent).toBe(true, 'should create AppComponent');
-    });
+    beforeEach(async(() => {
 
-    it('should have expected <h1> text', () => {
-        let fixture = TestBed.createComponent(AppComponent);
+        TestBed.configureTestingModule({
+            declarations: [
+                AppComponent
+            ]
+        })
+            .compileComponents()
+            .then(() => {
+                fixture = TestBed.createComponent(AppComponent);
+                appComponentUnderTest = fixture.componentInstance;
+            });
+    }));
+
+    it('should display original BX-bot UI title', () => {
+
+        // query for the title <h1> by CSS element selector
+        de = fixture.debugElement.query(By.css('h1'));
+        el = de.nativeElement;
+
         fixture.detectChanges();
+        expect(el.textContent).toContain(appComponentUnderTest.title);
+    });
 
-        let h1 = fixture.debugElement.query(el => el.name === 'h1').nativeElement;  // it works
-        h1 = fixture.debugElement.query(By.css('h1')).nativeElement;                // preferred
+    it('should display a different app title', () => {
 
-        expect(h1.innerText).toMatch(/BX-bot Admin Console/i, '<h1> should say something about "BX-bot Admin Console"');
+        //query for the title <h1> by CSS element selector
+        de = fixture.debugElement.query(By.css('h1'));
+        el = de.nativeElement;
+
+        appComponentUnderTest.title = 'Nostromo Title';
+        fixture.detectChanges();
+        expect(el.textContent).toContain('Nostromo Title');
     });
 });
