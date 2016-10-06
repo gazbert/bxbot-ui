@@ -1,5 +1,5 @@
 /**
- * System configuration for Angular 2 samples
+ * System configuration for Angular samples
  * Adjust as necessary for your application needs.
  */
 (function (global) {
@@ -22,10 +22,11 @@
             '@angular/http': 'npm:@angular/http/bundles/http.umd.js',
             '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
             '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
+            '@angular/upgrade': 'npm:@angular/upgrade/bundles/upgrade.umd.js',
 
             // other libraries
             'rxjs': 'npm:rxjs',
-            'angular2-in-memory-web-api': 'npm:angular2-in-memory-web-api',
+            'angular-in-memory-web-api': 'npm:angular-in-memory-web-api'
         },
         // packages tells the System loader how to load when no filename and/or no extension
         packages: {
@@ -36,16 +37,15 @@
             rxjs: {
                 defaultExtension: 'js'
             },
-            'angular2-in-memory-web-api': {
+            'angular-in-memory-web-api': {
                 main: './index.js',
                 defaultExtension: 'js'
             },
 
             // TODO move these into systemjs.config.extras.js ?
             // barrels
-            'app/shared': {main:'index.js', defaultExtension:'js'},
+            'app/shared': {main: 'index.js', defaultExtension: 'js'},
             // 'app/model/testing': {main:'index.js', defaultExtension:'js'},
-
         }
     });
 })(this);

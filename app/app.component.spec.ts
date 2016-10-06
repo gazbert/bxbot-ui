@@ -1,6 +1,6 @@
 import {TestBed, ComponentFixture, async} from "@angular/core/testing";
 import {By} from "@angular/platform-browser";
-import {DebugElement} from "@angular/core";
+import {DebugElement, NO_ERRORS_SCHEMA} from "@angular/core";
 import {AppComponent} from "./app.component";
 
 let appComponentUnderTest: AppComponent;
@@ -15,7 +15,8 @@ describe('Tests the main app component behaviour', function () {
         TestBed.configureTestingModule({
             declarations: [
                 AppComponent
-            ]
+            ],
+            schemas: [NO_ERRORS_SCHEMA]
         })
             .compileComponents()
             .then(() => {
@@ -36,7 +37,6 @@ describe('Tests the main app component behaviour', function () {
 
     it('should display a different app title', () => {
 
-        //query for the title <h1> by CSS element selector
         de = fixture.debugElement.query(By.css('h1'));
         el = de.nativeElement;
 
