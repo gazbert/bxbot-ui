@@ -1,13 +1,15 @@
 export class Exchange {
-    id: string;
-    adapter: string;
-    networkConfig: NetworkConfig;
+    constructor(public id: string,
+                public adapter: string,
+                public networkConfig: NetworkConfig) {
+    }
 }
 
-export class NetworkConfig{
-    connectionTimeout: number;
-    nonFatalErrorHttpStatusCodes: ErrorCode[];
-    nonFatalErrorMessages: ErrorMessage[];
+export class NetworkConfig {
+    constructor(public connectionTimeout: number,
+                public nonFatalErrorHttpStatusCodes: ErrorCode[],
+                public nonFatalErrorMessages: ErrorMessage[]) {
+    }
 }
 
 export class ErrorCode {

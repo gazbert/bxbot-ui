@@ -5,6 +5,8 @@ import {Exchange, ErrorCode, ErrorMessage, ExchangeRestClientService} from "../s
 
 /**
  * Template-driven version of the Exchange Adapter form.
+ *
+ * @author gazbert
  */
 @Component({
     selector: 'bx-exchange-adapter',
