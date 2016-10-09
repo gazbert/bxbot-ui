@@ -35,8 +35,8 @@ export class ExchangeAdapterComponent implements OnInit {
     }
 
     save(): void {
-        this.exchangeRestClientService.update(this.exchange).then(
-            () => this.goToDashboard());
+        this.exchangeRestClientService.update(this.exchange)
+            .then(() => this.goToDashboard());
     }
 
     addErrorCode(code: number): void {
