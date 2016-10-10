@@ -2,10 +2,16 @@ import {Router} from "@angular/router";
 import {Component, OnInit} from "@angular/core";
 import {ExchangeRestClientService, Exchange} from "../shared";
 
+/**
+ * The Dashboard component lists all the bots running on the Exchanges.
+ *
+ * @author gazbert
+ */
 @Component({
+    moduleId: module.id,
     selector: 'bx-dashboard',
-    templateUrl: 'app/dashboard/dashboard.component.html',
-    styleUrls: ['app/dashboard/dashboard.component.css']
+    templateUrl: 'dashboard.component.html',
+    styleUrls: ['dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
 

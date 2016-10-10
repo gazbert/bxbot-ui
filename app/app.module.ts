@@ -4,14 +4,13 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {InMemoryWebApiModule} from "angular-in-memory-web-api";
 import {InMemoryDataService} from "./shared/in-memory-data.service";
-
 import {AppComponent} from "./app.component";
 import {routing} from "./app.routing";
 import {ExchangeRestClientService} from "./shared/index";
-import {DashboardComponent} from "./dashboard/index";
 import {ExchangeAdapterComponent, ExchangeAdapterRxComponent} from "./exchange-adapter/index";
 import {EmailAlertsComponent, EqualValidator} from "./email-alerts/index";
 import {ExchangeDetailsComponent, Tabs, Tab} from "./exchange-details/index";
+import {DashboardModule} from "./dashboard/dashboard.module";
 
 /**
  * BX-bot UI main module.
@@ -25,11 +24,11 @@ import {ExchangeDetailsComponent, Tabs, Tab} from "./exchange-details/index";
         ReactiveFormsModule,
         HttpModule,
         InMemoryWebApiModule.forRoot(InMemoryDataService),
+        DashboardModule,
         routing
     ],
     declarations: [
         AppComponent,
-        DashboardComponent,
         ExchangeAdapterComponent,
         ExchangeAdapterRxComponent,
         EmailAlertsComponent,

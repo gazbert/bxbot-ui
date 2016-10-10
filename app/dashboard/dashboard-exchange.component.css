@@ -1,0 +1,29 @@
+.exchange {
+    padding: 20px;
+    position: relative;
+    text-align: center;
+    color: #eee;
+    max-height: 120px;
+    min-width: 120px;
+    background-color: #607D8B;
+    border-radius: 2px;
+}
+
+.exchange:hover {
+    background-color: #EEE;
+    cursor: pointer;
+    color: #607d8b;
+}
+
+@media (max-width: 600px) {
+    .exchange {
+        font-size: 10px;
+        max-height: 75px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .exchange {
+        min-width: 60px;
+    }
+}

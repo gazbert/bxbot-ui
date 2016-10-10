@@ -1,8 +1,5 @@
-<h3></h3>
 <div class="grid grid-pad">
-    <div *ngFor="let exchange of exchanges; trackBy:trackByExchangeId" (click)="gotoDetail(exchange)" class="col-1-4">
-        <div class="module exchange">
-            <h4>{{exchange.id}}</h4>
-        </div>
-    </div>
+    <dashboard-exchange *ngFor="let exchange of exchanges" class="col-1-4"
+                        [exchange]=exchange (selected)="gotoDetail($event)">
+    </dashboard-exchange>
 </div>
