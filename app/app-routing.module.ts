@@ -9,7 +9,7 @@ import {RouterModule} from "@angular/router";
             {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
             // {path: 'about', component: AboutComponent},
             // {path: 'settings', component: SettingsComponent},
-            {path: 'details', loadChildren: 'app/exchange-details/exchange-details.module#ExchangeDetailsModule'}
+            {path: 'exchange', loadChildren: 'app/exchange-details/exchange-details.module#ExchangeDetailsModule'}
         ])
     ],
     exports: [RouterModule] // re-export the module declarations

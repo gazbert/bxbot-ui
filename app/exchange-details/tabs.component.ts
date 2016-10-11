@@ -12,7 +12,7 @@ import {TabComponent} from "./tab.component";
     template: `
     <ul class="nav nav-pills">
       <li *ngFor="let tab of tabs; trackBy:trackByTabTitle" (click)="selectTab(tab)" [class.active]="tab.active">            
-        <a href="detail/{{tab.exchangeId}}#">{{tab.title}}</a>
+        <a href="exchange/{{tab.exchangeId}}#">{{tab.title}}</a>
       </li>
     </ul>
     <ng-content></ng-content>

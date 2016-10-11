@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
     }
 
     gotoDetail(exchange: Exchange): void {
-        let link = ['/detail', exchange.id];
+        let link = ['/exchange', exchange.id];
         this.router.navigate(link);
     }
 

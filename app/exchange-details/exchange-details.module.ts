@@ -9,7 +9,7 @@ import {EmailAlertsModule} from "../email-alerts/email-alerts.module";
 
 const routes: Routes = [
     {
-        path: 'detail/:id', component: ExchangeDetailsComponent
+        path: 'exchange/:id', component: ExchangeDetailsComponent
     }
 ];
 
