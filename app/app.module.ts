@@ -5,12 +5,12 @@ import {HttpModule} from "@angular/http";
 import {InMemoryWebApiModule} from "angular-in-memory-web-api";
 import {InMemoryDataService} from "./shared/in-memory-data.service";
 import {AppComponent} from "./app.component";
-import {routing} from "./app.routing";
 import {ExchangeRestClientService} from "./shared/index";
 import {DashboardModule} from "./dashboard/dashboard.module";
 import {ExchangeDetailsModule} from "./exchange-details/exchange-details.module";
 import {ExchangeAdapterModule} from "./exchange-adapter/exchange-adapter.module";
 import {EmailAlertsModule} from "./email-alerts/email-alerts.module";
+import {AppRoutingModule} from "./app-routing.module";
 
 /**
  * BX-bot UI main module.
@@ -26,9 +26,9 @@ import {EmailAlertsModule} from "./email-alerts/email-alerts.module";
         InMemoryWebApiModule.forRoot(InMemoryDataService),
         DashboardModule,
         ExchangeAdapterModule,
-        ExchangeDetailsModule,
         EmailAlertsModule,
-        routing
+        ExchangeDetailsModule,
+        AppRoutingModule
     ],
     declarations: [
         AppComponent

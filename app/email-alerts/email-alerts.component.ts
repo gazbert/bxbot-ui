@@ -8,8 +8,8 @@ import {EmailAlertsConfig} from "./email-alerts.model";
 @Component({
     moduleId: module.id,
     selector: 'bx-email-alerts',
-    templateUrl: './email-alerts.component.html',
-    styleUrls: ['./email-alerts.component.css']
+    templateUrl: 'email-alerts.component.html',
+    styleUrls: ['email-alerts.component.css']
 })
 export class EmailAlertsComponent implements OnInit {
 

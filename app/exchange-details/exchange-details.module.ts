@@ -5,6 +5,7 @@ import {ExchangeDetailsComponent} from "./exchange-details.component";
 import {TabComponent} from "./tab.component";
 import {TabsComponent} from "./tabs.component";
 import {ExchangeAdapterModule} from "../exchange-adapter/exchange-adapter.module";
+import {EmailAlertsModule} from "../email-alerts/email-alerts.module";
 
 const routes: Routes = [
     {
@@ -21,6 +22,7 @@ const routes: Routes = [
     imports: [
         BrowserModule,
         ExchangeAdapterModule,
+        EmailAlertsModule,
         RouterModule.forChild(routes),
     ],
     declarations: [ExchangeDetailsComponent, TabComponent, TabsComponent]
