@@ -7,10 +7,10 @@ import {InMemoryDataService} from "./shared/in-memory-data.service";
 import {AppComponent} from "./app.component";
 import {routing} from "./app.routing";
 import {ExchangeRestClientService} from "./shared/index";
-import {ExchangeAdapterComponent, ExchangeAdapterRxComponent} from "./exchange-adapter/index";
-import {EmailAlertsComponent, EqualValidator} from "./email-alerts/index";
-import {ExchangeDetailsComponent, Tabs, Tab} from "./exchange-details/index";
 import {DashboardModule} from "./dashboard/dashboard.module";
+import {ExchangeDetailsModule} from "./exchange-details/exchange-details.module";
+import {ExchangeAdapterModule} from "./exchange-adapter/exchange-adapter.module";
+import {EmailAlertsModule} from "./email-alerts/email-alerts.module";
 
 /**
  * BX-bot UI main module.
@@ -25,17 +25,13 @@ import {DashboardModule} from "./dashboard/dashboard.module";
         HttpModule,
         InMemoryWebApiModule.forRoot(InMemoryDataService),
         DashboardModule,
+        ExchangeAdapterModule,
+        ExchangeDetailsModule,
+        EmailAlertsModule,
         routing
     ],
     declarations: [
-        AppComponent,
-        ExchangeAdapterComponent,
-        ExchangeAdapterRxComponent,
-        EmailAlertsComponent,
-        EqualValidator,
-        ExchangeDetailsComponent,
-        Tabs,
-        Tab
+        AppComponent
     ],
     providers: [ExchangeRestClientService],
     bootstrap: [AppComponent]

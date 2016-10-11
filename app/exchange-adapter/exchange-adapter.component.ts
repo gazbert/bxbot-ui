@@ -9,9 +9,10 @@ import {Exchange, ErrorCode, ErrorMessage, ExchangeRestClientService} from "../s
  * @author gazbert
  */
 @Component({
+    moduleId: module.id,
     selector: 'bx-exchange-adapter',
-    templateUrl: 'app/exchange-adapter/exchange-adapter.component.html',
-    styleUrls: ['app/exchange-adapter/exchange-adapter.component.css']
+    templateUrl: 'exchange-adapter.component.html',
+    styleUrls: ['exchange-adapter.component.css']
 })
 export class ExchangeAdapterComponent implements OnInit {
 

@@ -19,7 +19,7 @@ import {Component, Input} from "@angular/core";
     </div>
   `
 })
-export class Tab {
+export class TabComponent {
     @Input('tabTitle') title: string;
     @Input('exchangeId') exchangeId: string;
     @Input() active = false;

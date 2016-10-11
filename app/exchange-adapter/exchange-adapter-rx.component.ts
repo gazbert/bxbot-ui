@@ -7,9 +7,10 @@ import {Exchange, ErrorCode, ErrorMessage, ExchangeRestClientService} from "../s
  * Reactive version of the Exchange Adapter form.
  */
 @Component({
+    moduleId: module.id,
     selector: 'bx-exchange-adapter-rx',
-    templateUrl: 'app/exchange-adapter/exchange-adapter-rx.component.html',
-    styleUrls: ['app/exchange-adapter/exchange-adapter.component.css']
+    templateUrl: 'exchange-adapter-rx.component.html',
+    styleUrls: ['exchange-adapter.component.css']
 })
 export class ExchangeAdapterRxComponent implements OnInit {
 
