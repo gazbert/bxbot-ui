@@ -3,7 +3,7 @@ import {Component, OnInit} from "@angular/core";
 import {Exchange, ExchangeRestClientService} from "../model";
 
 /**
- * The Dashboard component lists all the bots running on the Exchanges.
+ * The Dashboard component lists the Exchanges the bot is running on.
  *
  * @author gazbert
  */

@@ -6,11 +6,11 @@ import {Exchange} from "../model";
  */
 @Component({
     moduleId: module.id,
-    selector: 'dashboard-exchange',
-    templateUrl: 'dashboard-exchange.component.html',
-    styleUrls: ['dashboard-exchange.component.css']
+    selector: 'bx-dashboard-item',
+    templateUrl: 'dashboard-item.component.html',
+    styleUrls: ['dashboard-item.component.css']
 })
-export class DashboardExchangeComponent {
+export class DashboardItemComponent {
     @Input() exchange: Exchange;
     @Output() selected = new EventEmitter<Exchange>();
 

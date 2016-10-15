@@ -1,7 +1,7 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
 import {DashboardComponent} from "./dashboard.component";
-import {DashboardExchangeComponent} from "./dashboard-exchange.component";
+import {DashboardItemComponent} from "./dashboard-item.component";
 import {BrowserModule} from "@angular/platform-browser";
 
 const routes: Routes = [
@@ -19,7 +19,7 @@ const routes: Routes = [
         BrowserModule, // must have this if we do anything with *ngFor, *ngIf etc
         RouterModule.forChild(routes)
     ],
-    declarations: [DashboardComponent, DashboardExchangeComponent]
+    declarations: [DashboardComponent, DashboardItemComponent]
 })
 export class DashboardModule {
 }

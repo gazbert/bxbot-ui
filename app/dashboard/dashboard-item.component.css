@@ -1,4 +1,4 @@
-.exchange {
+.item {
     padding: 20px;
     position: relative;
     text-align: center;
@@ -9,21 +9,21 @@
     border-radius: 2px;
 }
 
-.exchange:hover {
+.item:hover {
     background-color: #EEE;
     cursor: pointer;
     color: #607d8b;
 }
 
 @media (max-width: 600px) {
-    .exchange {
+    .item {
         font-size: 10px;
         max-height: 75px;
     }
 }
 
 @media (max-width: 1024px) {
-    .exchange {
+    .item {
         min-width: 60px;
     }
 }
