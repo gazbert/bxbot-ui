@@ -1,15 +1,10 @@
-import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from "@angular/core/testing";
 import {By} from "@angular/platform-browser";
 import {DebugElement} from "@angular/core";
-import {ActivatedRoute, ActivatedRouteStub, click, newEvent, Router, RouterStub} from "../../testing";
-// import {Hero, HeroService} from "../model";
-// import {HeroDetailComponent} from "./hero-detail.component";
-// import {HeroDetailService} from "./hero-detail.service";
-// import {HeroModule} from "./hero.module";
-// import {HEROES, FakeHeroService} from "../model/testing";
 import {FormsModule} from "@angular/forms";
-// import {TitleCasePipe} from "../shared/title-case.pipe";
-// import {SharedModule} from "../shared/shared.module";
+
+import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from "@angular/core/testing";
+import {ActivatedRoute, ActivatedRouteStub, click, newEvent, Router, RouterStub} from "../../testing";
+
 import {Exchange, NetworkConfig, ErrorCode, ErrorMessage} from "../shared/exchange.model";
 import {ExchangeAdapterModule} from "./exchange-adapter.module";
 import {ExchangeAdapterService} from "./exchange-adapter.service";
@@ -44,7 +39,6 @@ describe('ExchangeAdapterComponent', () => {
     describe('with ExchangeAdapterModule setup', exchangeAdapterModuleSetup);
     describe('when override its provided ExchangeAdapterService', overrideSetup);
     describe('with FormsModule setup', formsModuleSetup);
-
     // describe('with SharedModule setup', sharedModuleSetup);
 });
 
