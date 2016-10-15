@@ -1,4 +1,4 @@
-import {Exchange} from "../shared/exchange.model";
+import {Exchange, NetworkConfig} from "../shared/exchange.model";
 
 /**
  * Dummy Exchange Adapter data.
@@ -6,157 +6,123 @@ import {Exchange} from "../shared/exchange.model";
  * @author gazbert
  */
 export var EXCHANGES: Exchange[] = [
-    {
-        id: 'Bitstamp',
-        adapter: 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
-        networkConfig: {
-            connectionTimeout: 60,
-            nonFatalErrorHttpStatusCodes: [
+
+    new Exchange('Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
+        new NetworkConfig(60,
+            [
                 {value: 503},
                 {value: 504},
                 {value: 522},
             ],
-            nonFatalErrorMessages: [
+            [
                 {value: "Connection reset"},
                 {value: "Connection refused"},
                 {value: "Remote host closed connection during handshake"}
             ]
-        }
-    },
-    {
-        id: 'GDAX',
-        adapter: 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
-        networkConfig: {
-            connectionTimeout: 120,
-            nonFatalErrorHttpStatusCodes: [
+        )),
+    new Exchange('GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
+        new NetworkConfig(60,
+            [
                 {value: 503},
                 {value: 504},
                 {value: 522},
             ],
-            nonFatalErrorMessages: [
+            [
                 {value: "Connection reset"},
                 {value: "Connection refused"},
                 {value: "Remote host closed connection during handshake"}
             ]
-        }
-    },
-    {
-        id: 'Gemini',
-        adapter: 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
-        networkConfig: {
-            connectionTimeout: 90,
-            nonFatalErrorHttpStatusCodes: [
+        )),
+    new Exchange('Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
+        new NetworkConfig(60,
+            [
                 {value: 503},
                 {value: 504},
                 {value: 522},
             ],
-            nonFatalErrorMessages: [
+            [
                 {value: "Connection reset"},
                 {value: "Connection refused"},
                 {value: "Remote host closed connection during handshake"}
             ]
-        }
-    },
-    {
-        id: 'ItBit',
-        adapter: 'com.gazbert.bxbot.exchanges.ItBitExchangeAdapter',
-        networkConfig: {
-            connectionTimeout: 30,
-            nonFatalErrorHttpStatusCodes: [
+        )),
+    new Exchange('ItBit', 'com.gazbert.bxbot.exchanges.ItBitExchangeAdapter',
+        new NetworkConfig(60,
+            [
                 {value: 503},
                 {value: 504},
                 {value: 522},
             ],
-            nonFatalErrorMessages: [
+            [
                 {value: "Connection reset"},
                 {value: "Connection refused"},
                 {value: "Remote host closed connection during handshake"}
             ]
-        }
-    },
-    {
-        id: 'BTC-e',
-        adapter: 'com.gazbert.bxbot.exchanges.BtceExchangeAdapter',
-        networkConfig: {
-            connectionTimeout: 45,
-            nonFatalErrorHttpStatusCodes: [
+        )),
+    new Exchange('BTC-e', 'com.gazbert.bxbot.exchanges.BtceExchangeAdapter',
+        new NetworkConfig(60,
+            [
                 {value: 503},
                 {value: 504},
                 {value: 522},
             ],
-            nonFatalErrorMessages: [
+            [
                 {value: "Connection reset"},
                 {value: "Connection refused"},
                 {value: "Remote host closed connection during handshake"}
             ]
-        }
-    },
-    {
-        id: 'OKCoin',
-        adapter: 'com.gazbert.bxbot.exchanges.OkCoinExchangeAdapter',
-        networkConfig: {
-            connectionTimeout: 50,
-            nonFatalErrorHttpStatusCodes: [
+        )),
+
+    new Exchange('OKCoin', 'com.gazbert.bxbot.exchanges.OkCoinExchangeAdapter',
+        new NetworkConfig(60,
+            [
                 {value: 503},
                 {value: 504},
                 {value: 522},
             ],
-            nonFatalErrorMessages: [
+            [
                 {value: "Connection reset"},
                 {value: "Connection refused"},
                 {value: "Remote host closed connection during handshake"}
             ]
-        }
-    },
-    {
-        id: 'Bitfinex',
-        adapter: 'com.gazbert.bxbot.exchanges.BitfinexExchangeAdapter',
-        networkConfig: {
-            connectionTimeout: 20,
-            nonFatalErrorHttpStatusCodes: [
+        )),
+    new Exchange('Bitfinex', 'com.gazbert.bxbot.exchanges.BitfinexExchangeAdapter',
+        new NetworkConfig(60,
+            [
                 {value: 503},
                 {value: 504},
                 {value: 522},
             ],
-            nonFatalErrorMessages: [
+            [
                 {value: "Connection reset"},
                 {value: "Connection refused"},
                 {value: "Remote host closed connection during handshake"}
             ]
-        }
-    },
-    {
-        id: 'Huobi',
-        adapter: 'com.gazbert.bxbot.exchanges.HuobiExchangeAdapter',
-        networkConfig: {
-            connectionTimeout: 10,
-            nonFatalErrorHttpStatusCodes: [
+        )),
+    new Exchange('Huobi', 'com.gazbert.bxbot.exchanges.HuobiExchangeAdapter',
+        new NetworkConfig(60,
+            [
                 {value: 503},
                 {value: 504},
                 {value: 522},
             ],
-            nonFatalErrorMessages: [
+            [
                 {value: "Connection reset"},
                 {value: "Connection refused"},
                 {value: "Remote host closed connection during handshake"}
             ]
-        }
-    },
-    {
-        id: 'Kraken',
-        adapter: 'com.gazbert.bxbot.exchanges.KrakenExchangeAdapter',
-        networkConfig: {
-            connectionTimeout: 60,
-            nonFatalErrorHttpStatusCodes: [
+        )),
+    new Exchange('Kraken', 'com.gazbert.bxbot.exchanges.KrakenExchangeAdapter',
+        new NetworkConfig(60,
+            [
                 {value: 503},
                 {value: 504},
                 {value: 522},
             ],
-            nonFatalErrorMessages: [
+            [
                 {value: "Connection reset"},
                 {value: "Connection refused"},
-                {value: "Remote host closed connection during handshake"},
+                {value: "Remote host closed connection during handshake"}
             ]
-        }
-    }
+        ))
 ];

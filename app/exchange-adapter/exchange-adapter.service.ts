@@ -16,6 +16,6 @@ export class ExchangeAdapterService {
     }
 
     saveExchange(exchange: Exchange) {
-        return this.exchangeAdapterDataService.updateExchange(exchange);
+        return this.exchangeAdapterDataService.saveExchange(exchange);
     }
 }

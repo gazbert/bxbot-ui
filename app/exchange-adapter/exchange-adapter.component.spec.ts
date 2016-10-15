@@ -14,6 +14,8 @@ import {Exchange, NetworkConfig, ErrorCode, ErrorMessage} from "../shared/exchan
 import {ExchangeAdapterModule} from "./exchange-adapter.module";
 import {ExchangeAdapterService} from "./exchange-adapter.service";
 import {ExchangeAdapterComponent} from "./exchange-adapter.component";
+import {EXCHANGES} from "../model/test-exchange-adapters";
+import {FakeExchangeAdapterDataService} from "../model/testing/fake-exchange-adapter-data.service";
 
 /**
  * Learning ground for writing jasmine tests.
@@ -33,12 +35,16 @@ let page: Page;
 // Tests
 // ----------------------------------------------------------------------------
 describe('ExchangeAdapterComponent', () => {
+
     beforeEach(() => {
         activatedRoute = new ActivatedRouteStub();
     });
-    // describe('with ExchangeAdapterModule setup', heroModuleSetup);
+
+    // TODO is order of tests significant?
+    describe('with ExchangeAdapterModule setup', exchangeAdapterModuleSetup);
     describe('when override its provided ExchangeAdapterService', overrideSetup);
-    // describe('with FormsModule setup', formsModuleSetup);
+    describe('with FormsModule setup', formsModuleSetup);
+
     // describe('with SharedModule setup', sharedModuleSetup);
 });
 
@@ -133,138 +139,136 @@ function overrideSetup() {
 }
 
 // ----------------------------------------------------------------------------
-// heroModuleSetup
+// Tests ExchangeAdapterModule using a fake ExchangeAdapterService
 // ----------------------------------------------------------------------------
-// const firstHero = HEROES[0];
-//
-// function heroModuleSetup() {
-//     beforeEach(async(() => {
-//         TestBed.configureTestingModule({
-//             imports: [HeroModule],
-//             //  declarations: [ HeroDetailComponent ], // NO!  DOUBLE DECLARATION
-//             providers: [
-//                 {provide: ActivatedRoute, useValue: activatedRoute},
-//                 {provide: HeroService, useClass: FakeHeroService},
-//                 {provide: Router, useClass: RouterStub},
-//             ]
-//         })
-//             .compileComponents();
-//     }));
-//
-//     describe('when navigate to existing hero', () => {
-//         let expectedHero: Hero;
-//
-//         beforeEach(async(() => {
-//             expectedHero = firstHero;
-//             activatedRoute.testParams = {id: expectedHero.id};
-//             createComponent();
-//         }));
-//
-//         it('should display that hero\'s name', () => {
-//             expect(page.nameDisplay.textContent).toBe(expectedHero.name);
-//         });
-//
-//         it('should navigate when click cancel', () => {
-//             click(page.cancelBtn);
-//             expect(page.navSpy.calls.any()).toBe(true, 'router.navigate called');
-//         });
-//
-//         it('should save when click save but not navigate immediately', () => {
-//             click(page.saveBtn);
-//             expect(page.saveSpy.calls.any()).toBe(true, 'HeroDetailService.save called');
-//             expect(page.navSpy.calls.any()).toBe(false, 'router.navigate not called');
-//         });
-//
-//         it('should navigate when click save and save resolves', fakeAsync(() => {
-//             click(page.saveBtn);
-//             tick(); // wait for async save to complete
-//             expect(page.navSpy.calls.any()).toBe(true, 'router.navigate called');
-//         }));
-//
-//         it('should convert hero name to Title Case', fakeAsync(() => {
-//             const inputName = 'quick BROWN  fox';
-//             const titleCaseName = 'Quick Brown  Fox';
-//
-//             // simulate user entering new name into the input box
-//             page.nameInput.value = inputName;
-//
-//             // dispatch a DOM event so that Angular learns of input value change.
-//             page.nameInput.dispatchEvent(newEvent('input'));
-//
-//             // Tell Angular to update the output span through the title pipe
-//             fixture.detectChanges();
-//
-//             expect(page.nameDisplay.textContent).toBe(titleCaseName);
-//         }));
-//     });
-//
-//     describe('when navigate with no hero id', () => {
-//         beforeEach(async(createComponent));
-//
-//         it('should have hero.id === 0', () => {
-//             expect(comp.hero.id).toBe(0);
-//         });
-//
-//         it('should display empty hero name', () => {
-//             expect(page.nameDisplay.textContent).toBe('');
-//         });
-//     });
-//
-//     describe('when navigate to non-existant hero id', () => {
-//         beforeEach(async(() => {
-//             activatedRoute.testParams = {id: 99999};
-//             createComponent();
-//         }));
-//
-//         it('should try to navigate back to hero list', () => {
-//             expect(page.gotoSpy.calls.any()).toBe(true, 'comp.gotoList called');
-//             expect(page.navSpy.calls.any()).toBe(true, 'router.navigate called');
-//         });
-//     });
-//
-//     // Why we must use `fixture.debugElement.injector` in `Page()`
-//     it('cannot use `inject` to get component\'s provided HeroDetailService', () => {
-//         let service: HeroDetailService;
-//         fixture = TestBed.createComponent(HeroDetailComponent);
-//         expect(
-//             // Throws because `inject` only has access to TestBed's injector
-//             // which is an ancestor of the component's injector
-//             inject([HeroDetailService], (hds: HeroDetailService) => service = hds)
-//         )
-//             .toThrowError(/No provider for HeroDetailService/);
-//
-//         // get `HeroDetailService` with component's own injector
-//         service = fixture.debugElement.injector.get(HeroDetailService);
-//         expect(service).toBeDefined('debugElement.injector');
-//     });
-// }
+const firstExchange = EXCHANGES[0];
 
-/////////////////////
+function exchangeAdapterModuleSetup() {
 
-// function formsModuleSetup() {
-//     beforeEach(async(() => {
-//         TestBed.configureTestingModule({
-//             imports: [FormsModule],
-//             declarations: [HeroDetailComponent, TitleCasePipe],
-//             providers: [
-//                 {provide: ActivatedRoute, useValue: activatedRoute},
-//                 {provide: HeroService, useClass: FakeHeroService},
-//                 {provide: Router, useClass: RouterStub},
-//             ]
-//         })
-//             .compileComponents();
-//     }));
-//
-//     it('should display 1st hero\'s name', fakeAsync(() => {
-//         const expectedHero = firstHero;
-//         activatedRoute.testParams = {id: expectedHero.id};
-//         createComponent().then(() => {
-//             expect(page.nameDisplay.textContent).toBe(expectedHero.name);
-//         });
-//     }));
-// }
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [ExchangeAdapterModule],
+            //  declarations: [ ExchangeAdapterComponent ], // NO!  DOUBLE DECLARATION
+            providers: [
+                {provide: ActivatedRoute, useValue: activatedRoute},
+                {provide: ExchangeAdapterService, useClass: FakeExchangeAdapterDataService},
+                {provide: Router, useClass: RouterStub},
+            ]
+        })
+            .compileComponents();
+    }));
 
-///////////////////////
+    describe('when navigate to existing exchange', () => {
+
+        let expectedExchange: Exchange;
+
+        beforeEach(async(() => {
+            expectedExchange = firstExchange;
+            activatedRoute.testParams = {id: expectedExchange.id};
+            createComponent();
+        }));
+
+        it('should display that exchange adapter\'s adapter', () => {
+            expect(page.adapterInput.value).toBe(expectedExchange.adapter);
+        });
+
+        it('should navigate when click cancel', () => {
+            click(page.cancelBtn);
+            expect(page.navSpy.calls.any()).toBe(true, 'router.navigate called');
+        });
+
+        it('should save when click save but not navigate immediately', () => {
+            click(page.saveBtn);
+            expect(page.saveSpy.calls.any()).toBe(true, 'ExchangeAdapterService.save called');
+            expect(page.navSpy.calls.any()).toBe(false, 'router.navigate not called');
+        });
+
+        it('should navigate when click save and save resolves', fakeAsync(() => {
+            click(page.saveBtn);
+            tick(); // wait for async save to complete
+            expect(page.navSpy.calls.any()).toBe(true, 'router.navigate called');
+        }));
+    });
+
+    // TODO FIX ME - bust
+    // describe('when navigate with no exchange id', () => {
+    //
+    //     beforeEach(async(createComponent));
+    //
+    //     // it('should have exchange.id === Bitstamp', () => {
+    //     //     expect(comp.exchange.adapter).toBe('Bitstamp');
+    //     // });
+    //
+    //     // it('should display empty exchange adapter name', () => {
+    //     //     expect(page.adapterInput.value).toBe('');
+    //     // });
+    // });
+
+    // TODO what's the behaviour here? Back to dashboard
+    // describe('when navigate to non-existant exchange id', () => {
+    //
+    //     beforeEach(async(() => {
+    //         activatedRoute.testParams = {id: 'no-here'};
+    //         createComponent();
+    //     }));
+    //
+    //     it('should try to navigate back to hero list', () => {
+    //         expect(page.gotoSpy.calls.any()).toBe(true, 'comp.gotoList called');
+    //         expect(page.navSpy.calls.any()).toBe(true, 'router.navigate called');
+    //     });
+    // });
+
+    // TODO FIX ME - does not throw exception
+    // Why we must use `fixture.debugElement.injector` in `Page()`
+    // it('cannot use `inject` to get component\'s provided ExchangeAdapterService', () => {
+    //
+    //     let service: ExchangeAdapterService;
+    //     fixture = TestBed.createComponent(ExchangeAdapterComponent);
+    //     expect(
+    //         // Throws because `inject` only has access to TestBed's injector
+    //         // which is an ancestor of the component's injector
+    //         inject([ExchangeAdapterService], (exchangeAdapterService: ExchangeAdapterService) => service = exchangeAdapterService)
+    //     )
+    //         .toThrowError(/No provider for ExchangeAdapterService/);
+    //
+    //     // get `ExchangeAdapterService` with component's own injector
+    //     service = fixture.debugElement.injector.get(ExchangeAdapterService);
+    //     expect(service).toBeDefined('debugElement.injector');
+    // });
+}
+
+// ----------------------------------------------------------------------------
+// TODO Do I need this?
+// ----------------------------------------------------------------------------
+
+function formsModuleSetup() {
+
+    beforeEach(async(() => {
+
+        TestBed.configureTestingModule({
+            imports: [FormsModule],
+            declarations: [ExchangeAdapterComponent],
+            providers: [
+                {provide: ActivatedRoute, useValue: activatedRoute},
+                {provide: ExchangeAdapterService, useClass: FakeExchangeAdapterDataService},
+                {provide: Router, useClass: RouterStub},
+            ]
+        })
+            .compileComponents();
+    }));
+
+    it('should display 1st exchange adapter\'s id', fakeAsync(() => {
+        const expectedExchange = firstExchange;
+        activatedRoute.testParams = {id: expectedExchange.id};
+        createComponent().then(() => {
+            expect(page.adapterInput.value).toBe(expectedExchange.adapter);
+        });
+    }));
+}
+
+// ----------------------------------------------------------------------------
+// TODO DO I need this?
+// ----------------------------------------------------------------------------
 
 // function sharedModuleSetup() {
 //     beforeEach(async(() => {
@@ -337,7 +341,11 @@ class Page {
         this.saveSpy = spyOn(exchangeAdapterService, 'saveExchange').and.callThrough();
     }
 
-    /** Add page elements after exchange arrives */
+    /**
+     * Add page elements after exchange arrives
+     *
+     * TODO - setup the rest of the fields...
+     */
     addPageElements() {
 
         if (comp.exchange) {

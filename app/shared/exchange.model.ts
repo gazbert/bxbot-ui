@@ -3,6 +3,10 @@ export class Exchange {
                 public adapter: string,
                 public networkConfig: NetworkConfig) {
     }
+
+    clone() {
+        return new Exchange(this.id, this.adapter, this.networkConfig);
+    }
 }
 
 export class NetworkConfig {

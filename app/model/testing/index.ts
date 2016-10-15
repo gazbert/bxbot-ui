@@ -1,0 +1,1 @@
+export * from './fake-exchange-adapter-data.service';

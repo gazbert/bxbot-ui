@@ -20,7 +20,7 @@ export class ExchangeAdapterDataService {
         );
     }
 
-    updateExchange(exchange: Exchange): Promise<Exchange> {
+    saveExchange(exchange: Exchange): Promise<Exchange> {
         return this.getExchange(exchange.id).then(e => {
             if (!e) {
                 throw new Error(`Exchange ${exchange.id} not found`);
