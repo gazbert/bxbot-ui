@@ -1,5 +1,5 @@
 import {ActivatedRouteStub} from "../../testing";
-import {Exchange, NetworkConfig, ErrorCode, ErrorMessage, ExchangeRestClientService} from "../shared";
+import {Exchange, NetworkConfig, ErrorCode, ErrorMessage} from "../model";
 import {ExchangeAdapterComponent} from "./exchange-adapter.component";
 
 /**

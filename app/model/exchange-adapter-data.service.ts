@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {EXCHANGES} from "./test-exchange-adapters";
-import {Exchange} from "../shared/exchange.model";
+import {Exchange} from "../model";
 
 /**
  * Dummy ExchangeAdapterDataService. Pretend it makes real http requests.

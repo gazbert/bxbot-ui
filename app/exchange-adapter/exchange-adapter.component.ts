@@ -1,7 +1,7 @@
 import {OnInit, Component, ViewChild} from "@angular/core";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
-import {Exchange, ErrorCode, ErrorMessage, ExchangeRestClientService} from "../shared";
+import {Exchange, ErrorCode, ErrorMessage} from "../model";
 import {ExchangeAdapterService} from "./exchange-adapter.service";
 
 /**

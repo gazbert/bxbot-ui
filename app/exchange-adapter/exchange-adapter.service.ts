@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Exchange} from "../shared/exchange.model";
+import {Exchange} from "../model/";
 import {ExchangeAdapterDataService} from "../model/exchange-adapter-data.service";
 
 @Injectable()

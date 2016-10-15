@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export class Exchange {
     constructor(public id: string,
                 public adapter: string,

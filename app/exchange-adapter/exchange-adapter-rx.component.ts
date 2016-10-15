@@ -1,7 +1,8 @@
 import {OnInit, Component} from "@angular/core";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {FormGroup, FormBuilder, Validators, FormControl, FormArray} from "@angular/forms";
-import {Exchange, ErrorCode, ErrorMessage, ExchangeRestClientService} from "../shared";
+import {Exchange, ErrorCode, ErrorMessage} from "../model";
+import {ExchangeRestClientService} from "../shared";
 
 /**
  * Reactive version of the Exchange Adapter form.

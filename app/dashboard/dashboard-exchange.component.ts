@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
-import {Exchange} from "../shared/exchange.model";
+import {Exchange} from "../model";
 
 /**
  * TODO - show status of the bot operating on the exchange here.

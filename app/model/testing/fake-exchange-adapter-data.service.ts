@@ -1,6 +1,6 @@
 // re-export for tester convenience
 import {ExchangeAdapterDataService} from "../exchange-adapter-data.service";
-import {Exchange, NetworkConfig} from "../../shared/exchange.model";
+import {Exchange, NetworkConfig} from "../../model";
 
 export var EXCHANGES: Exchange[] = [
 

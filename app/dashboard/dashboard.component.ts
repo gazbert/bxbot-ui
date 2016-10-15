@@ -1,6 +1,7 @@
 import {Router} from "@angular/router";
 import {Component, OnInit} from "@angular/core";
-import {ExchangeRestClientService, Exchange} from "../shared";
+import {ExchangeRestClientService} from "../shared";
+import {Exchange} from "../model";
 
 /**
  * The Dashboard component lists all the bots running on the Exchanges.

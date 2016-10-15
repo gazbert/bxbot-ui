@@ -5,7 +5,7 @@ import {FormsModule} from "@angular/forms";
 import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from "@angular/core/testing";
 import {ActivatedRoute, ActivatedRouteStub, click, newEvent, Router, RouterStub} from "../../testing";
 
-import {Exchange, NetworkConfig, ErrorCode, ErrorMessage} from "../shared/exchange.model";
+import {Exchange, NetworkConfig, ErrorCode, ErrorMessage} from "../model";
 import {ExchangeAdapterModule} from "./exchange-adapter.module";
 import {ExchangeAdapterService} from "./exchange-adapter.service";
 import {ExchangeAdapterComponent} from "./exchange-adapter.component";

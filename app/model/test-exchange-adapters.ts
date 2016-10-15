@@ -1,4 +1,4 @@
-import {Exchange, NetworkConfig} from "../shared/exchange.model";
+import {Exchange, NetworkConfig} from "../model";
 
 /**
  * Dummy Exchange Adapter data.
