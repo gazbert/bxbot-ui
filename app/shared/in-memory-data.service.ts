@@ -1,5 +1,8 @@
 import {InMemoryDbService} from "angular-in-memory-web-api";
 
+/**
+ * TODO Move this into model folder...
+ */
 export class InMemoryDataService implements InMemoryDbService {
     createDb() {
         let exchanges = [

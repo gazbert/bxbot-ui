@@ -1,7 +1,6 @@
 import {OnInit, Component} from "@angular/core";
 import {ActivatedRoute, Params, Router} from "@angular/router";
-import {Exchange} from "../model";
-import {ExchangeRestClientService} from "../shared";
+import {Exchange, ExchangeRestClientService} from "../model";
 
 /**
  * Wrapper for Exchange Details.
