@@ -1,6 +1,6 @@
 import {Router} from "@angular/router";
 import {Component, OnInit} from "@angular/core";
-import {Exchange, ExchangeRestClientService} from "../model";
+import {Exchange, ExchangeHttpDataService} from "../model";
 
 /**
  * The Dashboard component lists the Exchanges the bot is running on.
@@ -17,18 +17,23 @@ export class DashboardComponent implements OnInit {
 
     exchanges: Exchange[] = [];
 
-    constructor(private router: Router, private exchangeRestClientService: ExchangeRestClientService) {
+    constructor(private router: Router, private exchangeDataService: ExchangeHttpDataService) {
     }
 
     ngOnInit(): void {
-        this.exchangeRestClientService.getExchanges()
+        this.exchangeDataService.getExchanges()
             .then(exchanges => this.exchanges = exchanges.slice(0, 8));
     }
 
-    gotoDetail(exchange: Exchange): void {
-        let link = ['/exchange', exchange.id];
-        this.router.navigate(link);
+    gotoExchangeDetails(exchange: Exchange): void {
+
+        // TODO - when to use navigate vs navigateByUrl ?
+        // let link = ['/exchange', exchange.id];
+        // this.router.navigate(link);
+
+        let url = `/exchange/${exchange.id}`;
+        this.router.navigateByUrl(url);
     }
 
-    trackByExchangeId(index: number, exchange: Exchange) { return exchange.id; }
+    static trackByExchangeId(index: number, exchange: Exchange) { return exchange.id; }
 }

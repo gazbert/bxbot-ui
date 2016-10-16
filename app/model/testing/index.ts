@@ -1,1 +1,1 @@
-export * from './fake-exchange-adapter-data.service';
+export * from './fake-exchange-data.service';

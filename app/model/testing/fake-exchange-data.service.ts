@@ -1,6 +1,6 @@
 // re-export for tester convenience
-import {ExchangeAdapterDataService} from "../exchange-adapter-data.service";
 import {Exchange, NetworkConfig} from "../../model";
+import {ExchangeHttpDataService} from "../exchange-http-data.service";
 
 export var EXCHANGES: Exchange[] = [
 
@@ -46,11 +46,14 @@ export var EXCHANGES: Exchange[] = [
 ];
 
 /**
- * Fake Exchange Adapter data service backend for testing.
+ * Fake Exchange data service backend for testing.
  *
- * Weird! We implement a class ? No interface keyword in lang for ExchangeAdapterDataService type???
+ * Constructor inherited from ExchangeHttpDataService - calling code should pass null when creating this object.
+ *
+ * This seems very hacky. Must be better way of using the mock below, but we have to inject concrete
+ * service classes into the components...
  */
-export class FakeExchangeAdapterDataService implements ExchangeAdapterDataService {
+export class FakeExchangeDataService extends ExchangeHttpDataService {
 
     exchanges = EXCHANGES.map(e => e.clone());
     lastPromise: Promise<any>;  // remember so we can spy on promise calls
@@ -64,7 +67,7 @@ export class FakeExchangeAdapterDataService implements ExchangeAdapterDataServic
         return this.lastPromise = Promise.resolve(exchange);
     }
 
-    saveExchange(exchange: Exchange): Promise<Exchange> {
+    update(exchange: Exchange): Promise<Exchange> {
         return this.lastPromise = this.getExchange(exchange.id).then(e => {
             return e ?
                 Object.assign(e, exchange) :

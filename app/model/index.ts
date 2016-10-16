@@ -1,2 +1,3 @@
 export * from './exchange.model';
-export * from './exchange-rest-client.service';
+export * from './exchange-data.service';
+export * from './exchange-http-data.service';

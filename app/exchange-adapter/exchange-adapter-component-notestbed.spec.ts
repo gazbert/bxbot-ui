@@ -23,7 +23,7 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
     let expectedErrorCodes: ErrorCode[];
     let expectedErrorMsgs: ErrorMessage[];
 
-    let spyExchangeAdapterService: any;
+    let spyExchangeDataService: any;
     let router: any;
 
     beforeEach(done => {
@@ -38,14 +38,14 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
 
         router = jasmine.createSpyObj('router', ['navigate']);
 
-        spyExchangeAdapterService = jasmine.createSpyObj('ExchangeAdapterService', ['getExchange', 'saveExchange']);
-        spyExchangeAdapterService.getExchange.and.returnValue(Promise.resolve(expectedExchange));
-        spyExchangeAdapterService.saveExchange.and.returnValue(Promise.resolve(expectedExchange));
+        spyExchangeDataService = jasmine.createSpyObj('ExchangeHttpDataService', ['getExchange', 'update']);
+        spyExchangeDataService.getExchange.and.returnValue(Promise.resolve(expectedExchange));
+        spyExchangeDataService.update.and.returnValue(Promise.resolve(expectedExchange));
 
-        exchangeAdapterComponent = new ExchangeAdapterComponent(spyExchangeAdapterService, <any> activatedRoute, router);
+        exchangeAdapterComponent = new ExchangeAdapterComponent(spyExchangeDataService, <any> activatedRoute, router);
         exchangeAdapterComponent.ngOnInit();
 
-        spyExchangeAdapterService.getExchange.calls.first().returnValue.then(done);
+        spyExchangeDataService.getExchange.calls.first().returnValue.then(done);
     });
 
     it('should expose the Exchange retrieved from the service', () => {
@@ -59,7 +59,7 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
 
     it('should save when click Save', () => {
         exchangeAdapterComponent.save();
-        expect(spyExchangeAdapterService.saveExchange.calls.any()).toBe(true, 'ExchangeAdapterService.saveExchange called');
+        expect(spyExchangeDataService.update.calls.any()).toBe(true, 'ExchangeAdapterService.saveExchange called');
         expect(router.navigate.calls.any()).toBe(false, 'router.navigate not called yet');
     });
 
@@ -67,7 +67,7 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
         exchangeAdapterComponent.save();
 
         // waits for async save to complete before navigating
-        spyExchangeAdapterService.saveExchange.calls.first().returnValue
+        spyExchangeDataService.update.calls.first().returnValue
             .then(() => {
                 expect(router.navigate.calls.any()).toBe(true, 'router.navigate called');
                 done();

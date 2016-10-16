@@ -3,7 +3,6 @@ import {Exchange, NetworkConfig} from "../model";
 /**
  * Dummy Exchange Adapter data.
  *
- * @author gazbert
  */
 export var EXCHANGES: Exchange[] = [
 

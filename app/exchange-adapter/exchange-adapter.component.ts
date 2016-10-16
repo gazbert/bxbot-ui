@@ -1,8 +1,7 @@
 import {OnInit, Component, ViewChild} from "@angular/core";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
-import {Exchange, ErrorCode, ErrorMessage} from "../model";
-import {ExchangeAdapterService} from "./exchange-adapter.service";
+import {Exchange, ErrorCode, ErrorMessage, ExchangeHttpDataService} from "../model";
 
 /**
  * Template-driven version of the Exchange Adapter form.
@@ -20,14 +19,14 @@ export class ExchangeAdapterComponent implements OnInit {
     exchange: Exchange;
     active = true;
 
-    constructor(private exchangeAdapterService: ExchangeAdapterService, private route: ActivatedRoute,
+    constructor(private exchangeDataService: ExchangeHttpDataService, private route: ActivatedRoute,
                 private router: Router) {
     }
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
             let id = params['id'];
-            this.exchangeAdapterService.getExchange(id)
+            this.exchangeDataService.getExchange(id)
                 .then(exchange => this.exchange = exchange);
         });
     }
@@ -37,7 +36,7 @@ export class ExchangeAdapterComponent implements OnInit {
     }
 
     save(): void {
-        this.exchangeAdapterService.saveExchange(this.exchange)
+        this.exchangeDataService.update(this.exchange)
             .then(() => this.goToDashboard());
     }
 

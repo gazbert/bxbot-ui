@@ -1,10 +1,12 @@
 import {OnInit, Component} from "@angular/core";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {FormGroup, FormBuilder, Validators, FormControl, FormArray} from "@angular/forms";
-import {Exchange, ErrorCode, ErrorMessage, ExchangeRestClientService} from "../model";
+import {Exchange, ErrorCode, ErrorMessage, ExchangeHttpDataService} from "../model";
 
 /**
  * Reactive version of the Exchange Adapter form.
+ *
+ * @author gazbert
  */
 @Component({
     moduleId: module.id,
@@ -18,14 +20,14 @@ export class ExchangeAdapterRxComponent implements OnInit {
     active = true;
     public exchangeDetailsForm: FormGroup;
 
-    constructor(private exchangeRestClientService: ExchangeRestClientService, private route: ActivatedRoute,
+    constructor(private exchangeDataService: ExchangeHttpDataService, private route: ActivatedRoute,
                 private fb: FormBuilder, private router: Router) {
     }
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
             let id = params['id'];
-            this.exchangeRestClientService.getExchange(id)
+            this.exchangeDataService.getExchange(id)
                 .then(exchange => {
                     this.exchange = exchange;
                     this.buildForm();
@@ -54,7 +56,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
         this.exchangeDetailsForm.get('nonFatalErrorMessages').value.forEach(
             (m) => this.exchange.networkConfig.nonFatalErrorMessages.push({"value": m}));
 
-        this.exchangeRestClientService.update(this.exchange)
+        this.exchangeDataService.update(this.exchange)
             .then(exchange => {
                 this.goToDashboard();
             });

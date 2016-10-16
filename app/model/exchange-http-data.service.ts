@@ -2,11 +2,17 @@ import {Injectable} from "@angular/core";
 import {Http, Headers} from "@angular/http";
 import "rxjs/add/operator/toPromise";
 import {Exchange} from "../model";
+import {ExchangeDataService} from "./exchange-data.service";
 
+/**
+ * HTTP implementation of the Exchange Data Service.
+ *
+ * @author gazbert
+ */
 @Injectable()
-export class ExchangeRestClientService {
+export class ExchangeHttpDataService implements ExchangeDataService {
 
-    private exchangeUrl = 'app/exchanges';  // URL to web api
+    public exchangeUrl = 'app/exchanges';  // URL to web api
 
     constructor(private http: Http) {
     }

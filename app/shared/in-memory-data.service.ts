@@ -1,7 +1,7 @@
 import {InMemoryDbService} from "angular-in-memory-web-api";
 
 /**
- * TODO Move this into model folder...
+ * TODO Move this into model folder? Or perhaps a testing/model folder?
  */
 export class InMemoryDataService implements InMemoryDbService {
     createDb() {

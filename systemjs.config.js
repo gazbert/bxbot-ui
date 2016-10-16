@@ -46,7 +46,7 @@
             // barrels
             'app/shared': {main: 'index.js', defaultExtension: 'js'},
             'app/model': {main: 'index.js', defaultExtension: 'js'},
-            // 'app/model/testing': {main:'index.js', defaultExtension:'js'},
+            'app/model/testing': {main: 'index.js', defaultExtension: 'js'},
         }
     });
 })(this);
