@@ -16,6 +16,9 @@ import {FakeExchangeAdapterDataService} from "../model/testing/fake-exchange-ada
  * Learning ground for writing jasmine tests.
  *
  * Code originated from here: https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
+ *
+ * TODO Increase coverage for the form input + validation, adding/deleting error/message codes, etc...
+ *
  */
 
 // ----------------------------------------------------------------------------
@@ -206,7 +209,7 @@ function exchangeAdapterModuleSetup() {
     //         createComponent();
     //     }));
     //
-    //     it('should try to navigate back to hero list', () => {
+    //     it('should try to navigate back to dashboard list', () => {
     //         expect(page.gotoSpy.calls.any()).toBe(true, 'comp.gotoList called');
     //         expect(page.navSpy.calls.any()).toBe(true, 'router.navigate called');
     //     });
@@ -251,7 +254,7 @@ function formsModuleSetup() {
             .compileComponents();
     }));
 
-    it('should display 1st exchange adapter\'s id', fakeAsync(() => {
+    it('should display 1st exchange adapter\'s adapter name', fakeAsync(() => {
         const expectedExchange = firstExchange;
         activatedRoute.testParams = {id: expectedExchange.id};
         createComponent().then(() => {
@@ -268,21 +271,21 @@ function formsModuleSetup() {
 //     beforeEach(async(() => {
 //         TestBed.configureTestingModule({
 //             imports: [SharedModule],
-//             declarations: [HeroDetailComponent],
+//             declarations: [ExchangeAdapterComponent],
 //             providers: [
 //                 {provide: ActivatedRoute, useValue: activatedRoute},
-//                 {provide: HeroService, useClass: FakeHeroService},
+//                 {provide: ExchangeAdapterService, useClass: FakeExchangeAdapterDataService},
 //                 {provide: Router, useClass: RouterStub},
 //             ]
 //         })
 //             .compileComponents();
 //     }));
 //
-//     it('should display 1st hero\'s name', fakeAsync(() => {
-//         const expectedHero = firstHero;
-//         activatedRoute.testParams = {id: expectedHero.id};
+//     it('should display 1st exchange adapter\'s adapter name', fakeAsync(() => {
+//         const expectedExchange = firstExchange;
+//         activatedRoute.testParams = {id: expectedExchange.id};
 //         createComponent().then(() => {
-//             expect(page.nameDisplay.textContent).toBe(expectedHero.name);
+//             expect(page.adapterInput.value).toBe(expectedExchange.adapter);
 //         });
 //     }));
 // }

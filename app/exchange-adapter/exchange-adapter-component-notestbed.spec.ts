@@ -8,7 +8,7 @@ import {ExchangeAdapterComponent} from "./exchange-adapter.component";
  * Based off the goodies in the main Angular tutorial:
  * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
  *
- * TODO When should I/should I use the testbed?
+ * TODO When should I/should I not use the testbed?
  * TODO Increase coverage for the form input + validation, adding/deleting error/message codes, etc...
  *
  * @author gazbert
