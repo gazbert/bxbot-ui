@@ -14,7 +14,6 @@ import {Http} from "@angular/http";
 
 /**
  * Learning ground for writing jasmine tests.
- *
  * Code originated from here: https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
  *
  * TODO Increase coverage for the form input + validation, adding/deleting error/message codes, etc...

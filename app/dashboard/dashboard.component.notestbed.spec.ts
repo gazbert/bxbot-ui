@@ -15,7 +15,11 @@ class FakeRouter {
     }
 }
 
-describe('DashboardComponent: w/o Angular TestBed', () => {
+/**
+ * Learning ground for writing jasmine tests.
+ * Code originated from here: https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
+ */
+describe('When testing DashboardComponent without using Angular TestBed, it ', () => {
 
     let comp: DashboardComponent;
     let exchangeDataService: FakeExchangeDataService;
