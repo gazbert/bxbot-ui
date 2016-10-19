@@ -38,14 +38,14 @@ describe('When testing DashboardComponent without using Angular TestBed, it ', (
     });
 
     it('should NOT have exchanges immediately after OnInit', () => {
-        comp.ngOnInit(); // ngOnInit -> getExchanges
+        comp.ngOnInit(); // ngOnInit -> getExchangesPromise
         expect(comp.exchanges.length).toBe(0,
             'should not have exchanges until service promise resolves');
     });
 
     it('should HAVE exchanges after ExchangeAdapterDataService gets them', (done: DoneFn) => {
-        comp.ngOnInit(); // ngOnInit -> getExchanges
-        exchangeDataService.lastPromise // the one from getExchanges
+        comp.ngOnInit(); // ngOnInit -> getExchangesPromise
+        exchangeDataService.lastPromise // the one from getExchangesPromise
             .then(() => {
                 // throw new Error('deliberate error'); // see it fail gracefully
                 expect(comp.exchanges.length).toBeGreaterThan(0,

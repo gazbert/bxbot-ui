@@ -38,14 +38,14 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
 
         router = jasmine.createSpyObj('router', ['navigate']);
 
-        spyExchangeDataService = jasmine.createSpyObj('ExchangeHttpDataService', ['getExchange', 'update']);
-        spyExchangeDataService.getExchange.and.returnValue(Promise.resolve(expectedExchange));
+        spyExchangeDataService = jasmine.createSpyObj('ExchangeHttpDataService', ['getExchangeUsingPromise', 'update']);
+        spyExchangeDataService.getExchangeUsingPromise.and.returnValue(Promise.resolve(expectedExchange));
         spyExchangeDataService.update.and.returnValue(Promise.resolve(expectedExchange));
 
         exchangeAdapterComponent = new ExchangeAdapterComponent(spyExchangeDataService, <any> activatedRoute, router);
         exchangeAdapterComponent.ngOnInit();
 
-        spyExchangeDataService.getExchange.calls.first().returnValue.then(done);
+        spyExchangeDataService.getExchangeUsingPromise.calls.first().returnValue.then(done);
     });
 
     it('should expose the Exchange retrieved from the service', () => {

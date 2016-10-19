@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.exchangeDataService.getExchanges()
+        this.exchangeDataService.getExchangesUsingPromise()
             .then(exchanges => this.exchanges = exchanges.slice(0, 8));
     }
 

@@ -58,17 +58,17 @@ export class FakeExchangeDataService extends ExchangeHttpDataService {
     exchanges = EXCHANGES.map(e => e.clone());
     lastPromise: Promise<any>;  // remember so we can spy on promise calls
 
-    getExchanges() {
+    getExchangesUsingPromise() {
         return this.lastPromise = Promise.resolve<Exchange[]>(this.exchanges);
     }
 
-    getExchange(id: string) {
+    getExchangeUsingPromise(id: string) {
         let exchange = this.exchanges.find(e => e.id === id);
         return this.lastPromise = Promise.resolve(exchange);
     }
 
     update(exchange: Exchange): Promise<Exchange> {
-        return this.lastPromise = this.getExchange(exchange.id).then(e => {
+        return this.lastPromise = this.getExchangeUsingPromise(exchange.id).then(e => {
             return e ?
                 Object.assign(e, exchange) :
                 Promise.reject(`Exchange ${exchange.id} not found`) as any as Promise<Exchange>;

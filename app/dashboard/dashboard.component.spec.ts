@@ -107,7 +107,7 @@ function tests(exchangeClick: Function) {
 
         // Trigger component so it gets exchanges and binds to them
         beforeEach(async(() => {
-            fixture.detectChanges(); // runs ngOnInit -> getExchanges
+            fixture.detectChanges(); // runs ngOnInit -> getExchangesUsingPromise
             fixture.whenStable() // No need for the `lastPromise` hack!
                 .then(() => fixture.detectChanges()); // bind to exchanges
         }));

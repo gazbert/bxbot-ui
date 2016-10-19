@@ -65,7 +65,7 @@ function overrideSetup() {
             this.testExchange = new Exchange('btce', 'com.gazbert.bxbot.adapter.BtceExchangeAdapter', this.expectedNetworkConfig);
         }
 
-        getExchange(id: string): Promise<Exchange> {
+        getExchangeUsingPromise(id: string): Promise<Exchange> {
             return Promise.resolve(true).then(() => Object.assign({}, this.testExchange));
         }
 
