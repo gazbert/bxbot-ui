@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Http, Headers, Response} from "@angular/http";
+import {Http, Headers, Response, RequestOptions} from "@angular/http";
 import {Exchange} from "../model";
 import {ExchangeDataService} from "./exchange-data.service";
 
@@ -10,6 +10,7 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/toPromise';
+import {isObject} from "rxjs/util/isObject";
 
 /**
  * HTTP implementation of the Exchange Data Service.
@@ -53,13 +54,21 @@ export class ExchangeHttpDataService implements ExchangeDataService {
 
     private headers = new Headers({'Content-Type': 'application/json'});
 
-    // TODO update using Observable way
     update(exchange: Exchange): Promise<Exchange> {
         const url = `${this.exchangeUrl}/${exchange.id}`;
         return this.http
             .put(url, JSON.stringify(exchange), {headers: this.headers})
             .toPromise()
             .then(() => exchange)
+            .catch(this.handleError);
+    }
+
+    // TODO update using Observable way
+    updateUsingObserver(exchange: Exchange): Observable<Exchange> {
+        const url = `${this.exchangeUrl}/${exchange.id}`;
+        return this.http
+            .put(url, JSON.stringify(exchange), {headers: this.headers})
+            .map(this.extractData)
             .catch(this.handleError);
     }
 
@@ -83,6 +92,11 @@ export class ExchangeHttpDataService implements ExchangeDataService {
             throw new Error('Bad response status: ' + res.status);
         }
         let body = res.json();
-        return body.data || {};
+
+        if (isObject(body)) { // vs // if (body !== undefined && body !== null) {
+            return body.data || {};
+        } else {
+            return {};
+        }
     }
 }

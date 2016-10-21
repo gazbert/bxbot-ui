@@ -4,7 +4,7 @@ import {async, inject, TestBed} from "@angular/core/testing";
 import {Exchange, NetworkConfig} from "./exchange.model";
 import {ExchangeHttpDataService as ExchangeDataService} from "./exchange-http-data.service";
 
-import { Observable } from 'rxjs/Observable';
+import {Observable} from 'rxjs/Observable';
 // NOTE: We need to explicitly pull the rxjs operators in - if not, we get a stinky runtime error e.g.
 // 'Failed: this.http.get(...).map is not a function'
 import 'rxjs/add/observable/throw';

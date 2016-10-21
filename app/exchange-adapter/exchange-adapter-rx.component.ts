@@ -3,6 +3,10 @@ import {ActivatedRoute, Params, Router} from "@angular/router";
 import {FormGroup, FormBuilder, Validators, FormControl, FormArray} from "@angular/forms";
 import {Exchange, ErrorCode, ErrorMessage, ExchangeHttpDataService} from "../model";
 
+// NOTE: We need to explicitly pull the rxjs operators in - if not, we get a stinky runtime error e.g.
+// 'Failed: this.http.put(...).map is not a function'
+import 'rxjs/add/operator/map';
+
 /**
  * Reactive version of the Exchange Adapter form.
  *
@@ -19,6 +23,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
     exchange: Exchange;
     active = true;
     public exchangeDetailsForm: FormGroup;
+    errorMessage: string;
 
     constructor(private exchangeDataService: ExchangeHttpDataService, private route: ActivatedRoute,
                 private fb: FormBuilder, private router: Router) {
@@ -56,10 +61,17 @@ export class ExchangeAdapterRxComponent implements OnInit {
         this.exchangeDetailsForm.get('nonFatalErrorMessages').value.forEach(
             (m) => this.exchange.networkConfig.nonFatalErrorMessages.push({"value": m}));
 
-        this.exchangeDataService.update(this.exchange)
-            .then(exchange => {
-                this.goToDashboard();
-            });
+        // TODO using promise API
+        // this.exchangeDataService.update(this.exchange)
+        //     .then(exchange => {
+        //         this.goToDashboard();
+        //     });
+
+        // TODO using Observable
+        this.exchangeDataService.updateUsingObserver(this.exchange)
+            .subscribe(
+                exchange => {this.goToDashboard()},
+                error =>  this.errorMessage = <any>error);
     }
 
     addErrorCode(): void {
