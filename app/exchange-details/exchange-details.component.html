@@ -1,12 +1,12 @@
 <div *ngIf="exchange" class="container module-bootstrap">
     <h2>{{exchange.id}} Exchange Details</h2>
     <tabs>
-        <tab [exchangeId]=exchange.id [tabTitle]="'Exchange Adapter'"><bx-exchange-adapter-rx></bx-exchange-adapter-rx></tab>
+        <tab [exchangeId]=exchange.id [tabTitle]="'exchange edapter'"><bx-exchange-adapter-rx></bx-exchange-adapter-rx></tab>
         <!--<tab [tabTitle]="'Exchange Adapter'"><bx-exchange-adapter></bx-exchange-adapter></tab>-->
 
-        <tab [exchangeId]=exchange.id [tabTitle]="'Markets'">TODO: include Markets content</tab>
-        <tab [exchangeId]=exchange.id [tabTitle]="'Trading Strategies'">TODO: include Trading Strategies content</tab>
-        <tab [exchangeId]=exchange.id [tabTitle]="'Email Alerts'"><bx-email-alerts></bx-email-alerts></tab>
+        <tab [exchangeId]=exchange.id [tabTitle]="'markets'">TODO: include Markets content</tab>
+        <tab [exchangeId]=exchange.id [tabTitle]="'trading strategies'">TODO: include Trading Strategies content</tab>
+        <tab [exchangeId]=exchange.id [tabTitle]="'email alerts'"><bx-email-alerts></bx-email-alerts></tab>
     </tabs>
 </div>
 
