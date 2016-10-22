@@ -39,8 +39,10 @@ export class ExchangeHttpDataObservableService implements ExchangeDataObservable
 
     getExchange(id: string) {
         return this.http
-            .get('app/exchanges/{id}')
-            .map((r: Response) => r.json().data as Exchange);
+            .get(this.exchangeUrl + '/' + id)
+            // .map((r: Response) => r.json().data as Exchange);
+            .map(this.extractData)
+            .catch(this.handleError);
     }
 
     update(exchange: Exchange): Observable<Exchange> {
@@ -49,7 +51,7 @@ export class ExchangeHttpDataObservableService implements ExchangeDataObservable
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.post(url, body, options)
+        return this.http.put(url, body, options)
             .map(this.extractData)
             .catch(this.handleError);
     }

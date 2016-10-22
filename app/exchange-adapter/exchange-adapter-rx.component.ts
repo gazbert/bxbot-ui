@@ -1,14 +1,16 @@
 import {OnInit, Component} from "@angular/core";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {FormGroup, FormBuilder, Validators, FormControl, FormArray} from "@angular/forms";
-import {Exchange, ErrorCode, ErrorMessage, ExchangeHttpDataPromiseService} from "../model";
+import {Exchange, ErrorCode, ErrorMessage, ExchangeHttpDataObservableService} from "../model";
 
 // NOTE: We need to explicitly pull the rxjs operators in - if not, we get a stinky runtime error e.g.
 // 'Failed: this.http.put(...).map is not a function'
-// import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/map';
 
 /**
  * Reactive version of the Exchange Adapter form.
+ *
+ * For demo purposes, it uses the Observable flavour of the Exchange HTTP data service.
  *
  * @author gazbert
  */
@@ -25,7 +27,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
     public exchangeDetailsForm: FormGroup;
     errorMessage: string;
 
-    constructor(private exchangeDataService: ExchangeHttpDataPromiseService, private route: ActivatedRoute,
+    constructor(private exchangeDataService: ExchangeHttpDataObservableService, private route: ActivatedRoute,
                 private fb: FormBuilder, private router: Router) {
     }
 
@@ -33,10 +35,11 @@ export class ExchangeAdapterRxComponent implements OnInit {
         this.route.params.forEach((params: Params) => {
             let id = params['id'];
             this.exchangeDataService.getExchange(id)
-                .then(exchange => {
+                .subscribe(exchange => {
                     this.exchange = exchange;
                     this.buildForm();
-                });
+                },
+                error => this.errorMessage = <any>error); // TODO show meaningful error to user
         });
     }
 
@@ -62,15 +65,9 @@ export class ExchangeAdapterRxComponent implements OnInit {
             (m) => this.exchange.networkConfig.nonFatalErrorMessages.push({"value": m}));
 
         this.exchangeDataService.update(this.exchange)
-            .then(exchange => {
-                this.goToDashboard();
-            });
-
-        // TODO using Observable
-        // this.exchangeDataService.updateUsingObserver(this.exchange)
-        //     .subscribe(
-        //         exchange => {this.goToDashboard()},
-        //         error =>  this.errorMessage = <any>error);
+            .subscribe(
+                exchange => {this.goToDashboard()},
+                error => this.errorMessage = <any>error); // TODO show meaningful error to user
     }
 
     addErrorCode(): void {

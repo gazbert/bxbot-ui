@@ -3,9 +3,9 @@ import {Exchange, NetworkConfig, ErrorCode, ErrorMessage} from "../model";
 import {ExchangeAdapterComponent} from "./exchange-adapter.component";
 
 /**
- * First crack at writing Jasmine tests! ;-o
+ * Tests the behaviour of the Exchange Adapter (template) component is as expected.
  *
- * Based off the goodies in the main Angular tutorial:
+ * Based off the the main Angular tutorial:
  * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
  *
  * TODO When should I/should I not use the testbed?
