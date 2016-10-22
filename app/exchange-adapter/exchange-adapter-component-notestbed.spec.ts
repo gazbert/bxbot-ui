@@ -3,7 +3,7 @@ import {Exchange, NetworkConfig, ErrorCode, ErrorMessage} from "../model";
 import {ExchangeAdapterComponent} from "./exchange-adapter.component";
 
 /**
- * First bash at writing Jasmine tests! ;-o
+ * First crack at writing Jasmine tests! ;-o
  *
  * Based off the goodies in the main Angular tutorial:
  * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
@@ -38,14 +38,14 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
 
         router = jasmine.createSpyObj('router', ['navigate']);
 
-        spyExchangeDataService = jasmine.createSpyObj('ExchangeHttpDataService', ['getExchangeUsingPromise', 'update']);
-        spyExchangeDataService.getExchangeUsingPromise.and.returnValue(Promise.resolve(expectedExchange));
+        spyExchangeDataService = jasmine.createSpyObj('ExchangeHttpDataPromiseService', ['getExchange', 'update']);
+        spyExchangeDataService.getExchange.and.returnValue(Promise.resolve(expectedExchange));
         spyExchangeDataService.update.and.returnValue(Promise.resolve(expectedExchange));
 
         exchangeAdapterComponent = new ExchangeAdapterComponent(spyExchangeDataService, <any> activatedRoute, router);
         exchangeAdapterComponent.ngOnInit();
 
-        spyExchangeDataService.getExchangeUsingPromise.calls.first().returnValue.then(done);
+        spyExchangeDataService.getExchange.calls.first().returnValue.then(done);
     });
 
     it('should expose the Exchange retrieved from the service', () => {

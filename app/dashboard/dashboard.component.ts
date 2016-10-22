@@ -1,6 +1,6 @@
 import {Router} from "@angular/router";
 import {Component, OnInit} from "@angular/core";
-import {Exchange, ExchangeHttpDataService} from "../model";
+import {Exchange, ExchangeHttpDataPromiseService} from "../model";
 
 /**
  * The Dashboard component lists the Exchanges the bot is running on.
@@ -17,11 +17,11 @@ export class DashboardComponent implements OnInit {
 
     exchanges: Exchange[] = [];
 
-    constructor(private router: Router, private exchangeDataService: ExchangeHttpDataService) {
+    constructor(private router: Router, private exchangeDataService: ExchangeHttpDataPromiseService) {
     }
 
     ngOnInit(): void {
-        this.exchangeDataService.getExchangesUsingPromise()
+        this.exchangeDataService.getExchanges()
             .then(exchanges => this.exchanges = exchanges.slice(0, 8));
     }
 

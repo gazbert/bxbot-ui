@@ -1,4 +1,4 @@
 export * from './exchange.model';
-export * from './exchange-data.service';
-export * from './exchange-http-data.service';
+export * from './exchange-data-promise.service';
+export * from './exchange-http-data-promise.service';
 export * from './in-memory-data.service';

@@ -1,5 +1,7 @@
 /**
+ * Encapsulates the Exchange data model.
  *
+ * @author gazbert
  */
 export class Exchange {
     constructor(public id: string,

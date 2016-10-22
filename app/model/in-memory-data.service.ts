@@ -1,7 +1,11 @@
 import {InMemoryDbService} from "angular-in-memory-web-api";
 
 /**
- * TODO Move this into model folder? Or perhaps a testing/model folder?
+ * An in-memory data store for testing the app without the 'real' REST service backend.
+ *
+ * TODO Add markets, trading strats, email alert info, etc into here... or use separate Dbs ?
+ *
+ * @author gazbert
  */
 export class InMemoryDataService implements InMemoryDbService {
     createDb() {

@@ -1,10 +1,9 @@
-import {Exchange, NetworkConfig} from "../model";
+import {Exchange, NetworkConfig} from "../../model";
 
 /**
- * Dummy Exchange Adapter data.
- *
+ * Dummy Exchange Adapter data for testing.
  */
-export var EXCHANGES: Exchange[] = [
+export var EXCHANGE_ADAPTERS: Exchange[] = [
 
     new Exchange('Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
         new NetworkConfig(60,

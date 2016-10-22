@@ -1,7 +1,7 @@
 import {Router} from "@angular/router";
 import {DashboardComponent} from "./dashboard.component";
 import {addMatchers} from "../../testing";
-import {FakeExchangeDataService} from "../model/testing";
+import {FakeExchangeDataPromiseService} from "../model/testing";
 import {Exchange, NetworkConfig} from "../model/exchange.model";
 
 class FakeRouter {
@@ -22,13 +22,13 @@ class FakeRouter {
 describe('When testing DashboardComponent without using Angular TestBed, it ', () => {
 
     let comp: DashboardComponent;
-    let exchangeDataService: FakeExchangeDataService;
+    let exchangeDataService: FakeExchangeDataPromiseService;
     let router: Router;
 
     beforeEach(() => {
         addMatchers();
         router = new FakeRouter() as any as Router;
-        exchangeDataService = new FakeExchangeDataService(null);
+        exchangeDataService = new FakeExchangeDataPromiseService(null);
         comp = new DashboardComponent(router, exchangeDataService);
     });
 

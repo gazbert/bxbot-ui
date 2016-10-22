@@ -1,7 +1,11 @@
 import {Exchange, NetworkConfig} from "./exchange.model";
 
 /**
+ * Tests the Exchange model behaves as expected.
  *
+ * TODO Boost coverage
+ *
+ * @author gazbert
  */
 describe('Exchange', () => {
 

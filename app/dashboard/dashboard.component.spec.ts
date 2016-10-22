@@ -6,8 +6,8 @@ import {async, inject, ComponentFixture, TestBed} from "@angular/core/testing";
 import {DashboardComponent} from "./dashboard.component";
 import {DashboardModule} from "./dashboard.module";
 import {addMatchers, click} from "../../testing";
-import {FakeExchangeDataService} from "../model/testing";
-import {ExchangeHttpDataService} from "../model";
+import {FakeExchangeDataPromiseService} from "../model/testing";
+import {ExchangeHttpDataPromiseService} from "../model";
 
 /**
  * Learning ground for writing jasmine tests.
@@ -73,9 +73,9 @@ function compileAndCreate() {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             providers: [
-                {provide: ExchangeHttpDataService, useClass: FakeExchangeDataService},
+                {provide: ExchangeHttpDataPromiseService, useClass: FakeExchangeDataPromiseService},
                 {provide: Router, useClass: RouterStub},
-                {provide: Http, useValue: {}} // need this because the FakeExchangeDataService extends ExchangeHttpDataService
+                {provide: Http, useValue: {}} // need this because the FakeExchangeDataPromiseService extends ExchangeHttpDataPromiseService
             ]
         })
             .compileComponents().then(() => {

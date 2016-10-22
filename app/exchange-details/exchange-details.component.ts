@@ -1,6 +1,6 @@
 import {OnInit, Component} from "@angular/core";
 import {ActivatedRoute, Params, Router} from "@angular/router";
-import {Exchange, ExchangeHttpDataService} from "../model";
+import {Exchange, ExchangeHttpDataPromiseService} from "../model";
 
 /**
  * Container component for holding Exchange Details.
@@ -18,14 +18,14 @@ export class ExchangeDetailsComponent implements OnInit {
     exchange: Exchange;
     active = true;
 
-    constructor(private exchangeDataService: ExchangeHttpDataService, private route: ActivatedRoute,
+    constructor(private exchangeDataService: ExchangeHttpDataPromiseService, private route: ActivatedRoute,
                 private router: Router) {
     }
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
             let id = params['id'];
-            this.exchangeDataService.getExchangeUsingPromise(id)
+            this.exchangeDataService.getExchange(id)
                 .then(exchange => this.exchange = exchange);
         });
     }
