@@ -26,6 +26,8 @@ export class ExchangeHttpDataService implements ExchangeDataService {
     // vs JSON canned data for quick testing
     //private exchangeUrl = 'app/exchanges.json'; // URL to JSON file
 
+    private headers = new Headers({'Content-Type': 'application/json'});
+
     constructor(private http: Http) {
     }
 
@@ -52,8 +54,6 @@ export class ExchangeHttpDataService implements ExchangeDataService {
     //         .map((r: Response) => r.json().data as Exchange);
     // }
 
-    private headers = new Headers({'Content-Type': 'application/json'});
-
     update(exchange: Exchange): Promise<Exchange> {
         const url = `${this.exchangeUrl}/${exchange.id}`;
         return this.http
@@ -66,8 +66,11 @@ export class ExchangeHttpDataService implements ExchangeDataService {
     // TODO update using Observable way
     updateUsingObserver(exchange: Exchange): Observable<Exchange> {
         const url = `${this.exchangeUrl}/${exchange.id}`;
-        return this.http
-            .put(url, JSON.stringify(exchange), {headers: this.headers})
+        let body = JSON.stringify(exchange);
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(url, body, options)
             .map(this.extractData)
             .catch(this.handleError);
     }
