@@ -18,7 +18,7 @@ import 'rxjs/add/operator/map';
  * Based off the the main Angular tutorial:
  * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
  *
- * TODO rework tests for Observable
+ * TODO rework tests for using Observable - jasmine spies need setting up...
  * TODO When should I/should I not use the testbed?
  * TODO Increase coverage for the form input + validation, adding/deleting error/message codes, etc...
  *
@@ -36,7 +36,9 @@ describe('ExchangeAdapterRxComponent tests without TestBed', () => {
 
     let spyExchangeDataService: any;
     let router: any;
+
     let formBuilder: any;
+    let exchangeDetailsForm: any;
 
     beforeEach(done => {
 
@@ -50,11 +52,17 @@ describe('ExchangeAdapterRxComponent tests without TestBed', () => {
 
         router = jasmine.createSpyObj('router', ['navigate']);
 
+        formBuilder = jasmine.createSpyObj('FormBuilder', ['group']);
+        exchangeDetailsForm = jasmine.createSpyObj('FormGroup', ['get']);
+
         spyExchangeDataService = jasmine.createSpyObj('ExchangeHttpDataObservableService', ['getExchange', 'update']);
 
         // TODO rework for Observable
         //spyExchangeDataService.getExchange.and.returnValue(Promise.resolve(expectedExchange));
-        spyExchangeDataService.getExchange.and.returnValue(Observable.bind(expectedExchange));
+        spyExchangeDataService.getExchange.and.returnValue(Observable.of(expectedExchange));
+        formBuilder.group.and.returnValue(exchangeDetailsForm);
+        exchangeDetailsForm.get.and.returnValue('btce');
+
         spyExchangeDataService.update.and.returnValue(Promise.resolve(expectedExchange));
 
         exchangeAdapterComponent = new ExchangeAdapterRxComponent(spyExchangeDataService, <any> activatedRoute, formBuilder, router);
@@ -62,7 +70,7 @@ describe('ExchangeAdapterRxComponent tests without TestBed', () => {
 
         // TODO rework for Observable
         //spyExchangeDataService.getExchange.calls.first().returnValue.then(done);
-        //spyExchangeDataService.getExchange.calls.first().returnValue.subscribe(done);
+        // spyExchangeDataService.getExchange.calls.first().returnValue.subscribe(done);
     });
 
     // TODO rework for Observable
