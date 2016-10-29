@@ -5,7 +5,7 @@ import {Exchange, NetworkConfig} from "../../model";
  */
 export var EXCHANGE_ADAPTERS: Exchange[] = [
 
-    new Exchange('Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
+    new Exchange('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
         new NetworkConfig(60,
             [
                 {value: 503},
@@ -17,8 +17,9 @@ export var EXCHANGE_ADAPTERS: Exchange[] = [
                 {value: "Connection refused"},
                 {value: "Remote host closed connection during handshake"}
             ]
-        )),
-    new Exchange('GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
+        ),
+        null),
+    new Exchange('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
         new NetworkConfig(60,
             [
                 {value: 503},
@@ -30,8 +31,9 @@ export var EXCHANGE_ADAPTERS: Exchange[] = [
                 {value: "Connection refused"},
                 {value: "Remote host closed connection during handshake"}
             ]
-        )),
-    new Exchange('Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
+        ),
+        null),
+    new Exchange('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
         new NetworkConfig(60,
             [
                 {value: 503},
@@ -43,8 +45,9 @@ export var EXCHANGE_ADAPTERS: Exchange[] = [
                 {value: "Connection refused"},
                 {value: "Remote host closed connection during handshake"}
             ]
-        )),
-    new Exchange('ItBit', 'com.gazbert.bxbot.exchanges.ItBitExchangeAdapter',
+        ),
+        null),
+    new Exchange('itbit', 'ItBit', 'com.gazbert.bxbot.exchanges.ItBitExchangeAdapter',
         new NetworkConfig(60,
             [
                 {value: 503},
@@ -56,8 +59,9 @@ export var EXCHANGE_ADAPTERS: Exchange[] = [
                 {value: "Connection refused"},
                 {value: "Remote host closed connection during handshake"}
             ]
-        )),
-    new Exchange('BTC-e', 'com.gazbert.bxbot.exchanges.BtceExchangeAdapter',
+        ),
+        null),
+    new Exchange('btce', 'BTC-e', 'com.gazbert.bxbot.exchanges.BtceExchangeAdapter',
         new NetworkConfig(60,
             [
                 {value: 503},
@@ -69,9 +73,9 @@ export var EXCHANGE_ADAPTERS: Exchange[] = [
                 {value: "Connection refused"},
                 {value: "Remote host closed connection during handshake"}
             ]
-        )),
-
-    new Exchange('OKCoin', 'com.gazbert.bxbot.exchanges.OkCoinExchangeAdapter',
+        ),
+        null),
+    new Exchange('okcoin', 'OKCoin', 'com.gazbert.bxbot.exchanges.OkCoinExchangeAdapter',
         new NetworkConfig(60,
             [
                 {value: 503},
@@ -83,8 +87,9 @@ export var EXCHANGE_ADAPTERS: Exchange[] = [
                 {value: "Connection refused"},
                 {value: "Remote host closed connection during handshake"}
             ]
-        )),
-    new Exchange('Bitfinex', 'com.gazbert.bxbot.exchanges.BitfinexExchangeAdapter',
+        ),
+        null),
+    new Exchange('bitfinex', 'Bitfinex', 'com.gazbert.bxbot.exchanges.BitfinexExchangeAdapter',
         new NetworkConfig(60,
             [
                 {value: 503},
@@ -96,8 +101,9 @@ export var EXCHANGE_ADAPTERS: Exchange[] = [
                 {value: "Connection refused"},
                 {value: "Remote host closed connection during handshake"}
             ]
-        )),
-    new Exchange('Huobi', 'com.gazbert.bxbot.exchanges.HuobiExchangeAdapter',
+        ),
+        null),
+    new Exchange('huobi', 'Huobi', 'com.gazbert.bxbot.exchanges.HuobiExchangeAdapter',
         new NetworkConfig(60,
             [
                 {value: 503},
@@ -109,8 +115,9 @@ export var EXCHANGE_ADAPTERS: Exchange[] = [
                 {value: "Connection refused"},
                 {value: "Remote host closed connection during handshake"}
             ]
-        )),
-    new Exchange('Kraken', 'com.gazbert.bxbot.exchanges.KrakenExchangeAdapter',
+        ),
+        null),
+    new Exchange('kraken', 'Kraken', 'com.gazbert.bxbot.exchanges.KrakenExchangeAdapter',
         new NetworkConfig(60,
             [
                 {value: 503},
@@ -122,5 +129,6 @@ export var EXCHANGE_ADAPTERS: Exchange[] = [
                 {value: "Connection refused"},
                 {value: "Remote host closed connection during handshake"}
             ]
-        ))
+        ),
+        null)
 ];

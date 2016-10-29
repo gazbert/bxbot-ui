@@ -105,7 +105,7 @@ describe('Tests ExchangeHttpDataPromiseService (using Mock HTTP backend) ', () =
 });
 
 const makeExchangeData = () => [
-    new Exchange('Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
+    new Exchange('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
         new NetworkConfig(60,
             [
                 {value: 503},
@@ -117,8 +117,9 @@ const makeExchangeData = () => [
                 {value: "Connection refused"},
                 {value: "Remote host closed connection during handshake"}
             ]
-        )),
-    new Exchange('GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
+        ),
+        null),
+    new Exchange('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
         new NetworkConfig(60,
             [
                 {value: 503},
@@ -130,8 +131,9 @@ const makeExchangeData = () => [
                 {value: "Connection refused"},
                 {value: "Remote host closed connection during handshake"}
             ]
-        )),
-    new Exchange('Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
+        ),
+        null),
+    new Exchange('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
         new NetworkConfig(60,
             [
                 {value: 503},
@@ -143,6 +145,7 @@ const makeExchangeData = () => [
                 {value: "Connection refused"},
                 {value: "Remote host closed connection during handshake"}
             ]
-        )),
+        ),
+        null),
 ] as Exchange[];
 

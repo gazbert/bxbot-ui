@@ -3,14 +3,13 @@ import {HttpModule, Http, XHRBackend, Response, ResponseOptions} from "@angular/
 import {async, inject, TestBed} from "@angular/core/testing";
 import {Exchange, NetworkConfig} from "./exchange.model";
 import {ExchangeHttpDataObservableService as ExchangeDataService} from "./exchange-http-data-observable.service";
-
-import {Observable} from 'rxjs/Observable';
+import {Observable} from "rxjs/Observable";
+import "rxjs/add/observable/throw";
+import "rxjs/add/operator/do";
+import "rxjs/add/operator/catch";
+import "rxjs/add/operator/map";
 // NOTE: We need to explicitly pull the rxjs operators in - if not, we get a stinky runtime error e.g.
 // 'Failed: this.http.get(...).map is not a function'
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
 
 /**
  * Tests the Exchange HTTP (observable) service using a mocked HTTP backend.
@@ -47,7 +46,7 @@ describe('Tests ExchangeHttpDataObservableService (using Mock HTTP backend) ', (
     it('can provide the mockBackend as XHRBackend',
         inject([XHRBackend], (backend: MockBackend) => {
             expect(backend).not.toBeNull('backend should be provided');
-    }));
+        }));
 
 
     describe('when getExchanges', () => {
@@ -116,7 +115,7 @@ describe('Tests ExchangeHttpDataObservableService (using Mock HTTP backend) ', (
 });
 
 const makeExchangeData = () => [
-    new Exchange('Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
+    new Exchange('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
         new NetworkConfig(60,
             [
                 {value: 503},
@@ -128,8 +127,9 @@ const makeExchangeData = () => [
                 {value: "Connection refused"},
                 {value: "Remote host closed connection during handshake"}
             ]
-        )),
-    new Exchange('GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
+        ),
+        null),
+    new Exchange('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
         new NetworkConfig(60,
             [
                 {value: 503},
@@ -141,8 +141,9 @@ const makeExchangeData = () => [
                 {value: "Connection refused"},
                 {value: "Remote host closed connection during handshake"}
             ]
-        )),
-    new Exchange('Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
+        ),
+        null),
+    new Exchange('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
         new NetworkConfig(60,
             [
                 {value: 503},
@@ -154,5 +155,6 @@ const makeExchangeData = () => [
                 {value: "Connection refused"},
                 {value: "Remote host closed connection during handshake"}
             ]
-        )),
+        ),
+        null),
 ] as Exchange[];

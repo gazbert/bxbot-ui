@@ -11,7 +11,7 @@ describe('Exchange', () => {
 
     it('has correct initial values', () => {
         const exchange =
-            new Exchange('GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
+            new Exchange('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
                 new NetworkConfig(60,
                     [
                         {value: 503},
@@ -23,9 +23,9 @@ describe('Exchange', () => {
                         {value: "Connection refused"},
                         {value: "Remote host closed connection during handshake"}
                     ]
-                ));
+                ), null);
 
-        expect(exchange.id).toBe('GDAX');
+        expect(exchange.id).toBe('gdax');
         expect(exchange.adapter).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
 
         // TODO etc etc ...
@@ -33,7 +33,7 @@ describe('Exchange', () => {
 
     it('can clone itself', () => {
         const exchange =
-            new Exchange('GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
+            new Exchange('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
                 new NetworkConfig(60,
                     [
                         {value: 503},
@@ -45,7 +45,7 @@ describe('Exchange', () => {
                         {value: "Connection refused"},
                         {value: "Remote host closed connection during handshake"}
                     ]
-                ));
+                ), null);
 
         const clone = exchange.clone();
         expect(exchange).toEqual(clone);

@@ -1,5 +1,5 @@
 <div *ngIf="exchange" class="container module-bootstrap">
-    <h2>{{exchange.id}} Exchange Details</h2>
+    <h2>{{exchange.label}} Exchange Details</h2>
     <tabs>
         <tab [exchangeId]=exchange.id [tabTitle]="'exchange edapter'"><bx-exchange-adapter-rx></bx-exchange-adapter-rx></tab>
         <!--<tab [tabTitle]="'Exchange Adapter'"><bx-exchange-adapter></bx-exchange-adapter></tab>-->

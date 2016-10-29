@@ -11,7 +11,8 @@ export class InMemoryDataService implements InMemoryDbService {
     createDb() {
         let exchanges = [
             {
-                id: 'Bitstamp',
+                id: 'bitstamp',
+                label: 'Bitstamp',
                 adapter: 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 60,
@@ -23,10 +24,26 @@ export class InMemoryDataService implements InMemoryDbService {
                         {value: "Connection reset"},
                         {value: "Connection refused"},
                     ]
-                }
+                },
+                markets: [
+                    {
+                        id: 'btc_usd',
+                        label: 'BTC/USD',
+                        enabled: true,
+                        baseCurrency: 'BTC',
+                        counterCurrency: 'USD',
+                        tradingStrategy: {
+                            id: 'macd',
+                            label: 'MACD Indicator',
+                            description: 'MACD Indicator for deciding when to enter and exit trades.',
+                            baseCurrency: 'com.gazbert.bxbot.strategies.MacdStrategy'
+                        }
+                    }
+                ],
             },
             {
-                id: 'GDAX',
+                id: 'gdax',
+                label: 'GDAX',
                 adapter: 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 120,
@@ -38,10 +55,39 @@ export class InMemoryDataService implements InMemoryDbService {
                         {value: "Connection reset"},
                         {value: "Remote host closed connection during handshake"}
                     ]
-                }
+                },
+                markets: [
+                    {
+                        id: 'btc_usd',
+                        label: 'BTC/USD',
+                        enabled: false,
+                        baseCurrency: 'BTC',
+                        counterCurrency: 'USD',
+                        tradingStrategy: {
+                            id: 'macd',
+                            label: 'MACD Indicator',
+                            description: 'MACD Indicator for deciding when to enter and exit trades.',
+                            baseCurrency: 'com.gazbert.bxbot.strategies.MacdStrategy'
+                        }
+                    },
+                    {
+                        id: 'btc_gbp',
+                        label: 'BTC/GBP',
+                        enabled: true,
+                        baseCurrency: 'BTC',
+                        counterCurrency: 'GBP',
+                        tradingStrategy: {
+                            id: 'long-scalper',
+                            label: 'Long Scalper',
+                            description: 'Scalping strategy that buys low and sells high.',
+                            baseCurrency: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
+                        }
+                    }
+                ],
             },
             {
-                id: 'Gemini',
+                id: 'gemini',
+                label: 'Gemini',
                 adapter: 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 90,
@@ -56,7 +102,8 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 'ItBit',
+                id: 'itbit',
+                label: 'ItBit',
                 adapter: 'com.gazbert.bxbot.exchanges.ItBitExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 30,
@@ -71,7 +118,8 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 'BTC-e',
+                id: 'btce',
+                label: 'BTC-e',
                 adapter: 'com.gazbert.bxbot.exchanges.BtceExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 45,
@@ -86,7 +134,8 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 'OKCoin',
+                id: 'okcoin',
+                label: 'OKCoin',
                 adapter: 'com.gazbert.bxbot.exchanges.OkCoinExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 50,
@@ -101,7 +150,8 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 'Bitfinex',
+                id: 'bitfinex',
+                label: 'Bitfinex',
                 adapter: 'com.gazbert.bxbot.exchanges.BitfinexExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 20,
@@ -116,7 +166,8 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 'Huobi',
+                id: 'huobi',
+                label: 'Huobi',
                 adapter: 'com.gazbert.bxbot.exchanges.HuobiExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 10,
@@ -131,7 +182,8 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 'Kraken',
+                id: 'kraken',
+                label: 'Kraken',
                 adapter: 'com.gazbert.bxbot.exchanges.KrakenExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 60,

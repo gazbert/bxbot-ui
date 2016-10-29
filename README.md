@@ -1,5 +1,5 @@
 # BX-bot UI
-An Angular app for administering [BX-bot](https://github.com/gazbert/bxbot).
+An Angular app (and learning project!) for administering [BX-bot](https://github.com/gazbert/bxbot).
 
 Coming soon...
 

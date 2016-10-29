@@ -59,13 +59,13 @@ describe('When testing DashboardComponent without using Angular TestBed, it ', (
         const expectedErrorCodes = [{'value': 501}];
         const expectedErrorMsgs = [{'value': 'Connection timeout'}];
         const expectedNetworkConfig = new NetworkConfig(60, expectedErrorCodes, expectedErrorMsgs);
-        const testExchange = new Exchange('GDAX', 'com.gazbert.bxbot.adapter.GdaxExchangeAdapter', expectedNetworkConfig);
+        const testExchange = new Exchange('gdax', 'GDAX', 'com.gazbert.bxbot.adapter.GdaxExchangeAdapter', expectedNetworkConfig, null);
 
         const spy = spyOn(router, 'navigateByUrl');
 
         comp.gotoExchangeDetails(testExchange);
 
         const navArgs = spy.calls.mostRecent().args[0];
-        expect(navArgs).toBe('/exchange/GDAX', 'should nav to Exchange Details for Exchange GDAX');
+        expect(navArgs).toBe('/exchange/gdax', 'should nav to Exchange Details for Exchange GDAX');
     });
 });
