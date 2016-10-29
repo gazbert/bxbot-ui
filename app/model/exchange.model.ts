@@ -8,11 +8,12 @@ export class Exchange {
                 public label: string,
                 public adapter: string,
                 public networkConfig: NetworkConfig,
-                public markets: Market[]) {
+                public markets: Market[],
+                public emailAlertsConfig: EmailAlertsConfig) {
     }
 
     clone() {
-        return new Exchange(this.id, this.label, this.adapter, this.networkConfig, this.markets);
+        return new Exchange(this.id, this.label, this.adapter, this.networkConfig, this.markets, this.emailAlertsConfig);
     }
 }
 
@@ -48,5 +49,16 @@ export class TradingStrategy {
                 public label: string,
                 public description: string,
                 public className: string) {
+    }
+}
+
+export class EmailAlertsConfig {
+    constructor(public enabled: boolean,
+                public smtpHost: string,
+                public smtpPort: number,
+                public accountUsername: string,
+                public accountPassword: string,
+                public toAddress: string,
+                public fromAddress: string) {
     }
 }

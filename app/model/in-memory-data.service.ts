@@ -40,6 +40,15 @@ export class InMemoryDataService implements InMemoryDbService {
                         }
                     }
                 ],
+                emailAlertsConfig: {
+                    enabled: true,
+                    smtpHost: "smtp.gmail.com",
+                    smtpPort: 587,
+                    accountUsername: 'bobfett',
+                    accountPassword: 'iLoveHoth',
+                    toAddress: 'jabba@tatooine.space',
+                    fromAddress: 'boba.fett@hoth.space'
+                }
             },
             {
                 id: 'gdax',
@@ -84,6 +93,15 @@ export class InMemoryDataService implements InMemoryDbService {
                         }
                     }
                 ],
+                emailAlertsConfig: {
+                    enabled: true,
+                    smtpHost: "smtp.gmail.com",
+                    smtpPort: 587,
+                    accountUsername: 'bobfett',
+                    accountPassword: 'iLoveHoth',
+                    toAddress: 'jabba@tatooine.space',
+                    fromAddress: 'boba.fett@hoth.space'
+                }
             },
             {
                 id: 'gemini',

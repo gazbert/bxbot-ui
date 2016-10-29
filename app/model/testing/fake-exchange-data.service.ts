@@ -50,6 +50,7 @@ export var EXCHANGES: Exchange[] = [
                 {value: "Remote host closed connection during handshake"}
             ]
         ),
+        null,
         null),
     new Exchange('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
         new NetworkConfig(60,
@@ -64,6 +65,7 @@ export var EXCHANGES: Exchange[] = [
                 {value: "Remote host closed connection during handshake"}
             ]
         ),
+        null,
         null),
     new Exchange('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
         new NetworkConfig(60,
@@ -78,5 +80,6 @@ export var EXCHANGES: Exchange[] = [
                 {value: "Remote host closed connection during handshake"}
             ]
         ),
+        null,
         null)
 ];

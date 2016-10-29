@@ -46,7 +46,9 @@ describe('ExchangeAdapterRxComponent tests without TestBed', () => {
         expectedErrorMsgs = [{'value': 'Connection timeout'}];
         expectedNetworkConfig = new NetworkConfig(60, expectedErrorCodes, expectedErrorMsgs);
 
-        expectedExchange = new Exchange('btce', 'BTC-e', 'com.gazbert.bxbot.adapter.BtceExchangeAdapter', expectedNetworkConfig, null);
+        expectedExchange = new Exchange('btce', 'BTC-e', 'com.gazbert.bxbot.adapter.BtceExchangeAdapter',
+            expectedNetworkConfig, null, null);
+
         activatedRoute = new ActivatedRouteStub();
         activatedRoute.testParams = {id: expectedExchange.id};
 

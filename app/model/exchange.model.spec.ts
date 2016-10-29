@@ -23,7 +23,9 @@ describe('Exchange', () => {
                         {value: "Connection refused"},
                         {value: "Remote host closed connection during handshake"}
                     ]
-                ), null);
+                ),
+                null,
+                null);
 
         expect(exchange.id).toBe('gdax');
         expect(exchange.adapter).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
@@ -45,7 +47,9 @@ describe('Exchange', () => {
                         {value: "Connection refused"},
                         {value: "Remote host closed connection during handshake"}
                     ]
-                ), null);
+                ),
+                null,
+                null);
 
         const clone = exchange.clone();
         expect(exchange).toEqual(clone);

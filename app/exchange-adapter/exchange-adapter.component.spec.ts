@@ -62,7 +62,8 @@ function overrideSetup() {
             this.expectedErrorCodes = [{'value': 501}];
             this.expectedErrorMsgs = [{'value': 'Connection timeout'}];
             this.expectedNetworkConfig = new NetworkConfig(60, this.expectedErrorCodes, this.expectedErrorMsgs);
-            this.testExchange = new Exchange('btce', 'BTC-e', 'com.gazbert.bxbot.adapter.BtceExchangeAdapter', this.expectedNetworkConfig, null);
+            this.testExchange = new Exchange('btce', 'BTC-e', 'com.gazbert.bxbot.adapter.BtceExchangeAdapter',
+                this.expectedNetworkConfig, null, null);
         }
 
         getExchange(id: string): Promise<Exchange> {
