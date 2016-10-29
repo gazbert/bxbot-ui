@@ -65,6 +65,6 @@
     "@types/core-js": "^0.9.34",
     "@types/node": "^6.0.46",
     "@types/jasmine": "^2.5.36",
-    "@types/selenium-webdriver": "^2.52.0"
+    "@types/selenium-webdriver": "^2.53.33"
   }
 }

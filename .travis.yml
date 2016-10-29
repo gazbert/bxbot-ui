@@ -16,4 +16,3 @@ install:
   - npm install
 script:
   - npm run test-once
-  - npm run e2e
