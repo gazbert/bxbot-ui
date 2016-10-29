@@ -5,6 +5,7 @@
  * See: http://www.protractortest.org/#/tutorial
  *
  ******************************************************************************/
+import {browser, element, by} from "protractor";
 
 /**
  * Dashboard tests.
@@ -41,7 +42,7 @@ describe('Exchange Details Tests', function () {
     let expectedMsg = 'GDAX Exchange Details';
 
     beforeEach(function () {
-        browser.get('/exchange/GDAX');
+        browser.get('/exchange/gdax');
     });
 
     // TODO FIXME - times out :-(
