@@ -1,6 +1,6 @@
 # BX-bot UI
 
-[![Build Status][travis-badge]][travis-badge-url]
+[![Build Status](https://travis-ci.org/gazbert/bxbot-ui.svg?branch=master)](https://travis-ci.org/gazbert/bxbot-ui)
 
 An Angular app (and learning project!) for administering [BX-bot](https://github.com/gazbert/bxbot).
 
