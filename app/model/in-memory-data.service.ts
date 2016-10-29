@@ -36,7 +36,7 @@ export class InMemoryDataService implements InMemoryDbService {
                             id: 'macd',
                             label: 'MACD Indicator',
                             description: 'MACD Indicator for deciding when to enter and exit trades.',
-                            baseCurrency: 'com.gazbert.bxbot.strategies.MacdStrategy'
+                            className: 'com.gazbert.bxbot.strategies.MacdStrategy'
                         }
                     }
                 ],
@@ -67,7 +67,7 @@ export class InMemoryDataService implements InMemoryDbService {
                             id: 'macd',
                             label: 'MACD Indicator',
                             description: 'MACD Indicator for deciding when to enter and exit trades.',
-                            baseCurrency: 'com.gazbert.bxbot.strategies.MacdStrategy'
+                            className: 'com.gazbert.bxbot.strategies.MacdStrategy'
                         }
                     },
                     {
@@ -80,7 +80,7 @@ export class InMemoryDataService implements InMemoryDbService {
                             id: 'long-scalper',
                             label: 'Long Scalper',
                             description: 'Scalping strategy that buys low and sells high.',
-                            baseCurrency: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
+                            className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
                         }
                     }
                 ],
