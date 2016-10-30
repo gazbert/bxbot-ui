@@ -1,10 +1,9 @@
 <!--
     Reactive version of the Exchange Adapter form.
  -->
-<div *ngIf="exchange" class="">
-    <!--<h2>Exchange Adapter</h2>-->
+<div *ngIf="exchangeAdapter" class="">
 
-    <form *ngIf="active" novalidate [formGroup]="exchangeDetailsForm" (ngSubmit)="save()">
+    <form *ngIf="active" novalidate [formGroup]="exchangeAdapterForm" (ngSubmit)="save()">
 
         <div class="row">
             <div class="form-group col-sm-12">
@@ -115,7 +114,7 @@
                      http://stackoverflow.com/questions/38120756/angular2-router-navigate-refresh-page
                  -->
                 <button type="button" (click)="goToDashboard()" class="btn btn-default">Cancel</button>
-                <button type="submit" class="btn btn-primary" [disabled]="!exchangeDetailsForm.valid">Save</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!exchangeAdapterForm.valid">Save</button>
             </div>
         </div>
     </form>

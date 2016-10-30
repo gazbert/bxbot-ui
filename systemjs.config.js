@@ -42,7 +42,13 @@
             // barrels
             'app/shared': {main: 'index.js', defaultExtension: 'js'},
             'app/model': {main: 'index.js', defaultExtension: 'js'},
-            'app/model/testing': {main: 'index.js', defaultExtension: 'js'}
+            'app/model/exchange': {main: 'index.js', defaultExtension: 'js'},
+            'app/model/exchange/testing': {main: 'index.js', defaultExtension: 'js'},
+            'app/model/exchange-adapter': {main: 'index.js', defaultExtension: 'js'},
+            'app/model/exchange-adapter/testing': {main: 'index.js', defaultExtension: 'js'},
+            'app/model/market': {main: 'index.js', defaultExtension: 'js'},
+            'app/model/trading-strategy': {main: 'index.js', defaultExtension: 'js'},
+            'app/model/email-alerts': {main: 'index.js', defaultExtension: 'js'}
         }
     });
 })(this);

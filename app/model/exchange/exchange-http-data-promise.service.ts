@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Http, Headers} from "@angular/http";
-import {Exchange} from "../model";
 import {ExchangeDataPromiseService} from "./exchange-data-promise.service";
+import {Exchange} from "./exchange.model";
 
 // *** Don't forget this else you get runtime error!
 // zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function

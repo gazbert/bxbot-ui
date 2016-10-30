@@ -6,8 +6,8 @@ import {async, inject, ComponentFixture, TestBed} from "@angular/core/testing";
 import {DashboardComponent} from "./dashboard.component";
 import {DashboardModule} from "./dashboard.module";
 import {addMatchers, click} from "../../testing";
-import {FakeExchangeDataPromiseService} from "../model/testing";
-import {ExchangeHttpDataPromiseService} from "../model";
+import {FakeExchangeDataPromiseService} from "../model/exchange/testing";
+import {ExchangeHttpDataPromiseService} from "../model/exchange";
 
 /**
  * Learning ground for writing jasmine tests.

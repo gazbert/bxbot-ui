@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Http, Headers, Response, RequestOptions} from "@angular/http";
-import {Exchange} from "../model";
-import {ExchangeDataObservableService} from "./exchange-data-observable.service";
+import {ExchangeAdapter} from "./exchange-adapter.model";
+import {ExchangeAdapterDataObservableService} from "./exchange-adapter-data-observable.service";
 
 import {Observable} from 'rxjs/Observable';
 // NOTE: We need to explicitly pull the rxjs operators in - if not, we get a stinky runtime error e.g.
@@ -13,41 +13,44 @@ import 'rxjs/add/operator/toPromise';
 import {isObject} from "rxjs/util/isObject";
 
 /**
- * HTTP implementation of the Exchange Data Service.
+ * HTTP implementation of the Exchange Adapter Data Service.
  *
  * It demonstrates use of Observables in call responses.
  *
  * @author gazbert
  */
 @Injectable()
-export class ExchangeHttpDataObservableService implements ExchangeDataObservableService {
+export class ExchangeAdapterHttpDataObservableService implements ExchangeAdapterDataObservableService {
 
-    public exchangeUrl = 'app/exchanges';  // URL to web api
+    public exchangeAdaptersUrl = 'app/exchangeAdapters';  // URL to web api
     // vs JSON canned data for quick testing
-    //private exchangeUrl = 'app/exchanges.json'; // URL to JSON file
+    //private exchangeUrl = 'app/exchangeAdapters.json'; // URL to JSON file
 
     private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private http: Http) {
     }
 
-    getExchanges(): Observable<Exchange[]> {
-        return this.http.get(this.exchangeUrl)
+    getExchangeAdapters(): Observable<ExchangeAdapter[]> {
+        return this.http.get(this.exchangeAdaptersUrl)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
-    getExchange(id: string) {
+    // TODO FIXME - in memory service returns an array if we search by query param
+    // - it assumes (correctly) we can have >1 item, despite exchangeId being unique in our model
+    // hacked calling component to grab [0] for now...
+    getExchangeAdapterByExchangeId(id: string): Observable<ExchangeAdapter> {
         return this.http
-            .get(this.exchangeUrl + '/' + id)
-            // .map((r: Response) => r.json().data as Exchange);
+            .get(this.exchangeAdaptersUrl + "/?exchangeId=" + id)
+            //.map((r: Response) => r.json().data as ExchangeAdapter)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
-    update(exchange: Exchange): Observable<Exchange> {
-        const url = `${this.exchangeUrl}/${exchange.id}`;
-        let body = JSON.stringify(exchange);
+    update(exchangeAdapter: ExchangeAdapter): Observable<ExchangeAdapter> {
+        const url = `${this.exchangeAdaptersUrl}/${exchangeAdapter.id}`;
+        let body = JSON.stringify(exchangeAdapter);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 

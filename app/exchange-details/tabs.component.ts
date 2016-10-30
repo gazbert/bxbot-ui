@@ -2,7 +2,7 @@ import {Component, ContentChildren, QueryList, AfterContentInit} from "@angular/
 import {TabComponent} from "./tab.component";
 
 /**
- * TODO Move to shared folder
+ * TODO Move to shared folder and make re-usable
  *
  * Based on the excellent:
  * http://juristr.com/blog/2016/02/learning-ng2-creating-tab-component/

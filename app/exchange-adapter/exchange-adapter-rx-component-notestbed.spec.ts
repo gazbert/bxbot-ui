@@ -1,6 +1,6 @@
 import {ActivatedRouteStub} from "../../testing";
-import {Exchange, NetworkConfig, ErrorCode, ErrorMessage} from "../model";
 import {ExchangeAdapterRxComponent} from "./exchange-adapter-rx.component";
+import {ExchangeAdapter, NetworkConfig, ErrorCode, ErrorMessage} from "../model/exchange-adapter";
 
 import {Observable} from 'rxjs/Observable';
 // NOTE: We need to explicitly pull the rxjs operators in - if not, we get a stinky runtime error e.g.
@@ -9,6 +9,7 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+
 
 /**
  * Tests the behaviour of the Exchange Adapter (RX) component is as expected.
@@ -29,12 +30,12 @@ describe('ExchangeAdapterRxComponent tests without TestBed', () => {
     let activatedRoute: ActivatedRouteStub;
     let exchangeAdapterComponent: ExchangeAdapterRxComponent;
 
-    let expectedExchange: Exchange;
+    let expectedExchangeAdapter: ExchangeAdapter;
     let expectedNetworkConfig: NetworkConfig;
     let expectedErrorCodes: ErrorCode[];
     let expectedErrorMsgs: ErrorMessage[];
 
-    let spyExchangeDataService: any;
+    let spyExchangeAdapterDataService: any;
     let router: any;
 
     let formBuilder: any;
@@ -46,38 +47,38 @@ describe('ExchangeAdapterRxComponent tests without TestBed', () => {
         expectedErrorMsgs = [{'value': 'Connection timeout'}];
         expectedNetworkConfig = new NetworkConfig(60, expectedErrorCodes, expectedErrorMsgs);
 
-        expectedExchange = new Exchange('btce', 'BTC-e', 'com.gazbert.bxbot.adapter.BtceExchangeAdapter',
-            expectedNetworkConfig, null, null);
+        expectedExchangeAdapter = new ExchangeAdapter('btce', 'btce', 'com.gazbert.bxbot.adapter.BtceExchangeAdapter',
+            expectedNetworkConfig);
 
         activatedRoute = new ActivatedRouteStub();
-        activatedRoute.testParams = {id: expectedExchange.id};
+        activatedRoute.testParams = {id: expectedExchangeAdapter.id};
 
         router = jasmine.createSpyObj('router', ['navigate']);
 
         formBuilder = jasmine.createSpyObj('FormBuilder', ['group']);
         exchangeDetailsForm = jasmine.createSpyObj('FormGroup', ['get']);
 
-        spyExchangeDataService = jasmine.createSpyObj('ExchangeHttpDataObservableService', ['getExchange', 'update']);
+        spyExchangeAdapterDataService = jasmine.createSpyObj('ExchangeAdapterHttpDataObservableService', ['getExchangeAdapterByExchangeId', 'update']);
 
         // TODO rework for Observable
-        //spyExchangeDataService.getExchange.and.returnValue(Promise.resolve(expectedExchange));
-        spyExchangeDataService.getExchange.and.returnValue(Observable.of(expectedExchange));
+        //spyExchangeAdapterDataService.getExchange.and.returnValue(Promise.resolve(expectedExchangeAdapter));
+        spyExchangeAdapterDataService.getExchangeAdapterByExchangeId.and.returnValue(Observable.of(expectedExchangeAdapter));
         formBuilder.group.and.returnValue(exchangeDetailsForm);
         exchangeDetailsForm.get.and.returnValue('btce');
 
-        spyExchangeDataService.update.and.returnValue(Promise.resolve(expectedExchange));
+        spyExchangeAdapterDataService.update.and.returnValue(Promise.resolve(expectedExchangeAdapter));
 
-        exchangeAdapterComponent = new ExchangeAdapterRxComponent(spyExchangeDataService, <any> activatedRoute, formBuilder, router);
+        exchangeAdapterComponent = new ExchangeAdapterRxComponent(spyExchangeAdapterDataService, <any> activatedRoute, formBuilder, router);
         exchangeAdapterComponent.ngOnInit();
 
         // TODO rework for Observable
-        //spyExchangeDataService.getExchange.calls.first().returnValue.then(done);
-        // spyExchangeDataService.getExchange.calls.first().returnValue.subscribe(done);
+        //spyExchangeAdapterDataService.getExchange.calls.first().returnValue.then(done);
+        // spyExchangeAdapterDataService.getExchange.calls.first().returnValue.subscribe(done);
     });
 
     // TODO rework for Observable
     // it('should expose the Exchange retrieved from the service', () => {
-    //     expect(exchangeAdapterComponent.exchange).toBe(expectedExchange);
+    //     expect(exchangeAdapterComponent.exchange).toBe(expectedExchangeAdapter);
     // });
 
     // TODO rework for Observable
@@ -89,7 +90,7 @@ describe('ExchangeAdapterRxComponent tests without TestBed', () => {
     // TODO rework for Observable
     // it('should save when click Save', () => {
     //     exchangeAdapterComponent.save();
-    //     expect(spyExchangeDataService.update.calls.any()).toBe(true, 'ExchangeAdapterService.saveExchange called');
+    //     expect(spyExchangeAdapterDataService.update.calls.any()).toBe(true, 'ExchangeAdapterService.saveExchange called');
     //     expect(router.navigate.calls.any()).toBe(false, 'router.navigate not called yet');
     // });
 
@@ -98,7 +99,7 @@ describe('ExchangeAdapterRxComponent tests without TestBed', () => {
     //     exchangeAdapterComponent.save();
     //
     //     // waits for async save to complete before navigating
-    //     spyExchangeDataService.update.calls.first().returnValue
+    //     spyExchangeAdapterDataService.update.calls.first().returnValue
     //         .then(() => {
     //             expect(router.navigate.calls.any()).toBe(true, 'router.navigate called');
     //             done();

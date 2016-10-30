@@ -1,17 +1,15 @@
-import {Exchange, NetworkConfig} from "./exchange.model";
+import {ExchangeAdapter, NetworkConfig} from "./exchange-adapter.model";
 
 /**
- * Tests the Exchange model behaves as expected.
- *
- * TODO Boost coverage
+ * Tests the Exchange Adapter model behaves as expected.
  *
  * @author gazbert
  */
-describe('Exchange', () => {
+describe('Exchange Adapter', () => {
 
     it('has correct initial values', () => {
-        const exchange =
-            new Exchange('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
+        const exchangeAdapter =
+            new ExchangeAdapter('gdax', 'gdax', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
                 new NetworkConfig(60,
                     [
                         {value: 503},
@@ -23,19 +21,17 @@ describe('Exchange', () => {
                         {value: "Connection refused"},
                         {value: "Remote host closed connection during handshake"}
                     ]
-                ),
-                null,
-                null);
+                ));
 
-        expect(exchange.id).toBe('gdax');
-        expect(exchange.adapter).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
-
+        expect(exchangeAdapter.id).toBe('gdax');
+        expect(exchangeAdapter.exchangeId).toBe('gdax');
+        expect(exchangeAdapter.adapter).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
         // TODO etc etc ...
     });
 
     it('can clone itself', () => {
-        const exchange =
-            new Exchange('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
+        const exchangeAdapter =
+            new ExchangeAdapter('btce', 'btce', 'com.gazbert.bxbot.exchanges.BtceExchangeAdapter',
                 new NetworkConfig(60,
                     [
                         {value: 503},
@@ -47,11 +43,9 @@ describe('Exchange', () => {
                         {value: "Connection refused"},
                         {value: "Remote host closed connection during handshake"}
                     ]
-                ),
-                null,
-                null);
+                ));
 
-        const clone = exchange.clone();
-        expect(exchange).toEqual(clone);
+        const clone = exchangeAdapter.clone();
+        expect(exchangeAdapter).toEqual(clone);
     });
 });

@@ -1,7 +1,7 @@
 import {OnInit, Component, ViewChild} from "@angular/core";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
-import {Exchange, ErrorCode, ErrorMessage, ExchangeHttpDataPromiseService} from "../model";
+import {ExchangeAdapter, ErrorCode, ErrorMessage, ExchangeAdapterHttpDataPromiseService} from "../model/exchange-adapter";
 
 /**
  * Template-driven version of the Exchange Adapter form.
@@ -16,18 +16,18 @@ import {Exchange, ErrorCode, ErrorMessage, ExchangeHttpDataPromiseService} from 
 })
 export class ExchangeAdapterComponent implements OnInit {
 
-    exchange: Exchange;
+    exchangeAdapter: ExchangeAdapter;
     active = true;
 
-    constructor(private exchangeDataService: ExchangeHttpDataPromiseService, private route: ActivatedRoute,
+    constructor(private exchangeAdapterDataService: ExchangeAdapterHttpDataPromiseService, private route: ActivatedRoute,
                 private router: Router) {
     }
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
             let id = params['id'];
-            this.exchangeDataService.getExchange(id)
-                .then(exchange => this.exchange = exchange);
+            this.exchangeAdapterDataService.getExchangeAdapterByExchangeId(id)
+                .then(exchangeAdapter => this.exchangeAdapter = exchangeAdapter);
         });
     }
 
@@ -36,26 +36,26 @@ export class ExchangeAdapterComponent implements OnInit {
     }
 
     save(): void {
-        this.exchangeDataService.update(this.exchange)
+        this.exchangeAdapterDataService.update(this.exchangeAdapter)
             .then(() => this.goToDashboard());
     }
 
     addErrorCode(code: number): void {
-        this.exchange.networkConfig.nonFatalErrorHttpStatusCodes.push(new ErrorCode(code));
+        this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.push(new ErrorCode(code));
     }
 
     deleteErrorCode(code: ErrorCode): void {
-        this.exchange.networkConfig.nonFatalErrorHttpStatusCodes =
-            this.exchange.networkConfig.nonFatalErrorHttpStatusCodes.filter(c => c !== code);
+        this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes =
+            this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.filter(c => c !== code);
     }
 
     addErrorMessage(message: string): void {
-        this.exchange.networkConfig.nonFatalErrorMessages.push(new ErrorMessage(message));
+        this.exchangeAdapter.networkConfig.nonFatalErrorMessages.push(new ErrorMessage(message));
     }
 
     deleteErrorMessage(message: ErrorMessage): void {
-        this.exchange.networkConfig.nonFatalErrorMessages =
-            this.exchange.networkConfig.nonFatalErrorMessages.filter(m => m !== message);
+        this.exchangeAdapter.networkConfig.nonFatalErrorMessages =
+            this.exchangeAdapter.networkConfig.nonFatalErrorMessages.filter(m => m !== message);
     }
 
     // ------------------------------------------------------------------

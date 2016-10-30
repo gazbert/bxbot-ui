@@ -4,7 +4,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {InMemoryWebApiModule} from "angular-in-memory-web-api";
 import {AppComponent} from "./app.component";
-import {ExchangeHttpDataPromiseService, ExchangeHttpDataObservableService, InMemoryDataService} from "./model";
+import {InMemoryDataService} from "./model";
+import {ExchangeHttpDataPromiseService, ExchangeHttpDataObservableService} from "./model/exchange";
+import {ExchangeAdapterHttpDataPromiseService, ExchangeAdapterHttpDataObservableService} from "./model/exchange-adapter";
 import {DashboardModule} from "./dashboard/dashboard.module";
 import {ExchangeDetailsModule} from "./exchange-details/exchange-details.module";
 import {ExchangeAdapterModule} from "./exchange-adapter/exchange-adapter.module";
@@ -32,7 +34,12 @@ import {AppRoutingModule} from "./app-routing.module";
     declarations: [
         AppComponent
     ],
-    providers: [ExchangeHttpDataPromiseService, ExchangeHttpDataObservableService],
+    providers: [
+        ExchangeHttpDataPromiseService,
+        ExchangeHttpDataObservableService,
+        ExchangeAdapterHttpDataPromiseService,
+        ExchangeAdapterHttpDataObservableService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

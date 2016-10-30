@@ -1,15 +1,13 @@
 import {By} from "@angular/platform-browser";
 import {DebugElement} from "@angular/core";
 import {FormsModule} from "@angular/forms";
-
 import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from "@angular/core/testing";
 import {ActivatedRoute, ActivatedRouteStub, click, newEvent, Router, RouterStub} from "../../testing";
+import {ExchangeAdapter, NetworkConfig, ErrorCode, ErrorMessage, ExchangeAdapterHttpDataPromiseService} from "../model/exchange-adapter";
+import {FakeExchangeAdapterDataPromiseService, EXCHANGE_ADAPTERS} from "../model/exchange-adapter/testing";
 
-import {Exchange, NetworkConfig, ErrorCode, ErrorMessage, ExchangeHttpDataPromiseService} from "../model";
 import {ExchangeAdapterModule} from "./exchange-adapter.module";
 import {ExchangeAdapterComponent} from "./exchange-adapter.component";
-import {FakeExchangeDataPromiseService} from "../model/testing";
-import {EXCHANGE_ADAPTERS} from "../model/testing";
 import {Http} from "@angular/http";
 
 /**
@@ -39,39 +37,39 @@ describe('ExchangeAdapterComponent', () => {
 
     // TODO is order of tests significant?
     describe('with ExchangeAdapterModule setup', exchangeAdapterModuleSetup);
-    describe('when override its provided ExchangeHttpDataPromiseService', overrideSetup);
+    describe('when override its provided ExchangeAdapterHttpDataPromiseService', overrideSetup);
     describe('with FormsModule setup', formsModuleSetup);
 
     // describe('with SharedModule setup', sharedModuleSetup);
 });
 
 // ----------------------------------------------------------------------------
-// Test overrides real ExchangeHttpDataPromiseService in ExchangeAdapterComponent with
+// Test overrides real ExchangeAdapterHttpDataPromiseService in ExchangeAdapterComponent with
 // a stubbed service.
 // ----------------------------------------------------------------------------
 function overrideSetup() {
 
-    class StubExchangeHttpDataService {
+    class StubExchangeAdapterHttpDataService {
 
         expectedNetworkConfig: NetworkConfig;
         expectedErrorCodes: ErrorCode[];
         expectedErrorMsgs: ErrorMessage[];
-        testExchange: Exchange;
+        testExchangeAdapter: ExchangeAdapter;
 
         constructor() {
             this.expectedErrorCodes = [{'value': 501}];
             this.expectedErrorMsgs = [{'value': 'Connection timeout'}];
             this.expectedNetworkConfig = new NetworkConfig(60, this.expectedErrorCodes, this.expectedErrorMsgs);
-            this.testExchange = new Exchange('btce', 'BTC-e', 'com.gazbert.bxbot.adapter.BtceExchangeAdapter',
-                this.expectedNetworkConfig, null, null);
+            this.testExchangeAdapter = new ExchangeAdapter('btce', 'BTC-e', 'com.gazbert.bxbot.adapter.BtceExchangeAdapter',
+                this.expectedNetworkConfig);
         }
 
-        getExchange(id: string): Promise<Exchange> {
-            return Promise.resolve(true).then(() => Object.assign({}, this.testExchange));
+        getExchangeAdapterByExchangeId(id: string): Promise<ExchangeAdapter> {
+            return Promise.resolve(true).then(() => Object.assign({}, this.testExchangeAdapter));
         }
 
-        update(exchange: Exchange): Promise<Exchange> {
-            return Promise.resolve(true).then(() => Object.assign(this.testExchange, exchange));
+        update(exchangeAdapter: ExchangeAdapter): Promise<ExchangeAdapter> {
+            return Promise.resolve(true).then(() => Object.assign(this.testExchangeAdapter, exchangeAdapter));
         }
     }
 
@@ -84,62 +82,62 @@ function overrideSetup() {
             providers: [
                 {provide: ActivatedRoute, useValue: activatedRoute},
                 {provide: Router, useClass: RouterStub},
-                // ExchangeHttpDataPromiseService at this level is IRRELEVANT!
-                {provide: ExchangeHttpDataPromiseService, useValue: {}}
+                // ExchangeAdapterHttpDataPromiseService at this level is IRRELEVANT!
+                {provide: ExchangeAdapterHttpDataPromiseService, useValue: {}}
             ]
         })
         // Override component's own provider
             .overrideComponent(ExchangeAdapterComponent, {
                 set: {
                     providers: [
-                        {provide: ExchangeHttpDataPromiseService, useClass: StubExchangeHttpDataService}
+                        {provide: ExchangeAdapterHttpDataPromiseService, useClass: StubExchangeAdapterHttpDataService}
                     ]
                 }
             })
             .compileComponents();
     }));
 
-    let stubExchangeDataService: StubExchangeHttpDataService;
+    let stubExchangeAdapterDataService: StubExchangeAdapterHttpDataService;
 
     beforeEach(async(() => {
         createComponent();
         // get the component's injected StubExchangeHttpDataService
-        stubExchangeDataService = fixture.debugElement.injector.get(ExchangeHttpDataPromiseService);
+        stubExchangeAdapterDataService = fixture.debugElement.injector.get(ExchangeAdapterHttpDataPromiseService);
     }));
 
     it('should display stub Exchange Adapter\'s adapter name', () => {
-        expect(page.adapterInput.value).toBe(stubExchangeDataService.testExchange.adapter);
+        expect(page.adapterInput.value).toBe(stubExchangeAdapterDataService.testExchangeAdapter.adapter);
     });
 
     it('should save stub exchange change', fakeAsync(() => {
 
-        const origName = stubExchangeDataService.testExchange.adapter;
+        const origName = stubExchangeAdapterDataService.testExchangeAdapter.adapter;
         const newName = 'com.gazbert.DifferentAdapterName';
 
         page.adapterInput.value = newName;
         page.adapterInput.dispatchEvent(newEvent('input')); // tell Angular
 
-        expect(comp.exchange.adapter).toBe(newName, 'component exchange adapter has new adapter');
-        expect(stubExchangeDataService.testExchange.adapter).toBe(origName, 'service exchange adapter unchanged before save');
+        expect(comp.exchangeAdapter.adapter).toBe(newName, 'component exchange adapter has new adapter');
+        expect(stubExchangeAdapterDataService.testExchangeAdapter.adapter).toBe(origName, 'service exchange adapter unchanged before save');
 
         click(page.saveBtn);
         tick(); // wait for async save to complete
-        expect(stubExchangeDataService.testExchange.adapter).toBe(newName, 'service exchange adapter has new adapter name after save');
+        expect(stubExchangeAdapterDataService.testExchangeAdapter.adapter).toBe(newName, 'service exchange adapter has new adapter name after save');
         expect(page.navSpy.calls.any()).toBe(true, 'router.navigate called');
     }));
 
     it('fixture injected service is not the component injected service',
-        inject([ExchangeHttpDataPromiseService], (service: ExchangeHttpDataPromiseService) => {
+        inject([ExchangeAdapterHttpDataPromiseService], (service: ExchangeAdapterHttpDataPromiseService) => {
 
             expect(service).toEqual({}, 'service injected from fixture');
-            expect(stubExchangeDataService).toBeTruthy('service injected into component');
+            expect(stubExchangeAdapterDataService).toBeTruthy('service injected into component');
     }));
 }
 
 // ----------------------------------------------------------------------------
-// Tests ExchangeAdapterModule using a fake ExchangeHttpDataPromiseService
+// Tests ExchangeAdapterModule using a fake ExchangeAdapterHttpDataPromiseService
 // ----------------------------------------------------------------------------
-const firstExchange = EXCHANGE_ADAPTERS[0];
+const firstExchangeAdapter = EXCHANGE_ADAPTERS[0];
 
 function exchangeAdapterModuleSetup() {
 
@@ -149,7 +147,7 @@ function exchangeAdapterModuleSetup() {
             //  declarations: [ ExchangeAdapterComponent ], // NO!  DOUBLE DECLARATION
             providers: [
                 {provide: ActivatedRoute, useValue: activatedRoute},
-                {provide: ExchangeHttpDataPromiseService, useClass: FakeExchangeDataPromiseService},
+                {provide: ExchangeAdapterHttpDataPromiseService, useClass: FakeExchangeAdapterDataPromiseService},
                 {provide: Router, useClass: RouterStub},
                 {provide: Http, useValue: {}} // need this because the FakeExchangeDataPromiseService extends ExchangeHttpDataPromiseService
             ]
@@ -157,18 +155,18 @@ function exchangeAdapterModuleSetup() {
             .compileComponents();
     }));
 
-    describe('when navigate to existing exchange', () => {
+    describe('when navigate to existing Exchange Adapter', () => {
 
-        let expectedExchange: Exchange;
+        let expectedExchangeAdapter: ExchangeAdapter;
 
         beforeEach(async(() => {
-            expectedExchange = firstExchange;
-            activatedRoute.testParams = {id: expectedExchange.id};
+            expectedExchangeAdapter = firstExchangeAdapter;
+            activatedRoute.testParams = {id: expectedExchangeAdapter.id};
             createComponent();
         }));
 
         it('should display that exchange adapter\'s adapter', () => {
-            expect(page.adapterInput.value).toBe(expectedExchange.adapter);
+            expect(page.adapterInput.value).toBe(expectedExchangeAdapter.adapter);
         });
 
         it('should navigate when click cancel', () => {
@@ -178,7 +176,7 @@ function exchangeAdapterModuleSetup() {
 
         it('should save when click save but not navigate immediately', () => {
             click(page.saveBtn);
-            expect(page.saveSpy.calls.any()).toBe(true, 'ExchangeHttpDataPromiseService.update called');
+            expect(page.saveSpy.calls.any()).toBe(true, 'ExchangeAdapterHttpDataPromiseService.update called');
             expect(page.navSpy.calls.any()).toBe(false, 'router.navigate not called');
         });
 
@@ -249,7 +247,7 @@ function formsModuleSetup() {
             declarations: [ExchangeAdapterComponent],
             providers: [
                 {provide: ActivatedRoute, useValue: activatedRoute},
-                {provide: ExchangeHttpDataPromiseService, useClass: FakeExchangeDataPromiseService},
+                {provide: ExchangeAdapterHttpDataPromiseService, useClass: FakeExchangeAdapterDataPromiseService},
                 {provide: Router, useClass: RouterStub},
                 {provide: Http, useValue: {}} // need this because the FakeExchangeDataPromiseService extends ExchangeHttpDataPromiseService
             ]
@@ -258,10 +256,10 @@ function formsModuleSetup() {
     }));
 
     it('should display 1st exchange adapter\'s adapter name', fakeAsync(() => {
-        const expectedExchange = firstExchange;
-        activatedRoute.testParams = {id: expectedExchange.id};
+        const expectedExchangeAdapter = firstExchangeAdapter;
+        activatedRoute.testParams = {id: expectedExchangeAdapter.id};
         createComponent().then(() => {
-            expect(page.adapterInput.value).toBe(expectedExchange.adapter);
+            expect(page.adapterInput.value).toBe(expectedExchangeAdapter.adapter);
         });
     }));
 }
@@ -333,12 +331,12 @@ class Page {
 
         // Use component's injector to see the services it injected.
         const compInjector = fixture.debugElement.injector;
-        const exchangeDataService = compInjector.get(ExchangeHttpDataPromiseService);
+        const exchangeAdapterDataService = compInjector.get(ExchangeAdapterHttpDataPromiseService);
         const router = compInjector.get(Router);
 
         // this.gotoSpy = spyOn(comp, 'gotoList').and.callThrough();
         this.navSpy = spyOn(router, 'navigate');
-        this.saveSpy = spyOn(exchangeDataService, 'update').and.callThrough();
+        this.saveSpy = spyOn(exchangeAdapterDataService, 'update').and.callThrough();
     }
 
     /**
@@ -348,7 +346,7 @@ class Page {
      */
     addPageElements() {
 
-        if (comp.exchange) {
+        if (comp.exchangeAdapter) {
             // have a exchange so these elements are now in the DOM
             const buttons = fixture.debugElement.queryAll(By.css('button'));
             this.cancelBtn = buttons[0];

@@ -1,6 +1,6 @@
 import "rxjs/add/operator/toPromise";
-import {Exchange} from "../model";
 import {Observable} from "rxjs";
+import {Exchange} from "./exchange.model";
 
 /**
  * The Exchange Data Service communicates with the trading bots.

@@ -1,8 +1,8 @@
 import {Router} from "@angular/router";
 import {DashboardComponent} from "./dashboard.component";
 import {addMatchers} from "../../testing";
-import {FakeExchangeDataPromiseService} from "../model/testing";
-import {Exchange, NetworkConfig} from "../model/exchange.model";
+import {FakeExchangeDataPromiseService} from "../model/exchange/testing";
+import {Exchange} from "../model/exchange";
 
 class FakeRouter {
 
@@ -56,15 +56,9 @@ describe('When testing DashboardComponent without using Angular TestBed, it ', (
 
     it('should tell ROUTER to navigate by exchange id', () => {
 
-        const expectedErrorCodes = [{'value': 501}];
-        const expectedErrorMsgs = [{'value': 'Connection timeout'}];
-        const expectedNetworkConfig = new NetworkConfig(60, expectedErrorCodes, expectedErrorMsgs);
-        const testExchange = new Exchange('gdax', 'GDAX', 'com.gazbert.bxbot.adapter.GdaxExchangeAdapter', expectedNetworkConfig, null, null);
-
+        const testExchange = new Exchange('gdax', 'GDAX', 'Running');
         const spy = spyOn(router, 'navigateByUrl');
-
         comp.gotoExchangeDetails(testExchange);
-
         const navArgs = spy.calls.mostRecent().args[0];
         expect(navArgs).toBe('/exchange/gdax', 'should nav to Exchange Details for Exchange GDAX');
     });

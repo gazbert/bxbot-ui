@@ -1,25 +1,25 @@
 <!--
     Template-driven version of the Exchange Adapter form.
  -->
-<div *ngIf="exchange" class="container module-bootstrap">
+<div *ngIf="exchangeAdapter" class="container module-bootstrap">
 
-    <form *ngIf="active" #exchangeDetailsForm="ngForm" (ngSubmit)="save()">
+    <form *ngIf="active" #exchangeAdapterForm="ngForm" (ngSubmit)="save()">
 
         <div class="form-group">
             <label for="exchangeId">Id:</label>
-            <input [(ngModel)]="exchange.id" name="exchangeId" id="exchangeId" type="text" class="form-control"
+            <input [(ngModel)]="exchangeAdapter.id" name="exchangeId" id="exchangeId" type="text" class="form-control"
                    disabled/>
         </div>
 
         <div class="form-group">
             <label for="adapter">Adapter:</label>
-            <input [(ngModel)]="exchange.adapter" name="adapter" placeholder="MyExchangeAdapter" id="adapter"
+            <input [(ngModel)]="exchangeAdapter.adapter" name="adapter" placeholder="MyExchangeAdapter" id="adapter"
                    type="text" class="form-control" required maxlength="120"/>
             <div *ngIf="formErrors.adapter" class="alert alert-danger">{{ formErrors.adapter }}</div>
         </div>
         <div class="form-group">
             <label for="connectionTimeout">Connection Timeout (secs):</label>
-            <input [(ngModel)]="exchange.networkConfig.connectionTimeout" id="connectionTimeout"
+            <input [(ngModel)]="exchangeAdapter.networkConfig.connectionTimeout" id="connectionTimeout"
                    name="connectionTimeout" type="text" class="form-control" placeholder="60" required
                    pattern="\d+"/>
             <div *ngIf="formErrors.connectionTimeout" class="alert alert-danger">{{formErrors.connectionTimeout }}</div>
@@ -28,19 +28,19 @@
         <div class="row">
             <div class="col-sm-6">
                 <h4>Non Fatal HTTP Status Codes</h4>
-                <div *ngFor="let errorCode of exchange.networkConfig.nonFatalErrorHttpStatusCodes; let i=index;"
+                <div *ngFor="let errorCode of exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes; let i=index;"
                      class="panel panel-default">
                     <div class="panel-heading">
                         <span>Code {{i + 1}}</span>
                         <span class="glyphicon glyphicon-remove pull-right"
-                              *ngIf="exchange.networkConfig.nonFatalErrorHttpStatusCodes.length > 0"
-                              (click)="deleteErrorCode(exchange.networkConfig.nonFatalErrorHttpStatusCodes[i])"></span>
+                              *ngIf="exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length > 0"
+                              (click)="deleteErrorCode(exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[i])"></span>
                     </div>
                     <div class="panel-body">
                         <div class="form-group">
                             <label for="">HTTP Status Code:</label>
                             <input #httpStatusCode
-                                   [(ngModel)]="exchange.networkConfig.nonFatalErrorHttpStatusCodes[i].value"
+                                   [(ngModel)]="exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[i].value"
                                    type="text" class="form-control" id="errorCode_ + {{i}}"
                                    name="errorCode_ + {{i}}" required #errorCode="ngModel" pattern="\d{3}">
 
@@ -59,18 +59,18 @@
 
             <div class="col-sm-6">
                 <h4>Non Fatal Error Messages</h4>
-                <div *ngFor="let errorMsg of exchange.networkConfig.nonFatalErrorMessages; let i=index;"
+                <div *ngFor="let errorMsg of exchangeAdapter.networkConfig.nonFatalErrorMessages; let i=index;"
                      class="panel panel-default">
                     <div class="panel-heading">
                         <span>Message {{i + 1}}</span>
                         <span class="glyphicon glyphicon-remove pull-right"
-                              *ngIf="exchange.networkConfig.nonFatalErrorMessages.length > 0"
+                              *ngIf="exchangeAdapter.networkConfig.nonFatalErrorMessages.length > 0"
                               (click)="deleteErrorMessage(exchange.networkConfig.nonFatalErrorMessages[i])"></span>
                     </div>
                     <div class="panel-body">
                         <div class="form-group">
                             <label for="">Error Message:</label>
-                            <input [(ngModel)]="exchange.networkConfig.nonFatalErrorMessages[i].value"
+                            <input [(ngModel)]="exchangeAdapter.networkConfig.nonFatalErrorMessages[i].value"
                                    type="text" class="form-control" id="errorMsg_ + {{i}}"
                                    name="errorMsg_ + {{i}}" required #errorMsg="ngModel" minLength="1">
 
@@ -96,7 +96,7 @@
                  http://stackoverflow.com/questions/38120756/angular2-router-navigate-refresh-page
              -->
             <button type="button" (click)="goToDashboard()" class="btn btn-default">Cancel</button>
-            <button type="submit" (click)="save()" class="btn btn-primary" [disabled]="!exchangeDetailsForm.form.valid">Save</button>
+            <button type="submit" (click)="save()" class="btn btn-primary" [disabled]="!exchangeAdapterForm.form.valid">Save</button>
         </div>
     </form>
 </div>

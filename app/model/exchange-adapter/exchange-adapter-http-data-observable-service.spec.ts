@@ -1,8 +1,9 @@
 import {MockBackend, MockConnection} from "@angular/http/testing";
 import {HttpModule, Http, XHRBackend, Response, ResponseOptions} from "@angular/http";
 import {async, inject, TestBed} from "@angular/core/testing";
-import {Exchange, NetworkConfig} from "./exchange.model";
-import {ExchangeHttpDataObservableService as ExchangeDataService} from "./exchange-http-data-observable.service";
+import {ExchangeAdapterHttpDataObservableService as ExchangeAdapterDataService} from "./exchange-adapter-http-data-observable.service";
+import {ExchangeAdapter, NetworkConfig} from "./exchange-adapter.model";
+
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/observable/throw";
 import "rxjs/add/operator/do";
@@ -12,19 +13,19 @@ import "rxjs/add/operator/map";
 // 'Failed: this.http.get(...).map is not a function'
 
 /**
- * Tests the Exchange HTTP (observable) service using a mocked HTTP backend.
+ * Tests the Exchange Adapter HTTP (observable) service using a mocked HTTP backend.
  *
  * TODO tests for update, add, delete, etc...
  *
  * @author gazbert
  */
-describe('Tests ExchangeHttpDataObservableService (using Mock HTTP backend) ', () => {
+describe('Tests ExchangeAdapterHttpDataObservableService (using Mock HTTP backend) ', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [HttpModule],
             providers: [
-                ExchangeDataService,
+                ExchangeAdapterDataService,
                 {provide: XHRBackend, useClass: MockBackend}
             ]
         })
@@ -32,14 +33,14 @@ describe('Tests ExchangeHttpDataObservableService (using Mock HTTP backend) ', (
     }));
 
     it('can instantiate service when inject service',
-        inject([ExchangeDataService], (service: ExchangeDataService) => {
-            expect(service instanceof ExchangeDataService).toBe(true);
+        inject([ExchangeAdapterDataService], (service: ExchangeAdapterDataService) => {
+            expect(service instanceof ExchangeAdapterDataService).toBe(true);
         }));
 
     it('can instantiate service with "new"', inject([Http], (http: Http) => {
         expect(http).not.toBeNull('http should be provided');
-        let service = new ExchangeDataService(http);
-        expect(service instanceof ExchangeDataService).toBe(true, 'new service should be ok');
+        let service = new ExchangeAdapterDataService(http);
+        expect(service instanceof ExchangeAdapterDataService).toBe(true, 'new service should be ok');
     }));
 
     // TODO What's this all about?
@@ -49,50 +50,50 @@ describe('Tests ExchangeHttpDataObservableService (using Mock HTTP backend) ', (
         }));
 
 
-    describe('when getExchanges', () => {
+    describe('when getExchangeAdapters', () => {
 
         let backend: MockBackend;
-        let service: ExchangeDataService;
-        let fakeExchanges: Exchange[];
+        let service: ExchangeAdapterDataService;
+        let fakeExchangeAdapters: ExchangeAdapter[];
         let response: Response;
 
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
             backend = be;
-            service = new ExchangeDataService(http);
-            fakeExchanges = makeExchangeData();
-            let options = new ResponseOptions({status: 200, body: {data: fakeExchanges}});
+            service = new ExchangeAdapterDataService(http);
+            fakeExchangeAdapters = makeExchangeAdapterData();
+            let options = new ResponseOptions({status: 200, body: {data: fakeExchangeAdapters}});
             response = new Response(options);
         }));
 
-        it('should have expected fake Exchanges ', async(inject([], () => {
+        it('should have expected fake Exchange Adapters ', async(inject([], () => {
 
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.getExchanges()
-                .do(exchanges => {
-                    expect(exchanges.length).toBe(fakeExchanges.length,
-                        'should have expected 3 Exchanges');
+            service.getExchangeAdapters()
+                .do(exchangeAdapters => {
+                    expect(exchangeAdapters.length).toBe(fakeExchangeAdapters.length,
+                        'should have expected 3 Exchange Adapters');
                 })
                 .toPromise();
         })));
 
-        it('should have expected fake Exchanges ', async(inject([], () => {
+        it('should have expected fake Exchange Adapters ', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
 
-            service.getExchanges()
-                .do(exchanges => {
-                    expect(exchanges.length).toBe(fakeExchanges.length,
-                        'should have expected 3 Exchanges');
+            service.getExchangeAdapters()
+                .do(exchangeAdapters => {
+                    expect(exchangeAdapters.length).toBe(fakeExchangeAdapters.length,
+                        'should have expected 3 Exchange Adapters');
                 })
                 .toPromise();
         })));
 
-        it('should be OK returning no Exchanges', async(inject([], () => {
+        it('should be OK returning no Exchange Adapters', async(inject([], () => {
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
 
-            service.getExchanges()
-                .do(exchanges => {
-                    expect(exchanges.length).toBe(0, 'should have no Exchanges');
+            service.getExchangeAdapters()
+                .do(exchangeAdapters => {
+                    expect(exchangeAdapters.length).toBe(0, 'should have no Exchange Adapters');
                 })
                 .toPromise();
         })));
@@ -101,9 +102,9 @@ describe('Tests ExchangeHttpDataObservableService (using Mock HTTP backend) ', (
             let resp = new Response(new ResponseOptions({status: 404}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
 
-            service.getExchanges()
-                .do(exchanges => {
-                    fail('should not respond with Exchanges');
+            service.getExchangeAdapters()
+                .do(exchangeAdapters => {
+                    fail('should not respond with Exchange Adapters');
                 })
                 .catch(err => {
                     expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
@@ -114,8 +115,9 @@ describe('Tests ExchangeHttpDataObservableService (using Mock HTTP backend) ', (
     });
 });
 
-const makeExchangeData = () => [
-    new Exchange('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
+const makeExchangeAdapterData = () => [
+
+    new ExchangeAdapter('bitstamp', 'bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
         new NetworkConfig(60,
             [
                 {value: 503},
@@ -127,10 +129,8 @@ const makeExchangeData = () => [
                 {value: "Connection refused"},
                 {value: "Remote host closed connection during handshake"}
             ]
-        ),
-        null,
-        null),
-    new Exchange('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
+        )),
+    new ExchangeAdapter('gdax', 'gdax', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
         new NetworkConfig(60,
             [
                 {value: 503},
@@ -142,10 +142,8 @@ const makeExchangeData = () => [
                 {value: "Connection refused"},
                 {value: "Remote host closed connection during handshake"}
             ]
-        ),
-        null,
-        null),
-    new Exchange('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
+        )),
+    new ExchangeAdapter('gemini', 'gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
         new NetworkConfig(60,
             [
                 {value: 503},
@@ -157,7 +155,5 @@ const makeExchangeData = () => [
                 {value: "Connection refused"},
                 {value: "Remote host closed connection during handshake"}
             ]
-        ),
-        null,
-        null),
-] as Exchange[];
+        )),
+] as ExchangeAdapter[];

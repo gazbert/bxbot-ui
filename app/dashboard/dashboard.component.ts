@@ -1,6 +1,6 @@
 import {Router} from "@angular/router";
 import {Component, OnInit} from "@angular/core";
-import {Exchange, ExchangeHttpDataPromiseService} from "../model";
+import {Exchange, ExchangeHttpDataPromiseService} from "../model/exchange";
 
 /**
  * The Dashboard component lists the Exchanges the bot is running on.

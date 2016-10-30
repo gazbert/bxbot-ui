@@ -1,7 +1,7 @@
 import {OnInit, Component} from "@angular/core";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {FormGroup, FormBuilder, Validators, FormControl, FormArray} from "@angular/forms";
-import {Exchange, ErrorCode, ErrorMessage, ExchangeHttpDataObservableService} from "../model";
+import {ExchangeAdapter, ErrorCode, ErrorMessage, ExchangeAdapterHttpDataObservableService} from "../model/exchange-adapter";
 
 // NOTE: We need to explicitly pull the rxjs operators in - if not, we get a stinky runtime error e.g.
 // 'Failed: this.http.put(...).map is not a function'
@@ -22,21 +22,21 @@ import 'rxjs/add/operator/map';
 })
 export class ExchangeAdapterRxComponent implements OnInit {
 
-    exchange: Exchange;
+    exchangeAdapter: ExchangeAdapter;
     active = true;
-    public exchangeDetailsForm: FormGroup;
+    public exchangeAdapterForm: FormGroup;
     errorMessage: string;
 
-    constructor(private exchangeDataService: ExchangeHttpDataObservableService, private route: ActivatedRoute,
+    constructor(private exchangeAdapterDataService: ExchangeAdapterHttpDataObservableService, private route: ActivatedRoute,
                 private fb: FormBuilder, private router: Router) {
     }
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
             let id = params['id'];
-            this.exchangeDataService.getExchange(id)
-                .subscribe(exchange => {
-                    this.exchange = exchange;
+            this.exchangeAdapterDataService.getExchangeAdapterByExchangeId(id)
+                .subscribe(exchangeAdapter => {
+                    this.exchangeAdapter = exchangeAdapter[0]; // TODO hack for in memory service returning an array
                     this.buildForm();
                 },
                 error => this.errorMessage = <any>error); // TODO show meaningful error to user
@@ -50,43 +50,43 @@ export class ExchangeAdapterRxComponent implements OnInit {
     save(): void {
 
         // TODO Must be better way to adapt/map domain model <-> form UI model?
-        this.exchange.id = this.exchangeDetailsForm.get('exchangeId').value;
-        this.exchange.adapter = this.exchangeDetailsForm.get('adapter').value;
-        this.exchange.networkConfig.connectionTimeout = this.exchangeDetailsForm.get('connectionTimeout').value;
+        this.exchangeAdapter.id = this.exchangeAdapterForm.get('exchangeId').value;
+        this.exchangeAdapter.adapter = this.exchangeAdapterForm.get('adapter').value;
+        this.exchangeAdapter.networkConfig.connectionTimeout = this.exchangeAdapterForm.get('connectionTimeout').value;
 
         // hack for now til I sort the JSON integration spec out with Boot app
-        this.exchange.networkConfig.nonFatalErrorHttpStatusCodes.length = 0;
-        this.exchangeDetailsForm.get('nonFatalErrorHttpStatusCodes').value.forEach(
-            (c) => this.exchange.networkConfig.nonFatalErrorHttpStatusCodes.push({"value": parseInt(c)}));
+        this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length = 0;
+        this.exchangeAdapterForm.get('nonFatalErrorHttpStatusCodes').value.forEach(
+            (c) => this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.push({"value": parseInt(c)}));
 
         // hack for now til I sort the JSON integration spec out with Boot app
-        this.exchange.networkConfig.nonFatalErrorMessages.length = 0;
-        this.exchangeDetailsForm.get('nonFatalErrorMessages').value.forEach(
-            (m) => this.exchange.networkConfig.nonFatalErrorMessages.push({"value": m}));
+        this.exchangeAdapter.networkConfig.nonFatalErrorMessages.length = 0;
+        this.exchangeAdapterForm.get('nonFatalErrorMessages').value.forEach(
+            (m) => this.exchangeAdapter.networkConfig.nonFatalErrorMessages.push({"value": m}));
 
-        this.exchangeDataService.update(this.exchange)
+        this.exchangeAdapterDataService.update(this.exchangeAdapter)
             .subscribe(
-                exchange => {this.goToDashboard()},
+                exchangeAdapter => {this.goToDashboard()},
                 error => this.errorMessage = <any>error); // TODO show meaningful error to user
     }
 
     addErrorCode(): void {
-        const control = <FormArray>this.exchangeDetailsForm.controls['nonFatalErrorHttpStatusCodes'];
+        const control = <FormArray>this.exchangeAdapterForm.controls['nonFatalErrorHttpStatusCodes'];
         control.push(this.createNewErrorCodeGroup());
     }
 
     deleteErrorCode(i: number): void {
-        const control = <FormArray>this.exchangeDetailsForm.controls['nonFatalErrorHttpStatusCodes'];
+        const control = <FormArray>this.exchangeAdapterForm.controls['nonFatalErrorHttpStatusCodes'];
         control.removeAt(i);
     }
 
     addErrorMessage(): void {
-        const control = <FormArray>this.exchangeDetailsForm.controls['nonFatalErrorMessages'];
+        const control = <FormArray>this.exchangeAdapterForm.controls['nonFatalErrorMessages'];
         control.push(this.createNewErrorMessageGroup());
     }
 
     deleteErrorMessage(i: number): void {
-        const control = <FormArray>this.exchangeDetailsForm.controls['nonFatalErrorMessages'];
+        const control = <FormArray>this.exchangeAdapterForm.controls['nonFatalErrorMessages'];
         control.removeAt(i);
     }
 
@@ -96,15 +96,15 @@ export class ExchangeAdapterRxComponent implements OnInit {
 
     buildForm(): void {
 
-        this.exchangeDetailsForm = this.fb.group({
-            exchangeId: new FormControl({value: this.exchange.id, disabled: true}, Validators.required),
-            adapter: [this.exchange.adapter, [
+        this.exchangeAdapterForm = this.fb.group({
+            exchangeId: new FormControl({value: this.exchangeAdapter.id, disabled: true}, Validators.required),
+            adapter: [this.exchangeAdapter.adapter, [
                 Validators.required,
                 Validators.minLength(1),
                 Validators.maxLength(120),
                 Validators.pattern('([a-zA-Z_$][a-zA-Z\\d_$]*\.)*[a-zA-Z_$][a-zA-Z\\d_$]*')
             ]],
-            connectionTimeout: [this.exchange.networkConfig.connectionTimeout, [
+            connectionTimeout: [this.exchangeAdapter.networkConfig.connectionTimeout, [
                 Validators.required,
                 Validators.pattern('\\d+')
             ]],
@@ -113,16 +113,16 @@ export class ExchangeAdapterRxComponent implements OnInit {
         });
 
         // TODO Must be better way to automatically init the arrays from the model??
-        this.exchange.networkConfig.nonFatalErrorHttpStatusCodes.forEach(
+        this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.forEach(
             (code) => this.nonFatalErrorHttpStatusCodes.push(this.createErrorCodeGroup(code))
         );
 
         // TODO Must be better way to automatically init the arrays from the model??
-        this.exchange.networkConfig.nonFatalErrorMessages.forEach(
+        this.exchangeAdapter.networkConfig.nonFatalErrorMessages.forEach(
             (msg) => this.nonFatalErrorMessages.push(this.createErrorMessageGroup(msg))
         );
 
-        this.exchangeDetailsForm.valueChanges.subscribe(data => this.onValueChanged(data));
+        this.exchangeAdapterForm.valueChanges.subscribe(data => this.onValueChanged(data));
         this.onValueChanged(); // (re)set validation messages now
     }
 
@@ -159,20 +159,20 @@ export class ExchangeAdapterRxComponent implements OnInit {
     }
 
     get nonFatalErrorHttpStatusCodes(): FormArray {
-        return this.exchangeDetailsForm.get('nonFatalErrorHttpStatusCodes') as FormArray;
+        return this.exchangeAdapterForm.get('nonFatalErrorHttpStatusCodes') as FormArray;
     }
 
     get nonFatalErrorMessages(): FormArray {
-        return this.exchangeDetailsForm.get('nonFatalErrorMessages') as FormArray;
+        return this.exchangeAdapterForm.get('nonFatalErrorMessages') as FormArray;
     }
 
     onValueChanged(data?: any) {
 
-        if (!this.exchangeDetailsForm) {
+        if (!this.exchangeAdapterForm) {
             return;
         }
 
-        const form = this.exchangeDetailsForm;
+        const form = this.exchangeAdapterForm;
 
         for (const field in this.formErrors) {
             // clear previous error message (if any)
@@ -188,7 +188,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
         }
 
         // TODO hack to go though error codes - FIX needed to id individual inputs else we duplicate validation messages!
-        const errorCodeControl = <FormArray>this.exchangeDetailsForm.controls['nonFatalErrorHttpStatusCodes'];
+        const errorCodeControl = <FormArray>this.exchangeAdapterForm.controls['nonFatalErrorHttpStatusCodes'];
         errorCodeControl.controls.forEach((code) => {
             if (code && code.dirty && !code.valid) {
                 this.formErrors['nonFatalErrorHttpStatusCodes'] = '';
@@ -200,7 +200,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
         });
 
         // TODO hack to go though error messages - FIX needed to id individual inputs else we duplicate validation messages!
-        const errorMessageControl = <FormArray>this.exchangeDetailsForm.controls['nonFatalErrorMessages'];
+        const errorMessageControl = <FormArray>this.exchangeAdapterForm.controls['nonFatalErrorMessages'];
         errorMessageControl.controls.forEach((msg) => {
             if (msg && msg.dirty && !msg.valid) {
                 this.formErrors['nonFatalErrorMessages'] = '';
