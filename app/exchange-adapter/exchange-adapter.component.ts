@@ -1,7 +1,12 @@
-import {OnInit, Component, ViewChild} from "@angular/core";
-import {ActivatedRoute, Params, Router} from "@angular/router";
-import {NgForm} from "@angular/forms";
-import {ExchangeAdapter, ErrorCode, ErrorMessage, ExchangeAdapterHttpDataPromiseService} from "../model/exchange-adapter";
+import {OnInit, Component, ViewChild} from '@angular/core';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {NgForm} from '@angular/forms';
+import {
+    ExchangeAdapter,
+    ErrorCode,
+    ErrorMessage,
+    ExchangeAdapterHttpDataPromiseService
+} from '../model/exchange-adapter';
 
 /**
  * Template-driven version of the Exchange Adapter form.
@@ -18,6 +23,25 @@ export class ExchangeAdapterComponent implements OnInit {
 
     exchangeAdapter: ExchangeAdapter;
     active = true;
+
+    @ViewChild('exchangeDetailsForm') currentForm: NgForm;
+    exchangeDetailsForm: NgForm;
+
+    formErrors = {
+        'adapter': '',
+        'connectionTimeout': ''
+    };
+
+    validationMessages = {
+        'adapter': {
+            'required': 'Adapter Name is required.',
+            'maxlength': 'Adapter Name cannot be more than 120 characters long.'
+        },
+        'connectionTimeout': {
+            'required': 'Connection timeout is required.',
+            'pattern': 'Connection timeout must be a whole number.'
+        }
+    };
 
     constructor(private exchangeAdapterDataService: ExchangeAdapterHttpDataPromiseService, private route: ActivatedRoute,
                 private router: Router) {
@@ -62,9 +86,6 @@ export class ExchangeAdapterComponent implements OnInit {
     // Form validation
     // ------------------------------------------------------------------
 
-    exchangeDetailsForm: NgForm;
-    @ViewChild('exchangeDetailsForm') currentForm: NgForm;
-
     ngAfterViewChecked() {
         this.formChanged();
     }
@@ -87,33 +108,21 @@ export class ExchangeAdapterComponent implements OnInit {
         const form = this.exchangeDetailsForm.form;
 
         for (const field in this.formErrors) {
-            // clear previous error message (if any)
-            this.formErrors[field] = '';
-            const control = form.get(field);
+            if (this.formErrors.hasOwnProperty(field)) {
+                // clear previous error message (if any)
+                this.formErrors[field] = '';
+                const control = form.get(field);
 
-            if (control && control.dirty && !control.valid) {
-                const messages = this.validationMessages[field];
-                for (const key in control.errors) {
-                    this.formErrors[field] += messages[key] + ' ';
+                if (control && control.dirty && !control.valid) {
+                    const messages = this.validationMessages[field];
+                    for (const key in control.errors) {
+                        if (control.errors.hasOwnProperty(key)) {
+                            this.formErrors[field] += messages[key] + ' ';
+                        }
+                    }
                 }
             }
         }
     }
-
-    formErrors = {
-        'adapter': '',
-        'connectionTimeout': ''
-    };
-
-    validationMessages = {
-        'adapter': {
-            'required': 'Adapter Name is required.',
-            'maxlength': 'Adapter Name cannot be more than 120 characters long.'
-        },
-        'connectionTimeout': {
-            'required': 'Connection timeout is required.',
-            'pattern': 'Connection timeout must be a whole number.'
-        }
-    };
 }
 

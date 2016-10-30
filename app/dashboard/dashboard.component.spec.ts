@@ -1,13 +1,13 @@
-import {By} from "@angular/platform-browser";
-import {Router} from "@angular/router";
-import {NO_ERRORS_SCHEMA} from "@angular/core";
-import {Http} from "@angular/http";
-import {async, inject, ComponentFixture, TestBed} from "@angular/core/testing";
-import {DashboardComponent} from "./dashboard.component";
-import {DashboardModule} from "./dashboard.module";
-import {addMatchers, click} from "../../testing";
-import {FakeExchangeDataPromiseService} from "../model/exchange/testing";
-import {ExchangeHttpDataPromiseService} from "../model/exchange";
+import {By} from '@angular/platform-browser';
+import {Router} from '@angular/router';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {Http} from '@angular/http';
+import {async, inject, ComponentFixture, TestBed} from '@angular/core/testing';
+import {DashboardComponent} from './dashboard.component';
+import {DashboardModule} from './dashboard.module';
+import {addMatchers, click} from '../../testing';
+import {FakeExchangeDataPromiseService} from '../model/exchange/testing';
+import {ExchangeHttpDataPromiseService} from '../model/exchange';
 
 /**
  * Learning ground for writing jasmine tests.
@@ -38,7 +38,7 @@ describe('When testing DashboardComponent (deep), it ', () => {
     tests(clickForDeep);
 
     function clickForDeep() {
-        // get first <div class="item"> DebugElement
+        // get first <div class='item'> DebugElement
         const dashboardItem = fixture.debugElement.query(By.css('.item'));
         click(dashboardItem);
     }
@@ -129,7 +129,7 @@ function tests(exchangeClick: Function) {
 
                 const spy = spyOn(router, 'navigateByUrl');
 
-                exchangeClick(); // trigger click on first inner <div class="item">
+                exchangeClick(); // trigger click on first inner <div class='item'>
 
                 // args passed to router.navigateByUrl()
                 const navArgs = spy.calls.first().args[0];

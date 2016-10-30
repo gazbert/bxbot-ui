@@ -1,6 +1,6 @@
-import {ActivatedRouteStub} from "../../testing";
-import {ExchangeAdapterRxComponent} from "./exchange-adapter-rx.component";
-import {ExchangeAdapter, NetworkConfig, ErrorCode, ErrorMessage} from "../model/exchange-adapter";
+import {ActivatedRouteStub} from '../../testing';
+import {ExchangeAdapterRxComponent} from './exchange-adapter-rx.component';
+import {ExchangeAdapter, NetworkConfig, ErrorCode, ErrorMessage} from '../model/exchange-adapter';
 
 import {Observable} from 'rxjs/Observable';
 // NOTE: We need to explicitly pull the rxjs operators in - if not, we get a stinky runtime error e.g.
@@ -58,10 +58,11 @@ describe('ExchangeAdapterRxComponent tests without TestBed', () => {
         formBuilder = jasmine.createSpyObj('FormBuilder', ['group']);
         exchangeDetailsForm = jasmine.createSpyObj('FormGroup', ['get']);
 
-        spyExchangeAdapterDataService = jasmine.createSpyObj('ExchangeAdapterHttpDataObservableService', ['getExchangeAdapterByExchangeId', 'update']);
+        spyExchangeAdapterDataService = jasmine.createSpyObj('ExchangeAdapterHttpDataObservableService',
+            ['getExchangeAdapterByExchangeId', 'update']);
 
         // TODO rework for Observable
-        //spyExchangeAdapterDataService.getExchange.and.returnValue(Promise.resolve(expectedExchangeAdapter));
+        // spyExchangeAdapterDataService.getExchange.and.returnValue(Promise.resolve(expectedExchangeAdapter));
         spyExchangeAdapterDataService.getExchangeAdapterByExchangeId.and.returnValue(Observable.of(expectedExchangeAdapter));
         formBuilder.group.and.returnValue(exchangeDetailsForm);
         exchangeDetailsForm.get.and.returnValue('btce');
@@ -72,7 +73,7 @@ describe('ExchangeAdapterRxComponent tests without TestBed', () => {
         exchangeAdapterComponent.ngOnInit();
 
         // TODO rework for Observable
-        //spyExchangeAdapterDataService.getExchange.calls.first().returnValue.then(done);
+        // spyExchangeAdapterDataService.getExchange.calls.first().returnValue.then(done);
         // spyExchangeAdapterDataService.getExchange.calls.first().returnValue.subscribe(done);
     });
 

@@ -1,6 +1,6 @@
-import {Router} from "@angular/router";
-import {Component, OnInit} from "@angular/core";
-import {Exchange, ExchangeHttpDataPromiseService} from "../model/exchange";
+import {Router} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Exchange, ExchangeHttpDataPromiseService} from '../model/exchange';
 
 /**
  * The Dashboard component lists the Exchanges the bot is running on.
@@ -16,6 +16,8 @@ import {Exchange, ExchangeHttpDataPromiseService} from "../model/exchange";
 export class DashboardComponent implements OnInit {
 
     exchanges: Exchange[] = [];
+
+    static trackByExchangeId(index: number, exchange: Exchange) { return exchange.id; }
 
     constructor(private router: Router, private exchangeDataService: ExchangeHttpDataPromiseService) {
     }
@@ -34,6 +36,4 @@ export class DashboardComponent implements OnInit {
         let url = `/exchange/${exchange.id}`;
         this.router.navigateByUrl(url);
     }
-
-    static trackByExchangeId(index: number, exchange: Exchange) { return exchange.id; }
 }

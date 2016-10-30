@@ -1,5 +1,5 @@
-import {Directive, forwardRef, Attribute} from "@angular/core";
-import {Validator, AbstractControl, NG_VALIDATORS} from "@angular/forms";
+import {Directive, forwardRef, Attribute} from '@angular/core';
+import {Validator, AbstractControl, NG_VALIDATORS} from '@angular/forms';
 
 /**
  * Custom validation directive for validating Email Alerts config.
@@ -21,7 +21,9 @@ export class EqualValidator implements Validator {
     }
 
     private get isReverse() {
-        if (!this.reverse) return false;
+        if (!this.reverse) {
+            return false;
+        }
         return this.reverse === 'true' ? true : false;
     }
 
@@ -36,20 +38,22 @@ export class EqualValidator implements Validator {
         if (e && v !== e.value && !this.isReverse) {
             return {
                 validateEqual: false
-            }
+            };
         }
 
         // value equal and reverse
         if (e && v === e.value && this.isReverse) {
             delete e.errors['validateEqual'];
-            if (!Object.keys(e.errors).length) e.setErrors(null);
+            if (!Object.keys(e.errors).length) {
+                e.setErrors(null);
+            }
         }
 
         // value not equal and reverse
         if (e && v !== e.value && this.isReverse) {
             e.setErrors({
                 validateEqual: false
-            })
+            });
         }
 
         return null;

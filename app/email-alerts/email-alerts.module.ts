@@ -1,8 +1,8 @@
-import {NgModule} from "@angular/core";
-import {BrowserModule} from "@angular/platform-browser";
-import {FormsModule} from "@angular/forms";
-import {EmailAlertsComponent} from "./email-alerts.component";
-import {EqualValidator} from "./equal-validator.directive";
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {FormsModule} from '@angular/forms';
+import {EmailAlertsComponent} from './email-alerts.component';
+import {EqualValidator} from './equal-validator.directive';
 
 /**
  * Encapsulates Email Alerts config management.

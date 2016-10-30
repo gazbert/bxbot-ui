@@ -1,6 +1,6 @@
-import {Component, OnInit} from "@angular/core";
-import {Router} from "@angular/router";
-import {EmailAlertsConfig} from "./email-alerts.model";
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {EmailAlertsConfig} from './email-alerts.model';
 
 /**
  * Email Alerts config component.
@@ -26,7 +26,7 @@ export class EmailAlertsComponent implements OnInit {
             confirmPassword: '',
             toAddress: '',
             fromAddress: ''
-        }
+        };
     }
 
     save(model: EmailAlertsConfig, isValid: boolean) {

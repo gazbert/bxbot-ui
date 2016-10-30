@@ -1,14 +1,14 @@
-import {By} from "@angular/platform-browser";
-import {DebugElement} from "@angular/core";
-import {FormsModule} from "@angular/forms";
-import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from "@angular/core/testing";
-import {ActivatedRoute, ActivatedRouteStub, click, newEvent, Router, RouterStub} from "../../testing";
-import {ExchangeAdapter, NetworkConfig, ErrorCode, ErrorMessage, ExchangeAdapterHttpDataPromiseService} from "../model/exchange-adapter";
-import {FakeExchangeAdapterDataPromiseService, EXCHANGE_ADAPTERS} from "../model/exchange-adapter/testing";
+import {By} from '@angular/platform-browser';
+import {DebugElement} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
+import {ActivatedRoute, ActivatedRouteStub, click, newEvent, Router, RouterStub} from '../../testing';
+import {ExchangeAdapter, NetworkConfig, ErrorCode, ErrorMessage, ExchangeAdapterHttpDataPromiseService} from '../model/exchange-adapter';
+import {FakeExchangeAdapterDataPromiseService, EXCHANGE_ADAPTERS} from '../model/exchange-adapter/testing';
 
-import {ExchangeAdapterModule} from "./exchange-adapter.module";
-import {ExchangeAdapterComponent} from "./exchange-adapter.component";
-import {Http} from "@angular/http";
+import {ExchangeAdapterModule} from './exchange-adapter.module';
+import {ExchangeAdapterComponent} from './exchange-adapter.component';
+import {Http} from '@angular/http';
 
 /**
  * Learning ground for writing jasmine tests.
@@ -122,7 +122,8 @@ function overrideSetup() {
 
         click(page.saveBtn);
         tick(); // wait for async save to complete
-        expect(stubExchangeAdapterDataService.testExchangeAdapter.adapter).toBe(newName, 'service exchange adapter has new adapter name after save');
+        expect(stubExchangeAdapterDataService.testExchangeAdapter.adapter).toBe(
+            newName, 'service exchange adapter has new adapter name after save');
         expect(page.navSpy.calls.any()).toBe(true, 'router.navigate called');
     }));
 

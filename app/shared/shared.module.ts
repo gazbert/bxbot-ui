@@ -1,7 +1,7 @@
-import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
-import {FormsModule} from "@angular/forms";
-import {TitleCasePipe} from "./title-case.pipe";
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {TitleCasePipe} from './title-case.pipe';
 
 /**
  * Simple shared module (for now) to demo integrating with shared components with rest of app.

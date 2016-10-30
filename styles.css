@@ -1,4 +1,6 @@
-/* Master Styles */
+/*
+ * Master Styles for the app.
+ */
 h1 {
     color: #369;
     font-family: Arial, Helvetica, sans-serif;
@@ -70,92 +72,13 @@ nav a.router-link-active {
     color: #039be5;
 }
 
-/* items class */
-/*.items {*/
-    /*margin: 0 0 2em 0;*/
-    /*list-style-type: none;*/
-    /*padding: 0;*/
-    /*width: 24em;*/
-/*}*/
+/* for form input validation */
+.ng-valid[required], .ng-valid.required {
+    border-left: 5px solid #42A948; /* green */
+}
 
-/*.items li {*/
-    /*cursor: pointer;*/
-    /*position: relative;*/
-    /*left: 0;*/
-    /*background-color: #EEE;*/
-    /*margin: .5em;*/
-    /*padding: .3em 0;*/
-    /*height: 1.6em;*/
-    /*border-radius: 4px;*/
-/*}*/
-
-/*.items li:hover {*/
-    /*color: #607D8B;*/
-    /*background-color: #DDD;*/
-    /*left: .1em;*/
-/*}*/
-
-/*.items li.selected:hover {*/
-    /*background-color: #BBD8DC;*/
-    /*color: white;*/
-/*}*/
-
-/*.items .text {*/
-    /*position: relative;*/
-    /*top: -3px;*/
-/*}*/
-
-/*.items {*/
-    /*margin: 0 0 2em 0;*/
-    /*list-style-type: none;*/
-    /*padding: 0;*/
-    /*width: 24em;*/
-/*}*/
-
-/*.items li {*/
-    /*cursor: pointer;*/
-    /*position: relative;*/
-    /*left: 0;*/
-    /*background-color: #EEE;*/
-    /*margin: .5em;*/
-    /*padding: .3em 0;*/
-    /*height: 1.6em;*/
-    /*border-radius: 4px;*/
-/*}*/
-
-/*.items li:hover {*/
-    /*color: #607D8B;*/
-    /*background-color: #DDD;*/
-    /*left: .1em;*/
-/*}*/
-
-/*.items li.selected {*/
-    /*background-color: #CFD8DC;*/
-    /*color: white;*/
-/*}*/
-
-/*.items li.selected:hover {*/
-    /*background-color: #BBD8DC;*/
-/*}*/
-
-/*.items .text {*/
-    /*position: relative;*/
-    /*top: -3px;*/
-/*}*/
-
-/*.items .badge {*/
-    /*display: inline-block;*/
-    /*font-size: small;*/
-    /*color: white;*/
-    /*padding: 0.8em 0.7em 0 0.7em;*/
-    /*background-color: #607D8B;*/
-    /*line-height: 1em;*/
-    /*position: relative;*/
-    /*left: -1px;*/
-    /*top: -4px;*/
-    /*height: 1.8em;*/
-    /*margin-right: .8em;*/
-    /*border-radius: 4px 0 0 4px;*/
+/*.ng-invalid:not(form)  {*/
+/*border-left: 5px solid #a94442; !* red *!*/
 /*}*/
 
 /* everywhere else */

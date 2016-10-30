@@ -1,7 +1,7 @@
-import {OnInit, Component} from "@angular/core";
-import {ActivatedRoute, Params, Router} from "@angular/router";
-import {FormGroup, FormBuilder, Validators, FormControl, FormArray} from "@angular/forms";
-import {ExchangeAdapter, ErrorCode, ErrorMessage, ExchangeAdapterHttpDataObservableService} from "../model/exchange-adapter";
+import {OnInit, Component} from '@angular/core';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {FormGroup, FormBuilder, Validators, FormControl, FormArray} from '@angular/forms';
+import {ExchangeAdapter, ErrorCode, ErrorMessage, ExchangeAdapterHttpDataObservableService} from '../model/exchange-adapter';
 
 // NOTE: We need to explicitly pull the rxjs operators in - if not, we get a stinky runtime error e.g.
 // 'Failed: this.http.put(...).map is not a function'
@@ -26,6 +26,34 @@ export class ExchangeAdapterRxComponent implements OnInit {
     active = true;
     public exchangeAdapterForm: FormGroup;
     errorMessage: string;
+
+    formErrors = {
+        'adapter': '',
+        'connectionTimeout': '',
+        'nonFatalErrorHttpStatusCodes': '',
+        'nonFatalErrorMessages': ''
+    };
+
+    validationMessages = {
+        'adapter': {
+            'required': 'Adapter name is required.',
+            'maxlength': 'Adapter name cannot be more than 120 characters long.',
+            'pattern': 'Not a valid fully qualified Java class name.'
+        },
+        'connectionTimeout': {
+            'required': 'Connection timeout is required.',
+            'pattern': 'Connection timeout must be a whole number.'
+        },
+        'nonFatalErrorHttpStatusCodes': {
+            'required': 'Code must not be empty.',
+            'pattern': 'Code must be a 3 digit number.',
+            'httpCodeWhitelistChecker': 'HTTP Status Code not in whitelist.'
+        },
+        'nonFatalErrorMessages': {
+            'required': 'Message must not be empty.',
+            'maxlength': 'Message length cannot be more than 120 characters long.'
+        }
+    };
 
     constructor(private exchangeAdapterDataService: ExchangeAdapterHttpDataObservableService, private route: ActivatedRoute,
                 private fb: FormBuilder, private router: Router) {
@@ -57,16 +85,18 @@ export class ExchangeAdapterRxComponent implements OnInit {
         // hack for now til I sort the JSON integration spec out with Boot app
         this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length = 0;
         this.exchangeAdapterForm.get('nonFatalErrorHttpStatusCodes').value.forEach(
-            (c) => this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.push({"value": parseInt(c)}));
+            (c) => this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.push({'value': parseInt(c, 10)}));
 
         // hack for now til I sort the JSON integration spec out with Boot app
         this.exchangeAdapter.networkConfig.nonFatalErrorMessages.length = 0;
         this.exchangeAdapterForm.get('nonFatalErrorMessages').value.forEach(
-            (m) => this.exchangeAdapter.networkConfig.nonFatalErrorMessages.push({"value": m}));
+            (m) => this.exchangeAdapter.networkConfig.nonFatalErrorMessages.push({'value': m}));
 
         this.exchangeAdapterDataService.update(this.exchangeAdapter)
             .subscribe(
-                exchangeAdapter => {this.goToDashboard()},
+                exchangeAdapter => {
+                    this.goToDashboard();
+                },
                 error => this.errorMessage = <any>error); // TODO show meaningful error to user
     }
 
@@ -132,14 +162,14 @@ export class ExchangeAdapterRxComponent implements OnInit {
             Validators.required,
             Validators.minLength(1),
             Validators.maxLength(120),
-        ])
+        ]);
     }
     createNewErrorMessageGroup() {
         return new FormControl('', [
             Validators.required,
             Validators.minLength(1),
             Validators.maxLength(120),
-        ])
+        ]);
     }
 
     // TODO merge these 2 creates
@@ -148,14 +178,14 @@ export class ExchangeAdapterRxComponent implements OnInit {
             Validators.required,
             Validators.pattern('\\d{3}'),
             this.httpCodeWhitelistChecker,
-        ])
+        ]);
     }
     createNewErrorCodeGroup() {
         return new FormControl('', [
             Validators.required,
             Validators.pattern('\\d{3}'),
             this.httpCodeWhitelistChecker,
-        ])
+        ]);
     }
 
     get nonFatalErrorHttpStatusCodes(): FormArray {
@@ -175,14 +205,19 @@ export class ExchangeAdapterRxComponent implements OnInit {
         const form = this.exchangeAdapterForm;
 
         for (const field in this.formErrors) {
-            // clear previous error message (if any)
-            this.formErrors[field] = '';
-            const control = form.get(field);
 
-            if (control && control.dirty && !control.valid) {
-                const messages = this.validationMessages[field];
-                for (const key in control.errors) {
-                    this.formErrors[field] += messages[key] + ' ';
+            if (this.formErrors.hasOwnProperty(field)) {
+                // clear previous error message (if any)
+                this.formErrors[field] = '';
+                const control = form.get(field);
+
+                if (control && control.dirty && !control.valid) {
+                    const messages = this.validationMessages[field];
+                    for (const key in control.errors) {
+                        if (control.errors.hasOwnProperty(key)) {
+                            this.formErrors[field] += messages[key] + ' ';
+                        }
+                    }
                 }
             }
         }
@@ -194,7 +229,9 @@ export class ExchangeAdapterRxComponent implements OnInit {
                 this.formErrors['nonFatalErrorHttpStatusCodes'] = '';
                 const messages = this.validationMessages['nonFatalErrorHttpStatusCodes'];
                 for (const key in code.errors) {
-                    this.formErrors['nonFatalErrorHttpStatusCodes'] += messages[key] + ' ';
+                    if (code.errors.hasOwnProperty(key)) {
+                        this.formErrors['nonFatalErrorHttpStatusCodes'] += messages[key] + ' ';
+                    }
                 }
             }
         });
@@ -206,7 +243,9 @@ export class ExchangeAdapterRxComponent implements OnInit {
                 this.formErrors['nonFatalErrorMessages'] = '';
                 const messages = this.validationMessages['nonFatalErrorMessages'];
                 for (const key in msg.errors) {
-                    this.formErrors['nonFatalErrorMessages'] += messages[key] + ' ';
+                    if (msg.errors.hasOwnProperty(key)) {
+                        this.formErrors['nonFatalErrorMessages'] += messages[key] + ' ';
+                    }
                 }
             }
         });
@@ -223,34 +262,6 @@ export class ExchangeAdapterRxComponent implements OnInit {
             return null;
         }
     }
-
-    formErrors = {
-        'adapter': '',
-        'connectionTimeout': '',
-        'nonFatalErrorHttpStatusCodes': '',
-        'nonFatalErrorMessages': ''
-    };
-
-    validationMessages = {
-        'adapter': {
-            'required': 'Adapter name is required.',
-            'maxlength': 'Adapter name cannot be more than 120 characters long.',
-            'pattern': 'Not a valid fully qualified Java class name.'
-        },
-        'connectionTimeout': {
-            'required': 'Connection timeout is required.',
-            'pattern': 'Connection timeout must be a whole number.'
-        },
-        'nonFatalErrorHttpStatusCodes': {
-            'required': 'Code must not be empty.',
-            'pattern': 'Code must be a 3 digit number.',
-            'httpCodeWhitelistChecker': 'HTTP Status Code not in whitelist.'
-        },
-        'nonFatalErrorMessages': {
-            'required': 'Message must not be empty.',
-            'maxlength': 'Message length cannot be more than 120 characters long.'
-        }
-    };
 }
 
 

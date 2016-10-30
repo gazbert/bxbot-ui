@@ -1,6 +1,6 @@
-import {OnInit, Component} from "@angular/core";
-import {ActivatedRoute, Params, Router} from "@angular/router";
-import {Exchange, ExchangeHttpDataPromiseService} from "../model/exchange";
+import {OnInit, Component} from '@angular/core';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {Exchange, ExchangeHttpDataPromiseService} from '../model/exchange';
 
 /**
  * Container component for holding Exchange Details.

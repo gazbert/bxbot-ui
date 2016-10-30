@@ -1,4 +1,4 @@
-import {Pipe, PipeTransform} from "@angular/core";
+import {Pipe, PipeTransform} from '@angular/core';
 
 /**
  * Simple shared pipe component to demo integrating with shared components with rest of app.

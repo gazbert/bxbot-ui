@@ -1,7 +1,7 @@
-import {TestBed, ComponentFixture, async} from "@angular/core/testing";
-import {By} from "@angular/platform-browser";
-import {DebugElement, NO_ERRORS_SCHEMA} from "@angular/core";
-import {AppComponent} from "./app.component";
+import {TestBed, ComponentFixture, async} from '@angular/core/testing';
+import {By} from '@angular/platform-browser';
+import {DebugElement, NO_ERRORS_SCHEMA} from '@angular/core';
+import {AppComponent} from './app.component';
 
 let appComponentUnderTest: AppComponent;
 let fixture: ComponentFixture<AppComponent>;

@@ -1,8 +1,8 @@
-import {Router} from "@angular/router";
-import {DashboardComponent} from "./dashboard.component";
-import {addMatchers} from "../../testing";
-import {FakeExchangeDataPromiseService} from "../model/exchange/testing";
-import {Exchange} from "../model/exchange";
+import {Router} from '@angular/router';
+import {DashboardComponent} from './dashboard.component';
+import {addMatchers} from '../../testing';
+import {FakeExchangeDataPromiseService} from '../model/exchange/testing';
+import {Exchange} from '../model/exchange';
 
 class FakeRouter {
 

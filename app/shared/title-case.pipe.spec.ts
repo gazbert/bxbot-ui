@@ -1,4 +1,4 @@
-import {TitleCasePipe} from "./title-case.pipe";
+import {TitleCasePipe} from './title-case.pipe';
 
 /**
  * Tests behaviour of the Title case pipe component.

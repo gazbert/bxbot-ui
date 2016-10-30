@@ -1,6 +1,6 @@
-import {ActivatedRouteStub} from "../../testing";
-import {ExchangeAdapterComponent} from "./exchange-adapter.component";
-import {ExchangeAdapter, NetworkConfig, ErrorCode, ErrorMessage} from "../model/exchange-adapter";
+import {ActivatedRouteStub} from '../../testing';
+import {ExchangeAdapterComponent} from './exchange-adapter.component';
+import {ExchangeAdapter, NetworkConfig, ErrorCode, ErrorMessage} from '../model/exchange-adapter';
 
 /**
  * Tests the behaviour of the Exchange Adapter (template) component is as expected.
@@ -32,13 +32,15 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
         expectedErrorMsgs = [{'value': 'Connection timeout'}];
         expectedNetworkConfig = new NetworkConfig(60, expectedErrorCodes, expectedErrorMsgs);
 
-        expectedExchangeAdapter = new ExchangeAdapter('btce', 'btce', 'com.gazbert.bxbot.adapter.BtceExchangeAdapter', expectedNetworkConfig);
+        expectedExchangeAdapter = new ExchangeAdapter('btce', 'btce', 'com.gazbert.bxbot.adapter.BtceExchangeAdapter',
+            expectedNetworkConfig);
         activatedRoute = new ActivatedRouteStub();
         activatedRoute.testParams = {id: expectedExchangeAdapter.id};
 
         router = jasmine.createSpyObj('router', ['navigate']);
 
-        spyExchangeAdapterDataService = jasmine.createSpyObj('ExchangeAdapterHttpDataPromiseService', ['getExchangeAdapterByExchangeId', 'update']);
+        spyExchangeAdapterDataService = jasmine.createSpyObj('ExchangeAdapterHttpDataPromiseService',
+            ['getExchangeAdapterByExchangeId', 'update']);
         spyExchangeAdapterDataService.getExchangeAdapterByExchangeId.and.returnValue(Promise.resolve(expectedExchangeAdapter));
         spyExchangeAdapterDataService.update.and.returnValue(Promise.resolve(expectedExchangeAdapter));
 
