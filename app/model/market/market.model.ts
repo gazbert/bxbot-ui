@@ -15,4 +15,9 @@ export class Market {
                 public counterCurrency: string,
                 public tradingStrategy: TradingStrategy) {
     }
+
+    clone() {
+        return new Market(this.id, this.label, this.exchangeId, this.enabled, this.baseCurrency, this.counterCurrency,
+            this.tradingStrategy);
+    }
 }

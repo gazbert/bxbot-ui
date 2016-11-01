@@ -1,5 +1,5 @@
 /**
- * Encapsulates Email Alerts config for a bot running on an Exchange.
+ * Encapsulates Email Alerts config for a bot.
  *
  * @author gazbert
  */
@@ -14,5 +14,10 @@ export class EmailAlertsConfig {
                 public accountPassword: string,
                 public toAddress: string,
                 public fromAddress: string) {
+    }
+
+    clone() {
+        return new EmailAlertsConfig(this.id, this.exchangeId, this.enabled, this.smtpHost, this.smtpPort,
+        this.accountUsername, this.accountPassword, this.toAddress, this.fromAddress);
     }
 }

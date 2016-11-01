@@ -25,7 +25,7 @@ describe('Tests the main app component behaviour', function () {
             });
     }));
 
-    // TODO FIXME - seems to be broke :-(
+    // TODO FIXME - seems to be broke since Angular 2.0.2 :-(
     // it('should display original BX-bot UI title', () => {
     //
     //     // query for the title <h1> by CSS element selector
@@ -36,7 +36,7 @@ describe('Tests the main app component behaviour', function () {
     //     expect(el.textContent).toContain(appComponentUnderTest.title);
     // });
 
-    // TODO FIXME - seems to be broke :-(
+    // TODO FIXME - seems to be broke since Angular 2.0.2 :-(
     // it('should display a different app title', () => {
     //
     //     de = fixture.debugElement.query(By.css('h1'));

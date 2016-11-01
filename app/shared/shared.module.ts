@@ -6,6 +6,9 @@ import {TitleCasePipe} from './title-case.pipe';
 /**
  * Simple shared module (for now) to demo integrating with shared components with rest of app.
  *
+ * TitleCasePipe taken from Angular tutorial material:
+ * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
+ *
  * TODO - a lot more stuff will be put in here eventually...
  */
 @NgModule({

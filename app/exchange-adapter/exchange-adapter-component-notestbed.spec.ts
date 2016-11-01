@@ -3,7 +3,7 @@ import {ExchangeAdapterComponent} from './exchange-adapter.component';
 import {ExchangeAdapter, NetworkConfig, ErrorCode, ErrorMessage} from '../model/exchange-adapter';
 
 /**
- * Tests the behaviour of the Exchange Adapter (template) component is as expected.
+ * Tests the behaviour of the Exchange Adapter (Template version) component is as expected.
  *
  * Based off the the main Angular tutorial:
  * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html

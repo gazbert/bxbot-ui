@@ -2,6 +2,7 @@ import {Exchange} from "../../exchange";
 
 /**
  * Dummy Exchange data for testing.
+ * TODO is this needed anymore? If not, nuke it!
  */
 export var EXCHANGES: Exchange[] = [
 

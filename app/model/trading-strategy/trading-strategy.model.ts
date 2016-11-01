@@ -11,4 +11,8 @@ export class TradingStrategy {
                 public description: string,
                 public className: string) {
     }
+
+    clone() {
+        return new TradingStrategy(this.id, this.label, this.exchangeId, this.description, this.className);
+    }
 }

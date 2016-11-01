@@ -5,9 +5,8 @@ import {Exchange} from "./exchange.model";
 import {ExchangeHttpDataPromiseService as ExchangeDataService} from "./exchange-http-data-promise.service";
 
 /**
- * Tests the Exchange HTTP (promise) service using a mocked HTTP backend.
- *
- * TODO tests for update, add, delete, etc...
+ * Tests the Exchange HTTP Service (Promise flavour) using a mocked HTTP backend.
+ * TODO tests for getExchange() and update()
  *
  * @author gazbert
  */
@@ -57,7 +56,6 @@ describe('Tests ExchangeHttpDataPromiseService (using Mock HTTP backend) ', () =
         }));
 
         it('should have expected fake Exchanges ', async(inject([], () => {
-
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.getExchanges()
             //  .then(() => Promise.reject('deliberate'))
@@ -69,7 +67,6 @@ describe('Tests ExchangeHttpDataPromiseService (using Mock HTTP backend) ', () =
 
         it('should have expected fake Exchanges ', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-
             service.getExchanges()
                 .then(exchanges => {
                     expect(exchanges.length).toBe(fakeExchanges.length,
@@ -80,7 +77,6 @@ describe('Tests ExchangeHttpDataPromiseService (using Mock HTTP backend) ', () =
         it('should be OK returning no Exchanges', async(inject([], () => {
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-
             service.getExchanges()
                 .then(exchanges => {
                     expect(exchanges.length).toBe(0, 'should have no Exchanges');

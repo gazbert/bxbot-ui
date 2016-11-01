@@ -5,6 +5,11 @@ import {Component, Directive, Injectable, Input} from "@angular/core";
 import {NavigationExtras} from "@angular/router";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 
+/**
+ * Testing utils taken from Angular tutorial material:
+ * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
+ */
+
 @Directive({
     selector: '[routerLink]',
     host: {
@@ -54,3 +59,9 @@ export class ActivatedRouteStub {
         return {params: this.testParams};
     }
 }
+
+/*
+ Copyright 2016 Google Inc. All Rights Reserved.
+ Use of this source code is governed by an MIT-style license that
+ can be found in the LICENSE file at http://angular.io/license
+ */

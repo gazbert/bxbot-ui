@@ -3,10 +3,8 @@ import {ExchangeAdapter} from "./exchange-adapter.model";
 
 /**
  * The Exchange Adapter Data Service communicates with the trading bots.
- *
  * The service is used to update the bot's Exchange Adapter configuration.
- *
- * It uses Promises in the operation responses.
+ * It demonstrates use of Promises in the operation responses.
  *
  * @author gazbert
  */

@@ -3,6 +3,11 @@ import {RouterModule} from "@angular/router";
 // import {AboutComponent} from "./about.component";
 // import {SettingsComponent} from "./settings.component";
 
+/**
+ * Main routing module for the app.
+ *
+ * @author gazbert
+ */
 @NgModule({
     imports: [
         RouterModule.forRoot([

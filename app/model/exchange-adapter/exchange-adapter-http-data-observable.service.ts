@@ -14,7 +14,6 @@ import {isObject} from "rxjs/util/isObject";
 
 /**
  * HTTP implementation of the Exchange Adapter Data Service.
- *
  * It demonstrates use of Observables in call responses.
  *
  * @author gazbert
@@ -23,10 +22,8 @@ import {isObject} from "rxjs/util/isObject";
 export class ExchangeAdapterHttpDataObservableService implements ExchangeAdapterDataObservableService {
 
     public exchangeAdaptersUrl = 'app/exchangeAdapters';  // URL to web api
-    // vs JSON canned data for quick testing
+    // vs JSON canned data for quick testing below...
     //private exchangeUrl = 'app/exchangeAdapters.json'; // URL to JSON file
-
-    private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private http: Http) {
     }
@@ -38,7 +35,7 @@ export class ExchangeAdapterHttpDataObservableService implements ExchangeAdapter
     }
 
     // TODO FIXME - in memory service returns an array if we search by query param
-    // - it assumes (correctly) we can have >1 item, despite exchangeId being unique in our model
+    // It assumes (correctly) we can have >1 item, despite exchangeId being unique in our model
     // hacked calling component to grab [0] for now...
     getExchangeAdapterByExchangeId(id: string): Observable<ExchangeAdapter> {
         return this.http

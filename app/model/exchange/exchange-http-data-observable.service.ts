@@ -14,7 +14,6 @@ import {isObject} from "rxjs/util/isObject";
 
 /**
  * HTTP implementation of the Exchange Data Service.
- *
  * It demonstrates use of Observables in call responses.
  *
  * @author gazbert
@@ -23,10 +22,8 @@ import {isObject} from "rxjs/util/isObject";
 export class ExchangeHttpDataObservableService implements ExchangeDataObservableService {
 
     public exchangeUrl = 'app/exchanges';  // URL to web api
-    // vs JSON canned data for quick testing
-    //private exchangeUrl = 'app/exchanges.json'; // URL to JSON file
-
-    private headers = new Headers({'Content-Type': 'application/json'});
+    // vs JSON canned data for quick testing below...
+    // private exchangeUrl = 'app/exchanges.json'; // URL to JSON file
 
     constructor(private http: Http) {
     }

@@ -2,7 +2,10 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Exchange} from '../model/exchange';
 
 /**
+ * Dashboard Item component.
  * TODO - show status of the bot operating on the exchange here.
+ *
+ * @author gazbert
  */
 @Component({
     moduleId: module.id,

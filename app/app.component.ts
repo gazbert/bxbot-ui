@@ -1,5 +1,10 @@
 import {Component} from "@angular/core";
 
+/**
+ * The main app component provides the landing page - currently the Dashboard.
+ *
+ * @author gazbert
+ */
 @Component({
     selector: 'bxbot-ui',
     template: `

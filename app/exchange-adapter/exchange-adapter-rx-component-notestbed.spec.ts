@@ -10,7 +10,6 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
-
 /**
  * Tests the behaviour of the Exchange Adapter (RX) component is as expected.
  *

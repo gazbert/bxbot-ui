@@ -2,6 +2,9 @@ import {TitleCasePipe} from './title-case.pipe';
 
 /**
  * Tests behaviour of the Title case pipe component.
+ *
+ * TitleCasePipe taken from Angular tutorial material:
+ * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
  */
 describe('TitleCasePipe', () => {
 

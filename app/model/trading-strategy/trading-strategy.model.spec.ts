@@ -1,51 +1,29 @@
-// import {Exchange, NetworkConfig} from "./exchange.model";
-//
-// /**
-//  * Tests the Exchange Adapter model behaves as expected.
-//  *
-//  * @author gazbert
-//  */
-// describe('Exchange Adapter', () => {
-//
-//     it('has correct initial values', () => {
-//         const exchange =
-//             new Exchange('gdax', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
-//                 new NetworkConfig(60,
-//                     [
-//                         {value: 503},
-//                         {value: 504},
-//                         {value: 522},
-//                     ],
-//                     [
-//                         {value: "Connection reset"},
-//                         {value: "Connection refused"},
-//                         {value: "Remote host closed connection during handshake"}
-//                     ]
-//                 ));
-//
-//         expect(exchange.id).toBe('gdax');
-//         expect(exchange.exchangeId).toBe('gdax');
-//         expect(exchange.adapter).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
-//         // TODO etc etc ...
-//     });
-//
-//     it('can clone itself', () => {
-//         const exchange =
-//             new Exchange('btce', 'btce', 'com.gazbert.bxbot.exchanges.BtceExchangeAdapter',
-//                 new NetworkConfig(60,
-//                     [
-//                         {value: 503},
-//                         {value: 504},
-//                         {value: 522},
-//                     ],
-//                     [
-//                         {value: "Connection reset"},
-//                         {value: "Connection refused"},
-//                         {value: "Remote host closed connection during handshake"}
-//                     ]
-//                 ));
-//
-//         const clone = exchange.clone();
-//         expect(exchange).toEqual(clone);
-//     });
-// });
+import {TradingStrategy} from "./trading-strategy.model";
+
+/**
+ * Tests the Trading Strategy model behaves as expected.
+ *
+ * @author gazbert
+ */
+describe('Trading Strategy config', () => {
+
+    it('has correct initial values', () => {
+        const tradingStrategy = new TradingStrategy('gdax_macd', 'MACD Indicator', 'gdax',
+            'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy');
+
+        expect(tradingStrategy.id).toBe('gdax_macd');
+        expect(tradingStrategy.exchangeId).toBe('gdax');
+        expect(tradingStrategy.label).toBe('MACD Indicator');
+        expect(tradingStrategy.description).toBe('MACD Indicator for deciding when to enter and exit trades.');
+        expect(tradingStrategy.className).toBe('com.gazbert.bxbot.strategies.MacdStrategy');
+
+    });
+
+    it('can clone itself', () => {
+        const tradingStrategy = new TradingStrategy('gdax_macd', 'MACD Indicator', 'gdax',
+            'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy');
+
+        const clone = tradingStrategy.clone();
+        expect(tradingStrategy).toEqual(clone);
+    });
+});

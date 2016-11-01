@@ -3,6 +3,11 @@
 ////  Jasmine Custom Matchers ////
 // Be sure to extend jasmine-matchers.d.ts when adding matchers
 
+/**
+ * Testing utils taken from Angular tutorial material:
+ * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
+ */
+
 export function addMatchers(): void {
     jasmine.addMatchers({
         toHaveText: toHaveText
@@ -45,7 +50,6 @@ function elementText(n: any): string {
 
     return n.textContent;
 }
-
 
 /*
  Copyright 2016 Google Inc. All Rights Reserved.

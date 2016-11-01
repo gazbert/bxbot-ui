@@ -9,7 +9,6 @@ import 'rxjs/add/operator/map';
 
 /**
  * Reactive version of the Exchange Adapter form.
- *
  * For demo purposes, it uses the Observable flavour of the Exchange HTTP data service.
  *
  * @author gazbert

@@ -2,10 +2,10 @@ import {Pipe, PipeTransform} from '@angular/core';
 
 /**
  * Simple shared pipe component to demo integrating with shared components with rest of app.
- *
  * Transforms to uppercase the first letter of the words in a given string.
  *
- * Taken from: https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
+ * TitleCasePipe taken from Angular tutorial material:
+ * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
  */
 @Pipe({name: 'titlecase', pure: false})
 export class TitleCasePipe implements PipeTransform {

@@ -30,7 +30,7 @@ export class EmailAlertsComponent implements OnInit {
     }
 
     save(model: EmailAlertsConfig, isValid: boolean) {
-        // call API to save email alert config
+        // TODO call API to save email alert config...
         console.log(model, isValid);
     }
 

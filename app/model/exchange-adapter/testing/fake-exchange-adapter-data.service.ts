@@ -2,7 +2,7 @@ import {ExchangeAdapter, NetworkConfig} from "../exchange-adapter.model";
 import {ExchangeAdapterHttpDataPromiseService} from "../exchange-adapter-http-data-promise.service";
 
 /**
- * Fake Exchange Adapter data service backend for testing.
+ * Fake Exchange Adapter data service (Promise flavour) backend for testing.
  *
  * @author gazbert
  */
@@ -31,7 +31,6 @@ export class FakeExchangeAdapterDataPromiseService extends ExchangeAdapterHttpDa
 
 // re-export for tester convenience
 export var SOME_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
-
     new ExchangeAdapter('bitstamp', 'bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
         new NetworkConfig(60,
             [

@@ -12,9 +12,8 @@ import "rxjs/add/operator/map";
 // 'Failed: this.http.get(...).map is not a function'
 
 /**
- * Tests the Exchange HTTP (observable) service using a mocked HTTP backend.
- *
- * TODO tests for update, add, delete, etc...
+ * Tests the Exchange HTTP Service (Observable flavour) using a mocked HTTP backend.
+ * TODO tests for getExchange() and update()
  *
  * @author gazbert
  */
@@ -42,12 +41,11 @@ describe('Tests ExchangeHttpDataObservableService (using Mock HTTP backend) ', (
         expect(service instanceof ExchangeDataService).toBe(true, 'new service should be ok');
     }));
 
-    // TODO What's this all about?
+    // TODO What's this all about? Isn't this just testing Angular?
     it('can provide the mockBackend as XHRBackend',
         inject([XHRBackend], (backend: MockBackend) => {
             expect(backend).not.toBeNull('backend should be provided');
-        }));
-
+    }));
 
     describe('when getExchanges', () => {
 
@@ -65,7 +63,6 @@ describe('Tests ExchangeHttpDataObservableService (using Mock HTTP backend) ', (
         }));
 
         it('should have expected fake Exchanges ', async(inject([], () => {
-
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.getExchanges()
                 .do(exchanges => {
@@ -77,7 +74,6 @@ describe('Tests ExchangeHttpDataObservableService (using Mock HTTP backend) ', (
 
         it('should have expected fake Exchanges ', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-
             service.getExchanges()
                 .do(exchanges => {
                     expect(exchanges.length).toBe(fakeExchanges.length,
@@ -89,7 +85,6 @@ describe('Tests ExchangeHttpDataObservableService (using Mock HTTP backend) ', (
         it('should be OK returning no Exchanges', async(inject([], () => {
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-
             service.getExchanges()
                 .do(exchanges => {
                     expect(exchanges.length).toBe(0, 'should have no Exchanges');
@@ -100,9 +95,8 @@ describe('Tests ExchangeHttpDataObservableService (using Mock HTTP backend) ', (
         it('should treat 404 as an Observable error', async(inject([], () => {
             let resp = new Response(new ResponseOptions({status: 404}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-
             service.getExchanges()
-                .do(exchanges => {
+                .do(() => {
                     fail('should not respond with Exchanges');
                 })
                 .catch(err => {

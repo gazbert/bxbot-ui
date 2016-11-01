@@ -3,10 +3,8 @@ import {Exchange} from "./exchange.model";
 
 /**
  * The Exchange Data Service communicates with the trading bots.
- *
  * The service is used to update the bot's Exchange configuration.
- *
- * It uses Promises in the operation responses.
+ * It demonstrates use of Promises in the operation responses.
  *
  * @author gazbert
  */

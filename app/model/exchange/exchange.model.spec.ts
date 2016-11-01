@@ -15,9 +15,7 @@ describe('Exchange', () => {
     });
 
     it('can clone itself', () => {
-        const exchange =
-            new Exchange('btce', 'BTC-e', 'Stopped');
-
+        const exchange = new Exchange('btce', 'BTC-e', 'Stopped');
         const clone = exchange.clone();
         expect(exchange).toEqual(clone);
     });

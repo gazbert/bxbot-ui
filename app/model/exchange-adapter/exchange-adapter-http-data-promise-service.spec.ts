@@ -5,9 +5,8 @@ import {ExchangeAdapterHttpDataPromiseService as ExchangeAdapterDataService} fro
 import {ExchangeAdapter, NetworkConfig} from "./exchange-adapter.model";
 
 /**
- * Tests the Exchange Adapter HTTP (promise) service using a mocked HTTP backend.
- *
- * TODO tests for update, add, delete, etc...
+ * Tests the Exchange Adapter HTTP service (Promise flavour) using a mocked HTTP backend.
+ * TODO tests for getExchangeAdapterByExchangeId() and update()
  *
  * @author gazbert
  */
@@ -39,7 +38,7 @@ describe('Tests ExchangeAdapterHttpDataPromiseService (using Mock HTTP backend) 
     it('can provide the mockBackend as XHRBackend',
         inject([XHRBackend], (backend: MockBackend) => {
             expect(backend).not.toBeNull('backend should be provided');
-        }));
+    }));
 
     describe('when getExchangeAdapters', () => {
 
@@ -57,7 +56,6 @@ describe('Tests ExchangeAdapterHttpDataPromiseService (using Mock HTTP backend) 
         }));
 
         it('should have expected fake Exchange Adapters ', async(inject([], () => {
-
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.getExchangeAdapters()
             //  .then(() => Promise.reject('deliberate'))
@@ -69,7 +67,6 @@ describe('Tests ExchangeAdapterHttpDataPromiseService (using Mock HTTP backend) 
 
         it('should have expected fake Exchanges Adapters', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-
             service.getExchangeAdapters()
                 .then(exchangeAdapters => {
                     expect(exchangeAdapters.length).toBe(fakeExchangeAdapters.length,
@@ -80,7 +77,6 @@ describe('Tests ExchangeAdapterHttpDataPromiseService (using Mock HTTP backend) 
         it('should be OK returning no Exchange Adapters', async(inject([], () => {
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-
             service.getExchangeAdapters()
                 .then(exchangeAdapters => {
                     expect(exchangeAdapters.length).toBe(0, 'should have no Exchange Adapters');
@@ -105,7 +101,6 @@ describe('Tests ExchangeAdapterHttpDataPromiseService (using Mock HTTP backend) 
 });
 
 const makeExchangeAdapterData = () => [
-
     new ExchangeAdapter('bitstamp', 'bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
         new NetworkConfig(60,
             [

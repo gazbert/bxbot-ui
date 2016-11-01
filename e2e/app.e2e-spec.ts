@@ -1,7 +1,6 @@
 /******************************************************************************
  *
  * End 2 End Protractor tests (using Jasmine) for testing BX-bot UI behaviour.
- *
  * See: http://www.protractortest.org/#/tutorial
  *
  ******************************************************************************/
@@ -9,6 +8,7 @@ import {browser, element, by} from "protractor";
 
 /**
  * Dashboard tests.
+ * TODO Add lots more tests!
  */
 describe('Dashboard Tests', function () {
 

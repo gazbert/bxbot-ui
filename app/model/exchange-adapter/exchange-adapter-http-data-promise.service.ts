@@ -9,8 +9,8 @@ import 'rxjs/add/operator/toPromise';
 
 /**
  * HTTP implementation of the Exchange Adapter Data Service.
- *
- * It demonstrates use of Promises in call responses. Seems to be easier to use/understand than Observable way?
+ * It demonstrates use of Promises in call responses.
+ * Seems to be easier to use/understand than Observable way?
  *
  * @author gazbert
  */
@@ -18,8 +18,8 @@ import 'rxjs/add/operator/toPromise';
 export class ExchangeAdapterHttpDataPromiseService implements ExchangeAdapterDataPromiseService {
 
     public exchangeAdaptersUrl = 'app/exchangeAdapters';  // URL to web api
-    // vs JSON canned data for quick testing
-    //private exchangeAdaptersUrl = 'app/exchangeAdapters.json'; // URL to JSON file
+    // vs JSON canned data for quick testing below...
+    // private exchangeAdaptersUrl = 'app/exchangeAdapters.json'; // URL to JSON file
 
     private headers = new Headers({'Content-Type': 'application/json'});
 

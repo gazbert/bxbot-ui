@@ -3,7 +3,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Exchange, ExchangeHttpDataPromiseService} from '../model/exchange';
 
 /**
- * Container component for holding Exchange Details.
+ * Container for holding the bot's config for a given Exchange.
  *
  * @author gazbert
  */

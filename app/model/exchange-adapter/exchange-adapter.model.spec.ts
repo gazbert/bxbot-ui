@@ -5,11 +5,10 @@ import {ExchangeAdapter, NetworkConfig} from "./exchange-adapter.model";
  *
  * @author gazbert
  */
-describe('Exchange Adapter', () => {
+describe('Exchange Adapter config', () => {
 
     it('has correct initial values', () => {
-        const exchangeAdapter =
-            new ExchangeAdapter('gdax', 'gdax', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
+        const exchangeAdapter = new ExchangeAdapter('gdax', 'gdax', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
                 new NetworkConfig(60,
                     [
                         {value: 503},
@@ -26,12 +25,22 @@ describe('Exchange Adapter', () => {
         expect(exchangeAdapter.id).toBe('gdax');
         expect(exchangeAdapter.exchangeId).toBe('gdax');
         expect(exchangeAdapter.adapter).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
-        // TODO etc etc ...
+
+        expect(exchangeAdapter.networkConfig.connectionTimeout).toBe(60);
+
+        expect(exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0].value).toBe(503);
+        expect(exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1].value).toBe(504);
+        expect(exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[2].value).toBe(522);
+
+        expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[0].value).toBe("Connection reset");
+        expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[1].value).toBe("Connection refused");
+        expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[2].value).toBe("Remote host closed connection during handshake");
+
+
     });
 
     it('can clone itself', () => {
-        const exchangeAdapter =
-            new ExchangeAdapter('btce', 'btce', 'com.gazbert.bxbot.exchanges.BtceExchangeAdapter',
+        const exchangeAdapter = new ExchangeAdapter('btce', 'btce', 'com.gazbert.bxbot.exchanges.BtceExchangeAdapter',
                 new NetworkConfig(60,
                     [
                         {value: 503},

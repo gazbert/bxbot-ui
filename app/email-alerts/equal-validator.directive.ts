@@ -6,7 +6,6 @@ import {Validator, AbstractControl, NG_VALIDATORS} from '@angular/forms';
  *
  * Based on the excellent:
  * https://scotch.io/tutorials/how-to-implement-a-custom-validator-directive-confirm-password-in-angular-2
- *
  */
 @Directive({
     selector: '[validateEqual][formControlName],[validateEqual][formControl],[validateEqual][ngModel]',

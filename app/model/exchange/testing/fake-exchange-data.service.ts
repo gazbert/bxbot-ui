@@ -2,12 +2,11 @@ import {ExchangeHttpDataPromiseService} from "../exchange-http-data-promise.serv
 import {Exchange} from "../exchange.model";
 
 /**
- * Fake Exchange data service backend for testing.
+ * Fake Exchange data service (Promise flavour) backend for testing.
  *
- * Constructor inherited from ExchangeHttpDataPromiseService - calling code should pass null when creating this object.
- *
- * This seems very hacky. Must be better way of doing this, but we have to inject
- * concrete service classes into the components...
+ * Constructor is inherited from ExchangeHttpDataPromiseService - calling code should pass null when creating this object.
+ * This seems very hacky.
+ * Must be better way of doing this, but we have to inject concrete service classes into the components...
  *
  * @author gazbert
  */
@@ -36,7 +35,6 @@ export class FakeExchangeDataPromiseService extends ExchangeHttpDataPromiseServi
 
 // re-export for tester convenience
 export var SOME_EXCHANGES: Exchange[] = [
-
     new Exchange('bitstamp', 'Bitstamp', 'Running'),
     new Exchange('gdax', 'GDAX', 'Running'),
     new Exchange('gemini', 'Gemini', 'Stopped')

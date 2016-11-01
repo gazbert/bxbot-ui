@@ -13,9 +13,8 @@ import "rxjs/add/operator/map";
 // 'Failed: this.http.get(...).map is not a function'
 
 /**
- * Tests the Exchange Adapter HTTP (observable) service using a mocked HTTP backend.
- *
- * TODO tests for update, add, delete, etc...
+ * Tests the Exchange Adapter HTTP service (Observable flavour) using a mocked HTTP backend.
+ * TODO tests for getExchangeAdapterByExchangeId() and update()
  *
  * @author gazbert
  */
@@ -43,12 +42,11 @@ describe('Tests ExchangeAdapterHttpDataObservableService (using Mock HTTP backen
         expect(service instanceof ExchangeAdapterDataService).toBe(true, 'new service should be ok');
     }));
 
-    // TODO What's this all about?
+    // TODO What's this all about? Just testing Angular?
     it('can provide the mockBackend as XHRBackend',
         inject([XHRBackend], (backend: MockBackend) => {
             expect(backend).not.toBeNull('backend should be provided');
-        }));
-
+    }));
 
     describe('when getExchangeAdapters', () => {
 
@@ -66,7 +64,6 @@ describe('Tests ExchangeAdapterHttpDataObservableService (using Mock HTTP backen
         }));
 
         it('should have expected fake Exchange Adapters ', async(inject([], () => {
-
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.getExchangeAdapters()
                 .do(exchangeAdapters => {
@@ -78,7 +75,6 @@ describe('Tests ExchangeAdapterHttpDataObservableService (using Mock HTTP backen
 
         it('should have expected fake Exchange Adapters ', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-
             service.getExchangeAdapters()
                 .do(exchangeAdapters => {
                     expect(exchangeAdapters.length).toBe(fakeExchangeAdapters.length,
@@ -90,7 +86,6 @@ describe('Tests ExchangeAdapterHttpDataObservableService (using Mock HTTP backen
         it('should be OK returning no Exchange Adapters', async(inject([], () => {
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-
             service.getExchangeAdapters()
                 .do(exchangeAdapters => {
                     expect(exchangeAdapters.length).toBe(0, 'should have no Exchange Adapters');
@@ -101,9 +96,8 @@ describe('Tests ExchangeAdapterHttpDataObservableService (using Mock HTTP backen
         it('should treat 404 as an Observable error', async(inject([], () => {
             let resp = new Response(new ResponseOptions({status: 404}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-
             service.getExchangeAdapters()
-                .do(exchangeAdapters => {
+                .do(() => {
                     fail('should not respond with Exchange Adapters');
                 })
                 .catch(err => {
@@ -116,7 +110,6 @@ describe('Tests ExchangeAdapterHttpDataObservableService (using Mock HTTP backen
 });
 
 const makeExchangeAdapterData = () => [
-
     new ExchangeAdapter('bitstamp', 'bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
         new NetworkConfig(60,
             [
