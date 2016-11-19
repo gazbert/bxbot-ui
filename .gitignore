@@ -1,22 +1,11 @@
-
-*.idea
+.idea
 node_modules
 jspm_packages
+npm-debug.*
 link-checker-results.txt
-**/*npm-debug.log.*
-*.js
+app/**/*.js
 *.js.map
 e2e/**/*.js
 e2e/**/*.js.map
 _test-output
 _temp
-
-!karma*.js
-!protractor*.js
-!systemjs.config.js
-!systemjs.config.extras.js
-!typings/typings.d.ts
-!wallaby.js
-
-# node logs
-npm-debug.log
