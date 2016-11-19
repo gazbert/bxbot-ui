@@ -25,25 +25,23 @@ describe('Tests the main app component behaviour', function () {
             });
     }));
 
-    // TODO FIXME - seems to be broke since Angular 2.0.2 :-(
-    // it('should display original BX-bot UI title', () => {
-    //
-    //     // query for the title <h1> by CSS element selector
-    //     de = fixture.debugElement.query(By.css('h1'));
-    //     el = de.nativeElement;
-    //
-    //     fixture.detectChanges();
-    //     expect(el.textContent).toContain(appComponentUnderTest.title);
-    // });
+    it('should display original BX-bot UI title', () => {
 
-    // TODO FIXME - seems to be broke since Angular 2.0.2 :-(
-    // it('should display a different app title', () => {
-    //
-    //     de = fixture.debugElement.query(By.css('h1'));
-    //     el = de.nativeElement;
-    //
-    //     appComponentUnderTest.title = 'Nostromo Title';
-    //     fixture.detectChanges();
-    //     expect(el.textContent).toContain('Nostromo Title');
-    // });
+        // query for the title <h1> by CSS element selector
+        de = fixture.debugElement.query(By.css('h1'));
+        el = de.nativeElement;
+
+        fixture.detectChanges();
+        expect(el.textContent).toContain(appComponentUnderTest.title);
+    });
+
+    it('should display a different app title', () => {
+
+        de = fixture.debugElement.query(By.css('h1'));
+        el = de.nativeElement;
+
+        appComponentUnderTest.title = 'Nostromo Title';
+        fixture.detectChanges();
+        expect(el.textContent).toContain('Nostromo Title');
+    });
 });
