@@ -214,6 +214,15 @@ export class InMemoryDataService implements InMemoryDbService {
          */
         let markets = [
             {
+                id: 'bitstamp_btc_usd',
+                label: 'BTC/USD',
+                exchangeId: 'bitstamp',
+                enabled: false,
+                baseCurrency: 'BTC',
+                counterCurrency: 'USD',
+                tradingStrategy: {id: 'bitstamp_ema'}
+            },
+            {
                 id: 'btce_btc_usd',
                 label: 'BTC/USD',
                 exchangeId: 'btce',

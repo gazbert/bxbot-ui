@@ -7,6 +7,7 @@ import {AppComponent} from "./app.component";
 import {InMemoryDataService} from "./model";
 import {ExchangeHttpDataPromiseService, ExchangeHttpDataObservableService} from "./model/exchange";
 import {ExchangeAdapterHttpDataPromiseService, ExchangeAdapterHttpDataObservableService} from "./model/exchange-adapter";
+import {MarketHttpDataPromiseService} from "./model/market";
 import {DashboardModule} from "./dashboard/dashboard.module";
 import {ExchangeDetailsModule} from "./exchange-details/exchange-details.module";
 import {ExchangeAdapterModule} from "./exchange-adapter/exchange-adapter.module";
@@ -38,7 +39,8 @@ import {AppRoutingModule} from "./app-routing.module";
         ExchangeHttpDataPromiseService,
         ExchangeHttpDataObservableService,
         ExchangeAdapterHttpDataPromiseService,
-        ExchangeAdapterHttpDataObservableService
+        ExchangeAdapterHttpDataObservableService,
+        MarketHttpDataPromiseService,
     ],
     bootstrap: [AppComponent]
 })
