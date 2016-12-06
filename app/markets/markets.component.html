@@ -26,62 +26,72 @@
                         </div>
 
                         <!-- Market Name -->
-                        <div class="form-group">
-                            <label for="marketName_{{i}}">Name:</label>
-                            <input [(ngModel)]="markets[i].label"
-                                   type="text" class="form-control" id="marketName_{{i}}"
-                                   name="marketName_{{i}}" #marketName="ngModel" required maxlength="120">
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <label for="marketName_{{i}}">Name:</label>
+                                <input [(ngModel)]="markets[i].label"
+                                       type="text" class="form-control" id="marketName_{{i}}"
+                                       name="marketName_{{i}}" #marketName="ngModel" required maxlength="120">
 
-                            <div [hidden]="marketName.valid || marketName.pristine" class="alert alert-danger">
-                                Market Name must be set.
+                                <div [hidden]="marketName.valid || marketName.pristine" class="alert alert-danger">
+                                    Market Name must be set.
+                                </div>
                             </div>
                         </div>
 
                         <!-- Market Id -->
-                        <div class="form-group">
-                            <label for="marketId_{{i}}">Id:</label>
-                            <input [(ngModel)]="markets[i].id"
-                                   type="text" class="form-control" id="marketId_{{i}}"
-                                   name="marketId_{{i}}" #marketId="ngModel" required maxlength="120">
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <label for="marketId_{{i}}">Id:</label>
+                                <input [(ngModel)]="markets[i].id"
+                                       type="text" class="form-control" id="marketId_{{i}}"
+                                       name="marketId_{{i}}" #marketId="ngModel" required maxlength="120">
 
-                            <div [hidden]="marketId.valid || marketId.pristine" class="alert alert-danger">
-                                Market Id must be set.
+                                <div [hidden]="marketId.valid || marketId.pristine" class="alert alert-danger">
+                                    Market Id must be set.
+                                </div>
                             </div>
                         </div>
 
                         <!-- Base Currency -->
-                        <div class="form-group">
-                            <label for="baseCurrency_{{i}}">Base Currency:</label>
-                            <input [(ngModel)]="markets[i].baseCurrency"
-                                   type="text" class="form-control" id="baseCurrency_{{i}}"
-                                   name="baseCurrency_ + {{i}}" #baseCurrency="ngModel" required maxlength="120">
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <label for="baseCurrency_{{i}}">Base Currency:</label>
+                                <input [(ngModel)]="markets[i].baseCurrency"
+                                       type="text" class="form-control" id="baseCurrency_{{i}}"
+                                       name="baseCurrency_ + {{i}}" #baseCurrency="ngModel" required maxlength="120">
 
-                            <div [hidden]="baseCurrency.valid || baseCurrency.pristine" class="alert alert-danger">
-                                Base Currency must be set.
+                                <div [hidden]="baseCurrency.valid || baseCurrency.pristine" class="alert alert-danger">
+                                    Base Currency must be set.
+                                </div>
                             </div>
                         </div>
 
                         <!-- Counter Currency -->
-                        <div class="form-group">
-                            <label for="counterCurrency_{{i}}">Counter Currency:</label>
-                            <input [(ngModel)]="markets[i].counterCurrency"
-                                   type="text" class="form-control" id="counterCurrency_{{i}}"
-                                   name="counterCurrency_{{i}}" #counterCurrency="ngModel" required maxlength="120">
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <label for="counterCurrency_{{i}}">Counter Currency:</label>
+                                <input [(ngModel)]="markets[i].counterCurrency"
+                                       type="text" class="form-control" id="counterCurrency_{{i}}"
+                                       name="counterCurrency_{{i}}" #counterCurrency="ngModel" required maxlength="120">
 
-                            <div [hidden]="counterCurrency.valid || counterCurrency.pristine" class="alert alert-danger">
-                                Counter Currency must be set.
+                                <div [hidden]="counterCurrency.valid || counterCurrency.pristine" class="alert alert-danger">
+                                    Counter Currency must be set.
+                                </div>
                             </div>
                         </div>
 
                         <!-- Trading Strategy -->
-                        <div class="form-group">
-                            <label for="tradingStrategy_{{i}}">Trading Strategy:</label>
-                            <input [(ngModel)]="markets[i].tradingStrategy.id"
-                                   type="text" class="form-control" id="tradingStrategy_{{i}}"
-                                   name="tradingStrategy_{{i}}" #tradingStrategy="ngModel" required maxlength="120">
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <label for="tradingStrategy_{{i}}">Trading Strategy:</label>
+                                <input [(ngModel)]="markets[i].tradingStrategy.id"
+                                       type="text" class="form-control" id="tradingStrategy_{{i}}"
+                                       name="tradingStrategy_{{i}}" #tradingStrategy="ngModel" required maxlength="120">
 
-                            <div [hidden]="tradingStrategy.valid || tradingStrategy.pristine" class="alert alert-danger">
-                                Trading Strategy must be set.
+                                <div [hidden]="tradingStrategy.valid || tradingStrategy.pristine" class="alert alert-danger">
+                                    Trading Strategy must be set.
+                                </div>
                             </div>
                         </div>
                     </div>

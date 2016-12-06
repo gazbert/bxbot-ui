@@ -6,14 +6,14 @@
     <form *ngIf="active" novalidate [formGroup]="exchangeAdapterForm" (ngSubmit)="save()">
 
         <div class="row">
-            <div class="form-group col-sm-12">
+            <div class="form-group col-sm-6">
                 <label for="exchangeId">Id:</label>
                 <input formControlName="exchangeId" id="exchangeId" type="text" class="form-control"/>
             </div>
         </div>
 
         <div class="row">
-            <div class="form-group col-sm-12">
+            <div class="form-group col-sm-6">
                 <label for="adapter">Adapter:</label>
                 <input formControlName="adapter" placeholder="com.my.ExchangeAdapter" id="adapter" type="text"
                        class="form-control" maxlength="121" required/>
@@ -26,7 +26,7 @@
         </div>
 
         <div class="row">
-            <div class="form-group col-sm-12">
+            <div class="form-group col-sm-6">
                 <label for="connectionTimeout">Connection Timeout (secs):</label>
                 <input id="connectionTimeout" ngControlGroup="networkConfig" formControlName="connectionTimeout"
                        type="text"

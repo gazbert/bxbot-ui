@@ -2,62 +2,75 @@
 
     <form #f="ngForm" novalidate (ngSubmit)="save(f.value, f.valid)">
 
-        <div class="form-group">
-            <label for="alertsEnabled">Alerts enabled</label>
-            <input type="checkbox" class="checkbox" name="alertsEnabled" [ngModel]="emailAlerts.username" required
-                   #alertsEnabled="ngModel" id="alertsEnabled">
+        <div class="row">
+            <div class="form-group col-sm-6">
+                <label for="alertsEnabled">Alerts Enabled:</label>
+                <input type="checkbox" class="checkbox" name="alertsEnabled" [ngModel]="emailAlerts.username" required
+                       #alertsEnabled="ngModel" id="alertsEnabled">
+            </div>
         </div>
 
-        <div class="form-group">
-            <label for="accountUsername">Account username</label>
-            <input type="text" class="form-control" name="username" [ngModel]="emailAlerts.username"
-                   required minlength="5" maxlength="8" #username="ngModel" id="accountUsername">
-            <small [hidden]="username.valid || (username.pristine && !f.submitted)" class="text-danger">
-                Username is required (minimum 5 characters).
-            </small>
-            <!--<pre *ngIf="username.errors" class="margin-20">{{ username.errors | json }}</pre>-->
+        <div class="row">
+            <div class="form-group col-sm-6">
+                <label for="accountUsername">Account Username:</label>
+                <input type="text" class="form-control" name="username" [ngModel]="emailAlerts.username"
+                       required minlength="5" maxlength="8" #username="ngModel" id="accountUsername">
+                <small [hidden]="username.valid || (username.pristine && !f.submitted)" class="text-danger">
+                    Username is required (minimum 5 characters).
+                </small>
+                <!--<pre *ngIf="username.errors" class="margin-20">{{ username.errors | json }}</pre>-->
+            </div>
         </div>
 
-        <div class="form-group">
-            <label for="accountPassword">Account password</label>
-            <input type="password" class="form-control" name="password" [ngModel]="emailAlerts.password"
-                   required validateEqual="confirmPassword" reverse="true" #password="ngModel" id="accountPassword">
-            <small [hidden]="password.valid || (password.pristine && !f.submitted)" class="text-danger">
-                Password is required
-            </small>
-            <!--<pre *ngIf="password.errors" class="margin-20">{{ password.errors | json }}</pre>-->
-        </div>
-        <div class="form-group">
-            <label for="retypeAccountPassword">Retype Account password</label>
-            <input type="password" class="form-control" name="confirmPassword" [ngModel]="emailAlerts.confirmPassword"
-                   required validateEqual="password" reverse="false" #confirmPassword="ngModel"
-                   id="retypeAccountPassword">
-            <small [hidden]="confirmPassword.valid || (confirmPassword.pristine && !f.submitted)" class="text-danger">
-                Password mismatch
-            </small>
-            <!--<pre *ngIf="confirmPassword.errors" class="margin-20">{{ confirmPassword.errors | json }}</pre>-->
+        <div class="row">
+            <div class="form-group col-sm-6">
+                <label for="accountPassword">Account Password:</label>
+                <input type="password" class="form-control" name="password" [ngModel]="emailAlerts.password"
+                       required validateEqual="confirmPassword" reverse="true" #password="ngModel" id="accountPassword">
+                <small [hidden]="password.valid || (password.pristine && !f.submitted)" class="text-danger">
+                    Password is required
+                </small>
+                <!--<pre *ngIf="password.errors" class="margin-20">{{ password.errors | json }}</pre>-->
+            </div>
         </div>
 
-        <div class="form-group">
-            <label for="toAddress">To address</label>
-            <input type="email" class="form-control" name="toAddress" [ngModel]="emailAlerts.toAddress"
-                   required #toAddress="ngModel" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"
-                   id="toAddress">
-            <small [hidden]="toAddress.valid || (toAddress.pristine && !f.submitted)" class="text-danger">
-                Email is required and format should be <i>boba@fett.com</i>
-            </small>
-            <!--<pre *ngIf="toAddress.errors" class="margin-20">{{ toAddress.errors | json }}</pre>-->
+        <div class="row">
+            <div class="form-group col-sm-6">
+                <label for="retypeAccountPassword">Retype Account Password:</label>
+                <input type="password" class="form-control" name="confirmPassword" [ngModel]="emailAlerts.confirmPassword"
+                       required validateEqual="password" reverse="false" #confirmPassword="ngModel"
+                       id="retypeAccountPassword">
+                <small [hidden]="confirmPassword.valid || (confirmPassword.pristine && !f.submitted)" class="text-danger">
+                    Password mismatch
+                </small>
+                <!--<pre *ngIf="confirmPassword.errors" class="margin-20">{{ confirmPassword.errors | json }}</pre>-->
+            </div>
         </div>
 
-        <div class="form-group">
-            <label for="fromAddress">From address</label>
-            <input type="email" class="form-control" name="fromAddress" [ngModel]="emailAlerts.fromAddress"
-                   required #fromAddress="ngModel" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"
-                   id="fromAddress">
-            <small [hidden]="fromAddress.valid || (fromAddress.pristine && !f.submitted)" class="text-danger">
-                Email is required and format should be <i>boba@fett.com</i>
-            </small>
-            <!--<pre *ngIf="fromAddress.errors" class="margin-20">{{ fromAddress.errors | json }}</pre>-->
+        <div class="row">
+            <div class="form-group col-sm-6">
+                <label for="toAddress">To Address:</label>
+                <input type="email" class="form-control" name="toAddress" [ngModel]="emailAlerts.toAddress"
+                       required #toAddress="ngModel" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"
+                       id="toAddress">
+                <small [hidden]="toAddress.valid || (toAddress.pristine && !f.submitted)" class="text-danger">
+                    Email is required and format should be <i>boba@fett.com</i>
+                </small>
+                <!--<pre *ngIf="toAddress.errors" class="margin-20">{{ toAddress.errors | json }}</pre>-->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-sm-6">
+                <label for="fromAddress">From Address:</label>
+                <input type="email" class="form-control" name="fromAddress" [ngModel]="emailAlerts.fromAddress"
+                       required #fromAddress="ngModel" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"
+                       id="fromAddress">
+                <small [hidden]="fromAddress.valid || (fromAddress.pristine && !f.submitted)" class="text-danger">
+                    Email is required and format should be <i>boba@fett.com</i>
+                </small>
+                <!--<pre *ngIf="fromAddress.errors" class="margin-20">{{ fromAddress.errors | json }}</pre>-->
+            </div>
         </div>
 
         <div>
