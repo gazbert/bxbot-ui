@@ -46,7 +46,8 @@ export class ExchangeAdapterHttpDataObservableService implements ExchangeAdapter
     }
 
     update(exchangeAdapter: ExchangeAdapter): Observable<ExchangeAdapter> {
-        const url = `${this.exchangeAdaptersUrl}/${exchangeAdapter.id}`;
+        // const url = `${this.exchangeAdaptersUrl}/${exchangeAdapter.id}`;
+        const url = this.exchangeAdaptersUrl + '/' + exchangeAdapter.id;
         let body = JSON.stringify(exchangeAdapter);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });

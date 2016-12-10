@@ -39,7 +39,8 @@ export class ExchangeAdapterHttpDataPromiseService implements ExchangeAdapterDat
     }
 
     update(exchangeAdapter: ExchangeAdapter): Promise<ExchangeAdapter> {
-        const url = `${this.exchangeAdaptersUrl}/${exchangeAdapter.id}`;
+        // const url = `${this.exchangeAdaptersUrl}/${exchangeAdapter.id}`;
+        const url = this.exchangeAdaptersUrl + '/' + exchangeAdapter.id;
         return this.http
             .put(url, JSON.stringify(exchangeAdapter), {headers: this.headers})
             .toPromise()

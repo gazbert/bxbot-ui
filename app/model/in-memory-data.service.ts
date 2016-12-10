@@ -229,7 +229,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 enabled: false,
                 baseCurrency: 'BTC',
                 counterCurrency: 'USD',
-                tradingStrategy: {id: 'btce_macd'}
+                tradingStrategy: {id: 'btce_macd_rsi'}
             },
             {
                 id: 'gdax_btc_usd',
@@ -238,7 +238,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 enabled: false,
                 baseCurrency: 'BTC',
                 counterCurrency: 'USD',
-                tradingStrategy: {id: 'gdax_macd'}
+                tradingStrategy: {id: 'gdax_short-scalper'}
             },
             {
                 id: 'gdax_btc_gbp',
@@ -248,7 +248,61 @@ export class InMemoryDataService implements InMemoryDbService {
                 baseCurrency: 'BTC',
                 counterCurrency: 'GBP',
                 tradingStrategy: {id: 'gdax_long-scalper'}
-            }
+            },
+            {
+                id: 'gemini_eth_btc',
+                label: 'ETH/BTC',
+                exchangeId: 'gemini',
+                enabled: false,
+                baseCurrency: 'ETH',
+                counterCurrency: 'BTC',
+                tradingStrategy: {id: 'gemini_macd'}
+            },
+            {
+                id: 'okcoin_btc_usd',
+                label: 'BTC/USD',
+                exchangeId: 'okcoin',
+                enabled: false,
+                baseCurrency: 'BTC',
+                counterCurrency: 'USD',
+                tradingStrategy: {id: 'okcoin_ema'}
+            },
+            {
+                id: 'huobi_btc_usd',
+                label: 'BTC/USD',
+                exchangeId: 'huobi',
+                enabled: false,
+                baseCurrency: 'BTC',
+                counterCurrency: 'USD',
+                tradingStrategy: {id: 'huobi_ema_rsi'}
+            },
+            {
+                id: 'bitfinex_btc_usd',
+                label: 'BTC/USD',
+                exchangeId: 'bitfinex',
+                enabled: false,
+                baseCurrency: 'BTC',
+                counterCurrency: 'USD',
+                tradingStrategy: {id: 'bitfinex_long-scalper'}
+            },
+            {
+                id: 'kraken_btc_usd',
+                label: 'BTC/USD',
+                exchangeId: 'kraken',
+                enabled: false,
+                baseCurrency: 'BTC',
+                counterCurrency: 'USD',
+                tradingStrategy: {id: 'kraken_ema_rsi'}
+            },
+            {
+                id: 'itbit_btc_usd',
+                label: 'BTC/USD',
+                exchangeId: 'itbit',
+                enabled: false,
+                baseCurrency: 'BTC',
+                counterCurrency: 'USD',
+                tradingStrategy: {id: 'itbit_long-scalper'}
+            },
         ];
 
         /**

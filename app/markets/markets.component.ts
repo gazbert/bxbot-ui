@@ -1,10 +1,6 @@
 import {OnInit, Component, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {
-    ErrorCode,
-    ErrorMessage
-} from '../model/exchange-adapter';
 import {Market} from '../model/market/';
 import {MarketHttpDataPromiseService} from '../model/market/market-http-data-promise.service';
 
@@ -22,6 +18,8 @@ import {MarketHttpDataPromiseService} from '../model/market/market-http-data-pro
 export class MarketsComponent implements OnInit {
 
     markets: Market[] = [];
+    deletedMarkets: Market[] = [];
+    exchangeId;
     active = true;
 
     @ViewChild('marketsForm') currentForm: NgForm;
@@ -29,7 +27,8 @@ export class MarketsComponent implements OnInit {
 
     formErrors = {
         'marketName': '',
-        'connectionTimeout': ''
+        'counterCurrency': ''
+        // etc...
     };
 
     validationMessages = {
@@ -37,9 +36,9 @@ export class MarketsComponent implements OnInit {
             'required': 'Market Name is required.',
             'maxlength': 'Market Name cannot be more than 120 characters long.'
         },
-        'connectionTimeout': {
-            'required': 'Connection timeout is required.',
-            'pattern': 'Connection timeout must be a whole number.'
+        'counterCurrency': {
+            'required': 'Counter Currency is required.',
+            'pattern': 'Counter Currency must be 3 character currency id, e.g. BTC'
         }
     };
 
@@ -49,8 +48,8 @@ export class MarketsComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
-            let id = params['id'];
-            this.marketDataService.getMarketsByExchangeId(id)
+            this.exchangeId = params['id'];
+            this.marketDataService.getAllMarketsForExchange(this.exchangeId)
                 .then(markets => this.markets = markets);
         });
     }
@@ -59,31 +58,32 @@ export class MarketsComponent implements OnInit {
         this.router.navigate(['dashboard']);
     }
 
+    addMarket(id: string): void {
+        // TODO add new market
+        // this.markets.push(new Market('', '', '' , false, '', '', null));
+    }
+
+    deleteMarket(market: Market): void {
+        this.markets = this.markets.filter(m => m !== market);
+        this.deletedMarkets.push(market);
+    }
+
     save(): void {
-        // this.marketDataService.update(this.exchangeAdapter)
-        //     .then(() => this.goToDashboard());
-    }
 
-    addErrorCode(code: number): void {
-        // this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.push(new ErrorCode(code));
-    }
+        this.deletedMarkets.forEach((market) => {
+            this.marketDataService.deleteMarketById(market.id);
+        });
 
-    deleteErrorCode(code: ErrorCode): void {
-        // this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes =
-        //     this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.filter(c => c !== code);
-    }
-
-    addErrorMessage(message: string): void {
-        // this.exchangeAdapter.networkConfig.nonFatalErrorMessages.push(new ErrorMessage(message));
-    }
-
-    deleteErrorMessage(message: ErrorMessage): void {
-        // this.exchangeAdapter.networkConfig.nonFatalErrorMessages =
-        //     this.exchangeAdapter.networkConfig.nonFatalErrorMessages.filter(m => m !== message);
+        // TODO Only update Markets that have changed
+        this.markets.forEach((market) => {
+            this.marketDataService.updateMarket(market)
+                .then(() => this.goToDashboard());
+        });
     }
 
     // ------------------------------------------------------------------
     // Form validation
+    // TODO Need to rework to cater for multiple market entries... leave validation in HTML for now
     // ------------------------------------------------------------------
 
     ngAfterViewChecked() {

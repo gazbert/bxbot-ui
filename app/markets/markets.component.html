@@ -12,8 +12,8 @@
                     <div class="panel-heading">
                         <span>Market {{i + 1}}</span>
                         <span class="glyphicon glyphicon-remove pull-right"
-                              *ngIf="markets.length > 0"
-                              (click)="deleteErrorCode(markets[i])"></span>
+                              *ngIf="markets.length > 1"
+                              (click)="deleteMarket(markets[i])"></span>
                     </div>
                     <div class="panel-body">
 
@@ -21,8 +21,8 @@
                         <div class="form-group">
                             <label for="marketEnabled_{{i}}">Enabled:</label>
                             <input [(ngModel)]="markets[i].enabled"
-                                   type="checkbox" class="checkbox" id="marketEnabled_{{i}}"
-                                   name="marketEnabled_ + {{i}}" #marketEnabled="ngModel" required>
+                                   type="checkbox" class="checkbox-inline" id="marketEnabled_{{i}}"
+                                   name="marketEnabled_{{i}}" #marketEnabled="ngModel">
                         </div>
 
                         <!-- Market Name -->
@@ -31,7 +31,9 @@
                                 <label for="marketName_{{i}}">Name:</label>
                                 <input [(ngModel)]="markets[i].label"
                                        type="text" class="form-control" id="marketName_{{i}}"
-                                       name="marketName_{{i}}" #marketName="ngModel" required maxlength="120">
+                                       name="marketName_{{i}}" #marketName="ngModel" required maxlength="50">
+
+                                <!--<div *ngIf="formErrors.marketName" class="alert alert-danger">{{ formErrors.marketName }}</div>-->
 
                                 <div [hidden]="marketName.valid || marketName.pristine" class="alert alert-danger">
                                     Market Name must be set.
@@ -45,7 +47,7 @@
                                 <label for="marketId_{{i}}">Id:</label>
                                 <input [(ngModel)]="markets[i].id"
                                        type="text" class="form-control" id="marketId_{{i}}"
-                                       name="marketId_{{i}}" #marketId="ngModel" required maxlength="120">
+                                       name="marketId_{{i}}" #marketId="ngModel" required maxlength="50">
 
                                 <div [hidden]="marketId.valid || marketId.pristine" class="alert alert-danger">
                                     Market Id must be set.
@@ -59,10 +61,10 @@
                                 <label for="baseCurrency_{{i}}">Base Currency:</label>
                                 <input [(ngModel)]="markets[i].baseCurrency"
                                        type="text" class="form-control" id="baseCurrency_{{i}}"
-                                       name="baseCurrency_ + {{i}}" #baseCurrency="ngModel" required maxlength="120">
+                                       name="baseCurrency_{{i}}" #baseCurrency="ngModel" required maxlength="3" pattern="^[A-Z]{3}$">
 
                                 <div [hidden]="baseCurrency.valid || baseCurrency.pristine" class="alert alert-danger">
-                                    Base Currency must be set.
+                                    Base Currency must be valid 3 character currency id, e.g. BTC
                                 </div>
                             </div>
                         </div>
@@ -73,10 +75,10 @@
                                 <label for="counterCurrency_{{i}}">Counter Currency:</label>
                                 <input [(ngModel)]="markets[i].counterCurrency"
                                        type="text" class="form-control" id="counterCurrency_{{i}}"
-                                       name="counterCurrency_{{i}}" #counterCurrency="ngModel" required maxlength="120">
+                                       name="counterCurrency_{{i}}" #counterCurrency="ngModel" required maxlength="3" pattern="^[A-Z]{3}$">
 
                                 <div [hidden]="counterCurrency.valid || counterCurrency.pristine" class="alert alert-danger">
-                                    Counter Currency must be set.
+                                    Counter Currency must be valid 3 character currency id, e.g. BTC
                                 </div>
                             </div>
                         </div>
@@ -87,7 +89,7 @@
                                 <label for="tradingStrategy_{{i}}">Trading Strategy:</label>
                                 <input [(ngModel)]="markets[i].tradingStrategy.id"
                                        type="text" class="form-control" id="tradingStrategy_{{i}}"
-                                       name="tradingStrategy_{{i}}" #tradingStrategy="ngModel" required maxlength="120">
+                                       name="tradingStrategy_{{i}}" #tradingStrategy="ngModel" required maxlength="50">
 
                                 <div [hidden]="tradingStrategy.valid || tradingStrategy.pristine" class="alert alert-danger">
                                     Trading Strategy must be set.

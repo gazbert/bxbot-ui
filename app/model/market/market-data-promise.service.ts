@@ -10,5 +10,7 @@ import {Market} from "./market.model";
  */
 export interface MarketDataPromiseService {
 
-    getMarketsByExchangeId(exchangeId: string): Promise<Market[]>;
+    getAllMarketsForExchange(exchangeId: string): Promise<Market[]>;
+    updateMarket(market: Market): Promise<Market>;
+    deleteMarketById(marketId: string): Promise<Market>;
 }

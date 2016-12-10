@@ -26,11 +26,29 @@ export class MarketHttpDataPromiseService implements MarketDataPromiseService {
     constructor(private http: Http) {
     }
 
-    getMarketsByExchangeId(exchangeId: string): Promise<Market[]> {
-        const url = `${this.marketsUrl}?exchangeId=${exchangeId}`;
+    getAllMarketsForExchange(exchangeId: string): Promise<Market[]> {
+        const url = this.marketsUrl + '?exchangeId=' + exchangeId;
         return this.http.get(url)
             .toPromise()
             .then(response => response.json().data as Market[])
+            .catch(this.handleError);
+    }
+
+    updateMarket(market: Market): Promise<Market> {
+        const url = this.marketsUrl + '/' + market.id;
+        return this.http
+            .put(url, JSON.stringify(market), {headers: this.headers})
+            .toPromise()
+            .then(() => market)
+            .catch(this.handleError);
+    }
+
+    deleteMarketById(marketId: string): Promise<Market> {
+        const url = this.marketsUrl + '/' + marketId;
+        return this.http
+            .delete(url, {headers: this.headers})
+            .toPromise()
+            .then()
             .catch(this.handleError);
     }
 
