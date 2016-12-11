@@ -3,7 +3,7 @@
  -->
 <div *ngIf="markets">
 
-    <form *ngIf="active" #marketsForm="ngForm" (ngSubmit)="save()">
+    <form *ngIf="active" #f="ngForm" novalidate (ngSubmit)="save(f.valid)">
 
         <div class="row">
             <div class="col-sm-12">
@@ -35,9 +35,14 @@
 
                                 <!--<div *ngIf="formErrors.marketName" class="alert alert-danger">{{ formErrors.marketName }}</div>-->
 
-                                <div [hidden]="marketName.valid || marketName.pristine" class="alert alert-danger">
+                                <div [hidden]="marketName.valid || (marketName.pristine && !f.submitted)" class="alert alert-danger">
                                     Market Name must be set.
                                 </div>
+
+                                <!--<small [hidden]="marketName.valid || (marketName.pristine && !f.submitted)" class="text-danger">-->
+                                    <!--Market Name must be set-->
+                                <!--</small>-->
+
                             </div>
                         </div>
 
@@ -49,7 +54,11 @@
                                        type="text" class="form-control" id="marketId_{{i}}"
                                        name="marketId_{{i}}" #marketId="ngModel" required maxlength="50">
 
-                                <div [hidden]="marketId.valid || marketId.pristine" class="alert alert-danger">
+                                <!--<div [hidden]="marketId.valid || marketId.pristine" class="alert alert-danger">-->
+                                    <!--Market Id must be set.-->
+                                <!--</div>-->
+
+                                <div [hidden]="marketId.valid || (marketId.pristine && !f.submitted)" class="alert alert-danger">
                                     Market Id must be set.
                                 </div>
                             </div>
@@ -63,7 +72,11 @@
                                        type="text" class="form-control" id="baseCurrency_{{i}}"
                                        name="baseCurrency_{{i}}" #baseCurrency="ngModel" required maxlength="3" pattern="^[A-Z]{3}$">
 
-                                <div [hidden]="baseCurrency.valid || baseCurrency.pristine" class="alert alert-danger">
+                                <!--<div [hidden]="baseCurrency.valid || baseCurrency.pristine" class="alert alert-danger">-->
+                                    <!--Base Currency must be valid 3 character currency id, e.g. BTC-->
+                                <!--</div>-->
+
+                                <div [hidden]="baseCurrency.valid || (baseCurrency.pristine && !f.submitted)" class="alert alert-danger">
                                     Base Currency must be valid 3 character currency id, e.g. BTC
                                 </div>
                             </div>
@@ -77,7 +90,11 @@
                                        type="text" class="form-control" id="counterCurrency_{{i}}"
                                        name="counterCurrency_{{i}}" #counterCurrency="ngModel" required maxlength="3" pattern="^[A-Z]{3}$">
 
-                                <div [hidden]="counterCurrency.valid || counterCurrency.pristine" class="alert alert-danger">
+                                <!--<div [hidden]="counterCurrency.valid || counterCurrency.pristine" class="alert alert-danger">-->
+                                    <!--Counter Currency must be valid 3 character currency id, e.g. BTC-->
+                                <!--</div>-->
+
+                                <div [hidden]="counterCurrency.valid || (counterCurrency.pristine && !f.submitted)" class="alert alert-danger">
                                     Counter Currency must be valid 3 character currency id, e.g. BTC
                                 </div>
                             </div>
@@ -91,7 +108,11 @@
                                        type="text" class="form-control" id="tradingStrategy_{{i}}"
                                        name="tradingStrategy_{{i}}" #tradingStrategy="ngModel" required maxlength="50">
 
-                                <div [hidden]="tradingStrategy.valid || tradingStrategy.pristine" class="alert alert-danger">
+                                <!--<div [hidden]="tradingStrategy.valid || tradingStrategy.pristine" class="alert alert-danger">-->
+                                    <!--Trading Strategy must be set.-->
+                                <!--</div>-->
+
+                                <div [hidden]="tradingStrategy.valid || (tradingStrategy.pristine && !f.submitted)" class="alert alert-danger">
                                     Trading Strategy must be set.
                                 </div>
                             </div>
@@ -99,7 +120,7 @@
                     </div>
                 </div>
                 <div class="margin-20">
-                    <a (click)="addMarket(0)" style="cursor: default">
+                    <a (click)="addMarket()" style="cursor: default">
                         Add Market +
                     </a>
                 </div>
@@ -115,7 +136,7 @@
              http://stackoverflow.com/questions/38120756/angular2-router-navigate-refresh-page
              -->
             <button type="button" (click)="goToDashboard()" class="btn btn-default">Cancel</button>
-            <button type="submit" (click)="save()" class="btn btn-primary" [disabled]="!marketsForm.form.valid">Save</button>
+            <button type="submit" class="btn btn-primary">Save</button>
         </div>
     </form>
 </div>

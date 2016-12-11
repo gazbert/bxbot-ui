@@ -1,8 +1,8 @@
 import {OnInit, Component, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {Market} from '../model/market/';
-import {MarketHttpDataPromiseService} from '../model/market/market-http-data-promise.service';
+import {Market, MarketHttpDataPromiseService} from '../model/market/';
+import {TradingStrategy} from "../model/trading-strategy";
 
 /**
  * Template-driven version of the Markets form.
@@ -58,9 +58,9 @@ export class MarketsComponent implements OnInit {
         this.router.navigate(['dashboard']);
     }
 
-    addMarket(id: string): void {
-        // TODO add new market
-        // this.markets.push(new Market('', '', '' , false, '', '', null));
+    addMarket(): void {
+        let tradingStrategy = new TradingStrategy(null, null, this.exchangeId, null, null);
+        this.markets.push(new Market(null, null, this.exchangeId , false, null, null, tradingStrategy));
     }
 
     deleteMarket(market: Market): void {
@@ -68,17 +68,18 @@ export class MarketsComponent implements OnInit {
         this.deletedMarkets.push(market);
     }
 
-    save(): void {
+    save(isValid: boolean): void {
+        if (isValid) {
+            this.deletedMarkets.forEach((market) => {
+                this.marketDataService.deleteMarketById(market.id);
+            });
 
-        this.deletedMarkets.forEach((market) => {
-            this.marketDataService.deleteMarketById(market.id);
-        });
-
-        // TODO Only update Markets that have changed
-        this.markets.forEach((market) => {
-            this.marketDataService.updateMarket(market)
-                .then(() => this.goToDashboard());
-        });
+            // TODO Only update Markets that have changed
+            this.markets.forEach((market) => {
+                this.marketDataService.updateMarket(market)
+                    .then(() => this.goToDashboard());
+            });
+        }
     }
 
     // ------------------------------------------------------------------
