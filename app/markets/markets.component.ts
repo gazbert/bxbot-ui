@@ -2,7 +2,7 @@ import {OnInit, Component, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {Market, MarketHttpDataPromiseService} from '../model/market/';
-import {TradingStrategy} from "../model/trading-strategy";
+import {TradingStrategy} from '../model/trading-strategy';
 
 /**
  * Template-driven version of the Markets form.
