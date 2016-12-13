@@ -346,6 +346,83 @@ export class InMemoryDataService implements InMemoryDbService {
                 accountPassword: 'iLoveHoth',
                 toAddress: 'jabba@tatooine.space',
                 fromAddress: 'boba.fett@hoth.space'
+            },
+            {
+                id: 'bitstamp_email_alerts',
+                exchangeId: 'bitstamp',
+                enabled: true,
+                smtpHost: 'smtp.gmail.com',
+                smtpPort: 587,
+                accountUsername: 'darthvader',
+                accountPassword: 'TheForceIsStrongWithThisOne',
+                toAddress: 'boba.fett@hoth.space',
+                fromAddress: 'darth@deathstar.space'
+            },
+            {
+                id: 'gdax_email_alerts',
+                exchangeId: 'gdax',
+                enabled: true,
+                smtpHost: 'smtp.gmail.com',
+                smtpPort: 587,
+                accountUsername: 'solo',
+                accountPassword: 'NeverTellMeTheOdds!',
+                toAddress: 'lando@cloudcity.space',
+                fromAddress: 'han.solo@falcon.space'
+            },
+            {
+                id: 'itbit_email_alerts',
+                exchangeId: 'itbit',
+                enabled: true,
+                smtpHost: 'smtp.gmail.com',
+                smtpPort: 587,
+                accountUsername: 'gold5',
+                accountPassword: 'stayOnTarget',
+                toAddress: 'chewy@kashyyyk.space',
+                fromAddress: 'gold5@x-wing.space'
+            },
+            {
+                id: 'huobi_email_alerts',
+                exchangeId: 'huobi',
+                enabled: true,
+                smtpHost: 'smtp.gmail.com',
+                smtpPort: 587,
+                accountUsername: 'ackbar',
+                accountPassword: 'ItsATrap!',
+                toAddress: 'leia@alderaan.space',
+                fromAddress: 'admiral.ackbar@some-one.space'
+            },
+            {
+                id: 'okcoin_email_alerts',
+                exchangeId: 'okcoin',
+                enabled: true,
+                smtpHost: 'smtp.gmail.com',
+                smtpPort: 587,
+                accountUsername: 'yoda',
+                accountPassword: 'DoOrDoNotThereIsNoTry',
+                toAddress: 'r2d2@naboo.space',
+                fromAddress: 'master.yoda@dagobah.space',
+            },
+            {
+                id: 'kraken_email_alerts',
+                exchangeId: 'kraken',
+                enabled: true,
+                smtpHost: 'smtp.gmail.com',
+                smtpPort: 587,
+                accountUsername: 'obiwan',
+                accountPassword: 'UseTheForceLuke',
+                toAddress: 'luke.skywalker@tatooine.space',
+                fromAddress: 'Obi.Wan@coruscant.space',
+            },
+            {
+                id: 'bitfinex_email_alerts',
+                exchangeId: 'bitfinex',
+                enabled: true,
+                smtpHost: 'smtp.gmail.com',
+                smtpPort: 587,
+                accountUsername: 'chewy',
+                accountPassword: 'grrrrrrrrrrrrrr',
+                toAddress: 'luke.skywalker@tatooine.space',
+                fromAddress: 'chewbacca@kashyyyk.space',
             }
         ];
 

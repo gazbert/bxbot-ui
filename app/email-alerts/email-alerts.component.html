@@ -1,11 +1,14 @@
-<div class="">
+<!--
+ Template-driven version of the Email Alerts config form.
+ -->
+<div *ngIf="emailAlertsConfig">
 
-    <form #f="ngForm" novalidate (ngSubmit)="save(f.value, f.valid)">
+    <form #f="ngForm" novalidate (ngSubmit)="save(f.valid)">
 
         <div class="row">
             <div class="form-group col-sm-6">
                 <label for="alertsEnabled">Alerts Enabled:</label>
-                <input type="checkbox" class="checkbox" name="alertsEnabled" [ngModel]="emailAlerts.username" required
+                <input type="checkbox" class="checkbox" name="alertsEnabled" [ngModel]="emailAlertsConfig.enabled" required
                        #alertsEnabled="ngModel" id="alertsEnabled">
             </div>
         </div>
@@ -13,10 +16,10 @@
         <div class="row">
             <div class="form-group col-sm-6">
                 <label for="accountUsername">Account Username:</label>
-                <input type="text" class="form-control" name="username" [ngModel]="emailAlerts.username"
-                       required minlength="5" maxlength="8" #username="ngModel" id="accountUsername">
+                <input type="text" class="form-control" name="accountUsername" [ngModel]="emailAlertsConfig.accountUsername"
+                       required minlength="4" maxlength="8" #username="ngModel" id="accountUsername">
                 <small [hidden]="username.valid || (username.pristine && !f.submitted)" class="text-danger">
-                    Username is required (minimum 5 characters).
+                    Username is required (minimum 4 characters).
                 </small>
                 <!--<pre *ngIf="username.errors" class="margin-20">{{ username.errors | json }}</pre>-->
             </div>
@@ -25,7 +28,7 @@
         <div class="row">
             <div class="form-group col-sm-6">
                 <label for="accountPassword">Account Password:</label>
-                <input type="password" class="form-control" name="password" [ngModel]="emailAlerts.password"
+                <input type="password" class="form-control" name="password" [ngModel]="emailAlertsConfig.accountPassword"
                        required validateEqual="confirmPassword" reverse="true" #password="ngModel" id="accountPassword">
                 <small [hidden]="password.valid || (password.pristine && !f.submitted)" class="text-danger">
                     Password is required
@@ -37,7 +40,7 @@
         <div class="row">
             <div class="form-group col-sm-6">
                 <label for="retypeAccountPassword">Retype Account Password:</label>
-                <input type="password" class="form-control" name="confirmPassword" [ngModel]="emailAlerts.confirmPassword"
+                <input type="password" class="form-control" name="confirmPassword" [ngModel]="emailAlertsConfig.confirmPassword"
                        required validateEqual="password" reverse="false" #confirmPassword="ngModel"
                        id="retypeAccountPassword">
                 <small [hidden]="confirmPassword.valid || (confirmPassword.pristine && !f.submitted)" class="text-danger">
@@ -50,7 +53,7 @@
         <div class="row">
             <div class="form-group col-sm-6">
                 <label for="toAddress">To Address:</label>
-                <input type="email" class="form-control" name="toAddress" [ngModel]="emailAlerts.toAddress"
+                <input type="email" class="form-control" name="toAddress" [ngModel]="emailAlertsConfig.toAddress"
                        required #toAddress="ngModel" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"
                        id="toAddress">
                 <small [hidden]="toAddress.valid || (toAddress.pristine && !f.submitted)" class="text-danger">
@@ -63,7 +66,7 @@
         <div class="row">
             <div class="form-group col-sm-6">
                 <label for="fromAddress">From Address:</label>
-                <input type="email" class="form-control" name="fromAddress" [ngModel]="emailAlerts.fromAddress"
+                <input type="email" class="form-control" name="fromAddress" [ngModel]="emailAlertsConfig.fromAddress"
                        required #fromAddress="ngModel" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"
                        id="fromAddress">
                 <small [hidden]="fromAddress.valid || (fromAddress.pristine && !f.submitted)" class="text-danger">

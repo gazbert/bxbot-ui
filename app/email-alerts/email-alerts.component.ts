@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {EmailAlertsConfig} from './email-alerts.model';
+import {OnInit, Component, ViewChild} from '@angular/core';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {NgForm} from '@angular/forms';
+import {EmailAlertsConfig, EmailAlertsHttpDataPromiseService} from '../model/email-alerts';
 
 /**
  * Email Alerts config component.
@@ -13,25 +14,30 @@ import {EmailAlertsConfig} from './email-alerts.model';
 })
 export class EmailAlertsComponent implements OnInit {
 
-    public emailAlerts: EmailAlertsConfig;
+    emailAlertsConfig: EmailAlertsConfig;
+    exchangeId;
+    active = true;
 
-    constructor(private router: Router) {
+    @ViewChild('emailAlertsForm') currentForm: NgForm;
+    emailAlertsForm: NgForm;
+
+    constructor(private emailAlertsService: EmailAlertsHttpDataPromiseService, private route: ActivatedRoute,
+                private router: Router) {
     }
 
     ngOnInit() {
-        this.emailAlerts = {
-            alertsEnabled: false,
-            username: '',
-            password: '',
-            confirmPassword: '',
-            toAddress: '',
-            fromAddress: ''
-        };
+        this.route.params.forEach((params: Params) => {
+            this.exchangeId = params['id'];
+            this.emailAlertsService.getEmailAlertsConfigForExchange(this.exchangeId)
+                .then(emailAlertsConfig => this.emailAlertsConfig = emailAlertsConfig);
+        });
     }
 
-    save(model: EmailAlertsConfig, isValid: boolean) {
-        // TODO call API to save email alert config...
-        console.log(model, isValid);
+    save(isValid: boolean): void {
+        if (isValid) {
+            this.emailAlertsService.update(this.emailAlertsConfig)
+                .then(() => this.goToDashboard());
+        }
     }
 
     goToDashboard(): void {

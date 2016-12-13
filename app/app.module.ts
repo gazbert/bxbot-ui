@@ -13,6 +13,7 @@ import {ExchangeDetailsModule} from "./exchange-details/exchange-details.module"
 import {ExchangeAdapterModule} from "./exchange-adapter/exchange-adapter.module";
 import {EmailAlertsModule} from "./email-alerts/email-alerts.module";
 import {AppRoutingModule} from "./app-routing.module";
+import {EmailAlertsHttpDataPromiseService} from "./model/email-alerts";
 
 /**
  * BX-bot UI main module.
@@ -41,6 +42,7 @@ import {AppRoutingModule} from "./app-routing.module";
         ExchangeAdapterHttpDataPromiseService,
         ExchangeAdapterHttpDataObservableService,
         MarketHttpDataPromiseService,
+        EmailAlertsHttpDataPromiseService
     ],
     bootstrap: [AppComponent]
 })

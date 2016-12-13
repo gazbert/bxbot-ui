@@ -12,6 +12,8 @@ import 'rxjs/add/operator/toPromise';
  * It demonstrates use of Promises in call responses.
  * Seems to be easier to use/understand than Observable way?
  *
+ * TODO test spec
+ *
  * @author gazbert
  */
 @Injectable()
