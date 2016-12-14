@@ -423,6 +423,17 @@ export class InMemoryDataService implements InMemoryDbService {
                 accountPassword: 'grrrrrrrrrrrrrr',
                 toAddress: 'luke.skywalker@tatooine.space',
                 fromAddress: 'chewbacca@kashyyyk.space',
+            },
+            {
+                id: 'gemini_email_alerts',
+                exchangeId: 'gemini',
+                enabled: true,
+                smtpHost: 'smtp.gmail.com',
+                smtpPort: 587,
+                accountUsername: 'c3po',
+                accountPassword: 'ohMy!',
+                toAddress: 'bb-8@jakku.space',
+                fromAddress: 'c-3p0@naboo.space',
             }
         ];
 
