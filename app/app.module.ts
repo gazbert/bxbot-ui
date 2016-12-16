@@ -14,6 +14,8 @@ import {ExchangeAdapterModule} from "./exchange-adapter/exchange-adapter.module"
 import {EmailAlertsModule} from "./email-alerts/email-alerts.module";
 import {AppRoutingModule} from "./app-routing.module";
 import {EmailAlertsHttpDataPromiseService} from "./model/email-alerts";
+import {TradingStrategiesModule} from "./trading-strategies/trading-strategies.module";
+import {TradingStrategyHttpDataPromiseService} from "./model/trading-strategy/trading-strategy-http-data-promise.service";
 
 /**
  * BX-bot UI main module.
@@ -31,6 +33,7 @@ import {EmailAlertsHttpDataPromiseService} from "./model/email-alerts";
         ExchangeAdapterModule,
         EmailAlertsModule,
         ExchangeDetailsModule,
+        TradingStrategiesModule,
         AppRoutingModule
     ],
     declarations: [
@@ -42,6 +45,7 @@ import {EmailAlertsHttpDataPromiseService} from "./model/email-alerts";
         ExchangeAdapterHttpDataPromiseService,
         ExchangeAdapterHttpDataObservableService,
         MarketHttpDataPromiseService,
+        TradingStrategyHttpDataPromiseService,
         EmailAlertsHttpDataPromiseService
     ],
     bootstrap: [AppComponent]

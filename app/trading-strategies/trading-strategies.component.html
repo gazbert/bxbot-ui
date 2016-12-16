@@ -1,0 +1,115 @@
+<!--
+ Template-driven version of the Trading Strategies form.
+ -->
+<div *ngIf="tradingStrategies">
+
+    <form *ngIf="active" #f="ngForm" novalidate (ngSubmit)="save(f.valid)">
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div *ngFor="let tradingStrategy of tradingStrategies; let i=index;"
+                     class="panel panel-default">
+                    <div class="panel-heading">
+                        <span>Strategy {{i + 1}}</span>
+                        <span class="glyphicon glyphicon-remove pull-right"
+                              *ngIf="tradingStrategies.length > 1"
+                              (click)="deleteTradingStrategy(tradingStrategies[i])"></span>
+                    </div>
+                    <div class="panel-body">
+
+                        <!-- Strategy Id -->
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <label for="tradingStrategyId_{{i}}">Id:</label>
+                                <input [(ngModel)]="tradingStrategies[i].id"
+                                       type="text" class="form-control" id="tradingStrategyId_{{i}}"
+                                       name="tradingStrategyId_{{i}}" #tradingStrategyId="ngModel" required maxlength="50"/>
+
+                                <!--<div [hidden]="marketId.valid || marketId.pristine" class="alert alert-danger">-->
+                                <!--Market Id must be set.-->
+                                <!--</div>-->
+
+                                <div [hidden]="tradingStrategyId.valid || (tradingStrategyId.pristine && !f.submitted)" class="alert alert-danger">
+                                    Trading Strategy Id must be set.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Strategy Name -->
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <label for="tradingStrategyName_{{i}}">Name:</label>
+                                <input [(ngModel)]="tradingStrategies[i].label"
+                                       type="text" class="form-control" id="tradingStrategyName_{{i}}"
+                                       name="tradingStrategyName_{{i}}" #tradingStrategyName="ngModel" required maxlength="50"/>
+
+                                <!--<div *ngIf="formErrors.marketName" class="alert alert-danger">{{ formErrors.marketName }}</div>-->
+
+                                <div [hidden]="tradingStrategyName.valid || (tradingStrategyName.pristine && !f.submitted)" class="alert alert-danger">
+                                    Trading Strategy Name must be set.
+                                </div>
+
+                                <!--<small [hidden]="marketName.valid || (marketName.pristine && !f.submitted)" class="text-danger">-->
+                                    <!--Market Name must be set-->
+                                <!--</small>-->
+
+                            </div>
+                        </div>
+
+                        <!-- Strategy Description-->
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <label for="tradingStrategyDescrption_{{i}}">Description:</label>
+                                <input [(ngModel)]="tradingStrategies[i].description"
+                                       type="text" class="form-control" id="tradingStrategyDescrption_{{i}}"
+                                       name="tradingStrategyDescrption_{{i}}" #tradingStrategyDescription="ngModel"
+                                       maxlength="121"/>
+
+                                <!--<div [hidden]="baseCurrency.valid || baseCurrency.pristine" class="alert alert-danger">-->
+                                    <!--Base Currency must be valid 3 character currency id, e.g. BTC-->
+                                <!--</div>-->
+
+                                <div [hidden]="tradingStrategyDescription.valid || (tradingStrategyDescription.pristine && !f.submitted)" class="alert alert-danger">
+                                    Max Trading Strategy Description length is 120.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Strategy classname -->
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <label for="tradingStrategyClassname_{{i}}">Class Name:</label>
+                                <input [(ngModel)]="tradingStrategies[i].className" name="tradingStrategyClassname_{{i}}"
+                                       placeholder="com.me.MyTradingStrategyClass" id="tradingStrategyClassname_{{i}}"
+                                       type="text" class="form-control" required maxlength="120"
+                                       #tradingStrategyClassname ="ngModel"/>
+
+                                <div [hidden]="tradingStrategyClassname.valid || (tradingStrategyClassname.pristine && !f.submitted)" class="alert alert-danger">
+                                    Trading Strategy Classname must be valid Java class name.
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="margin-20">
+                    <a (click)="addTradingStrategy()" style="cursor: default">
+                        Add Trading Strategy +
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <hr>
+        </div>
+        <div>
+            <!--
+             Must have type for button else Chrome reloads entire app on Cancel click!
+             http://stackoverflow.com/questions/38120756/angular2-router-navigate-refresh-page
+             -->
+            <button type="button" (click)="goToDashboard()" class="btn btn-default">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </form>
+</div>

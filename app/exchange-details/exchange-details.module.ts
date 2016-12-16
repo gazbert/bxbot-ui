@@ -8,6 +8,7 @@ import {ExchangeAdapterModule} from '../exchange-adapter/exchange-adapter.module
 import {MarketsModule} from '../markets/markets.module';
 import {EmailAlertsModule} from '../email-alerts/email-alerts.module';
 import {SharedModule} from '../shared/shared.module';
+import {TradingStrategiesModule} from '../trading-strategies/trading-strategies.module';
 
 const routes: Routes = [
     {
@@ -26,6 +27,7 @@ const routes: Routes = [
         ExchangeAdapterModule,
         EmailAlertsModule,
         MarketsModule,
+        TradingStrategiesModule,
         SharedModule,
         RouterModule.forChild(routes),
     ],

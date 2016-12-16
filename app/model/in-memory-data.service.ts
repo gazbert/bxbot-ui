@@ -310,11 +310,11 @@ export class InMemoryDataService implements InMemoryDbService {
          */
         let tradingStrategies = [
             {
-                id: 'btce_macd',
-                label: 'MACD Indicator',
+                id: 'btce_macd_rsi',
+                label: 'MACD RSI Indicator',
                 exchangeId: 'btce',
-                description: 'MACD Indicator for deciding when to enter and exit trades.',
-                className: 'com.gazbert.bxbot.strategies.MacdStrategy'
+                description: 'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
+                className: 'com.gazbert.bxbot.strategies.MacdRsiStrategy'
             },
             {
                 id: 'btce_long-scalper',
@@ -324,11 +324,11 @@ export class InMemoryDataService implements InMemoryDbService {
                 className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
             },
             {
-                id: 'gdax_macd',
-                label: 'MACD Indicator',
+                id: 'gdax_long-scalper',
+                label: 'Long Scalper',
                 exchangeId: 'gdax',
-                description: 'MACD Indicator for deciding when to enter and exit trades.',
-                className: 'com.gazbert.bxbot.strategies.MacdStrategy'
+                description: 'Scalping strategy that buys low and sells high.',
+                className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
             },
         ];
 

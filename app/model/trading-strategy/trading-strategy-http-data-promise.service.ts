@@ -1,0 +1,43 @@
+import {Injectable} from "@angular/core";
+import {Http, Headers} from "@angular/http";
+import {TradingStrategy} from "./trading-strategy.model";
+import {TradingStrategyDataPromiseService} from "./trading-strategy-data-promise.service";
+
+// *** Don't forget this else you get runtime error!
+// zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function
+import 'rxjs/add/operator/toPromise';
+
+/**
+ * HTTP implementation of the Trading Strategy Data Service.
+ * It demonstrates use of Promises in call responses.
+ * Seems to be easier to use/understand than Observable way?
+ *
+ * TODO test spec
+ *
+ * @author gazbert
+ */
+@Injectable()
+export class TradingStrategyHttpDataPromiseService implements TradingStrategyDataPromiseService {
+
+    public tradingStrategiesUrl = 'app/tradingStrategies';  // URL to web api
+    // vs JSON canned data for quick testing below...
+    // private tradingStrategiesUrl = 'app/trading-strategies.json'; // URL to JSON file
+
+    private headers = new Headers({'Content-Type': 'application/json'});
+
+    constructor(private http: Http) {
+    }
+
+    getAllTradingStrategiesForExchange(exchangeId: string): Promise<TradingStrategy[]> {
+        const url = this.tradingStrategiesUrl + '?exchangeId=' + exchangeId;
+        return this.http.get(url)
+            .toPromise()
+            .then(response => response.json().data as TradingStrategy[])
+            .catch(this.handleError);
+    }
+
+    private handleError(error: any): Promise<any> {
+        console.error('An error occurred', error); // for demo purposes only
+        return Promise.reject(error.message || error);
+    }
+}
