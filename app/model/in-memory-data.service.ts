@@ -330,6 +330,69 @@ export class InMemoryDataService implements InMemoryDbService {
                 description: 'Scalping strategy that buys low and sells high.',
                 className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
             },
+            {
+                id: 'gdax_ema',
+                label: 'MACD Indicator',
+                exchangeId: 'gdax',
+                description: 'EMA Indicator algo for deciding when to enter and exit trades.',
+                className: 'com.gazbert.bxbot.strategies.EmaStrategy'
+            },
+            {
+                id: 'bitstamp_ema',
+                label: 'EMA Indicator',
+                exchangeId: 'bitstamp',
+                description: 'EAM Indicator algo for deciding when to enter and exit trades.',
+                className: 'com.gazbert.bxbot.strategies.EmaStrategy'
+            },
+            {
+                id: 'gemini_macd',
+                label: 'MACD Indicator',
+                exchangeId: 'gemini',
+                description: 'MACD Indicator algo for deciding when to enter and exit trades.',
+                className: 'com.gazbert.bxbot.strategies.MacdStrategy'
+            },
+            {
+                id: 'gemini_long-scalper',
+                label: 'Long Scalper',
+                exchangeId: 'gemini',
+                description: 'Scalping strategy that buys low and sells high.',
+                className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
+            },
+            {
+                id: 'okcoin_ema',
+                label: 'MACD Indicator',
+                exchangeId: 'okcoin',
+                description: 'EMA Indicator algo for deciding when to enter and exit trades.',
+                className: 'com.gazbert.bxbot.strategies.EmaStrategy'
+            },
+            {
+                id: 'huobi_ema_rsi',
+                label: 'MACD RSI Indicator',
+                exchangeId: 'huobi',
+                description: 'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
+                className: 'com.gazbert.bxbot.strategies.MacdRsiStrategy'
+            },
+            {
+                id: 'bitfinex_long-scalper',
+                label: 'Long Scalper',
+                exchangeId: 'bitfinex',
+                description: 'Scalping strategy that buys low and sells high.',
+                className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
+            },
+            {
+                id: 'kraken_ema_rsi',
+                label: 'EMA RSI Indicator',
+                exchangeId: 'kraken',
+                description: 'EMA Indicator and RSI algo for deciding when to enter and exit trades.',
+                className: 'com.gazbert.bxbot.strategies.EmaRsiStrategy'
+            },
+            {
+                id: 'itbit_long-scalper',
+                label: 'Long Scalper',
+                exchangeId: 'itbit',
+                description: 'Scalping strategy that buys low and sells high.',
+                className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
+            }
         ];
 
         /**

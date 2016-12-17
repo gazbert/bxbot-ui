@@ -58,29 +58,28 @@ export class TradingStrategiesComponent implements OnInit {
         this.router.navigate(['dashboard']);
     }
 
-    // addMarket(): void {
-    //     let tradingStrategy = new TradingStrategy(null, null, this.exchangeId, null, null);
-    //     this.markets.push(new Market(null, null, this.exchangeId , false, null, null, tradingStrategy));
-    // }
+    addTradingStrategy(): void {
+        this.tradingStrategies.push(new TradingStrategy(null, null, this.exchangeId, null, null));
+    }
 
-    // deleteMarket(market: Market): void {
-    //     this.markets = this.markets.filter(m => m !== market);
-    //     this.deletedMarkets.push(market);
-    // }
+    deleteTradingStrategy(tradingStrategy: TradingStrategy): void {
+        this.tradingStrategies = this.tradingStrategies.filter(m => m !== tradingStrategy);
+        this.deletedTradingStrategies.push(tradingStrategy);
+    }
 
-    // save(isValid: boolean): void {
-    //     if (isValid) {
-    //         this.deletedMarkets.forEach((market) => {
-    //             this.marketDataService.deleteMarketById(market.id);
-    //         });
-    //
-    //         // TODO Only update Markets that have changed
-    //         this.markets.forEach((market) => {
-    //             this.marketDataService.updateMarket(market)
-    //                 .then(() => this.goToDashboard());
-    //         });
-    //     }
-    // }
+    save(isValid: boolean): void {
+        if (isValid) {
+            this.deletedTradingStrategies.forEach((tradingStrategy) => {
+                this.tradingStrategyDataService.deleteTradingStrategyById(tradingStrategy.id);
+            });
+
+            // TODO Only update Strats that have changed
+            this.tradingStrategies.forEach((tradingStrategy) => {
+                this.tradingStrategyDataService.updateTradingStrategy(tradingStrategy)
+                    .then(() => this.goToDashboard());
+            });
+        }
+    }
 
     // ------------------------------------------------------------------
     // Form validation

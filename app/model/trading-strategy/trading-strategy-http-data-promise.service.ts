@@ -36,6 +36,24 @@ export class TradingStrategyHttpDataPromiseService implements TradingStrategyDat
             .catch(this.handleError);
     }
 
+    updateTradingStrategy(tradingStrategy: TradingStrategy): Promise<TradingStrategy> {
+        const url = this.tradingStrategiesUrl + '/' + tradingStrategy.id;
+        return this.http
+            .put(url, JSON.stringify(tradingStrategy), {headers: this.headers})
+            .toPromise()
+            .then(() => tradingStrategy)
+            .catch(this.handleError);
+    }
+
+    deleteTradingStrategyById(tradingStrategyId: string): Promise<TradingStrategy> {
+        const url = this.tradingStrategiesUrl + '/' + tradingStrategyId;
+        return this.http
+            .delete(url, {headers: this.headers})
+            .toPromise()
+            .then()
+            .catch(this.handleError);
+    }
+
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);

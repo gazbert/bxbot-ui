@@ -31,7 +31,8 @@
                                 <label for="marketName_{{i}}">Name:</label>
                                 <input [(ngModel)]="markets[i].label"
                                        type="text" class="form-control" id="marketName_{{i}}"
-                                       name="marketName_{{i}}" #marketName="ngModel" required maxlength="50"/>
+                                       name="marketName_{{i}}" #marketName="ngModel" required maxlength="50"
+                                       placeholder="BTC/USD"/>
 
                                 <!--<div *ngIf="formErrors.marketName" class="alert alert-danger">{{ formErrors.marketName }}</div>-->
 
@@ -70,14 +71,15 @@
                                 <label for="baseCurrency_{{i}}">Base Currency:</label>
                                 <input [(ngModel)]="markets[i].baseCurrency"
                                        type="text" class="form-control" id="baseCurrency_{{i}}"
-                                       name="baseCurrency_{{i}}" #baseCurrency="ngModel" required maxlength="3" pattern="^[A-Z]{3}$"/>
+                                       name="baseCurrency_{{i}}" #baseCurrency="ngModel" required maxlength="3"
+                                       pattern="^[A-Z]{3}$" placeholder="USD"/>
 
                                 <!--<div [hidden]="baseCurrency.valid || baseCurrency.pristine" class="alert alert-danger">-->
                                     <!--Base Currency must be valid 3 character currency id, e.g. BTC-->
                                 <!--</div>-->
 
                                 <div [hidden]="baseCurrency.valid || (baseCurrency.pristine && !f.submitted)" class="alert alert-danger">
-                                    Base Currency must be valid 3 character currency id, e.g. BTC
+                                    Base Currency must be valid 3 character currency id, e.g. USD
                                 </div>
                             </div>
                         </div>
@@ -88,7 +90,8 @@
                                 <label for="counterCurrency_{{i}}">Counter Currency:</label>
                                 <input [(ngModel)]="markets[i].counterCurrency"
                                        type="text" class="form-control" id="counterCurrency_{{i}}"
-                                       name="counterCurrency_{{i}}" #counterCurrency="ngModel" required maxlength="3" pattern="^[A-Z]{3}$"/>
+                                       name="counterCurrency_{{i}}" #counterCurrency="ngModel" required maxlength="3"
+                                       placeholder="BTC" pattern="^[A-Z]{3}$"/>
 
                                 <!--<div [hidden]="counterCurrency.valid || counterCurrency.pristine" class="alert alert-danger">-->
                                     <!--Counter Currency must be valid 3 character currency id, e.g. BTC-->

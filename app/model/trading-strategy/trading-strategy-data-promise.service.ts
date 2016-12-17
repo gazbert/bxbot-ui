@@ -11,4 +11,6 @@ import {TradingStrategy} from "./trading-strategy.model";
 export interface TradingStrategyDataPromiseService {
 
     getAllTradingStrategiesForExchange(exchangeId: string): Promise<TradingStrategy[]>;
+    updateTradingStrategy(tradingStrategy: TradingStrategy): Promise<TradingStrategy>;
+    deleteTradingStrategyById(tradingStrategyId: string): Promise<TradingStrategy>;
 }

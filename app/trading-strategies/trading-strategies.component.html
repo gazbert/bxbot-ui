@@ -23,14 +23,16 @@
                                 <label for="tradingStrategyId_{{i}}">Id:</label>
                                 <input [(ngModel)]="tradingStrategies[i].id"
                                        type="text" class="form-control" id="tradingStrategyId_{{i}}"
-                                       name="tradingStrategyId_{{i}}" #tradingStrategyId="ngModel" required maxlength="50"/>
+                                       name="tradingStrategyId_{{i}}" #tradingStrategyId="ngModel" required
+                                       maxlength="50"/>
 
                                 <!--<div [hidden]="marketId.valid || marketId.pristine" class="alert alert-danger">-->
                                 <!--Market Id must be set.-->
                                 <!--</div>-->
 
-                                <div [hidden]="tradingStrategyId.valid || (tradingStrategyId.pristine && !f.submitted)" class="alert alert-danger">
-                                    Trading Strategy Id must be set.
+                                <div [hidden]="tradingStrategyId.valid || (tradingStrategyId.pristine && !f.submitted)"
+                                     class="alert alert-danger">
+                                      Strategy Id must be set.
                                 </div>
                             </div>
                         </div>
@@ -46,7 +48,7 @@
                                 <!--<div *ngIf="formErrors.marketName" class="alert alert-danger">{{ formErrors.marketName }}</div>-->
 
                                 <div [hidden]="tradingStrategyName.valid || (tradingStrategyName.pristine && !f.submitted)" class="alert alert-danger">
-                                    Trading Strategy Name must be set.
+                                     Strategy Name must be set.
                                 </div>
 
                                 <!--<small [hidden]="marketName.valid || (marketName.pristine && !f.submitted)" class="text-danger">-->
@@ -70,7 +72,7 @@
                                 <!--</div>-->
 
                                 <div [hidden]="tradingStrategyDescription.valid || (tradingStrategyDescription.pristine && !f.submitted)" class="alert alert-danger">
-                                    Max Trading Strategy Description length is 120.
+                                    Max Description length is 120.
                                 </div>
                             </div>
                         </div>
@@ -80,12 +82,12 @@
                             <div class="col-sm-6 form-group">
                                 <label for="tradingStrategyClassname_{{i}}">Class Name:</label>
                                 <input [(ngModel)]="tradingStrategies[i].className" name="tradingStrategyClassname_{{i}}"
-                                       placeholder="com.me.MyTradingStrategyClass" id="tradingStrategyClassname_{{i}}"
+                                       placeholder="com.my.MyTradingStrategyClass" id="tradingStrategyClassname_{{i}}"
                                        type="text" class="form-control" required maxlength="120"
                                        #tradingStrategyClassname ="ngModel"/>
 
                                 <div [hidden]="tradingStrategyClassname.valid || (tradingStrategyClassname.pristine && !f.submitted)" class="alert alert-danger">
-                                    Trading Strategy Classname must be valid Java class name.
+                                    Strategy Class Name must be valid Java class, e.g. com.my.MyTradingStrategyClass
                                 </div>
                             </div>
                         </div>
