@@ -6,19 +6,19 @@
     <form *ngIf="active" #exchangeAdapterForm="ngForm" (ngSubmit)="save()">
 
         <div class="form-group">
-            <label for="exchangeId">Id:</label>
+            <label for="exchangeId">Id</label>
             <input [(ngModel)]="exchangeAdapter.id" name="exchangeId" id="exchangeId" type="text" class="form-control"
                    disabled/>
         </div>
 
         <div class="form-group">
-            <label for="adapter">Adapter:</label>
+            <label for="adapter">Adapter</label>
             <input [(ngModel)]="exchangeAdapter.adapter" name="adapter" placeholder="MyExchangeAdapter" id="adapter"
                    type="text" class="form-control" required maxlength="120"/>
             <div *ngIf="formErrors.adapter" class="alert alert-danger">{{ formErrors.adapter }}</div>
         </div>
         <div class="form-group">
-            <label for="connectionTimeout">Connection Timeout (secs):</label>
+            <label for="connectionTimeout">Connection Timeout (secs)</label>
             <input [(ngModel)]="exchangeAdapter.networkConfig.connectionTimeout" id="connectionTimeout"
                    name="connectionTimeout" type="text" class="form-control" placeholder="60" required
                    pattern="\d+"/>
@@ -38,7 +38,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="form-group">
-                            <label for="">HTTP Status Code:</label>
+                            <label for="">HTTP Status Code</label>
                             <input #httpStatusCode
                                    [(ngModel)]="exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[i].value"
                                    type="text" class="form-control" id="errorCode_ + {{i}}"
@@ -69,7 +69,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="form-group">
-                            <label for="">Error Message:</label>
+                            <label for="">Error Message</label>
                             <input [(ngModel)]="exchangeAdapter.networkConfig.nonFatalErrorMessages[i].value"
                                    type="text" class="form-control" id="errorMsg_ + {{i}}"
                                    name="errorMsg_ + {{i}}" required #errorMsg="ngModel" minLength="1">

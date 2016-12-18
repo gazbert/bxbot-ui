@@ -19,7 +19,7 @@
 
                         <!-- Enabled? -->
                         <div class="form-group">
-                            <label for="marketEnabled_{{i}}">Enabled:</label>
+                            <label for="marketEnabled_{{i}}">Enabled</label>
                             <input [(ngModel)]="markets[i].enabled"
                                    type="checkbox" class="checkbox-inline" id="marketEnabled_{{i}}"
                                    name="marketEnabled_{{i}}" #marketEnabled="ngModel"/>
@@ -28,7 +28,7 @@
                         <!-- Market Name -->
                         <div class="row">
                             <div class="col-sm-6 form-group">
-                                <label for="marketName_{{i}}">Name:</label>
+                                <label for="marketName_{{i}}">Name</label>
                                 <input [(ngModel)]="markets[i].label"
                                        type="text" class="form-control" id="marketName_{{i}}"
                                        name="marketName_{{i}}" #marketName="ngModel" required maxlength="50"
@@ -50,7 +50,7 @@
                         <!-- Market Id -->
                         <div class="row">
                             <div class="col-sm-6 form-group">
-                                <label for="marketId_{{i}}">Id:</label>
+                                <label for="marketId_{{i}}">Id</label>
                                 <input [(ngModel)]="markets[i].id"
                                        type="text" class="form-control" id="marketId_{{i}}"
                                        name="marketId_{{i}}" #marketId="ngModel" required maxlength="50"/>
@@ -68,7 +68,7 @@
                         <!-- Base Currency -->
                         <div class="row">
                             <div class="col-sm-6 form-group">
-                                <label for="baseCurrency_{{i}}">Base Currency:</label>
+                                <label for="baseCurrency_{{i}}">Base Currency</label>
                                 <input [(ngModel)]="markets[i].baseCurrency"
                                        type="text" class="form-control" id="baseCurrency_{{i}}"
                                        name="baseCurrency_{{i}}" #baseCurrency="ngModel" required maxlength="3"
@@ -87,7 +87,7 @@
                         <!-- Counter Currency -->
                         <div class="row">
                             <div class="col-sm-6 form-group">
-                                <label for="counterCurrency_{{i}}">Counter Currency:</label>
+                                <label for="counterCurrency_{{i}}">Counter Currency</label>
                                 <input [(ngModel)]="markets[i].counterCurrency"
                                        type="text" class="form-control" id="counterCurrency_{{i}}"
                                        name="counterCurrency_{{i}}" #counterCurrency="ngModel" required maxlength="3"
@@ -106,7 +106,7 @@
                         <!-- Trading Strategy -->
                         <div class="row">
                             <div class="col-sm-6 form-group">
-                                <label for="tradingStrategy_{{i}}">Trading Strategy:</label>
+                                <label for="tradingStrategy_{{i}}">Trading Strategy</label>
                                 <input [(ngModel)]="markets[i].tradingStrategy.id"
                                        type="text" class="form-control" id="tradingStrategy_{{i}}"
                                        name="tradingStrategy_{{i}}" #tradingStrategy="ngModel" required maxlength="50"/>

@@ -7,14 +7,14 @@
 
         <div class="row">
             <div class="form-group col-sm-6">
-                <label for="exchangeId">Id:</label>
+                <label for="exchangeId">Id</label>
                 <input formControlName="exchangeId" id="exchangeId" type="text" class="form-control"/>
             </div>
         </div>
 
         <div class="row">
             <div class="form-group col-sm-6">
-                <label for="adapter">Adapter:</label>
+                <label for="adapter">Adapter</label>
                 <input formControlName="adapter" placeholder="com.my.ExchangeAdapter" id="adapter" type="text"
                        class="form-control" maxlength="121" required/>
 
@@ -27,7 +27,7 @@
 
         <div class="row">
             <div class="form-group col-sm-6">
-                <label for="connectionTimeout">Connection Timeout (secs):</label>
+                <label for="connectionTimeout">Connection Timeout (secs)</label>
                 <input id="connectionTimeout" ngControlGroup="networkConfig" formControlName="connectionTimeout"
                        type="text"
                        class="form-control" placeholder="60" maxlength="8" required/>
@@ -56,7 +56,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="form-group">
-                            <label class="col-sm-6">HTTP Status Code:</label>
+                            <label class="col-sm-6">HTTP Status Code</label>
                             <input class="col-sm-6" type="text" [formControlName]="i" maxlength="3" required>
 
                             <!--<small [hidden]="nonFatalErrorHttpStatusCodes.controls[i].valid" class="text-danger">-->
@@ -88,7 +88,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="form-group">
-                            <label class="col-sm-5">Error Message:</label>
+                            <label class="col-sm-5">Error Message</label>
                             <input class="col-sm-7" type="text" [formControlName]="i" maxlength="121" required>
                             <div *ngIf="!nonFatalErrorMessages.controls[i].valid"
                                  class="alert alert-danger col-sm-7">

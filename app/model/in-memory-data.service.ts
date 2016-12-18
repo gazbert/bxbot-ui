@@ -396,7 +396,7 @@ export class InMemoryDataService implements InMemoryDbService {
         ];
 
         /**
-         * The Email Alerts config for the bots running on the Exchanges.
+         * The Email Alerts config for the bots to send alert messages.
          */
         let emailAlerts = [
             {

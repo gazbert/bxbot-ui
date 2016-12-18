@@ -8,7 +8,6 @@ import {browser, element, by} from "protractor";
 
 /**
  * Dashboard tests.
- * TODO Add lots more tests!
  */
 describe('Dashboard Tests', function () {
 
@@ -16,6 +15,12 @@ describe('Dashboard Tests', function () {
 
     beforeEach(function () {
         browser.get('');
+    });
+
+    it('Should redirect blank base URL to /dashboard', function () {
+        browser.getCurrentUrl().then(function (url) {
+            expect(url).toContain('/dashboard');
+        });
     });
 
     it('should display browser title: ' + expectedMsg, function () {
@@ -26,29 +31,122 @@ describe('Dashboard Tests', function () {
         expect(element(by.css('h1')).getText()).toEqual(expectedMsg);
     });
 
-    // TODO FIXME - how do I access the exchange list?
-    // it('should display 8 Exchange items', function () {
-    //     var dashboardItems = element.all(by.repeater('exchange in exchanges'));
-    //     expect(dashboardItems.count()).toBe(8);
-    // });
+    it('should display 8 dashboard Exchange items', function () {
 
+        // TODO below does not work with Angular2 :-(
+        // let dashboardItems = element.all(by.repeater('exchange in exchanges'));
+
+        // so we'll resort to CSS locator instead
+        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        expect(dashboardItems.count()).toBe(8);
+    });
+
+    it('first dashboard Exchange item should be Bitstamp', function () {
+        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        expect(dashboardItems.get(0).getText()).toContain('Bitstamp');
+    });
+
+    it('last dashboard Exchange item should be Huobi', function () {
+        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        expect(dashboardItems.get(7).getText()).toContain('Huobi');
+    });
+
+    it('Should render Gemini Exchange specific link', function () {
+
+        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        dashboardItems.get(2).click();
+
+        browser.getCurrentUrl().then(function (url) {
+            expect(url).toContain('/exchange/gemini');
+        });
+    });
 });
 
 /**
  * Exchange Details screen tests.
+ *
+ * TODO - Test for Dashboard click
+ * TODO - Tests for nav to Markets, Strats, Email Alerts
  */
 describe('Exchange Details Tests', function () {
 
-    let expectedMsg = 'GDAX Exchange Details';
-
     beforeEach(function () {
-        browser.get('/exchange/gdax');
+        browser.get('');
     });
 
-    // TODO FIXME - times out :-(
-    // it('should display GDAX Exchange Details in title: ' + expectedMsg, function () {
-    //     expect(element(by.css('h2')).getText()).toEqual(expectedMsg);
-    // });
+    it('Should render GDAX Exchange specific details', function () {
+
+        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        dashboardItems.get(1).click();
+        expect(element(by.css('h2')).getText()).toEqual('GDAX Exchange Details');
+
+        let tabLinks = element.all(by.css('li'));
+        expect(tabLinks.count()).toBe(4);
+        expect(tabLinks.first().getText()).toEqual('Exchange Adapter');
+        expect(tabLinks.get(1).getText()).toEqual('Markets');
+        expect(tabLinks.get(2).getText()).toEqual('Trading Strategies');
+        expect(tabLinks.last().getText()).toEqual('Email Alerts');
+
+        let tabItems = element.all(by.css('tab'));
+        expect(tabItems.count()).toBe(4);
+    });
+});
+
+/**
+ * Exchange Adapter screen tests.
+ *
+ * TODO - Tests for add/remove error codes and error messages
+ * TODO - Tests for save and cancel
+ */
+describe('Exchange Adapter Tests', function () {
+
+    beforeEach(function () {
+        browser.get('');
+    });
+
+    it('Should render ItBit Exchange Adapter config', function () {
+
+        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        dashboardItems.get(3).click();
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Exchange Details');
+
+        expect(element(by.id('exchangeId')).getAttribute('value')).toBe('itbit');
+        expect(element(by.id('adapter')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.ItBitExchangeAdapter');
+        expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('30');
+
+        // TODO check error codes and message values
+    });
+});
+
+
+/**
+ * Market screen tests.
+ *
+ * TODO - Tests for add/remove markets
+ * TODO - Tests for save and cancel
+ */
+describe('Market Tests', function () {
+
+    beforeEach(function () {
+        browser.get('');
+    });
+
+    it('Should render BTC-e Market config', function () {
+
+        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        dashboardItems.get(4).click();
+        expect(element(by.css('h2')).getText()).toEqual('BTC-e Exchange Details');
+
+        let tabLinks = element.all(by.css('li'));
+        tabLinks.get(1).click();
+
+        expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe(null);
+        expect(element(by.id('marketId_0')).getAttribute('value')).toBe('btce_btc_usd');
+        expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
+        expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
+        expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
+        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('btce_macd_rsi');
+    });
 });
 
 
