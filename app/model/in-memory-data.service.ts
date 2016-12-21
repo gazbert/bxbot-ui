@@ -392,7 +392,14 @@ export class InMemoryDataService implements InMemoryDbService {
                 exchangeId: 'itbit',
                 description: 'Scalping strategy that buys low and sells high.',
                 className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
-            }
+            },
+            {
+                id: 'itbit_ema_rsi',
+                label: 'MACD RSI Indicator',
+                exchangeId: 'itbit',
+                description: 'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
+                className: 'com.gazbert.bxbot.strategies.MacdRsiStrategy'
+            },
         ];
 
         /**
@@ -402,7 +409,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 id: 'btce_email_alerts',
                 exchangeId: 'btce',
-                enabled: true,
+                enabled: false,
                 smtpHost: 'smtp.gmail.com',
                 smtpPort: 587,
                 accountUsername: 'bobfett',
@@ -446,7 +453,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 id: 'huobi_email_alerts',
                 exchangeId: 'huobi',
-                enabled: true,
+                enabled: false,
                 smtpHost: 'smtp.gmail.com',
                 smtpPort: 587,
                 accountUsername: 'ackbar',
@@ -479,7 +486,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 id: 'bitfinex_email_alerts',
                 exchangeId: 'bitfinex',
-                enabled: true,
+                enabled: false,
                 smtpHost: 'smtp.gmail.com',
                 smtpPort: 587,
                 accountUsername: 'chewy',

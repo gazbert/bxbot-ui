@@ -3,6 +3,10 @@
  * End 2 End Protractor tests (using Jasmine) for testing BX-bot UI behaviour.
  * See: http://www.protractortest.org/#/tutorial
  *
+ * TODO - Use by.repeater()/model() instead of by.css() once Angular implement it for lists:
+ * https://angular.io/docs/ts/latest/guide/upgrade.html
+ * https://github.com/angular/protractor/issues/3205
+ *
  ******************************************************************************/
 import {browser, element, by} from "protractor";
 
@@ -34,6 +38,7 @@ describe('Dashboard Tests', function () {
     it('should display 8 dashboard Exchange items', function () {
 
         // TODO below does not work with Angular2 :-(
+        // https://github.com/angular/protractor/issues/3205
         // let dashboardItems = element.all(by.repeater('exchange in exchanges'));
 
         // so we'll resort to CSS locator instead
@@ -96,6 +101,7 @@ describe('Exchange Details Tests', function () {
  * Exchange Adapter screen tests.
  *
  * TODO - Tests for add/remove error codes and error messages
+ * TODO - Tests for updating/validating fields
  * TODO - Tests for save and cancel
  */
 describe('Exchange Adapter Tests', function () {
@@ -118,11 +124,11 @@ describe('Exchange Adapter Tests', function () {
     });
 });
 
-
 /**
  * Market screen tests.
  *
  * TODO - Tests for add/remove markets
+ * TODO - Tests for updating/validating fields
  * TODO - Tests for save and cancel
  */
 describe('Market Tests', function () {
@@ -147,8 +153,143 @@ describe('Market Tests', function () {
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
         expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('btce_macd_rsi');
     });
+
+    /**
+     * TODO Test code seems very brittle - we need access to the model!!!
+     */
+    it('Should update Market fields after saving', function () {
+
+        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        dashboardItems.get(4).click();
+        expect(element(by.css('h2')).getText()).toEqual('BTC-e Exchange Details');
+
+        let tabLinks = element.all(by.css('li'));
+        tabLinks.get(1).click();
+
+        expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe(null);
+        expect(element(by.id('marketId_0')).getAttribute('value')).toBe('btce_btc_usd');
+        expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
+        expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
+        expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
+        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('btce_macd_rsi');
+
+        // Update market fields
+        let marketEnabled = element(by.id('marketEnabled_0'));
+        marketEnabled.click();
+        expect(marketEnabled.getAttribute('ng-reflect-model')).toBe('true'); // must be better way?
+
+        // TODO - Cool! this has found a bug. If you update the id, it will create a new market, not update existing one.
+        // FIX needed for Markets and Trading Strategies.
+        // let marketId = element(by.id('marketId_0'));
+        // marketId.clear();
+        // marketId.sendKeys('myNewMarketId');
+        // expect(marketId.getAttribute('value')).toBe('myNewMarketId');
+
+        let marketName = element(by.id('marketName_0'));
+        let newMarketName = 'myNewMarket';
+        marketName.clear();
+        marketName.sendKeys(newMarketName);
+        expect(marketName.getAttribute('value')).toBe(newMarketName);
+
+        let baseCurrency = element(by.id('baseCurrency_0'));
+        let newBaseCurrency = 'GBP'
+        baseCurrency.clear();
+        baseCurrency.sendKeys(newBaseCurrency);
+        expect(baseCurrency.getAttribute('value')).toBe(newBaseCurrency);
+
+        let counterCurrency = element(by.id('counterCurrency_0'));
+        let newCounterCurrency = 'ETH';
+        counterCurrency.clear();
+        counterCurrency.sendKeys(newCounterCurrency);
+        expect(counterCurrency.getAttribute('value')).toBe(newCounterCurrency);
+
+        let tradingStrategy = element(by.id('tradingStrategy_0'));
+        let newTradingStrategy = 'com.my.new.Strat';
+        tradingStrategy.clear();
+        tradingStrategy.sendKeys(newTradingStrategy);
+        expect(tradingStrategy.getAttribute('value')).toBe(newTradingStrategy);
+
+        // Save and check the update worked
+        let saveButton = element(by.id('saveButton'));
+        saveButton.click();
+        dashboardItems.get(4).click();
+        tabLinks.get(1).click();
+
+        expect(element(by.id('marketName_0')).getAttribute('value')).toBe(newMarketName);
+        expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe(newBaseCurrency);
+        expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe(newCounterCurrency);
+        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe(newTradingStrategy);
+    });
 });
 
+/**
+ * Trading Strategies screen tests.
+ *
+ * TODO - Tests for add/remove strats
+ * TODO - Tests for updating/validating fields
+ * TODO - Tests for save and cancel
+ */
+describe('Trading Strategy Tests', function () {
+
+    beforeEach(function () {
+        browser.get('');
+    });
+
+    it('Should render ItBit Trading Strategy config', function () {
+
+        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        dashboardItems.get(3).click();
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Exchange Details');
+
+        let tabLinks = element.all(by.css('li'));
+        tabLinks.get(2).click();
+
+        // Strat 1
+        expect(element(by.id('tradingStrategyId_0')).getAttribute('value')).toBe('itbit_long-scalper');
+        expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');
+        expect(element(by.id('tradingStrategyDescription_0')).getAttribute('value'))
+            .toBe('Scalping strategy that buys low and sells high.');
+        expect(element(by.id('tradingStrategyClassname_0')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
+
+        // Strat 2
+        expect(element(by.id('tradingStrategyId_1')).getAttribute('value')).toBe('itbit_ema_rsi');
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
+        expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
+            .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');
+        expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
+    });
+});
+
+/**
+ * Email Alert Config screen tests.
+ *
+ * TODO - Tests for updating/validating fields
+ * TODO - Tests for save and cancel
+ */
+describe('Email Alerts Config Tests', function () {
+
+    beforeEach(function () {
+        browser.get('');
+    });
+
+    it('Should render Bitstamp Email Alerts config', function () {
+
+        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        dashboardItems.get(1).click();
+        expect(element(by.css('h2')).getText()).toEqual('GDAX Exchange Details');
+
+        let tabLinks = element.all(by.css('li'));
+        tabLinks.get(3).click();
+
+        expect(element(by.id('alertsEnabled')).getAttribute('value')).toBe('on');
+        expect(element(by.id('accountUsername')).getAttribute('value')).toBe('solo');
+        expect(element(by.id('accountPassword')).getAttribute('value')).toBe('NeverTellMeTheOdds!');
+        expect(element(by.id('toAddress')).getAttribute('value')).toBe('lando@cloudcity.space');
+        expect(element(by.id('fromAddress')).getAttribute('value')).toBe('han.solo@falcon.space');
+    });
+});
 
 //-----------------------------------------------------------------------------
 // Stuff from previous BX-bot UI that I coded in Angular 1.x ...
@@ -256,10 +397,3 @@ describe('Market Tests', function () {
 //
 //     });
 // });
-
-
-
-
-
-
-
