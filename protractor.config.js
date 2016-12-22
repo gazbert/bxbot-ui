@@ -29,7 +29,6 @@ exports.config = {
     // Spec patterns are relative to this config file
     specs: ['**/*e2e-spec.js'],
 
-
     // For angular tests
     useAllAngular2AppRoots: true,
 

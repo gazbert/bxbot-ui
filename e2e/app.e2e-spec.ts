@@ -1,128 +1,19 @@
-/******************************************************************************
+/******************************************************************************************
  *
- * End 2 End Protractor tests (using Jasmine) for testing BX-bot UI behaviour.
+ * End 2 End Protractor tests (using Jasmine) for testing various scenarios using the App.
  * See: http://www.protractortest.org/#/tutorial
  *
  * TODO - Use by.repeater()/model() instead of by.css() once Angular implement it for lists:
  * https://angular.io/docs/ts/latest/guide/upgrade.html
  * https://github.com/angular/protractor/issues/3205
  *
- ******************************************************************************/
+ * TODO - write tests for scenarios like:
+ *
+ * 1. Goto Dashboard, Click on GDAX, Update Market, Save, Update Email Alerts, Save, Goto Dashboard,
+ *    click on GDAX, check Market and Email Alerts updates are persisted.
+ * 2. etc...
+ ****************************************************************************************/
 import {browser, element, by} from "protractor";
-
-/**
- * Dashboard tests.
- */
-describe('Dashboard Tests', function () {
-
-    let expectedMsg = 'BX-bot Admin Console';
-
-    beforeEach(function () {
-        browser.get('');
-    });
-
-    it('Should redirect blank base URL to /dashboard', function () {
-        browser.getCurrentUrl().then(function (url) {
-            expect(url).toContain('/dashboard');
-        });
-    });
-
-    it('should display browser title: ' + expectedMsg, function () {
-        expect(browser.getTitle()).toEqual(expectedMsg);
-    });
-
-    it('should display admin console heading name: ' + expectedMsg, function () {
-        expect(element(by.css('h1')).getText()).toEqual(expectedMsg);
-    });
-
-    it('should display 8 dashboard Exchange items', function () {
-
-        // TODO below does not work with Angular2 :-(
-        // https://github.com/angular/protractor/issues/3205
-        // let dashboardItems = element.all(by.repeater('exchange in exchanges'));
-
-        // so we'll resort to CSS locator instead
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
-        expect(dashboardItems.count()).toBe(8);
-    });
-
-    it('first dashboard Exchange item should be Bitstamp', function () {
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
-        expect(dashboardItems.get(0).getText()).toContain('Bitstamp');
-    });
-
-    it('last dashboard Exchange item should be Huobi', function () {
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
-        expect(dashboardItems.get(7).getText()).toContain('Huobi');
-    });
-
-    it('Should render Gemini Exchange specific link', function () {
-
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
-        dashboardItems.get(2).click();
-
-        browser.getCurrentUrl().then(function (url) {
-            expect(url).toContain('/exchange/gemini');
-        });
-    });
-});
-
-/**
- * Exchange Details screen tests.
- *
- * TODO - Test for Dashboard click
- * TODO - Tests for nav to Markets, Strats, Email Alerts
- */
-describe('Exchange Details Tests', function () {
-
-    beforeEach(function () {
-        browser.get('');
-    });
-
-    it('Should render GDAX Exchange specific details', function () {
-
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
-        dashboardItems.get(1).click();
-        expect(element(by.css('h2')).getText()).toEqual('GDAX Exchange Details');
-
-        let tabLinks = element.all(by.css('li'));
-        expect(tabLinks.count()).toBe(4);
-        expect(tabLinks.first().getText()).toEqual('Exchange Adapter');
-        expect(tabLinks.get(1).getText()).toEqual('Markets');
-        expect(tabLinks.get(2).getText()).toEqual('Trading Strategies');
-        expect(tabLinks.last().getText()).toEqual('Email Alerts');
-
-        let tabItems = element.all(by.css('tab'));
-        expect(tabItems.count()).toBe(4);
-    });
-});
-
-/**
- * Exchange Adapter screen tests.
- *
- * TODO - Tests for add/remove error codes and error messages
- * TODO - Tests for updating/validating fields
- * TODO - Tests for save and cancel
- */
-describe('Exchange Adapter Tests', function () {
-
-    beforeEach(function () {
-        browser.get('');
-    });
-
-    it('Should render ItBit Exchange Adapter config', function () {
-
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
-        dashboardItems.get(3).click();
-        expect(element(by.css('h2')).getText()).toEqual('ItBit Exchange Details');
-
-        expect(element(by.id('exchangeId')).getAttribute('value')).toBe('itbit');
-        expect(element(by.id('adapter')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.ItBitExchangeAdapter');
-        expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('30');
-
-        // TODO check error codes and message values
-    });
-});
 
 /**
  * Market screen tests.
@@ -131,7 +22,7 @@ describe('Exchange Adapter Tests', function () {
  * TODO - Tests for updating/validating fields
  * TODO - Tests for save and cancel
  */
-describe('Market Tests', function () {
+xdescribe('Market Tests', function () {
 
     beforeEach(function () {
         browser.get('');
@@ -222,74 +113,6 @@ describe('Market Tests', function () {
     });
 });
 
-/**
- * Trading Strategies screen tests.
- *
- * TODO - Tests for add/remove strats
- * TODO - Tests for updating/validating fields
- * TODO - Tests for save and cancel
- */
-describe('Trading Strategy Tests', function () {
-
-    beforeEach(function () {
-        browser.get('');
-    });
-
-    it('Should render ItBit Trading Strategy config', function () {
-
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
-        dashboardItems.get(3).click();
-        expect(element(by.css('h2')).getText()).toEqual('ItBit Exchange Details');
-
-        let tabLinks = element.all(by.css('li'));
-        tabLinks.get(2).click();
-
-        // Strat 1
-        expect(element(by.id('tradingStrategyId_0')).getAttribute('value')).toBe('itbit_long-scalper');
-        expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');
-        expect(element(by.id('tradingStrategyDescription_0')).getAttribute('value'))
-            .toBe('Scalping strategy that buys low and sells high.');
-        expect(element(by.id('tradingStrategyClassname_0')).getAttribute('value'))
-            .toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
-
-        // Strat 2
-        expect(element(by.id('tradingStrategyId_1')).getAttribute('value')).toBe('itbit_ema_rsi');
-        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
-        expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
-            .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');
-        expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
-            .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
-    });
-});
-
-/**
- * Email Alert Config screen tests.
- *
- * TODO - Tests for updating/validating fields
- * TODO - Tests for save and cancel
- */
-describe('Email Alerts Config Tests', function () {
-
-    beforeEach(function () {
-        browser.get('');
-    });
-
-    it('Should render Bitstamp Email Alerts config', function () {
-
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
-        dashboardItems.get(1).click();
-        expect(element(by.css('h2')).getText()).toEqual('GDAX Exchange Details');
-
-        let tabLinks = element.all(by.css('li'));
-        tabLinks.get(3).click();
-
-        expect(element(by.id('alertsEnabled')).getAttribute('value')).toBe('on');
-        expect(element(by.id('accountUsername')).getAttribute('value')).toBe('solo');
-        expect(element(by.id('accountPassword')).getAttribute('value')).toBe('NeverTellMeTheOdds!');
-        expect(element(by.id('toAddress')).getAttribute('value')).toBe('lando@cloudcity.space');
-        expect(element(by.id('fromAddress')).getAttribute('value')).toBe('han.solo@falcon.space');
-    });
-});
 
 //-----------------------------------------------------------------------------
 // Stuff from previous BX-bot UI that I coded in Angular 1.x ...
