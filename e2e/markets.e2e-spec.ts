@@ -34,7 +34,6 @@ describe('Markets Screen Tests', function () {
         tabLinks.get(1).click();
 
         expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe(null);
-        expect(element(by.id('marketId_0')).getAttribute('value')).toBe('btce_btc_usd');
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
@@ -54,7 +53,6 @@ describe('Markets Screen Tests', function () {
         tabLinks.get(1).click();
 
         expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe(null);
-        expect(element(by.id('marketId_0')).getAttribute('value')).toBe('btce_btc_usd');
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');

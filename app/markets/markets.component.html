@@ -47,24 +47,6 @@
                             </div>
                         </div>
 
-                        <!-- Market Id -->
-                        <div class="row">
-                            <div class="col-sm-6 form-group">
-                                <label for="marketId_{{i}}">Id</label>
-                                <input [(ngModel)]="markets[i].id"
-                                       type="text" class="form-control" id="marketId_{{i}}"
-                                       name="marketId_{{i}}" #marketId="ngModel" required maxlength="50"/>
-
-                                <!--<div [hidden]="marketId.valid || marketId.pristine" class="alert alert-danger">-->
-                                    <!--Market Id must be set.-->
-                                <!--</div>-->
-
-                                <div [hidden]="marketId.valid || (marketId.pristine && !f.submitted)" class="alert alert-danger">
-                                    Market Id must be set.
-                                </div>
-                            </div>
-                        </div>
-
                         <!-- Base Currency -->
                         <div class="row">
                             <div class="col-sm-6 form-group">

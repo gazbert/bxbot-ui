@@ -23,6 +23,7 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
     let expectedTradingStrategy_2: TradingStrategy;
 
     let spyTradingStrategyDataService: any;
+    let spyMarketDataService: any; // mock this out, not testing it here, has it's own tests suite.
     let router: any;
 
     beforeEach(done => {
@@ -46,7 +47,8 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
         spyTradingStrategyDataService.getAllTradingStrategiesForExchange.and.returnValue(Promise.resolve(expectedTradingStrategies));
         spyTradingStrategyDataService.updateTradingStrategy.and.returnValue(Promise.resolve(expectedTradingStrategy_1));
 
-        tradingStrategiesComponent = new TradingStrategiesComponent(spyTradingStrategyDataService, <any> activatedRoute, router);
+        tradingStrategiesComponent = new TradingStrategiesComponent(spyTradingStrategyDataService, spyMarketDataService,
+            <any> activatedRoute, router);
         tradingStrategiesComponent.ngOnInit();
 
         spyTradingStrategyDataService.getAllTradingStrategiesForExchange.calls.first().returnValue.then(done);

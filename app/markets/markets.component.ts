@@ -64,6 +64,9 @@ export class MarketsComponent implements OnInit {
     }
 
     addMarket(): void {
+
+        // TODO create UUID for market
+        // TODO check name given is unique for current Exchange
         let tradingStrategy = new TradingStrategy(null, null, this.exchangeId, null, null);
         this.markets.push(new Market(null, null, this.exchangeId , false, null, null, tradingStrategy));
     }

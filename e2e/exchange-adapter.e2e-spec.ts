@@ -29,7 +29,6 @@ describe('Exchange Adapter Tests', function () {
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Exchange Details');
 
-        expect(element(by.id('exchangeId')).getAttribute('value')).toBe('itbit');
         expect(element(by.id('adapter')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.ItBitExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('30');
 

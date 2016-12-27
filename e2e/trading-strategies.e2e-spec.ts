@@ -33,7 +33,6 @@ describe('Trading Strategy Tests', function () {
         tabLinks.get(2).click();
 
         // Strat 1
-        expect(element(by.id('tradingStrategyId_0')).getAttribute('value')).toBe('itbit_long-scalper');
         expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');
         expect(element(by.id('tradingStrategyDescription_0')).getAttribute('value'))
             .toBe('Scalping strategy that buys low and sells high.');
@@ -41,7 +40,6 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
 
         // Strat 2
-        expect(element(by.id('tradingStrategyId_1')).getAttribute('value')).toBe('itbit_ema_rsi');
         expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
         expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
             .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');

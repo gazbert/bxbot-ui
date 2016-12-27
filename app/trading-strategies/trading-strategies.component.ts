@@ -3,6 +3,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {TradingStrategy} from '../model/trading-strategy';
 import {TradingStrategyHttpDataPromiseService} from '../model/trading-strategy';
+import {MarketHttpDataPromiseService} from '../model/market';
 
 /**
  * Template-driven version of the Trading Strategies form.
@@ -21,6 +22,7 @@ export class TradingStrategiesComponent implements OnInit {
     deletedTradingStrategies: TradingStrategy[] = [];
     exchangeId;
     active = true;
+    canDeleteStrategy = true;
 
     @ViewChild('tradingStrategiesForm') currentForm: NgForm;
     tradingStrategiesForm: NgForm;
@@ -42,7 +44,8 @@ export class TradingStrategiesComponent implements OnInit {
         }
     };
 
-    constructor(private tradingStrategyDataService: TradingStrategyHttpDataPromiseService, private route: ActivatedRoute,
+    constructor(private tradingStrategyDataService: TradingStrategyHttpDataPromiseService,
+                private marketDataService: MarketHttpDataPromiseService, private route: ActivatedRoute,
                 private router: Router) {
     }
 
@@ -58,13 +61,25 @@ export class TradingStrategiesComponent implements OnInit {
         this.router.navigate(['dashboard']);
     }
 
+
     addTradingStrategy(): void {
+        // TODO create UUID for strategy
+        // TODO check name given is unique for current Exchange
         this.tradingStrategies.push(new TradingStrategy(null, null, this.exchangeId, null, null));
     }
 
     deleteTradingStrategy(tradingStrategy: TradingStrategy): void {
-        this.tradingStrategies = this.tradingStrategies.filter(m => m !== tradingStrategy);
-        this.deletedTradingStrategies.push(tradingStrategy);
+
+        this.marketDataService.getAllMarketsForExchange(this.exchangeId)
+            .then((markets) => {
+                let marketsUsingTheStrategy = markets.filter(m => m.tradingStrategy.label === tradingStrategy.label);
+                if (marketsUsingTheStrategy.length > 0) {
+                    this.showCannotDeleteStrategyModal();
+                } else {
+                    this.tradingStrategies = this.tradingStrategies.filter(m => m !== tradingStrategy);
+                    this.deletedTradingStrategies.push(tradingStrategy);
+                }
+            });
     }
 
     save(isValid: boolean): void {
@@ -79,6 +94,18 @@ export class TradingStrategiesComponent implements OnInit {
                     .then(() => this.goToDashboard());
             });
         }
+    }
+
+    canBeDeleted() {
+        return this.tradingStrategies.length > 1;
+    }
+
+    showCannotDeleteStrategyModal(): void {
+        this.canDeleteStrategy = false;
+    }
+
+    hideCannotDeleteStrategyModal(): void {
+        this.canDeleteStrategy = true;
     }
 
     // ------------------------------------------------------------------

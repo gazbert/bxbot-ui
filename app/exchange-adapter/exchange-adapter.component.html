@@ -6,12 +6,6 @@
     <form *ngIf="active" #exchangeAdapterForm="ngForm" (ngSubmit)="save()">
 
         <div class="form-group">
-            <label for="exchangeId">Id</label>
-            <input [(ngModel)]="exchangeAdapter.id" name="exchangeId" id="exchangeId" type="text" class="form-control"
-                   disabled/>
-        </div>
-
-        <div class="form-group">
             <label for="adapter">Adapter</label>
             <input [(ngModel)]="exchangeAdapter.adapter" name="adapter" placeholder="MyExchangeAdapter" id="adapter"
                    type="text" class="form-control" required maxlength="120"/>
