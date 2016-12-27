@@ -107,17 +107,12 @@
                         <div class="row">
                             <div class="col-sm-6 form-group">
                                 <label for="tradingStrategy_{{i}}">Trading Strategy</label>
-                                <input [(ngModel)]="markets[i].tradingStrategy.id"
-                                       type="text" class="form-control" id="tradingStrategy_{{i}}"
-                                       name="tradingStrategy_{{i}}" #tradingStrategy="ngModel" required maxlength="50"/>
-
-                                <!--<div [hidden]="tradingStrategy.valid || tradingStrategy.pristine" class="alert alert-danger">-->
-                                    <!--Trading Strategy must be set.-->
-                                <!--</div>-->
-
-                                <div [hidden]="tradingStrategy.valid || (tradingStrategy.pristine && !f.submitted)" class="alert alert-danger">
-                                    Trading Strategy must be set.
-                                </div>
+                                <select name="tradingStrategy_{{i}}" id="tradingStrategy_{{i}}" class="form-control" required
+                                        [(ngModel)]="markets[i].tradingStrategy.label" #strategy="ngModel">
+                                    <option *ngFor="let tradingStrategy of tradingStrategies" [ngValue]="tradingStrategy.label">
+                                        {{tradingStrategy.label}}
+                                    </option>
+                                </select>
                             </div>
                         </div>
                     </div>

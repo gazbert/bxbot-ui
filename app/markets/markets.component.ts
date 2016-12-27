@@ -2,7 +2,7 @@ import {OnInit, Component, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {Market, MarketHttpDataPromiseService} from '../model/market/';
-import {TradingStrategy} from '../model/trading-strategy';
+import {TradingStrategy, TradingStrategyHttpDataPromiseService} from '../model/trading-strategy';
 
 /**
  * Template-driven version of the Markets form.
@@ -19,6 +19,7 @@ export class MarketsComponent implements OnInit {
 
     markets: Market[] = [];
     deletedMarkets: Market[] = [];
+    tradingStrategies: TradingStrategy[] = [];
     exchangeId;
     active = true;
 
@@ -42,7 +43,8 @@ export class MarketsComponent implements OnInit {
         }
     };
 
-    constructor(private marketDataService: MarketHttpDataPromiseService, private route: ActivatedRoute,
+    constructor(private marketDataService: MarketHttpDataPromiseService,
+                private tradingStrategyDataService: TradingStrategyHttpDataPromiseService, private route: ActivatedRoute,
                 private router: Router) {
     }
 
@@ -51,6 +53,9 @@ export class MarketsComponent implements OnInit {
             this.exchangeId = params['id'];
             this.marketDataService.getAllMarketsForExchange(this.exchangeId)
                 .then(markets => this.markets = markets);
+
+            this.tradingStrategyDataService.getAllTradingStrategiesForExchange(this.exchangeId)
+                .then(tradingStrategies => this.tradingStrategies = tradingStrategies);
         });
     }
 

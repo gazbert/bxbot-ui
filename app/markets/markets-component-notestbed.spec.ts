@@ -26,6 +26,7 @@ describe('MarketsComponent tests without TestBed', () => {
     let expectedTradingStrategy_2: TradingStrategy;
 
     let spyMarketDataService: any;
+    let spyTradingStrategyDataService: any; // mock this out, not testing it here, has it's own tests suite.
     let router: any;
 
     beforeEach(done => {
@@ -51,7 +52,7 @@ describe('MarketsComponent tests without TestBed', () => {
         spyMarketDataService.getAllMarketsForExchange.and.returnValue(Promise.resolve(expectedMarkets));
         spyMarketDataService.updateMarket.and.returnValue(Promise.resolve(expectedMarket_1));
 
-        marketsComponent = new MarketsComponent(spyMarketDataService, <any> activatedRoute, router);
+        marketsComponent = new MarketsComponent(spyMarketDataService, spyTradingStrategyDataService, <any> activatedRoute, router);
         marketsComponent.ngOnInit();
 
         spyMarketDataService.getAllMarketsForExchange.calls.first().returnValue.then(done);

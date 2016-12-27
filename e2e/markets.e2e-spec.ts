@@ -9,6 +9,7 @@
  *
  ******************************************************************************/
 import {browser, element, by} from "protractor";
+import {click} from "../testing/index";
 
 /**
  * Market screen tests.
@@ -37,7 +38,7 @@ describe('Markets Screen Tests', function () {
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('btce_macd_rsi');
+        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD RSI Indicator');
     });
 
     /**
@@ -57,7 +58,7 @@ describe('Markets Screen Tests', function () {
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('btce_macd_rsi');
+        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD RSI Indicator');
 
         // Update market fields
         let marketEnabled = element(by.id('marketEnabled_0'));
@@ -78,7 +79,7 @@ describe('Markets Screen Tests', function () {
         expect(marketName.getAttribute('value')).toBe(newMarketName);
 
         let baseCurrency = element(by.id('baseCurrency_0'));
-        let newBaseCurrency = 'GBP'
+        let newBaseCurrency = 'GBP';
         baseCurrency.clear();
         baseCurrency.sendKeys(newBaseCurrency);
         expect(baseCurrency.getAttribute('value')).toBe(newBaseCurrency);
@@ -90,9 +91,15 @@ describe('Markets Screen Tests', function () {
         expect(counterCurrency.getAttribute('value')).toBe(newCounterCurrency);
 
         let tradingStrategy = element(by.id('tradingStrategy_0'));
-        let newTradingStrategy = 'com.my.new.Strat';
-        tradingStrategy.clear();
-        tradingStrategy.sendKeys(newTradingStrategy);
+        let newTradingStrategy = '1: Long Scalper';
+
+        // TODO not supported with Angular 2 yet
+        //element(by.model('tradingStrategy_0')).sendKeys('Long Scalper');
+
+        // Both alts below work...
+        element(by.id('tradingStrategy_0')).sendKeys('Long Scalper');
+        //element(by.cssContainingText('option', 'Long Scalper')).click();
+
         expect(tradingStrategy.getAttribute('value')).toBe(newTradingStrategy);
 
         // Save and check the update worked
