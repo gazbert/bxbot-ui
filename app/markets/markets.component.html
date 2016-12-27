@@ -113,6 +113,11 @@
                                         {{tradingStrategy.label}}
                                     </option>
                                 </select>
+
+                                <div [hidden]="strategy.valid || (strategy.pristine && !f.submitted)" class="alert alert-danger">
+                                    A Trading Strategy must be selected
+                                </div>
+
                             </div>
                         </div>
                     </div>
