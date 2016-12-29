@@ -63,9 +63,8 @@ export class TradingStrategiesComponent implements OnInit {
 
 
     addTradingStrategy(): void {
-        // TODO create UUID for strategy
         // TODO check name given is unique for current Exchange
-        this.tradingStrategies.push(new TradingStrategy(null, null, this.exchangeId, null, null));
+        this.tradingStrategies.push(new TradingStrategy(this.createUuid(), null, this.exchangeId, null, null));
     }
 
     deleteTradingStrategy(tradingStrategy: TradingStrategy): void {
@@ -106,6 +105,16 @@ export class TradingStrategiesComponent implements OnInit {
 
     hideCannotDeleteStrategyModal(): void {
         this.canDeleteStrategy = true;
+    }
+
+    // TODO Only here temporarily for use with angular-in-memory-web-api until server side wired up.
+    // Server will create UUID and return in POST response object.
+    // Algo by @Broofa - http://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript/2117523#2117523
+    createUuid() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            let r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+            return v.toString(16);
+        });
     }
 
     // ------------------------------------------------------------------

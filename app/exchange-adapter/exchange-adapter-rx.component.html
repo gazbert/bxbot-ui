@@ -1,7 +1,7 @@
 <!--
     Reactive version of the Exchange Adapter form.
  -->
-<div *ngIf="exchangeAdapter" class="">
+<div *ngIf="exchangeAdapter">
 
     <form *ngIf="active" novalidate [formGroup]="exchangeAdapterForm" (ngSubmit)="save()">
 
