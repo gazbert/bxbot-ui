@@ -64,14 +64,14 @@ export class TradingStrategiesComponent implements OnInit {
 
     addTradingStrategy(): void {
         // TODO check name given is unique for current Exchange
-        this.tradingStrategies.push(new TradingStrategy(this.createUuid(), null, this.exchangeId, null, null));
+        this.tradingStrategies.push(new TradingStrategy(this.createUuid(), this.exchangeId, null, null, null));
     }
 
     deleteTradingStrategy(tradingStrategy: TradingStrategy): void {
 
         this.marketDataService.getAllMarketsForExchange(this.exchangeId)
             .then((markets) => {
-                let marketsUsingTheStrategy = markets.filter(m => m.tradingStrategy.label === tradingStrategy.label);
+                let marketsUsingTheStrategy = markets.filter(m => m.tradingStrategy.name === tradingStrategy.name);
                 if (marketsUsingTheStrategy.length > 0) {
                     this.showCannotDeleteStrategyModal();
                 } else {
@@ -82,6 +82,7 @@ export class TradingStrategiesComponent implements OnInit {
     }
 
     save(isValid: boolean): void {
+
         if (isValid) {
             this.deletedTradingStrategies.forEach((tradingStrategy) => {
                 this.tradingStrategyDataService.deleteTradingStrategyById(tradingStrategy.id);

@@ -90,9 +90,9 @@
                             <div class="col-sm-6 form-group">
                                 <label for="tradingStrategy_{{i}}">Trading Strategy</label>
                                 <select name="tradingStrategy_{{i}}" id="tradingStrategy_{{i}}" class="form-control" required
-                                        [(ngModel)]="markets[i].tradingStrategy.label" #strategy="ngModel">
-                                    <option *ngFor="let tradingStrategy of tradingStrategies" [ngValue]="tradingStrategy.label">
-                                        {{tradingStrategy.label}}
+                                        [(ngModel)]="markets[i].tradingStrategy.name" #strategy="ngModel">
+                                    <option *ngFor="let tradingStrategy of tradingStrategies" [ngValue]="tradingStrategy.name">
+                                        {{tradingStrategy.name}}
                                     </option>
                                 </select>
 

@@ -26,16 +26,16 @@ describe('MarketsComponent tests without TestBed', () => {
     let expectedTradingStrategy_2: TradingStrategy;
 
     let spyMarketDataService: any;
-    let spyTradingStrategyDataService: any; // mock this out, not testing it here, has it's own tests suite.
+    let spyTradingStrategyDataService: any;
     let router: any;
 
     beforeEach(done => {
 
-        expectedTradingStrategy_1 = new TradingStrategy('gdax_macd', 'MACD Indicator', 'gdax',
+        expectedTradingStrategy_1 = new TradingStrategy('gdax_macd', 'gdax', 'MACD Indicator',
             'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy');
         expectedMarket_1 = new Market('gdax_btc_usd', 'BTC/USD', 'gdax', true, 'BTC', 'USD', expectedTradingStrategy_1);
 
-        expectedTradingStrategy_2 = new TradingStrategy('gdax_ema', 'MACD Indicator', 'gdax',
+        expectedTradingStrategy_2 = new TradingStrategy('gdax_ema', 'gdax', 'MACD Indicator',
             'EMA Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.EmaStrategy');
         expectedMarket_2 = new Market('gdax_btc_gbp', 'BTC/GBP', 'gdax', true, 'BTC', 'GBP', expectedTradingStrategy_2);
 
@@ -46,9 +46,14 @@ describe('MarketsComponent tests without TestBed', () => {
 
         router = jasmine.createSpyObj('router', ['navigate']);
 
+        // Just mock this out, not testing it here, has it's own tests suite.
+        spyTradingStrategyDataService = jasmine.createSpyObj('TradingStrategyHttpDataPromiseService',
+            ['getAllTradingStrategiesForExchange']);
+        spyTradingStrategyDataService.getAllTradingStrategiesForExchange.and.returnValues(Promise.resolve([]));
+
+        // We are testing this tho...
         spyMarketDataService = jasmine.createSpyObj('MarketHttpDataPromiseService',
             ['getAllMarketsForExchange', 'updateMarket']);
-
         spyMarketDataService.getAllMarketsForExchange.and.returnValue(Promise.resolve(expectedMarkets));
         spyMarketDataService.updateMarket.and.returnValue(Promise.resolve(expectedMarket_1));
 

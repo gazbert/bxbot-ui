@@ -5,7 +5,7 @@
  */
 export class ExchangeAdapter {
     constructor(public id: string,
-                public exchangeId: string,
+                public exchangeId: string, // TODO why is this here? Redundant/duplicate value of id field?
                 public adapter: string,
                 public networkConfig: NetworkConfig) {
     }

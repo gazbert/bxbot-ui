@@ -28,10 +28,10 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
 
     beforeEach(done => {
 
-        expectedTradingStrategy_1 = new TradingStrategy('gdax_macd', 'MACD Indicator', 'gdax',
+        expectedTradingStrategy_1 = new TradingStrategy('gdax_macd', 'gdax', 'MACD Indicator',
             'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy');
 
-        expectedTradingStrategy_2 = new TradingStrategy('gdax_ema', 'MACD Indicator', 'gdax',
+        expectedTradingStrategy_2 = new TradingStrategy('gdax_ema', 'gdax', 'MACD Indicator',
             'EMA Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.EmaStrategy');
 
         expectedTradingStrategies = [expectedTradingStrategy_1, expectedTradingStrategy_2];

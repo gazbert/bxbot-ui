@@ -222,8 +222,8 @@ export class InMemoryDataService implements InMemoryDbService {
                 counterCurrency: 'USD',
                 tradingStrategy: {
                     id: 'bitstamp_ema',
-                    label: 'EMA Indicator',
                     exchangeId: 'bitstamp',
+                    name: 'EMA Indicator',
                     description: 'EAM Indicator algo for deciding when to enter and exit trades.',
                     className: 'com.gazbert.bxbot.strategies.EmaStrategy'
                 }
@@ -237,8 +237,8 @@ export class InMemoryDataService implements InMemoryDbService {
                 counterCurrency: 'USD',
                 tradingStrategy: {
                     id: 'btce_macd_rsi',
-                    label: 'MACD RSI Indicator',
                     exchangeId: 'btce',
+                    name: 'MACD RSI Indicator',
                     description: 'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
                     className: 'com.gazbert.bxbot.strategies.MacdRsiStrategy'
                 }
@@ -252,8 +252,8 @@ export class InMemoryDataService implements InMemoryDbService {
                 counterCurrency: 'USD',
                 tradingStrategy: {
                     id: 'gdax_ema',
-                    label: 'MACD Indicator',
                     exchangeId: 'gdax',
+                    name: 'MACD Indicator',
                     description: 'EMA Indicator algo for deciding when to enter and exit trades.',
                     className: 'com.gazbert.bxbot.strategies.EmaStrategy'
                 }
@@ -267,8 +267,8 @@ export class InMemoryDataService implements InMemoryDbService {
                 counterCurrency: 'GBP',
                 tradingStrategy: {
                     id: 'gdax_long-scalper',
-                    label: 'Long Scalper',
                     exchangeId: 'gdax',
+                    name: 'Long Scalper',
                     description: 'Scalping strategy that buys low and sells high.',
                     className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
                 }
@@ -282,8 +282,8 @@ export class InMemoryDataService implements InMemoryDbService {
                 counterCurrency: 'BTC',
                 tradingStrategy: {
                     id: 'gemini_macd',
-                    label: 'MACD Indicator',
                     exchangeId: 'gemini',
+                    name: 'MACD Indicator',
                     description: 'MACD Indicator algo for deciding when to enter and exit trades.',
                     className: 'com.gazbert.bxbot.strategies.MacdStrategy'
                 }
@@ -297,8 +297,8 @@ export class InMemoryDataService implements InMemoryDbService {
                 counterCurrency: 'USD',
                 tradingStrategy: {
                     id: 'okcoin_ema',
-                    label: 'MACD Indicator',
                     exchangeId: 'okcoin',
+                    name: 'MACD Indicator',
                     description: 'EMA Indicator algo for deciding when to enter and exit trades.',
                     className: 'com.gazbert.bxbot.strategies.EmaStrategy'
                 }
@@ -312,8 +312,8 @@ export class InMemoryDataService implements InMemoryDbService {
                 counterCurrency: 'USD',
                 tradingStrategy: {
                     id: 'huobi_ema_rsi',
-                    label: 'MACD RSI Indicator',
                     exchangeId: 'huobi',
+                    name: 'MACD RSI Indicator',
                     description: 'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
                     className: 'com.gazbert.bxbot.strategies.MacdRsiStrategy'
                 }
@@ -327,16 +327,16 @@ export class InMemoryDataService implements InMemoryDbService {
                 counterCurrency: 'USD',
                 tradingStrategy: {
                     id: 'bitfinex_long-scalper',
-                    label: 'Long Scalper',
                     exchangeId: 'bitfinex',
+                    name: 'Long Scalper',
                     description: 'Scalping strategy that buys low and sells high.',
                     className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
                 }
             },
             {
                 id: 'kraken_btc_usd',
-                label: 'BTC/USD',
                 exchangeId: 'kraken',
+                name: 'BTC/USD',
                 enabled: false,
                 baseCurrency: 'BTC',
                 counterCurrency: 'USD',
@@ -357,8 +357,8 @@ export class InMemoryDataService implements InMemoryDbService {
                 counterCurrency: 'USD',
                 tradingStrategy: {
                     id: 'itbit_ema_rsi',
-                    label: 'MACD RSI Indicator',
                     exchangeId: 'itbit',
+                    name: 'MACD RSI Indicator',
                     description: 'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
                     className: 'com.gazbert.bxbot.strategies.MacdRsiStrategy'
                 }
@@ -371,99 +371,99 @@ export class InMemoryDataService implements InMemoryDbService {
         let tradingStrategies = [
             {
                 id: 'btce_macd_rsi',
-                label: 'MACD RSI Indicator',
                 exchangeId: 'btce',
+                name: 'MACD RSI Indicator',
                 description: 'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
                 className: 'com.gazbert.bxbot.strategies.MacdRsiStrategy'
             },
             {
                 id: 'btce_long-scalper',
-                label: 'Long Scalper',
                 exchangeId: 'btce',
+                name: 'Long Scalper',
                 description: 'Scalping strategy that buys low and sells high.',
                 className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
             },
             {
                 id: 'btce_short-scalper',
-                label: 'Short Scalper',
                 exchangeId: 'btce',
+                name: 'Short Scalper',
                 description: 'Scalping strategy that sells and buys back more units at lower price.',
                 className: 'com.gazbert.bxbot.strategies.ShortScalperStrategy'
             },
             {
                 id: 'gdax_long-scalper',
-                label: 'Long Scalper',
                 exchangeId: 'gdax',
+                name: 'Long Scalper',
                 description: 'Scalping strategy that buys low and sells high.',
                 className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
             },
             {
                 id: 'gdax_ema',
-                label: 'MACD Indicator',
                 exchangeId: 'gdax',
+                name: 'MACD Indicator',
                 description: 'EMA Indicator algo for deciding when to enter and exit trades.',
                 className: 'com.gazbert.bxbot.strategies.EmaStrategy'
             },
             {
                 id: 'bitstamp_ema',
-                label: 'EMA Indicator',
                 exchangeId: 'bitstamp',
+                name: 'EMA Indicator',
                 description: 'EAM Indicator algo for deciding when to enter and exit trades.',
                 className: 'com.gazbert.bxbot.strategies.EmaStrategy'
             },
             {
                 id: 'gemini_macd',
-                label: 'MACD Indicator',
                 exchangeId: 'gemini',
+                name: 'MACD Indicator',
                 description: 'MACD Indicator algo for deciding when to enter and exit trades.',
                 className: 'com.gazbert.bxbot.strategies.MacdStrategy'
             },
             {
                 id: 'gemini_long-scalper',
-                label: 'Long Scalper',
                 exchangeId: 'gemini',
+                name: 'Long Scalper',
                 description: 'Scalping strategy that buys low and sells high.',
                 className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
             },
             {
                 id: 'okcoin_ema',
-                label: 'MACD Indicator',
                 exchangeId: 'okcoin',
+                name: 'MACD Indicator',
                 description: 'EMA Indicator algo for deciding when to enter and exit trades.',
                 className: 'com.gazbert.bxbot.strategies.EmaStrategy'
             },
             {
                 id: 'huobi_ema_rsi',
-                label: 'MACD RSI Indicator',
                 exchangeId: 'huobi',
+                name: 'MACD RSI Indicator',
                 description: 'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
                 className: 'com.gazbert.bxbot.strategies.MacdRsiStrategy'
             },
             {
                 id: 'bitfinex_long-scalper',
-                label: 'Long Scalper',
                 exchangeId: 'bitfinex',
+                name: 'Long Scalper',
                 description: 'Scalping strategy that buys low and sells high.',
                 className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
             },
             {
                 id: 'kraken_ema_rsi',
-                label: 'EMA RSI Indicator',
                 exchangeId: 'kraken',
+                name: 'EMA RSI Indicator',
                 description: 'EMA Indicator and RSI algo for deciding when to enter and exit trades.',
                 className: 'com.gazbert.bxbot.strategies.EmaRsiStrategy'
             },
             {
                 id: 'itbit_long-scalper',
-                label: 'Long Scalper',
                 exchangeId: 'itbit',
+                name: 'Long Scalper',
                 description: 'Scalping strategy that buys low and sells high.',
                 className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
             },
             {
                 id: 'itbit_ema_rsi',
-                label: 'MACD RSI Indicator',
                 exchangeId: 'itbit',
+                name: 'MACD RSI Indicator',
                 description: 'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
                 className: 'com.gazbert.bxbot.strategies.MacdRsiStrategy'
             },
