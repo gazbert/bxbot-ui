@@ -215,8 +215,8 @@ export class InMemoryDataService implements InMemoryDbService {
         let markets = [
             {
                 id: 'bitstamp_btc_usd',
-                label: 'BTC/USD',
                 exchangeId: 'bitstamp',
+                name: 'BTC/USD',
                 enabled: false,
                 baseCurrency: 'BTC',
                 counterCurrency: 'USD',
@@ -230,8 +230,8 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 'btce_btc_usd',
-                label: 'BTC/USD',
                 exchangeId: 'btce',
+                name: 'BTC/USD',
                 enabled: false,
                 baseCurrency: 'BTC',
                 counterCurrency: 'USD',
@@ -245,23 +245,23 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 'gdax_btc_usd',
-                label: 'BTC/USD',
                 exchangeId: 'gdax',
+                name: 'BTC/USD',
                 enabled: false,
                 baseCurrency: 'BTC',
                 counterCurrency: 'USD',
                 tradingStrategy: {
                     id: 'gdax_ema',
                     exchangeId: 'gdax',
-                    name: 'MACD Indicator',
+                    name: 'EMA Indicator',
                     description: 'EMA Indicator algo for deciding when to enter and exit trades.',
                     className: 'com.gazbert.bxbot.strategies.EmaStrategy'
                 }
             },
             {
                 id: 'gdax_btc_gbp',
-                label: 'BTC/GBP',
                 exchangeId: 'gdax',
+                name: 'BTC/GBP',
                 enabled: true,
                 baseCurrency: 'BTC',
                 counterCurrency: 'GBP',
@@ -275,8 +275,8 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 'gemini_eth_btc',
-                label: 'ETH/BTC',
                 exchangeId: 'gemini',
+                name: 'ETH/BTC',
                 enabled: false,
                 baseCurrency: 'ETH',
                 counterCurrency: 'BTC',
@@ -290,8 +290,8 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 'okcoin_btc_usd',
-                label: 'BTC/USD',
                 exchangeId: 'okcoin',
+                name: 'BTC/USD',
                 enabled: false,
                 baseCurrency: 'BTC',
                 counterCurrency: 'USD',
@@ -305,8 +305,8 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 'huobi_btc_usd',
-                label: 'BTC/USD',
                 exchangeId: 'huobi',
+                name: 'BTC/USD',
                 enabled: false,
                 baseCurrency: 'BTC',
                 counterCurrency: 'USD',
@@ -320,8 +320,8 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 'bitfinex_btc_usd',
-                label: 'BTC/USD',
                 exchangeId: 'bitfinex',
+                name: 'BTC/USD',
                 enabled: false,
                 baseCurrency: 'BTC',
                 counterCurrency: 'USD',
@@ -350,8 +350,8 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 'itbit_btc_usd',
-                label: 'BTC/USD',
                 exchangeId: 'itbit',
+                name: 'BTC/USD',
                 enabled: false,
                 baseCurrency: 'BTC',
                 counterCurrency: 'USD',
@@ -400,7 +400,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 id: 'gdax_ema',
                 exchangeId: 'gdax',
-                name: 'MACD Indicator',
+                name: 'EMA Indicator',
                 description: 'EMA Indicator algo for deciding when to enter and exit trades.',
                 className: 'com.gazbert.bxbot.strategies.EmaStrategy'
             },
@@ -408,7 +408,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 id: 'bitstamp_ema',
                 exchangeId: 'bitstamp',
                 name: 'EMA Indicator',
-                description: 'EAM Indicator algo for deciding when to enter and exit trades.',
+                description: 'EMA Indicator algo for deciding when to enter and exit trades.',
                 className: 'com.gazbert.bxbot.strategies.EmaStrategy'
             },
             {

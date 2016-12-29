@@ -8,8 +8,8 @@ import {TradingStrategy} from "../trading-strategy/trading-strategy.model";
 export class Market {
 
     constructor(public id: string,
-                public label: string,
                 public exchangeId: string,
+                public name: string,
                 public enabled: boolean,
                 public baseCurrency: string,
                 public counterCurrency: string,
@@ -17,7 +17,7 @@ export class Market {
     }
 
     clone() {
-        return new Market(this.id, this.label, this.exchangeId, this.enabled, this.baseCurrency, this.counterCurrency,
+        return new Market(this.id, this.exchangeId, this.name, this.enabled, this.baseCurrency, this.counterCurrency,
             this.tradingStrategy);
     }
 }

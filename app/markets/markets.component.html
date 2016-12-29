@@ -29,7 +29,7 @@
                         <div class="row">
                             <div class="col-sm-6 form-group">
                                 <label for="marketName_{{i}}">Name</label>
-                                <input [(ngModel)]="markets[i].label"
+                                <input [(ngModel)]="markets[i].name"
                                        type="text" class="form-control" id="marketName_{{i}}"
                                        name="marketName_{{i}}" #marketName="ngModel" required maxlength="50"
                                        placeholder="BTC/USD"/>

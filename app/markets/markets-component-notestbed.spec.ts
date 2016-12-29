@@ -33,11 +33,11 @@ describe('MarketsComponent tests without TestBed', () => {
 
         expectedTradingStrategy_1 = new TradingStrategy('gdax_macd', 'gdax', 'MACD Indicator',
             'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy');
-        expectedMarket_1 = new Market('gdax_btc_usd', 'BTC/USD', 'gdax', true, 'BTC', 'USD', expectedTradingStrategy_1);
+        expectedMarket_1 = new Market('gdax_btc_usd', 'gdax', 'BTC/USD', true, 'BTC', 'USD', expectedTradingStrategy_1);
 
         expectedTradingStrategy_2 = new TradingStrategy('gdax_ema', 'gdax', 'MACD Indicator',
             'EMA Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.EmaStrategy');
-        expectedMarket_2 = new Market('gdax_btc_gbp', 'BTC/GBP', 'gdax', true, 'BTC', 'GBP', expectedTradingStrategy_2);
+        expectedMarket_2 = new Market('gdax_btc_gbp', 'gdax', 'BTC/GBP', true, 'BTC', 'GBP', expectedTradingStrategy_2);
 
         expectedMarkets = [expectedMarket_1, expectedMarket_2];
 
