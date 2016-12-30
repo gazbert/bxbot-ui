@@ -16,13 +16,13 @@
 import {browser, element, by} from "protractor";
 
 /**
- * Market screen tests.
+ * Misc Scenario screen tests.
  *
  * TODO - Tests for add/remove markets
  * TODO - Tests for updating/validating fields
  * TODO - Tests for save and cancel
  */
-xdescribe('Market Tests', function () {
+xdescribe('Misc Scenario Tests', function () {
 
     beforeEach(function () {
         browser.get('');

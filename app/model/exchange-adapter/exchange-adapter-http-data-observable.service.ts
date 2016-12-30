@@ -34,19 +34,14 @@ export class ExchangeAdapterHttpDataObservableService implements ExchangeAdapter
             .catch(this.handleError);
     }
 
-    // TODO FIXME - in memory service returns an array if we search by query param
-    // It assumes (correctly) we can have >1 item, despite exchangeId being unique in our model
-    // hacked calling component to grab [0] for now...
     getExchangeAdapterByExchangeId(id: string): Observable<ExchangeAdapter> {
         return this.http
-            .get(this.exchangeAdaptersUrl + "/?exchangeId=" + id)
-            //.map((r: Response) => r.json().data as ExchangeAdapter)
-            .map(this.extractData)
+            .get(this.exchangeAdaptersUrl + '/' + id)
+            .map((r: Response) => r.json().data as ExchangeAdapter)
             .catch(this.handleError);
     }
 
     update(exchangeAdapter: ExchangeAdapter): Observable<ExchangeAdapter> {
-        // const url = `${this.exchangeAdaptersUrl}/${exchangeAdapter.id}`;
         const url = this.exchangeAdaptersUrl + '/' + exchangeAdapter.id;
         let body = JSON.stringify(exchangeAdapter);
         let headers = new Headers({ 'Content-Type': 'application/json' });

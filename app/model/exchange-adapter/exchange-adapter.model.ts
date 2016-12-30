@@ -5,13 +5,13 @@
  */
 export class ExchangeAdapter {
     constructor(public id: string,
-                public exchangeId: string, // TODO why is this here? Redundant/duplicate value of id field?
+                public name: string,
                 public adapter: string,
                 public networkConfig: NetworkConfig) {
     }
 
     clone() {
-        return new ExchangeAdapter(this.id, this.exchangeId, this.adapter, this.networkConfig);
+        return new ExchangeAdapter(this.id, this.name, this.adapter, this.networkConfig);
     }
 }
 

@@ -66,7 +66,7 @@ export class InMemoryDataService implements InMemoryDbService {
         let exchangeAdapters = [
             {
                 id: 'bitstamp',
-                exchangeId: 'bitstamp',
+                name: 'Bitstamp REST API Adapter',
                 adapter: 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 60,
@@ -82,7 +82,7 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 'gdax',
-                exchangeId: 'gdax',
+                name: 'GDAX REST API Adapter',
                 adapter: 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 120,
@@ -98,7 +98,7 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 'gemini',
-                exchangeId: 'gemini',
+                name: 'Gemini REST API Adapter',
                 adapter: 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 90,
@@ -114,7 +114,7 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 'itbit',
-                exchangeId: 'itbit',
+                name: 'ItBit REST API Adapter',
                 adapter: 'com.gazbert.bxbot.exchanges.ItBitExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 30,
@@ -130,7 +130,7 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 'btce',
-                exchangeId: 'btce',
+                name: 'BTC-e API Adapter',
                 adapter: 'com.gazbert.bxbot.exchanges.BtceExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 45,
@@ -146,7 +146,7 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 'okcoin',
-                exchangeId: 'okcoin',
+                name: 'OKCoin REST API Adapter',
                 adapter: 'com.gazbert.bxbot.exchanges.OkCoinExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 50,
@@ -162,7 +162,7 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 'bitfinex',
-                exchangeId: 'bitfinex',
+                name: 'Bitfinex REST API Adapter',
                 adapter: 'com.gazbert.bxbot.exchanges.BitfinexExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 20,
@@ -178,7 +178,7 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 'huobi',
-                exchangeId: 'huobi',
+                name: 'Huobi REST API Adapter',
                 adapter: 'com.gazbert.bxbot.exchanges.HuobiExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 10,
@@ -194,7 +194,7 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 'kraken',
-                exchangeId: 'kraken',
+                name: 'Kraken REST API Adapter',
                 adapter: 'com.gazbert.bxbot.exchanges.KrakenExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 60,

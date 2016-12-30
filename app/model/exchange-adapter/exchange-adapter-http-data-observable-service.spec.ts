@@ -110,7 +110,7 @@ describe('Tests ExchangeAdapterHttpDataObservableService (using Mock HTTP backen
 });
 
 const makeExchangeAdapterData = () => [
-    new ExchangeAdapter('bitstamp', 'bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
+    new ExchangeAdapter('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
         new NetworkConfig(60,
             [
                 {value: 503},
@@ -123,7 +123,7 @@ const makeExchangeAdapterData = () => [
                 {value: "Remote host closed connection during handshake"}
             ]
         )),
-    new ExchangeAdapter('gdax', 'gdax', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
+    new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
         new NetworkConfig(60,
             [
                 {value: 503},
@@ -136,7 +136,7 @@ const makeExchangeAdapterData = () => [
                 {value: "Remote host closed connection during handshake"}
             ]
         )),
-    new ExchangeAdapter('gemini', 'gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
+    new ExchangeAdapter('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
         new NetworkConfig(60,
             [
                 {value: 503},

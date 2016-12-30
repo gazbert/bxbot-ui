@@ -35,11 +35,10 @@ export class ExchangeAdapterHttpDataPromiseService implements ExchangeAdapterDat
 
     getExchangeAdapterByExchangeId(id: string): Promise<ExchangeAdapter> {
         return this.getExchangeAdapters()
-            .then(exchangeAdapters => exchangeAdapters.find(exchangeAdapter => exchangeAdapter.exchangeId === id));
+            .then(exchangeAdapters => exchangeAdapters.find(exchangeAdapter => exchangeAdapter.id === id));
     }
 
     update(exchangeAdapter: ExchangeAdapter): Promise<ExchangeAdapter> {
-        // const url = `${this.exchangeAdaptersUrl}/${exchangeAdapter.id}`;
         const url = this.exchangeAdaptersUrl + '/' + exchangeAdapter.id;
         return this.http
             .put(url, JSON.stringify(exchangeAdapter), {headers: this.headers})

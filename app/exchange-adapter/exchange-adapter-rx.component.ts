@@ -64,7 +64,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
             let id = params['id'];
             this.exchangeAdapterDataService.getExchangeAdapterByExchangeId(id)
                 .subscribe(exchangeAdapter => {
-                    this.exchangeAdapter = exchangeAdapter[0]; // TODO hack for in memory service returning an array
+                    this.exchangeAdapter = exchangeAdapter;
                     this.buildForm();
                 },
                 error => this.errorMessage = <any>error); // TODO show meaningful error to user
