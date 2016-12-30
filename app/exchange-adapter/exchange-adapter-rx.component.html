@@ -126,15 +126,12 @@
         <div>
             <hr>
         </div>
-        <div class="row">
-            <div class="col-sm-2 col-sm-offset-0">
-
-                <!-- Must have type for button else Chrome reloads entire app on Cancel click!
-                     http://stackoverflow.com/questions/38120756/angular2-router-navigate-refresh-page
-                 -->
-                <button type="button" (click)="goToDashboard()" class="btn btn-default">Cancel</button>
-                <button type="submit" class="btn btn-primary">Save</button>
-            </div>
+        <div>
+            <!-- Must have type for button else Chrome reloads entire app on Cancel click!
+                 http://stackoverflow.com/questions/38120756/angular2-router-navigate-refresh-page
+             -->
+            <button type="button" (click)="goToDashboard()" class="btn btn-default">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save</button>
         </div>
     </form>
 </div>
