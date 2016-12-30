@@ -7,6 +7,16 @@
 
         <div class="row">
             <div class="form-group col-sm-6">
+                <label for="adapter">Name</label>
+                <input formControlName="adapterName" placeholder="My REST API Adapter" id="adapterName" type="text"
+                       class="form-control" maxlength="121" required/>
+
+                <div *ngIf="formErrors.adapterName" class="alert alert-danger">{{ formErrors.adapterName }}</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-sm-6">
                 <label for="adapter">Class Name</label>
                 <input formControlName="adapter" placeholder="com.my.MyExchangeAdapter" id="adapter" type="text"
                        class="form-control" maxlength="121" required/>

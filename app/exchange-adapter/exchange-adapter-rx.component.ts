@@ -29,15 +29,20 @@ export class ExchangeAdapterRxComponent implements OnInit {
 
     formErrors = {
         'adapter': '',
+        'adapterName': '',
         'connectionTimeout': '',
         'nonFatalErrorHttpStatusCodes': '',
         'nonFatalErrorMessages': ''
     };
 
     validationMessages = {
-        'adapter': {
+        'adapterName': {
             'required': 'Adapter name is required.',
-            'maxlength': 'Adapter name cannot be more than 120 characters long.',
+            'maxlength': 'Adapter name cannot be more than 50 characters long.'
+        },
+        'adapter': {
+            'required': 'Adapter class name is required.',
+            'maxlength': 'Adapter class name cannot be more than 120 characters long.',
             'pattern': 'Not a valid fully qualified Java class name.'
         },
         'connectionTimeout': {
@@ -81,6 +86,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
 
             // TODO Must be better way to adapt/map domain model <-> form UI model?
             this.exchangeAdapter.id = this.exchangeAdapterForm.get('exchangeId').value;
+            this.exchangeAdapter.name = this.exchangeAdapterForm.get('adapterName').value;
             this.exchangeAdapter.adapter = this.exchangeAdapterForm.get('adapter').value;
             this.exchangeAdapter.networkConfig.connectionTimeout = this.exchangeAdapterForm.get('connectionTimeout').value;
 
@@ -135,6 +141,11 @@ export class ExchangeAdapterRxComponent implements OnInit {
 
         this.exchangeAdapterForm = this.fb.group({
             exchangeId: new FormControl({value: this.exchangeAdapter.id, disabled: true}, Validators.required),
+            adapterName: [this.exchangeAdapter.name, [
+                Validators.required,
+                Validators.minLength(1),
+                Validators.maxLength(50)
+            ]],
             adapter: [this.exchangeAdapter.adapter, [
                 Validators.required,
                 Validators.minLength(1),

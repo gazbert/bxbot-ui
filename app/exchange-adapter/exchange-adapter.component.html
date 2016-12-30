@@ -8,6 +8,18 @@
         <div class="row">
             <div class="form-group col-sm-6">
                 <label for="adapter">Class Name</label>
+                <input [(ngModel)]="exchangeAdapter.name" name="adapterName" placeholder="com.my.MyExchangeAdapter" id="adapterName"
+                       type="text" class="form-control" required maxlength="50"  #adapterName="ngModel">
+
+                <div [hidden]="adapterName.valid || (adapterName.pristine && !f.submitted)" class="alert alert-danger">
+                    Adapter name is required.
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-sm-6">
+                <label for="adapter">Class Name</label>
                 <input [(ngModel)]="exchangeAdapter.adapter" name="adapter" placeholder="com.my.MyExchangeAdapter" id="adapter"
                        type="text" class="form-control" required maxlength="120"  #adapterClassName="ngModel"
                        pattern=([a-zA-Z_$][a-zA-Z\\d_$]*\.)*[a-zA-Z_$][a-zA-Z\\d_$]*/>
@@ -19,6 +31,7 @@
                 <!--<div *ngIf="formErrors.adapter" class="alert alert-danger">{{ formErrors.adapter }}</div>-->
             </div>
         </div>
+
         <div class="row">
             <div class="form-group col-sm-6">
                 <label for="connectionTimeout">Connection Timeout (secs)</label>
