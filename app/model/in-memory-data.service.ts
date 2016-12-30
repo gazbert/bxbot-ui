@@ -15,47 +15,47 @@ export class InMemoryDataService implements InMemoryDbService {
         let exchanges = [
             {
                 id: 'bitstamp',
-                label: 'Bitstamp',
+                name: 'Bitstamp',
                 status: 'Running'
             },
             {
                 id: 'gdax',
-                label: 'GDAX',
+                name: 'GDAX',
                 status: 'Running'
             },
             {
                 id: 'gemini',
-                label: 'Gemini',
+                name: 'Gemini',
                 status: 'Stopped'
             },
             {
                 id: 'itbit',
-                label: 'ItBit',
+                name: 'ItBit',
                 status: 'Running'
             },
             {
                 id: 'btce',
-                label: 'BTC-e',
+                name: 'BTC-e',
                 status: 'Running'
             },
             {
                 id: 'okcoin',
-                label: 'OKCoin',
+                name: 'OKCoin',
                 status: 'Running'
             },
             {
                 id: 'bitfinex',
-                label: 'Bitfinex',
+                name: 'Bitfinex',
                 status: 'Stopped'
             },
             {
                 id: 'huobi',
-                label: 'Huobi',
+                name: 'Huobi',
                 status: 'Stopped'
             },
             {
                 id: 'kraken',
-                label: 'Kraken',
+                name: 'Kraken',
                 status: 'Running'
             }
         ];
@@ -342,8 +342,8 @@ export class InMemoryDataService implements InMemoryDbService {
                 counterCurrency: 'USD',
                 tradingStrategy: {
                     id: 'kraken_ema_rsi',
-                    label: 'EMA RSI Indicator',
                     exchangeId: 'kraken',
+                    name: 'EMA RSI Indicator',
                     description: 'EMA Indicator and RSI algo for deciding when to enter and exit trades.',
                     className: 'com.gazbert.bxbot.strategies.EmaRsiStrategy'
                 }

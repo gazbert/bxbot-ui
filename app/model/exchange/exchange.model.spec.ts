@@ -10,7 +10,7 @@ describe('Exchange', () => {
     it('has correct initial values', () => {
         const exchange = new Exchange('gdax', 'GDAX', 'Running');
         expect(exchange.id).toBe('gdax');
-        expect(exchange.label).toBe('GDAX');
+        expect(exchange.name).toBe('GDAX');
         expect(exchange.status).toBe('Running');
     });
 
