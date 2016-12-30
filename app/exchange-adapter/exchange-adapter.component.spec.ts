@@ -119,7 +119,8 @@ function overrideSetup() {
         page.adapterInput.dispatchEvent(newEvent('input')); // tell Angular
 
         expect(comp.exchangeAdapter.className).toBe(newName, 'component exchange adapter has new adapter');
-        expect(stubExchangeAdapterDataService.testExchangeAdapter.className).toBe(origName, 'service exchange adapter unchanged before save');
+        expect(stubExchangeAdapterDataService.testExchangeAdapter.className).toBe(origName,
+            'service exchange adapter unchanged before save');
 
         click(page.saveBtn);
         tick(); // wait for async save to complete
