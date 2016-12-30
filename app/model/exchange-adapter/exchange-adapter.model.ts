@@ -6,12 +6,12 @@
 export class ExchangeAdapter {
     constructor(public id: string,
                 public name: string,
-                public adapter: string,
+                public className: string,
                 public networkConfig: NetworkConfig) {
     }
 
     clone() {
-        return new ExchangeAdapter(this.id, this.name, this.adapter, this.networkConfig);
+        return new ExchangeAdapter(this.id, this.name, this.className, this.networkConfig);
     }
 }
 

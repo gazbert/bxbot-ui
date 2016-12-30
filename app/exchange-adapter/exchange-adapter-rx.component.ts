@@ -40,7 +40,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
             'required': 'Adapter name is required.',
             'maxlength': 'Adapter name cannot be more than 50 characters long.'
         },
-        'adapter': {
+        'className': {
             'required': 'Adapter class name is required.',
             'maxlength': 'Adapter class name cannot be more than 120 characters long.',
             'pattern': 'Not a valid fully qualified Java class name.'
@@ -87,7 +87,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
             // TODO Must be better way to adapt/map domain model <-> form UI model?
             this.exchangeAdapter.id = this.exchangeAdapterForm.get('exchangeId').value;
             this.exchangeAdapter.name = this.exchangeAdapterForm.get('adapterName').value;
-            this.exchangeAdapter.adapter = this.exchangeAdapterForm.get('adapter').value;
+            this.exchangeAdapter.className = this.exchangeAdapterForm.get('className').value;
             this.exchangeAdapter.networkConfig.connectionTimeout = this.exchangeAdapterForm.get('connectionTimeout').value;
 
             // hack for now til I sort the JSON integration spec out with Boot app
@@ -146,7 +146,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
                 Validators.minLength(1),
                 Validators.maxLength(50)
             ]],
-            adapter: [this.exchangeAdapter.adapter, [
+            className: [this.exchangeAdapter.className, [
                 Validators.required,
                 Validators.minLength(1),
                 Validators.maxLength(120),

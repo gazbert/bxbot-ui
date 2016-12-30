@@ -7,7 +7,7 @@
 
         <div class="row">
             <div class="form-group col-sm-6">
-                <label for="adapter">Class Name</label>
+                <label for="adapterName">Class Name</label>
                 <input [(ngModel)]="exchangeAdapter.name" name="adapterName" placeholder="com.my.MyExchangeAdapter" id="adapterName"
                        type="text" class="form-control" required maxlength="50"  #adapterName="ngModel">
 
@@ -19,8 +19,8 @@
 
         <div class="row">
             <div class="form-group col-sm-6">
-                <label for="adapter">Class Name</label>
-                <input [(ngModel)]="exchangeAdapter.adapter" name="adapter" placeholder="com.my.MyExchangeAdapter" id="adapter"
+                <label for="className">Class Name</label>
+                <input [(ngModel)]="exchangeAdapter.className" name="className" placeholder="com.my.MyExchangeAdapter" id="className"
                        type="text" class="form-control" required maxlength="120"  #adapterClassName="ngModel"
                        pattern=([a-zA-Z_$][a-zA-Z\\d_$]*\.)*[a-zA-Z_$][a-zA-Z\\d_$]*/>
 

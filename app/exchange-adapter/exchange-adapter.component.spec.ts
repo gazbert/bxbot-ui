@@ -106,24 +106,24 @@ function overrideSetup() {
     }));
 
     it('should display stub Exchange Adapter\'s adapter name', () => {
-        expect(page.adapterInput.value).toBe(stubExchangeAdapterDataService.testExchangeAdapter.adapter);
+        expect(page.adapterInput.value).toBe(stubExchangeAdapterDataService.testExchangeAdapter.className);
     });
 
     // TODO Broke since refactor to pass in save(boolean)
     xit('should save stub exchange change', fakeAsync(() => {
 
-        const origName = stubExchangeAdapterDataService.testExchangeAdapter.adapter;
+        const origName = stubExchangeAdapterDataService.testExchangeAdapter.className;
         const newName = 'com.gazbert.DifferentAdapterName';
 
         page.adapterInput.value = newName;
         page.adapterInput.dispatchEvent(newEvent('input')); // tell Angular
 
-        expect(comp.exchangeAdapter.adapter).toBe(newName, 'component exchange adapter has new adapter');
-        expect(stubExchangeAdapterDataService.testExchangeAdapter.adapter).toBe(origName, 'service exchange adapter unchanged before save');
+        expect(comp.exchangeAdapter.className).toBe(newName, 'component exchange adapter has new adapter');
+        expect(stubExchangeAdapterDataService.testExchangeAdapter.className).toBe(origName, 'service exchange adapter unchanged before save');
 
         click(page.saveBtn);
         tick(); // wait for async save to complete
-        expect(stubExchangeAdapterDataService.testExchangeAdapter.adapter).toBe(
+        expect(stubExchangeAdapterDataService.testExchangeAdapter.className).toBe(
             newName, 'service exchange adapter has new adapter name after save');
         expect(page.navSpy.calls.any()).toBe(true, 'router.navigate called');
     }));
@@ -168,7 +168,7 @@ function exchangeAdapterModuleSetup() {
         }));
 
         it('should display that exchange adapter\'s adapter', () => {
-            expect(page.adapterInput.value).toBe(expectedExchangeAdapter.adapter);
+            expect(page.adapterInput.value).toBe(expectedExchangeAdapter.className);
         });
 
         it('should navigate when click cancel', () => {
@@ -263,7 +263,7 @@ function formsModuleSetup() {
         const expectedExchangeAdapter = firstExchangeAdapter;
         activatedRoute.testParams = {id: expectedExchangeAdapter.id};
         createComponent().then(() => {
-            expect(page.adapterInput.value).toBe(expectedExchangeAdapter.adapter);
+            expect(page.adapterInput.value).toBe(expectedExchangeAdapter.className);
         });
     }));
 }
@@ -328,7 +328,8 @@ class Page {
 
     saveBtn: DebugElement;
     cancelBtn: DebugElement;
-    // nameDisplay: HTMLElement;
+
+    nameInput: HTMLElement;
     adapterInput: HTMLInputElement;
 
     constructor() {
@@ -344,9 +345,7 @@ class Page {
     }
 
     /**
-     * Add page elements after exchange arrives
-     *
-     * TODO - setup the rest of the fields...
+     * Add page elements after exchange arrives, you must
      */
     addPageElements() {
 
@@ -355,8 +354,11 @@ class Page {
             const buttons = fixture.debugElement.queryAll(By.css('button'));
             this.cancelBtn = buttons[0];
             this.saveBtn = buttons[1];
-            // this.nameDisplay = fixture.debugElement.query(By.css('adapter')).nativeElement;
-            this.adapterInput = fixture.debugElement.query(By.css('#adapter')).nativeElement;
+
+            this.nameInput = fixture.debugElement.query(By.css('#adapterName')).nativeElement;
+            this.adapterInput = fixture.debugElement.query(By.css('#className')).nativeElement;
+
+            // TODO add rest of fields lazy arse
         }
     }
 }

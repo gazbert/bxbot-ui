@@ -24,7 +24,7 @@ describe('Exchange Adapter config', () => {
 
         expect(exchangeAdapter.id).toBe('gdax');
         expect(exchangeAdapter.name).toBe('GDAX');
-        expect(exchangeAdapter.adapter).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
+        expect(exchangeAdapter.className).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
         expect(exchangeAdapter.networkConfig.connectionTimeout).toBe(60);
 
         expect(exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0].value).toBe(503);
