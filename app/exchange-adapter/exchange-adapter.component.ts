@@ -59,13 +59,15 @@ export class ExchangeAdapterComponent implements OnInit {
         this.router.navigate(['dashboard']);
     }
 
-    save(): void {
-        this.exchangeAdapterDataService.update(this.exchangeAdapter)
-            .then(() => this.goToDashboard());
+    save(isValid: boolean): void {
+        if (isValid) {
+            this.exchangeAdapterDataService.update(this.exchangeAdapter)
+                .then(() => this.goToDashboard());
+        }
     }
 
-    addErrorCode(code: number): void {
-        this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.push(new ErrorCode(code));
+    addErrorCode(): void {
+        this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.push(new ErrorCode(null));
     }
 
     deleteErrorCode(code: ErrorCode): void {

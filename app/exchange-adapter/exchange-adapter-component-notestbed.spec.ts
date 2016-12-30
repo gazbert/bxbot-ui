@@ -59,14 +59,16 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
         expect(router.navigate.calls.any()).toBe(true, 'router.navigate called');
     });
 
+    // TODO test when save(false) ... does not save...
     it('should save when click Save', () => {
-        exchangeAdapterComponent.save();
+        exchangeAdapterComponent.save(true);
         expect(spyExchangeAdapterDataService.update.calls.any()).toBe(true, 'ExchangeAdapterService.saveExchange called');
         expect(router.navigate.calls.any()).toBe(false, 'router.navigate not called yet');
     });
 
+    // TODO test when save(false) ... does not navigate...
     it('should navigate when click Save resolves', done => {
-        exchangeAdapterComponent.save();
+        exchangeAdapterComponent.save(true);
 
         // waits for async save to complete before navigating
         spyExchangeAdapterDataService.update.calls.first().returnValue

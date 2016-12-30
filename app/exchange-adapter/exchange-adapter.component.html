@@ -3,20 +3,35 @@
  -->
 <div *ngIf="exchangeAdapter">
 
-    <form *ngIf="active" #exchangeAdapterForm="ngForm" (ngSubmit)="save()">
+    <form *ngIf="active" #f="ngForm" novalidate (ngSubmit)="save(f.valid)">
 
-        <div class="form-group">
-            <label for="adapter">Adapter</label>
-            <input [(ngModel)]="exchangeAdapter.adapter" name="adapter" placeholder="MyExchangeAdapter" id="adapter"
-                   type="text" class="form-control" required maxlength="120"/>
-            <div *ngIf="formErrors.adapter" class="alert alert-danger">{{ formErrors.adapter }}</div>
+        <div class="row">
+            <div class="form-group col-sm-6">
+                <label for="adapter">Class Name</label>
+                <input [(ngModel)]="exchangeAdapter.adapter" name="adapter" placeholder="com.my.MyExchangeAdapter" id="adapter"
+                       type="text" class="form-control" required maxlength="120"  #adapterClassName="ngModel"
+                       pattern=([a-zA-Z_$][a-zA-Z\\d_$]*\.)*[a-zA-Z_$][a-zA-Z\\d_$]*/>
+
+                <div [hidden]="adapterClassName.valid || (adapterClassName.pristine && !f.submitted)" class="alert alert-danger">
+                    Not a valid fully qualified Java class name.
+                </div>
+
+                <!--<div *ngIf="formErrors.adapter" class="alert alert-danger">{{ formErrors.adapter }}</div>-->
+            </div>
         </div>
-        <div class="form-group">
-            <label for="connectionTimeout">Connection Timeout (secs)</label>
-            <input [(ngModel)]="exchangeAdapter.networkConfig.connectionTimeout" id="connectionTimeout"
-                   name="connectionTimeout" type="text" class="form-control" placeholder="60" required
-                   pattern="\d+"/>
-            <div *ngIf="formErrors.connectionTimeout" class="alert alert-danger">{{formErrors.connectionTimeout }}</div>
+        <div class="row">
+            <div class="form-group col-sm-6">
+                <label for="connectionTimeout">Connection Timeout (secs)</label>
+                <input [(ngModel)]="exchangeAdapter.networkConfig.connectionTimeout" id="connectionTimeout"
+                       name="connectionTimeout" type="text" class="form-control" placeholder="60" required
+                       pattern="\d+" #connectionTimeout="ngModel"/>
+
+                <div [hidden]="connectionTimeout.valid || (connectionTimeout.pristine && !f.submitted)" class="alert alert-danger">
+                    Connection timeout must be a whole number.
+                </div>
+
+                <!--<div *ngIf="formErrors.connectionTimeout" class="alert alert-danger">{{formErrors.connectionTimeout }}</div>-->
+            </div>
         </div>
 
         <div class="row">
@@ -32,20 +47,25 @@
                     </div>
                     <div class="panel-body">
                         <div class="form-group">
-                            <label for="">HTTP Status Code</label>
+                            <label for="errorCode_{{i}}">HTTP Status Code</label>
                             <input #httpStatusCode
                                    [(ngModel)]="exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[i].value"
-                                   type="text" class="form-control" id="errorCode_ + {{i}}"
-                                   name="errorCode_ + {{i}}" required #errorCode="ngModel" pattern="\d{3}">
+                                   type="text" class="form-control" id="errorCode_{{i}}"
+                                   name="errorCode_{{i}}" required #errorCode="ngModel" pattern="\d{3}"
+                                   placeholder="502">
 
-                            <div [hidden]="errorCode.valid || errorCode.pristine" class="alert alert-danger">
+                            <div [hidden]="errorCode.valid || (errorCode.pristine && !f.submitted)" class="alert alert-danger">
                                 HTTP error code must be a 3 digit number.
                             </div>
+
+                            <!--<div [hidden]="errorCode.valid || errorCode.pristine" class="alert alert-danger">-->
+                                <!--HTTP error code must be a 3 digit number.-->
+                            <!--</div>-->
                         </div>
                     </div>
                 </div>
                 <div class="margin-20">
-                    <a (click)="addErrorCode(0)" style="cursor: default">
+                    <a (click)="addErrorCode()" style="cursor: default">
                         Add error code +
                     </a>
                 </div>
@@ -59,18 +79,23 @@
                         <span>Message {{i + 1}}</span>
                         <span class="glyphicon glyphicon-remove pull-right"
                               *ngIf="exchangeAdapter.networkConfig.nonFatalErrorMessages.length > 0"
-                              (click)="deleteErrorMessage(exchange.networkConfig.nonFatalErrorMessages[i])"></span>
+                              (click)="deleteErrorMessage(exchangeAdapter.networkConfig.nonFatalErrorMessages[i])"></span>
                     </div>
                     <div class="panel-body">
                         <div class="form-group">
-                            <label for="">Error Message</label>
+                            <label for="errorMessage_{{i}}">Error Message</label>
                             <input [(ngModel)]="exchangeAdapter.networkConfig.nonFatalErrorMessages[i].value"
-                                   type="text" class="form-control" id="errorMsg_ + {{i}}"
-                                   name="errorMsg_ + {{i}}" required #errorMsg="ngModel" minLength="1">
+                                   type="text" class="form-control" id="errorMessage_{{i}}"
+                                   name="errorMessage_{{i}}" required #errorMsg="ngModel" minLength="1"
+                                   placeholder="My error message...">
 
-                            <div [hidden]="errorMsg.valid || errorMsg.pristine" class="alert alert-danger">
+                            <div [hidden]="errorMsg.valid || (errorMsg.pristine && !f.submitted)" class="alert alert-danger">
                                 Error message must not be empty.
                             </div>
+
+                            <!--<div [hidden]="errorMsg.valid || errorMsg.pristine" class="alert alert-danger">-->
+                                <!--Error message must not be empty.-->
+                            <!--</div>-->
                         </div>
                     </div>
                 </div>
@@ -90,7 +115,7 @@
                  http://stackoverflow.com/questions/38120756/angular2-router-navigate-refresh-page
              -->
             <button type="button" (click)="goToDashboard()" class="btn btn-default">Cancel</button>
-            <button type="submit" (click)="save()" class="btn btn-primary" [disabled]="!exchangeAdapterForm.form.valid">Save</button>
+            <button type="submit" class="btn btn-primary">Save</button>
         </div>
     </form>
 </div>
