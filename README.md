@@ -4,7 +4,7 @@
 
 An Angular app (and learning project!) for administering [BX-bot](https://github.com/gazbert/bxbot).
 
-Coming soon...
+Very much work in progress, but this is where we're [heading](https://github.com/gazbert/bxbot-ui/projects/1)...
 
 ## Credits
 This app started life as the [Angular 2 QuickStart](https://github.com/angular/quickstart) app and took (a lot of)
