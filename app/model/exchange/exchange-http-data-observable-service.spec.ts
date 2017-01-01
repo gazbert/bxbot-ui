@@ -17,7 +17,7 @@ import "rxjs/add/operator/map";
  *
  * @author gazbert
  */
-describe('Tests ExchangeHttpDataObservableService (using Mock HTTP backend) ', () => {
+describe('ExchangeHttpDataObservableService tests using TestBed and Mock HTTP backend', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -30,19 +30,19 @@ describe('Tests ExchangeHttpDataObservableService (using Mock HTTP backend) ', (
             .compileComponents();
     }));
 
-    it('can instantiate service when inject service',
+    it('should instantiate service when inject service',
         inject([ExchangeDataService], (service: ExchangeDataService) => {
             expect(service instanceof ExchangeDataService).toBe(true);
         }));
 
-    it('can instantiate service with "new"', inject([Http], (http: Http) => {
+    it('should instantiate service with "new"', inject([Http], (http: Http) => {
         expect(http).not.toBeNull('http should be provided');
         let service = new ExchangeDataService(http);
         expect(service instanceof ExchangeDataService).toBe(true, 'new service should be ok');
     }));
 
     // TODO What's this all about? Isn't this just testing Angular?
-    it('can provide the mockBackend as XHRBackend',
+    it('should provide the mockBackend as XHRBackend',
         inject([XHRBackend], (backend: MockBackend) => {
             expect(backend).not.toBeNull('backend should be provided');
     }));
@@ -61,16 +61,6 @@ describe('Tests ExchangeHttpDataObservableService (using Mock HTTP backend) ', (
             let options = new ResponseOptions({status: 200, body: {data: fakeExchanges}});
             response = new Response(options);
         }));
-
-        it('should have expected fake Exchanges ', async(inject([], () => {
-            backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.getExchanges()
-                .do(exchanges => {
-                    expect(exchanges.length).toBe(fakeExchanges.length,
-                        'should have expected 3 Exchanges');
-                })
-                .toPromise();
-        })));
 
         it('should have expected fake Exchanges ', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));

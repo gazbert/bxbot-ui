@@ -10,7 +10,7 @@ import {ExchangeHttpDataPromiseService as ExchangeDataService} from "./exchange-
  *
  * @author gazbert
  */
-describe('Tests ExchangeHttpDataPromiseService (using Mock HTTP backend) ', () => {
+describe('ExchangeHttpDataPromiseService tests using TestBed and Mock HTTP backend', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -23,19 +23,19 @@ describe('Tests ExchangeHttpDataPromiseService (using Mock HTTP backend) ', () =
             .compileComponents();
     }));
 
-    it('can instantiate service when inject service',
+    it('should instantiate service when inject service',
         inject([ExchangeDataService], (service: ExchangeDataService) => {
             expect(service instanceof ExchangeDataService).toBe(true);
         }));
 
-    it('can instantiate service with "new"', inject([Http], (http: Http) => {
+    it('should instantiate service with "new"', inject([Http], (http: Http) => {
         expect(http).not.toBeNull('http should be provided');
         let service = new ExchangeDataService(http);
         expect(service instanceof ExchangeDataService).toBe(true, 'new service should be ok');
     }));
 
     // TODO What's this all about? Are we just testing Angular here?
-    it('can provide the mockBackend as XHRBackend',
+    it('should provide the mockBackend as XHRBackend',
         inject([XHRBackend], (backend: MockBackend) => {
             expect(backend).not.toBeNull('backend should be provided');
         }));
@@ -58,16 +58,6 @@ describe('Tests ExchangeHttpDataPromiseService (using Mock HTTP backend) ', () =
         it('should have expected fake Exchanges ', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.getExchanges()
-            //  .then(() => Promise.reject('deliberate'))
-                .then(exchanges => {
-                    expect(exchanges.length).toBe(fakeExchanges.length,
-                        'should have expected 3 Exchanges');
-                });
-        })));
-
-        it('should have expected fake Exchanges ', async(inject([], () => {
-            backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.getExchanges()
                 .then(exchanges => {
                     expect(exchanges.length).toBe(fakeExchanges.length,
                         'should have expected 3 Exchanges');
@@ -84,19 +74,18 @@ describe('Tests ExchangeHttpDataPromiseService (using Mock HTTP backend) ', () =
         })));
 
         // TODO FIXME
-        // it('should treat 404 as an error', async(inject([], () => {
-        //     let resp = new Response(new ResponseOptions({status: 404}));
-        //     backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-        //
-        //     service.getExchanges()
-        //         .then(exchanges => {
-        //             fail('should not respond with Exchanges');
-        //         })
-        //         .catch(err => {
-        //             expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
-        //             return Observable.of(null); // failure is the expected test result
-        //         });
-        // })));
+        xit('should treat 404 as an error', async(inject([], () => {
+            let resp = new Response(new ResponseOptions({status: 404}));
+            backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
+
+            service.getExchanges()
+                .then(() => {
+                    fail('should not respond with Exchanges');
+                })
+                .catch(err => {
+                    expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
+                });
+        })));
     });
 });
 

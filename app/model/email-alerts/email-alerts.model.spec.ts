@@ -5,9 +5,9 @@ import {EmailAlertsConfig} from "./email-alerts.model";
  *
  * @author gazbert
  */
-describe('Email Alerts config', () => {
+describe('Email Alerts model tests', () => {
 
-    it('has correct initial values', () => {
+    it('should have correct initial values', () => {
 
         const emailAlertsConfig = new EmailAlertsConfig('gdax_email-alerts', 'gdax', true, 'smtp.gmail.com', 587,
             'bobfett', 'iLoveHoth', 'jabba@tatooine.space', 'boba.fett@hoth.space');
@@ -23,7 +23,7 @@ describe('Email Alerts config', () => {
         expect(emailAlertsConfig.fromAddress).toBe('boba.fett@hoth.space');
     });
 
-    it('can clone itself', () => {
+    it('should clone itself', () => {
 
         const emailAlertsConfig = new EmailAlertsConfig('gdax_email-alerts', 'gdax', true, 'smtp.gmail.com', 587,
             'bobfett', 'iLoveHoth', 'jabba@tatooine.space', 'boba.fett@hoth.space');

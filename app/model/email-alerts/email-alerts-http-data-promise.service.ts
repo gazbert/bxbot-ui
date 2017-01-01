@@ -35,7 +35,7 @@ export class EmailAlertsHttpDataPromiseService implements EmailAlertsDataPromise
             .catch(this.handleError);
     }
 
-    update(emailAlertsConfig: EmailAlertsConfig): Promise<EmailAlertsConfig> {
+    updateEmailAlertsConfig(emailAlertsConfig: EmailAlertsConfig): Promise<EmailAlertsConfig> {
         const url = this.emailAlertsUrl + '/' + emailAlertsConfig.id;
         return this.http
             .put(url, JSON.stringify(emailAlertsConfig), {headers: this.headers})

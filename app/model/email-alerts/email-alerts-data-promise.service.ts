@@ -11,5 +11,5 @@ import {EmailAlertsConfig} from "./email-alerts.model";
 export interface EmailAlertsDataPromiseService {
 
     getEmailAlertsConfigForExchange(id: string): Promise<EmailAlertsConfig>;
-    update(emailAlertsConfig: EmailAlertsConfig): Promise<EmailAlertsConfig>;
+    updateEmailAlertsConfig(emailAlertsConfig: EmailAlertsConfig): Promise<EmailAlertsConfig>;
 }

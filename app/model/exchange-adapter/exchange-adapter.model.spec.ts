@@ -5,9 +5,9 @@ import {ExchangeAdapter, NetworkConfig} from "./exchange-adapter.model";
  *
  * @author gazbert
  */
-describe('Exchange Adapter config', () => {
+describe('Exchange Adapter model tests', () => {
 
-    it('has correct initial values', () => {
+    it('should have correct initial values', () => {
         const exchangeAdapter = new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
                 new NetworkConfig(60,
                     [
@@ -36,7 +36,7 @@ describe('Exchange Adapter config', () => {
         expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[2].value).toBe("Remote host closed connection during handshake");
     });
 
-    it('can clone itself', () => {
+    it('should clone itself', () => {
         const exchangeAdapter = new ExchangeAdapter('btce', 'BTC-e', 'com.gazbert.bxbot.exchanges.BtceExchangeAdapter',
                 new NetworkConfig(60,
                     [

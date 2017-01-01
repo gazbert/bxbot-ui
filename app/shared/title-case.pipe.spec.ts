@@ -6,7 +6,7 @@ import {TitleCasePipe} from './title-case.pipe';
  * TitleCasePipe taken from Angular tutorial material:
  * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
  */
-describe('TitleCasePipe', () => {
+describe('Shared TitleCasePipe component tests', () => {
 
     // This pipe is a pure, stateless function so no need for BeforeEach
     let pipe = new TitleCasePipe();

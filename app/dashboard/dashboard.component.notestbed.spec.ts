@@ -16,10 +16,10 @@ class FakeRouter {
 }
 
 /**
- * Learning ground for writing jasmine tests.
+ * Learning ground for writing Jasmine tests.
  * Code originated from here: https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
  */
-describe('When testing DashboardComponent without using Angular TestBed, it ', () => {
+describe('DashboardComponent tests without TestBed', () => {
 
     let comp: DashboardComponent;
     let exchangeDataService: FakeExchangeDataPromiseService;
@@ -32,30 +32,27 @@ describe('When testing DashboardComponent without using Angular TestBed, it ', (
         comp = new DashboardComponent(router, exchangeDataService);
     });
 
-    it('should NOT have exchanges before calling OnInit', () => {
-        expect(comp.exchanges.length).toBe(0,
-            'should not have exchanges before OnInit');
+    it('should not have Exchange items before calling OnInit', () => {
+        expect(comp.exchanges.length).toBe(0, 'should not have Exchanges items before OnInit');
     });
 
-    it('should NOT have exchanges immediately after OnInit', () => {
+    it('should not have Exchange items immediately after OnInit', () => {
         comp.ngOnInit(); // ngOnInit -> getExchangesPromise
-        expect(comp.exchanges.length).toBe(0,
-            'should not have exchanges until service promise resolves');
+        expect(comp.exchanges.length).toBe(0, 'should not have Exchange items until ExchangeAdapterDataService promise resolves');
     });
 
-    it('should HAVE exchanges after ExchangeAdapterDataService gets them', (done: DoneFn) => {
+    it('should have Exchange items after ExchangeAdapterDataService called', (done: DoneFn) => {
         comp.ngOnInit(); // ngOnInit -> getExchangesPromise
         exchangeDataService.lastPromise // the one from getExchangesPromise
             .then(() => {
                 // throw new Error('deliberate error'); // see it fail gracefully
                 expect(comp.exchanges.length).toBeGreaterThan(0,
-                    'should have exchanges after service promise resolves');
+                    'should have Exchange items after ExchangeAdapterDataService promise resolves');
             })
             .then(done, done.fail);
     });
 
-    it('should tell ROUTER to navigate by exchange id', () => {
-
+    it('should tell Router to navigate by ExchangeId when Exchange item selected', () => {
         const testExchange = new Exchange('gdax', 'GDAX', 'Running');
         const spy = spyOn(router, 'navigateByUrl');
         comp.gotoExchangeDetails(testExchange);

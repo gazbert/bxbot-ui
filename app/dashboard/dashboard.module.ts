@@ -10,7 +10,7 @@ const routes: Routes = [
 
 /**
  * The Dashboard module.
- * It provides the splash screen and central control point of the app.
+ * It provides the landing screen and command and control point for the app.
  *
  * @author gazbert
  */

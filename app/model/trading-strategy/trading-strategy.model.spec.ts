@@ -5,9 +5,9 @@ import {TradingStrategy} from "./trading-strategy.model";
  *
  * @author gazbert
  */
-describe('Trading Strategy config', () => {
+describe('Trading Strategy model tests', () => {
 
-    it('has correct initial values', () => {
+    it('should have correct initial values', () => {
         const tradingStrategy = new TradingStrategy('gdax_macd', 'gdax', 'MACD Indicator',
             'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy');
 
@@ -18,7 +18,7 @@ describe('Trading Strategy config', () => {
         expect(tradingStrategy.className).toBe('com.gazbert.bxbot.strategies.MacdStrategy');
     });
 
-    it('can clone itself', () => {
+    it('should clone itself', () => {
         const tradingStrategy = new TradingStrategy('gdax_macd', 'gdax', 'MACD Indicator',
             'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy');
 

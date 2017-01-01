@@ -15,8 +15,7 @@ import {Component} from "@angular/core";
         </nav>
         <router-outlet></router-outlet>
     </div>
-  `,
-    styleUrls: ['app/app.component.css']
+  `
 })
 export class AppComponent {
     title = 'BX-bot Admin Console';

@@ -5,16 +5,16 @@ import {Exchange} from "./exchange.model";
  *
  * @author gazbert
  */
-describe('Exchange', () => {
+describe('Exchange model tests', () => {
 
-    it('has correct initial values', () => {
+    it('should have correct initial values', () => {
         const exchange = new Exchange('gdax', 'GDAX', 'Running');
         expect(exchange.id).toBe('gdax');
         expect(exchange.name).toBe('GDAX');
         expect(exchange.status).toBe('Running');
     });
 
-    it('can clone itself', () => {
+    it('should clone itself', () => {
         const exchange = new Exchange('btce', 'BTC-e', 'Stopped');
         const clone = exchange.clone();
         expect(exchange).toEqual(clone);

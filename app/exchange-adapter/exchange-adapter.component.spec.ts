@@ -11,9 +11,10 @@ import {ExchangeAdapterComponent} from './exchange-adapter.component';
 import {Http} from '@angular/http';
 
 /**
- * Learning ground for writing jasmine tests.
+ * Learning ground for writing Jasmine tests.
  * Code originated from here: https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
  *
+ * TODO When should I/should I not use the testbed?
  * TODO Increase coverage for the form input + validation, adding/deleting error/message codes, etc...
  *
  * @author gazbert
@@ -29,7 +30,7 @@ let page: Page;
 // ----------------------------------------------------------------------------
 // Tests
 // ----------------------------------------------------------------------------
-describe('ExchangeAdapterComponent', () => {
+describe('ExchangeAdapterComponent tests using TestBed', () => {
 
     beforeEach(() => {
         activatedRoute = new ActivatedRouteStub();
@@ -192,37 +193,37 @@ function exchangeAdapterModuleSetup() {
         }));
     });
 
-    // TODO FIX ME - bust
-    // describe('when navigate with no exchange id', () => {
-    //
-    //     beforeEach(async(createComponent));
-    //
-    //     // it('should have exchange.id === Bitstamp', () => {
-    //     //     expect(comp.exchange.adapter).toBe('Bitstamp');
-    //     // });
-    //
-    //     // it('should display empty exchange adapter name', () => {
-    //     //     expect(page.adapterInput.value).toBe('');
-    //     // });
-    // });
+    // TODO FIXME!
+    xdescribe('when navigate with no exchange id', () => {
 
-    // TODO what's the behaviour here? Back to dashboard
-    // describe('when navigate to non-existant exchange id', () => {
-    //
-    //     beforeEach(async(() => {
-    //         activatedRoute.testParams = {id: 'no-here'};
-    //         createComponent();
-    //     }));
-    //
-    //     it('should try to navigate back to dashboard list', () => {
-    //         expect(page.gotoSpy.calls.any()).toBe(true, 'comp.gotoList called');
-    //         expect(page.navSpy.calls.any()).toBe(true, 'router.navigate called');
-    //     });
-    // });
+        beforeEach(async(createComponent));
+
+        it('should have exchange.id === Bitstamp', () => {
+            expect(comp.exchangeAdapter.id).toBe('Bitstamp');
+        });
+
+        it('should display empty exchange adapter name', () => {
+            expect(page.adapterInput.value).toBe('');
+        });
+    });
+
+    // TODO FIXME what's the behaviour here? Back to dashboard
+    xdescribe('when navigate to non-existent exchange id', () => {
+
+        beforeEach(async(() => {
+            activatedRoute.testParams = {id: 'no-here'};
+            createComponent();
+        }));
+
+        it('should try to navigate back to dashboard list', () => {
+            expect(page.gotoSpy.calls.any()).toBe(true, 'comp.gotoList called');
+            expect(page.navSpy.calls.any()).toBe(true, 'router.navigate called');
+        });
+    });
 
     // TODO FIX ME - does not throw exception
     // Why we must use `fixture.debugElement.injector` in `Page()`
-    // it('cannot use `inject` to get component\'s provided ExchangeHttpDataService', () => {
+    // xit('cannot use `inject` to get component\'s provided ExchangeHttpDataService', () => {
     //
     //     let service: ExchangeHttpDataService;
     //     fixture = TestBed.createComponent(ExchangeAdapterComponent);

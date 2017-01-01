@@ -27,7 +27,7 @@ let fixture: ComponentFixture<DashboardComponent>;
 /**
  * Test accessing the Dashboard item div - deep
  */
-describe('When testing DashboardComponent (deep), it ', () => {
+describe('DashboardComponent tests with TestBed (deep)', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [DashboardModule]
@@ -47,7 +47,7 @@ describe('When testing DashboardComponent (deep), it ', () => {
 /**
  * Test accessing Dashboard item using bx-dashboard-item directive.
  */
-describe('When testing DashboardComponent (shallow), it ', () => {
+describe('DashboardComponent tests with TestBed (shallow)', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [DashboardComponent],
@@ -91,19 +91,17 @@ function compileAndCreate() {
  */
 function tests(exchangeClick: Function) {
 
-    it('should NOT have Exchanges before ngOnInit', () => {
-        expect(comp.exchanges.length).toBe(0,
-            'should not have Exchanges before ngOnInit');
+    it('should not have Exchange items before ngOnInit', () => {
+        expect(comp.exchanges.length).toBe(0, 'should not have Exchange items before ngOnInit');
     });
 
-    it('should NOT have Exchanges immediately after ngOnInit', () => {
+    it('should not have Exchange items immediately after ngOnInit', () => {
         fixture.detectChanges(); // runs initial lifecycle hooks
-
         expect(comp.exchanges.length).toBe(0,
-            'should not have Exchanges until service promise resolves');
+            'should not have Exchange items until ExchangeAdapterDataService promise resolves');
     });
 
-    describe('after get dashboard Exchanges', () => {
+    describe('After ExchangeAdapterDataService promise resolves', () => {
 
         // Trigger component so it gets exchanges and binds to them
         beforeEach(async(() => {
@@ -112,23 +110,22 @@ function tests(exchangeClick: Function) {
                 .then(() => fixture.detectChanges()); // bind to exchanges
         }));
 
-        it('should HAVE Exchanges', () => {
+        it('should have Exchange items', () => {
             expect(comp.exchanges.length).toBeGreaterThan(0,
-                'should have Exchanges after service promise resolves');
+                'should have Exchange items');
         });
 
-        it('should DISPLAY Exchanges', () => {
+        it('should display 3 Exchange items', () => {
             // Find and examine the displayed exchanges
             // Look for them in the DOM by css class
             const exchanges = fixture.debugElement.queryAll(By.css('bx-dashboard-item'));
-            expect(exchanges.length).toBe(3, 'should display 3 Exchanges');
+            expect(exchanges.length).toBe(3, 'should display 3 Exchange items');
         });
 
-        it('should tell ROUTER to navigate when Exchange clicked',
+        it('should tell Router to navigate when Exchange item selected',
             inject([Router], (router: Router) => {
 
                 const spy = spyOn(router, 'navigateByUrl');
-
                 exchangeClick(); // trigger click on first inner <div class='item'>
 
                 // args passed to router.navigateByUrl()

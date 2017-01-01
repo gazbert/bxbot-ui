@@ -4,7 +4,9 @@ import {NgForm} from '@angular/forms';
 import {EmailAlertsConfig, EmailAlertsHttpDataPromiseService} from '../model/email-alerts';
 
 /**
- * Email Alerts config component.
+ * Template-driven version of the Email Alerts config form.
+ *
+ * @author gazbert
  */
 @Component({
     moduleId: module.id,
@@ -53,8 +55,11 @@ export class EmailAlertsComponent implements OnInit {
 
     save(isValid: boolean): void {
         if (isValid) {
-            this.emailAlertsService.update(this.emailAlertsConfig)
-                .then(() => this.goToDashboard());
+            this.emailAlertsService.updateEmailAlertsConfig(this.emailAlertsConfig)
+                .then((updatedConfig) => {
+                    this.emailAlertsConfig = updatedConfig;
+                    this.goToDashboard();
+                });
         }
     }
 

@@ -23,6 +23,8 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
     let expectedErrorCodes: ErrorCode[];
     let expectedErrorMsgs: ErrorMessage[];
 
+    let expectedUpdatedExchangeAdapter: ExchangeAdapter;
+
     let spyExchangeAdapterDataService: any;
     let router: any;
 
@@ -34,6 +36,10 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
 
         expectedExchangeAdapter = new ExchangeAdapter('btce', 'BTC-e', 'com.gazbert.bxbot.adapter.BtceExchangeAdapter',
             expectedNetworkConfig);
+
+        expectedUpdatedExchangeAdapter = new ExchangeAdapter('btce', 'BTC-e', 'com.gazbert.bxbot.adapter.NewBtceExchangeAdapter',
+            expectedNetworkConfig);
+
         activatedRoute = new ActivatedRouteStub();
         activatedRoute.testParams = {id: expectedExchangeAdapter.id};
 
@@ -42,7 +48,7 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
         spyExchangeAdapterDataService = jasmine.createSpyObj('ExchangeAdapterHttpDataPromiseService',
             ['getExchangeAdapterByExchangeId', 'update']);
         spyExchangeAdapterDataService.getExchangeAdapterByExchangeId.and.returnValue(Promise.resolve(expectedExchangeAdapter));
-        spyExchangeAdapterDataService.update.and.returnValue(Promise.resolve(expectedExchangeAdapter));
+        spyExchangeAdapterDataService.update.and.returnValue(Promise.resolve(expectedUpdatedExchangeAdapter));
 
         exchangeAdapterComponent = new ExchangeAdapterComponent(spyExchangeAdapterDataService, <any> activatedRoute, router);
         exchangeAdapterComponent.ngOnInit();
@@ -50,7 +56,7 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
         spyExchangeAdapterDataService.getExchangeAdapterByExchangeId.calls.first().returnValue.then(done);
     });
 
-    it('should expose the Exchange Adapter retrieved from the service', () => {
+    it('should expose the ExchangeAdapter retrieved from ExchangeAdapterDataService', () => {
         expect(exchangeAdapterComponent.exchangeAdapter).toBe(expectedExchangeAdapter);
     });
 
@@ -59,14 +65,20 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
         expect(router.navigate.calls.any()).toBe(true, 'router.navigate called');
     });
 
-    // TODO test when save(false) ... does not save...
-    it('should save when click Save', () => {
+    it('should save when click Save', done => {
         exchangeAdapterComponent.save(true);
-        expect(spyExchangeAdapterDataService.update.calls.any()).toBe(true, 'ExchangeAdapterService.saveExchange called');
-        expect(router.navigate.calls.any()).toBe(false, 'router.navigate not called yet');
+        spyExchangeAdapterDataService.update.calls.first().returnValue
+            .then((updatedAdapter) => {
+                expect(updatedAdapter).toBe(expectedUpdatedExchangeAdapter);
+                expect(router.navigate.calls.any()).toBe(true, 'router.navigate called');
+                done();
+            });
     });
 
-    // TODO test when save(false) ... does not navigate...
+    it('should NOT save when click Save for invalid input', () => {
+        exchangeAdapterComponent.save(false);
+    });
+
     it('should navigate when click Save resolves', done => {
         exchangeAdapterComponent.save(true);
 
