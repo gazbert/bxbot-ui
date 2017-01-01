@@ -57,7 +57,6 @@ describe('Dashboard Tests', function () {
     });
 
     it('Should render Gemini Exchange specific link', function () {
-
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(2).click();
 

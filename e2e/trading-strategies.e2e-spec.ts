@@ -11,11 +11,10 @@
 import {browser, element, by} from "protractor";
 
 /**
- * Trading Strategies screen tests.
+ * Trading Strategy screen tests.
  *
  * TODO - Tests for add/remove strats
  * TODO - Tests for updating/validating fields
- * TODO - Tests for save and cancel
  */
 describe('Trading Strategy Tests', function () {
 
@@ -40,6 +39,152 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
 
         // Strat 2
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
+        expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
+            .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');
+        expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
+    });
+
+    /**
+     * TODO Test code seems very brittle - we need access to the model!
+     */
+    it('Should update Trading Strategy fields after Save', function () {
+
+        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        dashboardItems.get(3).click();
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Exchange Details');
+
+        let tabLinks = element.all(by.css('li'));
+        tabLinks.get(2).click();
+
+        // Strat 1
+        expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');
+        expect(element(by.id('tradingStrategyDescription_0')).getAttribute('value'))
+            .toBe('Scalping strategy that buys low and sells high.');
+        expect(element(by.id('tradingStrategyClassname_0')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
+
+        // Strat 2
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
+        expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
+            .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');
+        expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
+
+        // Update Strat 1 fields
+
+        // TODO - Cool! this has found a bug. If you update the id, it will create a new Strategy, not update existing one.
+        // FIX needed for Markets and Trading Strategies.
+        // let marketId = element(by.id('marketId_0'));
+        // marketId.clear();
+        // marketId.sendKeys('myNewMarketId');
+        // expect(marketId.getAttribute('value')).toBe('myNewMarketId');
+
+        let strategyName = element(by.id('tradingStrategyName_0'));
+        let newStrategyName = 'EMA Indicator';
+        strategyName.clear();
+        strategyName.sendKeys(newStrategyName);
+        expect(strategyName.getAttribute('value')).toBe(newStrategyName);
+
+        let strategyDescription = element(by.id('tradingStrategyDescription_0'));
+        let newStrategyDescription = 'EMA Indicator algo for deciding when to enter and exit trades.';
+        strategyDescription.clear();
+        strategyDescription.sendKeys(newStrategyDescription);
+        expect(strategyDescription.getAttribute('value')).toBe(newStrategyDescription);
+
+        let strategyClassName = element(by.id('tradingStrategyClassname_0'));
+        let newStrategyClassName = 'com.gazbert.bxbot.strategies.EmaIndicator';
+        strategyClassName.clear();
+        strategyClassName.sendKeys(newStrategyClassName);
+        expect(strategyClassName.getAttribute('value')).toBe(newStrategyClassName);
+
+        // Save and check the update worked
+        let saveButton = element(by.id('strategySaveButton'));
+        saveButton.click();
+        dashboardItems.get(3).click();
+        tabLinks.get(2).click();
+
+        // Strat 1 updated
+        expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe(newStrategyName);
+        expect(element(by.id('tradingStrategyDescription_0')).getAttribute('value')).toBe(newStrategyDescription);
+        expect(element(by.id('tradingStrategyClassname_0')).getAttribute('value')).toBe(newStrategyClassName);
+
+        // Strat 2 unchanged
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
+        expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
+            .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');
+        expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
+    });
+
+    /**
+     * TODO Test code seems very brittle - we need access to the model!
+     */
+    it('Should NOT update Trading Strategy fields after Cancel', function () {
+
+        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        dashboardItems.get(3).click();
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Exchange Details');
+
+        let tabLinks = element.all(by.css('li'));
+        tabLinks.get(2).click();
+
+        // Strat 1
+        expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');
+        expect(element(by.id('tradingStrategyDescription_0')).getAttribute('value'))
+            .toBe('Scalping strategy that buys low and sells high.');
+        expect(element(by.id('tradingStrategyClassname_0')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
+
+        // Strat 2
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
+        expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
+            .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');
+        expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
+
+        // Update Strat 1 fields
+
+        // TODO - Cool! this has found a bug. If you update the id, it will create a new Strategy, not update existing one.
+        // FIX needed for Markets and Trading Strategies.
+        // let marketId = element(by.id('marketId_0'));
+        // marketId.clear();
+        // marketId.sendKeys('myNewMarketId');
+        // expect(marketId.getAttribute('value')).toBe('myNewMarketId');
+
+        let strategyName = element(by.id('tradingStrategyName_0'));
+        let newStrategyName = 'EMA Indicator';
+        strategyName.clear();
+        strategyName.sendKeys(newStrategyName);
+        expect(strategyName.getAttribute('value')).toBe(newStrategyName);
+
+        let strategyDescription = element(by.id('tradingStrategyDescription_0'));
+        let newStrategyDescription = 'EMA Indicator algo for deciding when to enter and exit trades.';
+        strategyDescription.clear();
+        strategyDescription.sendKeys(newStrategyDescription);
+        expect(strategyDescription.getAttribute('value')).toBe(newStrategyDescription);
+
+        let strategyClassName = element(by.id('tradingStrategyClassname_0'));
+        let newStrategyClassName = 'com.gazbert.bxbot.strategies.EmaIndicator';
+        strategyClassName.clear();
+        strategyClassName.sendKeys(newStrategyClassName);
+        expect(strategyClassName.getAttribute('value')).toBe(newStrategyClassName);
+
+        // Cancel and check the update did not persist
+        let cancelButton = element(by.id('strategyCancelButton'));
+        cancelButton.click();
+        dashboardItems.get(3).click();
+        tabLinks.get(2).click();
+
+        // Strat 1 unchanged
+        expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');
+        expect(element(by.id('tradingStrategyDescription_0')).getAttribute('value'))
+            .toBe('Scalping strategy that buys low and sells high.');
+        expect(element(by.id('tradingStrategyClassname_0')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
+
+        // Strat 2 unchanged
         expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
         expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
             .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');

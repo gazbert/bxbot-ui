@@ -224,7 +224,7 @@ export class InMemoryDataService implements InMemoryDbService {
                     id: 'bitstamp_ema',
                     exchangeId: 'bitstamp',
                     name: 'EMA Indicator',
-                    description: 'EAM Indicator algo for deciding when to enter and exit trades.',
+                    description: 'EMA Indicator algo for deciding when to enter and exit trades.',
                     className: 'com.gazbert.bxbot.strategies.EmaStrategy'
                 }
             },
@@ -241,6 +241,21 @@ export class InMemoryDataService implements InMemoryDbService {
                     name: 'MACD RSI Indicator',
                     description: 'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
                     className: 'com.gazbert.bxbot.strategies.MacdRsiStrategy'
+                }
+            },
+            {
+                id: 'btce_ltc_usd',
+                exchangeId: 'btce',
+                name: 'LTC/USD',
+                enabled: true,
+                baseCurrency: 'LTC',
+                counterCurrency: 'USD',
+                tradingStrategy: {
+                    id: 'btce_long-scalper',
+                    exchangeId: 'btce',
+                    name: 'Long Scalper',
+                    description: 'Scalping strategy that buys low and sells high.',
+                    className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
                 }
             },
             {
