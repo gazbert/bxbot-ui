@@ -12,6 +12,7 @@ import {browser, element, by} from "protractor";
 
 /**
  * Trading Strategy screen tests.
+ * Test code seems very brittle - we need access to the model please Angular!
  *
  * TODO - Tests for add/remove strats
  * TODO - Tests for updating/validating fields
@@ -46,9 +47,6 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
     });
 
-    /**
-     * TODO Test code seems very brittle - we need access to the model!
-     */
     it('Should update Trading Strategy fields after Save', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
@@ -73,14 +71,6 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
 
         // Update Strat 1 fields
-
-        // TODO - Cool! this has found a bug. If you update the id, it will create a new Strategy, not update existing one.
-        // FIX needed for Markets and Trading Strategies.
-        // let marketId = element(by.id('marketId_0'));
-        // marketId.clear();
-        // marketId.sendKeys('myNewMarketId');
-        // expect(marketId.getAttribute('value')).toBe('myNewMarketId');
-
         let strategyName = element(by.id('tradingStrategyName_0'));
         let newStrategyName = 'EMA Indicator';
         strategyName.clear();
@@ -118,9 +108,6 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
     });
 
-    /**
-     * TODO Test code seems very brittle - we need access to the model!
-     */
     it('Should NOT update Trading Strategy fields after Cancel', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
@@ -145,14 +132,6 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
 
         // Update Strat 1 fields
-
-        // TODO - Cool! this has found a bug. If you update the id, it will create a new Strategy, not update existing one.
-        // FIX needed for Markets and Trading Strategies.
-        // let marketId = element(by.id('marketId_0'));
-        // marketId.clear();
-        // marketId.sendKeys('myNewMarketId');
-        // expect(marketId.getAttribute('value')).toBe('myNewMarketId');
-
         let strategyName = element(by.id('tradingStrategyName_0'));
         let newStrategyName = 'EMA Indicator';
         strategyName.clear();

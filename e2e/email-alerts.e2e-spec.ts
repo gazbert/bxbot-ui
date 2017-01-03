@@ -12,6 +12,7 @@ import {browser, element, by} from "protractor";
 
 /**
  * Email Alert Config screen tests.
+ * Test code seems very brittle - we need access to the model please Angular!
  *
  * TODO - Tests for updating/validating fields
  */
@@ -37,9 +38,6 @@ describe('Email Alerts Config Tests', function () {
         expect(element(by.id('fromAddress')).getAttribute('value')).toBe('c-3p0@naboo.space');
     });
 
-    /**
-     * TODO Test code seems very brittle - we need access to the model!
-     */
     it('Should update Email Alerts fields after Save', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
@@ -103,9 +101,6 @@ describe('Email Alerts Config Tests', function () {
         expect(element(by.id('fromAddress')).getAttribute('value')).toBe(newFromAddress);
     });
 
-    /**
-     * TODO Test code seems very brittle - we need access to the model!
-     */
     it('Should NOT update Email Alerts fields after Cancel', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));

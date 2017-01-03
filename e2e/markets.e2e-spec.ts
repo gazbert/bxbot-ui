@@ -13,6 +13,7 @@ import {click} from "../testing/index";
 
 /**
  * Market screen tests.
+ * Test code seems very brittle - we need access to the model please Angular!
  *
  * TODO - Tests for add/remove markets
  * TODO - Tests for updating/validating fields
@@ -47,9 +48,6 @@ describe('Market Screen Tests', function () {
         expect(element(by.id('tradingStrategy_1')).getAttribute('value')).toBe('1: Long Scalper');
     });
 
-    /**
-     * TODO Test code seems very brittle - we need access to the model!
-     */
     it('Should update Market fields after Save', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
@@ -77,13 +75,6 @@ describe('Market Screen Tests', function () {
         let marketEnabled = element(by.id('marketEnabled_0'));
         marketEnabled.click();
         expect(marketEnabled.getAttribute('ng-reflect-model')).toBe('true'); // must be better way?
-
-        // TODO - Cool! this has found a bug. If you update the id, it will create a new market, not update existing one.
-        // FIX needed for Markets and Trading Strategies.
-        // let marketId = element(by.id('marketId_0'));
-        // marketId.clear();
-        // marketId.sendKeys('myNewMarketId');
-        // expect(marketId.getAttribute('value')).toBe('myNewMarketId');
 
         let marketName = element(by.id('marketName_0'));
         let newMarketName = 'myNewMarket';
@@ -136,9 +127,6 @@ describe('Market Screen Tests', function () {
         expect(element(by.id('tradingStrategy_1')).getAttribute('value')).toBe('1: Long Scalper');
     });
 
-    /**
-     * TODO Test code seems very brittle - we need access to the model!
-     */
     it('Should NOT update Market fields after Cancel', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
@@ -158,13 +146,6 @@ describe('Market Screen Tests', function () {
         let marketEnabled = element(by.id('marketEnabled_0'));
         marketEnabled.click();
         expect(marketEnabled.getAttribute('ng-reflect-model')).toBe('true'); // must be better way?
-
-        // TODO - Cool! this has found a bug. If you update the id, it will create a new market, not update existing one.
-        // FIX needed for Markets and Trading Strategies.
-        // let marketId = element(by.id('marketId_0'));
-        // marketId.clear();
-        // marketId.sendKeys('myNewMarketId');
-        // expect(marketId.getAttribute('value')).toBe('myNewMarketId');
 
         let marketName = element(by.id('marketName_0'));
         let newMarketName = 'myNewMarket';
