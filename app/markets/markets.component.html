@@ -11,7 +11,7 @@
                      class="panel panel-default">
                     <div class="panel-heading">
                         <span>Market {{i + 1}}</span>
-                        <span class="glyphicon glyphicon-remove pull-right"
+                        <span id="deleteMarketButton_{{i}}" class="glyphicon glyphicon-remove pull-right"
                               *ngIf="markets.length > 1"
                               (click)="deleteMarket(markets[i])"></span>
                     </div>
@@ -105,7 +105,7 @@
                     </div>
                 </div>
                 <div class="margin-20">
-                    <a (click)="addMarket()" style="cursor: default">
+                    <a id="addMarketLink" (click)="addMarket()" style="cursor: default">
                         Add Market +
                     </a>
                 </div>

@@ -11,7 +11,7 @@
                      class="panel panel-default">
                     <div class="panel-heading">
                         <span>Strategy {{i + 1}}</span>
-                        <span class="glyphicon glyphicon-remove pull-right"
+                        <span id="deleteTradingStrategyButton_{{i}}" class="glyphicon glyphicon-remove pull-right"
                               *ngIf="canBeDeleted()"
                               (click)="deleteTradingStrategy(tradingStrategies[i])"></span>
                     </div>
@@ -77,7 +77,7 @@
                     </div>
                 </div>
                 <div class="margin-20">
-                    <a (click)="addTradingStrategy()" style="cursor: default">
+                    <a id="addTradingStrategyLink" (click)="addTradingStrategy()" style="cursor: default">
                         Add Trading Strategy +
                     </a>
                 </div>

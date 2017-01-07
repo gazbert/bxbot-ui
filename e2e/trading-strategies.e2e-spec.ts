@@ -12,9 +12,8 @@ import {browser, element, by} from "protractor";
 
 /**
  * Trading Strategy screen tests.
- * Test code seems very brittle - we need access to the model please Angular!
+ * Test code seems very brittle - can we have access to the model please Angular :-)
  *
- * TODO - Tests for add/remove strats
  * TODO - Tests for updating/validating fields
  */
 describe('Trading Strategy Tests', function () {
@@ -169,5 +168,122 @@ describe('Trading Strategy Tests', function () {
             .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');
         expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
             .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
+    });
+
+    it('Should add new Trading Strategy and save it', function () {
+
+        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        dashboardItems.get(3).click();
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Exchange Details');
+
+        let tabLinks = element.all(by.css('li'));
+        tabLinks.get(2).click();
+
+        // Strat 1
+        expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');
+        expect(element(by.id('tradingStrategyDescription_0')).getAttribute('value'))
+            .toBe('Scalping strategy that buys low and sells high.');
+        expect(element(by.id('tradingStrategyClassname_0')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
+
+        // Strat 2
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
+        expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
+            .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');
+        expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
+
+        // Add new Strat 3
+        let addTradingStrategyLink = element(by.id('addTradingStrategyLink'));
+        addTradingStrategyLink.click();
+
+        let strategyName = element(by.id('tradingStrategyName_2'));
+        let newStrategyName = 'EMA Indicator';
+        strategyName.clear();
+        strategyName.sendKeys(newStrategyName);
+        expect(strategyName.getAttribute('value')).toBe(newStrategyName);
+
+        let strategyDescription = element(by.id('tradingStrategyDescription_2'));
+        let newStrategyDescription = 'EMA Indicator algo for deciding when to enter and exit trades.';
+        strategyDescription.clear();
+        strategyDescription.sendKeys(newStrategyDescription);
+        expect(strategyDescription.getAttribute('value')).toBe(newStrategyDescription);
+
+        let strategyClassName = element(by.id('tradingStrategyClassname_2'));
+        let newStrategyClassName = 'com.gazbert.bxbot.strategies.EmaIndicator';
+        strategyClassName.clear();
+        strategyClassName.sendKeys(newStrategyClassName);
+        expect(strategyClassName.getAttribute('value')).toBe(newStrategyClassName);
+
+        // Save and check the update worked
+        let saveButton = element(by.id('strategySaveButton'));
+        saveButton.click();
+        dashboardItems.get(3).click();
+        tabLinks.get(2).click();
+
+        // Strat 1 unchanged
+        expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');
+        expect(element(by.id('tradingStrategyDescription_0')).getAttribute('value')).toBe(
+            'Scalping strategy that buys low and sells high.');
+        expect(element(by.id('tradingStrategyClassname_0')).getAttribute('value')).toBe(
+            'com.gazbert.bxbot.strategies.LongScalperStrategy');
+
+        // Strat 2 unchanged
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
+        expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
+            .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');
+        expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
+
+        // Hello Strat 3!
+        expect(element(by.id('tradingStrategyName_2')).getAttribute('value')).toBe(newStrategyName);
+        expect(element(by.id('tradingStrategyDescription_2')).getAttribute('value')).toBe(newStrategyDescription);
+        expect(element(by.id('tradingStrategyClassname_2')).getAttribute('value')).toBe(newStrategyClassName);
+    });
+
+    it('Should delete Trading Strategy and save change', function () {
+
+        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        dashboardItems.get(3).click();
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Exchange Details');
+
+        let tabLinks = element.all(by.css('li'));
+        tabLinks.get(2).click();
+
+        // Strat 1
+        expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');
+        expect(element(by.id('tradingStrategyDescription_0')).getAttribute('value'))
+            .toBe('Scalping strategy that buys low and sells high.');
+        expect(element(by.id('tradingStrategyClassname_0')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
+
+        // Strat 2
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
+        expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
+            .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');
+        expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
+
+        // Delete Strat 1
+        let deletingTradingStrategyButton = element(by.id('deleteTradingStrategyButton_0'));
+        deletingTradingStrategyButton.click();
+
+        // Save and check the update worked
+        let saveButton = element(by.id('strategySaveButton'));
+        saveButton.click();
+        dashboardItems.get(3).click();
+        tabLinks.get(2).click();
+
+        // Original Strat 1 'Long Scalper' deleted; new Strat 1 is 'MACD RSI Indicator' (previously Strat 2).
+        expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('MACD RSI Indicator');
+        expect(element(by.id('tradingStrategyDescription_0')).getAttribute('value')).toBe(
+            'MACD Indicator and RSI algo for deciding when to enter and exit trades.');
+        expect(element(by.id('tradingStrategyClassname_0')).getAttribute('value')).toBe(
+            'com.gazbert.bxbot.strategies.MacdRsiStrategy');
+
+        // Original Strat 2 moved
+        expect(element(by.id('tradingStrategyName_1')).isPresent()).toBe(false);
+        expect(element(by.id('tradingStrategyDescription_1')).isPresent()).toBe(false);
+        expect(element(by.id('tradingStrategyClassname_1')).isPresent()).toBe(false);
     });
 });

@@ -12,7 +12,7 @@ import {browser, element, by} from "protractor";
 
 /**
  * Email Alert Config screen tests.
- * Test code seems very brittle - we need access to the model please Angular!
+ * Test code seems very brittle - can we have access to the model please Angular :-)
  *
  * TODO - Tests for updating/validating fields
  */

@@ -27,15 +27,15 @@ describe('Dashboard Tests', function () {
         });
     });
 
-    it('should display browser title: ' + expectedMsg, function () {
+    it('Should display browser title: ' + expectedMsg, function () {
         expect(browser.getTitle()).toEqual(expectedMsg);
     });
 
-    it('should display admin console heading name: ' + expectedMsg, function () {
+    it('Should display admin console heading name: ' + expectedMsg, function () {
         expect(element(by.css('h1')).getText()).toEqual(expectedMsg);
     });
 
-    it('should display 8 dashboard Exchange items', function () {
+    it('Should display 8 dashboard Exchange items', function () {
 
         // TODO below does not work with Angular2 :-(
         // https://github.com/angular/protractor/issues/3205
@@ -46,12 +46,12 @@ describe('Dashboard Tests', function () {
         expect(dashboardItems.count()).toBe(8);
     });
 
-    it('first dashboard Exchange item should be Bitstamp', function () {
+    it('Should display Bitstamp as first dashboard Exchange item', function () {
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         expect(dashboardItems.get(0).getText()).toContain('Bitstamp');
     });
 
-    it('last dashboard Exchange item should be Huobi', function () {
+    it('Should display Huobi as last dashboard Exchange item', function () {
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         expect(dashboardItems.get(7).getText()).toContain('Huobi');
     });
