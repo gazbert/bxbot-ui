@@ -23,7 +23,7 @@ describe('Market Screen Tests', function () {
         browser.get('');
     });
 
-    it('Should render BTC-e Market config', function () {
+    it('should render BTC-e Market config', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(4).click();
@@ -47,7 +47,7 @@ describe('Market Screen Tests', function () {
         expect(element(by.id('tradingStrategy_1')).getAttribute('value')).toBe('1: Long Scalper');
     });
 
-    it('Should update Market fields after Save', function () {
+    it('should update Market fields after Save', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(4).click();
@@ -126,7 +126,7 @@ describe('Market Screen Tests', function () {
         expect(element(by.id('tradingStrategy_1')).getAttribute('value')).toBe('1: Long Scalper');
     });
 
-    it('Should NOT update Market fields after Cancel', function () {
+    it('should NOT update Market fields after Cancel', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(4).click();
@@ -197,7 +197,7 @@ describe('Market Screen Tests', function () {
         expect(element(by.id('tradingStrategy_1')).getAttribute('value')).toBe('1: Long Scalper');
     });
 
-    it('Should add new Market and save it', function () {
+    it('should add new Market and save it', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(4).click();
@@ -286,7 +286,7 @@ describe('Market Screen Tests', function () {
         expect(element(by.id('tradingStrategy_2')).getAttribute('value')).toBe('1: Long Scalper');
     });
 
-    it('Should delete Market and save change', function () {
+    it('should delete Market and save change', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(4).click();

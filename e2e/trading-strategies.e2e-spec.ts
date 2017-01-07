@@ -22,7 +22,7 @@ describe('Trading Strategy Tests', function () {
         browser.get('');
     });
 
-    it('Should render ItBit Trading Strategy config', function () {
+    it('should render ItBit Trading Strategy config', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(3).click();
@@ -46,7 +46,7 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
     });
 
-    it('Should update Trading Strategy fields after Save', function () {
+    it('should update Trading Strategy fields after Save', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(3).click();
@@ -107,7 +107,7 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
     });
 
-    it('Should NOT update Trading Strategy fields after Cancel', function () {
+    it('should NOT update Trading Strategy fields after Cancel', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(3).click();
@@ -170,7 +170,7 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
     });
 
-    it('Should add new Trading Strategy and save it', function () {
+    it('should add new Trading Strategy and save it', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(3).click();
@@ -241,7 +241,7 @@ describe('Trading Strategy Tests', function () {
         expect(element(by.id('tradingStrategyClassname_2')).getAttribute('value')).toBe(newStrategyClassName);
     });
 
-    it('Should delete Trading Strategy and save change', function () {
+    it('should delete Trading Strategy and save change', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(3).click();

@@ -21,21 +21,21 @@ describe('Dashboard Tests', function () {
         browser.get('');
     });
 
-    it('Should redirect blank base URL to /dashboard', function () {
+    it('should redirect blank base URL to /dashboard', function () {
         browser.getCurrentUrl().then(function (url) {
             expect(url).toContain('/dashboard');
         });
     });
 
-    it('Should display browser title: ' + expectedMsg, function () {
+    it('should display browser title: ' + expectedMsg, function () {
         expect(browser.getTitle()).toEqual(expectedMsg);
     });
 
-    it('Should display admin console heading name: ' + expectedMsg, function () {
+    it('should display admin console heading name: ' + expectedMsg, function () {
         expect(element(by.css('h1')).getText()).toEqual(expectedMsg);
     });
 
-    it('Should display 8 dashboard Exchange items', function () {
+    it('should display 8 dashboard Exchange items', function () {
 
         // TODO below does not work with Angular2 :-(
         // https://github.com/angular/protractor/issues/3205
@@ -46,17 +46,17 @@ describe('Dashboard Tests', function () {
         expect(dashboardItems.count()).toBe(8);
     });
 
-    it('Should display Bitstamp as first dashboard Exchange item', function () {
+    it('should display Bitstamp as first dashboard Exchange item', function () {
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         expect(dashboardItems.get(0).getText()).toContain('Bitstamp');
     });
 
-    it('Should display Huobi as last dashboard Exchange item', function () {
+    it('should display Huobi as last dashboard Exchange item', function () {
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         expect(dashboardItems.get(7).getText()).toContain('Huobi');
     });
 
-    it('Should render Gemini Exchange specific link', function () {
+    it('should render Gemini Exchange specific link', function () {
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(2).click();
 

@@ -22,7 +22,7 @@ describe('Exchange Details Tests', function () {
         browser.get('');
     });
 
-    it('Should render GDAX Exchange specific details', function () {
+    it('should render GDAX Exchange specific details', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(1).click();

@@ -23,7 +23,7 @@ describe('Exchange Adapter Tests', function () {
         browser.get('');
     });
 
-    it('Should render Bitstamp Exchange Adapter config', function () {
+    it('should render Bitstamp Exchange Adapter config', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(0).click();

@@ -28,7 +28,7 @@ xdescribe('Misc Scenario Tests', function () {
         browser.get('');
     });
 
-    it('Should render BTC-e Market config', function () {
+    it('should render BTC-e Market config', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(4).click();
