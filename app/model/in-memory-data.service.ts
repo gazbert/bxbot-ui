@@ -92,7 +92,7 @@ export class InMemoryDataService implements InMemoryDbService {
                     ],
                     nonFatalErrorMessages: [
                         {value: 'Connection reset'},
-                        {value: 'Remote host closed connection during handshake'}
+                        {value: ''}
                     ]
                 }
             },

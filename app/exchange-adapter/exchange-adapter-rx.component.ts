@@ -275,7 +275,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
 
     httpCodeWhitelistChecker(control: FormControl) {
         // TODO get from config or wherever
-        const httpCodeWhitelist = ['501', '502', '503', '504'];
+        const httpCodeWhitelist = ['501', '502', '503', '504', '524', '525', '522'];
         if (control && control.dirty) {
             const httpStatusCode = control.value;
             const validCode = httpCodeWhitelist.includes(httpStatusCode);
