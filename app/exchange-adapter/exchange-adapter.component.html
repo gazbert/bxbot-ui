@@ -54,7 +54,7 @@
                      class="panel panel-default">
                     <div class="panel-heading">
                         <span>Code {{i + 1}}</span>
-                        <span class="glyphicon glyphicon-remove pull-right"
+                        <span id="deleteErrorCodeButton_{{i}}" class="glyphicon glyphicon-remove pull-right"
                               *ngIf="exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length > 0"
                               (click)="deleteErrorCode(exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[i])"></span>
                     </div>
@@ -78,7 +78,7 @@
                     </div>
                 </div>
                 <div class="margin-20">
-                    <a (click)="addErrorCode()" style="cursor: default">
+                    <a id="addNewErrorCodeLink" (click)="addErrorCode()" style="cursor: default">
                         Add error code +
                     </a>
                 </div>
@@ -90,7 +90,7 @@
                      class="panel panel-default">
                     <div class="panel-heading">
                         <span>Message {{i + 1}}</span>
-                        <span class="glyphicon glyphicon-remove pull-right"
+                        <span id="deleteErrorMessageButton_{{i}}" class="glyphicon glyphicon-remove pull-right"
                               *ngIf="exchangeAdapter.networkConfig.nonFatalErrorMessages.length > 0"
                               (click)="deleteErrorMessage(exchangeAdapter.networkConfig.nonFatalErrorMessages[i])"></span>
                     </div>
@@ -113,7 +113,7 @@
                     </div>
                 </div>
                 <div class="margin-20">
-                    <a (click)="addErrorMessage('')" style="cursor: default">
+                    <a id="addNewErrorMessageLink" (click)="addErrorMessage('')" style="cursor: default">
                         Add error message +
                     </a>
                 </div>

@@ -55,7 +55,7 @@
                      class="panel panel-default">
                     <div class="panel-heading">
                         <span>Code {{i + 1}}</span>
-                        <span class="glyphicon glyphicon-remove pull-right"
+                        <span id="deleteErrorCodeButton_{{i}}" class="glyphicon glyphicon-remove pull-right"
                               *ngIf="nonFatalErrorHttpStatusCodes.controls.length > 1"
                               (click)="deleteErrorCode(i)"></span>
                     </div>
@@ -82,7 +82,7 @@
                     </div>
                 </div>
                 <div class="margin-20">
-                    <a (click)="addErrorCode()" style="cursor: default">
+                    <a id="addNewErrorCodeLink" (click)="addErrorCode()" style="cursor: default">
                         Add error code +
                     </a>
                 </div>
@@ -94,7 +94,7 @@
                      class="panel panel-default">
                     <div class="panel-heading">
                         <span>Message {{i + 1}}</span>
-                        <span class="glyphicon glyphicon-remove pull-right"
+                        <span id="deleteErrorMessageButton_{{i}}" class="glyphicon glyphicon-remove pull-right"
                               *ngIf="nonFatalErrorMessages.controls.length > 0"
                               (click)="deleteErrorMessage(i)"></span>
                     </div>
@@ -117,7 +117,7 @@
                     </div>
                 </div>
                 <div class="margin-20">
-                    <a (click)="addErrorMessage()" style="cursor: default">
+                    <a id="addNewErrorMessageLink" (click)="addErrorMessage()" style="cursor: default">
                         Add error message +
                     </a>
                 </div>

@@ -265,8 +265,8 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
 
         // Delete Strat 1
-        let deletingTradingStrategyButton = element(by.id('deleteTradingStrategyButton_0'));
-        deletingTradingStrategyButton.click();
+        let deleteTradingStrategyButton = element(by.id('deleteTradingStrategyButton_0'));
+        deleteTradingStrategyButton.click();
 
         // Save and check the update worked
         let saveButton = element(by.id('strategySaveButton'));
