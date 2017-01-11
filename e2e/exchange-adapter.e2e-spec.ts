@@ -7,6 +7,8 @@
  * https://angular.io/docs/ts/latest/guide/upgrade.html
  * https://github.com/angular/protractor/issues/3205
  *
+ * @author gazbert
+ *
  ********************************************************************************/
 import {browser, element, by} from "protractor";
 
@@ -45,7 +47,7 @@ describe('Exchange Adapter Tests', function () {
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Exchange Details');
 
         expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges2.BitstampExchangeAdapter2');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');

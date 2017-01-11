@@ -24,12 +24,13 @@
                                 <input [(ngModel)]="tradingStrategies[i].name"
                                        type="text" class="form-control" id="tradingStrategyName_{{i}}"
                                        name="tradingStrategyName_{{i}}" #tradingStrategyName="ngModel"
-                                       required maxlength="50"/>
+                                       required maxlength="50" pattern="[a-zA-Z0-9$ ]*"/>
 
                                 <!--<div *ngIf="formErrors.marketName" class="alert alert-danger">{{ formErrors.marketName }}</div>-->
 
-                                <div [hidden]="tradingStrategyName.valid || (tradingStrategyName.pristine && !f.submitted)" class="alert alert-danger">
-                                     Strategy Name must be set.
+                                <div id="invalidTradingStrategyName_{{i}}"
+                                     [hidden]="tradingStrategyName.valid || (tradingStrategyName.pristine && !f.submitted)" class="alert alert-danger">
+                                     Strategy Name must be set. Value must be alphanumeric.
                                 </div>
 
                                 <!--<small [hidden]="marketName.valid || (marketName.pristine && !f.submitted)" class="text-danger">-->
@@ -66,9 +67,10 @@
                                        placeholder="com.my.MyTradingStrategyClass" id="tradingStrategyClassname_{{i}}"
                                        type="text" class="form-control" required maxlength="120"
                                        #tradingStrategyClassname ="ngModel"
-                                       pattern="([a-zA-Z_$][a-zA-Z\\d_$]*\.)*[a-zA-Z_$][a-zA-Z\\d_$]*"/>
+                                       pattern="([a-zA-Z_$][a-zA-Z0-9_$]*\.)*[a-zA-Z_$][a-zA-Z0-9_$]*"/>
 
-                                <div [hidden]="tradingStrategyClassname.valid || (tradingStrategyClassname.pristine && !f.submitted)" class="alert alert-danger">
+                                <div id="invalidTradingStrategyClassname_{{i}}"
+                                     [hidden]="tradingStrategyClassname.valid || (tradingStrategyClassname.pristine && !f.submitted)" class="alert alert-danger">
                                     Strategy Class Name must be valid Java class, e.g. com.my.MyTradingStrategyClass
                                 </div>
                             </div>

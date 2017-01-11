@@ -17,7 +17,7 @@ You'll need [node.js](https://nodejs.org/en/download/) installed to build and ru
 1. Run `npm install` to install the dependencies - you'll only need to do this once, unless the versions are updated in 
    the [`package.json`](./package.json).
 1. To start the app: `npm start` - a browser window should open with the app running.
-1. To stop the app, CTRL-C from the command line.
+1. To stop the app, Ctrl-C from the command line.
 
 ### Jasmine Unit Tests
 

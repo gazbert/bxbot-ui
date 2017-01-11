@@ -14,7 +14,7 @@ import {browser, element, by} from "protractor";
  * Trading Strategy screen tests.
  * Test code seems very brittle - can we have access to the model please Angular :-)
  *
- * TODO - Tests for updating/validating fields
+ * @author gazbert
  */
 describe('Trading Strategy Tests', function () {
 
@@ -71,7 +71,7 @@ describe('Trading Strategy Tests', function () {
 
         // Update Strat 1 fields
         let strategyName = element(by.id('tradingStrategyName_0'));
-        let newStrategyName = 'EMA Indicator';
+        let newStrategyName = 'EMA Indicator 2';
         strategyName.clear();
         strategyName.sendKeys(newStrategyName);
         expect(strategyName.getAttribute('value')).toBe(newStrategyName);
@@ -83,7 +83,7 @@ describe('Trading Strategy Tests', function () {
         expect(strategyDescription.getAttribute('value')).toBe(newStrategyDescription);
 
         let strategyClassName = element(by.id('tradingStrategyClassname_0'));
-        let newStrategyClassName = 'com.gazbert.bxbot.strategies.EmaIndicator';
+        let newStrategyClassName = 'com.gazbert.bxbot.strategies2.EmaIndicator2';
         strategyClassName.clear();
         strategyClassName.sendKeys(newStrategyClassName);
         expect(strategyClassName.getAttribute('value')).toBe(newStrategyClassName);
@@ -286,4 +286,71 @@ describe('Trading Strategy Tests', function () {
         expect(element(by.id('tradingStrategyDescription_1')).isPresent()).toBe(false);
         expect(element(by.id('tradingStrategyClassname_1')).isPresent()).toBe(false);
     });
+
+   it('should NOT save Trading Strategy fields if there are validation errors', function () {
+
+        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        dashboardItems.get(3).click();
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Exchange Details');
+
+        let tabLinks = element.all(by.css('li'));
+        tabLinks.get(2).click();
+
+        // Strat 1
+        expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');
+        expect(element(by.id('tradingStrategyDescription_0')).getAttribute('value'))
+            .toBe('Scalping strategy that buys low and sells high.');
+        expect(element(by.id('tradingStrategyClassname_0')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
+
+        // Strat 2
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
+        expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
+            .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');
+        expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
+
+        // Update Strat 1 fields with some 'bad' values
+        let strategyName = element(by.id('tradingStrategyName_0'));
+        strategyName.clear();
+        let newStrategyName = 'dodgy n@me';
+        strategyName.sendKeys(newStrategyName);
+
+        expect(strategyName.getAttribute('value')).toBe(newStrategyName);
+
+        let strategyDescription = element(by.id('tradingStrategyDescription_0'));
+        let newStrategyDescription = 'EMA Indicator algo for deciding when to enter and exit trades.';
+        strategyDescription.clear();
+        strategyDescription.sendKeys(newStrategyDescription);
+        expect(strategyDescription.getAttribute('value')).toBe(newStrategyDescription);
+
+        let strategyClassName = element(by.id('tradingStrategyClassname_0'));
+        let newStrategyClassName = '123BadClassName';
+        strategyClassName.clear();
+        strategyClassName.sendKeys(newStrategyClassName);
+        expect(strategyClassName.getAttribute('value')).toBe(newStrategyClassName);
+
+        // Save and check the update did not persist
+        let saveButton = element(by.id('strategySaveButton'));
+        saveButton.click();
+
+        // Strat 1 - check for validation errors
+        expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe(newStrategyName);
+        expect(element(by.id('invalidTradingStrategyName_0')).getText()).toBe(
+            'Strategy Name must be set. Value must be alphanumeric.');
+
+        expect(element(by.id('tradingStrategyDescription_0')).getAttribute('value')).toBe(newStrategyDescription);
+
+        expect(element(by.id('tradingStrategyClassname_0')).getAttribute('value')).toBe(newStrategyClassName);
+        expect(element(by.id('invalidTradingStrategyClassname_0')).getText()).toBe(
+            'Strategy Class Name must be valid Java class, e.g. com.my.MyTradingStrategyClass');
+
+        // Strat 2 unchanged
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
+        expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
+            .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');
+        expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
+    });
+
 });

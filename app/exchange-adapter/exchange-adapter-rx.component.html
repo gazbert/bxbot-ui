@@ -19,7 +19,8 @@
             <div class="form-group col-sm-6">
                 <label for="className">Class Name</label>
                 <input formControlName="className" placeholder="com.my.MyExchangeAdapter" id="className" type="text"
-                       class="form-control" maxlength="121" required/>
+                       class="form-control" maxlength="121" required
+                       pattern="([a-zA-Z_$][a-zA-Z0-9_$]*\.)*[a-zA-Z_$][a-zA-Z0-9_$]*"/>
 
                 <!--<div *ngIf="!exchangeDetailsForm.controls.className.valid" class="alert alert-danger">-->
                 <!--Adapter class name is required.-->

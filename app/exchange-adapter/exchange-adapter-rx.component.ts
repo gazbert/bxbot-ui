@@ -150,7 +150,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
                 Validators.required,
                 Validators.minLength(1),
                 Validators.maxLength(120),
-                Validators.pattern('([a-zA-Z_$][a-zA-Z\\d_$]*\.)*[a-zA-Z_$][a-zA-Z\\d_$]*')
+                Validators.pattern('([a-zA-Z_$][a-zA-Z0-9_$]*\.)*[a-zA-Z_$][a-zA-Z0-9_$]*')
             ]],
             connectionTimeout: [this.exchangeAdapter.networkConfig.connectionTimeout, [
                 Validators.required,
