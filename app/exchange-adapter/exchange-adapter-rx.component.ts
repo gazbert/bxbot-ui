@@ -28,8 +28,8 @@ export class ExchangeAdapterRxComponent implements OnInit {
     formSaved = false;
 
     formErrors = {
-        'adapter': '',
         'adapterName': '',
+        'className': '',
         'connectionTimeout': '',
         'nonFatalErrorHttpStatusCodes': '',
         'nonFatalErrorMessages': ''
@@ -38,20 +38,22 @@ export class ExchangeAdapterRxComponent implements OnInit {
     validationMessages = {
         'adapterName': {
             'required': 'Adapter name is required.',
-            'maxlength': 'Adapter name cannot be more than 50 characters long.'
+            'maxlength': 'Adapter name cannot be more than 50 characters long.',
+            'pattern': 'Exchange Adapter Name must be set. Value must be alphanumeric and can only include the following '
+                       + 'special characters: _ -'
         },
         'className': {
             'required': 'Adapter class name is required.',
             'maxlength': 'Adapter class name cannot be more than 120 characters long.',
-            'pattern': 'Not a valid fully qualified Java class name.'
+            'pattern': 'Not a valid Java class name, e.g. com.my.strats.MyStrategy'
         },
         'connectionTimeout': {
             'required': 'Connection timeout is required.',
             'pattern': 'Connection timeout must be a whole number.'
         },
         'nonFatalErrorHttpStatusCodes': {
-            'required': 'Code must not be empty.',
-            'pattern': 'Code must be a 3 digit number.',
+            'required': 'HTTP error code must not be empty.',
+            'pattern': 'HTTP error code must be a 3 digit number.',
             'httpCodeWhitelistChecker': 'HTTP Status Code not in whitelist.'
         },
         'nonFatalErrorMessages': {
@@ -144,7 +146,8 @@ export class ExchangeAdapterRxComponent implements OnInit {
             adapterName: [this.exchangeAdapter.name, [
                 Validators.required,
                 Validators.minLength(1),
-                Validators.maxLength(50)
+                Validators.maxLength(50),
+                Validators.pattern('[a-zA-Z0-9_\\- ]*')
             ]],
             className: [this.exchangeAdapter.className, [
                 Validators.required,

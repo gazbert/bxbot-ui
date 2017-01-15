@@ -401,7 +401,7 @@ describe('Exchange Adapter Tests', function () {
         expect(errorCode_0.getAttribute('value')).toBe(newErrorCode_0);
 
         let errorCode_1 = element(by.id('errorCode_1'));
-        let newErrorCode_1 = '524';
+        let newErrorCode_1 = '522';
         errorCode_1.clear();
         errorCode_1.sendKeys(newErrorCode_1);
         expect(errorCode_1.getAttribute('value')).toBe(newErrorCode_1);
@@ -436,7 +436,7 @@ describe('Exchange Adapter Tests', function () {
             'Connection timeout must be a whole number.');
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe(newErrorCode_0);
-        expect(element(by.id('invalidErrorCode_0')).getText()).toBe(
+        expect(element(by.id('invalidErrorCode_0')).getText()).toContain(
             'HTTP error code must be a 3 digit number.');
 
         expect(element(by.id('errorCode_1')).getAttribute('value')).toBe(newErrorCode_1);
