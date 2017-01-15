@@ -12,7 +12,8 @@ import {browser, element, by} from "protractor";
 
 /**
  * Trading Strategy screen tests.
- * Test code seems very brittle - can we have access to the model please Angular :-)
+ *
+ * TODO - Test code seems very brittle: can we have access to the model please Angular :-)
  *
  * @author gazbert
  */
@@ -337,7 +338,7 @@ describe('Trading Strategy Tests', function () {
         // Strat 1 - check for validation errors
         expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe(newStrategyName);
         expect(element(by.id('invalidTradingStrategyName_0')).getText()).toBe(
-            'Strategy Name must be set. Value must be alphanumeric.');
+            'Strategy Name must be set. Value must be alphanumeric and can only include the following special characters: _ -');
 
         expect(element(by.id('tradingStrategyDescription_0')).getAttribute('value')).toBe(newStrategyDescription);
 

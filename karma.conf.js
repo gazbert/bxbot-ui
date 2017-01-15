@@ -3,6 +3,8 @@ module.exports = function (config) {
 
     var appBase    = 'app/';       // transpiled app JS and map files
     var appSrcBase = 'app/';       // app source TS files
+
+    // See https://github.com/angular/quickstart/issues/329
     var appAssets  = '/base/app/'; // component assets fetched by Angular's compiler
 
     // Testing helpers (optional) are conventionally in a folder called `testing`

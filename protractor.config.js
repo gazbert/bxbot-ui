@@ -28,15 +28,7 @@ exports.config = {
 
     // Spec patterns are relative to this config file
     specs: [
-        // '**/*e2e-spec.js'
-
-        '**/app.e2e-spec.js',
-        '**/dashboard.e2e-spec.js',
-        '**/email-alerts.e2e-spec.js',
-        '**/exchange-adapter.e2e-spec.js',
-        '**/exchange-details.e2e-spec.js',
-        '**/markets.e2e-spec.js',
-        '**/trading-strategies.e2e-spec.js'
+        '**/*e2e-spec.js'
     ],
 
     // For angular tests

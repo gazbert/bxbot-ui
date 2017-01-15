@@ -32,12 +32,13 @@
                                 <input [(ngModel)]="markets[i].name"
                                        type="text" class="form-control" id="marketName_{{i}}"
                                        name="marketName_{{i}}" #marketName="ngModel" required maxlength="50"
-                                       placeholder="BTC/USD"/>
+                                       placeholder="BTC/USD" pattern="[a-zA-Z0-9/_\- ]*"/>
 
                                 <!--<div *ngIf="formErrors.marketName" class="alert alert-danger">{{ formErrors.marketName }}</div>-->
 
-                                <div [hidden]="marketName.valid || (marketName.pristine && !f.submitted)" class="alert alert-danger">
-                                    Market Name must be set.
+                                <div id="invalidMarketName_{{i}}"
+                                     [hidden]="marketName.valid || (marketName.pristine && !f.submitted)" class="alert alert-danger">
+                                    Market Name must be set. Value must be alphanumeric and can only include the following special characters: / _ -
                                 </div>
 
                                 <!--<small [hidden]="marketName.valid || (marketName.pristine && !f.submitted)" class="text-danger">-->
@@ -60,7 +61,8 @@
                                     <!--Base Currency must be valid 3 character currency id, e.g. BTC-->
                                 <!--</div>-->
 
-                                <div [hidden]="baseCurrency.valid || (baseCurrency.pristine && !f.submitted)" class="alert alert-danger">
+                                <div id="invalidBaseCurrency_{{i}}"
+                                     [hidden]="baseCurrency.valid || (baseCurrency.pristine && !f.submitted)" class="alert alert-danger">
                                     Base Currency must be valid 3 character currency id, e.g. USD
                                 </div>
                             </div>
@@ -79,7 +81,8 @@
                                     <!--Counter Currency must be valid 3 character currency id, e.g. BTC-->
                                 <!--</div>-->
 
-                                <div [hidden]="counterCurrency.valid || (counterCurrency.pristine && !f.submitted)" class="alert alert-danger">
+                                <div id="invalidCounterCurrency_{{i}}"
+                                     [hidden]="counterCurrency.valid || (counterCurrency.pristine && !f.submitted)" class="alert alert-danger">
                                     Counter Currency must be valid 3 character currency id, e.g. BTC
                                 </div>
                             </div>

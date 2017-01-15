@@ -24,13 +24,13 @@
                                 <input [(ngModel)]="tradingStrategies[i].name"
                                        type="text" class="form-control" id="tradingStrategyName_{{i}}"
                                        name="tradingStrategyName_{{i}}" #tradingStrategyName="ngModel"
-                                       required maxlength="50" pattern="[a-zA-Z0-9$ ]*"/>
+                                       required maxlength="50" pattern="[a-zA-Z0-9_\- ]*"/>
 
                                 <!--<div *ngIf="formErrors.marketName" class="alert alert-danger">{{ formErrors.marketName }}</div>-->
 
                                 <div id="invalidTradingStrategyName_{{i}}"
                                      [hidden]="tradingStrategyName.valid || (tradingStrategyName.pristine && !f.submitted)" class="alert alert-danger">
-                                     Strategy Name must be set. Value must be alphanumeric.
+                                     Strategy Name must be set. Value must be alphanumeric and can only include the following special characters: _ -
                                 </div>
 
                                 <!--<small [hidden]="marketName.valid || (marketName.pristine && !f.submitted)" class="text-danger">-->
