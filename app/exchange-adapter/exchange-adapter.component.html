@@ -42,8 +42,6 @@
                 <div [hidden]="connectionTimeout.valid || (connectionTimeout.pristine && !f.submitted)" class="alert alert-danger">
                     Connection timeout must be a whole number.
                 </div>
-
-                <!--<div *ngIf="formErrors.connectionTimeout" class="alert alert-danger">{{formErrors.connectionTimeout }}</div>-->
             </div>
         </div>
 
@@ -70,10 +68,6 @@
                             <div [hidden]="errorCode.valid || (errorCode.pristine && !f.submitted)" class="alert alert-danger">
                                 HTTP error code must be a 3 digit number.
                             </div>
-
-                            <!--<div [hidden]="errorCode.valid || errorCode.pristine" class="alert alert-danger">-->
-                                <!--HTTP error code must be a 3 digit number.-->
-                            <!--</div>-->
                         </div>
                     </div>
                 </div>
@@ -105,10 +99,6 @@
                             <div [hidden]="errorMsg.valid || (errorMsg.pristine && !f.submitted)" class="alert alert-danger">
                                 Error message must not be empty.
                             </div>
-
-                            <!--<div [hidden]="errorMsg.valid || errorMsg.pristine" class="alert alert-danger">-->
-                                <!--Error message must not be empty.-->
-                            <!--</div>-->
                         </div>
                     </div>
                 </div>

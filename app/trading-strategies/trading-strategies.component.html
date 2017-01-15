@@ -26,15 +26,15 @@
                                        name="tradingStrategyName_{{i}}" #tradingStrategyName="ngModel"
                                        required maxlength="50" pattern="[a-zA-Z0-9_\- ]*"/>
 
-                                <!--<div *ngIf="formErrors.marketName" class="alert alert-danger">{{ formErrors.marketName }}</div>-->
+                                <!--<div *ngIf="formErrors.tradingStrategyName" class="alert alert-danger">{{ formErrors.tradingStrategyName }}</div>-->
 
                                 <div id="invalidTradingStrategyName_{{i}}"
                                      [hidden]="tradingStrategyName.valid || (tradingStrategyName.pristine && !f.submitted)" class="alert alert-danger">
                                      Strategy Name must be set. Value must be alphanumeric and can only include the following special characters: _ -
                                 </div>
 
-                                <!--<small [hidden]="marketName.valid || (marketName.pristine && !f.submitted)" class="text-danger">-->
-                                    <!--Market Name must be set-->
+                                <!--<small [hidden]="tradingStrategyName.valid || (tradingStrategyName.pristine && !f.submitted)" class="text-danger">-->
+                                    <!--Strategy Name must be set.-->
                                 <!--</small>-->
 
                             </div>
@@ -48,10 +48,6 @@
                                        type="text" class="form-control" id="tradingStrategyDescription_{{i}}"
                                        name="tradingStrategyDescription_{{i}}" #tradingStrategyDescription="ngModel"
                                        maxlength="121"/>
-
-                                <!--<div [hidden]="baseCurrency.valid || baseCurrency.pristine" class="alert alert-danger">-->
-                                    <!--Base Currency must be valid 3 character currency id, e.g. BTC-->
-                                <!--</div>-->
 
                                 <div [hidden]="tradingStrategyDescription.valid || (tradingStrategyDescription.pristine && !f.submitted)" class="alert alert-danger">
                                     Max Description length is 120.

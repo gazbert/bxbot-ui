@@ -57,10 +57,6 @@
                                        name="baseCurrency_{{i}}" #baseCurrency="ngModel" required maxlength="3"
                                        pattern="^[A-Z]{3}$" placeholder="USD"/>
 
-                                <!--<div [hidden]="baseCurrency.valid || baseCurrency.pristine" class="alert alert-danger">-->
-                                    <!--Base Currency must be valid 3 character currency id, e.g. BTC-->
-                                <!--</div>-->
-
                                 <div id="invalidBaseCurrency_{{i}}"
                                      [hidden]="baseCurrency.valid || (baseCurrency.pristine && !f.submitted)" class="alert alert-danger">
                                     Base Currency must be valid 3 character currency id, e.g. USD
@@ -76,10 +72,6 @@
                                        type="text" class="form-control" id="counterCurrency_{{i}}"
                                        name="counterCurrency_{{i}}" #counterCurrency="ngModel" required maxlength="3"
                                        placeholder="BTC" pattern="^[A-Z]{3}$"/>
-
-                                <!--<div [hidden]="counterCurrency.valid || counterCurrency.pristine" class="alert alert-danger">-->
-                                    <!--Counter Currency must be valid 3 character currency id, e.g. BTC-->
-                                <!--</div>-->
 
                                 <div id="invalidCounterCurrency_{{i}}"
                                      [hidden]="counterCurrency.valid || (counterCurrency.pristine && !f.submitted)" class="alert alert-danger">
