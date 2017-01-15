@@ -7,12 +7,14 @@
 
         <div class="row">
             <div class="form-group col-sm-6">
-                <label for="adapterName">Class Name</label>
+                <label for="adapterName">Name</label>
                 <input [(ngModel)]="exchangeAdapter.name" name="adapterName" placeholder="com.my.MyExchangeAdapter" id="adapterName"
-                       type="text" class="form-control" required maxlength="50"  #adapterName="ngModel">
+                       type="text" class="form-control" required maxlength="50"  #adapterName="ngModel"
+                       pattern="[a-zA-Z0-9_\- ]*">
 
-                <div [hidden]="adapterName.valid || (adapterName.pristine && !f.submitted)" class="alert alert-danger">
-                    Adapter name is required.
+                <div id="invalidExchangeAdapterName"
+                     [hidden]="adapterName.valid || (adapterName.pristine && !f.submitted)" class="alert alert-danger">
+                    Exchange Adapter Name must be set. Value must be alphanumeric and can only include the following special characters: _ -
                 </div>
             </div>
         </div>
@@ -20,12 +22,13 @@
         <div class="row">
             <div class="form-group col-sm-6">
                 <label for="className">Class Name</label>
-                <input [(ngModel)]="exchangeAdapter.className" name="className" placeholder="com.my.MyExchangeAdapter" id="className"
-                       type="text" class="form-control" required maxlength="120"  #adapterClassName="ngModel"
-                       pattern=([a-zA-Z_$][a-zA-Z\\d_$]*\.)*[a-zA-Z_$][a-zA-Z\\d_$]*/>
+                <input [(ngModel)]="exchangeAdapter.className" name="className" placeholder="com.my.MyExchangeAdapter"
+                       id="className" type="text" class="form-control" required maxlength="120" #adapterClassName="ngModel"
+                       pattern="([a-zA-Z_$][a-zA-Z0-9_$]*\.)*[a-zA-Z_$][a-zA-Z0-9_$]*"/>
 
-                <div [hidden]="adapterClassName.valid || (adapterClassName.pristine && !f.submitted)" class="alert alert-danger">
-                    Not a valid fully qualified Java class name.
+                <div id="invalidClassName"
+                     [hidden]="adapterClassName.valid || (adapterClassName.pristine && !f.submitted)" class="alert alert-danger">
+                    Not a valid Java class name, e.g. <i>com.my.strats.MyStrategy</i>
                 </div>
 
                 <!--<div *ngIf="formErrors.adapter" class="alert alert-danger">{{ formErrors.adapter }}</div>-->
@@ -39,7 +42,8 @@
                        name="connectionTimeout" type="text" class="form-control" placeholder="60" required
                        pattern="\d+" #connectionTimeout="ngModel"/>
 
-                <div [hidden]="connectionTimeout.valid || (connectionTimeout.pristine && !f.submitted)" class="alert alert-danger">
+                <div id="invalidConnectionTimeout"
+                     [hidden]="connectionTimeout.valid || (connectionTimeout.pristine && !f.submitted)" class="alert alert-danger">
                     Connection timeout must be a whole number.
                 </div>
             </div>
@@ -65,7 +69,8 @@
                                    name="errorCode_{{i}}" required #errorCode="ngModel" pattern="\d{3}"
                                    placeholder="502">
 
-                            <div [hidden]="errorCode.valid || (errorCode.pristine && !f.submitted)" class="alert alert-danger">
+                            <div id="invalidErrorCode_{{i}}"
+                                 [hidden]="errorCode.valid || (errorCode.pristine && !f.submitted)" class="alert alert-danger">
                                 HTTP error code must be a 3 digit number.
                             </div>
                         </div>

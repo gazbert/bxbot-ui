@@ -15,7 +15,9 @@ import {browser, element, by} from "protractor";
 /**
  * Exchange Adapter screen tests.
  *
- * TODO - Tests for updating/validating fields
+ * TODO - Test code seems very brittle: can we have access to the model please Angular :-)
+ *
+ * @author gazbert
  */
 describe('Exchange Adapter Tests', function () {
 
@@ -174,7 +176,7 @@ describe('Exchange Adapter Tests', function () {
         errorMessage_1.sendKeys(newErrorMessage_1);
         expect(errorMessage_1.getAttribute('value')).toBe(newErrorMessage_1);
 
-        // Save and check the update worked
+        // Cancel and check the update was not persisted
         let cancelButton = element(by.id('exchangeAdapterCancelButton'));
         cancelButton.click();
         dashboardItems.get(0).click();
@@ -356,4 +358,91 @@ describe('Exchange Adapter Tests', function () {
         expect(element(by.id('errorMessage_0')).getAttribute('value')).toBe('Connection reset');
         expect(element(by.id('errorMessage_1')).isPresent()).toBe(false); // gone!
     });
+
+    it('should NOT save Exchange Adapter fields if there are validation errors', function () {
+
+        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        dashboardItems.get(0).click();
+        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Exchange Details');
+
+        expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
+
+        expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
+        expect(element(by.id('errorCode_1')).getAttribute('value')).toBe('522');
+
+        expect(element(by.id('errorMessage_0')).getAttribute('value')).toBe('Connection reset');
+        expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe('Connection refused');
+
+        // Update fields with some 'bad' values
+        let adapterName = element(by.id('adapterName'));
+        let newAdapterName = 'Bitstamp REST API v2 Adapter!';
+        adapterName.clear();
+        adapterName.sendKeys(newAdapterName);
+        expect(adapterName.getAttribute('value')).toBe(newAdapterName);
+
+        let className = element(by.id('className'));
+        let newClassName = 'my.1new.BitstampExchangeAdapterV2';
+        className.clear();
+        className.sendKeys(newClassName);
+        expect(className.getAttribute('value')).toBe(newClassName);
+
+        let connectionTimeout = element(by.id('connectionTimeout'));
+        let newConnectionTimeout = 'ab1';
+        connectionTimeout.clear();
+        connectionTimeout.sendKeys(newConnectionTimeout);
+        expect(connectionTimeout.getAttribute('value')).toBe(newConnectionTimeout);
+
+        let errorCode_0 = element(by.id('errorCode_0'));
+        let newErrorCode_0 = 'a25';
+        errorCode_0.clear();
+        errorCode_0.sendKeys(newErrorCode_0);
+        expect(errorCode_0.getAttribute('value')).toBe(newErrorCode_0);
+
+        let errorCode_1 = element(by.id('errorCode_1'));
+        let newErrorCode_1 = '524';
+        errorCode_1.clear();
+        errorCode_1.sendKeys(newErrorCode_1);
+        expect(errorCode_1.getAttribute('value')).toBe(newErrorCode_1);
+
+        let errorMessage_0 = element(by.id('errorMessage_0'));
+        let newErrorMessage_0 = 'Connection reset by peer';
+        errorMessage_0.clear();
+        errorMessage_0.sendKeys(newErrorMessage_0);
+        expect(errorMessage_0.getAttribute('value')).toBe(newErrorMessage_0);
+
+        let errorMessage_1 = element(by.id('errorMessage_1'));
+        let newErrorMessage_1 = 'Remote host closed connection during handshake';
+        errorMessage_1.clear();
+        errorMessage_1.sendKeys(newErrorMessage_1);
+        expect(errorMessage_1.getAttribute('value')).toBe(newErrorMessage_1);
+
+        // Save and check the update did not persist
+        let saveButton = element(by.id('exchangeAdapterSaveButton'));
+        saveButton.click();
+
+        // Check for validation errors
+        expect(element(by.id('adapterName')).getAttribute('value')).toBe(newAdapterName);
+        expect(element(by.id('invalidExchangeAdapterName')).getText()).toBe(
+            'Exchange Adapter Name must be set. Value must be alphanumeric and can only include the following special characters: _ -');
+
+        expect(element(by.id('className')).getAttribute('value')).toBe(newClassName);
+        expect(element(by.id('invalidClassName')).getText()).toBe(
+            'Not a valid Java class name, e.g. com.my.strats.MyStrategy');
+
+        expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe(newConnectionTimeout);
+        expect(element(by.id('invalidConnectionTimeout')).getText()).toBe(
+            'Connection timeout must be a whole number.');
+
+        expect(element(by.id('errorCode_0')).getAttribute('value')).toBe(newErrorCode_0);
+        expect(element(by.id('invalidErrorCode_0')).getText()).toBe(
+            'HTTP error code must be a 3 digit number.');
+
+        expect(element(by.id('errorCode_1')).getAttribute('value')).toBe(newErrorCode_1);
+
+        expect(element(by.id('errorMessage_0')).getAttribute('value')).toBe(newErrorMessage_0);
+        expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe(newErrorMessage_1);
+    });
+
 });

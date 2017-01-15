@@ -316,7 +316,6 @@ describe('Trading Strategy Tests', function () {
         strategyName.clear();
         let newStrategyName = 'dodgy n@me';
         strategyName.sendKeys(newStrategyName);
-
         expect(strategyName.getAttribute('value')).toBe(newStrategyName);
 
         let strategyDescription = element(by.id('tradingStrategyDescription_0'));
