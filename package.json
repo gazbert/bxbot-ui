@@ -34,7 +34,7 @@
     "@angular/router": "~3.4.0",
     "@angular/upgrade": "~2.4.0",
 
-    "angular-in-memory-web-api": "~0.2.2",
+    "angular-in-memory-web-api": "~0.2.4",
     "bootstrap": "^3.3.7",
     "systemjs": "0.19.40",
     "core-js": "^2.4.1",
