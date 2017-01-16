@@ -1,48 +1,104 @@
 /******************************************************************************************
  *
- * End 2 End Protractor tests (using Jasmine) for testing various scenarios using the App.
+ * End 2 End Protractor tests (using Jasmine) for testing various scenarios using the app.
  * See: http://www.protractortest.org/#/tutorial
  *
  * TODO - Use by.repeater()/model() instead of by.css() once Angular implement it for lists:
  * https://angular.io/docs/ts/latest/guide/upgrade.html
  * https://github.com/angular/protractor/issues/3205
  *
- * TODO - write tests for scenarios like:
- *
- * 1. Goto Dashboard, Click on GDAX, Update Market, Save, Update Email Alerts, Save, Goto Dashboard,
- *    click on GDAX, check Market and Email Alerts updates are persisted.
- * 2. etc...
  ****************************************************************************************/
 import {browser, element, by} from "protractor";
 
 /**
- * Misc Scenario screen tests.
+ * Miscellaneous Scenario tests.
  *
- * TODO - Tests for add/remove markets
- * TODO - Tests for updating/validating fields
- * TODO - Tests for save and cancel
+ * TODO - Add some more scenarios...
+ *
+ * @author gazbert
  */
-xdescribe('Misc Scenario Tests', function () {
+describe('Miscellaneous Scenario Tests', function () {
 
     beforeEach(function () {
         browser.get('');
     });
 
-    it('should render BTC-e Market config', function () {
+    it('should add new Trading Strategy and be able to select it for existing Market', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
-        dashboardItems.get(4).click();
-        expect(element(by.css('h2')).getText()).toEqual('BTC-e Exchange Details');
+        dashboardItems.get(3).click();
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Exchange Details');
 
         let tabLinks = element.all(by.css('li'));
+        tabLinks.get(2).click();
+
+        // Existing Strat 1
+        expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');
+        expect(element(by.id('tradingStrategyDescription_0')).getAttribute('value'))
+            .toBe('Scalping strategy that buys low and sells high.');
+        expect(element(by.id('tradingStrategyClassname_0')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
+
+        // Existing Strat 2
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
+        expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
+            .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');
+        expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
+
+        // Add new Strat 3
+        let addTradingStrategyLink = element(by.id('addTradingStrategyLink'));
+        addTradingStrategyLink.click();
+
+        let strategyName = element(by.id('tradingStrategyName_2'));
+        let newStrategyName = 'EMA Indicator';
+        strategyName.clear();
+        strategyName.sendKeys(newStrategyName);
+        expect(strategyName.getAttribute('value')).toBe(newStrategyName);
+
+        let strategyDescription = element(by.id('tradingStrategyDescription_2'));
+        let newStrategyDescription = 'EMA Indicator algo for deciding when to enter and exit trades.';
+        strategyDescription.clear();
+        strategyDescription.sendKeys(newStrategyDescription);
+        expect(strategyDescription.getAttribute('value')).toBe(newStrategyDescription);
+
+        let strategyClassName = element(by.id('tradingStrategyClassname_2'));
+        let newStrategyClassName = 'com.gazbert.bxbot.strategies.EmaIndicator';
+        strategyClassName.clear();
+        strategyClassName.sendKeys(newStrategyClassName);
+        expect(strategyClassName.getAttribute('value')).toBe(newStrategyClassName);
+
+        // Save and update existing Market to use new strat
+        let saveButton = element(by.id('strategySaveButton'));
+        saveButton.click();
+        dashboardItems.get(3).click();
         tabLinks.get(1).click();
 
+        // Existing Market fields
         expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe(null);
-        expect(element(by.id('marketId_0')).getAttribute('value')).toBe('btce_btc_usd');
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('btce_macd_rsi');
+        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('1: MACD RSI Indicator');
+
+        // Update Market's Trading Strat
+        let tradingStrategy = element(by.id('tradingStrategy_0'));
+        let newTradingStrategy = '2: EMA Indicator';
+        element(by.id('tradingStrategy_0')).sendKeys('EMA Indicator');
+        expect(tradingStrategy.getAttribute('value')).toBe(newTradingStrategy);
+
+        // Save and check the update worked
+        saveButton = element(by.id('marketSaveButton'));
+        saveButton.click();
+        dashboardItems.get(3).click();
+        tabLinks.get(1).click();
+
+        // Market updated with new strat
+        expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe(null);
+        expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
+        expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
+        expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
+        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe(newTradingStrategy);
     });
 });
 

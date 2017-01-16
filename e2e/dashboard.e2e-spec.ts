@@ -12,6 +12,8 @@ import {browser, element, by} from "protractor";
 
 /**
  * Dashboard tests.
+ *
+ * @author gazbert
  */
 describe('Dashboard Tests', function () {
 
