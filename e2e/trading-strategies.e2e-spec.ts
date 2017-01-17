@@ -264,7 +264,58 @@ describe('Trading Strategy Tests', function () {
         expect(element(by.id('tradingStrategyClassname_1')).isPresent()).toBe(false);
     });
 
-   it('should NOT save Trading Strategy fields if there are validation errors', function () {
+    it('should NOT delete Trading Strategy if currently being used my a Market', function () {
+
+        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        dashboardItems.get(3).click();
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Exchange Details');
+
+        let tabLinks = element.all(by.css('li'));
+        tabLinks.get(2).click();
+
+        // Strat 1
+        expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');
+        expect(element(by.id('tradingStrategyDescription_0')).getAttribute('value'))
+            .toBe('Scalping strategy that buys low and sells high.');
+        expect(element(by.id('tradingStrategyClassname_0')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
+
+        // Strat 2
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
+        expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
+            .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');
+        expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
+
+        // Delete Strat 2 - will cause error
+        let deleteTradingStrategyButton = element(by.id('deleteTradingStrategyButton_1'));
+        deleteTradingStrategyButton.click();
+
+        // Expect error modal to pop up to alert user
+        expect(element(by.css('.modal-title')).getText()).toBe('Trading Strategy Still In Use');
+        expect(element(by.css('.modal-body')).getText()).toContain(
+            'You cannot delete this Trading Strategy because it is still being used my a Market on the Exchange.');
+
+        let modalCloseButton = element(by.id('cannotDeleteStrategyModalCloseButton'));
+        modalCloseButton.click();
+
+        // Strat 1 unchanged
+        expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');
+        expect(element(by.id('tradingStrategyDescription_0')).getAttribute('value'))
+            .toBe('Scalping strategy that buys low and sells high.');
+        expect(element(by.id('tradingStrategyClassname_0')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
+
+        // Strat 2 unchanged
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
+        expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
+            .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');
+        expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
+    });
+
+
+    it('should NOT save Trading Strategy fields if there are validation errors', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(3).click();
