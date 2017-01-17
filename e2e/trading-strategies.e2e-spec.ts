@@ -264,7 +264,7 @@ describe('Trading Strategy Tests', function () {
         expect(element(by.id('tradingStrategyClassname_1')).isPresent()).toBe(false);
     });
 
-    it('should NOT delete Trading Strategy if currently being used my a Market', function () {
+    it('should NOT delete Trading Strategy if currently being used by a Market', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(3).click();
