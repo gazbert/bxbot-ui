@@ -13,7 +13,7 @@ import {browser, element, by} from "protractor";
 /**
  * Miscellaneous Scenario tests.
  *
- * TODO - Add some more scenarios...
+ * TODO - Add more scenarios...
  *
  * @author gazbert
  */

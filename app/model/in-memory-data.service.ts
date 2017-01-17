@@ -92,7 +92,7 @@ export class InMemoryDataService implements InMemoryDbService {
                     ],
                     nonFatalErrorMessages: [
                         {value: 'Connection reset'},
-                        {value: ''}
+                        {value: 'Connection refused'}
                     ]
                 }
             },

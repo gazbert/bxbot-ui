@@ -23,7 +23,7 @@ describe('Dashboard Tests', function () {
         browser.get('');
     });
 
-    it('should redirect blank base URL to /dashboard', function () {
+    it('should redirect Dashboard if user does not enter a URL path', function () {
         browser.getCurrentUrl().then(function (url) {
             expect(url).toContain('/dashboard');
         });
@@ -33,11 +33,11 @@ describe('Dashboard Tests', function () {
         expect(browser.getTitle()).toEqual(expectedMsg);
     });
 
-    it('should display admin console heading name: ' + expectedMsg, function () {
+    it('should display Admin Console heading name: ' + expectedMsg, function () {
         expect(element(by.css('h1')).getText()).toEqual(expectedMsg);
     });
 
-    it('should display 8 dashboard Exchange items', function () {
+    it('should display 8 Dashboard Exchange items', function () {
 
         // TODO below does not work with Angular2 :-(
         // https://github.com/angular/protractor/issues/3205
@@ -48,12 +48,12 @@ describe('Dashboard Tests', function () {
         expect(dashboardItems.count()).toBe(8);
     });
 
-    it('should display Bitstamp as first dashboard Exchange item', function () {
+    it('should display Bitstamp as first Dashboard Exchange item', function () {
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         expect(dashboardItems.get(0).getText()).toContain('Bitstamp');
     });
 
-    it('should display Huobi as last dashboard Exchange item', function () {
+    it('should display Huobi as last Dashboard Exchange item', function () {
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         expect(dashboardItems.get(7).getText()).toContain('Huobi');
     });
@@ -66,5 +66,14 @@ describe('Dashboard Tests', function () {
             expect(url).toContain('/exchange/gemini');
         });
     });
+
+    it('should stay on Dashboard if user clicks on Dashboard button', function () {
+        browser.getCurrentUrl().then(function (url) {
+            let dashboardButton = element.all(by.css('dashboardButton'));
+            dashboardButton.click();
+            expect(url).toContain('/dashboard');
+        });
+    });
+
 });
 

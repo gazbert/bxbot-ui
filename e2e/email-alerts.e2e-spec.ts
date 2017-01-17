@@ -23,22 +23,6 @@ describe('Email Alerts Config Tests', function () {
         browser.get('');
     });
 
-    it('should render Gemini Email Alerts config', function () {
-
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
-        dashboardItems.get(2).click();
-        expect(element(by.css('h2')).getText()).toEqual('Gemini Exchange Details');
-
-        let tabLinks = element.all(by.css('li'));
-        tabLinks.get(3).click();
-
-        expect(element(by.id('alertsEnabled')).getAttribute('value')).toBe('on');
-        expect(element(by.id('accountUsername')).getAttribute('value')).toBe('c3po');
-        expect(element(by.id('accountPassword')).getAttribute('value')).toBe('ohMy!');
-        expect(element(by.id('toAddress')).getAttribute('value')).toBe('bb-8@jakku.space');
-        expect(element(by.id('fromAddress')).getAttribute('value')).toBe('c-3p0@naboo.space');
-    });
-
     it('should update Email Alerts fields after Save', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));

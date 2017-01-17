@@ -25,23 +25,6 @@ describe('Exchange Adapter Tests', function () {
         browser.get('');
     });
 
-    it('should render Bitstamp Exchange Adapter config', function () {
-
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
-        dashboardItems.get(0).click();
-        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Exchange Details');
-
-        expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
-        expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
-
-        expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
-        expect(element(by.id('errorCode_1')).getAttribute('value')).toBe('522');
-
-        expect(element(by.id('errorMessage_0')).getAttribute('value')).toBe('Connection reset');
-        expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe('Connection refused');
-    });
-
     it('should update Exchange Adapter fields after Save', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
