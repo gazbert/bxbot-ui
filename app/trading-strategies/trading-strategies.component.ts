@@ -63,7 +63,7 @@ export class TradingStrategiesComponent implements OnInit {
 
 
     addTradingStrategy(): void {
-        // TODO check name given is unique for current Exchange
+        // TODO - Check name given is unique for current Exchange
         this.tradingStrategies.push(new TradingStrategy(this.createUuid(), this.exchangeId, null, null, null));
     }
 
@@ -88,7 +88,7 @@ export class TradingStrategiesComponent implements OnInit {
                 this.tradingStrategyDataService.deleteTradingStrategyById(tradingStrategy.id);
             });
 
-            // TODO Only update Strats that have changed
+            // TODO - Only update Strats that have changed
             this.tradingStrategies.forEach((tradingStrategy) => {
                 this.tradingStrategyDataService.updateTradingStrategy(tradingStrategy)
                     .then(() => this.goToDashboard());
@@ -108,7 +108,7 @@ export class TradingStrategiesComponent implements OnInit {
         this.canDeleteStrategy = true;
     }
 
-    // TODO Only here temporarily for use with angular-in-memory-web-api until server side wired up.
+    // TODO - Only here temporarily for use with angular-in-memory-web-api until server side wired up.
     // Server will create UUID and return in POST response object.
     // Algo by @Broofa - http://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript/2117523#2117523
     createUuid() {
@@ -118,10 +118,10 @@ export class TradingStrategiesComponent implements OnInit {
         });
     }
 
-    // ------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------
     // Form validation
-    // TODO Need to rework to cater for multiple market entries... leave validation in HTML for now
-    // ------------------------------------------------------------------
+    // TODO - Rework to cater for multiple strat entries - leave validation in HTML for now
+    // -------------------------------------------------------------------------------------
 
     ngAfterViewChecked() {
         this.formChanged();
