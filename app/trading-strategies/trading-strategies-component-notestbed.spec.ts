@@ -9,7 +9,7 @@ import {Market} from '../model/market';
  * Based off the the main Angular tutorial:
  * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
  *
- * TODO Increase coverage for the form input + validation, adding/updating/deleting Trading Strategies.
+ * TODO - Increase coverage for (1) form input + validation, (2) updating Trading Strategies.
  *
  * @author gazbert
  */
@@ -22,9 +22,11 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
     let expectedTradingStrategy_1: TradingStrategy;
     let expectedTradingStrategy_2: TradingStrategy;
     let expectedUpdatedTradingStrategy_2: TradingStrategy;
+    let unusedTradingStrategy: TradingStrategy;
 
     let expectedMarkets = [];
     let expectedMarket_1: Market;
+    let expectedMarket_2: Market;
 
     let spyTradingStrategyDataService: any;
     let spyMarketDataService: any;
@@ -34,17 +36,20 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
 
         expectedTradingStrategy_1 = new TradingStrategy('gdax_macd', 'gdax', 'MACD Indicator',
             'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy');
-
         expectedTradingStrategy_2 = new TradingStrategy('gdax_ema', 'gdax', 'EMA Indicator',
             'EMA Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.EmaStrategy');
 
-        expectedTradingStrategies = [expectedTradingStrategy_1, expectedTradingStrategy_2];
+        unusedTradingStrategy = new TradingStrategy('gdax_not_used', 'gdax', 'EMA Indicator',
+            'EMA Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.EmaStrategy');
 
         expectedUpdatedTradingStrategy_2 = new TradingStrategy('gdax_scalper', 'gdax', 'Long Scalper',
             'Scalper that buys low and sells high, like duh.', 'com.gazbert.bxbot.strategies.LongScalper');
 
+        expectedTradingStrategies = [expectedTradingStrategy_1, expectedTradingStrategy_2, unusedTradingStrategy];
+
         expectedMarket_1 = new Market('gdax_btc_usd', 'gdax', 'BTC/USD', true, 'BTC', 'USD', expectedTradingStrategy_1);
-        expectedMarkets = [expectedMarket_1];
+        expectedMarket_2 = new Market('gdax_btc_gbp', 'gdax', 'BTC/GBP', true, 'BTC', 'GBP', expectedTradingStrategy_2);
+        expectedMarkets = [expectedMarket_1, expectedMarket_2];
 
         activatedRoute = new ActivatedRouteStub();
         activatedRoute.testParams = {id: expectedTradingStrategy_1.exchangeId};
@@ -52,7 +57,7 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
         router = jasmine.createSpyObj('router', ['navigate']);
 
         spyTradingStrategyDataService = jasmine.createSpyObj('TradingStrategiesHttpDataPromiseService',
-            ['getAllTradingStrategiesForExchange', 'updateTradingStrategy']);
+            ['getAllTradingStrategiesForExchange', 'updateTradingStrategy', 'deleteTradingStrategyById']);
         spyTradingStrategyDataService.getAllTradingStrategiesForExchange.and.returnValue(Promise.resolve(expectedTradingStrategies));
         spyTradingStrategyDataService.updateTradingStrategy.and.returnValue(Promise.resolve(expectedUpdatedTradingStrategy_2));
 
@@ -61,8 +66,10 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
 
         tradingStrategiesComponent = new TradingStrategiesComponent(spyTradingStrategyDataService, spyMarketDataService,
             <any> activatedRoute, router);
+
         tradingStrategiesComponent.ngOnInit();
 
+        // OnInit calls TradingStrategiesComponent.getAllTradingStrategiesForExchange; wait for it to get the exchanges
         spyTradingStrategyDataService.getAllTradingStrategiesForExchange.calls.first().returnValue.then(done);
     });
 
@@ -70,7 +77,7 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
         expect(tradingStrategiesComponent.tradingStrategies).toBe(expectedTradingStrategies);
 
         // paranoia ;-)
-        expect(tradingStrategiesComponent.tradingStrategies.length).toBe(2);
+        expect(tradingStrategiesComponent.tradingStrategies.length).toBe(3);
         expect(tradingStrategiesComponent.tradingStrategies[0].id).toBe('gdax_macd');
     });
 
@@ -85,7 +92,7 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
     });
 
     it('should NOT save and navigate to Dashboard when user clicks Cancel', () => {
-        tradingStrategiesComponent.goToDashboard();
+        tradingStrategiesComponent.cancel();
         expect(spyTradingStrategyDataService.updateTradingStrategy.calls.any()).toEqual(false);
         expect(router.navigate).toHaveBeenCalledWith(['dashboard']);
     });
@@ -96,14 +103,50 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
         expect(router.navigate.calls.any()).toBe(false, 'router.navigate should not have been called');
     });
 
-    // TODO - Fix issue with tradingStrategies array length not decreaing when strat deleted
-    xit('should remove Trading Strategy when user deletes it and no Market is currently using it', () => {
+    it('should NOT remove Trading Strategy currently being used by a Market', (done) => {
+        expect(tradingStrategiesComponent.tradingStrategies.length).toBe(3);
+        tradingStrategiesComponent.deleteTradingStrategy(expectedTradingStrategy_1); // being used
+        spyMarketDataService.getAllMarketsForExchange.calls.first().returnValue
+            .then((markets) => {
+                // paranoia ;-)
+                expect(markets.length).toBe(2);
+                expect(markets[0].tradingStrategy.id).toBe('gdax_macd');
+                expect(markets[0].tradingStrategy.name).toBe('MACD Indicator');
+                expect(markets[1].tradingStrategy.id).toBe('gdax_ema');
+                expect(markets[1].tradingStrategy.name).toBe('EMA Indicator');
 
-        expect(tradingStrategiesComponent.tradingStrategies.length).toBe(2);
-
-        tradingStrategiesComponent.deleteTradingStrategy(expectedTradingStrategy_2);
-        expect(tradingStrategiesComponent.tradingStrategies.length).toBe(1);
-        expect(tradingStrategiesComponent.deletedTradingStrategies.length).toBe(1);
+                expect(tradingStrategiesComponent.tradingStrategies.length).toBe(3);
+                expect(tradingStrategiesComponent.deletedTradingStrategies.length).toBe(0);
+                done();
+            });
     });
 
+    it('should remove Trading Strategy not being used by a Market', (done) => {
+        expect(tradingStrategiesComponent.tradingStrategies.length).toBe(3);
+        tradingStrategiesComponent.deleteTradingStrategy(unusedTradingStrategy);
+        spyMarketDataService.getAllMarketsForExchange.calls.first().returnValue
+            .then((markets) => {
+                // paranoia ;-)
+                expect(markets.length).toBe(2);
+                expect(markets[0].tradingStrategy.id).toBe('gdax_macd');
+                expect(markets[0].tradingStrategy.name).toBe('MACD Indicator');
+                expect(markets[1].tradingStrategy.id).toBe('gdax_ema');
+                expect(markets[1].tradingStrategy.name).toBe('EMA Indicator');
+
+                expect(tradingStrategiesComponent.tradingStrategies.length).toBe(2);
+                expect(tradingStrategiesComponent.deletedTradingStrategies.length).toBe(1);
+                done();
+            });
+    });
+
+    it('should add new Trading Strategy', () => {
+        expect(tradingStrategiesComponent.tradingStrategies).toBe(expectedTradingStrategies);
+        expect(tradingStrategiesComponent.tradingStrategies.length).toBe(3);
+
+        tradingStrategiesComponent.addTradingStrategy();
+        expect(tradingStrategiesComponent.tradingStrategies.length).toBe(4);
+        expect(tradingStrategiesComponent.tradingStrategies[3].id).not.toBeNull();
+        expect(tradingStrategiesComponent.tradingStrategies[3].exchangeId).toBe('gdax');
+        expect(tradingStrategiesComponent.tradingStrategies[3].name).toBe(null);
+    });
 });

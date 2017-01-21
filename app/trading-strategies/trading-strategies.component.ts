@@ -57,7 +57,7 @@ export class TradingStrategiesComponent implements OnInit {
         });
     }
 
-    goToDashboard() {
+    cancel() {
         this.router.navigate(['dashboard']);
     }
 
@@ -71,11 +71,11 @@ export class TradingStrategiesComponent implements OnInit {
 
         this.marketDataService.getAllMarketsForExchange(this.exchangeId)
             .then((markets) => {
-                let marketsUsingTheStrategy = markets.filter(m => m.tradingStrategy.name === tradingStrategy.name);
+                let marketsUsingTheStrategy = markets.filter(m => m.tradingStrategy.id === tradingStrategy.id);
                 if (marketsUsingTheStrategy.length > 0) {
                     this.showCannotDeleteStrategyModal();
                 } else {
-                    this.tradingStrategies = this.tradingStrategies.filter(m => m !== tradingStrategy);
+                    this.tradingStrategies = this.tradingStrategies.filter(s => s.id !== tradingStrategy.id);
                     this.deletedTradingStrategies.push(tradingStrategy);
                 }
             });
@@ -91,7 +91,7 @@ export class TradingStrategiesComponent implements OnInit {
             // TODO - Only update Strats that have changed
             this.tradingStrategies.forEach((tradingStrategy) => {
                 this.tradingStrategyDataService.updateTradingStrategy(tradingStrategy)
-                    .then(() => this.goToDashboard());
+                    .then(() => this.cancel());
             });
         }
     }
