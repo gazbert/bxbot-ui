@@ -24,12 +24,12 @@ export class TradingStrategiesComponent implements OnInit {
     active = true;
     canDeleteStrategy = true;
 
-    @ViewChild('tradingStrategiesForm') currentForm: NgForm;
     tradingStrategiesForm: NgForm;
+    @ViewChild('tradingStrategiesForm') currentForm: NgForm;
 
     formErrors = {
         'id': '',
-        'name': ''
+        'tradingStrategyName': ''
         // etc...
     };
 
@@ -38,9 +38,10 @@ export class TradingStrategiesComponent implements OnInit {
             'required': 'Id is required.',
             'maxlength': 'Id cannot be more than 120 characters long.'
         },
-        'name': {
-            'required': 'Name is required.',
-            'maxlength': 'Name cannot be more than 120 characters long.'
+        'tradingStrategyName': {
+            'required': '*** Strategy name is required.',
+            'maxlength': '*** Strategy name cannot be more than 50 characters long.',
+            'pattern': '*** Value must be alphanumeric and can only include the following special characters: _ -'
         }
     };
 
@@ -53,7 +54,14 @@ export class TradingStrategiesComponent implements OnInit {
         this.route.params.forEach((params: Params) => {
             this.exchangeId = params['id'];
             this.tradingStrategyDataService.getAllTradingStrategiesForExchange(this.exchangeId)
-                .then(tradingStrategies => this.tradingStrategies = tradingStrategies);
+                .then(tradingStrategies => {
+                    this.tradingStrategies = tradingStrategies;
+
+                    // TODO init the formErrors
+                    for (let i = 0; i < this.tradingStrategies.length; i++) {
+                        this.formErrors['tradingStrategyName_' + i] = '';
+                    }
+                });
         });
     }
 
@@ -85,10 +93,12 @@ export class TradingStrategiesComponent implements OnInit {
 
         if (isValid) {
             this.deletedTradingStrategies.forEach((tradingStrategy) => {
-                this.tradingStrategyDataService.deleteTradingStrategyById(tradingStrategy.id);
+                this.tradingStrategyDataService.deleteTradingStrategyById(tradingStrategy.id).then(() => {
+                   // TODO - update any UI state?
+                });
             });
 
-            // TODO - Only update Strats that have changed
+            // TODO - Be more efficient: only update Strats that have changed
             this.tradingStrategies.forEach((tradingStrategy) => {
                 this.tradingStrategyDataService.updateTradingStrategy(tradingStrategy)
                     .then(() => this.cancel());
@@ -144,16 +154,19 @@ export class TradingStrategiesComponent implements OnInit {
         }
         const form = this.tradingStrategiesForm.form;
 
+
         for (const field in this.formErrors) {
-            if (this.formErrors.hasOwnProperty(field)) {
+            if (this.formErrors.hasOwnProperty(field)) { // TODO formErrors needs to change to a Map/dynamic array indexed by <input> id ??
                 // clear previous error message (if any)
                 this.formErrors[field] = '';
                 const control = form.get(field);
 
                 if (control && control.dirty && !control.valid) {
-                    const messages = this.validationMessages[field];
+
+                    // TODO key using substring up to the _0 bit
+                    const messages = this.validationMessages[field.substring(0, field.indexOf('_'))];
                     for (const key in control.errors) {
-                        if (control.errors.hasOwnProperty(key)) {
+                        if (control.errors.hasOwnProperty(key)) { // this is ok minlength, pattern, etc attributes
                             this.formErrors[field] += messages[key] + ' ';
                         }
                     }

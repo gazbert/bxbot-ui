@@ -3,7 +3,7 @@
  -->
 <div *ngIf="tradingStrategies">
 
-    <form *ngIf="active" #f="ngForm" novalidate (ngSubmit)="save(f.valid)">
+    <form *ngIf="active" #tradingStrategiesForm="ngForm" novalidate (ngSubmit)="save(tradingStrategiesForm.valid)">
 
         <div class="row">
             <div class="col-sm-12">
@@ -26,12 +26,13 @@
                                        name="tradingStrategyName_{{i}}" #tradingStrategyName="ngModel"
                                        required maxlength="50" pattern="[a-zA-Z0-9_\- ]*"/>
 
-                                <!--<div *ngIf="formErrors.tradingStrategyName" class="alert alert-danger">{{ formErrors.tradingStrategyName }}</div>-->
+                                <!--TODO - ngIf=new function isValid(fieldId, index) ... div input getErrorMsg(fieldId, index) -->
+                                <div *ngIf="formErrors['tradingStrategyName_' + i].length > 0" class="alert alert-danger">{{ formErrors['tradingStrategyName_' + i] }}</div>
 
-                                <div id="invalidTradingStrategyName_{{i}}"
-                                     [hidden]="tradingStrategyName.valid || (tradingStrategyName.pristine && !f.submitted)" class="alert alert-danger">
-                                     Strategy Name must be set. Value must be alphanumeric and can only include the following special characters: _ -
-                                </div>
+                                <!--<div id="invalidTradingStrategyName_{{i}}"-->
+                                     <!--[hidden]="tradingStrategyName.valid || (tradingStrategyName.pristine && !f.submitted)" class="alert alert-danger">-->
+                                     <!--Strategy Name must be set. Value must be alphanumeric and can only include the following special characters: _ - -->
+                                <!--</div>-->
 
                                 <!--<small [hidden]="tradingStrategyName.valid || (tradingStrategyName.pristine && !f.submitted)" class="text-danger">-->
                                     <!--Strategy Name must be set.-->
@@ -49,7 +50,7 @@
                                        name="tradingStrategyDescription_{{i}}" #tradingStrategyDescription="ngModel"
                                        maxlength="121"/>
 
-                                <div [hidden]="tradingStrategyDescription.valid || (tradingStrategyDescription.pristine && !f.submitted)" class="alert alert-danger">
+                                <div [hidden]="tradingStrategyDescription.valid || (tradingStrategyDescription.pristine && !tradingStrategiesForm.submitted)" class="alert alert-danger">
                                     Max Description length is 120.
                                 </div>
                             </div>
@@ -66,7 +67,7 @@
                                        pattern="([a-zA-Z_$][a-zA-Z0-9_$]*\.)*[a-zA-Z_$][a-zA-Z0-9_$]*"/>
 
                                 <div id="invalidTradingStrategyClassname_{{i}}"
-                                     [hidden]="tradingStrategyClassname.valid || (tradingStrategyClassname.pristine && !f.submitted)" class="alert alert-danger">
+                                     [hidden]="tradingStrategyClassname.valid || (tradingStrategyClassname.pristine && !tradingStrategiesForm.submitted)" class="alert alert-danger">
                                     Strategy Class Name must be valid Java class, e.g. com.my.MyTradingStrategyClass
                                 </div>
                             </div>

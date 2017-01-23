@@ -80,7 +80,7 @@ export class MarketsComponent implements OnInit {
                 this.marketDataService.deleteMarketById(market.id);
             });
 
-            // TODO Only update Markets that have changed
+            // TODO - Be more efficient: only update Markets that have changed
             this.markets.forEach((market) => {
                 this.marketDataService.updateMarket(market)
                     .then(() => this.goToDashboard());
