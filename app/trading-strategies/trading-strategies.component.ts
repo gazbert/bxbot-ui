@@ -28,8 +28,8 @@ export class TradingStrategiesComponent implements OnInit {
     @ViewChild('tradingStrategiesForm') currentForm: NgForm;
 
     formErrors = {
-        'id': '',
-        'tradingStrategyName': ''
+        'id': '', // TODO change to id_0 or simply don't bother with anything?
+        'tradingStrategyName': '' // TODO change to tradingStrategyName_0
         // etc...
     };
 
@@ -73,6 +73,9 @@ export class TradingStrategiesComponent implements OnInit {
     addTradingStrategy(): void {
         // TODO - Check name given is unique for current Exchange
         this.tradingStrategies.push(new TradingStrategy(this.createUuid(), this.exchangeId, null, null, null));
+
+        // TODO add/update new errorMsg handlers
+        //this.formErrors['tradingStrategyName_' + i] = '';
     }
 
     deleteTradingStrategy(tradingStrategy: TradingStrategy): void {
@@ -85,6 +88,9 @@ export class TradingStrategiesComponent implements OnInit {
                 } else {
                     this.tradingStrategies = this.tradingStrategies.filter(s => s.id !== tradingStrategy.id);
                     this.deletedTradingStrategies.push(tradingStrategy);
+
+                    // TODO add/update new errorMsg handlers
+                    //this.formErrors['tradingStrategyName_' + i] = '';
                 }
             });
     }
@@ -153,7 +159,6 @@ export class TradingStrategiesComponent implements OnInit {
             return;
         }
         const form = this.tradingStrategiesForm.form;
-
 
         for (const field in this.formErrors) {
             if (this.formErrors.hasOwnProperty(field)) { // TODO formErrors needs to change to a Map/dynamic array indexed by <input> id ??
