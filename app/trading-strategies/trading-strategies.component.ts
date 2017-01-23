@@ -75,7 +75,7 @@ export class TradingStrategiesComponent implements OnInit {
         this.tradingStrategies.push(new TradingStrategy(this.createUuid(), this.exchangeId, null, null, null));
 
         // TODO add/update new errorMsg handlers
-        //this.formErrors['tradingStrategyName_' + i] = '';
+        // this.formErrors['tradingStrategyName_' + i] = '';
     }
 
     deleteTradingStrategy(tradingStrategy: TradingStrategy): void {
@@ -90,7 +90,7 @@ export class TradingStrategiesComponent implements OnInit {
                     this.deletedTradingStrategies.push(tradingStrategy);
 
                     // TODO add/update new errorMsg handlers
-                    //this.formErrors['tradingStrategyName_' + i] = '';
+                    // this.formErrors['tradingStrategyName_' + i] = '';
                 }
             });
     }
