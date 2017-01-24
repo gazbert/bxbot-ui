@@ -147,8 +147,7 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
     });
 
-    // TODO - FIXME once validation rework done
-    xit('should add new Trading Strategy and save it', function () {
+    it('should add new Trading Strategy and save it', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(3).click();
@@ -315,8 +314,7 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
     });
 
-    // TODO - FIXME once validation rework done
-    xit('should NOT save Trading Strategy fields if there are validation errors', function () {
+    it('should NOT save Trading Strategy fields if there are validation errors', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(3).click();
@@ -365,13 +363,13 @@ describe('Trading Strategy Tests', function () {
         // Strat 1 - check for validation errors
         expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe(newStrategyName);
         expect(element(by.id('invalidTradingStrategyName_0')).getText()).toBe(
-            'Strategy Name must be set. Value must be alphanumeric and can only include the following special characters: _ -');
+            'Strategy Name must be alphanumeric and can only include the following special characters: _ -');
 
         expect(element(by.id('tradingStrategyDescription_0')).getAttribute('value')).toBe(newStrategyDescription);
 
         expect(element(by.id('tradingStrategyClassname_0')).getAttribute('value')).toBe(newStrategyClassName);
         expect(element(by.id('invalidTradingStrategyClassname_0')).getText()).toBe(
-            'Strategy Class Name must be valid Java class, e.g. com.my.MyTradingStrategyClass');
+            'Class Name must be valid Java class, e.g. com.my.MyTradingStrategyClass');
 
         // Strat 2 unchanged
         expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');

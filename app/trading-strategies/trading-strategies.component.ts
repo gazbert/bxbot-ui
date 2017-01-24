@@ -27,22 +27,22 @@ export class TradingStrategiesComponent implements OnInit {
     tradingStrategiesForm: NgForm;
     @ViewChild('tradingStrategiesForm') currentForm: NgForm;
 
-    formErrors = {
-        'id': '', // TODO change to id_0 or simply don't bother with anything?
-        'tradingStrategyName': '' // TODO change to tradingStrategyName_0
-        // etc...
-    };
+    formErrors = {};
 
     validationMessages = {
-        'id': {
-            'required': 'Id is required.',
-            'maxlength': 'Id cannot be more than 120 characters long.'
-        },
         'tradingStrategyName': {
-            'required': '*** Strategy name is required.',
-            'maxlength': '*** Strategy name cannot be more than 50 characters long.',
-            'pattern': '*** Value must be alphanumeric and can only include the following special characters: _ -'
-        }
+            'required': 'Strategy Name is required.',
+            'maxlength': 'Strategy Name cannot be more than 50 characters long.',
+            'pattern': 'Strategy Name must be alphanumeric and can only include the following special characters: _ -'
+        },
+        'tradingStrategyDescription_': {
+            'maxlength': 'Max Description length is 120 characters.'
+        },
+        'tradingStrategyClassname': {
+            'required': 'Class name is required.',
+            'maxlength': 'Class name cannot be more than 50 characters long.',
+            'pattern': 'Class Name must be valid Java class, e.g. com.my.MyTradingStrategyClass'
+        },
     };
 
     constructor(private tradingStrategyDataService: TradingStrategyHttpDataPromiseService,
@@ -56,11 +56,7 @@ export class TradingStrategiesComponent implements OnInit {
             this.tradingStrategyDataService.getAllTradingStrategiesForExchange(this.exchangeId)
                 .then(tradingStrategies => {
                     this.tradingStrategies = tradingStrategies;
-
-                    // TODO init the formErrors
-                    for (let i = 0; i < this.tradingStrategies.length; i++) {
-                        this.formErrors['tradingStrategyName_' + i] = '';
-                    }
+                    this.updateFormErrors();
                 });
         });
     }
@@ -73,9 +69,7 @@ export class TradingStrategiesComponent implements OnInit {
     addTradingStrategy(): void {
         // TODO - Check name given is unique for current Exchange
         this.tradingStrategies.push(new TradingStrategy(this.createUuid(), this.exchangeId, null, null, null));
-
-        // TODO add/update new errorMsg handlers
-        // this.formErrors['tradingStrategyName_' + i] = '';
+        this.updateFormErrors();
     }
 
     deleteTradingStrategy(tradingStrategy: TradingStrategy): void {
@@ -88,9 +82,7 @@ export class TradingStrategiesComponent implements OnInit {
                 } else {
                     this.tradingStrategies = this.tradingStrategies.filter(s => s.id !== tradingStrategy.id);
                     this.deletedTradingStrategies.push(tradingStrategy);
-
-                    // TODO add/update new errorMsg handlers
-                    // this.formErrors['tradingStrategyName_' + i] = '';
+                    this.updateFormErrors();
                 }
             });
     }
@@ -134,19 +126,28 @@ export class TradingStrategiesComponent implements OnInit {
         });
     }
 
-    // -------------------------------------------------------------------------------------
+    updateFormErrors(): void {
+        for (let i = 0; i < this.tradingStrategies.length; i++) {
+            this.formErrors['tradingStrategyName_' + i] = '';
+            this.formErrors['tradingStrategyDescription_' + i] = '';
+            this.formErrors['tradingStrategyClassname_' + i] = '';
+        }
+    }
+
+    // ------------------------------------------------------------------------
     // Form validation
-    // TODO - Rework to cater for multiple strat entries - leave validation in HTML for now
-    // -------------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     ngAfterViewChecked() {
         this.formChanged();
     }
 
     formChanged() {
+
         if (this.currentForm === this.tradingStrategiesForm) {
             return;
         }
+
         this.tradingStrategiesForm = this.currentForm;
         if (this.tradingStrategiesForm) {
             this.tradingStrategiesForm.valueChanges
@@ -155,23 +156,23 @@ export class TradingStrategiesComponent implements OnInit {
     }
 
     onValueChanged(data?: any) {
+
         if (!this.tradingStrategiesForm) {
             return;
         }
+
         const form = this.tradingStrategiesForm.form;
 
         for (const field in this.formErrors) {
-            if (this.formErrors.hasOwnProperty(field)) { // TODO formErrors needs to change to a Map/dynamic array indexed by <input> id ??
+            if (this.formErrors.hasOwnProperty(field)) {
                 // clear previous error message (if any)
                 this.formErrors[field] = '';
                 const control = form.get(field);
 
                 if (control && control.dirty && !control.valid) {
-
-                    // TODO key using substring up to the _0 bit
                     const messages = this.validationMessages[field.substring(0, field.indexOf('_'))];
                     for (const key in control.errors) {
-                        if (control.errors.hasOwnProperty(key)) { // this is ok minlength, pattern, etc attributes
+                        if (control.errors.hasOwnProperty(key)) {
                             this.formErrors[field] += messages[key] + ' ';
                         }
                     }

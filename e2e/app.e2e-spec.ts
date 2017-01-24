@@ -23,8 +23,7 @@ describe('Miscellaneous Scenario Tests', function () {
         browser.get('');
     });
 
-    // TODO - FIXME once validation rework done
-    xit('should add new Trading Strategy and be able to select it for existing Market', function () {
+    it('should add new Trading Strategy and be able to select it for existing Market', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(3).click();
