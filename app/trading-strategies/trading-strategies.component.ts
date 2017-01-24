@@ -31,16 +31,16 @@ export class TradingStrategiesComponent implements OnInit {
 
     validationMessages = {
         'tradingStrategyName': {
-            'required': 'Strategy Name is required.',
-            'maxlength': 'Strategy Name cannot be more than 50 characters long.',
-            'pattern': 'Strategy Name must be alphanumeric and can only include the following special characters: _ -'
+            'required': 'Name is required.',
+            'maxlength': 'Name max length is 50 characters.',
+            'pattern': 'Name must be alphanumeric and can only include the following special characters: _ -'
         },
         'tradingStrategyDescription_': {
-            'maxlength': 'Max Description length is 120 characters.'
+            'maxlength': 'Description max length is 120 characters.'
         },
         'tradingStrategyClassname': {
-            'required': 'Class name is required.',
-            'maxlength': 'Class name cannot be more than 50 characters long.',
+            'required': 'Class Name is required.',
+            'maxlength': 'Class Name max length is 50 characters.',
             'pattern': 'Class Name must be valid Java class, e.g. com.my.MyTradingStrategyClass'
         },
     };
@@ -58,22 +58,20 @@ export class TradingStrategiesComponent implements OnInit {
                     this.tradingStrategies = tradingStrategies;
                     this.updateFormErrors();
                 });
-        });
+        }).then(() => {/*done*/});
     }
 
     cancel() {
         this.router.navigate(['dashboard']);
     }
 
-
     addTradingStrategy(): void {
-        // TODO - Check name given is unique for current Exchange
+        // TODO - Check given name is unique for current Exchange
         this.tradingStrategies.push(new TradingStrategy(this.createUuid(), this.exchangeId, null, null, null));
         this.updateFormErrors();
     }
 
     deleteTradingStrategy(tradingStrategy: TradingStrategy): void {
-
         this.marketDataService.getAllMarketsForExchange(this.exchangeId)
             .then((markets) => {
                 let marketsUsingTheStrategy = markets.filter(m => m.tradingStrategy.id === tradingStrategy.id);
@@ -88,12 +86,9 @@ export class TradingStrategiesComponent implements OnInit {
     }
 
     save(isValid: boolean): void {
-
         if (isValid) {
             this.deletedTradingStrategies.forEach((tradingStrategy) => {
-                this.tradingStrategyDataService.deleteTradingStrategyById(tradingStrategy.id).then(() => {
-                   // TODO - update any UI state?
-                });
+                this.tradingStrategyDataService.deleteTradingStrategyById(tradingStrategy.id).then(() => {/*done*/});
             });
 
             // TODO - Be more efficient: only update Strats that have changed
@@ -101,6 +96,8 @@ export class TradingStrategiesComponent implements OnInit {
                 this.tradingStrategyDataService.updateTradingStrategy(tradingStrategy)
                     .then(() => this.cancel());
             });
+        } else {
+            this.onValueChanged(); // force validation for new untouched strats
         }
     }
 
@@ -136,6 +133,7 @@ export class TradingStrategiesComponent implements OnInit {
 
     // ------------------------------------------------------------------------
     // Form validation
+    // TODO - Move into shared validation component
     // ------------------------------------------------------------------------
 
     ngAfterViewChecked() {
@@ -169,7 +167,9 @@ export class TradingStrategiesComponent implements OnInit {
                 this.formErrors[field] = '';
                 const control = form.get(field);
 
-                if (control && control.dirty && !control.valid) {
+                // 1st condition validates existing strat; 2nd condition validates new strat.
+                if ((control && control.dirty && !control.valid) ||
+                    (control && control.pristine && !control.valid && this.tradingStrategiesForm.submitted)) {
                     const messages = this.validationMessages[field.substring(0, field.indexOf('_'))];
                     for (const key in control.errors) {
                         if (control.errors.hasOwnProperty(key)) {

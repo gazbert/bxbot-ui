@@ -363,7 +363,7 @@ describe('Trading Strategy Tests', function () {
         // Strat 1 - check for validation errors
         expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe(newStrategyName);
         expect(element(by.id('invalidTradingStrategyName_0')).getText()).toBe(
-            'Strategy Name must be alphanumeric and can only include the following special characters: _ -');
+            'Name must be alphanumeric and can only include the following special characters: _ -');
 
         expect(element(by.id('tradingStrategyDescription_0')).getAttribute('value')).toBe(newStrategyDescription);
 

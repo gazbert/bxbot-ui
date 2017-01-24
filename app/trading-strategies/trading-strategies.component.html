@@ -59,26 +59,10 @@
                                        #tradingStrategyClassname ="ngModel"
                                        pattern="([a-zA-Z_$][a-zA-Z0-9_$]*\.)*[a-zA-Z_$][a-zA-Z0-9_$]*"/>
 
-                                <!--<div id="invalidTradingStrategyClassname_{{i}}"-->
-                                     <!--*ngIf="formErrors['tradingStrategyClassname_' + i].length > 0" class="alert alert-danger">-->
-                                    <!--{{ formErrors['tradingStrategyClassname_' + i] }}-->
-
-                                    <div id="invalidTradingStrategyClassname_{{i}}"
-                                         [hidden]="(formErrors['tradingStrategyClassname_' + i] === null
-                                         || formErrors['tradingStrategyClassname_' + i].length === 0 ) ||
-                                         (tradingStrategyClassname.pristine && !tradingStrategiesForm.submitted)" class="alert alert-danger">
-                                        {{ formErrors['tradingStrategyClassname_' + i] }}
-                                    </div>
-
-                                <!--[hidden]="marketName.valid || (marketName.pristine && !f.submitted)"-->
-
-                                    <!--<div id="invalidTradingStrategyClassname_{{i}}"-->
-                                         <!--[hidden]="tradingStrategyClassname.valid || -->
-                                         <!--(tradingStrategyClassname.pristine && !tradingStrategiesForm.submitted)" -->
-                                         <!--class="alert alert-danger">-->
-                                        <!---->
-                                        <!--Strategy Class Name must be valid Java class, e.g. com.my.MyTradingStrategyClass-->
-                                    <!--</div>-->
+                                <div id="invalidTradingStrategyClassname_{{i}}"
+                                     *ngIf="formErrors['tradingStrategyClassname_' + i].length > 0" class="alert alert-danger">
+                                    {{ formErrors['tradingStrategyClassname_' + i] }}
+                                </div>
                             </div>
                         </div>
 
