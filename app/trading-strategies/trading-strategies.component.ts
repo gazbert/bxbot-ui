@@ -45,6 +45,12 @@ export class TradingStrategiesComponent implements OnInit {
         },
     };
 
+    errorModal = {
+        'title': 'Trading Strategy Still In Use',
+        'body': 'You cannot delete this Trading Strategy because it is still being used my a Market on the Exchange. ' +
+                'Please check your Market configuration.'
+    };
+
     constructor(private tradingStrategyDataService: TradingStrategyHttpDataPromiseService,
                 private marketDataService: MarketHttpDataPromiseService, private route: ActivatedRoute,
                 private router: Router) {
@@ -133,7 +139,7 @@ export class TradingStrategiesComponent implements OnInit {
 
     // ------------------------------------------------------------------------
     // Form validation
-    // TODO - Move into shared validation component
+    // TODO - Move into new shared validation component
     // ------------------------------------------------------------------------
 
     ngAfterViewChecked() {

@@ -33,7 +33,7 @@
                             </div>
                         </div>
 
-                        <!-- Strategy Description-->
+                        <!-- Strategy Description -->
                         <div class="row">
                             <div class="col-sm-6 form-group">
                                 <label for="tradingStrategyDescription_{{i}}">Description</label>
@@ -95,11 +95,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
-                <h4 class="modal-title">Trading Strategy Still In Use</h4>
+                <h4 class="modal-title">{{errorModal.title}}</h4>
             </div>
             <div class="modal-body">
-                <p>You cannot delete this Trading Strategy because it is still being used my a Market on the Exchange.</p>
-                <p>Please check your Market configuration.</p>
+                {{errorModal.body}}
             </div>
             <div class="modal-footer">
                 <button id="cannotDeleteStrategyModalCloseButton" type="button" class="btn btn-primary"
