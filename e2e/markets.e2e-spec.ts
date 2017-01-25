@@ -9,7 +9,6 @@
  *
  ******************************************************************************/
 import {browser, element, by} from "protractor";
-import {click} from "../testing/index";
 
 /**
  * Market screen tests.
@@ -363,7 +362,7 @@ describe('Market Screen Tests', function () {
 
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe(newMarketName);
         expect(element(by.id('invalidMarketName_0')).getText()).toBe(
-            'Market Name must be set. Value must be alphanumeric and can only include the following special characters: / _ -');
+            'Name must be alphanumeric and can only include the following special characters: _ -');
 
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe(newBaseCurrency);
         expect(element(by.id('invalidBaseCurrency_0')).getText()).toBe(

@@ -3,7 +3,7 @@
  -->
 <div *ngIf="markets">
 
-    <form *ngIf="active" #f="ngForm" novalidate (ngSubmit)="save(f.valid)">
+    <form *ngIf="active" #marketsForm="ngForm" novalidate (ngSubmit)="save(marketsForm.valid)">
 
         <div class="row">
             <div class="col-sm-12">
@@ -34,17 +34,10 @@
                                        name="marketName_{{i}}" #marketName="ngModel" required maxlength="50"
                                        placeholder="BTC/USD" pattern="[a-zA-Z0-9/_\- ]*"/>
 
-                                <!--<div *ngIf="formErrors.marketName" class="alert alert-danger">{{ formErrors.marketName }}</div>-->
-
                                 <div id="invalidMarketName_{{i}}"
-                                     [hidden]="marketName.valid || (marketName.pristine && !f.submitted)" class="alert alert-danger">
-                                    Market Name must be set. Value must be alphanumeric and can only include the following special characters: / _ -
+                                     *ngIf="formErrors['marketName_' + i].length > 0" class="alert alert-danger">
+                                    {{ formErrors['marketName_' + i] }}
                                 </div>
-
-                                <!--<small [hidden]="marketName.valid || (marketName.pristine && !f.submitted)" class="text-danger">-->
-                                    <!--Market Name must be set-->
-                                <!--</small>-->
-
                             </div>
                         </div>
 
@@ -58,8 +51,8 @@
                                        pattern="^[A-Z]{3}$" placeholder="USD"/>
 
                                 <div id="invalidBaseCurrency_{{i}}"
-                                     [hidden]="baseCurrency.valid || (baseCurrency.pristine && !f.submitted)" class="alert alert-danger">
-                                    Base Currency must be valid 3 character currency id, e.g. USD
+                                     *ngIf="formErrors['baseCurrency_' + i].length > 0" class="alert alert-danger">
+                                    {{ formErrors['baseCurrency_' + i] }}
                                 </div>
                             </div>
                         </div>
@@ -74,8 +67,8 @@
                                        placeholder="BTC" pattern="^[A-Z]{3}$"/>
 
                                 <div id="invalidCounterCurrency_{{i}}"
-                                     [hidden]="counterCurrency.valid || (counterCurrency.pristine && !f.submitted)" class="alert alert-danger">
-                                    Counter Currency must be valid 3 character currency id, e.g. BTC
+                                     *ngIf="formErrors['counterCurrency_' + i].length > 0" class="alert alert-danger">
+                                    {{ formErrors['counterCurrency_' + i] }}
                                 </div>
                             </div>
                         </div>
@@ -91,10 +84,10 @@
                                     </option>
                                 </select>
 
-                                <div [hidden]="strategy.valid || (strategy.pristine && !f.submitted)" class="alert alert-danger">
-                                    A Trading Strategy must be selected
+                                <div id="invalidTradingStrategy_{{i}}"
+                                     *ngIf="formErrors['tradingStrategy_' + i].length > 0" class="alert alert-danger">
+                                    {{ formErrors['tradingStrategy_' + i] }}
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -115,7 +108,7 @@
              Must have type for button else Chrome reloads entire app on Cancel click!
              http://stackoverflow.com/questions/38120756/angular2-router-navigate-refresh-page
              -->
-            <button id="marketCancelButton" type="button" (click)="goToDashboard()" class="btn btn-default">Cancel</button>
+            <button id="marketCancelButton" type="button" (click)="cancel()" class="btn btn-default">Cancel</button>
             <button id="marketSaveButton" type="submit" class="btn btn-primary">Save</button>
         </div>
     </form>

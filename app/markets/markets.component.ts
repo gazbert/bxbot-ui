@@ -26,20 +26,24 @@ export class MarketsComponent implements OnInit {
     @ViewChild('marketsForm') currentForm: NgForm;
     marketsForm: NgForm;
 
-    formErrors = {
-        'marketName': '',
-        'counterCurrency': ''
-        // etc...
-    };
+    formErrors = {};
 
     validationMessages = {
         'marketName': {
-            'required': 'Market Name is required.',
-            'maxlength': 'Market Name cannot be more than 120 characters long.'
+            'required': 'Name is required.',
+            'maxlength': 'Name max length is 50 characters.',
+            'pattern': 'Name must be alphanumeric and can only include the following special characters: _ -'
         },
         'counterCurrency': {
             'required': 'Counter Currency is required.',
-            'pattern': 'Counter Currency must be 3 character currency id, e.g. BTC'
+            'pattern': 'Counter Currency must be valid 3 character currency id, e.g. BTC'
+        },
+        'baseCurrency': {
+            'required': 'Base Currency is required.',
+            'pattern': 'Base Currency must be valid 3 character currency id, e.g. USD'
+        },
+        'tradingStrategy': {
+            'required': 'Trading Strategy is required.'
         }
     };
 
@@ -52,32 +56,34 @@ export class MarketsComponent implements OnInit {
         this.route.params.forEach((params: Params) => {
             this.exchangeId = params['id'];
             this.marketDataService.getAllMarketsForExchange(this.exchangeId)
-                .then(markets => this.markets = markets);
+                .then(markets => {
+                    this.markets = markets;
+                    this.updateFormErrors();
+                });
+        }).then(() => {/*done*/});
 
-            this.tradingStrategyDataService.getAllTradingStrategiesForExchange(this.exchangeId)
-                .then(tradingStrategies => this.tradingStrategies = tradingStrategies);
-        });
-    }
+        this.tradingStrategyDataService.getAllTradingStrategiesForExchange(this.exchangeId)
+            .then(tradingStrategies => this.tradingStrategies = tradingStrategies);
 
-    goToDashboard() {
-        this.router.navigate(['dashboard']);
     }
 
     addMarket(): void {
         // TODO check name given is unique for current Exchange
         let tradingStrategy = new TradingStrategy(this.createUuid(), this.exchangeId, null, null, null);
         this.markets.push(new Market(this.createUuid(), this.exchangeId, null, false, null, null, tradingStrategy));
+        this.updateFormErrors();
     }
 
     deleteMarket(market: Market): void {
         this.markets = this.markets.filter(m => m !== market);
         this.deletedMarkets.push(market);
+        this.updateFormErrors();
     }
 
     save(isValid: boolean): void {
         if (isValid) {
             this.deletedMarkets.forEach((market) => {
-                this.marketDataService.deleteMarketById(market.id);
+                this.marketDataService.deleteMarketById(market.id).then(() => {/*done*/});
             });
 
             // TODO - Be more efficient: only update Markets that have changed
@@ -85,7 +91,17 @@ export class MarketsComponent implements OnInit {
                 this.marketDataService.updateMarket(market)
                     .then(() => this.goToDashboard());
             });
+        } else {
+            this.onValueChanged(); // force validation for new untouched markets
         }
+    }
+
+    cancel() {
+        this.goToDashboard();
+    }
+
+    goToDashboard() {
+        this.router.navigate(['dashboard']);
     }
 
     // TODO Only here temporarily for use with angular-in-memory-web-api until server side wired up.
@@ -98,19 +114,30 @@ export class MarketsComponent implements OnInit {
         });
     }
 
-    // ------------------------------------------------------------------
+    updateFormErrors(): void {
+        for (let i = 0; i < this.markets.length; i++) {
+            this.formErrors['marketName_' + i] = '';
+            this.formErrors['baseCurrency_' + i] = '';
+            this.formErrors['counterCurrency_' + i] = '';
+            this.formErrors['tradingStrategy_' + i] = '';
+        }
+    }
+
+    // ------------------------------------------------------------------------
     // Form validation
-    // TODO Need to rework to cater for multiple market entries... leave validation in HTML for now
-    // ------------------------------------------------------------------
+    // TODO - Move into new shared validation component
+    // ------------------------------------------------------------------------
 
     ngAfterViewChecked() {
         this.formChanged();
     }
 
     formChanged() {
+
         if (this.currentForm === this.marketsForm) {
             return;
         }
+
         this.marketsForm = this.currentForm;
         if (this.marketsForm) {
             this.marketsForm.valueChanges
@@ -119,9 +146,11 @@ export class MarketsComponent implements OnInit {
     }
 
     onValueChanged(data?: any) {
+
         if (!this.marketsForm) {
             return;
         }
+
         const form = this.marketsForm.form;
 
         for (const field in this.formErrors) {
@@ -130,8 +159,10 @@ export class MarketsComponent implements OnInit {
                 this.formErrors[field] = '';
                 const control = form.get(field);
 
-                if (control && control.dirty && !control.valid) {
-                    const messages = this.validationMessages[field];
+                // 1st condition validates existing market; 2nd condition validates new market.
+                if ((control && control.dirty && !control.valid) ||
+                    (control && control.pristine && !control.valid && this.marketsForm.submitted)) {
+                    const messages = this.validationMessages[field.substring(0, field.indexOf('_'))];
                     for (const key in control.errors) {
                         if (control.errors.hasOwnProperty(key)) {
                             this.formErrors[field] += messages[key] + ' ';
