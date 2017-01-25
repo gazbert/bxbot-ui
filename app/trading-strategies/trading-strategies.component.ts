@@ -67,10 +67,6 @@ export class TradingStrategiesComponent implements OnInit {
         }).then(() => {/*done*/});
     }
 
-    cancel() {
-        this.router.navigate(['dashboard']);
-    }
-
     addTradingStrategy(): void {
         // TODO - Check given name is unique for current Exchange
         this.tradingStrategies.push(new TradingStrategy(this.createUuid(), this.exchangeId, null, null, null));
@@ -100,11 +96,19 @@ export class TradingStrategiesComponent implements OnInit {
             // TODO - Be more efficient: only update Strats that have changed
             this.tradingStrategies.forEach((tradingStrategy) => {
                 this.tradingStrategyDataService.updateTradingStrategy(tradingStrategy)
-                    .then(() => this.cancel());
+                    .then(() => this.goToDashboard());
             });
         } else {
             this.onValueChanged(); // force validation for new untouched strats
         }
+    }
+
+    cancel() {
+        this.goToDashboard();
+    }
+
+    goToDashboard() {
+        this.router.navigate(['dashboard']);
     }
 
     canBeDeleted() {
