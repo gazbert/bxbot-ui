@@ -9,7 +9,7 @@ import {TradingStrategy} from '../model/trading-strategy';
  * Based off the the main Angular tutorial:
  * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
  *
- * TODO Increase coverage for the form input + validation, adding/updating/deleting Markets.
+ * TODO - Increase coverage for (1) form input + validation, (2) updating Markets.
  *
  * @author gazbert
  */
@@ -75,33 +75,44 @@ describe('MarketsComponent tests without TestBed', () => {
         expect(marketsComponent.markets[0].id).toBe('gdax_btc_usd');
     });
 
-    it('should navigate when click Cancel', () => {
-        marketsComponent.goToDashboard();
-        expect(router.navigate.calls.any()).toBe(true, 'router.navigate called');
-    });
-
-    it('should save when click Save for valid input', done => {
+    it('should save and navigate to Dashboard when user clicks Save for valid input', done => {
         marketsComponent.save(true);
         spyMarketDataService.updateMarket.calls.first().returnValue
-            .then((updatedMarket) => {
-                expect(updatedMarket).toBe(expectedUpdatedMarket_2);
-                expect(router.navigate.calls.any()).toBe(true, 'router.navigate called');
+            .then((updatedStrategy) => {
+                expect(updatedStrategy).toBe(expectedUpdatedMarket_2);
+                expect(router.navigate).toHaveBeenCalledWith(['dashboard']);
                 done();
             });
     });
 
-    it('should NOT save when click Save for invalid input', () => {
+
+    it('should NOT save and navigate to Dashboard when user clicks Cancel', () => {
+        marketsComponent.cancel();
+        expect(spyMarketDataService.updateMarket.calls.any()).toEqual(false);
+        expect(router.navigate).toHaveBeenCalledWith(['dashboard']);
+    });
+
+    it('should NOT save or navigate to Dashboard when user clicks Save for invalid input', () => {
         marketsComponent.save(false);
+        expect(spyMarketDataService.updateMarket.calls.any()).toEqual(false);
+        expect(router.navigate.calls.any()).toBe(false, 'router.navigate should not have been called');
     });
 
-    it('should navigate when click Save resolves', done => {
-        marketsComponent.save(true);
+    it('should remove Market when user deletes one', () => {
+        expect(marketsComponent.markets.length).toBe(2);
+        marketsComponent.deleteMarket(expectedMarket_1);
+        expect(marketsComponent.markets.length).toBe(1);
+        expect(marketsComponent.deletedMarkets.length).toBe(1);
+    });
 
-        // waits for async save to complete before navigating
-        spyMarketDataService.updateMarket.calls.first().returnValue
-            .then(() => {
-                expect(router.navigate.calls.any()).toBe(true, 'router.navigate called');
-                done();
-            });
+    it('should add new Market when user adds one', () => {
+        expect(marketsComponent.markets).toBe(expectedMarkets);
+        expect(marketsComponent.markets.length).toBe(2);
+
+        marketsComponent.addMarket();
+        expect(marketsComponent.markets.length).toBe(3);
+        expect(marketsComponent.markets[2].id).not.toBeNull();
+        expect(marketsComponent.markets[2].exchangeId).toBe('gdax');
+        expect(marketsComponent.markets[2].name).toBe(null);
     });
 });
