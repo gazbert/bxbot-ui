@@ -24,8 +24,8 @@
                                 <input [(ngModel)]="tradingStrategies[i].name"
                                        type="text" class="form-control" id="tradingStrategyName_{{i}}"
                                        name="tradingStrategyName_{{i}}" #tradingStrategyName="ngModel"
-                                       required maxlength="50" pattern="[a-zA-Z0-9_\- ]*"/>
-
+                                       required maxlength="50" pattern="[a-zA-Z0-9_\- ]*"
+                                       duplicateName="{{getOtherStrategyNames(tradingStrategies[i].id)}}"/>
                                 <div id="invalidTradingStrategyName_{{i}}"
                                      *ngIf="formErrors['tradingStrategyName_' + i].length > 0" class="alert alert-danger">
                                     {{ formErrors['tradingStrategyName_' + i] }}
@@ -41,7 +41,6 @@
                                        type="text" class="form-control" id="tradingStrategyDescription_{{i}}"
                                        name="tradingStrategyDescription_{{i}}" #tradingStrategyDescription="ngModel"
                                        maxlength="121"/>
-
                                 <div id="invalidTradingStrategyDescription_{{i}}"
                                      *ngIf="formErrors['tradingStrategyDescription_' + i].length > 0" class="alert alert-danger">
                                     {{ formErrors['tradingStrategyDescription_' + i] }}
@@ -58,7 +57,6 @@
                                        type="text" class="form-control" required maxlength="120"
                                        #tradingStrategyClassname ="ngModel"
                                        pattern="([a-zA-Z_$][a-zA-Z0-9_$]*\.)*[a-zA-Z_$][a-zA-Z0-9_$]*"/>
-
                                 <div id="invalidTradingStrategyClassname_{{i}}"
                                      *ngIf="formErrors['tradingStrategyClassname_' + i].length > 0" class="alert alert-danger">
                                     {{ formErrors['tradingStrategyClassname_' + i] }}

@@ -2,25 +2,19 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {TitleCasePipe} from './title-case.pipe';
+import {DuplicateNameValidatorDirective} from './duplicate-name';
 
 /**
- * Simple shared module (for now) to demo integrating with shared components with rest of app.
+ * Shared module to demo integrating shared components with rest of app.
  *
- * TitleCasePipe taken from Angular tutorial material:
- * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
+ * More useful stuff will be put in here eventually...
  *
- * TODO - a lot more stuff will be put in here eventually...
  */
 @NgModule({
     imports: [CommonModule],
-    exports: [CommonModule, FormsModule, TitleCasePipe],
-    declarations: [TitleCasePipe]
+    exports: [CommonModule, FormsModule, TitleCasePipe, DuplicateNameValidatorDirective],
+    declarations: [TitleCasePipe, DuplicateNameValidatorDirective]
 })
 export class SharedModule {
 }
 
-/*
- Copyright 2016 Google Inc. All Rights Reserved.
- Use of this source code is governed by an MIT-style license that
- can be found in the LICENSE file at http://angular.io/license
- */

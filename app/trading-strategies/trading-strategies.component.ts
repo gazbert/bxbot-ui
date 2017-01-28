@@ -33,7 +33,8 @@ export class TradingStrategiesComponent implements OnInit {
         'tradingStrategyName': {
             'required': 'Name is required.',
             'maxlength': 'Name max length is 50 characters.',
-            'pattern': 'Name must be alphanumeric and can only include the following special characters: _ -'
+            'pattern': 'Name must be alphanumeric and can only include the following special characters: _ -',
+            'duplicateName': 'Strategy Name already in use on this Exchange. Please choose another.',
         },
         'tradingStrategyDescription_': {
             'maxlength': 'Description max length is 120 characters.'
@@ -67,8 +68,18 @@ export class TradingStrategiesComponent implements OnInit {
         }).then(() => {/*done*/});
     }
 
+    getOtherStrategyNames(strategyId: string): string[] {
+        let tradingStrategyNames: string[] = [];
+        for (let i = 0; i < this.tradingStrategies.length; i++) {
+            let tradingStrategy = this.tradingStrategies[i];
+            if (tradingStrategy.id !== strategyId) { // excludes current strat name
+                tradingStrategyNames.push(tradingStrategy.name);
+            }
+        }
+        return tradingStrategyNames;
+    }
+
     addTradingStrategy(): void {
-        // TODO - Check given name is unique for current Exchange
         this.tradingStrategies.push(new TradingStrategy(this.createUuid(), this.exchangeId, null, null, null));
         this.updateFormErrors();
     }

@@ -33,7 +33,6 @@
                                        type="text" class="form-control" id="marketName_{{i}}"
                                        name="marketName_{{i}}" #marketName="ngModel" required maxlength="50"
                                        placeholder="BTC/USD" pattern="[a-zA-Z0-9/_\- ]*"/>
-
                                 <div id="invalidMarketName_{{i}}"
                                      *ngIf="formErrors['marketName_' + i].length > 0" class="alert alert-danger">
                                     {{ formErrors['marketName_' + i] }}
@@ -49,7 +48,6 @@
                                        type="text" class="form-control" id="baseCurrency_{{i}}"
                                        name="baseCurrency_{{i}}" #baseCurrency="ngModel" required maxlength="3"
                                        pattern="^[A-Z]{3}$" placeholder="USD"/>
-
                                 <div id="invalidBaseCurrency_{{i}}"
                                      *ngIf="formErrors['baseCurrency_' + i].length > 0" class="alert alert-danger">
                                     {{ formErrors['baseCurrency_' + i] }}
@@ -65,7 +63,6 @@
                                        type="text" class="form-control" id="counterCurrency_{{i}}"
                                        name="counterCurrency_{{i}}" #counterCurrency="ngModel" required maxlength="3"
                                        placeholder="BTC" pattern="^[A-Z]{3}$"/>
-
                                 <div id="invalidCounterCurrency_{{i}}"
                                      *ngIf="formErrors['counterCurrency_' + i].length > 0" class="alert alert-danger">
                                     {{ formErrors['counterCurrency_' + i] }}
@@ -83,7 +80,6 @@
                                         {{tradingStrategy.name}}
                                     </option>
                                 </select>
-
                                 <div id="invalidTradingStrategy_{{i}}"
                                      *ngIf="formErrors['tradingStrategy_' + i].length > 0" class="alert alert-danger">
                                     {{ formErrors['tradingStrategy_' + i] }}
