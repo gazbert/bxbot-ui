@@ -4,8 +4,8 @@
   "description": "An Angular app for administering BX-bot - https://github.com/gazbert/bxbot",
   "scripts": {
     "start": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
-    "docker-build": "docker build -t ng2-quickstart .",
-    "docker": "npm run docker-build && docker run -it --rm -p 3000:3000 -p 3001:3001 ng2-quickstart",
+    "docker-build": "docker build -t bxbot-ui .",
+    "docker": "npm run docker-build && docker run -it --rm -p 3000:3000 -p 3001:3001 bxbot-ui",
     "pree2e": "webdriver-manager update",
     "e2e": "tsc && concurrently \"http-server -s\" \"protractor protractor.config.js\" --kill-others --success first",
     "lint": "tslint ./app/**/*.ts -t verbose",

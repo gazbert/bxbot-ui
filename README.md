@@ -8,6 +8,11 @@ BX-bot UI is an Angular app (and learning project!) for administering [BX-bot](h
 
 Very much work in progress, but this is where we're [heading](https://github.com/gazbert/bxbot-ui/projects/1)...
 
+Although developed as a 'real-world' app, the code tries to showcase different features of Angular 2 and 
+[TypeScript](https://www.typescriptlang.org/). It's not meant to be an Angular 101 tutorial - the main 
+[Angular Documentation](https://angular.io/docs/ts/latest/guide/learning-angular.html/) does a _far_ better job! 
+It's more of a cookbook/sample app for experienced devs wanting to give Angular a whirl.
+
 ## User Guide
 
 You'll need [node.js](https://nodejs.org/en/download/) installed to build and run the app.
@@ -21,16 +26,16 @@ You'll need [node.js](https://nodejs.org/en/download/) installed to build and ru
 
 ### Jasmine Unit Tests
 
-The app has behaviour driven unit tests written in [Jasmine](https://jasmine.github.io/). 
+The app has behaviour-driven unit tests written using the excellent [Jasmine](https://jasmine.github.io/) framework. 
 
 1. To run the tests once: `npm run test-once`
 1. To continuously run the tests in the background using [Karma](https://karma-runner.github.io/1.0/index.html):
    `npm test` - Karma will monitor code changes and trigger re-running of the tests.
 1. To stop Karma, Ctrl-C from the command line.
 
-### Protractor End-To-End Tests
+### Protractor End-to-End Tests
 
-The app has e2e tests written using the [Protractor](http://www.protractortest.org) framework.
+The app has e2e tests written using [Protractor](http://www.protractortest.org).
 
 1. To run the tests once: `npm run e2e`. It's usually best not to have the app running at the same time.
 

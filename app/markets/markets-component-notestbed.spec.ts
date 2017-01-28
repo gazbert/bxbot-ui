@@ -78,8 +78,8 @@ describe('MarketsComponent tests without TestBed', () => {
     it('should save and navigate to Dashboard when user clicks Save for valid input', done => {
         marketsComponent.save(true);
         spyMarketDataService.updateMarket.calls.first().returnValue
-            .then((updatedStrategy) => {
-                expect(updatedStrategy).toBe(expectedUpdatedMarket_2);
+            .then((updatedMarket) => {
+                expect(updatedMarket).toBe(expectedUpdatedMarket_2);
                 expect(router.navigate).toHaveBeenCalledWith(['dashboard']);
                 done();
             });
