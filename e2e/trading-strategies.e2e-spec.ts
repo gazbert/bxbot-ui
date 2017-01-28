@@ -379,7 +379,7 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
     });
 
-    fit('should NOT save new Trading Strategy when Strategy Name already in use', function () {
+    it('should NOT save new Trading Strategy when Strategy Name already in use', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(3).click();
