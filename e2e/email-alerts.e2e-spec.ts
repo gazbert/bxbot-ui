@@ -34,7 +34,7 @@ describe('Email Alerts Config Tests', function () {
 
         expect(element(by.id('alertsEnabled')).getAttribute('value')).toBe('on');
         expect(element(by.id('accountUsername')).getAttribute('value')).toBe('c3po');
-        expect(element(by.id('accountPassword')).getAttribute('value')).toBe('ohMy!');
+        expect(element(by.id('accountPassword')).getAttribute('value')).toBe('ohMy');
         expect(element(by.id('toAddress')).getAttribute('value')).toBe('bb-8@jakku.space');
         expect(element(by.id('fromAddress')).getAttribute('value')).toBe('c-3p0@naboo.space');
 
@@ -97,7 +97,7 @@ describe('Email Alerts Config Tests', function () {
 
         expect(element(by.id('alertsEnabled')).getAttribute('value')).toBe('on');
         expect(element(by.id('accountUsername')).getAttribute('value')).toBe('c3po');
-        expect(element(by.id('accountPassword')).getAttribute('value')).toBe('ohMy!');
+        expect(element(by.id('accountPassword')).getAttribute('value')).toBe('ohMy');
         expect(element(by.id('toAddress')).getAttribute('value')).toBe('bb-8@jakku.space');
         expect(element(by.id('fromAddress')).getAttribute('value')).toBe('c-3p0@naboo.space');
 
@@ -144,7 +144,7 @@ describe('Email Alerts Config Tests', function () {
         // Email Alerts config unchanged
         expect(element(by.id('alertsEnabled')).getAttribute('value')).toBe('on');
         expect(element(by.id('accountUsername')).getAttribute('value')).toBe('c3po');
-        expect(element(by.id('accountPassword')).getAttribute('value')).toBe('ohMy!');
+        expect(element(by.id('accountPassword')).getAttribute('value')).toBe('ohMy');
         expect(element(by.id('toAddress')).getAttribute('value')).toBe('bb-8@jakku.space');
         expect(element(by.id('fromAddress')).getAttribute('value')).toBe('c-3p0@naboo.space');
     });
@@ -160,7 +160,7 @@ describe('Email Alerts Config Tests', function () {
 
         expect(element(by.id('alertsEnabled')).getAttribute('value')).toBe('on');
         expect(element(by.id('accountUsername')).getAttribute('value')).toBe('c3po');
-        expect(element(by.id('accountPassword')).getAttribute('value')).toBe('ohMy!');
+        expect(element(by.id('accountPassword')).getAttribute('value')).toBe('ohMy');
         expect(element(by.id('toAddress')).getAttribute('value')).toBe('bb-8@jakku.space');
         expect(element(by.id('fromAddress')).getAttribute('value')).toBe('c-3p0@naboo.space');
 
@@ -182,9 +182,10 @@ describe('Email Alerts Config Tests', function () {
         expect(accountPassword.getAttribute('value')).toBe(newAccountPassword);
 
         let retypeAccountPassword = element(by.id('retypeAccountPassword'));
+        let confirmedPasswordValidButDifferent = 'confirmedPasswordValidButDifferent';
         retypeAccountPassword.clear();
-        retypeAccountPassword.sendKeys(newAccountPassword);
-        expect(retypeAccountPassword.getAttribute('value')).toBe(newAccountPassword);
+        retypeAccountPassword.sendKeys(confirmedPasswordValidButDifferent);
+        expect(retypeAccountPassword.getAttribute('value')).toBe(confirmedPasswordValidButDifferent);
 
         let toAddress = element(by.id('toAddress'));
         let newToAddress = '#luke@tatoo ine.space';
@@ -207,15 +208,14 @@ describe('Email Alerts Config Tests', function () {
 
         expect(element(by.id('accountUsername')).getAttribute('value')).toBe(newAccountUsername);
         expect(element(by.id('invalidAccountUsername')).getText()).toBe(
-            'Value must be minimum of 4 alphanumeric chars. It may only include the following special characters: / _ -');
+            'Account Username must be alphanumeric and can only include the following special characters: _ -');
 
         expect(element(by.id('accountPassword')).getAttribute('value')).toBe(newAccountPassword);
         expect(element(by.id('invalidAccountPassword')).getText()).toBe(
-            'Value must be alphanumeric and can only include the following special characters: / _ - , . @ £ $');
+            'Account Password must be alphanumeric and can only include the following special characters: / _ - , . @ £ $');
 
-        expect(element(by.id('retypeAccountPassword')).getAttribute('value')).toBe(newAccountPassword);
-        expect(element(by.id('invalidRetypeAccountPassword')).getText()).toBe(
-            'Both passwords must match. Value must be alphanumeric and can only include the following special characters: / _ - , . @ £ $');
+        expect(element(by.id('retypeAccountPassword')).getAttribute('value')).toBe(confirmedPasswordValidButDifferent);
+        expect(element(by.id('invalidRetypeAccountPassword')).getText()).toBe('Passwords must match.');
 
         expect(element(by.id('toAddress')).getAttribute('value')).toBe(newToAddress);
         expect(element(by.id('invalidToAddress')).getText()).toBe(
@@ -224,6 +224,5 @@ describe('Email Alerts Config Tests', function () {
         expect(element(by.id('fromAddress')).getAttribute('value')).toBe(newFromAddress)
         expect(element(by.id('invalidFromAddress')).getText()).toBe(
             'Valid email From Address is required, e.g. boba@hoth.com');
-
     });
 });

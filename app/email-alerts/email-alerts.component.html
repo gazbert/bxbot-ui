@@ -3,8 +3,9 @@
  -->
 <div *ngIf="emailAlertsConfig">
 
-    <form *ngIf="active" #f="ngForm" novalidate (ngSubmit)="save(f.valid)">
+    <form *ngIf="active" #emailAlertsForm="ngForm" novalidate (ngSubmit)="save(emailAlertsForm.valid)">
 
+        <!-- Alerts Enabled? -->
         <div class="row">
             <div class="form-group col-sm-6">
                 <label for="alertsEnabled">Enabled</label>
@@ -13,78 +14,72 @@
             </div>
         </div>
 
+        <!-- Account Username -->
         <div class="row">
             <div class="form-group col-sm-6">
                 <label for="accountUsername">Account Username</label>
                 <input type="text" class="form-control" name="accountUsername" [(ngModel)]="emailAlertsConfig.accountUsername"
-                       required minlength="4" maxlength="8" #username="ngModel" id="accountUsername"
+                       required minlength="1" maxlength="50" #username="ngModel" id="accountUsername"
                        pattern="[a-zA-Z0-9_\- ]*">
-
                 <div id="invalidAccountUsername"
-                     [hidden]="username.valid || (username.pristine && !f.submitted)" class="alert alert-danger">
-                    Value must be minimum of 4 alphanumeric chars. It may only include the following special characters: / _ -
+                     *ngIf="formErrors['accountUsername'].length > 0" class="alert alert-danger">
+                    {{ formErrors['accountUsername'] }}
                 </div>
-
-                <!--<small [hidden]="username.valid || (username.pristine && !f.submitted)" class="text-danger">-->
-                    <!--Username is required (minimum 4 characters).-->
-                <!--</small>-->
-
-                <!--<pre *ngIf="username.errors" class="margin-20">{{ username.errors | json }}</pre>-->
             </div>
         </div>
 
+        <!-- Account Password -->
         <div class="row">
             <div class="form-group col-sm-6">
                 <label for="accountPassword">Account Password</label>
                 <input type="password" class="form-control" name="password" [(ngModel)]="emailAlertsConfig.accountPassword"
                        required validateEqual="confirmPassword" reverse="true" #password="ngModel" id="accountPassword"
-                       pattern="[a-zA-Z0-9_\-,.@£$ ]*">
-
+                       maxlength="50" pattern="[a-zA-Z0-9_\-,.@£$ ]*">
                 <div id="invalidAccountPassword"
-                     [hidden]="password.valid || (password.pristine && !f.submitted)" class="alert alert-danger">
-                    Value must be alphanumeric and can only include the following special characters: / _ - , . @ £ $
+                     *ngIf="formErrors['password'].length > 0" class="alert alert-danger">
+                    {{ formErrors['password'] }}
                 </div>
             </div>
         </div>
 
+        <!-- Retype Account Password -->
         <div class="row">
             <div class="form-group col-sm-6">
                 <label for="retypeAccountPassword">Retype Password</label>
                 <input type="password" class="form-control" name="confirmPassword" [ngModel]="emailAlertsConfig.confirmPassword"
                        required validateEqual="password" reverse="false" #confirmPassword="ngModel" pattern="[a-zA-Z0-9_\-,.@£$ ]*"
-                       id="retypeAccountPassword">
-
+                       id="retypeAccountPassword" maxlength="50">
                 <div id="invalidRetypeAccountPassword"
-                [hidden]="confirmPassword.valid || (confirmPassword.pristine && !f.submitted)" class="alert alert-danger">
-                    Both passwords must match. Value must be alphanumeric and can only include the following special characters: / _ - , . @ £ $
+                     *ngIf="formErrors['confirmPassword'].length > 0" class="alert alert-danger">
+                    {{ formErrors['confirmPassword'] }}
                 </div>
             </div>
         </div>
 
+        <!-- To address -->
         <div class="row">
             <div class="form-group col-sm-6">
-                <label for="toAddress">To Address</label>
+                <label for="toAddress">To:</label>
                 <input type="email" class="form-control" name="toAddress" [(ngModel)]="emailAlertsConfig.toAddress"
                        required #toAddress="ngModel" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"
-                       id="toAddress" placeholder="solo@falcon.com">
-
+                       id="toAddress" placeholder="solo@falcon.com" maxlength="50">
                 <div id="invalidToAddress"
-                     [hidden]="toAddress.valid || (toAddress.pristine && !f.submitted)" class="alert alert-danger">
-                    Valid email To Address is required, e.g. <i>solo@falcon.com</i>
+                     *ngIf="formErrors['toAddress'].length > 0" class="alert alert-danger">
+                    {{ formErrors['toAddress'] }}
                 </div>
             </div>
         </div>
 
+        <!-- From address -->
         <div class="row">
             <div class="form-group col-sm-6">
-                <label for="fromAddress">From Address</label>
+                <label for="fromAddress">From:</label>
                 <input type="email" class="form-control" name="fromAddress" [(ngModel)]="emailAlertsConfig.fromAddress"
                        required #fromAddress="ngModel" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"
-                       id="fromAddress" placeholder="boba@hoth.com">
-
+                       id="fromAddress" placeholder="boba@hoth.com" maxlength="50">
                 <div id="invalidFromAddress"
-                     [hidden]="fromAddress.valid || (fromAddress.pristine && !f.submitted)" class="alert alert-danger">
-                    Valid email From Address is required, e.g. <i>boba@hoth.com</i>
+                     *ngIf="formErrors['fromAddress'].length > 0" class="alert alert-danger">
+                    {{ formErrors['fromAddress'] }}
                 </div>
             </div>
         </div>
@@ -96,16 +91,16 @@
             <!-- Must have type for button else Chrome reloads entire app on Cancel click!
                  http://stackoverflow.com/questions/38120756/angular2-router-navigate-refresh-page
              -->
-            <button id="emailAlertCancelButton" type="button" (click)="goToDashboard()" class="btn btn-default">Cancel</button>
+            <button id="emailAlertCancelButton" type="button" (click)="cancel()" class="btn btn-default">Cancel</button>
             <button id="emailAlertSaveButton" type="submit" class="btn btn-primary">Save</button>
         </div>
 
         <!-- For Debugging-->
         <!--<div class="margin-20" *ngIf="f">-->
         <!--<div>Form details:-</div>-->
-        <!--<pre>Is form valid?: <br>{{f.valid | json}}</pre>-->
-        <!--<pre>Is form submitted?: <br>{{f.submitted | json}}</pre>-->
-        <!--<pre>submitted value: <br>{{f.value | json}}</pre>-->
+        <!--<pre>Is form valid?: <br>{{emailAlertsForm.valid | json}}</pre>-->
+        <!--<pre>Is form submitted?: <br>{{emailAlertsForm.submitted | json}}</pre>-->
+        <!--<pre>submitted value: <br>{{emailAlertsForm.value | json}}</pre>-->
         <!--</div>-->
     </form>
 </div>

@@ -23,21 +23,35 @@ export class EmailAlertsComponent implements OnInit {
     @ViewChild('emailAlertsForm') currentForm: NgForm;
     emailAlertsForm: NgForm;
 
-    // TODO add email alert stuff in here
-    formErrors = {
-        'accountUsername': '',
-        'toAddress': ''
-        // etc...
-    };
+    formErrors = {};
 
     validationMessages = {
         'accountUsername': {
-            'required': 'Username is required.',
-            'maxlength': 'Username cannot be more than 8 characters long.'
+            'required': 'Account Username is required.',
+            'maxlength': 'Account Username max length is 50 characters.',
+            'pattern': 'Account Username must be alphanumeric and can only include the following special characters: _ -',
+        },
+        'password': {
+            'required': 'Account Password is required.',
+            'maxlength': 'Account Password max length is 50 characters.',
+            'pattern': 'Account Password must be alphanumeric and can only include the following special characters: / _ - , . @ £ $',
+            'validateEqual': 'Passwords must match.'
+        },
+        'confirmPassword': {
+            'required': 'Please retype Account Password.',
+            'maxlength': 'Account Password max length is 50 characters.',
+            'pattern': 'Account Password must be alphanumeric and can only include the following special characters: / _ - , . @ £ $',
+            'validateEqual': 'Passwords must match.'
         },
         'toAddress': {
-            'required': 'Email To Address is required.',
-            'pattern': ' Email To Address is required and format should be: boba@fett.com'
+            'required': 'To Address is required.',
+            'maxlength': 'To Address max length is 50 characters.',
+            'pattern': 'Valid email To Address is required, e.g. solo@falcon.com'
+        },
+        'fromAddress': {
+            'required': 'From Address is required.',
+            'maxlength': 'From Address max length is 50 characters.',
+            'pattern': 'Valid email From Address is required, e.g. boba@hoth.com'
         }
     };
 
@@ -49,8 +63,11 @@ export class EmailAlertsComponent implements OnInit {
         this.route.params.forEach((params: Params) => {
             this.exchangeId = params['id'];
             this.emailAlertsService.getEmailAlertsConfigForExchange(this.exchangeId)
-                .then(emailAlertsConfig => this.emailAlertsConfig = emailAlertsConfig);
-        });
+                .then(emailAlertsConfig => {
+                    this.emailAlertsConfig = emailAlertsConfig;
+                    this.updateFormErrors();
+                });
+        }).then(() => {/*done*/});
     }
 
     save(isValid: boolean): void {
@@ -60,25 +77,42 @@ export class EmailAlertsComponent implements OnInit {
                     this.emailAlertsConfig = updatedConfig;
                     this.goToDashboard();
                 });
+        } else {
+            this.onValueChanged(); // force validation for new untouched strats
         }
     }
 
-    goToDashboard(): void {
-        this.router.navigate(['/dashboard']);
+    cancel() {
+        this.goToDashboard();
     }
 
-    // ------------------------------------------------------------------
-    // TODO Form validation
-    // ------------------------------------------------------------------
+    goToDashboard(): void {
+        this.router.navigate(['dashboard']);
+    }
+
+    updateFormErrors(): void {
+        this.formErrors['accountUsername'] = '';
+        this.formErrors['password'] = '';
+        this.formErrors['confirmPassword'] = '';
+        this.formErrors['toAddress'] = '';
+        this.formErrors['fromAddress'] = '';
+    }
+
+    // ------------------------------------------------------------------------
+    // Form validation
+    // TODO - Move into new shared validation component
+    // ------------------------------------------------------------------------
 
     ngAfterViewChecked() {
         this.formChanged();
     }
 
     formChanged() {
+
         if (this.currentForm === this.emailAlertsForm) {
             return;
         }
+
         this.emailAlertsForm = this.currentForm;
         if (this.emailAlertsForm) {
             this.emailAlertsForm.valueChanges
@@ -87,9 +121,11 @@ export class EmailAlertsComponent implements OnInit {
     }
 
     onValueChanged(data?: any) {
+
         if (!this.emailAlertsForm) {
             return;
         }
+
         const form = this.emailAlertsForm.form;
 
         for (const field in this.formErrors) {
@@ -98,7 +134,9 @@ export class EmailAlertsComponent implements OnInit {
                 this.formErrors[field] = '';
                 const control = form.get(field);
 
-                if (control && control.dirty && !control.valid) {
+                // 1st condition validates user update to email config; 2nd condition validates untouched email config
+                if ((control && control.dirty && !control.valid) ||
+                    (control && control.pristine && !control.valid && this.emailAlertsForm.submitted)) {
                     const messages = this.validationMessages[field];
                     for (const key in control.errors) {
                         if (control.errors.hasOwnProperty(key)) {

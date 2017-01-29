@@ -8,11 +8,11 @@ import {EmailAlertsConfig} from '../model/email-alerts';
  * Based off the the main Angular tutorial:
  * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
  *
- * TODO Increase coverage for form input validation.
+ * TODO - Increase coverage for form input + validation.
  *
  * @author gazbert
  */
-describe('EmailAlertsComponent tests without TestBed', () => {
+fdescribe('EmailAlertsComponent tests without TestBed', () => {
 
     let activatedRoute: ActivatedRouteStub;
     let emailAlertsComponent: EmailAlertsComponent;
@@ -55,36 +55,26 @@ describe('EmailAlertsComponent tests without TestBed', () => {
         expect(emailAlertsComponent.emailAlertsConfig.fromAddress).toBe('master.yoda@dagobah.space');
     });
 
-    it('should navigate when click Cancel', () => {
-        emailAlertsComponent.goToDashboard();
-        expect(router.navigate.calls.any()).toBe(true, 'router.navigate called');
-    });
-
-    it('should save when click Save for valid input', done => {
-
-        expect(emailAlertsComponent.emailAlertsConfig).toBe(expectedEmailAlertsConfig);
-
+    it('should save and navigate to Dashboard when user clicks Save for valid input', done => {
         emailAlertsComponent.save(true);
         spyEmailAlertsConfigDataService.updateEmailAlertsConfig.calls.first().returnValue
-            .then(() => {
-                expect(emailAlertsComponent.emailAlertsConfig).toBe(expectedUpdatedEmailAlertsConfig);
-                expect(router.navigate.calls.any()).toBe(true, 'router.navigate called');
+            .then((updatedEmailAlertConfig) => {
+                expect(updatedEmailAlertConfig).toBe(expectedUpdatedEmailAlertsConfig);
+                expect(router.navigate).toHaveBeenCalledWith(['dashboard']);
                 done();
             });
     });
 
-    it('should NOT save when click Save for invalid input', () => {
+    it('should NOT save and navigate to Dashboard when user clicks Cancel', () => {
+        emailAlertsComponent.cancel();
+        expect(spyEmailAlertsConfigDataService.updateEmailAlertsConfig.calls.any()).toEqual(false);
+        expect(router.navigate).toHaveBeenCalledWith(['dashboard']);
+    });
+
+    it('should NOT save or navigate to Dashboard when user clicks Save for invalid input', () => {
         emailAlertsComponent.save(false);
-    });
-
-    it('should navigate when click Save resolves', done => {
-        emailAlertsComponent.save(true);
-
-        // waits for async save to complete before navigating
-        spyEmailAlertsConfigDataService.updateEmailAlertsConfig.calls.first().returnValue
-            .then(() => {
-                expect(router.navigate.calls.any()).toBe(true, 'router.navigate called');
-                done();
-            });
+        expect(spyEmailAlertsConfigDataService.updateEmailAlertsConfig.calls.any()).toEqual(false);
+        expect(router.navigate.calls.any()).toBe(false, 'router.navigate should not have been called');
     });
 });
+
