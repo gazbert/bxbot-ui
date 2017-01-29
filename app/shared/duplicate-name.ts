@@ -4,8 +4,6 @@ import {AbstractControl, NG_VALIDATORS, Validator, ValidatorFn, Validators} from
 /**
  * Shared Directive component that checks for duplicate names.
  *
- * TODO - Investigate why selector returns ',' delimited string instead of array of string.
- *
  * @author gazbert
  */
 @Directive({
