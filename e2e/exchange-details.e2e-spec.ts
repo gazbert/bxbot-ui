@@ -114,7 +114,7 @@ describe('Exchange Details Tests', function () {
 
         expect(element(by.id('alertsEnabled')).getAttribute('value')).toBe('on');
         expect(element(by.id('accountUsername')).getAttribute('value')).toBe('solo');
-        expect(element(by.id('accountPassword')).getAttribute('value')).toBe('NeverTellMeTheOdds!');
+        expect(element(by.id('accountPassword')).getAttribute('value')).toBe('NeverTellMeTheOdds_');
         expect(element(by.id('toAddress')).getAttribute('value')).toBe('lando@cloudcity.space');
         expect(element(by.id('fromAddress')).getAttribute('value')).toBe('han.solo@falcon.space');
     });
