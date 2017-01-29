@@ -11,7 +11,8 @@ import {Component} from "@angular/core";
     <div class="container module-bootstrap">
         <h1>{{title}}</h1>
         <nav>
-            <a id="dashboardButton" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>         
+            <a id="dashboardButton" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+            <!--<a id="settingsButton" routerLink="/settings" routerLinkActive="active">Settings</a>      -->
         </nav>
         <router-outlet></router-outlet>
     </div>

@@ -32,7 +32,8 @@ export class MarketsComponent implements OnInit {
         'marketName': {
             'required': 'Name is required.',
             'maxlength': 'Name max length is 50 characters.',
-            'pattern': 'Name must be alphanumeric and can only include the following special characters: _ -'
+            'pattern': 'Name must be alphanumeric and can only include the following special characters: _ -',
+            'duplicateName': 'Market Name already in use on this Exchange. Please choose another.',
         },
         'counterCurrency': {
             'required': 'Counter Currency is required.',
@@ -67,8 +68,18 @@ export class MarketsComponent implements OnInit {
 
     }
 
+    getOtherMarketNames(marketId: string): string[] {
+        let marketNames: string[] = [];
+        for (let i = 0; i < this.markets.length; i++) {
+            let market = this.markets[i];
+            if (market.id !== marketId) { // excludes current market name
+                marketNames.push(market.name);
+            }
+        }
+        return marketNames;
+    }
+
     addMarket(): void {
-        // TODO check name given is unique for current Exchange
         let tradingStrategy = new TradingStrategy(this.createUuid(), this.exchangeId, null, null, null);
         this.markets.push(new Market(this.createUuid(), this.exchangeId, null, false, null, null, tradingStrategy));
         this.updateFormErrors();

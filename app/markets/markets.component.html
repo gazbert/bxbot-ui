@@ -32,7 +32,8 @@
                                 <input [(ngModel)]="markets[i].name"
                                        type="text" class="form-control" id="marketName_{{i}}"
                                        name="marketName_{{i}}" #marketName="ngModel" required maxlength="50"
-                                       placeholder="BTC/USD" pattern="[a-zA-Z0-9/_\- ]*"/>
+                                       placeholder="BTC/USD" pattern="[a-zA-Z0-9/_\- ]*"
+                                       duplicateName="{{getOtherMarketNames(markets[i].id)}}"/>
                                 <div id="invalidMarketName_{{i}}"
                                      *ngIf="formErrors['marketName_' + i].length > 0" class="alert alert-danger">
                                     {{ formErrors['marketName_' + i] }}

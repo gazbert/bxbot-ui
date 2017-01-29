@@ -424,7 +424,7 @@ describe('Trading Strategy Tests', function () {
         strategyClassName.sendKeys(newStrategyClassName);
         expect(strategyClassName.getAttribute('value')).toBe(newStrategyClassName);
 
-        // Save and check the update worked
+        // Save and check the update failed
         let saveButton = element(by.id('strategySaveButton'));
         saveButton.click();
 
