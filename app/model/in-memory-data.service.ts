@@ -538,7 +538,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 enabled: false,
                 smtpHost: 'smtp.gmail.com',
                 smtpPort: 587,
-                accountUsername: 'ackbar-',
+                accountUsername: 'ackbar-1',
                 accountPassword: 'ItsATrap#',
                 toAddress: 'leia@alderaan.space',
                 fromAddress: 'admiral.ackbar@some-one.space'

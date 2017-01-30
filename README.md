@@ -8,9 +8,9 @@ BX-bot UI is an Angular app (and learning project!) for administering [BX-bot](h
 
 Very much work in progress, but this is where we're [heading](https://github.com/gazbert/bxbot-ui/projects/1)...
 
-Although developed as a 'real-world' app, the code tries to showcase different features of Angular 2 and 
+Although being developed as a 'real-world' app, the code _tries_ to showcase different features of Angular 2 and 
 [TypeScript](https://www.typescriptlang.org/). It's not meant to be an Angular 101 tutorial - the main 
-[Angular Documentation](https://angular.io/docs/ts/latest/guide/learning-angular.html) does a _far_ better job! 
+[Angular Documentation](https://angular.io/docs/ts/latest/guide/learning-angular.html) does a far better job! 
 It's more of a cookbook/sample app for experienced devs wanting to give Angular a whirl.
 
 ## User Guide
