@@ -294,7 +294,7 @@ describe('Trading Strategy Tests', function () {
         // Expect error modal to pop up to alert user
         expect(element(by.css('.modal-title')).getText()).toBe('Trading Strategy Still In Use');
         expect(element(by.css('.modal-body')).getText()).toContain(
-            'You cannot delete this Trading Strategy because it is still being used my a Market on the Exchange.');
+            'You cannot delete this Trading Strategy because it is still being used by a Market on the Exchange.');
 
         let modalCloseButton = element(by.id('cannotDeleteStrategyModalCloseButton'));
         modalCloseButton.click();
