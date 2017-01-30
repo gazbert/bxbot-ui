@@ -12,7 +12,7 @@ import {EmailAlertsConfig} from '../model/email-alerts';
  *
  * @author gazbert
  */
-fdescribe('EmailAlertsComponent tests without TestBed', () => {
+describe('EmailAlertsComponent tests without TestBed', () => {
 
     let activatedRoute: ActivatedRouteStub;
     let emailAlertsComponent: EmailAlertsComponent;
