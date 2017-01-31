@@ -4,20 +4,16 @@ import {addMatchers} from '../../testing';
 import {FakeExchangeDataPromiseService} from '../model/exchange/testing';
 import {Exchange} from '../model/exchange';
 
-class FakeRouter {
-
-    navigateByUrl(url: string) {
-        return url;
-    }
-
-    navigate(url: string) {
-        return url;
-    }
-}
-
 /**
- * Learning ground for writing Jasmine tests.
- * Code originated from here: https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
+ * Tests the behaviour of the Trading Strategies component is as expected.
+ *
+ * It uses Fake/Dummy/Stubbed collaborators instead of Jasmine Spies for the
+ * tests. I think I prefer the spy method - less boiler plate stub code to write.
+ *
+ * Based off the the main Angular tutorial:
+ * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
+ *
+ * @author gazbert
  */
 describe('DashboardComponent tests without TestBed', () => {
 
@@ -32,22 +28,23 @@ describe('DashboardComponent tests without TestBed', () => {
         comp = new DashboardComponent(router, exchangeDataService);
     });
 
-    it('should not have Exchange items before calling OnInit', () => {
-        expect(comp.exchanges.length).toBe(0, 'should not have Exchanges items before OnInit');
+    it('should NOT have Exchange items before calling OnInit', () => {
+        expect(comp.exchanges.length).toBe(0, 'should not have Exchanges items before OnInit called');
     });
 
-    it('should not have Exchange items immediately after OnInit', () => {
+    it('should NOT have Exchange items immediately after OnInit', () => {
         comp.ngOnInit(); // ngOnInit -> getExchangesPromise
-        expect(comp.exchanges.length).toBe(0, 'should not have Exchange items until ExchangeAdapterDataService promise resolves');
+        expect(comp.exchanges.length).toBe(0,
+            'should not have Exchange items until after ExchangeDataService promise resolves');
     });
 
-    it('should have Exchange items after ExchangeAdapterDataService called', (done: DoneFn) => {
+    it('should have Exchange items after ExchangeDataService promise resolves', (done: DoneFn) => {
         comp.ngOnInit(); // ngOnInit -> getExchangesPromise
         exchangeDataService.lastPromise // the one from getExchangesPromise
             .then(() => {
                 // throw new Error('deliberate error'); // see it fail gracefully
                 expect(comp.exchanges.length).toBeGreaterThan(0,
-                    'should have Exchange items after ExchangeAdapterDataService promise resolves');
+                    'should have Exchange items after ExchangeDataService promise resolves');
             })
             .then(done, done.fail);
     });
@@ -57,6 +54,17 @@ describe('DashboardComponent tests without TestBed', () => {
         const spy = spyOn(router, 'navigateByUrl');
         comp.gotoExchangeDetails(testExchange);
         const navArgs = spy.calls.mostRecent().args[0];
-        expect(navArgs).toBe('/exchange/gdax', 'should nav to Exchange Details for Exchange GDAX');
+        expect(navArgs).toBe('/exchange/gdax', 'should navigate to GDAX Exchange Details for selected Exchange');
     });
 });
+
+class FakeRouter {
+
+    navigateByUrl(url: string) {
+        return url;
+    }
+
+    navigate(url: string) {
+        return url;
+    }
+}

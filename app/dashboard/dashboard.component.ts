@@ -3,7 +3,8 @@ import {Component, OnInit} from '@angular/core';
 import {Exchange, ExchangeHttpDataPromiseService} from '../model/exchange';
 
 /**
- * The Dashboard component displays the Exchanges that the bots are running on.
+ * The Dashboard displays the Exchanges the bots are running on.
+ * It provides the landing screen and Command & Control centre for the app.
  *
  * @author gazbert
  */

@@ -2,7 +2,8 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Exchange} from '../model/exchange';
 
 /**
- * Dashboard Item component - there is 1 per Exchange.
+ * Represents a Dashboard Item component.
+ * Essentially, an item is the Exchange the bot is running on.
  *
  * @author gazbert
  */
