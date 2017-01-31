@@ -17,7 +17,7 @@ const routes: Routes = [
 ];
 
 /**
- * Provides the container for all the configuration panels.
+ * Container module for holding all the configuration screens.
  *
  * @author gazbert
  */

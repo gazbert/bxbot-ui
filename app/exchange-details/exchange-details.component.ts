@@ -3,7 +3,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Exchange, ExchangeHttpDataPromiseService} from '../model/exchange';
 
 /**
- * Container for holding the bot's config for a given Exchange.
+ * Container for holding the config screens.
  *
  * @author gazbert
  */
@@ -27,11 +27,7 @@ export class ExchangeDetailsComponent implements OnInit {
             let id = params['id'];
             this.exchangeDataService.getExchange(id)
                 .then(exchange => this.exchange = exchange);
-        });
-    }
-
-    goToDashboard() {
-        this.router.navigate(['dashboard']);
+        }).then(() => {/*done*/});
     }
 }
 

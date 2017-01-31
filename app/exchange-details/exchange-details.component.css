@@ -18,40 +18,4 @@
     background-color: rgba(247, 247, 247, 0.88);
 }
 
-label {
-    display: inline-block;
-    width: 15em;
-    margin: .5em 0;
-    color: #444;
-    font-weight: bold;
-}
-
-input {
-    height: 2em;
-    font-size: 1em;
-    padding-left: .4em;
-}
-
-.items {
-    margin: 0 0 0.5em 0;
-    list-style-type: none;
-    /*padding: 0;*/
-    /*width: 31em;*/
-}
-
-.items li {
-    /*cursor: pointer;*/
-    /*position: relative;*/
-    /*left: 14.8em;*/
-    /*background-color: #EEE;*/
-    margin: .5em;
-    /*padding: .3em 0;*/
-    /*height: 1.6em;*/
-    /*border-radius: 4px;*/
-}
-
-.items .text {
-    position: relative;
-    top: -3px;
-}
 

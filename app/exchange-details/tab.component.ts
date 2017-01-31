@@ -1,9 +1,9 @@
 import {Component, Input} from '@angular/core';
 
 /**
- * TODO Move to shared folder and make re-usable
+ * Presents a single config tab.
  *
- * Based on the excellent:
+ * Originated from the excellent:
  * http://juristr.com/blog/2016/02/learning-ng2-creating-tab-component/
  */
 @Component({

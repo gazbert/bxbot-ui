@@ -2,9 +2,9 @@ import {Component, ContentChildren, QueryList, AfterContentInit} from '@angular/
 import {TabComponent} from './tab.component';
 
 /**
- * TODO Move to shared folder and make re-usable
+ * Presents a list of config tabs. Currently rendered as Bootstrap Pills.
  *
- * Based on the excellent:
+ * Originated from the excellent:
  * http://juristr.com/blog/2016/02/learning-ng2-creating-tab-component/
  */
 @Component({
@@ -41,5 +41,7 @@ export class TabsComponent implements AfterContentInit {
         tab.active = true;
     }
 
-    trackByTabTitle(index: number, title: string) { return title; }
+    trackByTabTitle(index: number, title: string) {
+        return title;
+    }
 }
