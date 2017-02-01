@@ -10,42 +10,46 @@ import {FakeExchangeDataPromiseService} from '../model/exchange/testing';
 import {ExchangeHttpDataPromiseService} from '../model/exchange';
 
 /**
- * Learning ground for writing jasmine tests.
- * Code originated from here: https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
+ * Tests the behaviour of the Trading Strategies component is as expected.
+ *
+ * It uses the Angular TestBed and a stubbed FakeExchangeDataPromiseService.
+ *
+ * I think I prefer the notestbed approach - less code and accessing just the model, i.e. no By.css stuff...
+ * But, TestBed useful if you need to test the UI rendering?
+ *
+ * Based off the main Angular tutorial:
+ * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
  */
-class RouterStub {
-    navigateByUrl(url: string) {
-        return url;
-    }
-}
-
-beforeEach(addMatchers);
-
-let comp: DashboardComponent;
+let dashboardComponent: DashboardComponent;
 let fixture: ComponentFixture<DashboardComponent>;
 
 /**
- * Test accessing the Dashboard item div - deep
+ * Add our custom Jasmine matchers.
  */
-describe('DashboardComponent tests with TestBed (deep)', () => {
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            imports: [DashboardModule]
-        });
-    });
-
-    compileAndCreate();
-    tests(clickForDeep);
-
-    function clickForDeep() {
-        // get first <div class='item'> DebugElement
-        const dashboardItem = fixture.debugElement.query(By.css('.item'));
-        click(dashboardItem);
-    }
-});
+beforeEach(addMatchers);
 
 /**
- * Test accessing Dashboard item using bx-dashboard-item directive.
+ * Add TestBed providers, compile, and create DashboardComponent.
+ */
+function compileAndCreate() {
+
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            providers: [
+                {provide: ExchangeHttpDataPromiseService, useClass: FakeExchangeDataPromiseService},
+                {provide: Router, useClass: RouterStub},
+                {provide: Http, useValue: {}} // need this because the FakeExchangeDataPromiseService extends
+                                              // ExchangeHttpDataPromiseService
+            ]
+        }).compileComponents().then(() => {
+            fixture = TestBed.createComponent(DashboardComponent);
+            dashboardComponent = fixture.componentInstance;
+        });
+    }));
+}
+
+/**
+ * Test Dashboard by via the bx-dashboard-item directive.
  */
 describe('DashboardComponent tests with TestBed (shallow)', () => {
     beforeEach(() => {
@@ -59,31 +63,31 @@ describe('DashboardComponent tests with TestBed (shallow)', () => {
     tests(clickForShallow);
 
     function clickForShallow() {
-        // get first <bx-dashboard-item> DebugElement
         const dashboardItemElement = fixture.debugElement.query(By.css('bx-dashboard-item'));
-        dashboardItemElement.triggerEventHandler('selected', comp.exchanges[0]);
+        // Triggers event to select the first <bx-dashboard-item> DebugElement
+        dashboardItemElement.triggerEventHandler('selected', dashboardComponent.exchanges[0]);
     }
 });
 
 /**
- * Add TestBed providers, compile, and create DashboardComponent.
+ * Test Dashboard by accessing the div item class directly.
  */
-function compileAndCreate() {
-
-    beforeEach(async(() => {
+describe('DashboardComponent tests with TestBed (deep)', () => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [
-                {provide: ExchangeHttpDataPromiseService, useClass: FakeExchangeDataPromiseService},
-                {provide: Router, useClass: RouterStub},
-                {provide: Http, useValue: {}} // need this because the FakeExchangeDataPromiseService extends ExchangeHttpDataPromiseService
-            ]
-        })
-            .compileComponents().then(() => {
-            fixture = TestBed.createComponent(DashboardComponent);
-            comp = fixture.componentInstance;
+            imports: [DashboardModule]
         });
-    }));
-}
+    });
+
+    compileAndCreate();
+    tests(clickForDeep);
+
+    function clickForDeep() {
+        // clicks the first <div class='item'> DebugElement
+        const dashboardItem = fixture.debugElement.query(By.css('.item'));
+        click(dashboardItem);
+    }
+});
 
 /**
  * The (almost) same tests for both.
@@ -91,28 +95,27 @@ function compileAndCreate() {
  */
 function tests(exchangeClick: Function) {
 
-    it('should not have Exchange items before ngOnInit', () => {
-        expect(comp.exchanges.length).toBe(0, 'should not have Exchange items before ngOnInit');
+    it('should NOT have Exchange items before ngOnInit', () => {
+        expect(dashboardComponent.exchanges.length).toBe(0, 'should not have Exchange items before ngOnInit');
     });
 
-    it('should not have Exchange items immediately after ngOnInit', () => {
+    it('should NOT have Exchange items immediately after ngOnInit', () => {
         fixture.detectChanges(); // runs initial lifecycle hooks
-        expect(comp.exchanges.length).toBe(0,
-            'should not have Exchange items until ExchangeAdapterDataService promise resolves');
+        expect(dashboardComponent.exchanges.length).toBe(0,
+            'should not have Exchange items until ExchangeDataService promise resolves');
     });
 
-    describe('After ExchangeAdapterDataService promise resolves', () => {
+    describe('After ExchangeDataService promise resolves', () => {
 
         // Trigger component so it gets exchanges and binds to them
         beforeEach(async(() => {
             fixture.detectChanges(); // runs ngOnInit -> getExchangesUsingPromise
-            fixture.whenStable() // No need for the `lastPromise` hack!
+            fixture.whenStable()     // No need for the `lastPromise` hack!
                 .then(() => fixture.detectChanges()); // bind to exchanges
         }));
 
-        it('should have Exchange items', () => {
-            expect(comp.exchanges.length).toBeGreaterThan(0,
-                'should have Exchange items');
+        it('should have retrieved 3 Exchange items', () => {
+            expect(dashboardComponent.exchanges.length).toBe(3, 'should have retrieved 3 Exchange items');
         });
 
         it('should display 3 Exchange items', () => {
@@ -123,18 +126,28 @@ function tests(exchangeClick: Function) {
         });
 
         it('should tell Router to navigate when Exchange item selected',
+
+            // inject our stubbed Router
             inject([Router], (router: Router) => {
 
                 const spy = spyOn(router, 'navigateByUrl');
-                exchangeClick(); // trigger click on first inner <div class='item'>
+
+                // callback: trigger click on first inner <div class='item'> OR bx-dashboard-item triggerEventHandler
+                exchangeClick();
 
                 // args passed to router.navigateByUrl()
                 const navArgs = spy.calls.first().args[0];
 
                 // expecting to navigate to id of the component's first Exchange
-                const id = comp.exchanges[0].id;
-                expect(navArgs).toBe('/exchange/' + id,
-                    'should nav to ExchangeDetailsComponent for first Exchange');
-        }));
+                const id = dashboardComponent.exchanges[0].id;
+                expect(navArgs).toBe('/exchange/' + id, 'should nav to ExchangeDetailsComponent for first Exchange');
+            }));
     });
 }
+
+class RouterStub {
+    navigateByUrl(url: string) {
+        return url;
+    }
+}
+

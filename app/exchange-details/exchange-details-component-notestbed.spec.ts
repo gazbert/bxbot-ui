@@ -5,7 +5,7 @@ import {ExchangeDetailsComponent} from './exchange-details.component';
 /**
  * Tests the behaviour of the Exchange Details component is as expected.
  *
- * Based off the the main Angular tutorial:
+ * Based off the main Angular tutorial:
  * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
  *
  * @author gazbert

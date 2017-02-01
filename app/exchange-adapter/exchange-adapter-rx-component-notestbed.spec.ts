@@ -15,7 +15,7 @@ import 'rxjs/add/operator/map';
  *
  * Note use of Observables instead of Promises in the Exchange HTTP service calls.
  *
- * Based off the the main Angular tutorial:
+ * Based off the main Angular tutorial:
  * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
  *
  * TODO rework tests for using Observable - jasmine spies need setting up...

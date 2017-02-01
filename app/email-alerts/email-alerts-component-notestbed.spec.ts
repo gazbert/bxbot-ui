@@ -5,7 +5,7 @@ import {EmailAlertsConfig} from '../model/email-alerts';
 /**
  * Tests the behaviour of the Email Alerts component is as expected.
  *
- * Based off the the main Angular tutorial:
+ * Based off the main Angular tutorial:
  * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
  *
  * TODO - Increase coverage for form input + validation.

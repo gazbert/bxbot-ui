@@ -38,13 +38,12 @@ describe('DashboardComponent tests without TestBed', () => {
             'should not have Exchange items until after ExchangeDataService promise resolves');
     });
 
-    it('should have Exchange items after ExchangeDataService promise resolves', (done: DoneFn) => {
+    it('should have 3 Exchange items after ExchangeDataService promise resolves', (done: DoneFn) => {
         comp.ngOnInit(); // ngOnInit -> getExchangesPromise
         exchangeDataService.lastPromise // the one from getExchangesPromise
             .then(() => {
                 // throw new Error('deliberate error'); // see it fail gracefully
-                expect(comp.exchanges.length).toBeGreaterThan(0,
-                    'should have Exchange items after ExchangeDataService promise resolves');
+                expect(comp.exchanges.length).toBe(3, 'should have 3 Exchange items after ExchangeDataService promise resolves');
             })
             .then(done, done.fail);
     });

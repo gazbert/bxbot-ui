@@ -6,7 +6,7 @@ import {Market} from '../model/market';
 /**
  * Tests the behaviour of the Trading Strategies component is as expected.
  *
- * Based off the the main Angular tutorial:
+ * Based off the main Angular tutorial:
  * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
  *
  * TODO - Increase coverage for (1) form input + validation, (2) updating Trading Strategies.

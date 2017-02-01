@@ -341,7 +341,7 @@ class Page {
         const exchangeAdapterDataService = compInjector.get(ExchangeAdapterHttpDataPromiseService);
         const router = compInjector.get(Router);
 
-        // this.gotoSpy = spyOn(comp, 'gotoList').and.callThrough();
+        // this.gotoSpy = spyOn(dashboardComponent, 'gotoList').and.callThrough();
         this.navSpy = spyOn(router, 'navigate');
         this.saveSpy = spyOn(exchangeAdapterDataService, 'update').and.callThrough();
     }

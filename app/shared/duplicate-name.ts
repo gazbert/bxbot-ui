@@ -13,7 +13,7 @@ import {AbstractControl, NG_VALIDATORS, Validator, ValidatorFn, Validators} from
 export class DuplicateNameValidatorDirective implements Validator, OnChanges {
 
     @Input() duplicateName: string[];
-    private valFn = Validators.nullValidator;
+    private validator = Validators.nullValidator;
 
     ngOnChanges(changes: SimpleChanges) {
         const change = changes['duplicateName'];
@@ -21,14 +21,14 @@ export class DuplicateNameValidatorDirective implements Validator, OnChanges {
             // TODO - for some reason this is a ',' de-limited string instead of an array of string :-/
             const strategyNames = change.currentValue;
             let stratNameStringArray = strategyNames.split(',');
-            this.valFn = duplicateNameValidator(stratNameStringArray);
+            this.validator = duplicateNameValidator(stratNameStringArray);
         } else {
-            this.valFn = Validators.nullValidator;
+            this.validator = Validators.nullValidator;
         }
     }
 
     validate(control: AbstractControl): {[key: string]: any} {
-        return this.valFn(control);
+        return this.validator(control);
     }
 }
 
