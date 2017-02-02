@@ -12,7 +12,7 @@ import {ExchangeAdapter, NetworkConfig, ErrorCode, ErrorMessage} from '../model/
  *
  * @author gazbert
  */
-fdescribe('ExchangeAdapterComponent tests without TestBed', () => {
+describe('ExchangeAdapterComponent tests without TestBed', () => {
 
     let activatedRoute: ActivatedRouteStub;
     let exchangeAdapterComponent: ExchangeAdapterComponent;
