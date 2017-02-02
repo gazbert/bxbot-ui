@@ -19,17 +19,12 @@ import {Http} from '@angular/http';
  *
  * @author gazbert
  */
-// ----------------------------------------------------------------------------
-// Test vars
-// ----------------------------------------------------------------------------
+
 let activatedRoute: ActivatedRouteStub;
 let comp: ExchangeAdapterComponent;
 let fixture: ComponentFixture<ExchangeAdapterComponent>;
 let page: Page;
 
-// ----------------------------------------------------------------------------
-// Tests
-// ----------------------------------------------------------------------------
 describe('ExchangeAdapterComponent tests using TestBed', () => {
 
     beforeEach(() => {

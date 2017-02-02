@@ -407,12 +407,12 @@ describe('Exchange Adapter Tests', function () {
 
         // Check for validation errors
         expect(element(by.id('adapterName')).getAttribute('value')).toBe(newAdapterName);
-        expect(element(by.id('invalidExchangeAdapterName')).getText()).toBe(
-            'Exchange Adapter Name must be set. Value must be alphanumeric and can only include the following special characters: _ -');
+        expect(element(by.id('invalidAdapterName')).getText()).toBe(
+            'Name must be alphanumeric and can only include the following special characters: _ -');
 
         expect(element(by.id('className')).getAttribute('value')).toBe(newClassName);
         expect(element(by.id('invalidClassName')).getText()).toBe(
-            'Not a valid Java class name, e.g. com.my.strats.MyStrategy');
+            'Class Name must be valid Java class, e.g. com.my.MyExchangeAdapterClass');
 
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe(newConnectionTimeout);
         expect(element(by.id('invalidConnectionTimeout')).getText()).toBe(
@@ -420,7 +420,7 @@ describe('Exchange Adapter Tests', function () {
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe(newErrorCode_0);
         expect(element(by.id('invalidErrorCode_0')).getText()).toContain(
-            'HTTP error code must be a 3 digit number.');
+            'HTTP Status Code must be a 3 digit number.');
 
         expect(element(by.id('errorCode_1')).getAttribute('value')).toBe(newErrorCode_1);
 

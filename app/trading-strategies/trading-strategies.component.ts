@@ -36,14 +36,14 @@ export class TradingStrategiesComponent implements OnInit {
             'pattern': 'Name must be alphanumeric and can only include the following special characters: _ -',
             'duplicateName': 'Strategy Name already in use on this Exchange. Please choose another.',
         },
-        'tradingStrategyDescription_': {
+        'tradingStrategyDescription': {
             'maxlength': 'Description max length is 120 characters.'
         },
         'tradingStrategyClassname': {
             'required': 'Class Name is required.',
             'maxlength': 'Class Name max length is 50 characters.',
             'pattern': 'Class Name must be valid Java class, e.g. com.my.MyTradingStrategyClass'
-        },
+        }
     };
 
     errorModal = {

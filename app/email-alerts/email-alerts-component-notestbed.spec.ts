@@ -8,7 +8,7 @@ import {EmailAlertsConfig} from '../model/email-alerts';
  * Based off the main Angular tutorial:
  * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
  *
- * TODO - Increase coverage for form input + validation.
+ * TODO - Increase coverage for form input + validation messages
  *
  * @author gazbert
  */

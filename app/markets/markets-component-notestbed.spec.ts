@@ -9,7 +9,7 @@ import {TradingStrategy} from '../model/trading-strategy';
  * Based off the main Angular tutorial:
  * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
  *
- * TODO - Increase coverage for (1) form input + validation, (2) updating Markets.
+ * TODO - Increase coverage for form input + validation messages
  *
  * @author gazbert
  */
