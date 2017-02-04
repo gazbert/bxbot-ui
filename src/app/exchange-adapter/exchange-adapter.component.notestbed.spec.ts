@@ -5,6 +5,11 @@ import {ExchangeAdapter, NetworkConfig, ErrorCode, ErrorMessage} from '../model/
 /**
  * Tests the behaviour of the Exchange Adapter component (Template version) is as expected.
  *
+ * Learning ground for writing Jasmine tests without using the TestBed.
+ *
+ * I think I prefer not using the TestBed - less code to write, less API to lean, more intuitive using pure Jasmine,
+ * and you're decoupled from UI changes by accessing the model directly.
+ *
  * Based off the main Angular tutorial:
  * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
  *

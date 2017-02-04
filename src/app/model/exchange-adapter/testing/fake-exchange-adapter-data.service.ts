@@ -29,9 +29,8 @@ export class FakeExchangeAdapterDataPromiseService extends ExchangeAdapterHttpDa
     }
 }
 
-// re-export for tester convenience
 export var SOME_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
-    new ExchangeAdapter('bitstamp', 'bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
+    new ExchangeAdapter('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
         new NetworkConfig(60,
             [
                 {value: 503},
@@ -44,7 +43,7 @@ export var SOME_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
                 {value: "Remote host closed connection during handshake"}
             ]
         )),
-    new ExchangeAdapter('gdax', 'gdax', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
+    new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
         new NetworkConfig(60,
             [
                 {value: 503},
@@ -57,7 +56,7 @@ export var SOME_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
                 {value: "Remote host closed connection during handshake"}
             ]
         )),
-    new ExchangeAdapter('gemini', 'gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
+    new ExchangeAdapter('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
         new NetworkConfig(60,
             [
                 {value: 503},
