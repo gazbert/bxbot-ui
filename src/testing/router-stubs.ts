@@ -1,9 +1,9 @@
 // export for convenience.
 export {ActivatedRoute, Router, RouterLink, RouterOutlet} from '@angular/router';
 
-import {Component, Directive, Injectable, Input} from "@angular/core";
-import {NavigationExtras} from "@angular/router";
-import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {Component, Directive, Injectable, Input} from '@angular/core';
+import {NavigationExtras} from '@angular/router';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 /**
  * Testing utils taken from Angular tutorial material:

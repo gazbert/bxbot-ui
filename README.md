@@ -28,7 +28,7 @@ You'll need [node.js](https://nodejs.org/en/download/) installed to build and ru
 
 The app has behaviour-driven unit tests written using the excellent [Jasmine](https://jasmine.github.io/) framework. 
 
-1. To run the tests once: `npm run test-once`
+1. To run the tests once: `npm run test:once`
 1. To continuously run the tests in the background using [Karma](https://karma-runner.github.io/1.0/index.html):
    `npm test` - Karma will monitor code changes and trigger re-running of the tests.
 1. To stop Karma, Ctrl-C from the command line.
@@ -59,5 +59,6 @@ inspiration from the following awesomeness:
 
 * The official [Angular Tutorial](https://angular.io/docs/ts/latest/tutorial/).
 * Scotch tutorials by [Jecelyn Yeen](https://pub.scotch.io/@jecelyn).
+* The official [Angular Style Guide](https://angular.io/docs/ts/latest/guide/style-guide.html)
 * [Juri Strumpflohner's](https://juristr.com/blog/collections/angular/) Angular blogs.
 * Blog posts by [Thoughtram](http://blog.thoughtram.io/angular/2016/09/15/angular-2-final-is-out.html).

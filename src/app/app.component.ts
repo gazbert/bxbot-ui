@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component} from '@angular/core';
 
 /**
  * The main app component provides the landing page - currently the Dashboard.
