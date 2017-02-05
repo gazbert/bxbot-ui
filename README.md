@@ -60,5 +60,6 @@ inspiration from the following awesomeness:
 * The official [Angular Tutorial](https://angular.io/docs/ts/latest/tutorial/).
 * Scotch tutorials by [Jecelyn Yeen](https://pub.scotch.io/@jecelyn).
 * The official [Angular Style Guide](https://angular.io/docs/ts/latest/guide/style-guide.html).
+* Lots of insightful articles by (former) Angular dev [Victor Savkin](https://vsavkin.com/).
 * [Juri Strumpflohner's](https://juristr.com/blog/collections/angular/) Angular blogs.
 * Blog posts by [Thoughtram](http://blog.thoughtram.io/angular/2016/09/15/angular-2-final-is-out.html).

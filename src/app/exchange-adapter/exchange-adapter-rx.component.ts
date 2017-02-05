@@ -3,13 +3,16 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormGroup, FormBuilder, Validators, FormControl, FormArray} from '@angular/forms';
 import {ExchangeAdapter, ErrorCode, ErrorMessage, ExchangeAdapterHttpDataObservableService} from '../model/exchange-adapter';
 
-// NOTE: We need to explicitly pull the rxjs operators in - if not, we get a stinky runtime error e.g.
-// 'Failed: this.http.put(...).map is not a function'
+// Need to explicitly import rxjs operators, else you get runtime error: 'Failed: this.http.put(...).map is not a function'
 import 'rxjs/add/operator/map';
 
 /**
- * Reactive version of the Exchange Adapter form.
- * For demo purposes, it uses the Observable flavour of the Exchange HTTP data service.
+ * Reactive (RX) version of the Exchange Adapter form.
+ *
+ * I'm still not convinced the Reactive form approach is better than the (far) simpler Template form approach -
+ * there's so much more code to write... or am I being a noob and missing something here? ;-/
+ *
+ * For demo purposes, it uses the Observable implementation of the Exchange Adapter HTTP Data service.
  *
  * @author gazbert
  */
@@ -74,8 +77,8 @@ export class ExchangeAdapterRxComponent implements OnInit {
                     this.exchangeAdapter = exchangeAdapter;
                     this.buildForm();
                 },
-                error => this.errorMessage = <any>error); // TODO show meaningful error to user
-        });
+                error => this.errorMessage = <any>error); // TODO - Show meaningful error to user?
+        }).then(() => {/*done*/});
     }
 
     goToDashboard(): void {
@@ -86,7 +89,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
         this.formSaved = true;
         if (isValid) {
 
-            // TODO Must be better way to adapt/map domain model <-> form UI model?
+            // TODO - Must be better way to adapt domain model <-> form UI model?
             this.exchangeAdapter.id = this.exchangeAdapterForm.get('exchangeId').value;
             this.exchangeAdapter.name = this.exchangeAdapterForm.get('adapterName').value;
             this.exchangeAdapter.className = this.exchangeAdapterForm.get('className').value;
@@ -104,11 +107,13 @@ export class ExchangeAdapterRxComponent implements OnInit {
 
             this.exchangeAdapterDataService.update(this.exchangeAdapter)
                 .subscribe(
-                    exchangeAdapter => {
-                        this.goToDashboard();
-                    },
-                    error => this.errorMessage = <any>error); // TODO show meaningful error to user
+                    () => this.goToDashboard(),
+                    error => this.errorMessage = <any>error); // TODO - Show meaningful error to user?
         }
+    }
+
+    cancel(): void {
+        this.goToDashboard();
     }
 
     isFormSaved() {
@@ -117,7 +122,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
 
     addErrorCode(): void {
         const control = <FormArray>this.exchangeAdapterForm.controls['nonFatalErrorHttpStatusCodes'];
-        control.push(this.createNewErrorCodeGroup());
+        control.push(this.createErrorCodeGroup(new ErrorCode(null)));
     }
 
     deleteErrorCode(i: number): void {
@@ -127,7 +132,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
 
     addErrorMessage(): void {
         const control = <FormArray>this.exchangeAdapterForm.controls['nonFatalErrorMessages'];
-        control.push(this.createNewErrorMessageGroup());
+        control.push(this.createErrorMessageGroup(new ErrorMessage('')));
     }
 
     deleteErrorMessage(i: number): void {
@@ -163,12 +168,12 @@ export class ExchangeAdapterRxComponent implements OnInit {
             nonFatalErrorMessages: new FormArray([]),
         });
 
-        // TODO Must be better way to automatically init the arrays from the model??
+        // TODO - Must be better way to automatically init the arrays from the model?
         this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.forEach(
             (code) => this.nonFatalErrorHttpStatusCodes.push(this.createErrorCodeGroup(code))
         );
 
-        // TODO Must be better way to automatically init the arrays from the model??
+        // TODO - Must be better way to automatically init the arrays from the model?
         this.exchangeAdapter.networkConfig.nonFatalErrorMessages.forEach(
             (msg) => this.nonFatalErrorMessages.push(this.createErrorMessageGroup(msg))
         );
@@ -177,7 +182,6 @@ export class ExchangeAdapterRxComponent implements OnInit {
         this.onValueChanged(); // (re)set validation messages now
     }
 
-    // TODO merge these 2 creates
     createErrorMessageGroup(errorMsg: ErrorMessage) {
         return new FormControl(errorMsg.value, [
             Validators.required,
@@ -185,24 +189,9 @@ export class ExchangeAdapterRxComponent implements OnInit {
             Validators.maxLength(120),
         ]);
     }
-    createNewErrorMessageGroup() {
-        return new FormControl('', [
-            Validators.required,
-            Validators.minLength(1),
-            Validators.maxLength(120),
-        ]);
-    }
 
-    // TODO merge these 2 creates
     createErrorCodeGroup(code: ErrorCode) {
         return new FormControl(code.value, [
-            Validators.required,
-            Validators.pattern('\\d{3}'),
-            this.httpCodeWhitelistChecker,
-        ]);
-    }
-    createNewErrorCodeGroup() {
-        return new FormControl('', [
             Validators.required,
             Validators.pattern('\\d{3}'),
             this.httpCodeWhitelistChecker,
@@ -242,7 +231,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
             }
         }
 
-        // TODO hack to go though error codes - FIX needed to id individual inputs else we duplicate validation messages!
+        // Set errors for any invalid Error Codes
         const errorCodeControl = <FormArray>this.exchangeAdapterForm.controls['nonFatalErrorHttpStatusCodes'];
         errorCodeControl.controls.forEach((code) => {
             if (code && !code.valid) {
@@ -256,7 +245,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
             }
         });
 
-        // TODO hack to go though error messages - FIX needed to id individual inputs else we duplicate validation messages!
+        // Set errors for any invalid Error Messages
         const errorMessageControl = <FormArray>this.exchangeAdapterForm.controls['nonFatalErrorMessages'];
         errorMessageControl.controls.forEach((msg) => {
             if (msg && !msg.valid) {
@@ -276,12 +265,19 @@ export class ExchangeAdapterRxComponent implements OnInit {
         }
     }
 
+    /**
+     * Here for demo purposes only. Shows how to use custom validation in a Reactive form.
+     */
     httpCodeWhitelistChecker(control: FormControl) {
-        // TODO get from config or wherever
+        // TODO - Get from config or someplace else...
         const httpCodeWhitelist = ['501', '502', '503', '504', '524', '525', '522'];
         if (control && control.dirty) {
             const httpStatusCode = control.value;
-            const validCode = httpCodeWhitelist.some(httpStatusCode);
+
+            const validCode = httpCodeWhitelist.some((code) => {
+                return code === httpStatusCode;
+            });
+
             return validCode ? null : {'httpCodeWhitelistChecker': {httpStatusCode}};
         } else {
             return null;

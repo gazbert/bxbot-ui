@@ -1,10 +1,11 @@
 <!--
-    Reactive version of the Exchange Adapter form.
+    Reactive (RX) version of the Exchange Adapter form.
  -->
 <div *ngIf="exchangeAdapter">
 
     <form *ngIf="active" novalidate [formGroup]="exchangeAdapterForm" (ngSubmit)="save(exchangeAdapterForm.valid)">
 
+        <!-- Adapter Name -->
         <div class="row">
             <div class="form-group col-sm-6">
                 <label for="adapterName">Name</label>
@@ -16,6 +17,7 @@
             </div>
         </div>
 
+        <!-- Class Name -->
         <div class="row">
             <div class="form-group col-sm-6">
                 <label for="className">Class Name</label>
@@ -27,26 +29,19 @@
             </div>
         </div>
 
+        <!-- Connection Timeout -->
         <div class="row">
             <div class="form-group col-sm-6">
                 <label for="connectionTimeout">Connection Timeout (secs)</label>
                 <input id="connectionTimeout" ngControlGroup="networkConfig" formControlName="connectionTimeout"
                        type="text" class="form-control" placeholder="60" maxlength="8" required/>
-
-                <!--<div *ngIf="!exchangeDetailsForm.controls.connectionTimeout.valid" class="alert alert-danger">-->
-                <!--Connection timeout must be a whole number.-->
-                <!--</div>-->
-
                 <div id="invalidConnectionTimeout"
                         *ngIf="formErrors.connectionTimeout" class="alert alert-danger">{{ formErrors.connectionTimeout }}
                 </div>
-
-                <!--<small *ngIf="!exchangeDetailsForm.controls.connectionTimeout.valid" class="text-danger">-->
-                <!--Connection timeout must be a whole number.-->
-                <!--</small>-->
             </div>
         </div>
 
+        <!-- Error Codes -->
         <div class="row">
             <div class="col-sm-6" formArrayName="nonFatalErrorHttpStatusCodes">
                 <h4>Non Fatal HTTP Status Codes</h4>
@@ -77,6 +72,7 @@
                 </div>
             </div>
 
+            <!-- Error Messages -->
             <div class="col-sm-6" formArrayName="nonFatalErrorMessages">
                 <h4>Non Fatal Error Messages</h4>
                 <div *ngFor="let nonFatalErrorMessage of nonFatalErrorMessages.controls; let i=index"
@@ -114,7 +110,7 @@
             <!-- Must have type for button else Chrome reloads entire app on Cancel click!
                  http://stackoverflow.com/questions/38120756/angular2-router-navigate-refresh-page
              -->
-            <button id="exchangeAdapterCancelButton" type="button" (click)="goToDashboard()" class="btn btn-default">Cancel</button>
+            <button id="exchangeAdapterCancelButton" type="button" (click)="cancel()" class="btn btn-default">Cancel</button>
             <button id="exchangeAdapterSaveButton" type="submit" class="btn btn-primary">Save</button>
         </div>
     </form>
