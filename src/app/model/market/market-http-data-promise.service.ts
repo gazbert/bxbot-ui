@@ -10,9 +10,7 @@ import 'rxjs/add/operator/toPromise';
 /**
  * HTTP implementation of the Market Data Service.
  * It demonstrates use of Promises in call responses.
- * Seems to be easier to use/understand than Observable way?
- *
- * TODO test spec
+ * Seems easier to use/understand than Observable way?
  *
  * @author gazbert
  */

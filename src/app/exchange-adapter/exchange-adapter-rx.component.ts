@@ -3,7 +3,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormGroup, FormBuilder, Validators, FormControl, FormArray} from '@angular/forms';
 import {ExchangeAdapter, ErrorCode, ErrorMessage, ExchangeAdapterHttpDataObservableService} from '../model/exchange-adapter';
 
-// Need to explicitly import rxjs operators, else you get runtime error: 'Failed: this.http.put(...).map is not a function'
+// Need to explicitly import rxjs operators, else you get runtime error, e.g. 'Failed: this.http.put(...).map is not a function'
 import 'rxjs/add/operator/map';
 
 /**

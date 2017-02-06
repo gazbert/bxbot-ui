@@ -3,14 +3,14 @@ import {Http, Headers} from "@angular/http";
 import {ExchangeAdapter} from "./exchange-adapter.model";
 import {ExchangeAdapterDataPromiseService} from "./exchange-adapter-data-promise.service";
 
-// *** Don't forget this else you get runtime error!
+// Don't forget this else you get runtime error:
 // zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function
 import 'rxjs/add/operator/toPromise';
 
 /**
  * HTTP implementation of the Exchange Adapter Data Service.
  * It demonstrates use of Promises in call responses.
- * Seems to be easier to use/understand than Observable way?
+ * Seems to be easier to use/understand than Observable approach?
  *
  * @author gazbert
  */
@@ -27,15 +27,18 @@ export class ExchangeAdapterHttpDataPromiseService implements ExchangeAdapterDat
     }
 
     getExchangeAdapters(): Promise<ExchangeAdapter[]> {
-        return this.http.get(this.exchangeAdaptersUrl)
+        return this.http
+            .get(this.exchangeAdaptersUrl)
             .toPromise()
             .then(response => response.json().data as ExchangeAdapter[])
             .catch(this.handleError);
     }
 
     getExchangeAdapterByExchangeId(id: string): Promise<ExchangeAdapter> {
-        return this.getExchangeAdapters()
-            .then(exchangeAdapters => exchangeAdapters.find(exchangeAdapter => exchangeAdapter.id === id));
+        return this.http.get(this.exchangeAdaptersUrl + '/' + id)
+            .toPromise()
+            .then(response => response.json().data as ExchangeAdapter[])
+            .catch(this.handleError);
     }
 
     update(exchangeAdapter: ExchangeAdapter): Promise<ExchangeAdapter> {
@@ -43,6 +46,7 @@ export class ExchangeAdapterHttpDataPromiseService implements ExchangeAdapterDat
         return this.http
             .put(url, JSON.stringify(exchangeAdapter), {headers: this.headers})
             .toPromise()
+            // .then(response => response.json().data as ExchangeAdapter) // TODO - Not work for some reason?
             .then(() => exchangeAdapter)
             .catch(this.handleError);
     }

@@ -3,7 +3,7 @@ import {ExchangeAdapterRxComponent} from './exchange-adapter-rx.component';
 import {ExchangeAdapter, NetworkConfig, ErrorCode, ErrorMessage} from '../model/exchange-adapter';
 import {Observable} from 'rxjs/Observable';
 
-// Need to explicitly import rxjs operators, else you get runtime error: 'Failed: this.http.put(...).map is not a function'
+// Need to explicitly import rxjs operators, else you get runtime error, e.g. 'Failed: this.http.put(...).map is not a function'
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';

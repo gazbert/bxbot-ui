@@ -3,17 +3,17 @@ import {HttpModule, Http, XHRBackend, Response, ResponseOptions} from "@angular/
 import {async, inject, TestBed} from "@angular/core/testing";
 import {ExchangeAdapterHttpDataObservableService as ExchangeAdapterDataService} from "./exchange-adapter-http-data-observable.service";
 import {ExchangeAdapter, NetworkConfig} from "./exchange-adapter.model";
-
 import {Observable} from "rxjs/Observable";
+
+// Need to explicitly import rxjs operators, else you get runtime error, e.g. 'Failed: this.http.put(...).map is not a function'
 import "rxjs/add/observable/throw";
 import "rxjs/add/operator/do";
 import "rxjs/add/operator/catch";
 import "rxjs/add/operator/map";
-// NOTE: We need to explicitly pull the rxjs operators in - if not, we get a stinky runtime error e.g.
-// 'Failed: this.http.get(...).map is not a function'
 
 /**
  * Tests the Exchange Adapter HTTP service (Observable flavour) using a mocked HTTP backend.
+ *
  * TODO tests for getExchangeAdapterByExchangeId() and update()
  *
  * @author gazbert

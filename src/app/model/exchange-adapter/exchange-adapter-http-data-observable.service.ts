@@ -2,15 +2,14 @@ import {Injectable} from "@angular/core";
 import {Http, Headers, Response, RequestOptions} from "@angular/http";
 import {ExchangeAdapter} from "./exchange-adapter.model";
 import {ExchangeAdapterDataObservableService} from "./exchange-adapter-data-observable.service";
-
 import {Observable} from 'rxjs/Observable';
-// NOTE: We need to explicitly pull the rxjs operators in - if not, we get a stinky runtime error e.g.
-// 'Failed: this.http.get(...).map is not a function'
+import {isObject} from "rxjs/util/isObject";
+
+// Need to explicitly import rxjs operators, else you get runtime error, e.g. 'Failed: this.http.put(...).map is not a function'
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/toPromise';
-import {isObject} from "rxjs/util/isObject";
 
 /**
  * HTTP implementation of the Exchange Adapter Data Service.
