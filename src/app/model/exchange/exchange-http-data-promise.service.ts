@@ -3,7 +3,7 @@ import {Http, Headers} from "@angular/http";
 import {ExchangeDataPromiseService} from "./exchange-data-promise.service";
 import {Exchange} from "./exchange.model";
 
-// *** Don't forget this else you get runtime error!
+// *** Don't forget this else you get runtime error:
 // zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function
 import 'rxjs/add/operator/toPromise';
 
@@ -34,7 +34,10 @@ export class ExchangeHttpDataPromiseService implements ExchangeDataPromiseServic
     }
 
     getExchange(id: string): Promise<Exchange> {
-        return this.getExchanges().then(exchanges => exchanges.find(exchange => exchange.id === id));
+        return this.http.get(this.exchangeUrl + '/' + id)
+            .toPromise()
+            .then(response => response.json().data as Exchange[])
+            .catch(this.handleError);
     }
 
     update(exchange: Exchange): Promise<Exchange> {
@@ -42,6 +45,7 @@ export class ExchangeHttpDataPromiseService implements ExchangeDataPromiseServic
         return this.http
             .put(url, JSON.stringify(exchange), {headers: this.headers})
             .toPromise()
+            // .then(response => response.json().data as Exchange) // TODO - Not work for some reason?
             .then(() => exchange)
             .catch(this.handleError);
     }

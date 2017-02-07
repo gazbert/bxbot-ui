@@ -2,22 +2,14 @@ import {MockBackend, MockConnection} from "@angular/http/testing";
 import {HttpModule, Http, XHRBackend, Response, ResponseOptions} from "@angular/http";
 import {async, inject, TestBed} from "@angular/core/testing";
 import {Exchange} from "./exchange.model";
-import {ExchangeHttpDataObservableService as ExchangeDataService} from "./exchange-http-data-observable.service";
-import {Observable} from "rxjs/Observable";
-import "rxjs/add/observable/throw";
-import "rxjs/add/operator/do";
-import "rxjs/add/operator/catch";
-import "rxjs/add/operator/map";
-// NOTE: We need to explicitly pull the rxjs operators in - if not, we get a stinky runtime error e.g.
-// 'Failed: this.http.get(...).map is not a function'
+import {ExchangeHttpDataPromiseService as ExchangeDataService} from "./exchange-http-data-promise.service";
 
 /**
- * Tests the Exchange HTTP Service (Observable flavour) using a mocked HTTP backend.
- * TODO tests for getExchange() and update()
+ * Tests the Exchange HTTP Data Service (Promise flavour) using a mocked HTTP backend.
  *
  * @author gazbert
  */
-describe('ExchangeHttpDataObservableService tests using TestBed and Mock HTTP backend', () => {
+describe('ExchangeHttpDataPromiseService tests using TestBed + Mock HTTP backend', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -27,10 +19,10 @@ describe('ExchangeHttpDataObservableService tests using TestBed and Mock HTTP ba
                 {provide: XHRBackend, useClass: MockBackend}
             ]
         })
-            .compileComponents();
+            .compileComponents().then(() => {/*done*/});
     }));
 
-    it('should instantiate service when inject service',
+    it('should instantiate implementation of ExchangeAdapterDataService when injected',
         inject([ExchangeDataService], (service: ExchangeDataService) => {
             expect(service instanceof ExchangeDataService).toBe(true);
         }));
@@ -38,16 +30,16 @@ describe('ExchangeHttpDataObservableService tests using TestBed and Mock HTTP ba
     it('should instantiate service with "new"', inject([Http], (http: Http) => {
         expect(http).not.toBeNull('http should be provided');
         let service = new ExchangeDataService(http);
-        expect(service instanceof ExchangeDataService).toBe(true, 'new service should be ok');
+        expect(service instanceof ExchangeDataService).toBe(true,
+            'new service should be instance of ExchangeAdapterDataService');
     }));
 
-    // TODO What's this all about? Isn't this just testing Angular?
-    it('should provide the mockBackend as XHRBackend',
+    it('should provide the MockBackend as XHRBackend',
         inject([XHRBackend], (backend: MockBackend) => {
-            expect(backend).not.toBeNull('backend should be provided');
-    }));
+            expect(backend).not.toBeNull('MockBackend backend should be provided');
+        }));
 
-    describe('when getExchanges', () => {
+    describe('when getExchanges() operation called', () => {
 
         let backend: MockBackend;
         let service: ExchangeDataService;
@@ -62,38 +54,40 @@ describe('ExchangeHttpDataObservableService tests using TestBed and Mock HTTP ba
             response = new Response(options);
         }));
 
-        it('should have expected fake Exchanges ', async(inject([], () => {
+        it('should return 3 Exchanges ', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.getExchanges()
-                .do(exchanges => {
+                .then(exchanges => {
                     expect(exchanges.length).toBe(fakeExchanges.length,
-                        'should have expected 3 Exchanges');
-                })
-                .toPromise();
+                        'should have returned 3 Exchanges');
+
+                    // paranoia!
+                    expect(exchanges[0].id).toBe('bitstamp');
+                    expect(exchanges[1].id).toBe('gdax');
+                    expect(exchanges[2].id).toBe('gemini');
+                });
         })));
 
-        it('should be OK returning no Exchanges', async(inject([], () => {
+        it('should handle returning no Exchanges', async(inject([], () => {
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getExchanges()
-                .do(exchanges => {
+                .then(exchanges => {
                     expect(exchanges.length).toBe(0, 'should have no Exchanges');
-                })
-                .toPromise();
+                });
         })));
 
-        it('should treat 404 as an Observable error', async(inject([], () => {
+        it('should treat 404 as an error', async(inject([], () => {
             let resp = new Response(new ResponseOptions({status: 404}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
+
             service.getExchanges()
-                .do(() => {
+                .then(() => {
                     fail('should not respond with Exchanges');
                 })
                 .catch(err => {
-                    expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
-                    return Observable.of(null); // failure is the expected test result
-                })
-                .toPromise();
+                    expect(err).toMatch(/Cannot read property 'data' of null/, 'should catch bad response status code');
+                });
         })));
     });
 });
@@ -101,5 +95,6 @@ describe('ExchangeHttpDataObservableService tests using TestBed and Mock HTTP ba
 const makeExchangeData = () => [
     new Exchange('bitstamp', 'Bitstamp', 'Running'),
     new Exchange('gdax', 'GDAX', 'Stopped'),
-    new Exchange('gemini', 'Gemini', 'Running')
+    new Exchange('gemini', 'Gemini', 'Running'),
 ] as Exchange[];
+

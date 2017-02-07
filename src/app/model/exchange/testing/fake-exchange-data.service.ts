@@ -33,7 +33,6 @@ export class FakeExchangeDataPromiseService extends ExchangeHttpDataPromiseServi
     }
 }
 
-// re-export for tester convenience
 export var SOME_EXCHANGES: Exchange[] = [
     new Exchange('bitstamp', 'Bitstamp', 'Running'),
     new Exchange('gdax', 'GDAX', 'Running'),
