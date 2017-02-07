@@ -9,7 +9,7 @@ import {EmailAlertsConfig} from "./email-alerts.model";
  *
  * @author gazbert
  */
-describe('EmailAlertsHttpDataPromiseService tests using TestBed and Mock HTTP backend', () => {
+describe('EmailAlertsHttpDataPromiseService tests using TestBed + Mock HTTP backend', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -39,7 +39,7 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed and Mock HTTP ba
             expect(backend).not.toBeNull('MockBackend backend should be provided');
     }));
 
-    describe('when getEmailAlertsConfigForExchange() operation called', () => {
+    describe('when getEmailAlertsConfigForExchange() operation called with \'gdax\'', () => {
 
         let backend: MockBackend;
         let service: EmailAlertsDataService;
@@ -73,7 +73,7 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed and Mock HTTP ba
         it('should handle returning no matching Email Alerts config', async(inject([], () => {
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.getEmailAlertsConfigForExchange('muh')
+            service.getEmailAlertsConfigForExchange('unknown')
                 .then(emailAlertsConfig => {
                     expect(emailAlertsConfig).toBe(undefined, 'should have no Email Alerts config');
                 });
@@ -83,7 +83,7 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed and Mock HTTP ba
             let resp = new Response(new ResponseOptions({status: 404}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
 
-            service.getEmailAlertsConfigForExchange('muh')
+            service.getEmailAlertsConfigForExchange('unknown')
                 .then(() => {
                     fail('should not respond with Email Alerts config');
                 })
@@ -97,7 +97,6 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed and Mock HTTP ba
 
         let backend: MockBackend;
         let service: EmailAlertsDataService;
-        let fakeEmailAlertsConfig: EmailAlertsConfig[];
         let response: Response;
         let updatedEmailAlertsConfig: EmailAlertsConfig;
 
@@ -109,7 +108,6 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed and Mock HTTP ba
 
             backend = be;
             service = new EmailAlertsDataService(http);
-            fakeEmailAlertsConfig = makeEmailAlertsData();
             let options = new ResponseOptions({status: 200, body: {data: updatedEmailAlertsConfig}});
             response = new Response(options);
         }));
@@ -127,7 +125,7 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed and Mock HTTP ba
                 });
         })));
 
-        // TODO - FIXME!
+        // TODO - FIXME - MockResponse does not seem to return response for the PUT - I'm missing something...
         xit('should handle returning no matching Email Alerts config', async(inject([], () => {
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
@@ -137,7 +135,7 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed and Mock HTTP ba
                 });
         })));
 
-        // TODO - FIXME!
+        // TODO - FIXME - MockResponse does not seem to return response for the PUT - I'm missing something...
         xit('should treat 404 as an error', async(inject([], () => {
             let resp = new Response(new ResponseOptions({status: 404}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));

@@ -100,6 +100,57 @@ describe('ExchangeHttpDataObservableService tests using TestBed + Mock HTTP back
                 //.toPromise();
         })));
     });
+
+    describe('when getExchange() operation called with \'gdax\'', () => {
+
+        let backend: MockBackend;
+        let service: ExchangeDataService;
+        let fakeExchanges: Exchange[];
+        let response: Response;
+
+        beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
+            backend = be;
+            service = new ExchangeDataService(http);
+            fakeExchanges = makeExchangeData();
+            let options = new ResponseOptions({status: 200, body: {data: fakeExchanges}});
+            response = new Response(options);
+        }));
+
+        it('should have returned GDAX Exchange', async(inject([], () => {
+            backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
+            service.getExchange('gdax')
+                .do(exchange => {
+                    expect(exchange.id).toBe('gdax');
+                    expect(exchange.name).toBe('GDAX');
+                    expect(exchange.status).toBe('Running');
+                });
+            //.toPromise();
+        })));
+
+        it('should handle returning no Exchange', async(inject([], () => {
+            let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
+            backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
+            service.getExchange('unknown')
+                .do(exchange => {
+                    expect(exchange.id).not.toBeDefined('should have no Exchange');
+                });
+            //.toPromise();
+        })));
+
+        it('should treat 404 as an Observable error', async(inject([], () => {
+            let resp = new Response(new ResponseOptions({status: 404}));
+            backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
+            service.getExchange('unknown')
+                .do(() => {
+                    fail('should not respond with Exchange');
+                })
+                .catch(err => {
+                    expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
+                    return Observable.of(null); // failure is the expected test result
+                });
+            //.toPromise();
+        })));
+    });
 });
 
 const makeExchangeData = () => [

@@ -46,7 +46,8 @@ export class ExchangeAdapterHttpDataPromiseService implements ExchangeAdapterDat
         return this.http
             .put(url, JSON.stringify(exchangeAdapter), {headers: this.headers})
             .toPromise()
-            // .then(response => response.json().data as ExchangeAdapter) // TODO - Not work for some reason?
+            // TODO - FIXME - MockResponse does not seem to return response for the PUT - I'm missing something...
+            // .then(response => response.json().data as ExchangeAdapter)
             .then(() => exchangeAdapter)
             .catch(this.handleError);
     }

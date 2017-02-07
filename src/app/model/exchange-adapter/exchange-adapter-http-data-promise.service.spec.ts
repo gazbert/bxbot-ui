@@ -159,7 +159,6 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
 
         let backend: MockBackend;
         let service: ExchangeAdapterDataService;
-        let fakeExchangeAdapters: ExchangeAdapter[];
         let response: Response;
         let updatedExchangeAdapter: ExchangeAdapter;
 
@@ -182,13 +181,11 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
 
             backend = mockBackend;
             service = new ExchangeAdapterDataService(http);
-            fakeExchangeAdapters = makeExchangeAdapterData();
             let options = new ResponseOptions({status: 200, body: {data: updatedExchangeAdapter}});
             response = new Response(options);
         }));
 
         it('should return updated Bitstamp Exchange Adapter', async(inject([], () => {
-
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.update(updatedExchangeAdapter)
                 .then(exchangeAdapter => {
@@ -201,25 +198,9 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
                 });
         })));
 
-        // TODO - FIXME!
+        // TODO - FIXME - MockResponse does not seem to return response for the PUT - I'm missing something...
         xit('should handle Exchange Adapter not found', async(inject([], () => {
-
-            updatedExchangeAdapter = new ExchangeAdapter('not-here', 'No Exist',
-                'com.gazbert.bxbot.exchanges.BitstampExchangeAdapterV2',
-                new NetworkConfig(90,
-                    [
-                        {value: 504},
-                        {value: 505},
-                        {value: 506},
-                    ],
-                    [
-                        {value: "Connection reset again!"},
-                        {value: "Connection refused again!"},
-                        {value: "Remote host closed connection during handshake again!"}
-                    ]
-                ));
-
-            let resp = new Response(new ResponseOptions({status: 404, body: {data: []}}));
+            let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.update(updatedExchangeAdapter)
                 .then(exchangeAdapter => {
@@ -227,24 +208,8 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
                 });
         })));
 
-        // TODO - FIXME!
+        // TODO - FIXME - MockResponse does not seem to return response for the PUT - I'm missing something...
         xit('should treat 404 as an error', async(inject([], () => {
-
-            let updatedExchangeAdapter = new ExchangeAdapter('not-here', 'No Exist',
-                'com.gazbert.bxbot.exchanges.BitstampExchangeAdapterV2',
-                new NetworkConfig(90,
-                    [
-                        {value: 504},
-                        {value: 505},
-                        {value: 506},
-                    ],
-                    [
-                        {value: "Connection reset again!"},
-                        {value: "Connection refused again!"},
-                        {value: "Remote host closed connection during handshake again!"}
-                    ]
-                ));
-
             let resp = new Response(new ResponseOptions({status: 404}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
 

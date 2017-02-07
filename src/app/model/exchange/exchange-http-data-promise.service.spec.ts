@@ -91,7 +91,7 @@ describe('ExchangeHttpDataPromiseService tests using TestBed + Mock HTTP backend
         })));
     });
 
-    describe('when getExchange() operation called', () => {
+    describe('when getExchange() operation called with \'gdax\'', () => {
 
         let backend: MockBackend;
         let service: ExchangeDataService;
@@ -106,24 +106,22 @@ describe('ExchangeHttpDataPromiseService tests using TestBed + Mock HTTP backend
             response = new Response(options);
         }));
 
-        // TODO FIXME!
-        xit('should return GDAX Exchange ', async(inject([], () => {
+        it('should return GDAX Exchange ', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.getExchange('gdax')
                 .then(exchange => {
                     expect(exchange.id).toBe('gdax');
                     expect(exchange.name).toBe('GDAX');
-                    expect(exchange.status).toBe('Started');
+                    expect(exchange.status).toBe('Running');
                 });
         })));
 
-        // TODO FIXME!
-        xit('should handle returning no Exchange', async(inject([], () => {
+        it('should handle returning no Exchange', async(inject([], () => {
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getExchange('unknown')
                 .then(exchange => {
-                    expect(exchange).not.toBeDefined('should have no Exchange');
+                    expect(exchange.id).not.toBeDefined('should have no Exchange');
                 });
         })));
 
@@ -141,11 +139,10 @@ describe('ExchangeHttpDataPromiseService tests using TestBed + Mock HTTP backend
         })));
     });
 
-    describe('when update() operation called', () => {
+    describe('when update() operation called for Bitstamp', () => {
 
         let backend: MockBackend;
         let service: ExchangeDataService;
-        let fakeExchanges: Exchange[];
         let response: Response;
         let updatedExchange: Exchange;
 
@@ -155,7 +152,6 @@ describe('ExchangeHttpDataPromiseService tests using TestBed + Mock HTTP backend
 
             backend = be;
             service = new ExchangeDataService(http);
-            fakeExchanges = makeExchangeData();
             let options = new ResponseOptions({status: 200, body: {data: updatedExchange}});
             response = new Response(options);
         }));
@@ -170,7 +166,7 @@ describe('ExchangeHttpDataPromiseService tests using TestBed + Mock HTTP backend
                 });
         })));
 
-        // TODO FIXME!
+        // TODO - FIXME - MockResponse does not seem to return response for the PUT - I'm missing something...
         xit('should handle returning no Exchange', async(inject([], () => {
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
@@ -180,7 +176,7 @@ describe('ExchangeHttpDataPromiseService tests using TestBed + Mock HTTP backend
                 });
         })));
 
-        // TODO FIXME!
+        // TODO - FIXME - MockResponse does not seem to return response for the PUT - I'm missing something...
         xit('should treat 404 as an error', async(inject([], () => {
             let resp = new Response(new ResponseOptions({status: 404}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));

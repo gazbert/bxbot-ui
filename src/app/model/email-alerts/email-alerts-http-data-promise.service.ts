@@ -40,6 +40,8 @@ export class EmailAlertsHttpDataPromiseService implements EmailAlertsDataPromise
         return this.http
             .put(url, JSON.stringify(emailAlertsConfig), {headers: this.headers})
             .toPromise()
+            // TODO - FIXME - MockResponse does not seem to return response for the PUT - I'm missing something...
+            // .then(response => response.json().data as EmailAlertsConfig)
             .then(() => emailAlertsConfig)
             .catch(this.handleError);
     }
