@@ -12,13 +12,11 @@ import "rxjs/add/operator/catch";
 import "rxjs/add/operator/map";
 
 /**
- * Tests the Exchange Adapter HTTP service (Observable flavour) using a mocked HTTP backend.
- *
- * TODO tests for getExchangeAdapterByExchangeId() and update()
+ * Tests the Exchange Adapter HTTP Data service (Observable flavour) using a mocked HTTP backend.
  *
  * @author gazbert
  */
-describe('ExchangeAdapterHttpDataObservableService tests using TestBed and Mock HTTP backend', () => {
+describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HTTP backend', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -28,10 +26,10 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed and Mock 
                 {provide: XHRBackend, useClass: MockBackend}
             ]
         })
-            .compileComponents();
+            .compileComponents().then(() => {/*done*/});
     }));
 
-    it('should instantiate service when inject service',
+    it('should instantiate implementation of ExchangeAdapterDataService when injected',
         inject([ExchangeAdapterDataService], (service: ExchangeAdapterDataService) => {
             expect(service instanceof ExchangeAdapterDataService).toBe(true);
         }));
@@ -39,16 +37,16 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed and Mock 
     it('should instantiate service with "new"', inject([Http], (http: Http) => {
         expect(http).not.toBeNull('http should be provided');
         let service = new ExchangeAdapterDataService(http);
-        expect(service instanceof ExchangeAdapterDataService).toBe(true, 'new service should be ok');
+        expect(service instanceof ExchangeAdapterDataService).toBe(true,
+            'new service should be instance of ExchangeAdapterDataService');
     }));
 
-    // TODO What's this all about? Just testing Angular?
-    it('should provide the mockBackend as XHRBackend',
+    it('should provide MockBackend as replacement for XHRBackend',
         inject([XHRBackend], (backend: MockBackend) => {
-            expect(backend).not.toBeNull('backend should be provided');
+            expect(backend).not.toBeNull('MockBackend backend should be provided');
     }));
 
-    describe('when getExchangeAdapters', () => {
+    describe('when getExchangeAdapters() operation called', () => {
 
         let backend: MockBackend;
         let service: ExchangeAdapterDataService;
@@ -63,24 +61,29 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed and Mock 
             response = new Response(options);
         }));
 
-        it('should have expected fake Exchange Adapters ', async(inject([], () => {
+        it('should return 3 Exchange Adapters ', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.getExchangeAdapters()
                 .do(exchangeAdapters => {
                     expect(exchangeAdapters.length).toBe(fakeExchangeAdapters.length,
-                        'should have expected 3 Exchange Adapters');
-                })
-                .toPromise();
+                        'should have returned 3 Exchange Adapters');
+
+                    // basic sanity check
+                    expect(exchangeAdapters[0].id).toBe('bitstamp');
+                    expect(exchangeAdapters[1].id).toBe('gdax');
+                    expect(exchangeAdapters[2].id).toBe('gemini');
+                });
+                //.toPromise();
         })));
 
-        it('should be OK returning no Exchange Adapters', async(inject([], () => {
+        it('should handle returning no Exchange Adapters', async(inject([], () => {
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getExchangeAdapters()
                 .do(exchangeAdapters => {
                     expect(exchangeAdapters.length).toBe(0, 'should have no Exchange Adapters');
-                })
-                .toPromise();
+                });
+                //.toPromise();
         })));
 
         it('should treat 404 as an Observable error', async(inject([], () => {
@@ -93,8 +96,8 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed and Mock 
                 .catch(err => {
                     expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
                     return Observable.of(null); // failure is the expected test result
-                })
-                .toPromise();
+                });
+                //.toPromise();
         })));
     });
 });

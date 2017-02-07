@@ -21,12 +21,12 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
         }).compileComponents().then(() => {/*done*/});
     }));
 
-    it('should instantiate ExchangeAdapterDataService when injected',
+    it('should instantiate implementation of ExchangeAdapterDataService when injected',
         inject([ExchangeAdapterDataService], (service: ExchangeAdapterDataService) => {
             expect(service instanceof ExchangeAdapterDataService).toBe(true);
         }));
 
-    it('should instantiate ExchangeAdapterDataService with "new"', inject([Http], (http: Http) => {
+    it('should instantiate service with "new"', inject([Http], (http: Http) => {
         expect(http).not.toBeNull('http should be provided');
         let service = new ExchangeAdapterDataService(http);
         expect(service instanceof ExchangeAdapterDataService).toBe(true,
@@ -58,7 +58,7 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
             service.getExchangeAdapters()
                 .then(exchangeAdapters => {
                     expect(exchangeAdapters.length).toBe(fakeExchangeAdapters.length,
-                        'should have expected 3 Exchange Adapters');
+                        'should have returned 3 Exchange Adapters');
 
                     // basic sanity check
                     expect(exchangeAdapters[0].id).toBe('bitstamp');
