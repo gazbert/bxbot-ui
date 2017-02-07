@@ -22,7 +22,7 @@ describe('ExchangeHttpDataPromiseService tests using TestBed + Mock HTTP backend
             .compileComponents().then(() => {/*done*/});
     }));
 
-    it('should instantiate implementation of ExchangeAdapterDataService when injected',
+    it('should instantiate implementation of ExchangeDataService when injected',
         inject([ExchangeDataService], (service: ExchangeDataService) => {
             expect(service instanceof ExchangeDataService).toBe(true);
         }));
@@ -31,7 +31,7 @@ describe('ExchangeHttpDataPromiseService tests using TestBed + Mock HTTP backend
         expect(http).not.toBeNull('http should be provided');
         let service = new ExchangeDataService(http);
         expect(service instanceof ExchangeDataService).toBe(true,
-            'new service should be instance of ExchangeAdapterDataService');
+            'new service should be instance of ExchangeDataService');
     }));
 
     it('should provide the MockBackend as XHRBackend',
@@ -90,11 +90,115 @@ describe('ExchangeHttpDataPromiseService tests using TestBed + Mock HTTP backend
                 });
         })));
     });
+
+    describe('when getExchange() operation called', () => {
+
+        let backend: MockBackend;
+        let service: ExchangeDataService;
+        let fakeExchanges: Exchange[];
+        let response: Response;
+
+        beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
+            backend = be;
+            service = new ExchangeDataService(http);
+            fakeExchanges = makeExchangeData();
+            let options = new ResponseOptions({status: 200, body: {data: fakeExchanges[1]}});
+            response = new Response(options);
+        }));
+
+        // TODO FIXME!
+        xit('should return GDAX Exchange ', async(inject([], () => {
+            backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
+            service.getExchange('gdax')
+                .then(exchange => {
+                    expect(exchange.id).toBe('gdax');
+                    expect(exchange.name).toBe('GDAX');
+                    expect(exchange.status).toBe('Started');
+                });
+        })));
+
+        // TODO FIXME!
+        xit('should handle returning no Exchange', async(inject([], () => {
+            let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
+            backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
+            service.getExchange('unknown')
+                .then(exchange => {
+                    expect(exchange).not.toBeDefined('should have no Exchange');
+                });
+        })));
+
+        it('should treat 404 as an error', async(inject([], () => {
+            let resp = new Response(new ResponseOptions({status: 404}));
+            backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
+
+            service.getExchange('unknown')
+                .then(() => {
+                    fail('should not respond with Exchange');
+                })
+                .catch(err => {
+                    expect(err).toMatch(/Cannot read property 'data' of null/, 'should catch bad response status code');
+                });
+        })));
+    });
+
+    describe('when update() operation called', () => {
+
+        let backend: MockBackend;
+        let service: ExchangeDataService;
+        let fakeExchanges: Exchange[];
+        let response: Response;
+        let updatedExchange: Exchange;
+
+        beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
+
+            updatedExchange = new Exchange('bitstamp', 'BitstampV2', 'Stopped');
+
+            backend = be;
+            service = new ExchangeDataService(http);
+            fakeExchanges = makeExchangeData();
+            let options = new ResponseOptions({status: 200, body: {data: updatedExchange}});
+            response = new Response(options);
+        }));
+
+        it('should return updated Bitstamp Exchange ', async(inject([], () => {
+            backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
+            service.update(updatedExchange)
+                .then(exchange => {
+                    expect(exchange.id).toBe('bitstamp');
+                    expect(exchange.name).toBe('BitstampV2');
+                    expect(exchange.status).toBe('Stopped');
+                });
+        })));
+
+        // TODO FIXME!
+        xit('should handle returning no Exchange', async(inject([], () => {
+            let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
+            backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
+            service.update(updatedExchange)
+                .then(exchange => {
+                    expect(exchange.id).not.toBeDefined('should have no Exchange');
+                });
+        })));
+
+        // TODO FIXME!
+        xit('should treat 404 as an error', async(inject([], () => {
+            let resp = new Response(new ResponseOptions({status: 404}));
+            backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
+
+            service.update(updatedExchange)
+                .then(() => {
+                    fail('should not respond with Exchange');
+                })
+                .catch(err => {
+                    expect(err).toMatch(/Cannot read property 'data' of null/, 'should catch bad response status code');
+                });
+        })));
+    });
 });
 
 const makeExchangeData = () => [
     new Exchange('bitstamp', 'Bitstamp', 'Running'),
-    new Exchange('gdax', 'GDAX', 'Stopped'),
-    new Exchange('gemini', 'Gemini', 'Running'),
+    new Exchange('gdax', 'GDAX', 'Running'),
+    new Exchange('gemini', 'Gemini', 'Stopped'),
 ] as Exchange[];
 

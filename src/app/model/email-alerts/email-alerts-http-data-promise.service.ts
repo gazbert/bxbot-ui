@@ -3,7 +3,7 @@ import {Http, Headers} from "@angular/http";
 import {EmailAlertsConfig} from "./email-alerts.model";
 import {EmailAlertsDataPromiseService} from "./email-alerts-data-promise.service";
 
-// *** Don't forget this else you get runtime error!
+// *** Don't forget this else you get runtime error:
 // zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function
 import 'rxjs/add/operator/toPromise';
 
