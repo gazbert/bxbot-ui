@@ -2,8 +2,7 @@ import "rxjs/add/operator/toPromise";
 import {EmailAlertsConfig} from "./email-alerts.model";
 
 /**
- * The Email Alerts Data Service communicates with the trading bots.
- * The service is used to update the bot's Email Alerts configuration.
+ * The Email Alerts Data Service provides operations to update Email Alerts configuration.
  * It demonstrates use of Promises in the operation responses.
  *
  * @author gazbert

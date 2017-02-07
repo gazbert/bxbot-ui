@@ -9,6 +9,7 @@ import {TradingStrategy} from "../trading-strategy/trading-strategy.model";
 describe('Market model tests', () => {
 
     it('should have correct initial values', () => {
+
         const tradingStrategy = new TradingStrategy('gdax_macd', 'gdax', 'MACD Indicator',
             'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy');
         const market = new Market('gdax_btc_usd', 'gdax', 'BTC/USD', true, 'BTC', 'USD', tradingStrategy);
@@ -23,6 +24,7 @@ describe('Market model tests', () => {
     });
 
     it('should clone itself', () => {
+
         const tradingStrategy = new TradingStrategy('gdax_macd', 'gdax', 'MACD Indicator',
             'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy');
         const market = new Market('gdax_btc_usd', 'gdax', 'BTC/USD', true, 'BTC', 'USD', tradingStrategy);

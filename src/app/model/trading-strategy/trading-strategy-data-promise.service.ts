@@ -2,8 +2,7 @@ import "rxjs/add/operator/toPromise";
 import {TradingStrategy} from "./trading-strategy.model";
 
 /**
- * The Trading Strategy Data Service communicates with the trading bots.
- * The service is used to update the bot's Market configuration.
+ * The Trading Strategy Data Service provides operations to update Trading Strategy configuration.
  * It demonstrates use of Promises in the operation responses.
  *
  * @author gazbert
