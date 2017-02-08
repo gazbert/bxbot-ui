@@ -108,7 +108,7 @@ function overrideExchangeAdapterServiceSetup() {
         stubExchangeAdapterDataService = fixture.debugElement.injector.get(ExchangeAdapterHttpDataPromiseService);
     }));
 
-    it('should inject the stubbed Exchange Adapter service',
+    xit('should inject the stubbed Exchange Adapter service',
         inject([ExchangeAdapterHttpDataPromiseService], (service: ExchangeAdapterHttpDataPromiseService) => {
             expect(service).toEqual({}, 'service injected from fixture');
             expect(stubExchangeAdapterDataService).toBeTruthy('service injected into component is the stub');

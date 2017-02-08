@@ -10,7 +10,8 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 /**
- * Tests the behaviour of the Exchange Adapter (RX) component is as expected.
+ * Tests the behaviour of the Exchange Adapter (RxJS) component is as expected.
+ * See: https://angular.io/docs/ts/latest/guide/reactive-forms.html
  *
  * Note use of Observables instead of Promises in the Exchange Adapter HTTP Data service calls.
  *
@@ -21,7 +22,7 @@ import 'rxjs/add/operator/map';
  *
  * @author gazbert
  */
-describe('ExchangeAdapterRxComponent tests without TestBed', () => {
+xdescribe('ExchangeAdapterRxComponent tests without TestBed', () => {
 
     let activatedRoute: ActivatedRouteStub;
     let exchangeAdapterComponent: ExchangeAdapterRxComponent;

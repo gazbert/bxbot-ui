@@ -7,7 +7,8 @@ import {ExchangeAdapter, ErrorCode, ErrorMessage, ExchangeAdapterHttpDataObserva
 import 'rxjs/add/operator/map';
 
 /**
- * Reactive (RX) version of the Exchange Adapter form.
+ * Reactive (RxJS) version of the Exchange Adapter form.
+ * See: https://angular.io/docs/ts/latest/guide/reactive-forms.html
  *
  * I'm still not convinced the Reactive form approach is better than the (far) simpler Template form approach -
  * there's so much more code to write... or am I being a noob and missing something here? ;-/
@@ -95,12 +96,12 @@ export class ExchangeAdapterRxComponent implements OnInit {
             this.exchangeAdapter.className = this.exchangeAdapterForm.get('className').value;
             this.exchangeAdapter.networkConfig.connectionTimeout = this.exchangeAdapterForm.get('connectionTimeout').value;
 
-            // hack for now til I sort the JSON integration spec out with Boot app
+            // hack for now til I sort the JSON integration spec out with Spring Boot app
             this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length = 0;
             this.exchangeAdapterForm.get('nonFatalErrorHttpStatusCodes').value.forEach(
                 (c) => this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.push({'value': parseInt(c, 10)}));
 
-            // hack for now til I sort the JSON integration spec out with Boot app
+            // hack for now til I sort the JSON integration spec out with Spring Boot app
             this.exchangeAdapter.networkConfig.nonFatalErrorMessages.length = 0;
             this.exchangeAdapterForm.get('nonFatalErrorMessages').value.forEach(
                 (m) => this.exchangeAdapter.networkConfig.nonFatalErrorMessages.push({'value': m}));
