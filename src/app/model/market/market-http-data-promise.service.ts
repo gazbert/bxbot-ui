@@ -39,10 +39,13 @@ export class MarketHttpDataPromiseService implements MarketDataPromiseService {
         return this.http
             .put(url, JSON.stringify(market), {headers: this.headers})
             .toPromise()
+            // TODO - FIXME - MockResponse does not seem to return response for the PUT - I'm missing something...
+            // .then(response => response.json().data as Market)
             .then(() => market)
             .catch(this.handleError);
     }
 
+    // TODO - return deleted Market? Or remove returned Promise
     deleteMarketById(marketId: string): Promise<Market> {
         const url = this.marketsUrl + '/' + marketId;
         return this.http
