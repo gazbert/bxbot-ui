@@ -120,8 +120,7 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
                 });
         })));
 
-        // TODO - FIXME - MockResponse does not seem to return response for the PUT - I'm missing something...
-        xit('should handle returning no matching Trading Strategies', async(inject([], () => {
+        it('should handle returning no matching Trading Strategies', async(inject([], () => {
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.updateTradingStrategy(updatedTradingStrategy)
@@ -130,7 +129,7 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
                 });
         })));
 
-        // TODO - FIXME - MockResponse does not seem to return response for the PUT - I'm missing something...
+        // TODO - FIXME - getting: 'An error occurred', TypeError{}
         xit('should treat 404 as an error', async(inject([], () => {
             let resp = new Response(new ResponseOptions({status: 404}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));

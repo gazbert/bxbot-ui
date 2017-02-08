@@ -39,7 +39,7 @@ export class TradingStrategyHttpDataPromiseService implements TradingStrategyDat
         return this.http
             .put(url, JSON.stringify(tradingStrategy), {headers: this.headers})
             .toPromise()
-            .then(() => tradingStrategy)
+            .then(response => response.json().data as TradingStrategy)
             .catch(this.handleError);
     }
 

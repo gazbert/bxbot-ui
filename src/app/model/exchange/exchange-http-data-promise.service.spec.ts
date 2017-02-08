@@ -168,8 +168,7 @@ describe('ExchangeHttpDataPromiseService tests using TestBed + Mock HTTP backend
                 });
         })));
 
-        // TODO - FIXME - MockResponse does not seem to return response for the PUT - I'm missing something...
-        xit('should handle returning no Exchange', async(inject([], () => {
+        it('should handle returning no Exchange', async(inject([], () => {
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.update(updatedExchange)
@@ -178,7 +177,7 @@ describe('ExchangeHttpDataPromiseService tests using TestBed + Mock HTTP backend
                 });
         })));
 
-        // TODO - FIXME - MockResponse does not seem to return response for the PUT - I'm missing something...
+        // TODO - FIXME - 'An error occurred', TypeError{}
         xit('should treat 404 as an error', async(inject([], () => {
             let resp = new Response(new ResponseOptions({status: 404}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));

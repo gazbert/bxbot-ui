@@ -39,9 +39,7 @@ export class MarketHttpDataPromiseService implements MarketDataPromiseService {
         return this.http
             .put(url, JSON.stringify(market), {headers: this.headers})
             .toPromise()
-            // TODO - FIXME - MockResponse does not seem to return response for the PUT - I'm missing something...
-            // .then(response => response.json().data as Market)
-            .then(() => market)
+            .then(response => response.json().data as Market)
             .catch(this.handleError);
     }
 
