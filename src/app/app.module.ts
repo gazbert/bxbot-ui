@@ -28,7 +28,7 @@ import {TradingStrategyHttpDataPromiseService} from './model/trading-strategy/tr
         FormsModule,
         ReactiveFormsModule,
         HttpModule,
-        InMemoryWebApiModule.forRoot(InMemoryDataService,  {put204: false}),
+        InMemoryWebApiModule.forRoot(InMemoryDataService,  {put204: false, delete404: true}),
         DashboardModule,
         ExchangeAdapterModule,
         EmailAlertsModule,

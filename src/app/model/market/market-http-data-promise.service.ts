@@ -43,13 +43,12 @@ export class MarketHttpDataPromiseService implements MarketDataPromiseService {
             .catch(this.handleError);
     }
 
-    // TODO - return deleted Market? Or remove returned Promise
-    deleteMarketById(marketId: string): Promise<Market> {
+    deleteMarketById(marketId: string): Promise<boolean> {
         const url = this.marketsUrl + '/' + marketId;
         return this.http
             .delete(url, {headers: this.headers})
             .toPromise()
-            .then()
+            .then(response => response.status === 200)
             .catch(this.handleError);
     }
 

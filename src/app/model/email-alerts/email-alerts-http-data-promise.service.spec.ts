@@ -74,23 +74,7 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed + Mock HTTP back
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getEmailAlertsConfigForExchange('unknown')
-                .then(emailAlertsConfig => {
-                    expect(emailAlertsConfig).toBe(undefined, 'should have no Email Alerts config');
-                });
-        })));
-
-        // TODO - FIXME - getting: 'An error occurred', TypeError{}
-        xit('should treat 404 as an error', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 404}));
-            backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-
-            service.getEmailAlertsConfigForExchange('unknown')
-                .then(() => {
-                    fail('should not respond with Email Alerts config');
-                })
-                .catch(err => {
-                    expect(err).toMatch(/Cannot read property 'data' of null/, 'should catch bad response status code');
-                });
+                .then(emailAlertsConfig => expect(emailAlertsConfig).toBe(undefined, 'should have no Email Alerts config'));
         })));
     });
 
@@ -113,7 +97,7 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed + Mock HTTP back
             response = new Response(options);
         }));
 
-        it('should return updated GDAX Email Alerts config', async(inject([], () => {
+        it('should return updated GDAX Email Alerts config on success', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.updateEmailAlertsConfig(updatedEmailAlertsConfig)
                 .then(emailAlertsConfig => {
@@ -126,27 +110,11 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed + Mock HTTP back
                 });
         })));
 
-        it('should handle returning no matching Email Alerts config', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
+        it('should NOT return Email Alerts config for 401 response', async(inject([], () => {
+            let resp = new Response(new ResponseOptions({status: 401, body: {data: ['Bad request - unknown id']}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.updateEmailAlertsConfig(updatedEmailAlertsConfig)
-                .then(emailAlertsConfig => {
-                    expect(emailAlertsConfig.id).toBe(undefined, 'should have no Email Alerts config');
-                });
-        })));
-
-        // TODO - FIXME - getting: 'An error occurred', TypeError{}
-        xit('should treat 404 as an error', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 404}));
-            backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-
-            service.updateEmailAlertsConfig(updatedEmailAlertsConfig)
-                .then(() => {
-                    fail('should not respond with Email Alerts config');
-                })
-                .catch(err => {
-                    expect(err).toMatch(/Cannot read property 'data' of null/, 'should catch bad response status code');
-                });
+                .then(emailAlertsConfig => expect(emailAlertsConfig.id).not.toBeDefined('should not have Email Alerts config'));
         })));
     });
 

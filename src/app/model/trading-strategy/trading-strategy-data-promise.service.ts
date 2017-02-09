@@ -11,5 +11,5 @@ export interface TradingStrategyDataPromiseService {
 
     getAllTradingStrategiesForExchange(exchangeId: string): Promise<TradingStrategy[]>;
     updateTradingStrategy(tradingStrategy: TradingStrategy): Promise<TradingStrategy>;
-    deleteTradingStrategyById(tradingStrategyId: string): Promise<TradingStrategy>;
+    deleteTradingStrategyById(tradingStrategyId: string): Promise<boolean>;
 }

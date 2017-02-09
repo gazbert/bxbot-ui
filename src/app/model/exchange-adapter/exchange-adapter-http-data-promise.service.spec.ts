@@ -71,23 +71,7 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getExchangeAdapters()
-                .then(exchangeAdapters => {
-                    expect(exchangeAdapters.length).toBe(0, 'should have no Exchange Adapters');
-                });
-        })));
-
-        // TODO - FIXME - getting: 'An error occurred', TypeError{}
-        xit('should treat 404 as an error', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 404}));
-            backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-
-            service.getExchangeAdapters()
-                .then(() => {
-                    fail('should not respond with Exchanges Adapters');
-                })
-                .catch(err => {
-                    expect(err).toMatch(/Cannot read property 'data' of null/, 'should catch bad response status code');
-                });
+                .then(exchangeAdapters => expect(exchangeAdapters.length).toBe(0, 'should have no Exchange Adapters'));
         })));
     });
 
@@ -97,12 +81,13 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
         let service: ExchangeAdapterDataService;
         let fakeExchangeAdapters: ExchangeAdapter[];
         let response: Response;
+        const GDAX_EXCHANGE = 1;
 
         beforeEach(inject([Http, XHRBackend], (http: Http, mockBackend: MockBackend) => {
             backend = mockBackend;
             service = new ExchangeAdapterDataService(http);
             fakeExchangeAdapters = makeExchangeAdapterData();
-            let options = new ResponseOptions({status: 200, body: {data: fakeExchangeAdapters[1]}});
+            let options = new ResponseOptions({status: 200, body: {data: fakeExchangeAdapters[GDAX_EXCHANGE]}});
             response = new Response(options);
         }));
 
@@ -137,23 +122,7 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getExchangeAdapterByExchangeId('unknown')
-                .then(exchangeAdapter => {
-                    expect(exchangeAdapter.id).not.toBeDefined('should have no Exchange Adapter');
-                });
-        })));
-
-        // TODO - FIXME - getting: 'An error occurred', TypeError{}
-        xit('should treat 404 as an error', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 404}));
-            backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-
-            service.getExchangeAdapterByExchangeId('unknown')
-                .then(() => {
-                    fail('should not respond with Exchange Adapter');
-                })
-                .catch(err => {
-                    expect(err).toMatch(/Cannot read property 'data' of null/, 'should catch bad response status code');
-                });
+                .then(exchangeAdapter => expect(exchangeAdapter.id).not.toBeDefined('should have no Exchange Adapter'));
         })));
     });
 
@@ -187,7 +156,7 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
             response = new Response(options);
         }));
 
-        it('should return updated Bitstamp Exchange Adapter', async(inject([], () => {
+        it('should return updated Bitstamp Exchange Adapter on success', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.update(updatedExchangeAdapter)
                 .then(exchangeAdapter => {
@@ -200,27 +169,11 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
                 });
         })));
 
-        it('should handle Exchange Adapter not found', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
+        it('should NOT return Exchange Adapter for 401 response', async(inject([], () => {
+            let resp = new Response(new ResponseOptions({status: 401, body: {data: ['Bad request - unknown id']}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.update(updatedExchangeAdapter)
-                .then(exchangeAdapter => {
-                    expect(exchangeAdapter.id).not.toBeDefined('should have no Exchange Adapter');
-                });
-        })));
-
-        // TODO - FIXME - getting: 'An error occurred', TypeError{}
-        xit('should treat 404 as an error', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 404}));
-            backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-
-            service.update(updatedExchangeAdapter)
-                .then(() => {
-                    fail('should not respond with Exchange Adapter');
-                })
-                .catch(err => {
-                    expect(err).toMatch(/Cannot read property 'data' of null/, 'should catch bad response status code');
-                });
+                .then(exchangeAdapter => expect(exchangeAdapter.id).not.toBeDefined('should have no Exchange Adapter'));
         })));
     });
 });

@@ -80,9 +80,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getExchangeAdapters()
-                .do(exchangeAdapters => {
-                    expect(exchangeAdapters.length).toBe(0, 'should have no Exchange Adapters');
-                });
+                .do(exchangeAdapters => expect(exchangeAdapters.length).toBe(0, 'should have no Exchange Adapters'));
                 //.toPromise();
         })));
 
@@ -107,12 +105,13 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
         let service: ExchangeAdapterDataService;
         let fakeExchangeAdapters: ExchangeAdapter[];
         let response: Response;
+        const GDAX_EXCHANGE = 1;
 
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
             backend = be;
             service = new ExchangeAdapterDataService(http);
             fakeExchangeAdapters = makeExchangeAdapterData();
-            let options = new ResponseOptions({status: 200, body: {data: fakeExchangeAdapters}});
+            let options = new ResponseOptions({status: 200, body: {data: fakeExchangeAdapters[GDAX_EXCHANGE]}});
             response = new Response(options);
         }));
 
@@ -148,9 +147,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getExchangeAdapterByExchangeId('unknown')
-                .do(exchangeAdapter => {
-                    expect(exchangeAdapter.id).not.toBeDefined('should have no Exchange Adapter');
-                });
+                .do(exchangeAdapter => expect(exchangeAdapter.id).not.toBeDefined('should have no Exchange Adapter'));
             //.toPromise();
         })));
 
@@ -173,7 +170,6 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
 
         let backend: MockBackend;
         let service: ExchangeAdapterDataService;
-        let fakeExchangeAdapters: ExchangeAdapter[];
         let response: Response;
         let updatedExchangeAdapter: ExchangeAdapter;
 
@@ -196,12 +192,11 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
 
             backend = be;
             service = new ExchangeAdapterDataService(http);
-            fakeExchangeAdapters = makeExchangeAdapterData();
-            let options = new ResponseOptions({status: 200, body: {data: fakeExchangeAdapters}});
+            let options = new ResponseOptions({status: 200, body: {data: updatedExchangeAdapter}});
             response = new Response(options);
         }));
 
-        it('should return updated Bitstamp Exchange Adapter', async(inject([], () => {
+        it('should return updated Bitstamp Exchange Adapter on success', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.update(updatedExchangeAdapter)
                 .do(exchangeAdapter => {
@@ -215,13 +210,11 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
             //.toPromise();
         })));
 
-        it('should handle returning no Exchange Adapter', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
+        it('should NOT return Exchange Adapter for 401 response', async(inject([], () => {
+            let resp = new Response(new ResponseOptions({status: 401}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.update(updatedExchangeAdapter)
-                .do(exchangeAdapter => {
-                    expect(exchangeAdapter.id).not.toBeDefined('should have no Exchange Adapter');
-                });
+                .do(exchangeAdapter => expect(exchangeAdapter.id).not.toBeDefined('should have no Exchange Adapter'));
             //.toPromise();
         })));
 

@@ -7,8 +7,6 @@ import {TradingStrategy} from "../trading-strategy";
 /**
  * Tests the Trading Strategy HTTP Data service (Promise flavour) using a mocked HTTP backend.
  *
- * TODO - test for deleteTradingStrategyById()
- *
  * @author gazbert
  */
 describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP backend', () => {
@@ -58,32 +56,14 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
         it('should return 2 BTC-e Trading Strategies', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.getAllTradingStrategiesForExchange('btce')
-                .then(tradingStrategies => {
-                    expect(tradingStrategies.length).toBe(2, 'should return 2 BTC-e Trading Strategies');
-                });
+                .then(tradingStrategies => expect(tradingStrategies.length).toBe(2, 'should return 2 BTC-e Trading Strategies'));
         })));
 
         it('should handle returning no matching Trading Strategies', async(inject([], () => {
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getAllTradingStrategiesForExchange('unknown')
-                .then(tradingStrategies => {
-                    expect(tradingStrategies.length).toBe(0, 'should have no Trading Strategies');
-                });
-        })));
-
-        // TODO - FIXME - getting: 'An error occurred', TypeError{}
-        xit('should treat 404 as an error', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 404}));
-            backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-
-            service.getAllTradingStrategiesForExchange('unknown')
-                .then(() => {
-                    fail('should not respond with Trading Strategies');
-                })
-                .catch(err => {
-                    expect(err).toMatch(/Cannot read property 'data' of null/, 'should catch bad response status code');
-                });
+                .then(tradingStrategies => expect(tradingStrategies.length).toBe(0, 'should have no Trading Strategies'));
         })));
     });
 
@@ -106,7 +86,7 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
             response = new Response(options);
         }));
 
-        it('should return updated BTC-e Trading Strategy', async(inject([], () => {
+        it('should return updated BTC-e Trading Strategy on success', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.updateTradingStrategy(updatedTradingStrategy)
                 .then(tradingStrategy => {
@@ -116,31 +96,41 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
                     expect(tradingStrategy.id).toBe(updatedTradingStrategy.id);
                     expect(tradingStrategy.name).toBe(updatedTradingStrategy.name);
                     expect(tradingStrategy.className).toBe(updatedTradingStrategy.className);
-
                 });
         })));
 
-        it('should handle returning no matching Trading Strategies', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
+        it('should NOT return Market for 401 response', async(inject([], () => {
+            let resp = new Response(new ResponseOptions({status: 401, body: {data: ['Bad request - unknown id']}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.updateTradingStrategy(updatedTradingStrategy)
-                .then(tradingStrategy => {
-                    expect(tradingStrategy.id).not.toBeDefined('should have no Trading Strategy');
-                });
+                .then(tradingStrategy => expect(tradingStrategy.id).not.toBeDefined('should have no Trading Strategy'));
+        })));
+    });
+
+    describe('when deleteTradingStrategyById() operation called with \'btce_macd_rsi\'', () => {
+
+        let backend: MockBackend;
+        let service: TradingStrategyDataService;
+        let response: Response;
+
+        beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
+            backend = be;
+            service = new TradingStrategyDataService(http);
+            let options = new ResponseOptions({status: 200});
+            response = new Response(options);
+        }));
+
+        it('should return status response of \'true\' if successful', async(inject([], () => {
+            backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
+            service.deleteTradingStrategyById('btce_macd_rsi')
+                .then(status => expect(status).toBe(true));
         })));
 
-        // TODO - FIXME - getting: 'An error occurred', TypeError{}
-        xit('should treat 404 as an error', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 404}));
+        it('should return status response of \'false\' if NOT successful', async(inject([], () => {
+            let resp = new Response(new ResponseOptions({status: 401}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-
-            service.updateTradingStrategy(updatedTradingStrategy)
-                .then(() => {
-                    fail('should not respond with Trading Strategy');
-                })
-                .catch(err => {
-                    expect(err).toMatch(/Cannot read property 'data' of null/, 'should catch bad response status code');
-                });
+            service.deleteTradingStrategyById('unknown')
+                .then(status => expect(status).toBe(false));
         })));
     });
 });

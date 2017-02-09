@@ -43,13 +43,12 @@ export class TradingStrategyHttpDataPromiseService implements TradingStrategyDat
             .catch(this.handleError);
     }
 
-    // TODO - return deleted Trading Strat? Or remove returned Promise
-    deleteTradingStrategyById(tradingStrategyId: string): Promise<TradingStrategy> {
+    deleteTradingStrategyById(tradingStrategyId: string): Promise<boolean> {
         const url = this.tradingStrategiesUrl + '/' + tradingStrategyId;
         return this.http
             .delete(url, {headers: this.headers})
             .toPromise()
-            .then()
+            .then(response => response.status === 200)
             .catch(this.handleError);
     }
 

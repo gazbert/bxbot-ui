@@ -8,8 +8,6 @@ import {Market} from "./market.model";
 /**
  * Tests the Market HTTP Data service (Promise flavour) using a mocked HTTP backend.
  *
- * TODO - test deleteMarketById()
- *
  * @author gazbert
  */
 describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend', () => {
@@ -72,23 +70,7 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getAllMarketsForExchange('unknown')
-                .then(markets => {
-                    expect(markets.length).toBe(0, 'should have no Markets');
-                });
-        })));
-
-        // TODO - FIXME - getting: 'An error occurred', TypeError{}
-        xit('should treat 404 as an error', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 404}));
-            backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-
-            service.getAllMarketsForExchange('unknown')
-                .then(() => {
-                    fail('should not respond with Markets');
-                })
-                .catch(err => {
-                    expect(err).toMatch(/Cannot read property 'data' of null/, 'should catch bad response status code');
-                });
+                .then(markets => expect(markets.length).toBe(0, 'should have no Markets'));
         })));
     });
 
@@ -112,7 +94,7 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
             response = new Response(options);
         }));
 
-        it('should return updated BTC-e Market', async(inject([], () => {
+        it('should return updated BTC-e Market on success', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.updateMarket(updatedMarket)
                 .then(market => {
@@ -125,30 +107,40 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
                 });
         })));
 
-        it('should handle returning no matching Markets', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
+        it('should NOT return Market for 401 response', async(inject([], () => {
+            let resp = new Response(new ResponseOptions({status: 401, body: {data: ['Bad request - unknown id']}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.updateMarket(updatedMarket)
-                .then(market => {
-                    expect(market.id).not.toBeDefined('should have no Market');
-                });
-        })));
-
-        // TODO - FIXME - getting: 'An error occurred', TypeError{}
-        xit('should treat 404 as an error', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 404}));
-            backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-
-            service.updateMarket(updatedMarket)
-                .then(() => {
-                    fail('should not respond with Market');
-                })
-                .catch(err => {
-                    expect(err).toMatch(/Cannot read property 'data' of null/, 'should catch bad response status code');
-                });
+                .then(market => expect(market.id).not.toBeDefined('should have no Market'));
         })));
     });
 
+    describe('when deleteMarketById() operation called with \'btce_btc_usd\'', () => {
+
+        let backend: MockBackend;
+        let service: MarketDataService;
+        let response: Response;
+
+        beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
+            backend = be;
+            service = new MarketDataService(http);
+            let options = new ResponseOptions({status: 200});
+            response = new Response(options);
+        }));
+
+        it('should return status response of \'true\' if successful', async(inject([], () => {
+            backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
+            service.deleteMarketById('btce_btc_usd')
+                .then(status => expect(status).toBe(true));
+        })));
+
+        it('should return status response of \'false\' if NOT successful', async(inject([], () => {
+            let resp = new Response(new ResponseOptions({status: 401}));
+            backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
+            service.deleteMarketById('unknown')
+                .then(status => expect(status).toBe(false));
+        })));
+    });
 });
 
 const makeMarketData = () => [

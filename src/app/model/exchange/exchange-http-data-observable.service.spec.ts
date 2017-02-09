@@ -80,9 +80,7 @@ describe('ExchangeHttpDataObservableService tests using TestBed + Mock HTTP back
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getExchanges()
-                .do(exchanges => {
-                    expect(exchanges.length).toBe(0, 'should have no Exchanges');
-                });
+                .do(exchanges => expect(exchanges.length).toBe(0, 'should have no Exchanges'));
                 //.toPromise();
         })));
 
@@ -107,12 +105,13 @@ describe('ExchangeHttpDataObservableService tests using TestBed + Mock HTTP back
         let service: ExchangeDataService;
         let fakeExchanges: Exchange[];
         let response: Response;
+        const GDAX_EXCHANGE = 1;
 
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
             backend = be;
             service = new ExchangeDataService(http);
             fakeExchanges = makeExchangeData();
-            let options = new ResponseOptions({status: 200, body: {data: fakeExchanges}});
+            let options = new ResponseOptions({status: 200, body: {data: fakeExchanges[GDAX_EXCHANGE]}});
             response = new Response(options);
         }));
 
@@ -131,9 +130,7 @@ describe('ExchangeHttpDataObservableService tests using TestBed + Mock HTTP back
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getExchange('unknown')
-                .do(exchange => {
-                    expect(exchange.id).not.toBeDefined('should have no Exchange');
-                });
+                .do(exchange => expect(exchange.id).not.toBeDefined('should have no Exchange'));
             //.toPromise();
         })));
 
@@ -141,6 +138,60 @@ describe('ExchangeHttpDataObservableService tests using TestBed + Mock HTTP back
             let resp = new Response(new ResponseOptions({status: 404}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getExchange('unknown')
+                .do(() => {
+                    fail('should not respond with Exchange');
+                })
+                .catch(err => {
+                    expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
+                    return Observable.of(null); // failure is the expected test result
+                });
+            //.toPromise();
+        })));
+    });
+
+    describe('when update() operation called for Bitstamp', () => {
+
+        let backend: MockBackend;
+        let service: ExchangeDataService;
+        let response: Response;
+        let updatedExchange: Exchange;
+
+        beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
+
+            updatedExchange = new Exchange('bitstamp', 'Bitstamp v2', 'Stopped');
+
+            backend = be;
+            service = new ExchangeDataService(http);
+            let options = new ResponseOptions({status: 200, body: {data: updatedExchange}});
+            response = new Response(options);
+        }));
+
+        it('should return updated Bitstamp Exchange Adapter on success', async(inject([], () => {
+            backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
+            service.update(updatedExchange)
+                .do(exchange => {
+                    expect(exchange).toBe(updatedExchange);
+
+                    // paranoia!
+                    expect(exchange.id).toBe('bitstamp');
+                    expect(exchange.name).toBe('Bitstamp v2');
+                    expect(exchange.status).toBe('Stopped');
+                });
+            //.toPromise();
+        })));
+
+        it('should NOT return Exchange for 401 response', async(inject([], () => {
+            let resp = new Response(new ResponseOptions({status: 401}));
+            backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
+            service.update(updatedExchange)
+                .do(exchange => expect(exchange.id).not.toBeDefined('should have no Exchange'));
+            //.toPromise();
+        })));
+
+        it('should treat 404 as an Observable error', async(inject([], () => {
+            let resp = new Response(new ResponseOptions({status: 404}));
+            backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
+            service.update(updatedExchange)
                 .do(() => {
                     fail('should not respond with Exchange');
                 })
