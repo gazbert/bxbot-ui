@@ -49,10 +49,10 @@ functionality errors.
 ### Configuration
 
 The app uses Angular's [In Memory Web API](https://github.com/angular/in-memory-web-api) as a replacement
-backend for development and local testing. The API config configuration options are set in [`app.module.ts`](/app/app.module.ts).
+backend for development and local testing. The API config configuration options are set in [`app.module.ts`](/src/app/app.module.ts).
 
 
-The application config is in JSON format and lives in the [`in-memory-data.service.ts`](/app/model/in-memory-data.service.ts) file.
+The application config is in JSON format and lives in the [`in-memory-data.service.ts`](/src/app/model/in-memory-data.service.ts) file.
 
 ## Credits
 This app started life as the [Angular 2 QuickStart](https://github.com/angular/quickstart) app and took (a lot of)
