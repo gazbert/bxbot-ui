@@ -9,8 +9,14 @@ import 'rxjs/add/operator/toPromise';
 
 /**
  * HTTP implementation of the Exchange Data Service.
+ *
  * It demonstrates use of Promises in call responses.
- * Seems easier to use/understand than Observable way?
+ *
+ * We chain the toPromise operator to the Observable result of http.get. It converts the Observable into a Promise
+ * which is passed back to the caller.
+ *
+ * Converting to a promise is a good choice when asking http.get to fetch a single chunk of data - when we receive the
+ * data, we're done. A single result in the form of a promise is easy for the calling component to understand/consume.
  *
  * @author gazbert
  */

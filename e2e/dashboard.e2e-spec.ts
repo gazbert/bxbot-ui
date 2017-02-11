@@ -7,6 +7,8 @@
  * https://angular.io/docs/ts/latest/guide/upgrade.html
  * https://github.com/angular/protractor/issues/3205
  *
+ * TODO - Add test for Dashboard search/filter box
+ *
  ******************************************************************************/
 import {browser, element, by} from "protractor";
 

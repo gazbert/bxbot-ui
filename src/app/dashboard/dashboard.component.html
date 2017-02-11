@@ -1,5 +1,10 @@
-<div class="grid grid-pad">
-    <bx-dashboard-item *ngFor="let exchange of exchanges" class="col-1-4"
-                        [exchange]=exchange (selected)="gotoExchangeDetails($event)">
-    </bx-dashboard-item>
+<div id="dashboard">
+    <div id="dashboard-item-filter">
+        <input #searchBox id="search-box" class="form-control center" (keyup)="search(searchBox.value)" placeholder="Search..."/>
+    </div>
+    <div id="dashboard-grid" class="grid grid-pad">
+        <bx-dashboard-item *ngFor="let exchange of exchanges" class="col-1-4"
+                           [exchange]=exchange (selected)="gotoExchangeDetails($event)">
+        </bx-dashboard-item>
+    </div>
 </div>

@@ -2,7 +2,6 @@
     Template-driven version of the Exchange Adapter form.
  -->
 <div *ngIf="exchangeAdapter">
-
     <form *ngIf="active" #exchangeAdapterForm="ngForm" novalidate (ngSubmit)="save(exchangeAdapterForm.valid)">
 
         <!-- Adapter Name -->
@@ -113,7 +112,6 @@
                 </div>
             </div>
         </div>
-
         <div>
             <hr>
         </div>

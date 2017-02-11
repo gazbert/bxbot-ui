@@ -13,7 +13,11 @@ import 'rxjs/add/operator/toPromise';
 
 /**
  * HTTP implementation of the Exchange Adapter Data Service.
+ *
  * It demonstrates use of Observables in call responses.
+ *
+ * An Observable is a stream of events that can be processed with array-like operators.
+ * Angular uses the RxJS library to provide basic support for Observables.
  *
  * @author gazbert
  */

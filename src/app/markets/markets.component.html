@@ -2,9 +2,7 @@
  Template-driven version of the Markets form.
  -->
 <div *ngIf="markets">
-
     <form *ngIf="active" #marketsForm="ngForm" novalidate (ngSubmit)="save(marketsForm.valid)">
-
         <div class="row">
             <div class="col-sm-12">
                 <div *ngFor="let market of markets; let i=index;"
@@ -96,7 +94,6 @@
                 </div>
             </div>
         </div>
-
         <div>
             <hr>
         </div>

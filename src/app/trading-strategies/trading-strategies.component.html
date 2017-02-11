@@ -2,9 +2,7 @@
  Template-driven version of the Trading Strategies form.
  -->
 <div *ngIf="tradingStrategies">
-
     <form *ngIf="active" #tradingStrategiesForm="ngForm" novalidate (ngSubmit)="save(tradingStrategiesForm.valid)">
-
         <div class="row">
             <div class="col-sm-12">
                 <div *ngFor="let tradingStrategy of tradingStrategies; let i=index;"
@@ -73,7 +71,6 @@
                 </div>
             </div>
         </div>
-
         <div>
             <hr>
         </div>

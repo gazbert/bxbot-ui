@@ -14,6 +14,8 @@ import "rxjs/add/operator/map";
 /**
  * Tests the Exchange HTTP Data Service (Observable flavour) using a mocked HTTP backend.
  *
+ * TODO - add test for getExchangeByName()
+ *
  * @author gazbert
  */
 describe('ExchangeHttpDataObservableService tests using TestBed + Mock HTTP backend', () => {

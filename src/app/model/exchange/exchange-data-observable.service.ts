@@ -12,5 +12,6 @@ export interface ExchangeDataObservableService {
 
     getExchanges(): Observable<Exchange[]>;
     getExchange(id: string): Observable<Exchange>;
+    getExchangeByName(name: string): Observable<Exchange[]>;
     update(exchange: Exchange): Observable<Exchange>;
 }

@@ -2,7 +2,6 @@
  Template-driven version of the Email Alerts config form.
  -->
 <div *ngIf="emailAlertsConfig">
-
     <form *ngIf="active" #emailAlertsForm="ngForm" novalidate (ngSubmit)="save(emailAlertsForm.valid)">
 
         <!-- Alerts Enabled? -->
@@ -83,7 +82,6 @@
                 </div>
             </div>
         </div>
-
         <div>
             <hr>
         </div>
@@ -94,7 +92,6 @@
             <button id="emailAlertCancelButton" type="button" (click)="cancel()" class="btn btn-default">Cancel</button>
             <button id="emailAlertSaveButton" type="submit" class="btn btn-primary">Save</button>
         </div>
-
         <!-- For Debugging-->
         <!--<div class="margin-20" *ngIf="f">-->
         <!--<div>Form details:-</div>-->

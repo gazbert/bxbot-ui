@@ -13,7 +13,11 @@ import 'rxjs/add/operator/toPromise';
 
 /**
  * HTTP implementation of the Exchange Data Service.
+ *
  * It demonstrates use of Observables in call responses.
+ *
+ * An Observable is a stream of events that can be processed with array-like operators.
+ * Angular uses the RxJS library to provide basic support for Observables.
  *
  * @author gazbert
  */
@@ -38,6 +42,14 @@ export class ExchangeHttpDataObservableService implements ExchangeDataObservable
             .get(this.exchangeUrl + '/' + id)
             .map((r: Response) => r.json().data as Exchange)
             // .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    getExchangeByName(name: string): Observable<Exchange[]> {
+        return this.http
+            .get(this.exchangeUrl + '/?name=' + name)
+            // .map((r: Response) => r.json().data as Exchange[])
+            .map(this.extractData)
             .catch(this.handleError);
     }
 

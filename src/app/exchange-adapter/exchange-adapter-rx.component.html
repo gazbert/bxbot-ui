@@ -3,7 +3,6 @@
     See: https://angular.io/docs/ts/latest/guide/reactive-forms.html
  -->
 <div *ngIf="exchangeAdapter">
-
     <form *ngIf="active" novalidate [formGroup]="exchangeAdapterForm" (ngSubmit)="save(exchangeAdapterForm.valid)">
 
         <!-- Adapter Name -->
@@ -103,7 +102,6 @@
                 </div>
             </div>
         </div>
-
         <div>
             <hr>
         </div>
