@@ -99,7 +99,7 @@ xdescribe('ExchangeAdapterRxComponent tests without TestBed', () => {
         expect(router.navigate.calls.any()).toBe(false, 'router.navigate should not have been called');
     });
 
-    // TODO - FIXME for Observable approach
+    // FIXME - broken after changing to use
     xit('should save and navigate to Dashboard when user clicks Save for valid input', done => {
         exchangeAdapterComponent.save(true);
         spyExchangeAdapterDataService.update.calls.first().returnValue
@@ -110,7 +110,7 @@ xdescribe('ExchangeAdapterRxComponent tests without TestBed', () => {
             });
     });
 
-    // TODO - FIXME for Observable approach
+    // FIXME - broken after changing to use
     xit('should create new Error Code when user adds one', () => {
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1]).not.toBeDefined();
@@ -120,7 +120,7 @@ xdescribe('ExchangeAdapterRxComponent tests without TestBed', () => {
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1].value).toBeNull();
     });
 
-    // TODO - FIXME for Observable approach
+    // FIXME - broken after changing to use
     xit('should create new Error Message when user adds one', () => {
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(1);
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages[1]).not.toBeDefined();
@@ -129,7 +129,7 @@ xdescribe('ExchangeAdapterRxComponent tests without TestBed', () => {
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages[1].value).toBe('');
     });
 
-    // TODO - FIXME for Observable approach
+    // FIXME - broken after changing to use
     xit('should remove Error Code when user deletes one', () => {
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1]).not.toBeDefined();
@@ -138,7 +138,7 @@ xdescribe('ExchangeAdapterRxComponent tests without TestBed', () => {
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0]).not.toBeDefined();
     });
 
-    // TODO - FIXME for Observable approach
+    // FIXME - broken after changing to use
     xit('should remove Error Message when user deletes one', () => {
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(1);
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages[1]).not.toBeDefined();
