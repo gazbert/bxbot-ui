@@ -3,7 +3,7 @@ import {Http, Headers} from "@angular/http";
 import {ExchangeDataPromiseService} from "./exchange-data-promise.service";
 import {Exchange} from "./exchange.model";
 
-// *** Don't forget this else you get runtime error:
+// Don't forget this else you get runtime error:
 // zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function
 import 'rxjs/add/operator/toPromise';
 

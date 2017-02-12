@@ -77,5 +77,30 @@ describe('Dashboard Tests', function () {
         });
     });
 
+    it('should filter displayed Exchange items when user searches by Exchange name', function () {
+
+        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        expect(dashboardItems.count()).toBe(8);
+
+        let searchBox = element.all(by.id('search-box'));
+        searchBox.sendKeys('Bit');
+
+        expect(dashboardItems.count()).toBe(3);
+        expect(dashboardItems.get(0).getText()).toContain('Bitstamp');
+        expect(dashboardItems.get(1).getText()).toContain('ItBit');
+        expect(dashboardItems.get(2).getText()).toContain('Bitfinex');
+
+        searchBox.clear();
+        searchBox.sendKeys('Ok');
+        expect(dashboardItems.count()).toBe(1);
+        expect(dashboardItems.get(0).getText()).toContain('OKCoin');
+
+        searchBox.clear();
+        searchBox.sendKeys('G');
+        expect(dashboardItems.count()).toBe(2);
+        expect(dashboardItems.get(0).getText()).toContain('GDAX');
+        expect(dashboardItems.get(1).getText()).toContain('Gemini');
+    });
+
 });
 

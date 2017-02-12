@@ -25,8 +25,13 @@ describe('Miscellaneous Scenario Tests', function () {
 
     it('should add new Trading Strategy and be able to select it for existing Market', function () {
 
+        let searchBox = element.all(by.id('search-box'));
+        searchBox.sendKeys('ItBit');
+
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
-        dashboardItems.get(3).click();
+        expect(dashboardItems.count()).toBe(1);
+
+        dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Exchange Details');
 
         let tabLinks = element.all(by.css('li'));

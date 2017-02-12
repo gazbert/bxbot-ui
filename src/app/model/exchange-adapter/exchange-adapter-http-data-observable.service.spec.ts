@@ -5,7 +5,10 @@ import {ExchangeAdapterHttpDataObservableService as ExchangeAdapterDataService} 
 import {ExchangeAdapter, NetworkConfig} from "./exchange-adapter.model";
 import {Observable} from "rxjs/Observable";
 
-// Need to explicitly import rxjs operators, else you get runtime error, e.g. 'Failed: this.http.put(...).map is not a function'
+// Most RxJS operators are not included in Angular's base Observable implementation.
+// The base implementation includes only what Angular itself requires.
+// If you want more RxJS features, you need to explicitly import rxjs operators, else you get runtime error, e.g.
+// 'Failed: this.http.put(...).map is not a function'
 import "rxjs/add/observable/throw";
 import "rxjs/add/operator/do";
 import "rxjs/add/operator/catch";

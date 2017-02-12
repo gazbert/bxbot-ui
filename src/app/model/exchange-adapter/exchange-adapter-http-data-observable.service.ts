@@ -5,7 +5,10 @@ import {ExchangeAdapterDataObservableService} from "./exchange-adapter-data-obse
 import {Observable} from 'rxjs/Observable';
 import {isObject} from "rxjs/util/isObject";
 
-// Need to explicitly import rxjs operators, else you get runtime error, e.g. 'Failed: this.http.put(...).map is not a function'
+// Most RxJS operators are not included in Angular's base Observable implementation.
+// The base implementation includes only what Angular itself requires.
+// If you want more RxJS features, you need to explicitly import rxjs operators, else you get runtime error, e.g.
+// 'Failed: this.http.put(...).map is not a function'
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
@@ -18,6 +21,9 @@ import 'rxjs/add/operator/toPromise';
  *
  * An Observable is a stream of events that can be processed with array-like operators.
  * Angular uses the RxJS library to provide basic support for Observables.
+ *
+ * Observables are useful if you start a request, cancel it, and then make a different request before the server has
+ * responded to the first request. This request-cancel-new-request sequence is difficult to implement with Promises.
  *
  * @author gazbert
  */

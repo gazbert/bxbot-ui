@@ -3,7 +3,10 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormGroup, FormBuilder, Validators, FormControl, FormArray} from '@angular/forms';
 import {ExchangeAdapter, ErrorCode, ErrorMessage, ExchangeAdapterHttpDataObservableService} from '../model/exchange-adapter';
 
-// Need to explicitly import rxjs operators, else you get runtime error, e.g. 'Failed: this.http.put(...).map is not a function'
+// Most RxJS operators are not included in Angular's base Observable implementation.
+// The base implementation includes only what Angular itself requires.
+// If you want more RxJS features, you need to explicitly import rxjs operators, else you get runtime error, e.g.
+// 'Failed: this.http.put(...).map is not a function'
 import 'rxjs/add/operator/map';
 
 /**
