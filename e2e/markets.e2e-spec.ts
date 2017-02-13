@@ -17,7 +17,7 @@ import {browser, element, by} from "protractor";
  *
  * @author gazbert
  */
-fdescribe('Market Screen Tests', function () {
+describe('Market Screen Tests', function () {
 
     beforeEach(function () {
         browser.get('');
