@@ -15,7 +15,6 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/startWith';
 
-
 /**
  * The Dashboard displays the Exchanges the bots are running on.
  *
@@ -35,8 +34,7 @@ import 'rxjs/add/operator/startWith';
 export class DashboardComponent implements OnInit {
 
     /**
-     * An Observable is a stream of events that can be processed with array-like operators.
-     * Here we declare our stream of Exchange events.
+     * The Exchange Observable is a stream of Exchange events that can be processed with array-like operators.
      */
     exchanges: Observable<Exchange[]>;
 
@@ -63,13 +61,13 @@ export class DashboardComponent implements OnInit {
      * We don't pass every user keystroke directly to the ExchangeHttpDataService, else we'd send a load of HTTP
      * requests! We achieve this by chaining Observable operators: debounceTime(300) and distinctUntilChanged.
      *
-     * The switchMap calls ExchangeHttpDataService for each search term that makes it through the debounce and
+     * The switchMap calls the ExchangeHttpDataService for each search term that makes it through the debounce and
      * distinctUntilChanged checks. It cancels and discards previous search Observables, returning only the
      * latest ExchangeHttpDataService Observable.
      *
      * Every qualifying key event can trigger an HTTP method call. Even with a 300ms pause between requests,
-     * we could have multiple HTTP requests in flight, and they may not return in the order sent.
-     * switchMap preserves the original request order while returning only the Observable from the most recent HTTP
+     * there could be multiple HTTP requests in flight, and they may not return in the order sent.
+     * switchMap preserves the original request order and only returns the Observable from the most recent HTTP
      * method call. Results from prior calls are canceled and discarded.
      *
      * If the search text is empty, we short-circuit the HTTP method call, and return an Observable containing the

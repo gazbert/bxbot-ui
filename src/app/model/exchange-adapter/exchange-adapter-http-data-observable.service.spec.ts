@@ -67,7 +67,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
         it('should return 3 Exchange Adapters ', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.getExchangeAdapters()
-                .do(exchangeAdapters => {
+                .subscribe(exchangeAdapters => {
                     expect(exchangeAdapters.length).toBe(fakeExchangeAdapters.length,
                         'should have returned 3 Exchange Adapters');
 
@@ -83,7 +83,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getExchangeAdapters()
-                .do(exchangeAdapters => expect(exchangeAdapters.length).toBe(0, 'should have no Exchange Adapters'));
+                .subscribe(exchangeAdapters => expect(exchangeAdapters.length).toBe(0, 'should have no Exchange Adapters'));
                 //.toPromise();
         })));
 
@@ -121,7 +121,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
         it('should return GDAX Exchange Adapter', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.getExchangeAdapterByExchangeId('gdax')
-                .do(exchangeAdapter => {
+                .subscribe(exchangeAdapter => {
                     expect(exchangeAdapter.id).toBe('gdax');
                     expect(exchangeAdapter.name).toBe('GDAX');
                     expect(exchangeAdapter.className).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
@@ -150,7 +150,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getExchangeAdapterByExchangeId('unknown')
-                .do(exchangeAdapter => expect(exchangeAdapter.id).not.toBeDefined('should have no Exchange Adapter'));
+                .subscribe(exchangeAdapter => expect(exchangeAdapter.id).not.toBeDefined('should have no Exchange Adapter'));
             //.toPromise();
         })));
 
@@ -202,7 +202,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
         it('should return updated Bitstamp Exchange Adapter on success', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.update(updatedExchangeAdapter)
-                .do(exchangeAdapter => {
+                .subscribe(exchangeAdapter => {
                     expect(exchangeAdapter).toBe(updatedExchangeAdapter);
 
                     // paranoia!
@@ -217,7 +217,13 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
             let resp = new Response(new ResponseOptions({status: 401}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.update(updatedExchangeAdapter)
-                .do(exchangeAdapter => expect(exchangeAdapter.id).not.toBeDefined('should have no Exchange Adapter'));
+                .do(() => {
+                    fail('should not respond with Exchange Adapter');
+                })
+                .catch(err => {
+                    expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
+                    return Observable.of(null); // failure is the expected test result
+                });
             //.toPromise();
         })));
 

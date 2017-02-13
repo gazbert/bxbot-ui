@@ -14,7 +14,6 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/toPromise';
 
-
 /**
  * HTTP implementation of the Exchange Data Service.
  *
@@ -55,9 +54,6 @@ export class ExchangeHttpDataObservableService implements ExchangeDataObservable
     getExchangeByName(name: string): Observable<Exchange[]> {
         return this.http
             .get(this.exchangeUrl + '/?name=' + name)
-            // we no longer call toPromise. Instead we return the Observable from the the http.get,
-            // after chaining it to another RxJS operator, map, to extract Exchanges from the response data.
-            // .toPromise()
             .map(this.extractData)
             // .map((r: Response) => r.json().data as Exchange[])
             .catch(this.handleError);

@@ -17,8 +17,6 @@ import "rxjs/add/operator/map";
 /**
  * Tests the Exchange HTTP Data Service (Observable flavour) using a mocked HTTP backend.
  *
- * TODO - add test for getExchangeByName()
- *
  * @author gazbert
  */
 describe('ExchangeHttpDataObservableService tests using TestBed + Mock HTTP backend', () => {
@@ -31,7 +29,8 @@ describe('ExchangeHttpDataObservableService tests using TestBed + Mock HTTP back
                 {provide: XHRBackend, useClass: MockBackend}
             ]
         })
-            .compileComponents().then(() => {/*done*/});
+            .compileComponents().then(() => {/*done*/
+        });
     }));
 
     it('should instantiate implementation of ExchangeDataService when injected',
@@ -49,7 +48,7 @@ describe('ExchangeHttpDataObservableService tests using TestBed + Mock HTTP back
     it('should provide the MockBackend as XHRBackend',
         inject([XHRBackend], (backend: MockBackend) => {
             expect(backend).not.toBeNull('MockBackend backend should be provided');
-    }));
+        }));
 
     describe('when getExchanges() operation called', () => {
 
@@ -69,7 +68,7 @@ describe('ExchangeHttpDataObservableService tests using TestBed + Mock HTTP back
         it('should have returned 3 Exchanges ', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.getExchanges()
-                .do(exchanges => {
+                .subscribe(exchanges => {
                     expect(exchanges.length).toBe(fakeExchanges.length,
                         'should have returned 3 Exchanges');
 
@@ -78,15 +77,15 @@ describe('ExchangeHttpDataObservableService tests using TestBed + Mock HTTP back
                     expect(exchanges[1].id).toBe('gdax');
                     expect(exchanges[2].id).toBe('gemini');
                 });
-                //.toPromise();
+            //.toPromise();
         })));
 
         it('should handle returning no Exchanges', async(inject([], () => {
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getExchanges()
-                .do(exchanges => expect(exchanges.length).toBe(0, 'should have no Exchanges'));
-                //.toPromise();
+                .subscribe(exchanges => expect(exchanges.length).toBe(0, 'should have no Exchanges'));
+            //.toPromise();
         })));
 
         it('should treat 404 as an Observable error', async(inject([], () => {
@@ -100,7 +99,7 @@ describe('ExchangeHttpDataObservableService tests using TestBed + Mock HTTP back
                     expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
                     return Observable.of(null); // failure is the expected test result
                 });
-                //.toPromise();
+            //.toPromise();
         })));
     });
 
@@ -123,10 +122,10 @@ describe('ExchangeHttpDataObservableService tests using TestBed + Mock HTTP back
         it('should have returned GDAX Exchange', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.getExchange('gdax')
-                .do(exchange => {
+                .subscribe(exchange => {
                     expect(exchange.id).toBe('gdax');
                     expect(exchange.name).toBe('GDAX');
-                    expect(exchange.status).toBe('Running');
+                    expect(exchange.status).toBe('Stopped');
                 });
             //.toPromise();
         })));
@@ -135,7 +134,7 @@ describe('ExchangeHttpDataObservableService tests using TestBed + Mock HTTP back
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getExchange('unknown')
-                .do(exchange => expect(exchange.id).not.toBeDefined('should have no Exchange'));
+                .subscribe(exchange => expect(exchange.id).not.toBeDefined('should have no Exchange'));
             //.toPromise();
         })));
 
@@ -174,7 +173,7 @@ describe('ExchangeHttpDataObservableService tests using TestBed + Mock HTTP back
         it('should return updated Bitstamp Exchange Adapter on success', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.update(updatedExchange)
-                .do(exchange => {
+                .subscribe(exchange => {
                     expect(exchange).toBe(updatedExchange);
 
                     // paranoia!
@@ -189,7 +188,13 @@ describe('ExchangeHttpDataObservableService tests using TestBed + Mock HTTP back
             let resp = new Response(new ResponseOptions({status: 401}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.update(updatedExchange)
-                .do(exchange => expect(exchange.id).not.toBeDefined('should have no Exchange'));
+                .do(() => {
+                    fail('should not respond with Exchange');
+                })
+                .catch(err => {
+                    expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
+                    return Observable.of(null); // failure is the expected test result
+                });
             //.toPromise();
         })));
 
@@ -197,6 +202,54 @@ describe('ExchangeHttpDataObservableService tests using TestBed + Mock HTTP back
             let resp = new Response(new ResponseOptions({status: 404}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.update(updatedExchange)
+                .do(() => {
+                    fail('should not respond with Exchange');
+                })
+                .catch(err => {
+                    expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
+                    return Observable.of(null); // failure is the expected test result
+                });
+            //.toPromise();
+        })));
+    });
+
+    describe('when getExchangeByName() operation called with \'gd\'', () => {
+
+        let backend: MockBackend;
+        let service: ExchangeDataService;
+        let fakeExchanges: Exchange[];
+        let response: Response;
+        const GDAX_EXCHANGE = 1;
+
+        beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
+            backend = be;
+            service = new ExchangeDataService(http);
+            fakeExchanges = makeExchangeData();
+            let options = new ResponseOptions({status: 200, body: {data: fakeExchanges[GDAX_EXCHANGE]}});
+            response = new Response(options);
+        }));
+
+        it('should have returned GDAX Exchange', async(inject([], () => {
+            backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
+            service.getExchangeByName('gd')
+                .subscribe(exchange => {
+                    expect(exchange).toBe(fakeExchanges[GDAX_EXCHANGE]);
+                });
+            //.toPromise();
+        })));
+
+        xit('should handle returning no Exchange', async(inject([], () => {
+            let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
+            backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
+            service.getExchangeByName('unknown')
+                .subscribe(exchange => expect(exchange).not.toBeDefined('should have no Exchange'));
+            // .toPromise();
+        })));
+
+        it('should treat 404 as an Observable error', async(inject([], () => {
+            let resp = new Response(new ResponseOptions({status: 404}));
+            backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
+            service.getExchangeByName('unknown')
                 .do(() => {
                     fail('should not respond with Exchange');
                 })
