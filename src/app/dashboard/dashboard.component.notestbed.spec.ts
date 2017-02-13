@@ -30,28 +30,21 @@ describe('DashboardComponent tests without TestBed', () => {
         comp = new DashboardComponent(router, exchangeDataService);
     });
 
-    // FIXME - broken after changing to use Observable
-    // it('should NOT have Exchange items before calling OnInit', () => {
-    //     expect(comp.exchanges.length).toBe(0, 'should not have Exchanges items before OnInit called');
-    // });
+    it('should NOT have Exchange items before calling OnInit', () => {
+        expect(comp.exchanges).not.toBeDefined('should not have Exchanges items before OnInit called');
+    });
 
-    // FIXME - broken after changing to use Observable
-    // xit('should NOT have Exchange items immediately after OnInit', () => {
-    //     comp.ngOnInit(); // ngOnInit -> getExchangesPromise
-    //     expect(comp.exchanges.length).toBe(0,
-    //         'should not have Exchange items until after ExchangeDataService promise resolves');
-    // });
+    it('should have Exchange items immediately after OnInit', () => {
+        comp.ngOnInit();
+        expect(comp.exchanges).toBeDefined('should have Exchange items after OnInit called');
+    });
 
-    // FIXME - broken after changing to use Observable
-    // it('should have 3 Exchange items after ExchangeDataService promise resolves', (done: DoneFn) => {
-    //     comp.ngOnInit(); // ngOnInit -> getExchangesPromise
-    //     exchangeDataService.lastPromise // the one from getExchangesPromise
-    //         .then(() => {
-    //             // throw new Error('deliberate error'); // see it fail gracefully
-    //             expect(comp.exchanges.length).toBe(3, 'should have 3 Exchange items after ExchangeDataService promise resolves');
-    //         })
-    //         .then(done, done.fail);
-    // });
+    it('should have 3 Exchange items after ExchangeDataService Observable subscribe', () => {
+        comp.ngOnInit();
+        comp.exchanges.toPromise().then((exchanges) => {
+            expect(exchanges.length).toBe(3, 'should have 3 Exchange items after ExchangeDataService Observable subscribe');
+        });
+    });
 
     it('should tell Router to navigate by ExchangeId when Exchange item selected', () => {
         const testExchange = new Exchange('gdax', 'GDAX', 'Running');
