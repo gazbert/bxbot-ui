@@ -13,8 +13,6 @@ import {Exchange} from '../model/exchange';
  * Based off the the main Angular tutorial:
  * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
  *
- * TODO - Add test for search/getExchangeByName
- *
  * @author gazbert
  */
 describe('DashboardComponent tests without TestBed', () => {
@@ -30,23 +28,36 @@ describe('DashboardComponent tests without TestBed', () => {
         comp = new DashboardComponent(router, exchangeDataService);
     });
 
-    it('should NOT have Exchange items before calling OnInit', () => {
-        expect(comp.exchanges).not.toBeDefined('should not have Exchanges items before OnInit called');
+    it('should NOT have Exchange items before calling ngOnInit', () => {
+        expect(comp.exchanges).not.toBeDefined('should not have Exchanges items before ngOnInit called');
     });
 
-    // FIXME - broken after changing to use Observable
-    xit('should have Exchange items immediately after OnInit', () => {
+    it('should have 3 Exchange items after ngAfterViewInit', (done) => {
         comp.ngOnInit();
-        // comp.ngAfterViewInit();
-        expect(comp.exchanges).toBeDefined('should have Exchange items after OnInit called');
-    });
+        comp.exchanges.subscribe((exchanges) => {
+            expect(exchanges.length).toBe(3, 'should have 3 Exchange items after ngAfterViewInit');
 
-    // FIXME - broken after changing to use Observable
-    xit('should have 3 Exchange items after ExchangeDataService Observable subscribe', () => {
-        comp.ngOnInit();
-        comp.exchanges.toPromise().then((exchanges) => {
-            expect(exchanges.length).toBe(5, 'should have 3 Exchange items after ExchangeDataService Observable subscribe');
+            // paranoia!
+            expect(exchanges[0].id).toBe('bitstamp');
+            expect(exchanges[1].id).toBe('gdax');
+            expect(exchanges[2].id).toBe('gemini');
+
+            done(); // https://github.com/jasmine/jasmine/issues/694
         });
+        comp.ngAfterViewInit();
+    });
+
+    // FIXME - search not working ;-/
+    xit('should have Gemini Exchange item after user searches for \'ge\'', (done) => {
+        comp.ngOnInit();
+        comp.exchanges.subscribe((exchanges) => {
+            expect(exchanges.length).toBe(1, 'should have 1 Gemini Exchange item');
+            expect(exchanges[0].id).toBe('gemini');
+
+            done(); // https://github.com/jasmine/jasmine/issues/694
+        });
+        // comp.ngAfterViewInit();
+        comp.search('ge');
     });
 
     it('should tell Router to navigate by ExchangeId when Exchange item selected', () => {
