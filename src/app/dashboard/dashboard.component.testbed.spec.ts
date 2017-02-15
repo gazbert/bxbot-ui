@@ -3,11 +3,13 @@ import {Router} from '@angular/router';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {Http} from '@angular/http';
 import {async, inject, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Observable} from 'rxjs/Observable';
 import {DashboardComponent} from './dashboard.component';
 import {DashboardModule} from './dashboard.module';
 import {addMatchers, click} from '../../testing';
 import {FakeExchangeDataObservableService} from '../model/exchange/testing';
 import {ExchangeHttpDataObservableService} from '../model/exchange';
+import {SOME_MORE_EXCHANGES} from "../model/exchange/testing/fake-exchange-data-observable.service";
 
 /**
  * Tests the behaviour of the Trading Strategies component is as expected.
@@ -22,6 +24,7 @@ import {ExchangeHttpDataObservableService} from '../model/exchange';
  */
 let dashboardComponent: DashboardComponent;
 let fixture: ComponentFixture<DashboardComponent>;
+const BITSTAMP_EXCHANGE = 0;
 
 /**
  * Add our custom Jasmine matchers.
@@ -51,8 +54,7 @@ function compileAndCreate() {
 /**
  * Test Dashboard by via the bx-dashboard-item directive.
  */
-// FIXME - broken after changing to use Observable
-xdescribe('DashboardComponent tests with TestBed (shallow)', () => {
+describe('DashboardComponent tests with TestBed (shallow)', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [DashboardComponent],
@@ -66,15 +68,14 @@ xdescribe('DashboardComponent tests with TestBed (shallow)', () => {
     function clickForShallow() {
         const dashboardItemElement = fixture.debugElement.query(By.css('bx-dashboard-item'));
         // Triggers event to select the first <bx-dashboard-item> DebugElement
-        dashboardItemElement.triggerEventHandler('selected', dashboardComponent.exchanges[0]);
+        dashboardItemElement.triggerEventHandler('selected', SOME_MORE_EXCHANGES[BITSTAMP_EXCHANGE]);
     }
 });
 
 /**
  * Test Dashboard by accessing the div item class directly.
  */
-// FIXME - broken after changing to use Observable
-xdescribe('DashboardComponent tests with TestBed (deep)', () => {
+describe('DashboardComponent tests with TestBed (deep)', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [DashboardModule]
@@ -97,34 +98,49 @@ xdescribe('DashboardComponent tests with TestBed (deep)', () => {
  */
 function tests(exchangeClick: Function) {
 
-    // FIXME - broken after changing to use Observable
-    // xit('should NOT have Exchange items before ngOnInit', () => {
-    //     expect(dashboardComponent.exchanges.length).toBe(0, 'should not have Exchange items before ngOnInit');
-    // });
+    it('should NOT have Exchange items before ngOnInit', () => {
+        expect(dashboardComponent.exchanges).not.toBeDefined('should not have Exchanges items before ngOnInit called');
+    });
 
-    // FIXME - broken after changing to use Observable
-    // xit('should NOT have Exchange items immediately after ngOnInit', () => {
-    //     fixture.detectChanges(); // runs initial lifecycle hooks
-    //     expect(dashboardComponent.exchanges.length).toBe(0,
-    //         'should not have Exchange items until ExchangeDataService promise resolves');
-    // });
+    describe('After ExchangeDataService getExchanges() Observable is subscribed to', () => {
 
-    describe('After ExchangeDataService promise resolves', () => {
+        /*
+         * Hack to prevent runtime test error:
+         *
+         * Failed: Cannot use setInterval from within an async zone test.
+         * Error: Cannot use setInterval from within an async zone test.
+         *
+         * See: https://github.com/angular/angular/issues/10127
+         */
+        beforeAll(() => {
+            // Monkey-patch Observable.debounceTime() since it is using
+            // setInterval() internally which not allowed within async zone
+            Observable.prototype.debounceTime = function () { return this; };
+        });
 
-        // Trigger component so it gets exchanges and binds to them
+        // Trigger component so it gets exchanges and binds to them the UI bits
         beforeEach(async(() => {
-            fixture.detectChanges(); // runs ngOnInit -> getExchangesUsingPromise
-            fixture.whenStable()     // No need for the `lastPromise` hack!
-                .then(() => fixture.detectChanges()); // bind to exchanges
+            fixture.detectChanges(); // runs ngOnInit + ngAfterViewInit -> getExchanges()
+            fixture.whenStable().then(() => fixture.detectChanges()); // bind to exchanges
         }));
 
-        // FIXME - broken after changing to use Observable
-        // it('should have retrieved 3 Exchange items', () => {
-        //     expect(dashboardComponent.exchanges.length).toBe(3, 'should have retrieved 3 Exchange items');
-        // });
+        it('should have fetched 3 Exchange items', (done) => {
+            dashboardComponent.ngOnInit();
+            dashboardComponent.exchanges.do((exchanges) => {
 
-        // FIXME - broken after changing to use Observable
-        xit('should display 3 Exchange items', () => {
+                expect(exchanges.length).toBe(3, 'should have 3 Exchange items after ngAfterViewInit');
+
+                // paranoia!
+                expect(exchanges[0].id).toBe('bitstamp');
+                expect(exchanges[1].id).toBe('gdax');
+                expect(exchanges[2].id).toBe('gemini');
+
+                done();
+            }).toPromise(); // MUST have this for test to work!
+            dashboardComponent.ngAfterViewInit();
+        });
+
+        it('should display 3 Exchange items', () => {
             // Find and examine the displayed exchanges
             // Look for them in the DOM by css class
             const exchanges = fixture.debugElement.queryAll(By.css('bx-dashboard-item'));
@@ -145,9 +161,10 @@ function tests(exchangeClick: Function) {
                 const navArgs = spy.calls.first().args[0];
 
                 // expecting to navigate to id of the component's first Exchange
-                const id = dashboardComponent.exchanges[0].id;
-                expect(navArgs).toBe('/exchange/' + id, 'should nav to ExchangeDetailsComponent for first Exchange');
-            }));
+                expect(navArgs).toBe('/exchange/' + SOME_MORE_EXCHANGES[BITSTAMP_EXCHANGE].id,
+                    'should nav to ExchangeDetailsComponent for first Exchange');
+            })
+        );
     });
 }
 
