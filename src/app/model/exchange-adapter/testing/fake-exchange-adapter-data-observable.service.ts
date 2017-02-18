@@ -1,35 +1,43 @@
+import {Observable} from 'rxjs/Observable';
 import {ExchangeAdapter, NetworkConfig} from "../exchange-adapter.model";
-import {ExchangeAdapterHttpDataPromiseService} from "../exchange-adapter-http-data-promise.service";
+import {ExchangeAdapterHttpDataObservableService} from "../exchange-adapter-http-data-observable.service";
 
 /**
- * Fake Exchange Adapter data service (Promise flavour) backend for testing.
+ * Fake Exchange Adapter data service (Observable flavour) backend for testing.
  *
  * @author gazbert
  */
-export class FakeExchangeAdapterDataPromiseService extends ExchangeAdapterHttpDataPromiseService {
+export class FakeExchangeAdapterDataObservableService extends ExchangeAdapterHttpDataObservableService {
 
-    exchangeAdapters = SOME_EXCHANGE_ADAPTERS.map(e => e.clone());
-    lastPromise: Promise<any>;  // remember so we can spy on promise calls
+    exchangeAdapters = SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS.map(e => e.clone());
 
-    getExchangeAdapters() {
-        return this.lastPromise = Promise.resolve<ExchangeAdapter[]>(this.exchangeAdapters);
+    getExchangeAdapters(): Observable<ExchangeAdapter[]> {
+        return Observable.create(observer => {
+            observer.next(this.exchangeAdapters);
+            // call complete if you want to close this stream (like a promise)
+            observer.complete();
+        });
     }
 
-    getExchangeAdapterByExchangeId(id: string) {
+    getExchangeAdapterByExchangeId(id: string): Observable<ExchangeAdapter> {
         let exchangeAdapter = this.exchangeAdapters.find(e => e.id === id);
-        return this.lastPromise = Promise.resolve(exchangeAdapter);
+        return Observable.create(observer => {
+            observer.next(exchangeAdapter);
+            // call complete if you want to close this stream (like a promise)
+            observer.complete();
+        });
     }
 
-    update(exchangeAdapter: ExchangeAdapter): Promise<ExchangeAdapter> {
-        return this.lastPromise = this.getExchangeAdapterByExchangeId(exchangeAdapter.id).then(e => {
-            return e ?
-                Object.assign(e, exchangeAdapter) :
-                Promise.reject(`Exchange Adapter ${exchangeAdapter.id} not found`) as any as Promise<ExchangeAdapter>;
+    update(exchangeAdapter: ExchangeAdapter): Observable<ExchangeAdapter> {
+        return Observable.create(observer => {
+            observer.next(exchangeAdapter);
+            // call complete if you want to close this stream (like a promise)
+            observer.complete();
         });
     }
 }
 
-export var SOME_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
+export var SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
     new ExchangeAdapter('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
         new NetworkConfig(60,
             [

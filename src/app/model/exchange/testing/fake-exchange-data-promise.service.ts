@@ -12,7 +12,7 @@ import {Exchange} from "../exchange.model";
  */
 export class FakeExchangeDataPromiseService extends ExchangeHttpDataPromiseService {
 
-    exchanges = SOME_EXCHANGES.map(e => e.clone());
+    exchanges = SOME_FAKE_PROMISE_EXCHANGES.map(e => e.clone());
     lastPromise: Promise<any>;  // remember so we can spy on promise calls
 
     getExchanges() {
@@ -33,7 +33,7 @@ export class FakeExchangeDataPromiseService extends ExchangeHttpDataPromiseServi
     }
 }
 
-export var SOME_EXCHANGES: Exchange[] = [
+export var SOME_FAKE_PROMISE_EXCHANGES: Exchange[] = [
     new Exchange('bitstamp', 'Bitstamp', 'Running'),
     new Exchange('gdax', 'GDAX', 'Running'),
     new Exchange('gemini', 'Gemini', 'Stopped')

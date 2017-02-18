@@ -342,7 +342,7 @@ describe('Exchange Adapter Tests', function () {
         expect(element(by.id('errorMessage_1')).isPresent()).toBe(false); // gone!
     });
 
-    it('should NOT save Exchange Adapter fields if there are validation errors', function () {
+    fit('should NOT save Exchange Adapter fields if there are validation errors', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(0).click();

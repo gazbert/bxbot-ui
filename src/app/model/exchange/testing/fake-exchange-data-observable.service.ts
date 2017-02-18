@@ -13,7 +13,7 @@ import {Observable} from 'rxjs/Observable';
  */
 export class FakeExchangeDataObservableService extends ExchangeHttpDataObservableService {
 
-    exchanges = SOME_MORE_EXCHANGES.map(e => e.clone());
+    exchanges = SOME_FAKE_OBSERVABLE_EXCHANGES.map(e => e.clone());
 
     getExchanges(): Observable<Exchange[]> {
         return Observable.create(observer => {
@@ -50,7 +50,7 @@ export class FakeExchangeDataObservableService extends ExchangeHttpDataObservabl
     }
 }
 
-export var SOME_MORE_EXCHANGES: Exchange[] = [
+export var SOME_FAKE_OBSERVABLE_EXCHANGES: Exchange[] = [
     new Exchange('bitstamp', 'Bitstamp', 'Running'),
     new Exchange('gdax', 'GDAX', 'Running'),
     new Exchange('gemini', 'Gemini', 'Stopped')

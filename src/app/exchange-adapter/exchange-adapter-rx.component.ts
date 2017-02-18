@@ -44,23 +44,22 @@ export class ExchangeAdapterRxComponent implements OnInit {
 
     validationMessages = {
         'adapterName': {
-            'required': 'Adapter name is required.',
-            'maxlength': 'Adapter name cannot be more than 50 characters long.',
-            'pattern': 'Exchange Adapter Name must be set. Value must be alphanumeric and can only include the following '
-                       + 'special characters: _ -'
+            'required': 'Name is required.',
+            'maxlength': 'Name max length is 50 characters.',
+            'pattern': 'Name must be alphanumeric and can only include the following special characters: _ -'
         },
         'className': {
-            'required': 'Adapter class name is required.',
-            'maxlength': 'Adapter class name cannot be more than 120 characters long.',
-            'pattern': 'Not a valid Java class name, e.g. com.my.strats.MyStrategy'
+            'required': 'Class Name is required.',
+            'maxlength': 'Class Name max length is 120 characters.',
+            'pattern': 'Class Name must be valid Java class, e.g. com.my.MyExchangeAdapterClass'
         },
         'connectionTimeout': {
             'required': 'Connection timeout is required.',
             'pattern': 'Connection timeout must be a whole number.'
         },
         'nonFatalErrorHttpStatusCodes': {
-            'required': 'HTTP error code must not be empty.',
-            'pattern': 'HTTP error code must be a 3 digit number.',
+            'required': 'Connection timeout is required.',
+            'pattern': 'HTTP Status Code must be a 3 digit number.',
             'httpCodeWhitelistChecker': 'HTTP Status Code not in whitelist.'
         },
         'nonFatalErrorMessages': {

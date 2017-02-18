@@ -16,16 +16,18 @@ import 'rxjs/add/operator/map';
  * Tests the behaviour of the Exchange Adapter (RxJS) component is as expected.
  * See: https://angular.io/docs/ts/latest/guide/reactive-forms.html
  *
+ * Learning ground for writing Jasmine tests without using the TestBed.
+ *
  * Note use of Observables instead of Promises in the Exchange Adapter HTTP Data service calls.
+ *
+ * FIXME - Trying to write the equivalent tests for a Reactive form without the TestBed is proving VERY difficult!
  *
  * Based off the main Angular tutorial:
  * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
  *
- * TODO - Fix tests for RX form
- *
  * @author gazbert
  */
-xdescribe('ExchangeAdapterRxComponent tests without TestBed', () => {
+describe('ExchangeAdapterRxComponent tests without TestBed', () => {
 
     let activatedRoute: ActivatedRouteStub;
     let exchangeAdapterComponent: ExchangeAdapterRxComponent;
@@ -78,7 +80,8 @@ xdescribe('ExchangeAdapterRxComponent tests without TestBed', () => {
         spyExchangeAdapterDataService.getExchangeAdapterByExchangeId.calls.first().returnValue.subscribe(done);
     });
 
-    it('should expose ExchangeAdapter config retrieved from ExchangeAdapterDataService', () => {
+    // FIXME - broken after changing to use Observables
+    xit('should expose ExchangeAdapter config retrieved from ExchangeAdapterDataService', () => {
         expect(exchangeAdapterComponent.exchangeAdapter).toBe(expectedExchangeAdapter);
 
         // paranoia ;-)
@@ -87,13 +90,15 @@ xdescribe('ExchangeAdapterRxComponent tests without TestBed', () => {
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0].value).toBe(501);
     });
 
-    it('should NOT save and navigate to Dashboard when user clicks Cancel', () => {
+    // FIXME - broken after changing to use Observables
+    xit('should NOT save and navigate to Dashboard when user clicks Cancel', () => {
         exchangeAdapterComponent.cancel();
         expect(spyExchangeAdapterDataService.update.calls.any()).toEqual(false);
         expect(router.navigate).toHaveBeenCalledWith(['dashboard']);
     });
 
-    it('should NOT save or navigate to Dashboard when user clicks Save for invalid input', () => {
+    // FIXME - broken after changing to use Observables
+    xit('should NOT save or navigate to Dashboard when user clicks Save for invalid input', () => {
         exchangeAdapterComponent.save(false);
         expect(spyExchangeAdapterDataService.update.calls.any()).toEqual(false);
         expect(router.navigate.calls.any()).toBe(false, 'router.navigate should not have been called');

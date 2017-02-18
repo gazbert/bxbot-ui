@@ -9,7 +9,7 @@ import {DashboardModule} from './dashboard.module';
 import {addMatchers, click} from '../../testing';
 import {FakeExchangeDataObservableService} from '../model/exchange/testing';
 import {ExchangeHttpDataObservableService} from '../model/exchange';
-import {SOME_MORE_EXCHANGES} from "../model/exchange/testing/fake-exchange-data-observable.service";
+import {SOME_FAKE_OBSERVABLE_EXCHANGES} from "../model/exchange/testing/fake-exchange-data-observable.service";
 
 /**
  * Tests the behaviour of the Trading Strategies component is as expected.
@@ -68,7 +68,7 @@ describe('DashboardComponent tests with TestBed (shallow)', () => {
     function clickForShallow() {
         const dashboardItemElement = fixture.debugElement.query(By.css('bx-dashboard-item'));
         // Triggers event to select the first <bx-dashboard-item> DebugElement
-        dashboardItemElement.triggerEventHandler('selected', SOME_MORE_EXCHANGES[BITSTAMP_EXCHANGE]);
+        dashboardItemElement.triggerEventHandler('selected', SOME_FAKE_OBSERVABLE_EXCHANGES[BITSTAMP_EXCHANGE]);
     }
 });
 
@@ -161,7 +161,7 @@ function tests(exchangeClick: Function) {
                 const navArgs = spy.calls.first().args[0];
 
                 // expecting to navigate to id of the component's first Exchange
-                expect(navArgs).toBe('/exchange/' + SOME_MORE_EXCHANGES[BITSTAMP_EXCHANGE].id,
+                expect(navArgs).toBe('/exchange/' + SOME_FAKE_OBSERVABLE_EXCHANGES[BITSTAMP_EXCHANGE].id,
                     'should nav to ExchangeDetailsComponent for first Exchange');
             })
         );
