@@ -42,7 +42,7 @@ export class ExchangeHttpDataPromiseService implements ExchangeDataPromiseServic
     getExchange(id: string): Promise<Exchange> {
         return this.http.get(this.exchangeUrl + '/' + id)
             .toPromise()
-            .then(response => response.json().data as Exchange[])
+            .then(response => response.json().data as Exchange)
             .catch(this.handleError);
     }
 

@@ -8,7 +8,7 @@ BX-bot UI is an Angular app (and learning journey!) for administering [BX-bot](h
 
 Very much work in progress, but this is where we're [heading](https://github.com/gazbert/bxbot-ui/projects/1)...
 
-Although being developed as a 'real-world' app, the code _tries_ to showcase different features of Angular 2 and 
+Although being developed as a 'real-world' app, the code _tries_ to showcase different features of Angular 4 and 
 [TypeScript](https://www.typescriptlang.org/). It's not meant to be an Angular 101 tutorial - the main 
 [Angular Documentation](https://angular.io/docs/ts/latest/guide/learning-angular.html) does a far better job! 
 It's more of a cookbook/sample app for experienced devs wanting to give Angular a whirl.
@@ -55,7 +55,7 @@ backend for development and local testing. The API config configuration options 
 The application config is in JSON format and lives in the [`in-memory-data.service.ts`](/src/app/model/in-memory-data.service.ts) file.
 
 ## Credits
-This app started life as the [Angular 2 QuickStart](https://github.com/angular/quickstart) app and took (a lot of)
+This app started life as the [Angular 4 QuickStart](https://github.com/angular/quickstart) app and took (a lot of)
 inspiration from the following awesomeness:
 
 * The official [Angular Tutorial](https://angular.io/docs/ts/latest/tutorial/).
