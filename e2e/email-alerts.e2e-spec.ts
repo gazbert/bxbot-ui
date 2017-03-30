@@ -104,7 +104,7 @@ describe('Email Alerts Config Tests', function () {
         // Update Email Alerts fields
         let emailAlertsEnabled = element(by.id('alertsEnabled'));
         emailAlertsEnabled.click();
-        expect(emailAlertsEnabled.getAttribute('ng-reflect-model')).toBe(false); // must be better way?
+        expect(emailAlertsEnabled.getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
 
         let accountUsername = element(by.id('accountUsername'));
         let newAccountUsername = 'solo';
