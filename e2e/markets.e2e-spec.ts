@@ -453,7 +453,7 @@ describe('Market Screen Tests', function () {
         expect(element(by.id('tradingStrategy_2')).getAttribute('value')).toBe(newTradingStrategy);
 
         // Market 1 unchanged
-        expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe(null);
+        expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('false');
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
