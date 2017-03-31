@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Http, Headers} from "@angular/http";
-import {ExchangeAdapter, NetworkConfig} from "./exchange-adapter.model";
+import {ExchangeAdapter} from "./exchange-adapter.model";
 import {ExchangeAdapterDataPromiseService} from "./exchange-adapter-data-promise.service";
 
 // Don't forget this else you get runtime error:
@@ -28,8 +28,6 @@ export class ExchangeAdapterHttpDataPromiseService implements ExchangeAdapterDat
     // private exchangeAdaptersUrl = 'app/exchangeAdapters.json'; // URL to JSON file
 
     private headers = new Headers({'Content-Type': 'application/json'});
-
-    expectedNetworkConfig: NetworkConfig;
 
     constructor(private http: Http) {
     }

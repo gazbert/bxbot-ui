@@ -9,6 +9,7 @@ import {ExchangeAdapter, NetworkConfig, ErrorCode, ErrorMessage, ExchangeAdapter
 import {FakeExchangeAdapterDataPromiseService, SOME_FAKE_PROMISE_EXCHANGE_ADAPTERS} from '../model/exchange-adapter/testing';
 import {ExchangeAdapterModule} from './exchange-adapter.module';
 import {ExchangeAdapterComponent} from './exchange-adapter.component';
+import {ExchangeAdapterDataPromiseService} from "../model/exchange-adapter/exchange-adapter-data-promise.service";
 
 /**
  * Tests the behaviour of the Exchange Adapter component (Template version) is as expected.
@@ -30,8 +31,7 @@ let comp: ExchangeAdapterComponent;
 let fixture: ComponentFixture<ExchangeAdapterComponent>;
 let page: Page;
 
-// FIXME - broken since uprade to Angular 4
-xdescribe('ExchangeAdapterComponent tests using TestBed', () => {
+describe('ExchangeAdapterComponent tests using TestBed', () => {
 
     beforeEach(() => {
         activatedRoute = new ActivatedRouteStub();
@@ -47,27 +47,31 @@ xdescribe('ExchangeAdapterComponent tests using TestBed', () => {
  */
 function overrideExchangeAdapterServiceSetup() {
 
-    class StubExchangeAdapterHttpDataService {
+    let expectedNetworkConfig: NetworkConfig;
+    let expectedErrorCodes: ErrorCode[];
+    let expectedErrorMsgs: ErrorMessage[];
+    let testExchangeAdapter: ExchangeAdapter;
 
-        expectedNetworkConfig: NetworkConfig;
-        expectedErrorCodes: ErrorCode[];
-        expectedErrorMsgs: ErrorMessage[];
-        testExchangeAdapter: ExchangeAdapter;
+    class StubExchangeAdapterHttpDataService implements ExchangeAdapterDataPromiseService {
 
         constructor() {
-            this.expectedErrorCodes = [{'value': 501}];
-            this.expectedErrorMsgs = [{'value': 'Connection timeout'}];
-            this.expectedNetworkConfig = new NetworkConfig(60, this.expectedErrorCodes, this.expectedErrorMsgs);
-            this.testExchangeAdapter = new ExchangeAdapter('btce', 'BTC-e',
-                'com.gazbert.bxbot.adapter.BtceExchangeAdapter', this.expectedNetworkConfig);
+            expectedErrorCodes = [{'value': 501}];
+            expectedErrorMsgs = [{'value': 'Connection timeout'}];
+            expectedNetworkConfig = new NetworkConfig(60, expectedErrorCodes, expectedErrorMsgs);
+            testExchangeAdapter = new ExchangeAdapter('btce', 'BTC-e',
+                'com.gazbert.bxbot.adapter.BtceExchangeAdapter', expectedNetworkConfig);
         }
 
         getExchangeAdapterByExchangeId(id: string): Promise<ExchangeAdapter> {
-            return Promise.resolve(true).then(() => Object.assign({}, this.testExchangeAdapter));
+            return Promise.resolve(true).then(() => Object.assign({}, testExchangeAdapter));
         }
 
         update(exchangeAdapter: ExchangeAdapter): Promise<ExchangeAdapter> {
-            return Promise.resolve(true).then(() => Object.assign(this.testExchangeAdapter, exchangeAdapter));
+            return Promise.resolve(true).then(() => Object.assign(testExchangeAdapter, exchangeAdapter));
+        }
+
+        getExchangeAdapters(): Promise<ExchangeAdapter[]> {
+            return undefined;
         }
     }
 
@@ -104,8 +108,7 @@ function overrideExchangeAdapterServiceSetup() {
         createComponent().then(() => {/*done*/});
 
         // Get hold of component's injected ExchangeAdapterService stub.
-        // FIXME - broken since uprade to Angular 4
-        // stubExchangeAdapterDataService = fixture.debugElement.injector.get(ExchangeAdapterHttpDataPromiseService);
+        stubExchangeAdapterDataService = fixture.debugElement.injector.get(ExchangeAdapterHttpDataPromiseService);
     }));
 
     xit('should inject the stubbed Exchange Adapter service',
@@ -116,36 +119,35 @@ function overrideExchangeAdapterServiceSetup() {
 
     it('should expose ExchangeAdapter config retrieved from ExchangeAdapterDataService', () => {
 
-        expect(page.adapterNameInput.value).toBe(stubExchangeAdapterDataService.testExchangeAdapter.name);
-        expect(page.classNameInput.value).toBe(stubExchangeAdapterDataService.testExchangeAdapter.className);
+        expect(page.adapterNameInput.value).toBe(testExchangeAdapter.name);
+        expect(page.classNameInput.value).toBe(testExchangeAdapter.className);
 
         expect(page.connectionTimeoutInput.value).toBe('' + // hack to turn it into a String for comparison ;-)
-            stubExchangeAdapterDataService.testExchangeAdapter.networkConfig.connectionTimeout);
+            testExchangeAdapter.networkConfig.connectionTimeout);
 
         expect(page.errorCode_0Input.value).toBe('' + // hack to turn it into a String for comparison ;-)
-            stubExchangeAdapterDataService.testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0].value);
+            testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0].value);
 
         expect(page.errorMessage_0Input.value).toBe(
-            stubExchangeAdapterDataService.testExchangeAdapter.networkConfig.nonFatalErrorMessages[0].value);
+            testExchangeAdapter.networkConfig.nonFatalErrorMessages[0].value);
     });
 
     it('should save and navigate to Dashboard when user clicks Save for valid input', fakeAsync(() => {
 
-        const origName = stubExchangeAdapterDataService.testExchangeAdapter.name;
+        const origName = testExchangeAdapter.name;
         const newName = 'NewBTCe';
 
         page.adapterNameInput.value = newName;
         page.adapterNameInput.dispatchEvent(newEvent('input')); // tell Angular
 
         expect(comp.exchangeAdapter.name).toBe(newName, 'Exchange Adapter Name updated');
-        expect(stubExchangeAdapterDataService.testExchangeAdapter.name).toBe(origName,
-            'ExchangeAdapterService Exchange Adapter Name unchanged before save');
+        expect(testExchangeAdapter.name).toBe(origName, 'ExchangeAdapterService Exchange Adapter Name unchanged before save');
 
         click(page.saveBtn);
         comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
         tick(); // wait for async save to complete
 
-        expect(stubExchangeAdapterDataService.testExchangeAdapter.name).toBe(newName,
+        expect(testExchangeAdapter.name).toBe(newName,
             'ExchangeAdapterService Exchange Adapter Name changes after save');
 
         expect(page.saveSpy.calls.any()).toBe(true, 'ExchangeAdapterService update() called');
@@ -159,20 +161,20 @@ function overrideExchangeAdapterServiceSetup() {
     });
 
     it('should NOT save or navigate to Dashboard when user clicks Save for invalid input', () => {
-        const origName = stubExchangeAdapterDataService.testExchangeAdapter.name;
+        const origName = testExchangeAdapter.name;
         const newName = '!NewBTCe'; // ! is invalid char
 
         page.adapterNameInput.value = newName;
         page.adapterNameInput.dispatchEvent(newEvent('input')); // tell Angular
 
         expect(comp.exchangeAdapter.name).toBe(newName, 'Exchange Adapter Name updated');
-        expect(stubExchangeAdapterDataService.testExchangeAdapter.name).toBe(origName,
+        expect(testExchangeAdapter.name).toBe(origName,
             'ExchangeAdapterService Exchange Adapter Name unchanged before save');
 
         click(page.saveBtn);
         comp.save(false); // TODO hack to tell Angular form is invalid - is there a better way?
 
-        expect(stubExchangeAdapterDataService.testExchangeAdapter.name).toBe(origName,
+        expect(testExchangeAdapter.name).toBe(origName,
             'ExchangeAdapterService Exchange Adapter Name not changed after save');
 
         expect(page.saveSpy.calls.any()).toBe(false, 'ExchangeAdapterService update() not called');
@@ -181,44 +183,44 @@ function overrideExchangeAdapterServiceSetup() {
 
     it('should create new Error Code when user adds one', () => {
 
-        expect(stubExchangeAdapterDataService.testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
 
         click(page.addNewErrorCodeLink);
 
-        expect(stubExchangeAdapterDataService.testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(2);
-        expect(stubExchangeAdapterDataService.testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1].value).toBeDefined();
-        expect(stubExchangeAdapterDataService.testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1].value).toBeNull();
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(2);
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1].value).toBeDefined();
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1].value).toBeNull();
     });
 
     it('should create new Error Message when user adds one', () => {
 
-        expect(stubExchangeAdapterDataService.testExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(1);
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(1);
 
         click(page.addNewErrorMessageLink);
 
-        expect(stubExchangeAdapterDataService.testExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(2);
-        expect(stubExchangeAdapterDataService.testExchangeAdapter.networkConfig.nonFatalErrorMessages[1].value).toBeDefined();
-        expect(stubExchangeAdapterDataService.testExchangeAdapter.networkConfig.nonFatalErrorMessages[1].value).toBe('');
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(2);
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages[1].value).toBeDefined();
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages[1].value).toBe('');
     });
 
     it('should remove Error Code when user deletes one', () => {
 
-        expect(stubExchangeAdapterDataService.testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
 
         click(page.deleteErrorCodeBtn);
 
-        expect(stubExchangeAdapterDataService.testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(0);
-        expect(stubExchangeAdapterDataService.testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0]).not.toBeDefined();
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(0);
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0]).not.toBeDefined();
     });
 
     it('should remove Error Message when user deletes one', () => {
 
-        expect(stubExchangeAdapterDataService.testExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(1);
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(1);
 
         click(page.deleteErrorMessageBtn);
 
-        expect(stubExchangeAdapterDataService.testExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(0);
-        expect(stubExchangeAdapterDataService.testExchangeAdapter.networkConfig.nonFatalErrorMessages[0]).not.toBeDefined();
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(0);
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages[0]).not.toBeDefined();
     });
 }
 
