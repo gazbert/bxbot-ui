@@ -4,7 +4,8 @@
 
 ## What is BX-bot UI?
 
-BX-bot UI is an Angular app (and learning journey!) for administering [BX-bot](https://github.com/gazbert/bxbot).
+[BX-bot UI](https://github.com/gazbert/bxbot-ui/wiki) is an Angular app (and learning journey!) for administering  
+[BX-bot](https://github.com/gazbert/bxbot).
 
 Very much work in progress, but this is where we're [heading](https://github.com/gazbert/bxbot-ui/projects/1)...
 
