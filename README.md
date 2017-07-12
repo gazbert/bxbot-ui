@@ -11,7 +11,7 @@ Very much work in progress, but this is where we're [heading](https://github.com
 
 Although being developed as a 'real-world' app, the code _tries_ to showcase different features of Angular 4 and 
 [TypeScript](https://www.typescriptlang.org/). It's not meant to be an Angular 101 tutorial - the main 
-[Angular Documentation](https://angular.io/docs/ts/latest/guide/learning-angular.html) does a far better job! 
+[Angular Documentation](https://angular.io/docs) does a far better job! 
 
 ## User Guide
 
