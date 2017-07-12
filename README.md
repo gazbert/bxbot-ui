@@ -13,9 +13,6 @@ Although being developed as a 'real-world' app, the code _tries_ to showcase dif
 [TypeScript](https://www.typescriptlang.org/). It's not meant to be an Angular 101 tutorial - the main 
 [Angular Documentation](https://angular.io/docs/ts/latest/guide/learning-angular.html) does a far better job! 
 
-To communicate with the bots, this app needs configuring to use [BX-bot UI Server](https://github.com/gazbert/bxbot-ui-server) -
-currently work in progress...
-
 ## User Guide
 
 You'll need [node.js](https://nodejs.org/en/download/) installed to build and run the app.
@@ -55,6 +52,9 @@ The app uses Angular's [In Memory Web API](https://github.com/angular/in-memory-
 backend for development and local testing. The API config configuration options are set in [`app.module.ts`](/src/app/app.module.ts).
 
 The application config is in JSON format and lives in the [`in-memory-data.service.ts`](/src/app/model/in-memory-data.service.ts) file.
+
+To communicate with the bots for real, the app will need configuring to use 
+[BX-bot UI Server](https://github.com/gazbert/bxbot-ui-server) - currently work in progress.
 
 ## Coming Soon
 * Integration with [BX-bot UI Server](https://github.com/gazbert/bxbot-ui-server).
