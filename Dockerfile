@@ -11,7 +11,7 @@ RUN mkdir -p /bxbot-ui /home/nodejs && \
     chown -R nodejs:nodejs /home/nodejs
 
 WORKDIR /bxbot-ui
-COPY package.json typings.json /bxbot-ui/
+COPY package.json /bxbot-ui/
 RUN npm install --unsafe-perm=true
 
 COPY . /bxbot-ui
