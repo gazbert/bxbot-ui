@@ -20,4 +20,8 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
     title = 'BX-bot Admin Console';
+
+    //public static REST_API_BASE_URL = 'app/exchanges.json';          // URL to JSON file
+    //public static REST_API_BASE_URL = 'http://localhost:8080/api/';  // URL to real server
+    public static REST_API_BASE_URL = 'app/';                          // URL to in-memory web API
 }

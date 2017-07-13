@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Http, Headers} from "@angular/http";
+import {AppComponent} from "../../app.component";
 import {EmailAlertsConfig} from "./email-alerts.model";
 import {EmailAlertsDataPromiseService} from "./email-alerts-data-promise.service";
 
@@ -23,10 +24,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class EmailAlertsHttpDataPromiseService implements EmailAlertsDataPromiseService {
 
-    public emailAlertsUrl = 'app/emailAlerts';  // URL to web api
-    // vs JSON canned data for quick testing below...
-    // private emailAlertsUrl = 'app/emailAlerts.json'; // URL to JSON file
-
+    private emailAlertsUrl = AppComponent.REST_API_BASE_URL + 'emailAlerts';
     private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private http: Http) {

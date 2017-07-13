@@ -28,7 +28,10 @@ import {TradingStrategyHttpDataPromiseService} from './model/trading-strategy/tr
         FormsModule,
         ReactiveFormsModule,
         HttpModule,
+
+        // Comment line below out to use 'real' bxbot-ui-server Spring Boot backend
         InMemoryWebApiModule.forRoot(InMemoryDataService,  {put204: false, delete404: true}),
+
         DashboardModule,
         ExchangeAdapterModule,
         EmailAlertsModule,

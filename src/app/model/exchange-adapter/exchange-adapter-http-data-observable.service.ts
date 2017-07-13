@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Http, Headers, Response, RequestOptions} from "@angular/http";
+import {AppComponent} from "../../app.component";
 import {ExchangeAdapter} from "./exchange-adapter.model";
 import {ExchangeAdapterDataObservableService} from "./exchange-adapter-data-observable.service";
 import {Observable} from 'rxjs/Observable';
@@ -30,9 +31,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class ExchangeAdapterHttpDataObservableService implements ExchangeAdapterDataObservableService {
 
-    public exchangeAdaptersUrl = 'app/exchangeAdapters';  // URL to web api
-    // vs JSON canned data for quick testing below...
-    //private exchangeUrl = 'app/exchangeAdapters.json'; // URL to JSON file
+    private exchangeAdaptersUrl = AppComponent.REST_API_BASE_URL + 'exchangeAdapters';
 
     constructor(private http: Http) {
     }

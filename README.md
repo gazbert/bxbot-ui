@@ -10,7 +10,7 @@
 Very much work in progress, but this is where we're [heading](https://github.com/gazbert/bxbot-ui/projects/1)...
 
 Although being developed as a 'real-world' app, the code _tries_ to showcase different features of Angular 4 and 
-[TypeScript](https://www.typescriptlang.org/). It's not meant to be an Angular 101 tutorial - the main 
+[TypeScript](https://www.typescriptlang.org/). It's not meant to be an Angular 101 tutorial - the  
 [Angular Documentation](https://angular.io/docs) does a far better job! 
 
 ## User Guide

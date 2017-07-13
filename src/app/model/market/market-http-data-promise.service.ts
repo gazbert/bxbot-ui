@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Http, Headers} from "@angular/http";
+import {AppComponent} from "../../app.component";
 import {Market} from "./market.model";
 import {MarketDataPromiseService} from "./market-data-promise.service";
 
@@ -23,10 +24,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class MarketHttpDataPromiseService implements MarketDataPromiseService {
 
-    public marketsUrl = 'app/markets';  // URL to web api
-    // vs JSON canned data for quick testing below...
-    // private marketsUrl = 'app/markets.json'; // URL to JSON file
-
+    private marketsUrl = AppComponent.REST_API_BASE_URL + 'markets';
     private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private http: Http) {

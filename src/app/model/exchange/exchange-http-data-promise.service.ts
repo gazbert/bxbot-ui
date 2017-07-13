@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Http, Headers} from "@angular/http";
+import {AppComponent} from "../../app.component";
 import {ExchangeDataPromiseService} from "./exchange-data-promise.service";
 import {Exchange} from "./exchange.model";
 
@@ -23,10 +24,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class ExchangeHttpDataPromiseService implements ExchangeDataPromiseService {
 
-    public exchangeUrl = 'app/exchanges';  // URL to web api
-    // vs JSON canned data for quick testing below...
-    // private exchangeUrl = 'app/exchanges.json'; // URL to JSON file
-
+    private exchangeUrl = AppComponent.REST_API_BASE_URL + 'exchanges';
     private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private http: Http) {

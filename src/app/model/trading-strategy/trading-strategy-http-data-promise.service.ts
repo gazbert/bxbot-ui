@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Http, Headers} from "@angular/http";
+import {AppComponent} from "../../app.component";
 import {TradingStrategy} from "./trading-strategy.model";
 import {TradingStrategyDataPromiseService} from "./trading-strategy-data-promise.service";
 
@@ -23,10 +24,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class TradingStrategyHttpDataPromiseService implements TradingStrategyDataPromiseService {
 
-    public tradingStrategiesUrl = 'app/tradingStrategies';  // URL to web api
-    // vs JSON canned data for quick testing below...
-    // private tradingStrategiesUrl = 'app/trading-strategies.json'; // URL to JSON file
-
+    private tradingStrategiesUrl = AppComponent.REST_API_BASE_URL + 'tradingStrategies';
     private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private http: Http) {
