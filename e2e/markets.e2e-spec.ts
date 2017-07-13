@@ -33,7 +33,7 @@ describe('Market Screen Tests', function () {
         tabLinks.get(1).click();
 
         // Market 1
-        expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe(null); // must be better way?
+        expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
@@ -111,7 +111,7 @@ describe('Market Screen Tests', function () {
         let tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
 
-        expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe(null); // must be better way?
+        expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
@@ -159,7 +159,7 @@ describe('Market Screen Tests', function () {
         tabLinks.get(1).click();
 
         // Market 1 unchanged
-        expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe(null); // must be better way?
+        expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
@@ -183,7 +183,7 @@ describe('Market Screen Tests', function () {
         tabLinks.get(1).click();
 
         // Market 1
-        expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe(null); // must be better way?
+        expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
@@ -241,7 +241,7 @@ describe('Market Screen Tests', function () {
         tabLinks.get(1).click();
 
         // Market 1 unchanged
-        expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe(null); // must be better way?
+        expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
@@ -272,7 +272,7 @@ describe('Market Screen Tests', function () {
         tabLinks.get(1).click();
 
         // Market 1
-        expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe(null); // must be better way?
+        expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
@@ -319,7 +319,7 @@ describe('Market Screen Tests', function () {
         let tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
 
-        expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe(null); // must be better way?
+        expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
@@ -392,7 +392,7 @@ describe('Market Screen Tests', function () {
         tabLinks.get(1).click();
 
         // Market 1
-        expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe(null); // must be better way?
+        expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
@@ -453,7 +453,7 @@ describe('Market Screen Tests', function () {
         expect(element(by.id('tradingStrategy_2')).getAttribute('value')).toBe(newTradingStrategy);
 
         // Market 1 unchanged
-        expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe(null); // must be better way?
+        expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
