@@ -80,7 +80,7 @@ describe('Miscellaneous Scenario Tests', function () {
         tabLinks.get(1).click();
 
         // Existing Market fields
-        expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('false');
+        expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe(null); // must be better way?
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
@@ -99,7 +99,7 @@ describe('Miscellaneous Scenario Tests', function () {
         tabLinks.get(1).click();
 
         // Market updated with new strat
-        expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('false');
+        expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe(null); // must be better way?
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');

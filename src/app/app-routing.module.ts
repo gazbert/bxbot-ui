@@ -1,6 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-// import {SettingsComponent} from "./settings.component";
+// import {DashboardComponent} from './dashboard/dashboard.component';
+// import {HomeComponent} from './home.component';
+// import {SettingsComponent} from './settings.component';
 
 /**
  * Main routing module for the app.

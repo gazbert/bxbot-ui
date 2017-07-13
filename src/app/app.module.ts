@@ -5,6 +5,7 @@ import {HttpModule} from '@angular/http';
 import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {AppComponent} from './app.component';
 import {InMemoryDataService} from './model';
+import {HomeComponent} from './home.component';
 import {ExchangeHttpDataPromiseService, ExchangeHttpDataObservableService} from './model/exchange';
 import {ExchangeAdapterHttpDataPromiseService, ExchangeAdapterHttpDataObservableService} from './model/exchange-adapter';
 import {MarketHttpDataPromiseService} from './model/market';
@@ -40,7 +41,8 @@ import {TradingStrategyHttpDataPromiseService} from './model/trading-strategy/tr
         AppRoutingModule
     ],
     declarations: [
-        AppComponent
+        AppComponent,
+        HomeComponent
     ],
     providers: [
         ExchangeHttpDataPromiseService,

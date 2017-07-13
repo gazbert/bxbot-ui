@@ -41,7 +41,7 @@ describe('Email Alerts Config Tests', function () {
         // Update Email Alerts fields
         let emailAlertsEnabled = element(by.id('alertsEnabled'));
         emailAlertsEnabled.click();
-        expect(emailAlertsEnabled.getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
+        expect(emailAlertsEnabled.getAttribute('ng-reflect-model')).toBe(null); // must be better way?
 
         let accountUsername = element(by.id('accountUsername'));
         let newAccountUsername = 'solo';
@@ -79,7 +79,7 @@ describe('Email Alerts Config Tests', function () {
         tabLinks.get(3).click();
 
         // Email Alerts config updated
-        expect(element(by.id('alertsEnabled')).getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
+        expect(element(by.id('alertsEnabled')).getAttribute('ng-reflect-model')).toBe(null); // must be better way?
         expect(element(by.id('accountUsername')).getAttribute('value')).toBe(newAccountUsername);
         expect(element(by.id('accountPassword')).getAttribute('value')).toBe(newAccountPassword);
         expect(element(by.id('toAddress')).getAttribute('value')).toBe(newToAddress);
@@ -104,7 +104,7 @@ describe('Email Alerts Config Tests', function () {
         // Update Email Alerts fields
         let emailAlertsEnabled = element(by.id('alertsEnabled'));
         emailAlertsEnabled.click();
-        expect(emailAlertsEnabled.getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
+        expect(emailAlertsEnabled.getAttribute('ng-reflect-model')).toBe(null); // must be better way?
 
         let accountUsername = element(by.id('accountUsername'));
         let newAccountUsername = 'solo';
@@ -167,7 +167,7 @@ describe('Email Alerts Config Tests', function () {
         // Update Email Alerts fields with some 'bad' values
         let emailAlertsEnabled = element(by.id('alertsEnabled'));
         emailAlertsEnabled.click();
-        expect(emailAlertsEnabled.getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
+        expect(emailAlertsEnabled.getAttribute('ng-reflect-model')).toBe(null); // must be better way?
 
         let accountUsername = element(by.id('accountUsername'));
         let newAccountUsername = '@solo ~';
