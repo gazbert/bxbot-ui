@@ -59,13 +59,13 @@ export class DashboardComponent implements OnInit {
      * https://angular.io/docs/ts/latest/tutorial/toh-pt6.html#
      *
      * We don't pass every user keystroke directly to the ExchangeHttpDataService, else we'd send a load of HTTP
-     * requests! We achieve this by chaining Observable operators: debounceTime(300) and distinctUntilChanged.
+     * requests! We achieve this by chaining Observable operators: debounceTime(200) and distinctUntilChanged.
      *
      * The switchMap calls the ExchangeHttpDataService for each search term that makes it through the debounce and
      * distinctUntilChanged checks. It cancels and discards previous search Observables, returning only the
      * latest ExchangeHttpDataService Observable.
      *
-     * Every qualifying key event can trigger an HTTP method call. Even with a 300ms pause between requests,
+     * Every qualifying key event can trigger an HTTP method call. Even with a 200ms pause between requests,
      * there could be multiple HTTP requests in flight, and they may not return in the order sent.
      * switchMap preserves the original request order and only returns the Observable from the most recent HTTP
      * method call. Results from prior calls are canceled and discarded.
@@ -78,7 +78,7 @@ export class DashboardComponent implements OnInit {
      */
     ngOnInit(): void {
         this.exchanges = this.searchTerms
-            .debounceTime(300)        // wait 300ms after each keystroke before considering the term
+            .debounceTime(200)        // wait 200ms after each keystroke before considering the term
             .distinctUntilChanged()   // ignore if next search term is same as previous
             .switchMap(term => term   // switch to new Observable each time the term changes
                 // return the http search Observable
@@ -86,9 +86,10 @@ export class DashboardComponent implements OnInit {
                 // or the first 8 Exchanges if there was no search term entered by user
                 : this.exchangeDataService.getExchanges().toPromise().then((exchanges) => exchanges.slice(0, 8)))
             .catch(error => {
-                // TODO - Show meaningful error to user?
+                // TODO - Show meaningful error to user? Redirect to friendly error page?
                 this.errorMessage = error;
-                console.log(error);
+                console.log("BARF " + error);
+                this.router.navigateByUrl("/login").then();
                 return Observable.of<Exchange[]>([]);
             });
     }

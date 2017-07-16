@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {Http, Headers, Response, RequestOptions} from "@angular/http";
 import {AppComponent} from "../../app.component";
 import {ExchangeDataObservableService} from "./exchange-data-observable.service";
+import {AuthenticationService} from "../../shared";
 import {Exchange} from "./exchange.model";
 import {Observable} from 'rxjs/Observable';
 import {isObject} from "rxjs/util/isObject";
@@ -33,35 +34,58 @@ export class ExchangeHttpDataObservableService implements ExchangeDataObservable
 
     private exchangeUrl = AppComponent.REST_API_BASE_URL + 'exchanges';
 
-    constructor(private http: Http) {
+    constructor(private http: Http, private authenticationService: AuthenticationService) {
     }
 
     getExchanges(): Observable<Exchange[]> {
-        return this.http.get(this.exchangeUrl)
+
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + this.authenticationService.getToken()
+        });
+
+        return this.http.get(this.exchangeUrl, {headers: headers})
             .map(this.extractData)
             .catch(this.handleError);
     }
 
     getExchange(id: string): Observable<Exchange> {
+
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + this.authenticationService.getToken()
+        });
+
         return this.http
-            .get(this.exchangeUrl + '/' + id)
+            .get(this.exchangeUrl + '/' + id, {headers: headers})
             .map((r: Response) => r.json().data as Exchange)
             // .map(this.extractData)
             .catch(this.handleError);
     }
 
     getExchangeByName(name: string): Observable<Exchange[]> {
+
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + this.authenticationService.getToken()
+        });
+
         return this.http
-            .get(this.exchangeUrl + '/?name=' + name)
+            .get(this.exchangeUrl + '/?name=' + name, {headers: headers})
             .map(this.extractData)
             // .map((r: Response) => r.json().data as Exchange[])
             .catch(this.handleError);
     }
 
     update(exchange: Exchange): Observable<Exchange> {
+
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + this.authenticationService.getToken()
+        });
+
         const url = `${this.exchangeUrl}/${exchange.id}`;
         let body = JSON.stringify(exchange);
-        let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
         return this.http.put(url, body, options)
@@ -72,6 +96,7 @@ export class ExchangeHttpDataObservableService implements ExchangeDataObservable
     private handleError (error: any) {
         // In a real world app, we might use a remote logging infrastructure
         // We'd also dig deeper into the error to get a better message
+        // Redirect to friendly error page?
         let errMsg = (error.message) ? error.message :
             error.status ? `${error.status} - ${error.statusText}` : 'Server error';
         console.error(errMsg); // log to console instead

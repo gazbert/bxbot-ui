@@ -1,7 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-// import {DashboardComponent} from './dashboard/dashboard.component';
-// import {HomeComponent} from './home.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
+import {LoginComponent} from './login';
+import {CanActivateAuthGuard} from './shared';
 // import {SettingsComponent} from './settings.component';
 
 /**
@@ -13,8 +14,14 @@ import {RouterModule} from '@angular/router';
     imports: [
         RouterModule.forRoot([
             {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
-            // {path: 'settings', component: SettingsComponent},
-            {path: 'exchange', loadChildren: 'app/exchange-details/exchange-details.module#ExchangeDetailsModule'}
+            {path: 'login', component: LoginComponent},
+            {path: 'dashboard', component: DashboardComponent, canActivate: [CanActivateAuthGuard]},
+            // {path: 'settings', component: SettingsComponent, canActivate: [CanActivateAuthGuard]},
+            {
+                path: 'exchange',
+                loadChildren: 'app/exchange-details/exchange-details.module#ExchangeDetailsModule',
+                canActivate: [CanActivateAuthGuard]
+            }
         ])
     ],
     exports: [RouterModule] // re-export the module declarations

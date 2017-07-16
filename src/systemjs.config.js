@@ -52,7 +52,8 @@
             'app/model/exchange-adapter/testing': {main: 'index.js', defaultExtension: 'js'},
             'app/model/market': {main: 'index.js', defaultExtension: 'js'},
             'app/model/trading-strategy': {main: 'index.js', defaultExtension: 'js'},
-            'app/model/email-alerts': {main: 'index.js', defaultExtension: 'js'}
+            'app/model/email-alerts': {main: 'index.js', defaultExtension: 'js'},
+            'app/login': {main: 'index.js', defaultExtension: 'js'},
         }
     });
 })(this);

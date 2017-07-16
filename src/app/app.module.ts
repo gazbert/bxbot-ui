@@ -2,10 +2,9 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
-import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {AppComponent} from './app.component';
+import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {InMemoryDataService} from './model';
-import {HomeComponent} from './home.component';
 import {ExchangeHttpDataPromiseService, ExchangeHttpDataObservableService} from './model/exchange';
 import {ExchangeAdapterHttpDataPromiseService, ExchangeAdapterHttpDataObservableService} from './model/exchange-adapter';
 import {MarketHttpDataPromiseService} from './model/market';
@@ -17,6 +16,8 @@ import {AppRoutingModule} from './app-routing.module';
 import {EmailAlertsHttpDataPromiseService} from './model/email-alerts';
 import {TradingStrategiesModule} from './trading-strategies/trading-strategies.module';
 import {TradingStrategyHttpDataPromiseService} from './model/trading-strategy/trading-strategy-http-data-promise.service';
+import {LoginModule} from './login/login.module';
+import {AuthenticationService, CanActivateAuthGuard} from './shared';
 
 /**
  * BX-bot UI main module.
@@ -38,11 +39,11 @@ import {TradingStrategyHttpDataPromiseService} from './model/trading-strategy/tr
         EmailAlertsModule,
         ExchangeDetailsModule,
         TradingStrategiesModule,
-        AppRoutingModule
+        AppRoutingModule,
+        LoginModule
     ],
     declarations: [
-        AppComponent,
-        HomeComponent
+        AppComponent
     ],
     providers: [
         ExchangeHttpDataPromiseService,
@@ -51,7 +52,9 @@ import {TradingStrategyHttpDataPromiseService} from './model/trading-strategy/tr
         ExchangeAdapterHttpDataObservableService,
         MarketHttpDataPromiseService,
         TradingStrategyHttpDataPromiseService,
-        EmailAlertsHttpDataPromiseService
+        EmailAlertsHttpDataPromiseService,
+        AuthenticationService,
+        CanActivateAuthGuard
     ],
     bootstrap: [AppComponent]
 })

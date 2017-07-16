@@ -11,8 +11,8 @@ import {Component} from '@angular/core';
     <div class="container module-bootstrap">
         <h1>{{title}}</h1>
         <nav>
-            <!--<a id="homeButton" routerLink="/home" routerLinkActive="active">Home</a>-->
-            <a id="dashboardButton" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+            <a id="dashboardButton" routerLink="dashboard" routerLinkActive="active">Dashboard</a>
+            <a id="loginButton" routerLink="/login" routerLinkActive="active">Login</a>
             <!--<a id="settingsButton" routerLink="/settings" routerLinkActive="active">Settings</a>      -->
         </nav>
         <router-outlet></router-outlet>
@@ -21,7 +21,6 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
 
-    // public static REST_API_BASE_URL = 'app/exchanges.json';          // URL to JSON file
     // public static REST_API_BASE_URL = 'http://localhost:8080/api/';  // URL to real server
     public static REST_API_BASE_URL = 'app/';                           // URL to in-memory web API
 
