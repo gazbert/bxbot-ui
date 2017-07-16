@@ -12,7 +12,7 @@ import {Component} from '@angular/core';
         <h1>{{title}}</h1>
         <nav>
             <a id="dashboardButton" routerLink="dashboard" routerLinkActive="active">Dashboard</a>
-            <a id="loginButton" routerLink="/login" routerLinkActive="active">Login</a>
+            <a id="loginButton" routerLink="/login" routerLinkActive="active" class="login-btn">Login</a>
             <!--<a id="settingsButton" routerLink="/settings" routerLinkActive="active">Settings</a>      -->
         </nav>
         <router-outlet></router-outlet>
