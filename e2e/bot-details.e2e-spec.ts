@@ -11,19 +11,19 @@
 import {browser, element, by} from "protractor";
 
 /**
- * Config Details screen tests.
+ * Bot Details screen tests.
  *
  * TODO - Test code seems very brittle: can we have access to the model please Angular :-)
  *
  * @author gazbert
  */
-describe('Config Details Tests', function () {
+describe('Bot Details Tests', function () {
 
     beforeEach(function () {
         browser.get('');
     });
 
-    it('should render GDAX Config Details tab links', function () {
+    it('should render GDAX Bot Details tab links', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(1).click();
