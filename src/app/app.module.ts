@@ -5,7 +5,7 @@ import {HttpModule} from '@angular/http';
 import {AppComponent} from './app.component';
 import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {InMemoryDataService} from './model';
-import {ExchangeHttpDataPromiseService, ExchangeHttpDataObservableService} from './model/exchange';
+import {BotHttpDataPromiseService, BotHttpDataObservableService} from './model/bot';
 import {ExchangeAdapterHttpDataPromiseService, ExchangeAdapterHttpDataObservableService} from './model/exchange-adapter';
 import {MarketHttpDataPromiseService} from './model/market';
 import {DashboardModule} from './dashboard/dashboard.module';
@@ -46,8 +46,8 @@ import {AuthenticationService, CanActivateAuthGuard} from './shared';
         AppComponent
     ],
     providers: [
-        ExchangeHttpDataPromiseService,
-        ExchangeHttpDataObservableService,
+        BotHttpDataPromiseService,
+        BotHttpDataObservableService,
         ExchangeAdapterHttpDataPromiseService,
         ExchangeAdapterHttpDataObservableService,
         MarketHttpDataPromiseService,

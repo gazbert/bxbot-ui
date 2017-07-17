@@ -10,13 +10,13 @@ import {ExchangeAdapter, ErrorCode, ErrorMessage, ExchangeAdapterHttpDataObserva
 import 'rxjs/add/operator/map';
 
 /**
- * Reactive (RxJS) version of the Exchange Adapter form.
+ * Reactive (RxJS) version of the Bot Adapter form.
  * See: https://angular.io/docs/ts/latest/guide/reactive-forms.html
  *
  * I'm still not convinced the Reactive form approach is better than the (far) simpler Template form approach -
  * there's so much more code to write... or am I being a noob and missing something here? ;-/
  *
- * For demo purposes, it uses the Observable implementation of the Exchange Adapter HTTP Data service.
+ * For demo purposes, it uses the Observable implementation of the Bot Adapter HTTP Data service.
  *
  * @author gazbert
  */

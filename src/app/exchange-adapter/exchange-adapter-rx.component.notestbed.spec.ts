@@ -13,12 +13,12 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 /**
- * Tests the behaviour of the Exchange Adapter (RxJS) component is as expected.
+ * Tests the behaviour of the Bot Adapter (RxJS) component is as expected.
  * See: https://angular.io/docs/ts/latest/guide/reactive-forms.html
  *
  * Learning ground for writing Jasmine tests without using the TestBed.
  *
- * Note use of Observables instead of Promises in the Exchange Adapter HTTP Data service calls.
+ * Note use of Observables instead of Promises in the Bot Adapter HTTP Data service calls.
  *
  * FIXME - Trying to write the equivalent tests for a Reactive form without the TestBed is proving VERY difficult!
  *

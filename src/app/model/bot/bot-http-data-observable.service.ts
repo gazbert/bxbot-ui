@@ -1,9 +1,9 @@
 import {Injectable} from "@angular/core";
 import {Http, Headers, Response, RequestOptions} from "@angular/http";
 import {AppComponent} from "../../app.component";
-import {ExchangeDataObservableService} from "./exchange-data-observable.service";
+import {BotDataObservableService} from "./bot-data-observable.service";
 import {AuthenticationService} from "../../shared";
-import {Exchange} from "./exchange.model";
+import {Bot} from "./bot.model";
 import {Observable} from 'rxjs/Observable';
 import {isObject} from "rxjs/util/isObject";
 
@@ -17,7 +17,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/toPromise';
 
 /**
- * HTTP implementation of the Exchange Data Service.
+ * HTTP implementation of the Bot Data Service.
  *
  * It demonstrates use of Observables in call responses.
  *
@@ -30,26 +30,26 @@ import 'rxjs/add/operator/toPromise';
  * @author gazbert
  */
 @Injectable()
-export class ExchangeHttpDataObservableService implements ExchangeDataObservableService {
+export class BotHttpDataObservableService implements BotDataObservableService {
 
-    private exchangeUrl = AppComponent.REST_API_BASE_URL + 'exchanges';
+    private botUrl = AppComponent.REST_API_BASE_URL + 'bots';
 
     constructor(private http: Http, private authenticationService: AuthenticationService) {
     }
 
-    getExchanges(): Observable<Exchange[]> {
+    getBots(): Observable<Bot[]> {
 
         let headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + this.authenticationService.getToken()
         });
 
-        return this.http.get(this.exchangeUrl, {headers: headers})
+        return this.http.get(this.botUrl, {headers: headers})
             .map(this.extractData)
             .catch(this.handleError);
     }
 
-    getExchange(id: string): Observable<Exchange> {
+    getBot(id: string): Observable<Bot> {
 
         let headers = new Headers({
             'Content-Type': 'application/json',
@@ -57,13 +57,13 @@ export class ExchangeHttpDataObservableService implements ExchangeDataObservable
         });
 
         return this.http
-            .get(this.exchangeUrl + '/' + id, {headers: headers})
-            .map((r: Response) => r.json().data as Exchange)
+            .get(this.botUrl + '/' + id, {headers: headers})
+            .map((r: Response) => r.json().data as Bot)
             // .map(this.extractData)
             .catch(this.handleError);
     }
 
-    getExchangeByName(name: string): Observable<Exchange[]> {
+    getBotByName(name: string): Observable<Bot[]> {
 
         let headers = new Headers({
             'Content-Type': 'application/json',
@@ -71,21 +71,21 @@ export class ExchangeHttpDataObservableService implements ExchangeDataObservable
         });
 
         return this.http
-            .get(this.exchangeUrl + '/?name=' + name, {headers: headers})
+            .get(this.botUrl + '/?name=' + name, {headers: headers})
             .map(this.extractData)
-            // .map((r: Response) => r.json().data as Exchange[])
+            // .map((r: Response) => r.json().data as Bot[])
             .catch(this.handleError);
     }
 
-    update(exchange: Exchange): Observable<Exchange> {
+    update(bot: Bot): Observable<Bot> {
 
         let headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + this.authenticationService.getToken()
         });
 
-        const url = `${this.exchangeUrl}/${exchange.id}`;
-        let body = JSON.stringify(exchange);
+        const url = `${this.botUrl}/${bot.id}`;
+        let body = JSON.stringify(bot);
         let options = new RequestOptions({ headers: headers });
 
         return this.http.put(url, body, options)

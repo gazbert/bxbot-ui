@@ -11,23 +11,23 @@
 import {browser, element, by} from "protractor";
 
 /**
- * Exchange Details screen tests.
+ * Config Details screen tests.
  *
  * TODO - Test code seems very brittle: can we have access to the model please Angular :-)
  *
  * @author gazbert
  */
-describe('Exchange Details Tests', function () {
+describe('Config Details Tests', function () {
 
     beforeEach(function () {
         browser.get('');
     });
 
-    it('should render GDAX Exchange Details tab links', function () {
+    it('should render GDAX Config Details tab links', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(1).click();
-        expect(element(by.css('h2')).getText()).toEqual('GDAX Exchange Details');
+        expect(element(by.css('h2')).getText()).toEqual('GDAX Config Details');
 
         let tabLinks = element.all(by.css('li'));
         expect(tabLinks.count()).toBe(4);
@@ -44,7 +44,7 @@ describe('Exchange Details Tests', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(1).click();
-        expect(element(by.css('h2')).getText()).toEqual('GDAX Exchange Details');
+        expect(element(by.css('h2')).getText()).toEqual('GDAX Config Details');
 
         expect(element(by.id('adapterName')).getAttribute('value')).toBe('GDAX REST API Adapter');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
@@ -59,7 +59,7 @@ describe('Exchange Details Tests', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(1).click();
-        expect(element(by.css('h2')).getText()).toEqual('GDAX Exchange Details');
+        expect(element(by.css('h2')).getText()).toEqual('GDAX Config Details');
 
         let tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
@@ -83,7 +83,7 @@ describe('Exchange Details Tests', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(1).click();
-        expect(element(by.css('h2')).getText()).toEqual('GDAX Exchange Details');
+        expect(element(by.css('h2')).getText()).toEqual('GDAX Config Details');
 
         let tabLinks = element.all(by.css('li'));
         tabLinks.get(2).click();
@@ -107,7 +107,7 @@ describe('Exchange Details Tests', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(1).click();
-        expect(element(by.css('h2')).getText()).toEqual('GDAX Exchange Details');
+        expect(element(by.css('h2')).getText()).toEqual('GDAX Config Details');
 
         let tabLinks = element.all(by.css('li'));
         tabLinks.get(3).click();
@@ -125,7 +125,7 @@ describe('Exchange Details Tests', function () {
 
             let dashboardItems = element.all(by.css('bx-dashboard-item'));
             dashboardItems.get(1).click();
-            expect(element(by.css('h2')).getText()).toEqual('GDAX Exchange Details');
+            expect(element(by.css('h2')).getText()).toEqual('GDAX Config Details');
 
             let dashboardButton = element.all(by.css('dashboardButton'));
             dashboardButton.click();

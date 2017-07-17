@@ -5,7 +5,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ExchangeAdapterComponent} from './exchange-adapter.component';
 
 /**
- * Encapsulates Exchange Adapter config management.
+ * Encapsulates Bot Adapter config management.
  *
  * @author gazbert
  */

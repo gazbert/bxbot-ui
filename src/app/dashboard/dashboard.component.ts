@@ -2,7 +2,7 @@ import {Router} from "@angular/router";
 import {Component, OnInit} from "@angular/core";
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
-import {Exchange, ExchangeHttpDataObservableService} from "../model/exchange";
+import {Bot, BotHttpDataObservableService} from "../model/bot";
 
 // Most RxJS operators are not included in Angular's base Observable implementation.
 // The base implementation includes only what Angular itself requires.
@@ -34,9 +34,9 @@ import 'rxjs/add/operator/startWith';
 export class DashboardComponent implements OnInit {
 
     /**
-     * The Exchange Observable is a stream of Exchange events that can be processed with array-like operators.
+     * The Bot Observable is a stream of Bot events that can be processed with array-like operators.
      */
-    exchanges: Observable<Exchange[]>;
+    exchanges: Observable<Bot[]>;
 
     /**
      * A Subject is a producer of an Observable event stream.
@@ -46,14 +46,14 @@ export class DashboardComponent implements OnInit {
     private searchTerms = new Subject<string>();
     private errorMessage: string;
 
-    constructor(private router: Router, private exchangeDataService: ExchangeHttpDataObservableService) {
+    constructor(private router: Router, private exchangeDataService: BotHttpDataObservableService) {
     }
 
     /**
      * Our ngOnInit sets up the Observable of Exchanges.
      *
-     * It turns the stream of search terms into a stream of Exchange arrays and assigns the result to the
-     * exchanges property.
+     * It turns the stream of search terms into a stream of Bot arrays and assigns the result to the
+     * bots property.
      *
      * Based off Observable example in the main Angular tutorial:
      * https://angular.io/docs/ts/latest/tutorial/toh-pt6.html#
@@ -82,15 +82,15 @@ export class DashboardComponent implements OnInit {
             .distinctUntilChanged()   // ignore if next search term is same as previous
             .switchMap(term => term   // switch to new Observable each time the term changes
                 // return the http search Observable
-                ? this.exchangeDataService.getExchangeByName(term)
+                ? this.exchangeDataService.getBotByName(term)
                 // or the first 8 Exchanges if there was no search term entered by user
-                : this.exchangeDataService.getExchanges().toPromise().then((exchanges) => exchanges.slice(0, 8)))
+                : this.exchangeDataService.getBots().toPromise().then((exchanges) => exchanges.slice(0, 8)))
             .catch(error => {
                 // TODO - Show meaningful error to user? Redirect to friendly error page?
                 this.errorMessage = error;
                 console.log("BARF " + error);
                 this.router.navigateByUrl("/login").then();
-                return Observable.of<Exchange[]>([]);
+                return Observable.of<Bot[]>([]);
             });
     }
 
@@ -103,7 +103,7 @@ export class DashboardComponent implements OnInit {
         this.searchTerms.next(term);
     }
 
-    gotoExchangeDetails(exchange: Exchange): void {
+    gotoExchangeDetails(exchange: Bot): void {
         // TODO - when to use navigate vs navigateByUrl ?
         // let link = ['/exchange', exchange.id];
         // this.router.navigate(link);

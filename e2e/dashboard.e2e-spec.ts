@@ -39,28 +39,28 @@ describe('Dashboard Tests', function () {
         expect(element(by.css('h1')).getText()).toEqual(expectedMsg);
     });
 
-    it('should display 8 Dashboard Exchange items', function () {
+    it('should display 8 Dashboard Bot items', function () {
 
         // TODO below does not work with Angular2 :-(
         // https://github.com/angular/protractor/issues/3205
-        // let dashboardItems = element.all(by.repeater('exchange in exchanges'));
+        // let dashboardItems = element.all(by.repeater('exchange in bots'));
 
         // so we'll resort to CSS locator instead
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         expect(dashboardItems.count()).toBe(8);
     });
 
-    it('should display Bitstamp as first Dashboard Exchange item', function () {
+    it('should display Bitstamp as first Dashboard Bot item', function () {
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         expect(dashboardItems.get(0).getText()).toContain('Bitstamp');
     });
 
-    it('should display Huobi as last Dashboard Exchange item', function () {
+    it('should display Huobi as last Dashboard Bot item', function () {
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         expect(dashboardItems.get(7).getText()).toContain('Huobi');
     });
 
-    it('should render Gemini Exchange specific link', function () {
+    it('should render Gemini Bot specific link', function () {
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(2).click();
 
@@ -77,7 +77,7 @@ describe('Dashboard Tests', function () {
         });
     });
 
-    it('should filter displayed Exchange items when user searches by Exchange name', function () {
+    it('should filter displayed Bot items when user searches by Bot name', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         expect(dashboardItems.count()).toBe(8);

@@ -1,8 +1,8 @@
 import {Router} from '@angular/router';
 import {DashboardComponent} from './dashboard.component';
 import {addMatchers} from '../../testing';
-import {FakeExchangeDataObservableService} from '../model/exchange/testing';
-import {Exchange} from '../model/exchange';
+import {FakeBotDataObservableService} from '../model/bot/testing';
+import {Bot} from '../model/bot';
 
 /**
  * Tests the behaviour of the Trading Strategies component is as expected.
@@ -18,24 +18,24 @@ import {Exchange} from '../model/exchange';
 xdescribe('DashboardComponent tests without TestBed', () => {
 
     let comp: DashboardComponent;
-    let exchangeDataService: FakeExchangeDataObservableService;
+    let exchangeDataService: FakeBotDataObservableService;
     let router: Router;
 
     beforeEach(() => {
         addMatchers();
         router = new FakeRouter() as any as Router;
-        exchangeDataService = new FakeExchangeDataObservableService(null, null);// new AuthenticationService(http)); // TODO mock the Auth service when re-enable tests!
+        exchangeDataService = new FakeBotDataObservableService(null, null);// new AuthenticationService(http)); // TODO mock the Auth service when re-enable tests!
         comp = new DashboardComponent(router, exchangeDataService);
     });
 
-    it('should NOT have Exchange items before calling ngOnInit', () => {
+    it('should NOT have Bot items before calling ngOnInit', () => {
         expect(comp.exchanges).not.toBeDefined('should not have Exchanges items before ngOnInit called');
     });
 
-    it('should have 3 Exchange items after ngAfterViewInit', (done) => {
+    it('should have 3 Bot items after ngAfterViewInit', (done) => {
         comp.ngOnInit();
         comp.exchanges.subscribe((exchanges) => {
-            expect(exchanges.length).toBe(3, 'should have 3 Exchange items after ngAfterViewInit');
+            expect(exchanges.length).toBe(3, 'should have 3 Bot items after ngAfterViewInit');
 
             // paranoia!
             expect(exchanges[0].id).toBe('bitstamp');
@@ -48,10 +48,10 @@ xdescribe('DashboardComponent tests without TestBed', () => {
     });
 
     // FIXME - search not working ;-/
-    xit('should have Gemini Exchange item after user searches for \'ge\'', (done) => {
+    xit('should have Gemini Bot item after user searches for \'ge\'', (done) => {
         comp.ngOnInit();
         comp.exchanges.subscribe((exchanges) => {
-            expect(exchanges.length).toBe(1, 'should have 1 Gemini Exchange item');
+            expect(exchanges.length).toBe(1, 'should have 1 Gemini Bot item');
             expect(exchanges[0].id).toBe('gemini');
 
             done(); // https://github.com/jasmine/jasmine/issues/694
@@ -60,12 +60,12 @@ xdescribe('DashboardComponent tests without TestBed', () => {
         comp.search('ge');
     });
 
-    it('should tell Router to navigate by ExchangeId when Exchange item selected', () => {
-        const testExchange = new Exchange('gdax', 'GDAX', 'Running');
+    it('should tell Router to navigate by ExchangeId when Bot item selected', () => {
+        const testExchange = new Bot('gdax', 'GDAX', 'Running');
         const spy = spyOn(router, 'navigateByUrl');
         comp.gotoExchangeDetails(testExchange);
         const navArgs = spy.calls.mostRecent().args[0];
-        expect(navArgs).toBe('/exchange/gdax', 'should navigate to GDAX Exchange Details for selected Exchange');
+        expect(navArgs).toBe('/exchange/gdax', 'should navigate to GDAX Bot Details for selected Bot');
     });
 });
 

@@ -1,15 +1,15 @@
 import {Injectable} from "@angular/core";
 import {Http, Headers} from "@angular/http";
 import {AppComponent} from "../../app.component";
-import {ExchangeDataPromiseService} from "./exchange-data-promise.service";
-import {Exchange} from "./exchange.model";
+import {BotDataPromiseService} from "./bot-data-promise.service";
+import {Bot} from "./bot.model";
 
 // Don't forget this else you get runtime error:
 // zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function
 import 'rxjs/add/operator/toPromise';
 
 /**
- * HTTP implementation of the Exchange Data Service.
+ * HTTP implementation of the Bot Data Service.
  *
  * It demonstrates use of Promises in call responses.
  *
@@ -22,34 +22,34 @@ import 'rxjs/add/operator/toPromise';
  * @author gazbert
  */
 @Injectable()
-export class ExchangeHttpDataPromiseService implements ExchangeDataPromiseService {
+export class BotHttpDataPromiseService implements BotDataPromiseService {
 
-    private exchangeUrl = AppComponent.REST_API_BASE_URL + 'exchanges';
+    private botUrl = AppComponent.REST_API_BASE_URL + 'bots';
     private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private http: Http) {
     }
 
-    getExchanges(): Promise<Exchange[]> {
-        return this.http.get(this.exchangeUrl)
+    getBots(): Promise<Bot[]> {
+        return this.http.get(this.botUrl)
             .toPromise()
-            .then(response => response.json().data as Exchange[])
+            .then(response => response.json().data as Bot[])
             .catch(this.handleError);
     }
 
-    getExchange(id: string): Promise<Exchange> {
-        return this.http.get(this.exchangeUrl + '/' + id)
+    getBot(id: string): Promise<Bot> {
+        return this.http.get(this.botUrl + '/' + id)
             .toPromise()
-            .then(response => response.json().data as Exchange)
+            .then(response => response.json().data as Bot)
             .catch(this.handleError);
     }
 
-    update(exchange: Exchange): Promise<Exchange> {
-        const url = `${this.exchangeUrl}/${exchange.id}`;
+    update(bot: Bot): Promise<Bot> {
+        const url = `${this.botUrl}/${bot.id}`;
         return this.http
-            .put(url, JSON.stringify(exchange), {headers: this.headers})
+            .put(url, JSON.stringify(bot), {headers: this.headers})
             .toPromise()
-            .then(response => response.json().data as Exchange)
+            .then(response => response.json().data as Bot)
             .catch(this.handleError);
     }
 

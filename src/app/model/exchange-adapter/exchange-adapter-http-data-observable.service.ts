@@ -16,7 +16,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/toPromise';
 
 /**
- * HTTP implementation of the Exchange Adapter Data Service.
+ * HTTP implementation of the Bot Adapter Data Service.
  *
  * It demonstrates use of Observables in call responses.
  *

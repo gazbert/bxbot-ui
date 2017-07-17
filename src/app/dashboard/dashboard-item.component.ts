@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Exchange} from '../model/exchange';
+import {Bot} from '../model/bot';
 
 /**
  * Represents a Dashboard Item component.
- * Essentially, an item is the Exchange the bot is running on.
+ * Essentially, an item is the Bot the bot is running on.
  *
  * @author gazbert
  */
@@ -14,8 +14,8 @@ import {Exchange} from '../model/exchange';
     styleUrls: ['dashboard-item.component.css']
 })
 export class DashboardItemComponent {
-    @Input() exchange: Exchange;
-    @Output() selected = new EventEmitter<Exchange>();
+    @Input() exchange: Bot;
+    @Output() selected = new EventEmitter<Bot>();
 
     click() {
         this.selected.next(this.exchange);

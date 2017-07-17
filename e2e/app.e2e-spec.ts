@@ -32,7 +32,7 @@ describe('Miscellaneous Scenario Tests', function () {
         expect(dashboardItems.count()).toBe(1);
 
         dashboardItems.get(0).click();
-        expect(element(by.css('h2')).getText()).toEqual('ItBit Exchange Details');
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Config Details');
 
         let tabLinks = element.all(by.css('li'));
         tabLinks.get(2).click();

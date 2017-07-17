@@ -15,7 +15,7 @@ import "rxjs/add/operator/catch";
 import "rxjs/add/operator/map";
 
 /**
- * Tests the Exchange Adapter HTTP Data service (Observable flavour) using a mocked HTTP backend.
+ * Tests the Bot Adapter HTTP Data service (Observable flavour) using a mocked HTTP backend.
  *
  * @author gazbert
  */
@@ -64,12 +64,12 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
             response = new Response(options);
         }));
 
-        it('should return 3 Exchange Adapters ', async(inject([], () => {
+        it('should return 3 Bot Adapters ', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.getExchangeAdapters()
                 .subscribe(exchangeAdapters => {
                     expect(exchangeAdapters.length).toBe(fakeExchangeAdapters.length,
-                        'should have returned 3 Exchange Adapters');
+                        'should have returned 3 Bot Adapters');
 
                     // basic sanity check
                     expect(exchangeAdapters[0].id).toBe('bitstamp');
@@ -79,11 +79,11 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
                 //.toPromise();
         })));
 
-        it('should handle returning no Exchange Adapters', async(inject([], () => {
+        it('should handle returning no Bot Adapters', async(inject([], () => {
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getExchangeAdapters()
-                .subscribe(exchangeAdapters => expect(exchangeAdapters.length).toBe(0, 'should have no Exchange Adapters'));
+                .subscribe(exchangeAdapters => expect(exchangeAdapters.length).toBe(0, 'should have no Bot Adapters'));
                 //.toPromise();
         })));
 
@@ -92,7 +92,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getExchangeAdapters()
                 .do(() => {
-                    fail('should not respond with Exchange Adapters');
+                    fail('should not respond with Bot Adapters');
                 })
                 .catch(err => {
                     expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
@@ -118,13 +118,13 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
             response = new Response(options);
         }));
 
-        it('should return GDAX Exchange Adapter', async(inject([], () => {
+        it('should return GDAX Bot Adapter', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.getExchangeAdapterByExchangeId('gdax')
                 .subscribe(exchangeAdapter => {
                     expect(exchangeAdapter.id).toBe('gdax');
                     expect(exchangeAdapter.name).toBe('GDAX');
-                    expect(exchangeAdapter.className).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
+                    expect(exchangeAdapter.className).toBe('com.gazbert.bxbot.bots.GdaxExchangeAdapter');
                     expect(exchangeAdapter.networkConfig.connectionTimeout).toBe(60);
 
                     expect(exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(3);
@@ -146,11 +146,11 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
             //.toPromise();
         })));
 
-        it('should handle returning no Exchange Adapter', async(inject([], () => {
+        it('should handle returning no Bot Adapter', async(inject([], () => {
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getExchangeAdapterByExchangeId('unknown')
-                .subscribe(exchangeAdapter => expect(exchangeAdapter.id).not.toBeDefined('should have no Exchange Adapter'));
+                .subscribe(exchangeAdapter => expect(exchangeAdapter.id).not.toBeDefined('should have no Bot Adapter'));
             //.toPromise();
         })));
 
@@ -159,7 +159,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getExchangeAdapterByExchangeId('unknown')
                 .do(() => {
-                    fail('should not respond with Exchange Adapter');
+                    fail('should not respond with Bot Adapter');
                 })
                 .catch(err => {
                     expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
@@ -179,7 +179,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
 
             updatedExchangeAdapter = new ExchangeAdapter('bitstamp', 'Bitstamp v2',
-                'com.gazbert.bxbot.exchanges.BitstampExchangeAdapterV2',
+                'com.gazbert.bxbot.bots.BitstampExchangeAdapterV2',
                 new NetworkConfig(90,
                     [
                         {value: 504},
@@ -199,7 +199,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
             response = new Response(options);
         }));
 
-        it('should return updated Bitstamp Exchange Adapter on success', async(inject([], () => {
+        it('should return updated Bitstamp Bot Adapter on success', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.update(updatedExchangeAdapter)
                 .subscribe(exchangeAdapter => {
@@ -208,17 +208,17 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
                     // paranoia!
                     expect(exchangeAdapter.id).toBe('bitstamp');
                     expect(exchangeAdapter.name).toBe('Bitstamp v2');
-                    expect(exchangeAdapter.className).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapterV2');
+                    expect(exchangeAdapter.className).toBe('com.gazbert.bxbot.bots.BitstampExchangeAdapterV2');
                 });
             //.toPromise();
         })));
 
-        it('should NOT return Exchange Adapter for 401 response', async(inject([], () => {
+        it('should NOT return Bot Adapter for 401 response', async(inject([], () => {
             let resp = new Response(new ResponseOptions({status: 401}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.update(updatedExchangeAdapter)
                 .do(() => {
-                    fail('should not respond with Exchange Adapter');
+                    fail('should not respond with Bot Adapter');
                 })
                 .catch(err => {
                     expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
@@ -232,7 +232,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.update(updatedExchangeAdapter)
                 .do(() => {
-                    fail('should not respond with Exchange Adapter');
+                    fail('should not respond with Bot Adapter');
                 })
                 .catch(err => {
                     expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
@@ -244,7 +244,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
 });
 
 const makeExchangeAdapterData = () => [
-    new ExchangeAdapter('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
+    new ExchangeAdapter('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.bots.BitstampExchangeAdapter',
         new NetworkConfig(60,
             [
                 {value: 503},
@@ -257,7 +257,7 @@ const makeExchangeAdapterData = () => [
                 {value: "Remote host closed connection during handshake"}
             ]
         )),
-    new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
+    new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.bots.GdaxExchangeAdapter',
         new NetworkConfig(60,
             [
                 {value: 503},
@@ -270,7 +270,7 @@ const makeExchangeAdapterData = () => [
                 {value: "Remote host closed connection during handshake"}
             ]
         )),
-    new ExchangeAdapter('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
+    new ExchangeAdapter('gemini', 'Gemini', 'com.gazbert.bxbot.bots.GeminiExchangeAdapter',
         new NetworkConfig(60,
             [
                 {value: 503},

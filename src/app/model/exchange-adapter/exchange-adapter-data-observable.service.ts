@@ -3,7 +3,7 @@ import {Observable} from "rxjs";
 import {ExchangeAdapter} from "./exchange-adapter.model";
 
 /**
- * The Exchange Adapter Data Service provides operations to update Exchange Adapter configuration.
+ * The Bot Adapter Data Service provides operations to update Bot Adapter configuration.
  * It demonstrates use of Observables in the operation responses.
  *
  * @author gazbert

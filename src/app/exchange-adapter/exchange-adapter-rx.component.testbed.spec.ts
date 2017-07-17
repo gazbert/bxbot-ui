@@ -20,7 +20,7 @@ import {ExchangeAdapterDataObservableService} from "../model/exchange-adapter/ex
 
 
 /**
- * Tests the behaviour of the Exchange Adapter component (RxJS version) is as expected.
+ * Tests the behaviour of the Bot Adapter component (RxJS version) is as expected.
  *
  * Learning ground for writing Jasmine tests using the TestBed.
  * (Trying to write the equivalent tests for a Reactive form without the TestBed is proving VERY difficult!)
@@ -132,7 +132,7 @@ function overrideExchangeAdapterServiceSetup() {
         stubExchangeAdapterDataService = fixture.debugElement.injector.get(ExchangeAdapterHttpDataObservableService);
     }));
 
-    it('should inject the stubbed Exchange Adapter service',
+    it('should inject the stubbed Bot Adapter service',
         inject([ExchangeAdapterHttpDataObservableService], (service: ExchangeAdapterHttpDataObservableService) => {
             expect(service).toEqual({}, 'service injected from fixture');
             expect(stubExchangeAdapterDataService).toBeTruthy('service injected into component is the stub');
@@ -161,16 +161,16 @@ function overrideExchangeAdapterServiceSetup() {
         page.adapterNameInput.value = newName;
         page.adapterNameInput.dispatchEvent(newEvent('input')); // tell Angular
 
-        expect(comp.exchangeAdapter.name).toBe(origName, 'Exchange Adapter Name model not to be updated before save');
+        expect(comp.exchangeAdapter.name).toBe(origName, 'Bot Adapter Name model not to be updated before save');
         expect(testExchangeAdapter.name).toBe(origName,
-            'ExchangeAdapterService Exchange Adapter Name model NOT to be updated before save');
+            'ExchangeAdapterService Bot Adapter Name model NOT to be updated before save');
 
         click(page.saveBtn);
         comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
         tick(); // wait for async save to complete
 
         expect(testExchangeAdapter.name).toBe(newName,
-            'ExchangeAdapterService Exchange Adapter Name changes after save');
+            'ExchangeAdapterService Bot Adapter Name changes after save');
 
         expect(page.saveSpy.calls.any()).toBe(true, 'ExchangeAdapterService update() called');
         expect(page.navSpy).toHaveBeenCalledWith(['dashboard']);
@@ -189,15 +189,15 @@ function overrideExchangeAdapterServiceSetup() {
         page.adapterNameInput.value = newName;
         page.adapterNameInput.dispatchEvent(newEvent('input')); // tell Angular
 
-        expect(comp.exchangeAdapter.name).toBe(origName, 'Exchange Adapter Name in model not to be updated');
+        expect(comp.exchangeAdapter.name).toBe(origName, 'Bot Adapter Name in model not to be updated');
         expect(testExchangeAdapter.name).toBe(origName,
-            'ExchangeAdapterService Exchange Adapter Name unchanged before save');
+            'ExchangeAdapterService Bot Adapter Name unchanged before save');
 
         click(page.saveBtn);
         comp.save(false); // TODO hack to tell Angular form is invalid - is there a better way?
 
         expect(testExchangeAdapter.name).toBe(origName,
-            'ExchangeAdapterService Exchange Adapter Name not changed after save');
+            'ExchangeAdapterService Bot Adapter Name not changed after save');
 
         expect(page.saveSpy.calls.any()).toBe(false, 'ExchangeAdapterService update() not called');
         expect(page.navSpy.calls.any()).toBe(false, 'router.navigate should not have been called');
@@ -274,7 +274,7 @@ function fakeExchangeAdapterServiceSetup() {
                 {provide: ExchangeAdapterHttpDataObservableService, useClass: FakeExchangeAdapterDataObservableService},
                 {provide: Router, useClass: RouterStub},
 
-                // need this because the FakeExchangeAdapterDataObservableService extends ExchangeHttpDataObservableService
+                // need this because the FakeExchangeAdapterDataObservableService extends BotHttpDataObservableService
                 {provide: Http, useValue: {}}
             ]
         })
@@ -282,7 +282,7 @@ function fakeExchangeAdapterServiceSetup() {
         });
     }));
 
-    describe('when user navigates to existing Exchange Adapter', () => {
+    describe('when user navigates to existing Bot Adapter', () => {
 
         let expectedExchangeAdapter: ExchangeAdapter;
 
@@ -315,15 +315,15 @@ function fakeExchangeAdapterServiceSetup() {
             page.adapterNameInput.value = newName;
             page.adapterNameInput.dispatchEvent(newEvent('input')); // tell Angular
 
-            expect(comp.exchangeAdapter.name).toBe(origName, 'Exchange Adapter Name not to be updated before save');
+            expect(comp.exchangeAdapter.name).toBe(origName, 'Bot Adapter Name not to be updated before save');
             expect(expectedExchangeAdapter.name).toBe(origName,
-                'ExchangeAdapterService Exchange Adapter Name unchanged before save');
+                'ExchangeAdapterService Bot Adapter Name unchanged before save');
 
             click(page.saveBtn);
             comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
             tick(); // wait for async save to complete
 
-            expect(comp.exchangeAdapter.name).toBe(newName, 'Exchange Adapter Name to be updated after save');
+            expect(comp.exchangeAdapter.name).toBe(newName, 'Bot Adapter Name to be updated after save');
             expect(page.saveSpy.calls.any()).toBe(true, 'ExchangeAdapterService update() called');
             expect(page.navSpy).toHaveBeenCalledWith(['dashboard']);
         }));
@@ -341,15 +341,15 @@ function fakeExchangeAdapterServiceSetup() {
             page.adapterNameInput.value = newName;
             page.adapterNameInput.dispatchEvent(newEvent('input')); // tell Angular
 
-            expect(comp.exchangeAdapter.name).toBe(origName, 'Exchange Adapter Name updated');
+            expect(comp.exchangeAdapter.name).toBe(origName, 'Bot Adapter Name updated');
             expect(expectedExchangeAdapter.name).toBe(origName,
-                'ExchangeAdapterService Exchange Adapter Name unchanged before save');
+                'ExchangeAdapterService Bot Adapter Name unchanged before save');
 
             click(page.saveBtn);
             comp.save(false); // TODO hack to tell Angular form is invalid - is there a better way?
 
             expect(expectedExchangeAdapter.name).toBe(origName,
-                'ExchangeAdapterService Exchange Adapter Name not changed after save');
+                'ExchangeAdapterService Bot Adapter Name not changed after save');
 
             expect(page.saveSpy.calls.any()).toBe(false, 'ExchangeAdapterService update() not called');
             expect(page.navSpy.calls.any()).toBe(false, 'router.navigate should not have been called');
@@ -424,17 +424,17 @@ function createComponent() {
     comp = fixture.componentInstance;
     page = new Page();
 
-    // 1st change detection triggers ngOnInit which gets an Exchange Adapter config
+    // 1st change detection triggers ngOnInit which gets an Bot Adapter config
     fixture.detectChanges();
     return fixture.whenStable().then(() => {
-        // 2nd change detection displays the async-fetched Exchange Adapter config
+        // 2nd change detection displays the async-fetched Bot Adapter config
         fixture.detectChanges();
         page.addPageElements();
     });
 }
 
 /**
- * This helper class represents the Exchange Adapter screen.
+ * This helper class represents the Bot Adapter screen.
  */
 class Page {
 

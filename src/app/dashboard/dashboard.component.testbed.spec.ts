@@ -7,14 +7,14 @@ import {Observable} from 'rxjs/Observable';
 import {DashboardComponent} from './dashboard.component';
 import {DashboardModule} from './dashboard.module';
 import {addMatchers, click} from '../../testing';
-import {FakeExchangeDataObservableService} from '../model/exchange/testing';
-import {ExchangeHttpDataObservableService} from '../model/exchange';
-import {SOME_FAKE_OBSERVABLE_EXCHANGES} from "../model/exchange/testing/fake-exchange-data-observable.service";
+import {FakeBotDataObservableService} from '../model/bot/testing';
+import {BotHttpDataObservableService} from '../model/bot';
+import {SOME_FAKE_OBSERVABLE_BOTS} from "../model/bot/testing/fake-bot-data-observable.service";
 
 /**
  * Tests the behaviour of the Trading Strategies component is as expected.
  *
- * It uses the Angular TestBed and a stubbed FakeExchangeDataObservableService.
+ * It uses the Angular TestBed and a stubbed FakeBotDataObservableService.
  *
  * I think I prefer the notestbed approach - less code and accessing just the model, i.e. no By.css stuff...
  * But, TestBed useful if you need to test the UI rendering?
@@ -39,10 +39,10 @@ function compileAndCreate() {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             providers: [
-                {provide: ExchangeHttpDataObservableService, useClass: FakeExchangeDataObservableService},
+                {provide: BotHttpDataObservableService, useClass: FakeBotDataObservableService},
                 {provide: Router, useClass: RouterStub},
-                {provide: Http, useValue: {}} // need this because the FakeExchangeDataObservableService extends
-                                              // ExchangeHttpDataObservableService
+                {provide: Http, useValue: {}} // need this because the FakeBotDataObservableService extends
+                                              // BotHttpDataObservableService
             ]
         }).compileComponents().then(() => {
             fixture = TestBed.createComponent(DashboardComponent);
@@ -68,7 +68,7 @@ xdescribe('DashboardComponent tests with TestBed (shallow)', () => {
     function clickForShallow() {
         const dashboardItemElement = fixture.debugElement.query(By.css('bx-dashboard-item'));
         // Triggers event to select the first <bx-dashboard-item> DebugElement
-        dashboardItemElement.triggerEventHandler('selected', SOME_FAKE_OBSERVABLE_EXCHANGES[BITSTAMP_EXCHANGE]);
+        dashboardItemElement.triggerEventHandler('selected', SOME_FAKE_OBSERVABLE_BOTS[BITSTAMP_EXCHANGE]);
     }
 });
 
@@ -94,15 +94,15 @@ xdescribe('DashboardComponent tests with TestBed (deep)', () => {
 
 /**
  * The (almost) same tests for both.
- * Only change: the way that the first Exchange is clicked.
+ * Only change: the way that the first Bot is clicked.
  */
 function tests(exchangeClick: Function) {
 
-    it('should NOT have Exchange items before ngOnInit', () => {
+    it('should NOT have Bot items before ngOnInit', () => {
         expect(dashboardComponent.exchanges).not.toBeDefined('should not have Exchanges items before ngOnInit called');
     });
 
-    describe('After ExchangeDataService getExchanges() Observable is subscribed to', () => {
+    describe('After ExchangeDataService getBots() Observable is subscribed to', () => {
 
         /*
          * Hack to prevent runtime test error:
@@ -118,17 +118,17 @@ function tests(exchangeClick: Function) {
             Observable.prototype.debounceTime = function () { return this; };
         });
 
-        // Trigger component so it gets exchanges and binds to them the UI bits
+        // Trigger component so it gets bots and binds to them the UI bits
         beforeEach(async(() => {
-            fixture.detectChanges(); // runs ngOnInit + ngAfterViewInit -> getExchanges()
-            fixture.whenStable().then(() => fixture.detectChanges()); // bind to exchanges
+            fixture.detectChanges(); // runs ngOnInit + ngAfterViewInit -> getBots()
+            fixture.whenStable().then(() => fixture.detectChanges()); // bind to bots
         }));
 
-        it('should have fetched 3 Exchange items', (done) => {
+        it('should have fetched 3 Bot items', (done) => {
             dashboardComponent.ngOnInit();
             dashboardComponent.exchanges.do((exchanges) => {
 
-                expect(exchanges.length).toBe(3, 'should have 3 Exchange items after ngAfterViewInit');
+                expect(exchanges.length).toBe(3, 'should have 3 Bot items after ngAfterViewInit');
 
                 // paranoia!
                 expect(exchanges[0].id).toBe('bitstamp');
@@ -140,14 +140,14 @@ function tests(exchangeClick: Function) {
             dashboardComponent.ngAfterViewInit();
         });
 
-        it('should display 3 Exchange items', () => {
-            // Find and examine the displayed exchanges
+        it('should display 3 Bot items', () => {
+            // Find and examine the displayed bots
             // Look for them in the DOM by css class
             const exchanges = fixture.debugElement.queryAll(By.css('bx-dashboard-item'));
-            expect(exchanges.length).toBe(3, 'should display 3 Exchange items');
+            expect(exchanges.length).toBe(3, 'should display 3 Bot items');
         });
 
-        it('should tell Router to navigate when Exchange item selected',
+        it('should tell Router to navigate when Bot item selected',
 
             // inject our stubbed Router
             inject([Router], (router: Router) => {
@@ -160,9 +160,9 @@ function tests(exchangeClick: Function) {
                 // args passed to router.navigateByUrl()
                 const navArgs = spy.calls.first().args[0];
 
-                // expecting to navigate to id of the component's first Exchange
-                expect(navArgs).toBe('/exchange/' + SOME_FAKE_OBSERVABLE_EXCHANGES[BITSTAMP_EXCHANGE].id,
-                    'should nav to ExchangeDetailsComponent for first Exchange');
+                // expecting to navigate to id of the component's first Bot
+                expect(navArgs).toBe('/exchange/' + SOME_FAKE_OBSERVABLE_BOTS[BITSTAMP_EXCHANGE].id,
+                    'should nav to ExchangeDetailsComponent for first Bot');
             })
         );
     });

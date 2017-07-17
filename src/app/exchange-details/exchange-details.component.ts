@@ -1,6 +1,6 @@
 import {OnInit, Component} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {Exchange, ExchangeHttpDataPromiseService} from '../model/exchange';
+import {Bot, BotHttpDataPromiseService} from '../model/bot';
 
 /**
  * Container for holding the config screens.
@@ -15,17 +15,17 @@ import {Exchange, ExchangeHttpDataPromiseService} from '../model/exchange';
 })
 export class ExchangeDetailsComponent implements OnInit {
 
-    exchange: Exchange;
+    exchange: Bot;
     active = true;
 
-    constructor(private exchangeDataService: ExchangeHttpDataPromiseService, private route: ActivatedRoute,
+    constructor(private exchangeDataService: BotHttpDataPromiseService, private route: ActivatedRoute,
                 private router: Router) {
     }
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
             let id = params['id'];
-            this.exchangeDataService.getExchange(id)
+            this.exchangeDataService.getBot(id)
                 .then(exchange => this.exchange = exchange);
         }).then(() => {/*done*/});
     }

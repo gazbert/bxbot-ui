@@ -27,7 +27,7 @@ describe('Trading Strategy Tests', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(3).click();
-        expect(element(by.css('h2')).getText()).toEqual('ItBit Exchange Details');
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Config Details');
 
         let tabLinks = element.all(by.css('li'));
         tabLinks.get(2).click();
@@ -88,7 +88,7 @@ describe('Trading Strategy Tests', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(3).click();
-        expect(element(by.css('h2')).getText()).toEqual('ItBit Exchange Details');
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Config Details');
 
         let tabLinks = element.all(by.css('li'));
         tabLinks.get(2).click();
@@ -151,7 +151,7 @@ describe('Trading Strategy Tests', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(3).click();
-        expect(element(by.css('h2')).getText()).toEqual('ItBit Exchange Details');
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Config Details');
 
         let tabLinks = element.all(by.css('li'));
         tabLinks.get(2).click();
@@ -222,7 +222,7 @@ describe('Trading Strategy Tests', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(3).click();
-        expect(element(by.css('h2')).getText()).toEqual('ItBit Exchange Details');
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Config Details');
 
         let tabLinks = element.all(by.css('li'));
         tabLinks.get(2).click();
@@ -268,7 +268,7 @@ describe('Trading Strategy Tests', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(3).click();
-        expect(element(by.css('h2')).getText()).toEqual('ItBit Exchange Details');
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Config Details');
 
         let tabLinks = element.all(by.css('li'));
         tabLinks.get(2).click();
@@ -318,7 +318,7 @@ describe('Trading Strategy Tests', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(3).click();
-        expect(element(by.css('h2')).getText()).toEqual('ItBit Exchange Details');
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Config Details');
 
         let tabLinks = element.all(by.css('li'));
         tabLinks.get(2).click();
@@ -383,7 +383,7 @@ describe('Trading Strategy Tests', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(3).click();
-        expect(element(by.css('h2')).getText()).toEqual('ItBit Exchange Details');
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Config Details');
 
         let tabLinks = element.all(by.css('li'));
         tabLinks.get(2).click();

@@ -10,9 +10,9 @@ export class InMemoryDataService implements InMemoryDbService {
     createDb() {
 
         /**
-         * The Exchanges the bots are running on.
+         * The bots.
          */
-        let exchanges = [
+        let bots = [
             {
                 id: 'bitstamp',
                 name: 'Bitstamp',
@@ -61,7 +61,7 @@ export class InMemoryDataService implements InMemoryDbService {
         ];
 
         /**
-         * The Exchange Adapters for integrating with the Exchanges.
+         * The Bot Adapters for integrating with the Exchanges.
          */
         let exchangeAdapters = [
             {
@@ -589,6 +589,6 @@ export class InMemoryDataService implements InMemoryDbService {
             }
         ];
 
-        return {exchanges, exchangeAdapters, markets, tradingStrategies, emailAlerts};
+        return {bots, exchangeAdapters, markets, tradingStrategies, emailAlerts};
     }
 }

@@ -27,7 +27,7 @@ describe('Market Screen Tests', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(4).click();
-        expect(element(by.css('h2')).getText()).toEqual('BTC-e Exchange Details');
+        expect(element(by.css('h2')).getText()).toEqual('BTC-e Config Details');
 
         let tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
@@ -106,7 +106,7 @@ describe('Market Screen Tests', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(4).click();
-        expect(element(by.css('h2')).getText()).toEqual('BTC-e Exchange Details');
+        expect(element(by.css('h2')).getText()).toEqual('BTC-e Config Details');
 
         let tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
@@ -177,7 +177,7 @@ describe('Market Screen Tests', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(4).click();
-        expect(element(by.css('h2')).getText()).toEqual('BTC-e Exchange Details');
+        expect(element(by.css('h2')).getText()).toEqual('BTC-e Config Details');
 
         let tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
@@ -266,7 +266,7 @@ describe('Market Screen Tests', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(4).click();
-        expect(element(by.css('h2')).getText()).toEqual('BTC-e Exchange Details');
+        expect(element(by.css('h2')).getText()).toEqual('BTC-e Config Details');
 
         let tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
@@ -314,7 +314,7 @@ describe('Market Screen Tests', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(4).click();
-        expect(element(by.css('h2')).getText()).toEqual('BTC-e Exchange Details');
+        expect(element(by.css('h2')).getText()).toEqual('BTC-e Config Details');
 
         let tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
@@ -386,7 +386,7 @@ describe('Market Screen Tests', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(4).click();
-        expect(element(by.css('h2')).getText()).toEqual('BTC-e Exchange Details');
+        expect(element(by.css('h2')).getText()).toEqual('BTC-e Config Details');
 
         let tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();

@@ -9,7 +9,7 @@ import {ExchangeAdapterDataPromiseService} from "./exchange-adapter-data-promise
 import 'rxjs/add/operator/toPromise';
 
 /**
- * HTTP implementation of the Exchange Adapter Data Service.
+ * HTTP implementation of the Bot Adapter Data Service.
  *
  * It demonstrates use of Promises in call responses.
  *

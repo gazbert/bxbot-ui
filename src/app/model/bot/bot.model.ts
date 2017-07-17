@@ -1,9 +1,9 @@
 /**
- * Encapsulates an Exchange.
+ * Encapsulates a Bot.
  *
  * @author gazbert
  */
-export class Exchange {
+export class Bot {
 
     constructor(public id: string,
                 public name: string,
@@ -11,6 +11,6 @@ export class Exchange {
     }
 
     clone() {
-        return new Exchange(this.id, this.name, this.status);
+        return new Bot(this.id, this.name, this.status);
     }
 }
