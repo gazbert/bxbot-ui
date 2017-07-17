@@ -104,7 +104,7 @@ nav a.router-link-active {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.login-btn {
+.logout-btn {
     float: right;
     margin-right: 20px;
 }

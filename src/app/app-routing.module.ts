@@ -13,15 +13,16 @@ import {CanActivateAuthGuard} from './shared';
 @NgModule({
     imports: [
         RouterModule.forRoot([
-            {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
-            {path: 'login', component: LoginComponent},
+            {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
             {path: 'dashboard', component: DashboardComponent, canActivate: [CanActivateAuthGuard]},
-            // {path: 'settings', component: SettingsComponent, canActivate: [CanActivateAuthGuard]},
+            {path: 'login', component: LoginComponent},
+            {path: 'logout', component: LoginComponent},
             {
                 path: 'exchange',
                 loadChildren: 'app/exchange-details/exchange-details.module#ExchangeDetailsModule',
                 canActivate: [CanActivateAuthGuard]
             }
+            // {path: 'settings', component: SettingsComponent, canActivate: [CanActivateAuthGuard]},
         ])
     ],
     exports: [RouterModule] // re-export the module declarations
