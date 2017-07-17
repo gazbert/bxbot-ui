@@ -48,7 +48,7 @@ export class TradingStrategiesComponent implements OnInit {
 
     errorModal = {
         'title': 'Trading Strategy Still In Use',
-        'body': 'You cannot delete this Trading Strategy because it is still being used by a Market on the Bot. ' +
+        'body': 'You cannot delete this Trading Strategy because it is still being used by a Market on the Exchange. ' +
                 'Please check your Market configuration.'
     };
 

@@ -1,0 +1,11 @@
+<div *ngIf="bot" class="container module-bootstrap">
+    <h2>{{bot.name}} Details</h2>
+    <tabs>
+        <tab [tabId]="bot.id" [tabTitle]="'exchange adapter'"><bx-exchange-adapter-rx></bx-exchange-adapter-rx></tab>
+        <!--<tab [tabId]="bot.id" [tabTitle]="'exchange adapter'"><bx-exchange-adapter></bx-exchange-adapter></tab>-->
+
+        <tab [tabId]="bot.id" [tabTitle]="'markets'"><bx-markets></bx-markets></tab>
+        <tab [tabId]="bot.id" [tabTitle]="'trading strategies'"><bx-trading-strategies></bx-trading-strategies></tab>
+        <tab [tabId]="bot.id" [tabTitle]="'email alerts'"><bx-email-alerts></bx-email-alerts></tab>
+    </tabs>
+</div>

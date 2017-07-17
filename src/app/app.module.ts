@@ -9,7 +9,7 @@ import {BotHttpDataPromiseService, BotHttpDataObservableService} from './model/b
 import {ExchangeAdapterHttpDataPromiseService, ExchangeAdapterHttpDataObservableService} from './model/exchange-adapter';
 import {MarketHttpDataPromiseService} from './model/market';
 import {DashboardModule} from './dashboard/dashboard.module';
-import {ExchangeDetailsModule} from './exchange-details/exchange-details.module';
+import {ExchangeDetailsModule} from './bot-details/bot-details.module';
 import {ExchangeAdapterModule} from './exchange-adapter/exchange-adapter.module';
 import {EmailAlertsModule} from './email-alerts/email-alerts.module';
 import {AppRoutingModule} from './app-routing.module';

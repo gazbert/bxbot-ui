@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {BrowserModule} from '@angular/platform-browser';
-import {ExchangeDetailsComponent} from './exchange-details.component';
+import {BotDetailsComponent} from './bot-details.component';
 import {TabComponent} from './tab.component';
 import {TabsComponent} from './tabs.component';
 import {ExchangeAdapterModule} from '../exchange-adapter/exchange-adapter.module';
@@ -12,12 +12,12 @@ import {TradingStrategiesModule} from '../trading-strategies/trading-strategies.
 
 const routes: Routes = [
     {
-        path: 'exchange/:id', component: ExchangeDetailsComponent
+        path: 'bot/:id', component: BotDetailsComponent
     }
 ];
 
 /**
- * Container module for holding all the configuration screens.
+ * Container module for holding the bot's config and status screens.
  *
  * @author gazbert
  */
@@ -31,7 +31,7 @@ const routes: Routes = [
         SharedModule,
         RouterModule.forChild(routes),
     ],
-    declarations: [ExchangeDetailsComponent, TabComponent, TabsComponent]
+    declarations: [BotDetailsComponent, TabComponent, TabsComponent]
 })
 export class ExchangeDetailsModule {
 }

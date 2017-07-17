@@ -27,7 +27,7 @@ describe('Config Details Tests', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(1).click();
-        expect(element(by.css('h2')).getText()).toEqual('GDAX Config Details');
+        expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
 
         let tabLinks = element.all(by.css('li'));
         expect(tabLinks.count()).toBe(4);
@@ -44,10 +44,10 @@ describe('Config Details Tests', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(1).click();
-        expect(element(by.css('h2')).getText()).toEqual('GDAX Config Details');
+        expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
 
         expect(element(by.id('adapterName')).getAttribute('value')).toBe('GDAX REST API Adapter');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
+        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.bots.GdaxExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('120');
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
         expect(element(by.id('errorCode_1')).getAttribute('value')).toBe('522');
@@ -59,7 +59,7 @@ describe('Config Details Tests', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(1).click();
-        expect(element(by.css('h2')).getText()).toEqual('GDAX Config Details');
+        expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
 
         let tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
@@ -83,7 +83,7 @@ describe('Config Details Tests', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(1).click();
-        expect(element(by.css('h2')).getText()).toEqual('GDAX Config Details');
+        expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
 
         let tabLinks = element.all(by.css('li'));
         tabLinks.get(2).click();
@@ -107,7 +107,7 @@ describe('Config Details Tests', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(1).click();
-        expect(element(by.css('h2')).getText()).toEqual('GDAX Config Details');
+        expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
 
         let tabLinks = element.all(by.css('li'));
         tabLinks.get(3).click();
@@ -125,7 +125,7 @@ describe('Config Details Tests', function () {
 
             let dashboardItems = element.all(by.css('bx-dashboard-item'));
             dashboardItems.get(1).click();
-            expect(element(by.css('h2')).getText()).toEqual('GDAX Config Details');
+            expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
 
             let dashboardButton = element.all(by.css('dashboardButton'));
             dashboardButton.click();

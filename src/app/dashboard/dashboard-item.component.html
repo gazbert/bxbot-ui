@@ -1,8 +1,8 @@
 <div (click)="click()" class="module item">
-    <h3>{{exchange.name}}</h3>
+    <h3>{{bot.name}}</h3>
     <h6>
-        <span *ngIf="exchange.status === 'Running'" class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
-        <span *ngIf="exchange.status === 'Stopped'" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-        {{exchange.status}}
+        <span *ngIf="bot.status === 'Running'" class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+        <span *ngIf="bot.status === 'Stopped'" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+        {{bot.status}}
     </h6>
 </div>

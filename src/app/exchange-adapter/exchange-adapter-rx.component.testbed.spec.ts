@@ -470,7 +470,7 @@ class Page {
 
         if (comp.exchangeAdapter) {
 
-            // We have a exchange so these elements are now in the DOM...
+            // We have a bot so these elements are now in the DOM...
             this.saveBtn = fixture.debugElement.query(By.css('#exchangeAdapterSaveButton'));
             this.cancelBtn = fixture.debugElement.query(By.css('#exchangeAdapterCancelButton'));
 

@@ -32,7 +32,7 @@ describe('Miscellaneous Scenario Tests', function () {
         expect(dashboardItems.count()).toBe(1);
 
         dashboardItems.get(0).click();
-        expect(element(by.css('h2')).getText()).toEqual('ItBit Config Details');
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
 
         let tabLinks = element.all(by.css('li'));
         tabLinks.get(2).click();
@@ -115,24 +115,24 @@ describe('Miscellaneous Scenario Tests', function () {
 //
 //     browser.driver.manage().window().setSize(1200, 1000);
 //
-//     it('Should redirect index.html to index.html#/exchanges', function () {
+//     it('Should redirect index.html to index.html#/bots', function () {
 //         browser.get('app/index.html');
 //         browser.getLocationAbsUrl().then(function (url) {
 //
-//             expect(url).toEqual('/exchanges');     // use for custom REST Exchange service impl
-//             //expect(url).toEqual('/exchanges/');  // use for $http service impl
+//             expect(url).toEqual('/bots');     // use for custom REST Exchange service impl
+//             //expect(url).toEqual('/bots/');  // use for $http service impl
 //         });
 //     });
 //
 //     describe('Exchange list view', function () {
 //
 //         beforeEach(function () {
-//             browser.get('app/index.html#/exchanges');
+//             browser.get('app/index.html#/bots');
 //         });
 //
-//         it('Should filter the exchange list as a user types into the search box', function () {
+//         it('Should filter the bot list as a user types into the search box', function () {
 //             3
-//             var exchangeList = element.all(by.repeater('exchange in exchanges'));
+//             var exchangeList = element.all(by.repeater('bot in bots'));
 //             var query = element(by.model('query'));
 //
 //             expect(exchangeList.count()).toBe(8);
@@ -145,9 +145,9 @@ describe('Miscellaneous Scenario Tests', function () {
 //             expect(exchangeList.count()).toBe(1);
 //         });
 //
-//         it('Should be possible to control exchange order via the drop down select box', function () {
+//         it('Should be possible to control bot order via the drop down select box', function () {
 //
-//             var exchangeNameColumn = element.all(by.repeater('exchange in exchanges').column('exchange.name'));
+//             var exchangeNameColumn = element.all(by.repeater('bot in bots').column('bot.name'));
 //             var query = element(by.model('query'));
 //
 //             function getNames() {
@@ -177,12 +177,12 @@ describe('Miscellaneous Scenario Tests', function () {
 //             ]);
 //         });
 //
-//         it('Should render exchange specific links', function () {
+//         it('Should render bot specific links', function () {
 //             var query = element(by.model('query'));
 //             query.sendKeys('huobi');
-//             element.all(by.css('.exchanges li a')).first().click();
+//             element.all(by.css('.bots li a')).first().click();
 //             browser.getLocationAbsUrl().then(function (url) {
-//                 expect(url).toEqual('/exchanges/Huobi');
+//                 expect(url).toEqual('/bots/Huobi');
 //             });
 //         });
 //     });
@@ -190,25 +190,25 @@ describe('Miscellaneous Scenario Tests', function () {
 //     describe('Exchange detail view', function () {
 //
 //         beforeEach(function () {
-//             browser.get('app/index.html#/exchanges/Coinbase');
+//             browser.get('app/index.html#/bots/Coinbase');
 //         });
 //
 //         it('Should display Coinbase page', function () {
-//             expect(element(by.binding('exchange.name')).getText()).toBe('Coinbase Configuration');
+//             expect(element(by.binding('bot.name')).getText()).toBe('Coinbase Configuration');
 //         });
 //
 //         it('Should display expected Coinbase Market configuration', function () {
 //
 //             /*
-//              * NOTE: For form input fields, you have to use by.model('exchange.market.counterCurrency') AND
+//              * NOTE: For form input fields, you have to use by.model('bot.market.counterCurrency') AND
 //              * getAttribute('value') instead of getText() !
 //              */
-//             expect(element(by.model('exchange.market.label')).getAttribute('value')).toBe('BTC/GBP');
-//             expect(element(by.model('exchange.market.id')).getAttribute('value')).toBe('BTC-GBP');
-//             expect(element(by.model('exchange.market.baseCurrency')).getAttribute('value')).toBe('BTC');
-//             expect(element(by.model('exchange.market.counterCurrency')).getAttribute('value')).toBe('GBP');
+//             expect(element(by.model('bot.market.label')).getAttribute('value')).toBe('BTC/GBP');
+//             expect(element(by.model('bot.market.id')).getAttribute('value')).toBe('BTC-GBP');
+//             expect(element(by.model('bot.market.baseCurrency')).getAttribute('value')).toBe('BTC');
+//             expect(element(by.model('bot.market.counterCurrency')).getAttribute('value')).toBe('GBP');
 //
-//             expect(element(by.binding('exchange.market.enabled')).getText()).toContain('\u2713'); // true/ticked
+//             expect(element(by.binding('bot.market.enabled')).getText()).toContain('\u2713'); // true/ticked
 //         });
 //
 //     });

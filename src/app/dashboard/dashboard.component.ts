@@ -16,11 +16,11 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/startWith';
 
 /**
- * The Dashboard displays the Exchanges the bots are running on.
+ * The Dashboard displays the Bots.
  *
  * It provides the landing screen and Command & Control centre for the app.
  *
- * The component also demonstrates use of RxJS Observables to display the Exchanges:
+ * The component also demonstrates use of RxJS Observables to display the Bots:
  * http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html
  *
  * @author gazbert
@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
     /**
      * The Bot Observable is a stream of Bot events that can be processed with array-like operators.
      */
-    exchanges: Observable<Bot[]>;
+    bots: Observable<Bot[]>;
 
     /**
      * A Subject is a producer of an Observable event stream.
@@ -46,11 +46,11 @@ export class DashboardComponent implements OnInit {
     private searchTerms = new Subject<string>();
     private errorMessage: string;
 
-    constructor(private router: Router, private exchangeDataService: BotHttpDataObservableService) {
+    constructor(private router: Router, private botDataService: BotHttpDataObservableService) {
     }
 
     /**
-     * Our ngOnInit sets up the Observable of Exchanges.
+     * Our ngOnInit sets up the Observable Bots.
      *
      * It turns the stream of search terms into a stream of Bot arrays and assigns the result to the
      * bots property.
@@ -58,12 +58,12 @@ export class DashboardComponent implements OnInit {
      * Based off Observable example in the main Angular tutorial:
      * https://angular.io/docs/ts/latest/tutorial/toh-pt6.html#
      *
-     * We don't pass every user keystroke directly to the ExchangeHttpDataService, else we'd send a load of HTTP
+     * We don't pass every user keystroke directly to the BotHttpDataService, else we'd send a load of HTTP
      * requests! We achieve this by chaining Observable operators: debounceTime(200) and distinctUntilChanged.
      *
-     * The switchMap calls the ExchangeHttpDataService for each search term that makes it through the debounce and
+     * The switchMap calls the BotHttpDataService for each search term that makes it through the debounce and
      * distinctUntilChanged checks. It cancels and discards previous search Observables, returning only the
-     * latest ExchangeHttpDataService Observable.
+     * latest BotHttpDataService Observable.
      *
      * Every qualifying key event can trigger an HTTP method call. Even with a 200ms pause between requests,
      * there could be multiple HTTP requests in flight, and they may not return in the order sent.
@@ -71,20 +71,20 @@ export class DashboardComponent implements OnInit {
      * method call. Results from prior calls are canceled and discarded.
      *
      * If the search text is empty, we short-circuit the HTTP method call, and return an Observable containing the
-     * first 8 Exchanges.
+     * first 8 Bots.
      *
-     * NOTE: canceling the ExchangeHttpDataService observable won't actually abort a pending HTTP request. Angular does
+     * NOTE: canceling the BotHttpDataService observable won't actually abort a pending HTTP request. Angular does
      * not support this yet - it just discards unwanted results.
      */
     ngOnInit(): void {
-        this.exchanges = this.searchTerms
+        this.bots = this.searchTerms
             .debounceTime(200)        // wait 200ms after each keystroke before considering the term
             .distinctUntilChanged()   // ignore if next search term is same as previous
             .switchMap(term => term   // switch to new Observable each time the term changes
                 // return the http search Observable
-                ? this.exchangeDataService.getBotByName(term)
-                // or the first 8 Exchanges if there was no search term entered by user
-                : this.exchangeDataService.getBots().toPromise().then((exchanges) => exchanges.slice(0, 8)))
+                ? this.botDataService.getBotByName(term)
+                // or the first 8 Bots if there was no search term entered by user
+                : this.botDataService.getBots().toPromise().then((bots) => bots.slice(0, 8)))
             .catch(error => {
                 // TODO - Show meaningful error to user? Redirect to friendly error page?
                 this.errorMessage = error;
@@ -95,7 +95,7 @@ export class DashboardComponent implements OnInit {
     }
 
     ngAfterViewInit() {
-        // trigger initial display of Exchanges.
+        // trigger initial display of Bots.
         this.searchTerms.next('');
     }
 
@@ -103,12 +103,12 @@ export class DashboardComponent implements OnInit {
         this.searchTerms.next(term);
     }
 
-    gotoExchangeDetails(exchange: Bot): void {
+    gotoBotDetails(bot: Bot): void {
         // TODO - when to use navigate vs navigateByUrl ?
-        // let link = ['/exchange', exchange.id];
+        // let link = ['/bot', bot.id];
         // this.router.navigate(link);
 
-        let url = `/exchange/${exchange.id}`;
+        let url = `/bot/${bot.id}`;
         this.router.navigateByUrl(url);
     }
 }

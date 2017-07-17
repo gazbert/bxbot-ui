@@ -3,7 +3,7 @@ import {Bot} from '../model/bot';
 
 /**
  * Represents a Dashboard Item component.
- * Essentially, an item is the Bot the bot is running on.
+ * An item is a Bot!
  *
  * @author gazbert
  */
@@ -14,11 +14,11 @@ import {Bot} from '../model/bot';
     styleUrls: ['dashboard-item.component.css']
 })
 export class DashboardItemComponent {
-    @Input() exchange: Bot;
+    @Input() bot: Bot;
     @Output() selected = new EventEmitter<Bot>();
 
     click() {
-        this.selected.next(this.exchange);
+        this.selected.next(this.bot);
     }
 }
 

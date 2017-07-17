@@ -29,10 +29,10 @@ describe('Exchange Adapter Tests', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(0).click();
-        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Config Details');
+        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
 
         expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.bots.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
@@ -104,10 +104,10 @@ describe('Exchange Adapter Tests', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(0).click();
-        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Config Details');
+        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
 
         expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.bots.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
@@ -165,7 +165,7 @@ describe('Exchange Adapter Tests', function () {
         dashboardItems.get(0).click();
 
         expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.bots.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
@@ -179,10 +179,10 @@ describe('Exchange Adapter Tests', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(0).click();
-        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Config Details');
+        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
 
         expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.bots.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
@@ -208,7 +208,7 @@ describe('Exchange Adapter Tests', function () {
 
         // Same as before
         expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.bots.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
@@ -225,10 +225,10 @@ describe('Exchange Adapter Tests', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(0).click();
-        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Config Details');
+        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
 
         expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.bots.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
@@ -248,7 +248,7 @@ describe('Exchange Adapter Tests', function () {
 
         // Same as before
         expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.bots.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
         // Original Error Code 2 (522) moved
@@ -263,10 +263,10 @@ describe('Exchange Adapter Tests', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(0).click();
-        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Config Details');
+        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
 
         expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.bots.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
@@ -292,7 +292,7 @@ describe('Exchange Adapter Tests', function () {
 
         // Same as before
         expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.bots.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
@@ -309,10 +309,10 @@ describe('Exchange Adapter Tests', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(0).click();
-        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Config Details');
+        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
 
         expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.bots.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
@@ -332,7 +332,7 @@ describe('Exchange Adapter Tests', function () {
 
         // Same as before
         expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.bots.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
@@ -346,10 +346,10 @@ describe('Exchange Adapter Tests', function () {
 
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(0).click();
-        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Config Details');
+        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
 
         expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.bots.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');

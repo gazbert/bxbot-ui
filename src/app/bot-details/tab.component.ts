@@ -21,6 +21,6 @@ import {Component, Input} from '@angular/core';
 })
 export class TabComponent {
     @Input('tabTitle') title: string;
-    @Input('exchangeId') exchangeId: string;
+    @Input('tabId') id: string;
     @Input() active = false;
 }

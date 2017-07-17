@@ -43,7 +43,7 @@ describe('Dashboard Tests', function () {
 
         // TODO below does not work with Angular2 :-(
         // https://github.com/angular/protractor/issues/3205
-        // let dashboardItems = element.all(by.repeater('exchange in bots'));
+        // let dashboardItems = element.all(by.repeater('bot in bots'));
 
         // so we'll resort to CSS locator instead
         let dashboardItems = element.all(by.css('bx-dashboard-item'));
@@ -65,7 +65,7 @@ describe('Dashboard Tests', function () {
         dashboardItems.get(2).click();
 
         browser.getCurrentUrl().then(function (url) {
-            expect(url).toContain('/exchange/gemini');
+            expect(url).toContain('/bot/gemini');
         });
     });
 

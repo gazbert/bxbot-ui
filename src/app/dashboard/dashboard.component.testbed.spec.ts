@@ -12,7 +12,7 @@ import {BotHttpDataObservableService} from '../model/bot';
 import {SOME_FAKE_OBSERVABLE_BOTS} from "../model/bot/testing/fake-bot-data-observable.service";
 
 /**
- * Tests the behaviour of the Trading Strategies component is as expected.
+ * Tests the behaviour of the Dashboard component is as expected.
  *
  * It uses the Angular TestBed and a stubbed FakeBotDataObservableService.
  *
@@ -24,7 +24,7 @@ import {SOME_FAKE_OBSERVABLE_BOTS} from "../model/bot/testing/fake-bot-data-obse
  */
 let dashboardComponent: DashboardComponent;
 let fixture: ComponentFixture<DashboardComponent>;
-const BITSTAMP_EXCHANGE = 0;
+const BITSTAMP_BOT = 0;
 
 /**
  * Add our custom Jasmine matchers.
@@ -68,7 +68,7 @@ xdescribe('DashboardComponent tests with TestBed (shallow)', () => {
     function clickForShallow() {
         const dashboardItemElement = fixture.debugElement.query(By.css('bx-dashboard-item'));
         // Triggers event to select the first <bx-dashboard-item> DebugElement
-        dashboardItemElement.triggerEventHandler('selected', SOME_FAKE_OBSERVABLE_BOTS[BITSTAMP_EXCHANGE]);
+        dashboardItemElement.triggerEventHandler('selected', SOME_FAKE_OBSERVABLE_BOTS[BITSTAMP_BOT]);
     }
 });
 
@@ -96,13 +96,13 @@ xdescribe('DashboardComponent tests with TestBed (deep)', () => {
  * The (almost) same tests for both.
  * Only change: the way that the first Bot is clicked.
  */
-function tests(exchangeClick: Function) {
+function tests(botClick: Function) {
 
     it('should NOT have Bot items before ngOnInit', () => {
-        expect(dashboardComponent.exchanges).not.toBeDefined('should not have Exchanges items before ngOnInit called');
+        expect(dashboardComponent.bots).not.toBeDefined('should not have Bots items before ngOnInit called');
     });
 
-    describe('After ExchangeDataService getBots() Observable is subscribed to', () => {
+    describe('After BotDataService getBots() Observable is subscribed to', () => {
 
         /*
          * Hack to prevent runtime test error:
@@ -126,14 +126,14 @@ function tests(exchangeClick: Function) {
 
         it('should have fetched 3 Bot items', (done) => {
             dashboardComponent.ngOnInit();
-            dashboardComponent.exchanges.do((exchanges) => {
+            dashboardComponent.bots.do((bots) => {
 
-                expect(exchanges.length).toBe(3, 'should have 3 Bot items after ngAfterViewInit');
+                expect(bots.length).toBe(3, 'should have 3 Bot items after ngAfterViewInit');
 
                 // paranoia!
-                expect(exchanges[0].id).toBe('bitstamp');
-                expect(exchanges[1].id).toBe('gdax');
-                expect(exchanges[2].id).toBe('gemini');
+                expect(bots[0].id).toBe('bitstamp');
+                expect(bots[1].id).toBe('gdax');
+                expect(bots[2].id).toBe('gemini');
 
                 done();
             }).toPromise(); // MUST have this for test to work!
@@ -143,8 +143,8 @@ function tests(exchangeClick: Function) {
         it('should display 3 Bot items', () => {
             // Find and examine the displayed bots
             // Look for them in the DOM by css class
-            const exchanges = fixture.debugElement.queryAll(By.css('bx-dashboard-item'));
-            expect(exchanges.length).toBe(3, 'should display 3 Bot items');
+            const bots = fixture.debugElement.queryAll(By.css('bx-dashboard-item'));
+            expect(bots.length).toBe(3, 'should display 3 Bot items');
         });
 
         it('should tell Router to navigate when Bot item selected',
@@ -155,14 +155,14 @@ function tests(exchangeClick: Function) {
                 const spy = spyOn(router, 'navigateByUrl');
 
                 // callback: trigger click on first inner <div class='item'> OR bx-dashboard-item triggerEventHandler
-                exchangeClick();
+                botClick();
 
                 // args passed to router.navigateByUrl()
                 const navArgs = spy.calls.first().args[0];
 
                 // expecting to navigate to id of the component's first Bot
-                expect(navArgs).toBe('/exchange/' + SOME_FAKE_OBSERVABLE_BOTS[BITSTAMP_EXCHANGE].id,
-                    'should nav to ExchangeDetailsComponent for first Bot');
+                expect(navArgs).toBe('/bot/' + SOME_FAKE_OBSERVABLE_BOTS[BITSTAMP_BOT].id,
+                    'should nav to BotDetailsComponent for first Bot');
             })
         );
     });

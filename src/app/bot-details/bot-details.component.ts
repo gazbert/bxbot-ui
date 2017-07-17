@@ -3,19 +3,19 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Bot, BotHttpDataPromiseService} from '../model/bot';
 
 /**
- * Container for holding the config screens.
+ * Container for holding the Bot config and status screens.
  *
  * @author gazbert
  */
 @Component({
     moduleId: module.id,
-    selector: 'bx-exchange-details',
-    templateUrl: 'exchange-details.component.html',
-    styleUrls: ['exchange-details.component.css']
+    selector: 'bx-bot-details',
+    templateUrl: 'bot-details.component.html',
+    styleUrls: ['bot-details.component.css']
 })
-export class ExchangeDetailsComponent implements OnInit {
+export class BotDetailsComponent implements OnInit {
 
-    exchange: Bot;
+    bot: Bot;
     active = true;
 
     constructor(private exchangeDataService: BotHttpDataPromiseService, private route: ActivatedRoute,
@@ -26,7 +26,7 @@ export class ExchangeDetailsComponent implements OnInit {
         this.route.params.forEach((params: Params) => {
             let id = params['id'];
             this.exchangeDataService.getBot(id)
-                .then(exchange => this.exchange = exchange);
+                .then(bot => this.bot = bot);
         }).then(() => {/*done*/});
     }
 }

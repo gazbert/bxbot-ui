@@ -18,8 +18,8 @@ import {CanActivateAuthGuard} from './shared';
             {path: 'login', component: LoginComponent},
             {path: 'logout', component: LoginComponent},
             {
-                path: 'exchange',
-                loadChildren: 'app/exchange-details/exchange-details.module#ExchangeDetailsModule',
+                path: 'bot',
+                loadChildren: 'app/bot-details/bot-details.module#BotDetailsModule',
                 canActivate: [CanActivateAuthGuard]
             }
             // {path: 'settings', component: SettingsComponent, canActivate: [CanActivateAuthGuard]},

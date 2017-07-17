@@ -5,7 +5,7 @@ import {FakeBotDataObservableService} from '../model/bot/testing';
 import {Bot} from '../model/bot';
 
 /**
- * Tests the behaviour of the Trading Strategies component is as expected.
+ * Tests the behaviour of the Dashboard component is as expected.
  *
  * It uses Fake/Dummy/Stubbed collaborators instead of Jasmine Spies for the
  * tests. I think I prefer the spy method - less boiler plate stub code to write.
@@ -18,29 +18,29 @@ import {Bot} from '../model/bot';
 xdescribe('DashboardComponent tests without TestBed', () => {
 
     let comp: DashboardComponent;
-    let exchangeDataService: FakeBotDataObservableService;
+    let botDataService: FakeBotDataObservableService;
     let router: Router;
 
     beforeEach(() => {
         addMatchers();
         router = new FakeRouter() as any as Router;
-        exchangeDataService = new FakeBotDataObservableService(null, null);// new AuthenticationService(http)); // TODO mock the Auth service when re-enable tests!
-        comp = new DashboardComponent(router, exchangeDataService);
+        botDataService = new FakeBotDataObservableService(null, null);// new AuthenticationService(http)); // TODO mock the Auth service when re-enable tests!
+        comp = new DashboardComponent(router, botDataService);
     });
 
     it('should NOT have Bot items before calling ngOnInit', () => {
-        expect(comp.exchanges).not.toBeDefined('should not have Exchanges items before ngOnInit called');
+        expect(comp.bots).not.toBeDefined('should not have Bots items before ngOnInit called');
     });
 
     it('should have 3 Bot items after ngAfterViewInit', (done) => {
         comp.ngOnInit();
-        comp.exchanges.subscribe((exchanges) => {
-            expect(exchanges.length).toBe(3, 'should have 3 Bot items after ngAfterViewInit');
+        comp.bots.subscribe((bots) => {
+            expect(bots.length).toBe(3, 'should have 3 Bot items after ngAfterViewInit');
 
             // paranoia!
-            expect(exchanges[0].id).toBe('bitstamp');
-            expect(exchanges[1].id).toBe('gdax');
-            expect(exchanges[2].id).toBe('gemini');
+            expect(bots[0].id).toBe('bitstamp');
+            expect(bots[1].id).toBe('gdax');
+            expect(bots[2].id).toBe('gemini');
 
             done(); // https://github.com/jasmine/jasmine/issues/694
         });
@@ -50,9 +50,9 @@ xdescribe('DashboardComponent tests without TestBed', () => {
     // FIXME - search not working ;-/
     xit('should have Gemini Bot item after user searches for \'ge\'', (done) => {
         comp.ngOnInit();
-        comp.exchanges.subscribe((exchanges) => {
-            expect(exchanges.length).toBe(1, 'should have 1 Gemini Bot item');
-            expect(exchanges[0].id).toBe('gemini');
+        comp.bots.subscribe((bots) => {
+            expect(bots.length).toBe(1, 'should have 1 Gemini Bot item');
+            expect(bots[0].id).toBe('gemini');
 
             done(); // https://github.com/jasmine/jasmine/issues/694
         });
@@ -60,12 +60,12 @@ xdescribe('DashboardComponent tests without TestBed', () => {
         comp.search('ge');
     });
 
-    it('should tell Router to navigate by ExchangeId when Bot item selected', () => {
-        const testExchange = new Bot('gdax', 'GDAX', 'Running');
+    it('should tell Router to navigate by BotId when Bot item selected', () => {
+        const testBot = new Bot('gdax', 'GDAX', 'Running');
         const spy = spyOn(router, 'navigateByUrl');
-        comp.gotoExchangeDetails(testExchange);
+        comp.gotoBotDetails(testBot);
         const navArgs = spy.calls.mostRecent().args[0];
-        expect(navArgs).toBe('/exchange/gdax', 'should navigate to GDAX Bot Details for selected Bot');
+        expect(navArgs).toBe('/bot/gdax', 'should navigate to GDAX Bot Details for selected Bot');
     });
 });
 
