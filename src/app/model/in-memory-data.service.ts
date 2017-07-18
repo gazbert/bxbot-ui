@@ -67,7 +67,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 id: 'bitstamp',
                 name: 'Bitstamp REST API Adapter',
-                className: 'com.gazbert.bxbot.bots.BitstampExchangeAdapter',
+                className: 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 60,
                     nonFatalErrorHttpStatusCodes: [
@@ -83,7 +83,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 id: 'gdax',
                 name: 'GDAX REST API Adapter',
-                className: 'com.gazbert.bxbot.bots.GdaxExchangeAdapter',
+                className: 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 120,
                     nonFatalErrorHttpStatusCodes: [
@@ -99,7 +99,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 id: 'gemini',
                 name: 'Gemini REST API Adapter',
-                className: 'com.gazbert.bxbot.bots.GeminiExchangeAdapter',
+                className: 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 90,
                     nonFatalErrorHttpStatusCodes: [
@@ -115,7 +115,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 id: 'itbit',
                 name: 'ItBit REST API Adapter',
-                className: 'com.gazbert.bxbot.bots.ItBitExchangeAdapter',
+                className: 'com.gazbert.bxbot.exchanges.ItBitExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 30,
                     nonFatalErrorHttpStatusCodes: [
@@ -131,7 +131,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 id: 'btce',
                 name: 'BTC-e API Adapter',
-                className: 'com.gazbert.bxbot.bots.BtceExchangeAdapter',
+                className: 'com.gazbert.bxbot.exchanges.BtceExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 45,
                     nonFatalErrorHttpStatusCodes: [
@@ -147,7 +147,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 id: 'okcoin',
                 name: 'OKCoin REST API Adapter',
-                className: 'com.gazbert.bxbot.bots.OkCoinExchangeAdapter',
+                className: 'com.gazbert.bxbot.exchanges.OkCoinExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 50,
                     nonFatalErrorHttpStatusCodes: [
@@ -163,7 +163,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 id: 'bitfinex',
                 name: 'Bitfinex REST API Adapter',
-                className: 'com.gazbert.bxbot.bots.BitfinexExchangeAdapter',
+                className: 'com.gazbert.bxbot.exchanges.BitfinexExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 20,
                     nonFatalErrorHttpStatusCodes: [
@@ -179,7 +179,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 id: 'huobi',
                 name: 'Huobi REST API Adapter',
-                className: 'com.gazbert.bxbot.bots.HuobiExchangeAdapter',
+                className: 'com.gazbert.bxbot.exchanges.HuobiExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 10,
                     nonFatalErrorHttpStatusCodes: [
@@ -195,7 +195,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 id: 'kraken',
                 name: 'Kraken REST API Adapter',
-                className: 'com.gazbert.bxbot.bots.KrakenExchangeAdapter',
+                className: 'com.gazbert.bxbot.exchanges.KrakenExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 60,
                     nonFatalErrorHttpStatusCodes: [

@@ -1,5 +1,5 @@
 /**
- * Encapsulates an Bot Adapter.
+ * Encapsulates an Exchange Adapter.
  *
  * @author gazbert
  */

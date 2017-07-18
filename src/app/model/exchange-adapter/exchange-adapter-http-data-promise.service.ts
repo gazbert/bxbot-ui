@@ -9,7 +9,7 @@ import {ExchangeAdapterDataPromiseService} from "./exchange-adapter-data-promise
 import 'rxjs/add/operator/toPromise';
 
 /**
- * HTTP implementation of the Bot Adapter Data Service.
+ * HTTP implementation of the Exchange Adapter Data Service.
  *
  * It demonstrates use of Promises in call responses.
  *
@@ -35,14 +35,14 @@ export class ExchangeAdapterHttpDataPromiseService implements ExchangeAdapterDat
             .get(this.exchangeAdaptersUrl)
             .toPromise()
             .then(response => response.json().data as ExchangeAdapter[])
-            .catch(this.handleError);
+            .catch(ExchangeAdapterHttpDataPromiseService.handleError);
     }
 
     getExchangeAdapterByExchangeId(id: string): Promise<ExchangeAdapter> {
         return this.http.get(this.exchangeAdaptersUrl + '/' + id)
             .toPromise()
             .then(response => response.json().data as ExchangeAdapter)
-            .catch(this.handleError);
+            .catch(ExchangeAdapterHttpDataPromiseService.handleError);
     }
 
     update(exchangeAdapter: ExchangeAdapter): Promise<ExchangeAdapter> {
@@ -51,10 +51,10 @@ export class ExchangeAdapterHttpDataPromiseService implements ExchangeAdapterDat
             .put(url, JSON.stringify(exchangeAdapter), {headers: this.headers})
             .toPromise()
             .then(response => response.json().data as ExchangeAdapter)
-            .catch(this.handleError);
+            .catch(ExchangeAdapterHttpDataPromiseService.handleError);
     }
 
-    private handleError(error: any): Promise<any> {
+    private static handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
     }

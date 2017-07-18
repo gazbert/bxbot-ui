@@ -16,7 +16,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/toPromise';
 
 /**
- * HTTP implementation of the Bot Adapter Data Service.
+ * HTTP implementation of the Exchange Adapter Data Service.
  *
  * It demonstrates use of Observables in call responses.
  *
@@ -38,15 +38,15 @@ export class ExchangeAdapterHttpDataObservableService implements ExchangeAdapter
 
     getExchangeAdapters(): Observable<ExchangeAdapter[]> {
         return this.http.get(this.exchangeAdaptersUrl)
-            .map(this.extractData)
-            .catch(this.handleError);
+            .map(ExchangeAdapterHttpDataObservableService.extractData)
+            .catch(ExchangeAdapterHttpDataObservableService.handleError);
     }
 
     getExchangeAdapterByExchangeId(id: string): Observable<ExchangeAdapter> {
         return this.http
             .get(this.exchangeAdaptersUrl + '/' + id)
             .map((r: Response) => r.json().data as ExchangeAdapter)
-            .catch(this.handleError);
+            .catch(ExchangeAdapterHttpDataObservableService.handleError);
     }
 
     update(exchangeAdapter: ExchangeAdapter): Observable<ExchangeAdapter> {
@@ -56,11 +56,11 @@ export class ExchangeAdapterHttpDataObservableService implements ExchangeAdapter
         let options = new RequestOptions({ headers: headers });
 
         return this.http.put(url, body, options)
-            .map(this.extractData)
-            .catch(this.handleError);
+            .map(ExchangeAdapterHttpDataObservableService.extractData)
+            .catch(ExchangeAdapterHttpDataObservableService.handleError);
     }
 
-    private handleError (error: any) {
+    private static handleError (error: any) {
         // In a real world app, we might use a remote logging infrastructure
         // We'd also dig deeper into the error to get a better message
         let errMsg = (error.message) ? error.message :
@@ -69,7 +69,7 @@ export class ExchangeAdapterHttpDataObservableService implements ExchangeAdapter
         return Observable.throw(errMsg);
     }
 
-    private extractData(res: Response) {
+    private static extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Bad response status: ' + res.status);
         }

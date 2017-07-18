@@ -1,14 +1,14 @@
 import {ExchangeAdapter, NetworkConfig} from "./exchange-adapter.model";
 
 /**
- * Tests the Bot Adapter model behaves as expected.
+ * Tests the Exchange Adapter model behaves as expected.
  *
  * @author gazbert
  */
-describe('Bot Adapter model tests', () => {
+describe('Exchange Adapter model tests', () => {
 
     it('should have correct initial values', () => {
-        const exchangeAdapter = new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.bots.GdaxExchangeAdapter',
+        const exchangeAdapter = new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
                 new NetworkConfig(60,
                     [
                         {value: 503},
@@ -24,7 +24,7 @@ describe('Bot Adapter model tests', () => {
 
         expect(exchangeAdapter.id).toBe('gdax');
         expect(exchangeAdapter.name).toBe('GDAX');
-        expect(exchangeAdapter.className).toBe('com.gazbert.bxbot.bots.GdaxExchangeAdapter');
+        expect(exchangeAdapter.className).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
         expect(exchangeAdapter.networkConfig.connectionTimeout).toBe(60);
 
         expect(exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0].value).toBe(503);
@@ -37,7 +37,7 @@ describe('Bot Adapter model tests', () => {
     });
 
     it('should clone itself', () => {
-        const exchangeAdapter = new ExchangeAdapter('btce', 'BTC-e', 'com.gazbert.bxbot.bots.BtceExchangeAdapter',
+        const exchangeAdapter = new ExchangeAdapter('btce', 'BTC-e', 'com.gazbert.bxbot.exchanges.BtceExchangeAdapter',
                 new NetworkConfig(60,
                     [
                         {value: 503},

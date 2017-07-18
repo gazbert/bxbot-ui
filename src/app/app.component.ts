@@ -42,6 +42,7 @@ export class AppComponent {
      */
     public static REST_API_BASE_URL = 'app/';
 
+
     isLoggedIn(): boolean {
         return AuthenticationService.isLoggedIn();
     }

@@ -2,7 +2,7 @@ import "rxjs/add/operator/toPromise";
 import {ExchangeAdapter} from "./exchange-adapter.model";
 
 /**
- * The Bot Adapter Data Service provides operations to update Bot Adapter configuration.
+ * The Exchange Adapter Data Service provides operations to update Exchange Adapter configuration.
  * It demonstrates use of Promises in the operation responses.
  *
  * @author gazbert
