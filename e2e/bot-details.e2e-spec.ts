@@ -47,7 +47,7 @@ describe('Bot Details Tests', function () {
         expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
 
         expect(element(by.id('adapterName')).getAttribute('value')).toBe('GDAX REST API Adapter');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.bots.GdaxExchangeAdapter');
+        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('120');
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
         expect(element(by.id('errorCode_1')).getAttribute('value')).toBe('522');
