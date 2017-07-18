@@ -32,7 +32,7 @@ describe('Main Application Component tests', function () {
         el = de.nativeElement;
 
         fixture.detectChanges();
-        expect(el.textContent).toContain(appComponentUnderTest.title);
+        expect(el.textContent).toContain(AppComponent.TITLE);
     });
 
     xit('should display a different app title', () => {
@@ -40,7 +40,7 @@ describe('Main Application Component tests', function () {
         de = fixture.debugElement.query(By.css('h1'));
         el = de.nativeElement;
 
-        appComponentUnderTest.title = 'Nostromo Title';
+        AppComponent.TITLE = 'Nostromo Title';
         fixture.detectChanges();
         expect(el.textContent).toContain('Nostromo Title');
     });

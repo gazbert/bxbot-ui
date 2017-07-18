@@ -9,17 +9,20 @@ import {AuthenticationService} from './shared/authentication.service';
 @Component({
     selector: 'bxbot-ui',
     template: `
-    <div class="container module-bootstrap">
-        <h1>{{title}}</h1>
-        <nav>
-            <a id="dashboardButton" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-            <a id="settingsButton">Settings</a>
-            <a id="logoutButton" class="logout-btn" routerLink="/login" routerLinkActive="active" *ngIf="isLoggedIn()">Logout</a>
-        </nav>
-        <router-outlet></router-outlet>
-    </div>`
+        <div class="container module-bootstrap">
+            <h1>{{getTitle()}}</h1>
+            <nav>
+                <a id="dashboardButton" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+                <a id="settingsButton">Settings</a>
+                <a id="logoutButton" class="logout-btn" routerLink="/login" routerLinkActive="active"
+                   *ngIf="isLoggedIn()">Logout</a>
+            </nav>
+            <router-outlet></router-outlet>
+        </div>`
 })
 export class AppComponent {
+
+    public static TITLE = 'BX-bot Admin Console';
 
     /**
      * Base URL to real server's authentication endpoint.
@@ -39,12 +42,11 @@ export class AppComponent {
      */
     public static REST_API_BASE_URL = 'app/';
 
-    title = 'BX-bot Admin Console';
-
-    constructor(private authenticationService: AuthenticationService) {
-    }
-
     isLoggedIn(): boolean {
         return AuthenticationService.isLoggedIn();
+    }
+
+    getTitle() {
+        return AppComponent.TITLE;
     }
 }
