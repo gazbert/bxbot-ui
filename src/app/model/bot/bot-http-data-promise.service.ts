@@ -34,14 +34,14 @@ export class BotHttpDataPromiseService implements BotDataPromiseService {
         return this.http.get(this.botUrl)
             .toPromise()
             .then(response => response.json().data as Bot[])
-            .catch(this.handleError);
+            .catch(BotHttpDataPromiseService.handleError);
     }
 
     getBot(id: string): Promise<Bot> {
         return this.http.get(this.botUrl + '/' + id)
             .toPromise()
             .then(response => response.json().data as Bot)
-            .catch(this.handleError);
+            .catch(BotHttpDataPromiseService.handleError);
     }
 
     update(bot: Bot): Promise<Bot> {
@@ -50,10 +50,10 @@ export class BotHttpDataPromiseService implements BotDataPromiseService {
             .put(url, JSON.stringify(bot), {headers: this.headers})
             .toPromise()
             .then(response => response.json().data as Bot)
-            .catch(this.handleError);
+            .catch(BotHttpDataPromiseService.handleError);
     }
 
-    private handleError(error: any): Promise<any> {
+    private static handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
     }

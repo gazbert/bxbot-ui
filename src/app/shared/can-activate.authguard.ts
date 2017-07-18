@@ -3,7 +3,7 @@ import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from "
 import {AuthenticationService} from "./authentication.service";
 
 /**
- * Broken - does not seem to be invoked!
+ * FIXME - Broken - does not seem to get invoked and block the routes if the user is not logged in :-(
  */
 @Injectable()
 export class CanActivateAuthGuard implements CanActivate {
@@ -12,12 +12,9 @@ export class CanActivateAuthGuard implements CanActivate {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-
-        if (this.authService.isLoggedIn()) {
-            // logged in so return true
+        if (AuthenticationService.isLoggedIn()) {
             return true;
         } else {
-            // not logged in so redirect to login page with the return url and return false
             this.router.navigate(['/login']);
             return false;
         }

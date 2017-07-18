@@ -41,7 +41,7 @@ xdescribe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend'
 
     it('should instantiate service with "new"', inject([Http], (http: Http) => {
         expect(http).not.toBeNull('http should be provided');
-        let service = new BotDataService(http, new AuthenticationService(http)); // TODO mock the Auth service when re-enable tests!;
+        let service = new BotDataService(http);
         expect(service instanceof BotDataService).toBe(true,
             'new service should be instance of BotDataService');
     }));
@@ -60,7 +60,7 @@ xdescribe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend'
 
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
             backend = be;
-            service = new BotDataService(http, new AuthenticationService(http)); // TODO mock the Auth service when re-enable tests!);
+            service = new BotDataService(http);
             fakeBots = makeBotData();
             let options = new ResponseOptions({status: 200, body: {data: fakeBots}});
             response = new Response(options);
@@ -114,7 +114,7 @@ xdescribe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend'
 
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
             backend = be;
-            service = new BotDataService(http, new AuthenticationService(http)); // TODO mock the Auth service when re-enable tests!
+            service = new BotDataService(http);
             fakeBots = makeBotData();
             let options = new ResponseOptions({status: 200, body: {data: fakeBots[GDAX_BOT]}});
             response = new Response(options);
@@ -166,7 +166,7 @@ xdescribe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend'
             updatedBot = new Bot('bitstamp', 'Bitstamp v2', 'Stopped');
 
             backend = be;
-            service = new BotDataService(http, new AuthenticationService(http)); // TODO mock the Auth service when re-enable tests!
+            service = new BotDataService(http);
             let options = new ResponseOptions({status: 200, body: {data: updatedBot}});
             response = new Response(options);
         }));
@@ -224,7 +224,7 @@ xdescribe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend'
 
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
             backend = be;
-            service = new BotDataService(http, new AuthenticationService(http)); // TODO mock the Auth service when re-enable tests!
+            service = new BotDataService(http);
             fakeBots = makeBotData();
             let options = new ResponseOptions({status: 200, body: {data: fakeBots[GDAX_BOT]}});
             response = new Response(options);

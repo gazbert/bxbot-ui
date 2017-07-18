@@ -34,54 +34,54 @@ export class BotHttpDataObservableService implements BotDataObservableService {
 
     private botUrl = AppComponent.REST_API_BASE_URL + 'bots';
 
-    constructor(private http: Http, private authenticationService: AuthenticationService) {
+    constructor(private http: Http) {
     }
 
     getBots(): Observable<Bot[]> {
 
         let headers = new Headers({
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + this.authenticationService.getToken()
+            'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
         return this.http.get(this.botUrl, {headers: headers})
-            .map(this.extractData)
-            .catch(this.handleError);
+            .map(BotHttpDataObservableService.extractData)
+            .catch(BotHttpDataObservableService.handleError);
     }
 
     getBot(id: string): Observable<Bot> {
 
         let headers = new Headers({
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + this.authenticationService.getToken()
+            'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
         return this.http
             .get(this.botUrl + '/' + id, {headers: headers})
             .map((r: Response) => r.json().data as Bot)
             // .map(this.extractData)
-            .catch(this.handleError);
+            .catch(BotHttpDataObservableService.handleError);
     }
 
     getBotByName(name: string): Observable<Bot[]> {
 
         let headers = new Headers({
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + this.authenticationService.getToken()
+            'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
         return this.http
             .get(this.botUrl + '/?name=' + name, {headers: headers})
-            .map(this.extractData)
+            .map(BotHttpDataObservableService.extractData)
             // .map((r: Response) => r.json().data as Bot[])
-            .catch(this.handleError);
+            .catch(BotHttpDataObservableService.handleError);
     }
 
     update(bot: Bot): Observable<Bot> {
 
         let headers = new Headers({
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + this.authenticationService.getToken()
+            'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
         const url = `${this.botUrl}/${bot.id}`;
@@ -89,11 +89,11 @@ export class BotHttpDataObservableService implements BotDataObservableService {
         let options = new RequestOptions({ headers: headers });
 
         return this.http.put(url, body, options)
-            .map(this.extractData)
-            .catch(this.handleError);
+            .map(BotHttpDataObservableService.extractData)
+            .catch(BotHttpDataObservableService.handleError);
     }
 
-    private handleError (error: any) {
+    private static handleError (error: any) {
         // In a real world app, we might use a remote logging infrastructure
         // We'd also dig deeper into the error to get a better message
         // Redirect to friendly error page?
@@ -103,7 +103,7 @@ export class BotHttpDataObservableService implements BotDataObservableService {
         return Observable.throw(errMsg);
     }
 
-    private extractData(res: Response) {
+    private static extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Bad response status: ' + res.status);
         }

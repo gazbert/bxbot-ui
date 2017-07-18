@@ -15,7 +15,7 @@ import {Bot} from '../model/bot';
  *
  * @author gazbert
  */
-xdescribe('DashboardComponent tests without TestBed', () => {
+describe('DashboardComponent tests without TestBed', () => {
 
     let comp: DashboardComponent;
     let botDataService: FakeBotDataObservableService;
@@ -24,7 +24,7 @@ xdescribe('DashboardComponent tests without TestBed', () => {
     beforeEach(() => {
         addMatchers();
         router = new FakeRouter() as any as Router;
-        botDataService = new FakeBotDataObservableService(null, null);// new AuthenticationService(http)); // TODO mock the Auth service when re-enable tests!
+        botDataService = new FakeBotDataObservableService(null);
         comp = new DashboardComponent(router, botDataService);
     });
 
