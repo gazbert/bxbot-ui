@@ -25,7 +25,7 @@ describe('Main Application Component tests', function () {
             });
     }));
 
-    xit('should display original BX-bot UI title', () => {
+    it('should display original BX-bot UI title', () => {
 
         // query for the title <h1> by CSS element selector
         de = fixture.debugElement.query(By.css('h1'));
@@ -35,7 +35,7 @@ describe('Main Application Component tests', function () {
         expect(el.textContent).toContain(AppComponent.TITLE);
     });
 
-    xit('should display a different app title', () => {
+    it('should display a different app title', () => {
 
         de = fixture.debugElement.query(By.css('h1'));
         el = de.nativeElement;
