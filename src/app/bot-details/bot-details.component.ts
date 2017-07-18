@@ -18,14 +18,14 @@ export class BotDetailsComponent implements OnInit {
     bot: Bot;
     active = true;
 
-    constructor(private exchangeDataService: BotHttpDataPromiseService, private route: ActivatedRoute,
+    constructor(private botDataService: BotHttpDataPromiseService, private route: ActivatedRoute,
                 private router: Router) {
     }
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
             let id = params['id'];
-            this.exchangeDataService.getBot(id)
+            this.botDataService.getBot(id)
                 .then(bot => this.bot = bot);
         }).then(() => {/*done*/});
     }

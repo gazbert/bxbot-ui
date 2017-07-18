@@ -106,5 +106,5 @@ nav a.router-link-active {
 
 .logout-btn {
     float: right;
-    margin-right: 20px;
+    /*margin-right: 20px;*/
 }

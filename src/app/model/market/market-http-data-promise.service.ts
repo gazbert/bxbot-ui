@@ -24,7 +24,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class MarketHttpDataPromiseService implements MarketDataPromiseService {
 
-    private marketsUrl = AppComponent.REST_API_BASE_URL + 'markets';
+    private marketsUrl = AppComponent.REST_API_BASE_URL + '/markets';
     private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private http: Http) {

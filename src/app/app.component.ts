@@ -28,19 +28,19 @@ export class AppComponent {
      * Base URL to real server's authentication endpoint.
      * This is ignored when using in-memory web API.
      */
-    public static AUTH_ENDPOINT_BASE_URL = 'http://localhost:8080/auth';
+    public static AUTH_ENDPOINT_BASE_URL = 'http://localhost:8080';
 
     /**
      * Base URL to real server's REST API endpoints.
      * Uncomment this to use the 'real' backend.
      */
-    // public static REST_API_BASE_URL = 'http://localhost:8080/api/';
+    // public static REST_API_BASE_URL = 'http://localhost:8080/api';
 
     /**
      * Base URL to Angular's in-memory web API endpoints.
      * Uncomment this to use for dev/testing/demos.
      */
-    public static REST_API_BASE_URL = 'app/';
+    public static REST_API_BASE_URL = 'app';
 
 
     isLoggedIn(): boolean {

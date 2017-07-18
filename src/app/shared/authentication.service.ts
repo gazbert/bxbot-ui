@@ -17,7 +17,7 @@ import {AppComponent} from "../app.component";
 @Injectable()
 export class AuthenticationService {
 
-    private authUrl = AppComponent.AUTH_ENDPOINT_BASE_URL + 'auth';
+    private authUrl = AppComponent.AUTH_ENDPOINT_BASE_URL + '/auth';
     private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private http: Http) {

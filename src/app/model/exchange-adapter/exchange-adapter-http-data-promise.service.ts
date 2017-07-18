@@ -1,8 +1,9 @@
-import {Injectable} from "@angular/core";
-import {Http, Headers} from "@angular/http";
-import {AppComponent} from "../../app.component";
-import {ExchangeAdapter} from "./exchange-adapter.model";
-import {ExchangeAdapterDataPromiseService} from "./exchange-adapter-data-promise.service";
+import {Injectable} from '@angular/core';
+import {Http, Headers} from '@angular/http';
+import {AppComponent} from '../../app.component';
+import {ExchangeAdapter} from './exchange-adapter.model';
+import {ExchangeAdapterDataPromiseService} from './exchange-adapter-data-promise.service';
+import {AuthenticationService} from '../../shared/authentication.service';
 
 // Don't forget this else you get runtime error:
 // zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function
@@ -24,31 +25,48 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class ExchangeAdapterHttpDataPromiseService implements ExchangeAdapterDataPromiseService {
 
-    private exchangeAdaptersUrl = AppComponent.REST_API_BASE_URL + 'exchangeAdapters';
-    private headers = new Headers({'Content-Type': 'application/json'});
+    private exchangeAdaptersUrl = AppComponent.REST_API_BASE_URL + '/exchangeAdapters';
 
     constructor(private http: Http) {
     }
 
     getExchangeAdapters(): Promise<ExchangeAdapter[]> {
+
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + AuthenticationService.getToken()
+        });
+
         return this.http
-            .get(this.exchangeAdaptersUrl)
+            .get(this.exchangeAdaptersUrl, {headers: headers})
             .toPromise()
             .then(response => response.json().data as ExchangeAdapter[])
             .catch(ExchangeAdapterHttpDataPromiseService.handleError);
     }
 
     getExchangeAdapterByExchangeId(id: string): Promise<ExchangeAdapter> {
-        return this.http.get(this.exchangeAdaptersUrl + '/' + id)
+
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + AuthenticationService.getToken()
+        });
+
+        return this.http.get(this.exchangeAdaptersUrl + '/' + id, {headers: headers})
             .toPromise()
             .then(response => response.json().data as ExchangeAdapter)
             .catch(ExchangeAdapterHttpDataPromiseService.handleError);
     }
 
     update(exchangeAdapter: ExchangeAdapter): Promise<ExchangeAdapter> {
+
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + AuthenticationService.getToken()
+        });
+
         const url = this.exchangeAdaptersUrl + '/' + exchangeAdapter.id;
         return this.http
-            .put(url, JSON.stringify(exchangeAdapter), {headers: this.headers})
+            .put(url, JSON.stringify(exchangeAdapter), {headers: headers})
             .toPromise()
             .then(response => response.json().data as ExchangeAdapter)
             .catch(ExchangeAdapterHttpDataPromiseService.handleError);

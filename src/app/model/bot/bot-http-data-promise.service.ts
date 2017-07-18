@@ -7,6 +7,7 @@ import {Bot} from "./bot.model";
 // Don't forget this else you get runtime error:
 // zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function
 import 'rxjs/add/operator/toPromise';
+import {AuthenticationService} from "../../shared/authentication.service";
 
 /**
  * HTTP implementation of the Bot Data Service.
@@ -24,30 +25,47 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class BotHttpDataPromiseService implements BotDataPromiseService {
 
-    private botUrl = AppComponent.REST_API_BASE_URL + 'bots';
-    private headers = new Headers({'Content-Type': 'application/json'});
+    private botUrl = AppComponent.REST_API_BASE_URL + '/bots';
 
     constructor(private http: Http) {
     }
 
     getBots(): Promise<Bot[]> {
-        return this.http.get(this.botUrl)
+
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + AuthenticationService.getToken()
+        });
+
+        return this.http.get(this.botUrl, {headers: headers})
             .toPromise()
             .then(response => response.json().data as Bot[])
             .catch(BotHttpDataPromiseService.handleError);
     }
 
     getBot(id: string): Promise<Bot> {
-        return this.http.get(this.botUrl + '/' + id)
+
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + AuthenticationService.getToken()
+        });
+
+        return this.http.get(this.botUrl + '/' + id, {headers: headers})
             .toPromise()
             .then(response => response.json().data as Bot)
             .catch(BotHttpDataPromiseService.handleError);
     }
 
     update(bot: Bot): Promise<Bot> {
+
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + AuthenticationService.getToken()
+        });
+
         const url = `${this.botUrl}/${bot.id}`;
         return this.http
-            .put(url, JSON.stringify(bot), {headers: this.headers})
+            .put(url, JSON.stringify(bot), {headers: headers})
             .toPromise()
             .then(response => response.json().data as Bot)
             .catch(BotHttpDataPromiseService.handleError);

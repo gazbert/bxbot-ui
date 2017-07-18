@@ -1,10 +1,11 @@
-import {Injectable} from "@angular/core";
-import {Http, Headers, Response, RequestOptions} from "@angular/http";
-import {AppComponent} from "../../app.component";
-import {ExchangeAdapter} from "./exchange-adapter.model";
-import {ExchangeAdapterDataObservableService} from "./exchange-adapter-data-observable.service";
+import {Injectable} from '@angular/core';
+import {Http, Headers, Response, RequestOptions} from '@angular/http';
+import {AppComponent} from '../../app.component';
+import {ExchangeAdapter} from './exchange-adapter.model';
+import {ExchangeAdapterDataObservableService} from './exchange-adapter-data-observable.service';
+import {AuthenticationService} from '../../shared/authentication.service';
 import {Observable} from 'rxjs/Observable';
-import {isObject} from "rxjs/util/isObject";
+import {isObject} from 'rxjs/util/isObject';
 
 // Most RxJS operators are not included in Angular's base Observable implementation.
 // The base implementation includes only what Angular itself requires.
@@ -31,29 +32,46 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class ExchangeAdapterHttpDataObservableService implements ExchangeAdapterDataObservableService {
 
-    private exchangeAdaptersUrl = AppComponent.REST_API_BASE_URL + 'exchangeAdapters';
+    private exchangeAdaptersUrl = AppComponent.REST_API_BASE_URL + '/exchangeAdapters';
 
     constructor(private http: Http) {
     }
 
     getExchangeAdapters(): Observable<ExchangeAdapter[]> {
-        return this.http.get(this.exchangeAdaptersUrl)
+
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + AuthenticationService.getToken()
+        });
+
+        return this.http.get(this.exchangeAdaptersUrl, {headers: headers})
             .map(ExchangeAdapterHttpDataObservableService.extractData)
             .catch(ExchangeAdapterHttpDataObservableService.handleError);
     }
 
     getExchangeAdapterByExchangeId(id: string): Observable<ExchangeAdapter> {
+
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + AuthenticationService.getToken()
+        });
+
         return this.http
-            .get(this.exchangeAdaptersUrl + '/' + id)
+            .get(this.exchangeAdaptersUrl + '/' + id, {headers: headers})
             .map((r: Response) => r.json().data as ExchangeAdapter)
             .catch(ExchangeAdapterHttpDataObservableService.handleError);
     }
 
     update(exchangeAdapter: ExchangeAdapter): Observable<ExchangeAdapter> {
+
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + AuthenticationService.getToken()
+        });
+
         const url = this.exchangeAdaptersUrl + '/' + exchangeAdapter.id;
         let body = JSON.stringify(exchangeAdapter);
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+        let options = new RequestOptions({headers: headers});
 
         return this.http.put(url, body, options)
             .map(ExchangeAdapterHttpDataObservableService.extractData)
