@@ -24,8 +24,8 @@ export class BotDetailsComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
-            let id = params['id'];
-            this.botDataService.getBot(id)
+            let botId = params['id'];
+            this.botDataService.getBot(botId)
                 .then(bot => this.bot = bot);
         }).then(() => {/*done*/});
     }

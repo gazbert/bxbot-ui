@@ -23,7 +23,7 @@ export class FakeBotDataObservableService extends BotHttpDataObservableService {
             });
     }
 
-    getBot(id: string): Observable<Bot> {
+    getBot(id: number): Observable<Bot> {
         let bot = this.bots.find(e => e.id === id);
         return Observable.create(observer => {
             observer.next(bot);
@@ -51,7 +51,7 @@ export class FakeBotDataObservableService extends BotHttpDataObservableService {
 }
 
 export var SOME_FAKE_OBSERVABLE_BOTS: Bot[] = [
-    new Bot('bitstamp', 'Bitstamp', 'Running'),
-    new Bot('gdax', 'GDAX', 'Running'),
-    new Bot('gemini', 'Gemini', 'Stopped')
+    new Bot(1, 'Bitstamp', 'Running'),
+    new Bot(2, 'GDAX', 'Running'),
+    new Bot(3, 'Gemini', 'Stopped')
 ];

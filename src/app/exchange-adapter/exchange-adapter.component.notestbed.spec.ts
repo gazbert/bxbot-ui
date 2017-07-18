@@ -39,25 +39,25 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
         expectedNetworkConfig = new NetworkConfig(60, expectedErrorCodes, expectedErrorMsgs);
 
         expectedExchangeAdapter = new ExchangeAdapter('btce', 'BTC-e', 'com.gazbert.bxbot.adapter.BtceExchangeAdapter',
-            expectedNetworkConfig);
+            1, expectedNetworkConfig);
 
         expectedUpdatedExchangeAdapter = new ExchangeAdapter('btce', 'BTC-e', 'com.gazbert.bxbot.adapter.NewBtceExchangeAdapter',
-            expectedNetworkConfig);
+            2, expectedNetworkConfig);
 
         activatedRoute = new ActivatedRouteStub();
-        activatedRoute.testParams = {id: expectedExchangeAdapter.id};
+        activatedRoute.testParams = {id: expectedExchangeAdapter.botId};
 
         router = jasmine.createSpyObj('router', ['navigate']);
 
         spyExchangeAdapterDataService = jasmine.createSpyObj('ExchangeAdapterHttpDataPromiseService',
-            ['getExchangeAdapterByExchangeId', 'update']);
-        spyExchangeAdapterDataService.getExchangeAdapterByExchangeId.and.returnValue(Promise.resolve(expectedExchangeAdapter));
+            ['getExchangeAdapterByBotId', 'update']);
+        spyExchangeAdapterDataService.getExchangeAdapterByBotId.and.returnValue(Promise.resolve(expectedExchangeAdapter));
         spyExchangeAdapterDataService.update.and.returnValue(Promise.resolve(expectedUpdatedExchangeAdapter));
 
         exchangeAdapterComponent = new ExchangeAdapterComponent(spyExchangeAdapterDataService, <any> activatedRoute, router);
         exchangeAdapterComponent.ngOnInit();
 
-        spyExchangeAdapterDataService.getExchangeAdapterByExchangeId.calls.first().returnValue.then(done);
+        spyExchangeAdapterDataService.getExchangeAdapterByBotId.calls.first().returnValue.then(done);
     });
 
     it('should expose ExchangeAdapter config retrieved from ExchangeAdapterDataService', () => {

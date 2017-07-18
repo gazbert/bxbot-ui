@@ -31,11 +31,11 @@ export class EmailAlertsHttpDataPromiseService implements EmailAlertsDataPromise
     }
 
     getEmailAlertsConfigForExchange(exchangeId: string): Promise<EmailAlertsConfig> {
-        const url = this.emailAlertsUrl + '?exchangeId=' + exchangeId;
+        const url = this.emailAlertsUrl + '?exchangeId=' + exchangeId; // TODO - use botId for FK
         return this.http.get(url)
             .toPromise()
             .then(response => response.json().data as EmailAlertsConfig[])
-            .then(emailAlertsConfigs => emailAlertsConfigs.find(emailAlertsConfig => emailAlertsConfig.exchangeId === exchangeId))
+            .then(emailAlertsConfigs => emailAlertsConfigs.find(emailAlertsConfig => emailAlertsConfig.exchangeId == exchangeId))
             .catch(this.handleError);
     }
 

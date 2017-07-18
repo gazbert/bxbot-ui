@@ -19,7 +19,7 @@ export class FakeBotDataPromiseService extends BotHttpDataPromiseService {
         return this.lastPromise = Promise.resolve<Bot[]>(this.bots);
     }
 
-    getBot(id: string) {
+    getBot(id: number) {
         let bot = this.bots.find(e => e.id === id);
         return this.lastPromise = Promise.resolve(bot);
     }
@@ -34,7 +34,7 @@ export class FakeBotDataPromiseService extends BotHttpDataPromiseService {
 }
 
 export var SOME_FAKE_PROMISE_BOTS: Bot[] = [
-    new Bot('bitstamp', 'Bitstamp', 'Running'),
-    new Bot('gdax', 'GDAX', 'Running'),
-    new Bot('gemini', 'Gemini', 'Stopped')
+    new Bot(1, 'Bitstamp', 'Running'),
+    new Bot(2, 'GDAX', 'Running'),
+    new Bot(3, 'Gemini', 'Stopped')
 ];

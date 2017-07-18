@@ -15,13 +15,13 @@ export class FakeExchangeAdapterDataPromiseService extends ExchangeAdapterHttpDa
         return this.lastPromise = Promise.resolve<ExchangeAdapter[]>(this.exchangeAdapters);
     }
 
-    getExchangeAdapterByExchangeId(id: string) {
-        let exchangeAdapter = this.exchangeAdapters.find(e => e.id === id);
+    getExchangeAdapterByBotId(id: number) {
+        let exchangeAdapter = this.exchangeAdapters.find(e => e.botId === id);
         return this.lastPromise = Promise.resolve(exchangeAdapter);
     }
 
     update(exchangeAdapter: ExchangeAdapter): Promise<ExchangeAdapter> {
-        return this.lastPromise = this.getExchangeAdapterByExchangeId(exchangeAdapter.id).then(e => {
+        return this.lastPromise = this.getExchangeAdapterByBotId(exchangeAdapter.botId).then(e => {
             return e ?
                 Object.assign(e, exchangeAdapter) :
                 Promise.reject(`Exchange Adapter ${exchangeAdapter.id} not found`) as any as Promise<ExchangeAdapter>;
@@ -30,7 +30,7 @@ export class FakeExchangeAdapterDataPromiseService extends ExchangeAdapterHttpDa
 }
 
 export var SOME_FAKE_PROMISE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
-    new ExchangeAdapter('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
+    new ExchangeAdapter('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter', 1,
         new NetworkConfig(60,
             [
                 {value: 503},
@@ -43,7 +43,7 @@ export var SOME_FAKE_PROMISE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
                 {value: "Remote host closed connection during handshake"}
             ]
         )),
-    new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
+    new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter', 2,
         new NetworkConfig(60,
             [
                 {value: 503},
@@ -56,7 +56,7 @@ export var SOME_FAKE_PROMISE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
                 {value: "Remote host closed connection during handshake"}
             ]
         )),
-    new ExchangeAdapter('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
+    new ExchangeAdapter('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter', 3,
         new NetworkConfig(60,
             [
                 {value: 503},

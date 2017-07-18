@@ -49,7 +49,7 @@ export class BotHttpDataObservableService implements BotDataObservableService {
             .catch(BotHttpDataObservableService.handleError);
     }
 
-    getBot(id: string): Observable<Bot> {
+    getBot(id: number): Observable<Bot> {
 
         let headers = new Headers({
             'Content-Type': 'application/json',

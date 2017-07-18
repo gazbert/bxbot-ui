@@ -38,9 +38,9 @@ describe('DashboardComponent tests without TestBed', () => {
             expect(bots.length).toBe(3, 'should have 3 Bot items after ngAfterViewInit');
 
             // paranoia!
-            expect(bots[0].id).toBe('bitstamp');
-            expect(bots[1].id).toBe('gdax');
-            expect(bots[2].id).toBe('gemini');
+            expect(bots[0].id).toBe(1);
+            expect(bots[1].id).toBe(2);
+            expect(bots[2].id).toBe(3);
 
             done(); // https://github.com/jasmine/jasmine/issues/694
         });
@@ -61,11 +61,11 @@ describe('DashboardComponent tests without TestBed', () => {
     });
 
     it('should tell Router to navigate by BotId when Bot item selected', () => {
-        const testBot = new Bot('gdax', 'GDAX', 'Running');
+        const testBot = new Bot(1, 'GDAX', 'Running');
         const spy = spyOn(router, 'navigateByUrl');
         comp.gotoBotDetails(testBot);
         const navArgs = spy.calls.mostRecent().args[0];
-        expect(navArgs).toBe('/bot/gdax', 'should navigate to GDAX Bot Details for selected Bot');
+        expect(navArgs).toBe('/bot/1', 'should navigate to GDAX Bot Details for selected Bot');
     });
 });
 

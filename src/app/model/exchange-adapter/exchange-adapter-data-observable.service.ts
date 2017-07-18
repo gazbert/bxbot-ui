@@ -11,7 +11,7 @@ import {ExchangeAdapter} from "./exchange-adapter.model";
 export interface ExchangeAdapterDataObservableService {
 
     getExchangeAdapters(): Observable<ExchangeAdapter[]>;
-    getExchangeAdapterByExchangeId(id: string): Observable<ExchangeAdapter>;
+    getExchangeAdapterByBotId(botId: number): Observable<ExchangeAdapter>;
     update(exchangeAdapter: ExchangeAdapter): Observable<ExchangeAdapter>;
 }
 

@@ -10,6 +10,6 @@ import {Bot} from "./bot.model";
 export interface BotDataPromiseService {
 
     getBots(): Promise<Bot[]>;
-    getBot(id: string): Promise<Bot>;
+    getBot(id: number): Promise<Bot>;
     update(exchange: Bot): Promise<Bot>;
 }

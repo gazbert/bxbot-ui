@@ -44,16 +44,12 @@ export class ExchangeAdapterHttpDataPromiseService implements ExchangeAdapterDat
             .catch(ExchangeAdapterHttpDataPromiseService.handleError);
     }
 
-    getExchangeAdapterByExchangeId(id: string): Promise<ExchangeAdapter> {
-
-        let headers = new Headers({
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + AuthenticationService.getToken()
-        });
-
-        return this.http.get(this.exchangeAdaptersUrl + '/' + id, {headers: headers})
+    getExchangeAdapterByBotId(botId: number): Promise<ExchangeAdapter> {
+        const url = this.exchangeAdaptersUrl + '?botId=' + botId;
+        return this.http.get(url)
             .toPromise()
-            .then(response => response.json().data as ExchangeAdapter)
+            .then(response => response.json().data as ExchangeAdapter[])
+            .then(exchangeAdapters => exchangeAdapters.find(exchangeAdapter => exchangeAdapter.botId == botId))
             .catch(ExchangeAdapterHttpDataPromiseService.handleError);
     }
 

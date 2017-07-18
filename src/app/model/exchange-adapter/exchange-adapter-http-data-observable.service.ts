@@ -49,16 +49,17 @@ export class ExchangeAdapterHttpDataObservableService implements ExchangeAdapter
             .catch(ExchangeAdapterHttpDataObservableService.handleError);
     }
 
-    getExchangeAdapterByExchangeId(id: string): Observable<ExchangeAdapter> {
+    // FIXME - this doe not work
+    getExchangeAdapterByBotId(botId: number): Observable<ExchangeAdapter> {
 
         let headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        return this.http
-            .get(this.exchangeAdaptersUrl + '/' + id, {headers: headers})
-            .map((r: Response) => r.json().data as ExchangeAdapter)
+        const url = this.exchangeAdaptersUrl + '?botId=' + botId;
+        return this.http.get(url, {headers: headers})
+            .map(ExchangeAdapterHttpDataObservableService.extractData)
             .catch(ExchangeAdapterHttpDataObservableService.handleError);
     }
 

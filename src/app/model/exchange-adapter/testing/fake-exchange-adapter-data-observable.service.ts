@@ -19,8 +19,8 @@ export class FakeExchangeAdapterDataObservableService extends ExchangeAdapterHtt
         });
     }
 
-    getExchangeAdapterByExchangeId(id: string): Observable<ExchangeAdapter> {
-        let exchangeAdapter = this.exchangeAdapters.find(e => e.id === id);
+    getExchangeAdapterByBotId(id: number): Observable<ExchangeAdapter> {
+        let exchangeAdapter = this.exchangeAdapters.find(e => e.botId === id);
         return Observable.create(observer => {
             observer.next(exchangeAdapter);
             // call complete if you want to close this stream (like a promise)
@@ -38,7 +38,7 @@ export class FakeExchangeAdapterDataObservableService extends ExchangeAdapterHtt
 }
 
 export var SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
-    new ExchangeAdapter('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
+    new ExchangeAdapter('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter', 1,
         new NetworkConfig(60,
             [
                 {value: 503},
@@ -51,7 +51,7 @@ export var SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
                 {value: "Remote host closed connection during handshake"}
             ]
         )),
-    new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
+    new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter', 2,
         new NetworkConfig(60,
             [
                 {value: 503},
@@ -64,7 +64,7 @@ export var SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
                 {value: "Remote host closed connection during handshake"}
             ]
         )),
-    new ExchangeAdapter('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
+    new ExchangeAdapter('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter', 3,
         new NetworkConfig(60,
             [
                 {value: 503},

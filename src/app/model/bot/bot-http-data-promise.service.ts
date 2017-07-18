@@ -43,7 +43,7 @@ export class BotHttpDataPromiseService implements BotDataPromiseService {
             .catch(BotHttpDataPromiseService.handleError);
     }
 
-    getBot(id: string): Promise<Bot> {
+    getBot(id: number): Promise<Bot> {
 
         let headers = new Headers({
             'Content-Type': 'application/json',

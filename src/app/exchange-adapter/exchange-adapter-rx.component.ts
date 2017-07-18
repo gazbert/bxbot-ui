@@ -74,8 +74,8 @@ export class ExchangeAdapterRxComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
-            let id = params['id'];
-            this.exchangeAdapterDataService.getExchangeAdapterByExchangeId(id)
+            let botId = params['id'];
+            this.exchangeAdapterDataService.getExchangeAdapterByBotId(botId)
                 .subscribe(exchangeAdapter => {
                     this.exchangeAdapter = exchangeAdapter;
                     this.buildForm();

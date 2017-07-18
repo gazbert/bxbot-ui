@@ -8,14 +8,14 @@ import {Bot} from "./bot.model";
 describe('Bot model tests', () => {
 
     it('should have correct initial values', () => {
-        const bot = new Bot('gdax', 'GDAX', 'Running');
-        expect(bot.id).toBe('gdax');
+        const bot = new Bot(1, 'GDAX', 'Running');
+        expect(bot.id).toBe(1);
         expect(bot.name).toBe('GDAX');
         expect(bot.status).toBe('Running');
     });
 
     it('should clone itself', () => {
-        const bot = new Bot('btce', 'BTC-e', 'Stopped');
+        const bot = new Bot(2, 'BTC-e', 'Stopped');
         const clone = bot.clone();
         expect(bot).toEqual(clone);
     });

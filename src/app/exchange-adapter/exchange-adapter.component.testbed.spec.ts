@@ -59,10 +59,10 @@ function overrideExchangeAdapterServiceSetup() {
             expectedErrorMsgs = [{'value': 'Connection timeout'}];
             expectedNetworkConfig = new NetworkConfig(60, expectedErrorCodes, expectedErrorMsgs);
             testExchangeAdapter = new ExchangeAdapter('btce', 'BTC-e',
-                'com.gazbert.bxbot.adapter.BtceExchangeAdapter', expectedNetworkConfig);
+                'com.gazbert.bxbot.adapter.BtceExchangeAdapter', 1, expectedNetworkConfig);
         }
 
-        getExchangeAdapterByExchangeId(id: string): Promise<ExchangeAdapter> {
+        getExchangeAdapterByBotId(id: number): Promise<ExchangeAdapter> {
             return Promise.resolve(true).then(() => Object.assign({}, testExchangeAdapter));
         }
 
@@ -252,7 +252,7 @@ function fakeExchangeAdapterServiceSetup() {
 
         beforeEach(async(() => {
             expectedExchangeAdapter = firstExchangeAdapter;
-            activatedRoute.testParams = {id: expectedExchangeAdapter.id};
+            activatedRoute.testParams = {id: expectedExchangeAdapter.botId};
             createComponent().then(() => {/*done*/});
         }));
 

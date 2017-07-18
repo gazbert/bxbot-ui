@@ -10,64 +10,65 @@ export class InMemoryDataService implements InMemoryDbService {
     createDb() {
 
         /**
-         * The bots.
+         * The Bots.
          */
         let bots = [
             {
-                id: 'bitstamp',
+                id: 1,
                 name: 'Bitstamp',
                 status: 'Running'
             },
             {
-                id: 'gdax',
+                id: 2,
                 name: 'GDAX',
                 status: 'Running'
             },
             {
-                id: 'gemini',
+                id: 3,
                 name: 'Gemini',
                 status: 'Stopped'
             },
             {
-                id: 'itbit',
+                id: 4,
                 name: 'ItBit',
                 status: 'Running'
             },
             {
-                id: 'btce',
+                id: 5,
                 name: 'BTC-e',
                 status: 'Running'
             },
             {
-                id: 'okcoin',
+                id: 6,
                 name: 'OKCoin',
                 status: 'Running'
             },
             {
-                id: 'bitfinex',
+                id: 7,
                 name: 'Bitfinex',
                 status: 'Stopped'
             },
             {
-                id: 'huobi',
+                id: 8,
                 name: 'Huobi',
                 status: 'Stopped'
             },
             {
-                id: 'kraken',
+                id: 9,
                 name: 'Kraken',
                 status: 'Running'
             }
         ];
 
         /**
-         * The Bot Adapters for integrating with the Exchanges.
+         * The Exchange Adapters.
          */
         let exchangeAdapters = [
             {
-                id: 'bitstamp',
+                id: 1,
                 name: 'Bitstamp REST API Adapter',
                 className: 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
+                botId: 1,
                 networkConfig: {
                     connectionTimeout: 60,
                     nonFatalErrorHttpStatusCodes: [
@@ -84,6 +85,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 id: 'gdax',
                 name: 'GDAX REST API Adapter',
                 className: 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
+                botId: 2,
                 networkConfig: {
                     connectionTimeout: 120,
                     nonFatalErrorHttpStatusCodes: [
@@ -100,6 +102,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 id: 'gemini',
                 name: 'Gemini REST API Adapter',
                 className: 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
+                botId: 3,
                 networkConfig: {
                     connectionTimeout: 90,
                     nonFatalErrorHttpStatusCodes: [
@@ -116,6 +119,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 id: 'itbit',
                 name: 'ItBit REST API Adapter',
                 className: 'com.gazbert.bxbot.exchanges.ItBitExchangeAdapter',
+                botId: 4,
                 networkConfig: {
                     connectionTimeout: 30,
                     nonFatalErrorHttpStatusCodes: [
@@ -132,6 +136,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 id: 'btce',
                 name: 'BTC-e API Adapter',
                 className: 'com.gazbert.bxbot.exchanges.BtceExchangeAdapter',
+                botId: 5,
                 networkConfig: {
                     connectionTimeout: 45,
                     nonFatalErrorHttpStatusCodes: [
@@ -148,6 +153,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 id: 'okcoin',
                 name: 'OKCoin REST API Adapter',
                 className: 'com.gazbert.bxbot.exchanges.OkCoinExchangeAdapter',
+                botId: 6,
                 networkConfig: {
                     connectionTimeout: 50,
                     nonFatalErrorHttpStatusCodes: [
@@ -164,6 +170,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 id: 'bitfinex',
                 name: 'Bitfinex REST API Adapter',
                 className: 'com.gazbert.bxbot.exchanges.BitfinexExchangeAdapter',
+                botId: 7,
                 networkConfig: {
                     connectionTimeout: 20,
                     nonFatalErrorHttpStatusCodes: [
@@ -180,6 +187,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 id: 'huobi',
                 name: 'Huobi REST API Adapter',
                 className: 'com.gazbert.bxbot.exchanges.HuobiExchangeAdapter',
+                botId: 8,
                 networkConfig: {
                     connectionTimeout: 10,
                     nonFatalErrorHttpStatusCodes: [
@@ -196,6 +204,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 id: 'kraken',
                 name: 'Kraken REST API Adapter',
                 className: 'com.gazbert.bxbot.exchanges.KrakenExchangeAdapter',
+                botId: 9,
                 networkConfig: {
                     connectionTimeout: 60,
                     nonFatalErrorHttpStatusCodes: [
@@ -245,7 +254,7 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 'btce_ltc_usd',
-                exchangeId: 'btce',
+                exchangeId: 1,
                 name: 'LTC/USD',
                 enabled: true,
                 baseCurrency: 'LTC',
@@ -260,7 +269,7 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 'gdax_btc_usd',
-                exchangeId: 'gdax',
+                exchangeId: 2,
                 name: 'BTC/USD',
                 enabled: false,
                 baseCurrency: 'BTC',
@@ -275,7 +284,7 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 'gdax_btc_gbp',
-                exchangeId: 'gdax',
+                exchangeId: 3,
                 name: 'BTC/GBP',
                 enabled: true,
                 baseCurrency: 'BTC',
@@ -290,7 +299,7 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 'gemini_eth_btc',
-                exchangeId: 'gemini',
+                exchangeId: 4,
                 name: 'ETH/BTC',
                 enabled: false,
                 baseCurrency: 'ETH',
@@ -305,7 +314,7 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 'okcoin_btc_usd',
-                exchangeId: 'okcoin',
+                exchangeId: 5,
                 name: 'BTC/USD',
                 enabled: false,
                 baseCurrency: 'BTC',
@@ -320,7 +329,7 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 'huobi_btc_usd',
-                exchangeId: 'huobi',
+                exchangeId: 6,
                 name: 'BTC/USD',
                 enabled: false,
                 baseCurrency: 'BTC',
@@ -335,7 +344,7 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 'bitfinex_btc_usd',
-                exchangeId: 'bitfinex',
+                exchangeId: 7,
                 name: 'BTC/USD',
                 enabled: false,
                 baseCurrency: 'BTC',
@@ -350,7 +359,7 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 'kraken_btc_usd',
-                exchangeId: 'kraken',
+                exchangeId: 8,
                 name: 'BTC/USD',
                 enabled: false,
                 baseCurrency: 'BTC',
@@ -365,7 +374,7 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 'itbit_btc_usd',
-                exchangeId: 'itbit',
+                exchangeId: 9,
                 name: 'BTC/USD',
                 enabled: false,
                 baseCurrency: 'BTC',

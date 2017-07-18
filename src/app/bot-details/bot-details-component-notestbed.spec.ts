@@ -20,7 +20,7 @@ describe('BotDetailsComponent tests without TestBed', () => {
 
     beforeEach(done => {
 
-        expectedBot_1 = new Bot('bitstamp', 'Bitstamp', 'Running');
+        expectedBot_1 = new Bot(1, 'Bitstamp', 'Running');
 
         activatedRoute = new ActivatedRouteStub();
         activatedRoute.testParams = {id: expectedBot_1.id};
@@ -41,7 +41,7 @@ describe('BotDetailsComponent tests without TestBed', () => {
         expect(botDetailsComponent.bot).toBe(expectedBot_1);
 
         // paranoia ;-)
-        expect(botDetailsComponent.bot.id).toBe('bitstamp');
+        expect(botDetailsComponent.bot.id).toBe(1);
         expect(botDetailsComponent.bot.name).toBe('Bitstamp');
         expect(botDetailsComponent.bot.status).toBe('Running');
     });

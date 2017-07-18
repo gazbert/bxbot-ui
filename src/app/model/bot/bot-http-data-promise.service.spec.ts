@@ -62,9 +62,9 @@ describe('BotHttpDataPromiseService tests using TestBed + Mock HTTP backend', ()
                         'should have returned 3 Bots');
 
                     // paranoia!
-                    expect(bots[0].id).toBe('bitstamp');
-                    expect(bots[1].id).toBe('gdax');
-                    expect(bots[2].id).toBe('gemini');
+                    expect(bots[0].id).toBe(1);
+                    expect(bots[1].id).toBe(2);
+                    expect(bots[2].id).toBe(3);
                 });
         })));
 
@@ -94,9 +94,9 @@ describe('BotHttpDataPromiseService tests using TestBed + Mock HTTP backend', ()
 
         it('should return GDAX Bot ', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.getBot('gdax')
+            service.getBot(2)
                 .then(bots => {
-                    expect(bots.id).toBe('gdax');
+                    expect(bots.id).toBe(2);
                     expect(bots.name).toBe('GDAX');
                     expect(bots.status).toBe('Running');
                 });
@@ -105,7 +105,7 @@ describe('BotHttpDataPromiseService tests using TestBed + Mock HTTP backend', ()
         it('should handle returning no Bot', async(inject([], () => {
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.getBot('unknown')
+            service.getBot(100) // unknown id
                 .then(bot => expect(bot.id).not.toBeDefined('should have no Bot'));
         })));
     });
@@ -119,7 +119,7 @@ describe('BotHttpDataPromiseService tests using TestBed + Mock HTTP backend', ()
 
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
 
-            udpatedBot = new Bot('bitstamp', 'BitstampV2', 'Stopped');
+            udpatedBot = new Bot(1, 'BitstampV2', 'Stopped');
 
             backend = be;
             service = new BotDataService(http);
@@ -131,7 +131,7 @@ describe('BotHttpDataPromiseService tests using TestBed + Mock HTTP backend', ()
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.update(udpatedBot)
                 .then(bot => {
-                    expect(bot.id).toBe('bitstamp');
+                    expect(bot.id).toBe(1);
                     expect(bot.name).toBe('BitstampV2');
                     expect(bot.status).toBe('Stopped');
                 });
@@ -147,8 +147,8 @@ describe('BotHttpDataPromiseService tests using TestBed + Mock HTTP backend', ()
 });
 
 const makeBotData = () => [
-    new Bot('bitstamp', 'Bitstamp', 'Running'),
-    new Bot('gdax', 'GDAX', 'Running'),
-    new Bot('gemini', 'Gemini', 'Stopped'),
+    new Bot(1, 'Bitstamp', 'Running'),
+    new Bot(2, 'GDAX', 'Running'),
+    new Bot(3, 'Gemini', 'Stopped'),
 ] as Bot[];
 

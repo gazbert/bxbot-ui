@@ -88,7 +88,7 @@ export class DashboardComponent implements OnInit {
             .catch(error => {
                 // TODO - Show meaningful error to user? Redirect to friendly error page?
                 this.errorMessage = error;
-                console.log("BARF " + error);
+                console.log("TODO - Barf! : " + error);
                 this.router.navigateByUrl("/login").then();
                 return Observable.of<Bot[]>([]);
             });

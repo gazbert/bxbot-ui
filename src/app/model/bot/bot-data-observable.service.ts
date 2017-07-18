@@ -11,7 +11,7 @@ import {Bot} from "./bot.model";
 export interface BotDataObservableService {
 
     getBots(): Observable<Bot[]>;
-    getBot(id: string): Observable<Bot>;
+    getBot(id: number): Observable<Bot>;
     getBotByName(name: string): Observable<Bot[]>;
     update(exchange: Bot): Observable<Bot>;
 }

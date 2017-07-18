@@ -52,10 +52,10 @@ describe('ExchangeAdapterRxComponent tests without TestBed', () => {
         expectedNetworkConfig = new NetworkConfig(60, expectedErrorCodes, expectedErrorMsgs);
 
         expectedExchangeAdapter = new ExchangeAdapter('btce', 'BTC-e v2 API Adapter', 'com.gazbert.bxbot.adapter.BtceExchangeAdapter',
-            expectedNetworkConfig);
+            1, expectedNetworkConfig);
 
         expectedUpdatedExchangeAdapter = new ExchangeAdapter('btce', 'BTC-e v3 API Adapter', 'com.gazbert.bxbot.adapter.NewBtceExchangeAdapter',
-            expectedNetworkConfig);
+            2, expectedNetworkConfig);
 
         activatedRoute = new ActivatedRouteStub();
         activatedRoute.testParams = {id: expectedExchangeAdapter.id};
@@ -70,14 +70,14 @@ describe('ExchangeAdapterRxComponent tests without TestBed', () => {
         // TODO - think I need to mock out the rest of the bits here, e.g. nonFatalErrorHttpStatusCodes, nonFatalErrorMessages
 
         spyExchangeAdapterDataService = jasmine.createSpyObj('ExchangeAdapterHttpDataObservableService',
-            ['getExchangeAdapterByExchangeId', 'update']);
-        spyExchangeAdapterDataService.getExchangeAdapterByExchangeId.and.returnValue(Observable.of(expectedExchangeAdapter));
+            ['getExchangeAdapterByBotId', 'update']);
+        spyExchangeAdapterDataService.getExchangeAdapterByBotId.and.returnValue(Observable.of(expectedExchangeAdapter));
         spyExchangeAdapterDataService.update.and.returnValue(Observable.of(expectedUpdatedExchangeAdapter));
 
         exchangeAdapterComponent = new ExchangeAdapterRxComponent(spyExchangeAdapterDataService, <any> activatedRoute, formBuilder, router);
         exchangeAdapterComponent.ngOnInit();
 
-        spyExchangeAdapterDataService.getExchangeAdapterByExchangeId.calls.first().returnValue.subscribe(done);
+        spyExchangeAdapterDataService.getExchangeAdapterByBotId.calls.first().returnValue.subscribe(done);
     });
 
     // FIXME - broken after changing to use Observables

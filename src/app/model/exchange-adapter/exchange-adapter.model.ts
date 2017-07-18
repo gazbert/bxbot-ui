@@ -7,11 +7,12 @@ export class ExchangeAdapter {
     constructor(public id: string,
                 public name: string,
                 public className: string,
+                public botId: number,
                 public networkConfig: NetworkConfig) {
     }
 
     clone() {
-        return new ExchangeAdapter(this.id, this.name, this.className, this.networkConfig);
+        return new ExchangeAdapter(this.id, this.name, this.className, this.botId, this.networkConfig);
     }
 }
 

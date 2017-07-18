@@ -8,7 +8,7 @@ import {ExchangeAdapter, NetworkConfig} from "./exchange-adapter.model";
 describe('Exchange Adapter model tests', () => {
 
     it('should have correct initial values', () => {
-        const exchangeAdapter = new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
+        const exchangeAdapter = new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter', 1,
                 new NetworkConfig(60,
                     [
                         {value: 503},
@@ -37,7 +37,7 @@ describe('Exchange Adapter model tests', () => {
     });
 
     it('should clone itself', () => {
-        const exchangeAdapter = new ExchangeAdapter('btce', 'BTC-e', 'com.gazbert.bxbot.exchanges.BtceExchangeAdapter',
+        const exchangeAdapter = new ExchangeAdapter('btce', 'BTC-e', 'com.gazbert.bxbot.exchanges.BtceExchangeAdapter', 1,
                 new NetworkConfig(60,
                     [
                         {value: 503},
