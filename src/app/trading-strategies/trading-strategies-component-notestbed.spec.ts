@@ -34,15 +34,15 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
 
     beforeEach(done => {
 
-        expectedTradingStrategy_1 = new TradingStrategy('gdax_macd', 'gdax', 'MACD Indicator',
+        expectedTradingStrategy_1 = new TradingStrategy('gdax_macd', 2, 'MACD Indicator',
             'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy');
-        expectedTradingStrategy_2 = new TradingStrategy('gdax_ema', 'gdax', 'EMA Indicator',
+        expectedTradingStrategy_2 = new TradingStrategy('gdax_ema', 2, 'EMA Indicator',
             'EMA Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.EmaStrategy');
 
-        unusedTradingStrategy = new TradingStrategy('gdax_not_used', 'gdax', 'EMA Indicator',
+        unusedTradingStrategy = new TradingStrategy('gdax_not_used', 2, 'EMA Indicator',
             'EMA Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.EmaStrategy');
 
-        expectedUpdatedTradingStrategy_2 = new TradingStrategy('gdax_scalper', 'gdax', 'Long Scalper',
+        expectedUpdatedTradingStrategy_2 = new TradingStrategy('gdax_scalper', 2, 'Long Scalper',
             'Scalper that buys low and sells high, like duh.', 'com.gazbert.bxbot.strategies.LongScalper');
 
         expectedTradingStrategies = [expectedTradingStrategy_1, expectedTradingStrategy_2, unusedTradingStrategy];
@@ -52,13 +52,13 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
         expectedMarkets = [expectedMarket_1, expectedMarket_2];
 
         activatedRoute = new ActivatedRouteStub();
-        activatedRoute.testParams = {id: expectedTradingStrategy_1.exchangeId};
+        activatedRoute.testParams = {id: expectedTradingStrategy_1.botId};
 
         router = jasmine.createSpyObj('router', ['navigate']);
 
         spyTradingStrategyDataService = jasmine.createSpyObj('TradingStrategiesHttpDataPromiseService',
-            ['getAllTradingStrategiesForExchange', 'updateTradingStrategy', 'deleteTradingStrategyById']);
-        spyTradingStrategyDataService.getAllTradingStrategiesForExchange.and.returnValue(Promise.resolve(expectedTradingStrategies));
+            ['getAllTradingStrategiesForBotId', 'updateTradingStrategy', 'deleteTradingStrategyById']);
+        spyTradingStrategyDataService.getAllTradingStrategiesForBotId.and.returnValue(Promise.resolve(expectedTradingStrategies));
         spyTradingStrategyDataService.updateTradingStrategy.and.returnValue(Promise.resolve(expectedUpdatedTradingStrategy_2));
 
         spyMarketDataService = jasmine.createSpyObj('MarketHttpDataPromiseService', ['getAllMarketsForBotId']);
@@ -70,7 +70,7 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
         tradingStrategiesComponent.ngOnInit();
 
         // OnInit calls TradingStrategiesComponent.getAllTradingStrategiesForExchange; wait for it to get the exchanges
-        spyTradingStrategyDataService.getAllTradingStrategiesForExchange.calls.first().returnValue.then(done);
+        spyTradingStrategyDataService.getAllTradingStrategiesForBotId.calls.first().returnValue.then(done);
     });
 
     it('should expose Trading Strategies retrieved from TradingStrategyDataService', () => {
@@ -146,7 +146,7 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
         tradingStrategiesComponent.addTradingStrategy();
         expect(tradingStrategiesComponent.tradingStrategies.length).toBe(4);
         expect(tradingStrategiesComponent.tradingStrategies[3].id).not.toBeNull();
-        expect(tradingStrategiesComponent.tradingStrategies[3].exchangeId).toBe('gdax');
+        expect(tradingStrategiesComponent.tradingStrategies[3].botId).toBe(2);
         expect(tradingStrategiesComponent.tradingStrategies[3].name).toBe(null);
     });
 });

@@ -63,7 +63,7 @@ export class MarketsComponent implements OnInit {
                 });
         }).then(() => {/*done*/});
 
-        this.tradingStrategyDataService.getAllTradingStrategiesForExchange(this.exchangeId)
+        this.tradingStrategyDataService.getAllTradingStrategiesForBotId(this.exchangeId)
             .then(tradingStrategies => this.tradingStrategies = tradingStrategies);
 
     }

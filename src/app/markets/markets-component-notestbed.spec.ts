@@ -33,11 +33,11 @@ describe('MarketsComponent tests without TestBed', () => {
 
     beforeEach(done => {
 
-        expectedTradingStrategy_1 = new TradingStrategy('gdax_macd', 'gdax', 'MACD Indicator',
+        expectedTradingStrategy_1 = new TradingStrategy('gdax_macd', 2, 'MACD Indicator',
             'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy');
         expectedMarket_1 = new Market('gdax_btc_usd', 2, 'BTC/USD', true, 'BTC', 'USD', expectedTradingStrategy_1);
 
-        expectedTradingStrategy_2 = new TradingStrategy('gdax_ema', 'gdax', 'MACD Indicator',
+        expectedTradingStrategy_2 = new TradingStrategy('gdax_ema', 2, 'MACD Indicator',
             'EMA Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.EmaStrategy');
         expectedMarket_2 = new Market('gdax_btc_gbp', 2, 'BTC/GBP', true, 'BTC', 'GBP', expectedTradingStrategy_2);
 
@@ -52,8 +52,8 @@ describe('MarketsComponent tests without TestBed', () => {
 
         // Just mock this out, not testing it here, has it's own tests suite.
         spyTradingStrategyDataService = jasmine.createSpyObj('TradingStrategyHttpDataPromiseService',
-            ['getAllTradingStrategiesForExchange']);
-        spyTradingStrategyDataService.getAllTradingStrategiesForExchange.and.returnValues(Promise.resolve([]));
+            ['getAllTradingStrategiesForBotId']);
+        spyTradingStrategyDataService.getAllTradingStrategiesForBotId.and.returnValues(Promise.resolve([]));
 
         // We are testing this tho...
         spyMarketDataService = jasmine.createSpyObj('MarketHttpDataPromiseService',

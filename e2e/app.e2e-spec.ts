@@ -81,8 +81,8 @@ describe('Miscellaneous Scenario Tests', function () {
 
         // Existing Market fields
         expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
-        expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
-        expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
+        expect(element(by.id('marketName_0')).getAttribute('value')).toBe('XBT/USD');
+        expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('XBT');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
         expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('1: MACD RSI Indicator');
 
@@ -100,8 +100,8 @@ describe('Miscellaneous Scenario Tests', function () {
 
         // Market updated with new strat
         expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
-        expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
-        expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
+        expect(element(by.id('marketName_0')).getAttribute('value')).toBe('XBT/USD');
+        expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('XBT');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
         expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe(newTradingStrategy);
     });

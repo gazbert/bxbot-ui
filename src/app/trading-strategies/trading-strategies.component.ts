@@ -60,7 +60,7 @@ export class TradingStrategiesComponent implements OnInit {
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
             this.exchangeId = params['id'];
-            this.tradingStrategyDataService.getAllTradingStrategiesForExchange(this.exchangeId)
+            this.tradingStrategyDataService.getAllTradingStrategiesForBotId(this.exchangeId)
                 .then(tradingStrategies => {
                     this.tradingStrategies = tradingStrategies;
                     this.updateFormErrors();
