@@ -65,7 +65,7 @@ describe('Dashboard Tests', function () {
         dashboardItems.get(2).click();
 
         browser.getCurrentUrl().then(function (url) {
-            expect(url).toContain('/bot/gemini');
+            expect(url).toContain('/bot/3');
         });
     });
 

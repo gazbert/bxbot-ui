@@ -17,7 +17,7 @@ import {browser, element, by} from "protractor";
  *
  * @author gazbert
  */
-fdescribe('Email Alerts Config Tests', function () {
+describe('Email Alerts Config Tests', function () {
 
     beforeEach(function () {
         browser.get('');
