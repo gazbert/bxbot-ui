@@ -233,38 +233,6 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 2,
-                botId: 2,
-                marketId: 'btc_usd',
-                name: 'BTC/USD',
-                enabled: false,
-                baseCurrency: 'BTC',
-                counterCurrency: 'USD',
-                tradingStrategy: {
-                    id: 'btce_macd_rsi',
-                    exchangeId: 'btce',
-                    name: 'MACD RSI Indicator',
-                    description: 'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
-                    className: 'com.gazbert.bxbot.strategies.MacdRsiStrategy'
-                }
-            },
-            {
-                id: 3,
-                botId: 2,
-                marketId: 'ltc_usd',
-                name: 'LTC/USD',
-                enabled: true,
-                baseCurrency: 'LTC',
-                counterCurrency: 'USD',
-                tradingStrategy: {
-                    id: 'btce_long-scalper',
-                    exchangeId: 'btce',
-                    name: 'Long Scalper',
-                    description: 'Scalping strategy that buys low and sells high.',
-                    className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
-                }
-            },
-            {
                 id: 4,
                 botId: 2,
                 marketId: 'BTC-USD',
@@ -282,7 +250,7 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 5,
-                botId: 3,
+                botId: 2,
                 marketId: 'BTC-GBP',
                 name: 'BTC/GBP',
                 enabled: true,
@@ -298,7 +266,7 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 6,
-                botId: 4,
+                botId: 3,
                 marketId: 'etcbtc',
                 name: 'ETH/BTC',
                 enabled: false,
@@ -313,8 +281,56 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 7,
+                id: 11,
+                botId:4,
+                marketId: 'XBTUSD',
+                name: 'XBT/USD',
+                enabled: false,
+                baseCurrency: 'XBT',
+                counterCurrency: 'USD',
+                tradingStrategy: {
+                    id: 'itbit_ema_rsi',
+                    exchangeId: 'itbit',
+                    name: 'MACD RSI Indicator',
+                    description: 'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
+                    className: 'com.gazbert.bxbot.strategies.MacdRsiStrategy'
+                }
+            },
+            {
+                id: 2,
                 botId: 5,
+                marketId: 'btc_usd',
+                name: 'BTC/USD',
+                enabled: false,
+                baseCurrency: 'BTC',
+                counterCurrency: 'USD',
+                tradingStrategy: {
+                    id: 'btce_macd_rsi',
+                    exchangeId: 'btce',
+                    name: 'MACD RSI Indicator',
+                    description: 'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
+                    className: 'com.gazbert.bxbot.strategies.MacdRsiStrategy'
+                }
+            },
+            {
+                id: 3,
+                botId: 5,
+                marketId: 'ltc_usd',
+                name: 'LTC/USD',
+                enabled: true,
+                baseCurrency: 'LTC',
+                counterCurrency: 'USD',
+                tradingStrategy: {
+                    id: 'btce_long-scalper',
+                    exchangeId: 'btce',
+                    name: 'Long Scalper',
+                    description: 'Scalping strategy that buys low and sells high.',
+                    className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
+                }
+            },
+            {
+                id: 7,
+                botId: 6,
                 marketId: 'okcoin_btc_usd',
                 name: 'BTC/USD',
                 enabled: false,
@@ -326,22 +342,6 @@ export class InMemoryDataService implements InMemoryDbService {
                     name: 'MACD Indicator',
                     description: 'EMA Indicator algo for deciding when to enter and exit trades.',
                     className: 'com.gazbert.bxbot.strategies.EmaStrategy'
-                }
-            },
-            {
-                id: 8,
-                botId: 6,
-                marketId: 'BTC-USD',
-                name: 'BTC/USD',
-                enabled: false,
-                baseCurrency: 'BTC',
-                counterCurrency: 'USD',
-                tradingStrategy: {
-                    id: 'huobi_ema_rsi',
-                    exchangeId: 'huobi',
-                    name: 'MACD RSI Indicator',
-                    description: 'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
-                    className: 'com.gazbert.bxbot.strategies.MacdRsiStrategy'
                 }
             },
             {
@@ -361,8 +361,24 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 10,
+                id: 8,
                 botId: 8,
+                marketId: 'BTC-USD',
+                name: 'BTC/USD',
+                enabled: false,
+                baseCurrency: 'BTC',
+                counterCurrency: 'USD',
+                tradingStrategy: {
+                    id: 'huobi_ema_rsi',
+                    exchangeId: 'huobi',
+                    name: 'MACD RSI Indicator',
+                    description: 'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
+                    className: 'com.gazbert.bxbot.strategies.MacdRsiStrategy'
+                }
+            },
+            {
+                id: 10,
+                botId: 9,
                 marketId: 'XBTUSD',
                 name: 'XBT/USD',
                 enabled: false,
@@ -375,23 +391,7 @@ export class InMemoryDataService implements InMemoryDbService {
                     description: 'EMA Indicator and RSI algo for deciding when to enter and exit trades.',
                     className: 'com.gazbert.bxbot.strategies.EmaRsiStrategy'
                 }
-            },
-            {
-                id: 11,
-                botId: 9,
-                marketId: 'XBTUSD',
-                name: 'XBT/USD',
-                enabled: false,
-                baseCurrency: 'XBT',
-                counterCurrency: 'USD',
-                tradingStrategy: {
-                    id: 'itbit_ema_rsi',
-                    exchangeId: 'itbit',
-                    name: 'MACD RSI Indicator',
-                    description: 'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
-                    className: 'com.gazbert.bxbot.strategies.MacdRsiStrategy'
-                }
-            },
+            }
         ];
 
         /**
