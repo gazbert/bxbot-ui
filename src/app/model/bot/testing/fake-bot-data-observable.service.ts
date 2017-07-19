@@ -50,7 +50,7 @@ export class FakeBotDataObservableService extends BotHttpDataObservableService {
     }
 }
 
-export var SOME_FAKE_OBSERVABLE_BOTS: Bot[] = [
+export const SOME_FAKE_OBSERVABLE_BOTS: Bot[] = [
     new Bot(1, 'Bitstamp', 'Running'),
     new Bot(2, 'GDAX', 'Running'),
     new Bot(3, 'Gemini', 'Stopped')

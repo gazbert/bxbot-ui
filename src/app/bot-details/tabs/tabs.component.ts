@@ -2,10 +2,10 @@ import {Component, ContentChildren, QueryList, AfterContentInit} from '@angular/
 import {TabComponent} from './tab.component';
 
 /**
- * Presents a list of config tabs. Currently rendered as Bootstrap Pills.
+ * Presents a list of screen tabs - currently rendered as Bootstrap Pills.
  *
  * Originated from the excellent:
- * http://juristr.com/blog/2016/02/learning-ng2-creating-tab-component/
+ * http://juristr.com/blog/2016/02/learning-ng2-creating-tab-component
  */
 @Component({
     selector: 'tabs',

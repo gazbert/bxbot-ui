@@ -62,13 +62,13 @@ export class InMemoryDataService implements InMemoryDbService {
 
         /**
          * The Exchange Adapters.
+         * 1-1 relationship with the bot, so 'id' is always the same as the bot 'id'.
          */
         let exchangeAdapters = [
             {
                 id: 1,
                 name: 'Bitstamp REST API Adapter',
                 className: 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
-                botId: 1,
                 networkConfig: {
                     connectionTimeout: 60,
                     nonFatalErrorHttpStatusCodes: [
@@ -82,10 +82,9 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 'gdax',
+                id: 2,
                 name: 'GDAX REST API Adapter',
                 className: 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
-                botId: 2,
                 networkConfig: {
                     connectionTimeout: 120,
                     nonFatalErrorHttpStatusCodes: [
@@ -99,10 +98,9 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 'gemini',
+                id: 3,
                 name: 'Gemini REST API Adapter',
                 className: 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
-                botId: 3,
                 networkConfig: {
                     connectionTimeout: 90,
                     nonFatalErrorHttpStatusCodes: [
@@ -116,10 +114,9 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 'itbit',
+                id: 4,
                 name: 'ItBit REST API Adapter',
                 className: 'com.gazbert.bxbot.exchanges.ItBitExchangeAdapter',
-                botId: 4,
                 networkConfig: {
                     connectionTimeout: 30,
                     nonFatalErrorHttpStatusCodes: [
@@ -133,10 +130,9 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 'btce',
+                id: 5,
                 name: 'BTC-e API Adapter',
                 className: 'com.gazbert.bxbot.exchanges.BtceExchangeAdapter',
-                botId: 5,
                 networkConfig: {
                     connectionTimeout: 45,
                     nonFatalErrorHttpStatusCodes: [
@@ -150,10 +146,9 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 'okcoin',
+                id: 6,
                 name: 'OKCoin REST API Adapter',
                 className: 'com.gazbert.bxbot.exchanges.OkCoinExchangeAdapter',
-                botId: 6,
                 networkConfig: {
                     connectionTimeout: 50,
                     nonFatalErrorHttpStatusCodes: [
@@ -167,10 +162,9 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 'bitfinex',
+                id: 7,
                 name: 'Bitfinex REST API Adapter',
                 className: 'com.gazbert.bxbot.exchanges.BitfinexExchangeAdapter',
-                botId: 7,
                 networkConfig: {
                     connectionTimeout: 20,
                     nonFatalErrorHttpStatusCodes: [
@@ -184,10 +178,9 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 'huobi',
+                id: 8,
                 name: 'Huobi REST API Adapter',
                 className: 'com.gazbert.bxbot.exchanges.HuobiExchangeAdapter',
-                botId: 8,
                 networkConfig: {
                     connectionTimeout: 10,
                     nonFatalErrorHttpStatusCodes: [
@@ -201,10 +194,9 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 'kraken',
+                id: 9,
                 name: 'Kraken REST API Adapter',
                 className: 'com.gazbert.bxbot.exchanges.KrakenExchangeAdapter',
-                botId: 9,
                 networkConfig: {
                     connectionTimeout: 60,
                     nonFatalErrorHttpStatusCodes: [
@@ -223,8 +215,9 @@ export class InMemoryDataService implements InMemoryDbService {
          */
         let markets = [
             {
-                id: 'bitstamp_btc_usd',
-                exchangeId: 'bitstamp',
+                id: 1,
+                botId: 1,
+                marketId: 'btcusd',
                 name: 'BTC/USD',
                 enabled: false,
                 baseCurrency: 'BTC',
@@ -238,8 +231,9 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 'btce_btc_usd',
-                exchangeId: 'btce',
+                id: 2,
+                botId: 2,
+                marketId: 'btc_usd',
                 name: 'BTC/USD',
                 enabled: false,
                 baseCurrency: 'BTC',
@@ -253,8 +247,9 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 'btce_ltc_usd',
-                exchangeId: 1,
+                id: 3,
+                botId: 2,
+                marketId: 'ltc_usd',
                 name: 'LTC/USD',
                 enabled: true,
                 baseCurrency: 'LTC',
@@ -268,8 +263,9 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 'gdax_btc_usd',
-                exchangeId: 2,
+                id: 4,
+                botId: 2,
+                marketId: 'BTC-USD',
                 name: 'BTC/USD',
                 enabled: false,
                 baseCurrency: 'BTC',
@@ -283,8 +279,9 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 'gdax_btc_gbp',
-                exchangeId: 3,
+                id: 5,
+                botId: 3,
+                marketId: 'BTC-GBP',
                 name: 'BTC/GBP',
                 enabled: true,
                 baseCurrency: 'BTC',
@@ -298,8 +295,9 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 'gemini_eth_btc',
-                exchangeId: 4,
+                id: 6,
+                botId: 4,
+                marketId: 'etcbtc',
                 name: 'ETH/BTC',
                 enabled: false,
                 baseCurrency: 'ETH',
@@ -313,8 +311,9 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 'okcoin_btc_usd',
-                exchangeId: 5,
+                id: 7,
+                botId: 5,
+                marketId: 'okcoin_btc_usd',
                 name: 'BTC/USD',
                 enabled: false,
                 baseCurrency: 'BTC',
@@ -328,8 +327,9 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 'huobi_btc_usd',
-                exchangeId: 6,
+                id: 8,
+                botId: 6,
+                marketId: 'BTC-USD',
                 name: 'BTC/USD',
                 enabled: false,
                 baseCurrency: 'BTC',
@@ -343,8 +343,9 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 'bitfinex_btc_usd',
-                exchangeId: 7,
+                id: 9,
+                botId: 7,
+                marketId: 'btcusd',
                 name: 'BTC/USD',
                 enabled: false,
                 baseCurrency: 'BTC',
@@ -358,12 +359,13 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 'kraken_btc_usd',
-                exchangeId: 8,
-                name: 'BTC/USD',
+                id: 10,
+                botId: 8,
+                marketId: 'XBTUSD',
+                name: 'XBT/USD',
                 enabled: false,
-                baseCurrency: 'BTC',
-                counterCurrency: 'USD',
+                baseCurrency: 'XXBT',
+                counterCurrency: 'ZUSD',
                 tradingStrategy: {
                     id: 'kraken_ema_rsi',
                     exchangeId: 'kraken',
@@ -373,11 +375,12 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 'itbit_btc_usd',
-                exchangeId: 9,
-                name: 'BTC/USD',
+                id: 11,
+                botId: 9,
+                marketId: 'XBTUSD',
+                name: 'XBT/USD',
                 enabled: false,
-                baseCurrency: 'BTC',
+                baseCurrency: 'XBT',
                 counterCurrency: 'USD',
                 tradingStrategy: {
                     id: 'itbit_ema_rsi',
@@ -395,98 +398,98 @@ export class InMemoryDataService implements InMemoryDbService {
         let tradingStrategies = [
             {
                 id: 'btce_macd_rsi',
-                exchangeId: 'btce',
+                botId: 5,
                 name: 'MACD RSI Indicator',
                 description: 'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
                 className: 'com.gazbert.bxbot.strategies.MacdRsiStrategy'
             },
             {
                 id: 'btce_long-scalper',
-                exchangeId: 'btce',
+                botId: 5,
                 name: 'Long Scalper',
                 description: 'Scalping strategy that buys low and sells high.',
                 className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
             },
             {
                 id: 'btce_short-scalper',
-                exchangeId: 'btce',
+                botId: 5,
                 name: 'Short Scalper',
                 description: 'Scalping strategy that sells and buys back more units at lower price.',
                 className: 'com.gazbert.bxbot.strategies.ShortScalperStrategy'
             },
             {
                 id: 'gdax_long-scalper',
-                exchangeId: 'gdax',
+                botId: 2,
                 name: 'Long Scalper',
                 description: 'Scalping strategy that buys low and sells high.',
                 className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
             },
             {
                 id: 'gdax_ema',
-                exchangeId: 'gdax',
+                botId: 2,
                 name: 'EMA Indicator',
                 description: 'EMA Indicator algo for deciding when to enter and exit trades.',
                 className: 'com.gazbert.bxbot.strategies.EmaStrategy'
             },
             {
                 id: 'bitstamp_ema',
-                exchangeId: 'bitstamp',
+                botId: 1,
                 name: 'EMA Indicator',
                 description: 'EMA Indicator algo for deciding when to enter and exit trades.',
                 className: 'com.gazbert.bxbot.strategies.EmaStrategy'
             },
             {
                 id: 'gemini_macd',
-                exchangeId: 'gemini',
+                botId: 3,
                 name: 'MACD Indicator',
                 description: 'MACD Indicator algo for deciding when to enter and exit trades.',
                 className: 'com.gazbert.bxbot.strategies.MacdStrategy'
             },
             {
                 id: 'gemini_long-scalper',
-                exchangeId: 'gemini',
+                botId: 3,
                 name: 'Long Scalper',
                 description: 'Scalping strategy that buys low and sells high.',
                 className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
             },
             {
                 id: 'okcoin_ema',
-                exchangeId: 'okcoin',
+                botId: 6,
                 name: 'MACD Indicator',
                 description: 'EMA Indicator algo for deciding when to enter and exit trades.',
                 className: 'com.gazbert.bxbot.strategies.EmaStrategy'
             },
             {
                 id: 'huobi_ema_rsi',
-                exchangeId: 'huobi',
+                botId: 8,
                 name: 'MACD RSI Indicator',
                 description: 'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
                 className: 'com.gazbert.bxbot.strategies.MacdRsiStrategy'
             },
             {
                 id: 'bitfinex_long-scalper',
-                exchangeId: 'bitfinex',
+                botId: 7,
                 name: 'Long Scalper',
                 description: 'Scalping strategy that buys low and sells high.',
                 className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
             },
             {
                 id: 'kraken_ema_rsi',
-                exchangeId: 'kraken',
+                botId: 9,
                 name: 'EMA RSI Indicator',
                 description: 'EMA Indicator and RSI algo for deciding when to enter and exit trades.',
                 className: 'com.gazbert.bxbot.strategies.EmaRsiStrategy'
             },
             {
                 id: 'itbit_long-scalper',
-                exchangeId: 'itbit',
+                botId: 4,
                 name: 'Long Scalper',
                 description: 'Scalping strategy that buys low and sells high.',
                 className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
             },
             {
                 id: 'itbit_ema_rsi',
-                exchangeId: 'itbit',
+                botId: 4,
                 name: 'MACD RSI Indicator',
                 description: 'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
                 className: 'com.gazbert.bxbot.strategies.MacdRsiStrategy'
@@ -495,11 +498,11 @@ export class InMemoryDataService implements InMemoryDbService {
 
         /**
          * The Email Alerts config for bots to send alert messages.
+         * 1-1 relationship with the bot, so 'id' is always the same as the bot 'id'.
          */
         let emailAlerts = [
             {
-                id: 'btce_email_alerts',
-                exchangeId: 'btce',
+                id: 1,
                 enabled: false,
                 smtpHost: 'smtp.gmail.com',
                 smtpPort: 587,
@@ -509,8 +512,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 fromAddress: 'boba.fett@hoth.space'
             },
             {
-                id: 'bitstamp_email_alerts',
-                exchangeId: 'bitstamp',
+                id: 2,
                 enabled: true,
                 smtpHost: 'smtp.gmail.com',
                 smtpPort: 587,
@@ -520,8 +522,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 fromAddress: 'darth@deathstar.space'
             },
             {
-                id: 'gdax_email_alerts',
-                exchangeId: 'gdax',
+                id: 3,
                 enabled: true,
                 smtpHost: 'smtp.gmail.com',
                 smtpPort: 587,
@@ -531,8 +532,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 fromAddress: 'han.solo@falcon.space'
             },
             {
-                id: 'itbit_email_alerts',
-                exchangeId: 'itbit',
+                id: 4,
                 enabled: true,
                 smtpHost: 'smtp.gmail.com',
                 smtpPort: 587,
@@ -542,8 +542,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 fromAddress: 'gold5@x-wing.space'
             },
             {
-                id: 'huobi_email_alerts',
-                exchangeId: 'huobi',
+                id: 5,
                 enabled: false,
                 smtpHost: 'smtp.gmail.com',
                 smtpPort: 587,
@@ -553,8 +552,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 fromAddress: 'admiral.ackbar@some-one.space'
             },
             {
-                id: 'okcoin_email_alerts',
-                exchangeId: 'okcoin',
+                id: 6,
                 enabled: true,
                 smtpHost: 'smtp.gmail.com',
                 smtpPort: 587,
@@ -564,8 +562,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 fromAddress: 'master.yoda@dagobah.space',
             },
             {
-                id: 'kraken_email_alerts',
-                exchangeId: 'kraken',
+                id: 7,
                 enabled: true,
                 smtpHost: 'smtp.gmail.com',
                 smtpPort: 587,
@@ -575,8 +572,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 fromAddress: 'Obi.Wan@coruscant.space',
             },
             {
-                id: 'bitfinex_email_alerts',
-                exchangeId: 'bitfinex',
+                id: 8,
                 enabled: false,
                 smtpHost: 'smtp.gmail.com',
                 smtpPort: 587,
@@ -586,8 +582,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 fromAddress: 'chewbacca@kashyyyk.space',
             },
             {
-                id: 'gemini_email_alerts',
-                exchangeId: 'gemini',
+                id: 9,
                 enabled: true,
                 smtpHost: 'smtp.gmail.com',
                 smtpPort: 587,

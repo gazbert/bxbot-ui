@@ -1,6 +1,6 @@
 import {OnInit, Component} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
-import {Bot, BotHttpDataPromiseService} from '../model/bot';
+import {ActivatedRoute, Params} from '@angular/router';
+import {Bot, BotHttpDataObservableService} from '../model/bot';
 
 /**
  * Container for holding the Bot config and status screens.
@@ -17,16 +17,19 @@ export class BotDetailsComponent implements OnInit {
 
     bot: Bot;
     active = true;
+    errorMessage: string;
 
-    constructor(private botDataService: BotHttpDataPromiseService, private route: ActivatedRoute,
-                private router: Router) {
+    constructor(private botDataService: BotHttpDataObservableService, private route: ActivatedRoute) {
     }
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
             let botId = params['id'];
             this.botDataService.getBot(botId)
-                .then(bot => this.bot = bot);
+                .subscribe(bot => {
+                        this.bot = bot;
+                    },
+                    error => this.errorMessage = <any>error); // TODO - Show meaningful error to user?
         }).then(() => {/*done*/});
     }
 }

@@ -1,6 +1,7 @@
 import {ActivatedRouteStub} from '../../testing';
 import {Bot} from '../model/bot';
 import {BotDetailsComponent} from './bot-details.component';
+import {Observable} from "rxjs/Observable";
 
 /**
  * Tests the behaviour of the Bot Details component is as expected.
@@ -27,14 +28,15 @@ describe('BotDetailsComponent tests without TestBed', () => {
 
         router = jasmine.createSpyObj('router', ['navigate']);
 
-        spyBotDataService = jasmine.createSpyObj('BotHttpDataPromiseService', ['getBot']);
-        spyBotDataService.getBot.and.returnValue(Promise.resolve(expectedBot_1));
+        spyBotDataService = jasmine.createSpyObj('BotHttpDataObservableService', ['getBot']);
+        spyBotDataService.getBot.and.returnValue(Observable.of(expectedBot_1));
 
-        botDetailsComponent = new BotDetailsComponent(spyBotDataService, <any> activatedRoute, router);
+        botDetailsComponent = new BotDetailsComponent(spyBotDataService, <any> activatedRoute);
         botDetailsComponent.ngOnInit();
 
         // OnInit calls BotDetailsComponent.getBot; wait for it to get the bot details
-        spyBotDataService.getBot.calls.first().returnValue.then(done);
+        botDetailsComponent.ngOnInit();
+        spyBotDataService.getBot.calls.first().returnValue.subscribe(done); // tell the spy how to process Observable
     });
 
     it('should expose Bot Details retrieved from BotDataService', () => {

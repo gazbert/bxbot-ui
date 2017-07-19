@@ -3,7 +3,6 @@ import {HttpModule, Http, XHRBackend, Response, ResponseOptions} from "@angular/
 import {async, inject, TestBed} from "@angular/core/testing";
 import {Bot} from "./bot.model";
 import {BotHttpDataObservableService as BotDataService} from "./bot-http-data-observable.service";
-import {AuthenticationService} from "../../shared";
 import {Observable} from "rxjs/Observable";
 
 // Most RxJS operators are not included in Angular's base Observable implementation.
@@ -16,11 +15,11 @@ import "rxjs/add/operator/catch";
 import "rxjs/add/operator/map";
 
 /**
- * Tests the Bot HTTP Data Service (Observable flavour) using a mocked HTTP backend.
+ * Tests the Bot HTTP Data Service (Observables) using a mocked HTTP backend.
  *
  * @author gazbert
  */
-xdescribe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend', () => {
+describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -74,9 +73,9 @@ xdescribe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend'
                         'should have returned 3 Bots');
 
                     // paranoia!
-                    expect(bots[0].id).toBe('bitstamp');
-                    expect(bots[1].id).toBe('gdax');
-                    expect(bots[2].id).toBe('gemini');
+                    expect(bots[0].id).toBe(1);
+                    expect(bots[1].id).toBe(2);
+                    expect(bots[2].id).toBe(3);
                 });
             //.toPromise();
         })));
@@ -104,7 +103,7 @@ xdescribe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend'
         })));
     });
 
-    describe('when getBot() operation called with \'gdax\'', () => {
+    describe('when getBot() operation called with \'2\'', () => {
 
         let backend: MockBackend;
         let service: BotDataService;
@@ -124,7 +123,7 @@ xdescribe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend'
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.getBot(1)
                 .subscribe(bot => {
-                    expect(bot.id).toBe(1);
+                    expect(bot.id).toBe(2);
                     expect(bot.name).toBe('GDAX');
                     expect(bot.status).toBe('Stopped');
                 });
@@ -214,7 +213,7 @@ xdescribe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend'
         })));
     });
 
-    describe('when getBotByName() operation called with \'gd\'', () => {
+    describe('when getBotByName() operation called with \'gdax\'', () => {
 
         let backend: MockBackend;
         let service: BotDataService;

@@ -54,7 +54,7 @@ function compileAndCreate() {
 /**
  * Test Dashboard by via the bx-dashboard-item directive.
  */
-xdescribe('DashboardComponent tests with TestBed (shallow)', () => {
+describe('DashboardComponent tests with TestBed (shallow)', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [DashboardComponent],
@@ -75,7 +75,7 @@ xdescribe('DashboardComponent tests with TestBed (shallow)', () => {
 /**
  * Test Dashboard by accessing the div item class directly.
  */
-xdescribe('DashboardComponent tests with TestBed (deep)', () => {
+describe('DashboardComponent tests with TestBed (deep)', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [DashboardModule]
@@ -131,9 +131,9 @@ function tests(botClick: Function) {
                 expect(bots.length).toBe(3, 'should have 3 Bot items after ngAfterViewInit');
 
                 // paranoia!
-                expect(bots[0].id).toBe('bitstamp');
-                expect(bots[1].id).toBe('gdax');
-                expect(bots[2].id).toBe('gemini');
+                expect(bots[0].id).toBe(1);
+                expect(bots[1].id).toBe(2);
+                expect(bots[2].id).toBe(3);
 
                 done();
             }).toPromise(); // MUST have this for test to work!

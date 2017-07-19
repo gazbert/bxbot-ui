@@ -3,7 +3,7 @@ import {Observable} from "rxjs";
 import {Bot} from "./bot.model";
 
 /**
- * The Bot Data Service provides operations to update Bot configuration.
+ * The Bot Data Service provides operations to fetch Bot metadata and status details.
  * It demonstrates use of Observables in the operation responses.
  *
  * @author gazbert

@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 
 /**
- * Presents a single config tab.
+ * Represents a single screen tab.
  *
  * Originated from the excellent:
  * http://juristr.com/blog/2016/02/learning-ng2-creating-tab-component/

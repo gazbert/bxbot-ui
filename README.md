@@ -11,7 +11,7 @@ Although being developed as a 'real-world' app, the code _tries_ to showcase dif
 [TypeScript](https://www.typescriptlang.org/). It's not meant to be an Angular 101 tutorial - the 
 [Angular Documentation](https://angular.io/docs) does a far better job!
 
-NOTE: _This project is very much work in progress and not safe for production._
+_NOTE: This project is very much work in progress and not yet safe for production._
 
 ## User Guide
 

@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Bot} from '../model/bot';
+import {Bot} from '../../model/bot';
 
 /**
  * Represents a Dashboard Item component.
- * An item is a Bot!
+ * An item is a Bot.
  *
  * @author gazbert
  */

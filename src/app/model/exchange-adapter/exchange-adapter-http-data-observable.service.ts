@@ -49,7 +49,6 @@ export class ExchangeAdapterHttpDataObservableService implements ExchangeAdapter
             .catch(ExchangeAdapterHttpDataObservableService.handleError);
     }
 
-    // FIXME - this doe not work
     getExchangeAdapterByBotId(botId: number): Observable<ExchangeAdapter> {
 
         let headers = new Headers({
@@ -57,7 +56,11 @@ export class ExchangeAdapterHttpDataObservableService implements ExchangeAdapter
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        const url = this.exchangeAdaptersUrl + '?botId=' + botId;
+        // FIXME - this doe not work!
+        // const url = this.exchangeAdaptersUrl + '?botId=' + botId;
+
+        // ...for now, use hack and assume botId will always be same as exchangeId ;-/
+        const url = this.exchangeAdaptersUrl + '/' + botId;
         return this.http.get(url, {headers: headers})
             .map(ExchangeAdapterHttpDataObservableService.extractData)
             .catch(ExchangeAdapterHttpDataObservableService.handleError);
