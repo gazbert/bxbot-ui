@@ -39,11 +39,11 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed + Mock HTTP back
             expect(backend).not.toBeNull('MockBackend backend should be provided');
     }));
 
-    describe('when getEmailAlertsConfigForExchange() operation called with \'gdax\'', () => {
+    describe('when getEmailAlertsConfigByBotId() operation called with \'1\'', () => {
 
         let backend: MockBackend;
         let service: EmailAlertsDataService;
-        let fakeEmailAlertsConfig: EmailAlertsConfig[];
+        let fakeEmailAlertsConfig: EmailAlertsConfig;
         let response: Response;
 
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
@@ -56,10 +56,9 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed + Mock HTTP back
 
         it('should expect GDAX Email Alerts config', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.getEmailAlertsConfigForExchange('gdax')
+            service.getEmailAlertsConfigByBotId(1)
                 .then(emailAlertsConfig => {
-                    expect(emailAlertsConfig.id).toBe('gdax_email-alerts');
-                    expect(emailAlertsConfig.exchangeId).toBe('gdax');
+                    expect(emailAlertsConfig.id).toBe(1);
                     expect(emailAlertsConfig.enabled).toBe(true);
                     expect(emailAlertsConfig.smtpHost).toBe('smtp.gmail.com');
                     expect(emailAlertsConfig.smtpPort).toBe(587);
@@ -71,9 +70,9 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed + Mock HTTP back
         })));
 
         it('should handle returning no matching Email Alerts config', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
+            let resp = new Response(new ResponseOptions({status: 200, body: {undefined}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.getEmailAlertsConfigForExchange('unknown')
+            service.getEmailAlertsConfigByBotId(100) // unknown id
                 .then(emailAlertsConfig => expect(emailAlertsConfig).toBe(undefined, 'should have no Email Alerts config'));
         })));
     });
@@ -87,7 +86,7 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed + Mock HTTP back
 
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
 
-            updatedEmailAlertsConfig = new EmailAlertsConfig('gdax_email-alerts', 'gdax', true,
+            updatedEmailAlertsConfig = new EmailAlertsConfig(1, true,
                 'new.smtp.gmail.com', 589, 'new_bobfett', 'new_iLoveHoth',
                 'new_jabba@tatooine.space', 'new_boba.fett@hoth.space');
 
@@ -104,8 +103,7 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed + Mock HTTP back
                     expect(emailAlertsConfig).toBe(updatedEmailAlertsConfig);
 
                     // paranoia!
-                    expect(emailAlertsConfig.id).toBe('gdax_email-alerts');
-                    expect(emailAlertsConfig.exchangeId).toBe('gdax');
+                    expect(emailAlertsConfig.id).toBe(1);
                     expect(emailAlertsConfig.smtpHost).toBe('new.smtp.gmail.com');
                 });
         })));
@@ -117,14 +115,11 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed + Mock HTTP back
                 .then(emailAlertsConfig => expect(emailAlertsConfig.id).not.toBeDefined('should not have Email Alerts config'));
         })));
     });
-
 });
 
-const makeEmailAlertsData = () => [
-
-    new EmailAlertsConfig('gdax_email-alerts', 'gdax', true, 'smtp.gmail.com', 587,
-        'bobfett', 'iLoveHoth', 'jabba@tatooine.space', 'boba.fett@hoth.space')
-
-] as EmailAlertsConfig[];
+function makeEmailAlertsData() {
+    return new EmailAlertsConfig(1, true, 'smtp.gmail.com', 587, 'bobfett', 'iLoveHoth',
+        'jabba@tatooine.space', 'boba.fett@hoth.space');
+}
 
 

@@ -25,33 +25,33 @@ describe('EmailAlertsComponent tests without TestBed', () => {
 
     beforeEach(done => {
 
-        expectedEmailAlertsConfig = new EmailAlertsConfig('okcoin_email_alerts', 'okcoin', true, 'smtp.gmail.com', 587,
+        expectedEmailAlertsConfig = new EmailAlertsConfig(2, true, 'smtp.gmail.com', 587,
             'yoda', 'DoOrDoNotThereIsNoTry', 'r2d2@naboo.space', 'master.yoda@dagobah.space');
 
-        expectedUpdatedEmailAlertsConfig = new EmailAlertsConfig('okcoin_email_alerts', 'okcoin', true, 'smtp.gmail.com', 587,
+        expectedUpdatedEmailAlertsConfig = new EmailAlertsConfig(2, true, 'smtp.gmail.com', 587,
             'yoda', 'aNewPassword', 'r2d2@naboo.space', 'yoda.the.boss@dagobah.space');
 
         activatedRoute = new ActivatedRouteStub();
-        activatedRoute.testParams = {id: expectedEmailAlertsConfig.exchangeId};
+        activatedRoute.testParams = {id: expectedEmailAlertsConfig.id};
 
         router = jasmine.createSpyObj('router', ['navigate']);
 
         spyEmailAlertsConfigDataService = jasmine.createSpyObj('EmailAlertsConfigHttpDataPromiseService',
-            ['getEmailAlertsConfigForExchange', 'updateEmailAlertsConfig']);
-        spyEmailAlertsConfigDataService.getEmailAlertsConfigForExchange.and.returnValue(Promise.resolve(expectedEmailAlertsConfig));
+            ['getEmailAlertsConfigByBotId', 'updateEmailAlertsConfig']);
+        spyEmailAlertsConfigDataService.getEmailAlertsConfigByBotId.and.returnValue(Promise.resolve(expectedEmailAlertsConfig));
         spyEmailAlertsConfigDataService.updateEmailAlertsConfig.and.returnValue(Promise.resolve(expectedUpdatedEmailAlertsConfig));
 
         emailAlertsComponent = new EmailAlertsComponent(spyEmailAlertsConfigDataService, <any> activatedRoute, router);
         emailAlertsComponent.ngOnInit();
 
-        spyEmailAlertsConfigDataService.getEmailAlertsConfigForExchange.calls.first().returnValue.then(done);
+        spyEmailAlertsConfigDataService.getEmailAlertsConfigByBotId.calls.first().returnValue.then(done);
     });
 
     it('should expose EmailAlertsConfig retrieved from the EmailAlertsDataService', () => {
         expect(emailAlertsComponent.emailAlertsConfig).toBe(expectedEmailAlertsConfig);
 
         // paranoia ;-)
-        expect(emailAlertsComponent.emailAlertsConfig.id).toBe('okcoin_email_alerts');
+        expect(emailAlertsComponent.emailAlertsConfig.id).toBe(2);
         expect(emailAlertsComponent.emailAlertsConfig.fromAddress).toBe('master.yoda@dagobah.space');
     });
 

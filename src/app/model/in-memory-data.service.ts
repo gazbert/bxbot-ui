@@ -62,7 +62,7 @@ export class InMemoryDataService implements InMemoryDbService {
 
         /**
          * The Exchange Adapters.
-         * 1-1 relationship with the bot, so 'id' is always the same as the bot 'id'.
+         * There is a 1-1 relationship with the bot - backend server will always set 'id' to the same as the Bot 'id'.
          */
         let exchangeAdapters = [
             {
@@ -498,7 +498,7 @@ export class InMemoryDataService implements InMemoryDbService {
 
         /**
          * The Email Alerts config for bots to send alert messages.
-         * 1-1 relationship with the bot, so 'id' is always the same as the bot 'id'.
+         * There is a 1-1 relationship with the bot - backend server will always set 'id' to the same as the Bot 'id'.
          */
         let emailAlerts = [
             {

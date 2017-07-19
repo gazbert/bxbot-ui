@@ -62,7 +62,7 @@ export class EmailAlertsComponent implements OnInit {
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
             this.exchangeId = params['id'];
-            this.emailAlertsService.getEmailAlertsConfigForExchange(this.exchangeId)
+            this.emailAlertsService.getEmailAlertsConfigByBotId(this.exchangeId)
                 .then(emailAlertsConfig => {
                     this.emailAlertsConfig = emailAlertsConfig;
                     this.updateFormErrors();

@@ -56,10 +56,6 @@ export class ExchangeAdapterHttpDataObservableService implements ExchangeAdapter
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        // FIXME - this doe not work!
-        // const url = this.exchangeAdaptersUrl + '?botId=' + botId;
-
-        // ...for now, use hack and assume botId will always be same as exchangeId ;-/
         const url = this.exchangeAdaptersUrl + '/' + botId;
         return this.http.get(url, {headers: headers})
             .map(ExchangeAdapterHttpDataObservableService.extractData)

@@ -45,11 +45,10 @@ export class ExchangeAdapterHttpDataPromiseService implements ExchangeAdapterDat
     }
 
     getExchangeAdapterByBotId(botId: number): Promise<ExchangeAdapter> {
-        const url = this.exchangeAdaptersUrl + '?botId=' + botId;
+        const url = this.exchangeAdaptersUrl + '/' + botId;
         return this.http.get(url)
             .toPromise()
-            .then(response => response.json().data as ExchangeAdapter[])
-            .then(exchangeAdapters => exchangeAdapters.find(exchangeAdapter => exchangeAdapter.botId == botId))
+            .then(response => response.json().data as ExchangeAdapter)
             .catch(ExchangeAdapterHttpDataPromiseService.handleError);
     }
 

@@ -9,11 +9,10 @@ describe('Email Alerts model tests', () => {
 
     it('should have correct initial values', () => {
 
-        const emailAlertsConfig = new EmailAlertsConfig('gdax_email-alerts', 'gdax', true, 'smtp.gmail.com', 587,
+        const emailAlertsConfig = new EmailAlertsConfig(1, true, 'smtp.gmail.com', 587,
             'bobfett', 'iLoveHoth', 'jabba@tatooine.space', 'boba.fett@hoth.space');
 
-        expect(emailAlertsConfig.id).toBe('gdax_email-alerts');
-        expect(emailAlertsConfig.exchangeId).toBe('gdax');
+        expect(emailAlertsConfig.id).toBe(1);
         expect(emailAlertsConfig.enabled).toBe(true);
         expect(emailAlertsConfig.smtpHost).toBe('smtp.gmail.com');
         expect(emailAlertsConfig.smtpPort).toBe(587);
@@ -25,7 +24,7 @@ describe('Email Alerts model tests', () => {
 
     it('should clone itself', () => {
 
-        const emailAlertsConfig = new EmailAlertsConfig('gdax_email-alerts', 'gdax', true, 'smtp.gmail.com', 587,
+        const emailAlertsConfig = new EmailAlertsConfig(1, true, 'smtp.gmail.com', 587,
             'bobfett', 'iLoveHoth', 'jabba@tatooine.space', 'boba.fett@hoth.space');
 
         const clone = emailAlertsConfig.clone();

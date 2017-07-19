@@ -5,8 +5,7 @@
  */
 export class EmailAlertsConfig {
 
-    constructor(public id: string,
-                public exchangeId: string,
+    constructor(public id: number,
                 public enabled: boolean,
                 public smtpHost: string,
                 public smtpPort: number,
@@ -17,7 +16,7 @@ export class EmailAlertsConfig {
     }
 
     clone() {
-        return new EmailAlertsConfig(this.id, this.exchangeId, this.enabled, this.smtpHost, this.smtpPort,
+        return new EmailAlertsConfig(this.id, this.enabled, this.smtpHost, this.smtpPort,
         this.accountUsername, this.accountPassword, this.toAddress, this.fromAddress);
     }
 }

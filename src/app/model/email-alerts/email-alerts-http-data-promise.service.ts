@@ -30,13 +30,12 @@ export class EmailAlertsHttpDataPromiseService implements EmailAlertsDataPromise
     constructor(private http: Http) {
     }
 
-    getEmailAlertsConfigForExchange(exchangeId: string): Promise<EmailAlertsConfig> {
-        const url = this.emailAlertsUrl + '?exchangeId=' + exchangeId; // TODO - use botId for FK
+    getEmailAlertsConfigByBotId(botId: number): Promise<EmailAlertsConfig> {
+        const url = this.emailAlertsUrl + '/' + botId;
         return this.http.get(url)
             .toPromise()
-            .then(response => response.json().data as EmailAlertsConfig[])
-            .then(emailAlertsConfigs => emailAlertsConfigs.find(emailAlertsConfig => emailAlertsConfig.exchangeId == exchangeId))
-            .catch(this.handleError);
+            .then(response => response.json().data as EmailAlertsConfig)
+            .catch(EmailAlertsHttpDataPromiseService.handleError);
     }
 
     updateEmailAlertsConfig(emailAlertsConfig: EmailAlertsConfig): Promise<EmailAlertsConfig> {
@@ -45,10 +44,10 @@ export class EmailAlertsHttpDataPromiseService implements EmailAlertsDataPromise
             .put(url, JSON.stringify(emailAlertsConfig), {headers: this.headers})
             .toPromise()
             .then(response => response.json().data as EmailAlertsConfig)
-            .catch(this.handleError);
+            .catch(EmailAlertsHttpDataPromiseService.handleError);
     }
 
-    private handleError(error: any): Promise<any> {
+    private static handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
     }
