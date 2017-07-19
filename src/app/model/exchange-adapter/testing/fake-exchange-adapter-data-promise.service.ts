@@ -1,5 +1,5 @@
 import {ExchangeAdapter, NetworkConfig} from "../exchange-adapter.model";
-import {ExchangeAdapterHttpDataPromiseService} from "../exchange-adapter-http-data-promise.service";
+import {ExchangeAdapterHttpDataPromiseService} from "../../exchange-adapter/promise";
 
 /**
  * Fake Exchange Adapter data service (Promise flavour) backend for testing.
@@ -29,7 +29,7 @@ export class FakeExchangeAdapterDataPromiseService extends ExchangeAdapterHttpDa
     }
 }
 
-export var SOME_FAKE_PROMISE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
+export const SOME_FAKE_PROMISE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
     new ExchangeAdapter('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter', 1,
         new NetworkConfig(60,
             [

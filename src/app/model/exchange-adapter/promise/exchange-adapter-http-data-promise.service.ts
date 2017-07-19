@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
-import {AppComponent} from '../../app.component';
-import {ExchangeAdapter} from './exchange-adapter.model';
+import {AppComponent} from '../../../app.component';
+import {ExchangeAdapter} from '../exchange-adapter.model';
 import {ExchangeAdapterDataPromiseService} from './exchange-adapter-data-promise.service';
-import {AuthenticationService} from '../../shared/authentication.service';
+import {AuthenticationService} from '../../../shared/authentication.service';
 
 // Don't forget this else you get runtime error:
 // zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function

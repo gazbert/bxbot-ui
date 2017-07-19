@@ -1,7 +1,8 @@
 import {OnInit, Component, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {ExchangeAdapter, ErrorCode, ErrorMessage, ExchangeAdapterHttpDataPromiseService} from '../model/exchange-adapter';
+import {ExchangeAdapter, ErrorCode, ErrorMessage} from '../model/exchange-adapter';
+import {ExchangeAdapterHttpDataPromiseService} from "../model/exchange-adapter/promise";
 
 /**
  * Template-driven version of the Exchange Adapter form.

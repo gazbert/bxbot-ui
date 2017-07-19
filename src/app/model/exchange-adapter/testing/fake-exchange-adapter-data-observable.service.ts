@@ -37,7 +37,7 @@ export class FakeExchangeAdapterDataObservableService extends ExchangeAdapterHtt
     }
 }
 
-export var SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
+export const SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
     new ExchangeAdapter('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter', 1,
         new NetworkConfig(60,
             [

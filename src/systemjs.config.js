@@ -50,7 +50,7 @@
             'app/model/bot': {main: 'index.js', defaultExtension: 'js'},
             'app/model/bot/testing': {main: 'index.js', defaultExtension: 'js'},
             'app/model/exchange-adapter': {main: 'index.js', defaultExtension: 'js'},
-            'app/model/exchange-adapter/rx': {main: 'index.js', defaultExtension: 'js'},
+            'app/model/exchange-adapter/promise': {main: 'index.js', defaultExtension: 'js'},
             'app/model/exchange-adapter/testing': {main: 'index.js', defaultExtension: 'js'},
             'app/model/market': {main: 'index.js', defaultExtension: 'js'},
             'app/model/trading-strategy': {main: 'index.js', defaultExtension: 'js'},
