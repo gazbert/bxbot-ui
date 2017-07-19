@@ -47,8 +47,8 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
 
         expectedTradingStrategies = [expectedTradingStrategy_1, expectedTradingStrategy_2, unusedTradingStrategy];
 
-        expectedMarket_1 = new Market('gdax_btc_usd', 'gdax', 'BTC/USD', true, 'BTC', 'USD', expectedTradingStrategy_1);
-        expectedMarket_2 = new Market('gdax_btc_gbp', 'gdax', 'BTC/GBP', true, 'BTC', 'GBP', expectedTradingStrategy_2);
+        expectedMarket_1 = new Market('gdax_btc_usd', 2, 'BTC/USD', true, 'BTC', 'USD', expectedTradingStrategy_1);
+        expectedMarket_2 = new Market('gdax_btc_gbp', 2, 'BTC/GBP', true, 'BTC', 'GBP', expectedTradingStrategy_2);
         expectedMarkets = [expectedMarket_1, expectedMarket_2];
 
         activatedRoute = new ActivatedRouteStub();
@@ -61,8 +61,8 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
         spyTradingStrategyDataService.getAllTradingStrategiesForExchange.and.returnValue(Promise.resolve(expectedTradingStrategies));
         spyTradingStrategyDataService.updateTradingStrategy.and.returnValue(Promise.resolve(expectedUpdatedTradingStrategy_2));
 
-        spyMarketDataService = jasmine.createSpyObj('MarketHttpDataPromiseService', ['getAllMarketsForExchange']);
-        spyMarketDataService.getAllMarketsForExchange.and.returnValue(Promise.resolve(expectedMarkets));
+        spyMarketDataService = jasmine.createSpyObj('MarketHttpDataPromiseService', ['getAllMarketsForBotId']);
+        spyMarketDataService.getAllMarketsForBotId.and.returnValue(Promise.resolve(expectedMarkets));
 
         tradingStrategiesComponent = new TradingStrategiesComponent(spyTradingStrategyDataService, spyMarketDataService,
             <any> activatedRoute, router);
@@ -106,7 +106,7 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
     it('should NOT remove Trading Strategy currently being used by a Market', (done) => {
         expect(tradingStrategiesComponent.tradingStrategies.length).toBe(3);
         tradingStrategiesComponent.deleteTradingStrategy(expectedTradingStrategy_1); // being used
-        spyMarketDataService.getAllMarketsForExchange.calls.first().returnValue
+        spyMarketDataService.getAllMarketsForBotId.calls.first().returnValue
             .then((markets) => {
                 // paranoia ;-)
                 expect(markets.length).toBe(2);
@@ -124,7 +124,7 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
     it('should remove Trading Strategy not being used by a Market', (done) => {
         expect(tradingStrategiesComponent.tradingStrategies.length).toBe(3);
         tradingStrategiesComponent.deleteTradingStrategy(unusedTradingStrategy);
-        spyMarketDataService.getAllMarketsForExchange.calls.first().returnValue
+        spyMarketDataService.getAllMarketsForBotId.calls.first().returnValue
             .then((markets) => {
                 // paranoia ;-)
                 expect(markets.length).toBe(2);

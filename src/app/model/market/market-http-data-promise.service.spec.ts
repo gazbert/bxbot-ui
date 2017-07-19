@@ -39,7 +39,7 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
             expect(backend).not.toBeNull('MockBackend backend should be provided');
     }));
 
-    describe('when getAllMarketsForExchange() operation called with \'btce\'', () => {
+    describe('when getAllMarketsForBotId() operation called with \'btce\'', () => {
 
         let backend: MockBackend;
         let service: MarketDataService;
@@ -56,7 +56,7 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
 
         it('should return 2 BTC-e Markets', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.getAllMarketsForExchange('btce')
+            service.getAllMarketsForBotId(3)
                 .then(markets => {
                     expect(markets.length).toBe(2, 'should return 2 BTC-e Markets');
 
@@ -69,7 +69,7 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
         it('should handle returning no matching Markets', async(inject([], () => {
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.getAllMarketsForExchange('unknown')
+            service.getAllMarketsForBotId(100) // unknown id
                 .then(markets => expect(markets.length).toBe(0, 'should have no Markets'));
         })));
     });
@@ -83,7 +83,7 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
 
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
 
-            updatedMarket = new Market('btce_btc_usd', 'btce', 'BTC/USD', true, 'BTC', 'USD',
+            updatedMarket = new Market('btce_btc_usd', 3, 'BTC/USD', true, 'BTC', 'USD',
                 new TradingStrategy('btce_macd', 'btce', 'MACD Indicator',
                     'MACD Indicator for deciding when to enter and exit trades.',
                     'com.gazbert.bxbot.strategies.MacdStrategy'));
@@ -145,12 +145,12 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
 
 const makeMarketData = () => [
 
-    new Market('btce_btc_usd', 'btce', 'BTC/USD', true, 'BTC', 'USD',
+    new Market('btce_btc_usd', 3, 'BTC/USD', true, 'BTC', 'USD',
         new TradingStrategy('btce_macd_rsi', 'btce', 'MACD RSI Indicator',
             'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
             'com.gazbert.bxbot.strategies.MacdRsiStrategy')),
 
-    new Market('btce_ltc_usd', 'btce_', 'LTC/USD', true, 'LTC', 'USD',
+    new Market('btce_ltc_usd', 3, 'LTC/USD', true, 'LTC', 'USD',
         new TradingStrategy('btce_macd', 'btce', 'MACD Indicator',
             'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy')),
 

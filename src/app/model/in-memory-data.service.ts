@@ -212,6 +212,8 @@ export class InMemoryDataService implements InMemoryDbService {
 
         /**
          * The Markets being trading on.
+         * The 'id' field is required because we cannot rely on the marketId being unique across different Exchanges -
+         * it is often the same. e.g. btcusd
          */
         let markets = [
             {
@@ -516,20 +518,20 @@ export class InMemoryDataService implements InMemoryDbService {
                 enabled: true,
                 smtpHost: 'smtp.gmail.com',
                 smtpPort: 587,
-                accountUsername: 'darthvader',
-                accountPassword: 'TheForceIsStrongWithThisOne',
-                toAddress: 'boba.fett@hoth.space',
-                fromAddress: 'darth@deathstar.space'
+                accountUsername: 'solo',
+                accountPassword: 'NeverTellMeTheOdds_',
+                toAddress: 'lando@cloudcity.space',
+                fromAddress: 'han.solo@falcon.space'
             },
             {
                 id: 3,
                 enabled: true,
                 smtpHost: 'smtp.gmail.com',
                 smtpPort: 587,
-                accountUsername: 'solo',
-                accountPassword: 'NeverTellMeTheOdds_',
-                toAddress: 'lando@cloudcity.space',
-                fromAddress: 'han.solo@falcon.space'
+                accountUsername: 'c3po',
+                accountPassword: 'ohMy',
+                toAddress: 'bb-8@jakku.space',
+                fromAddress: 'c-3p0@naboo.space',
             },
             {
                 id: 4,
@@ -586,10 +588,10 @@ export class InMemoryDataService implements InMemoryDbService {
                 enabled: true,
                 smtpHost: 'smtp.gmail.com',
                 smtpPort: 587,
-                accountUsername: 'c3po',
-                accountPassword: 'ohMy',
-                toAddress: 'bb-8@jakku.space',
-                fromAddress: 'c-3p0@naboo.space',
+                accountUsername: 'darthvader',
+                accountPassword: 'TheForceIsStrongWithThisOne',
+                toAddress: 'boba.fett@hoth.space',
+                fromAddress: 'darth@deathstar.space'
             }
         ];
 

@@ -30,8 +30,8 @@ export class MarketHttpDataPromiseService implements MarketDataPromiseService {
     constructor(private http: Http) {
     }
 
-    getAllMarketsForExchange(exchangeId: string): Promise<Market[]> {
-        const url = this.marketsUrl + '?exchangeId=' + exchangeId;
+    getAllMarketsForBotId(botId: number): Promise<Market[]> {
+        const url = this.marketsUrl + '?botId=' + botId;
         return this.http.get(url)
             .toPromise()
             .then(response => response.json().data as Market[])

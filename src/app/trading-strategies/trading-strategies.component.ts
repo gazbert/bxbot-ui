@@ -85,7 +85,7 @@ export class TradingStrategiesComponent implements OnInit {
     }
 
     deleteTradingStrategy(tradingStrategy: TradingStrategy): void {
-        this.marketDataService.getAllMarketsForExchange(this.exchangeId)
+        this.marketDataService.getAllMarketsForBotId(this.exchangeId)
             .then((markets) => {
                 let marketsUsingTheStrategy = markets.filter(m => m.tradingStrategy.id === tradingStrategy.id);
                 if (marketsUsingTheStrategy.length > 0) {

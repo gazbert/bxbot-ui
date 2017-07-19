@@ -35,18 +35,18 @@ describe('MarketsComponent tests without TestBed', () => {
 
         expectedTradingStrategy_1 = new TradingStrategy('gdax_macd', 'gdax', 'MACD Indicator',
             'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy');
-        expectedMarket_1 = new Market('gdax_btc_usd', 'gdax', 'BTC/USD', true, 'BTC', 'USD', expectedTradingStrategy_1);
+        expectedMarket_1 = new Market('gdax_btc_usd', 2, 'BTC/USD', true, 'BTC', 'USD', expectedTradingStrategy_1);
 
         expectedTradingStrategy_2 = new TradingStrategy('gdax_ema', 'gdax', 'MACD Indicator',
             'EMA Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.EmaStrategy');
-        expectedMarket_2 = new Market('gdax_btc_gbp', 'gdax', 'BTC/GBP', true, 'BTC', 'GBP', expectedTradingStrategy_2);
+        expectedMarket_2 = new Market('gdax_btc_gbp', 2, 'BTC/GBP', true, 'BTC', 'GBP', expectedTradingStrategy_2);
 
         expectedMarkets = [expectedMarket_1, expectedMarket_2];
 
-        expectedUpdatedMarket_2 = new Market('gdax_btc_gbp', 'gdax', 'ETH/USD', true, 'ETH', 'USD', expectedTradingStrategy_2);
+        expectedUpdatedMarket_2 = new Market('gdax_btc_gbp', 2, 'ETH/USD', true, 'ETH', 'USD', expectedTradingStrategy_2);
 
         activatedRoute = new ActivatedRouteStub();
-        activatedRoute.testParams = {id: expectedMarket_1.exchangeId};
+        activatedRoute.testParams = {id: expectedMarket_1.botId};
 
         router = jasmine.createSpyObj('router', ['navigate']);
 
@@ -57,14 +57,14 @@ describe('MarketsComponent tests without TestBed', () => {
 
         // We are testing this tho...
         spyMarketDataService = jasmine.createSpyObj('MarketHttpDataPromiseService',
-            ['getAllMarketsForExchange', 'updateMarket']);
-        spyMarketDataService.getAllMarketsForExchange.and.returnValue(Promise.resolve(expectedMarkets));
+            ['getAllMarketsForBotId', 'updateMarket']);
+        spyMarketDataService.getAllMarketsForBotId.and.returnValue(Promise.resolve(expectedMarkets));
         spyMarketDataService.updateMarket.and.returnValue(Promise.resolve(expectedUpdatedMarket_2));
 
         marketsComponent = new MarketsComponent(spyMarketDataService, spyTradingStrategyDataService, <any> activatedRoute, router);
         marketsComponent.ngOnInit();
 
-        spyMarketDataService.getAllMarketsForExchange.calls.first().returnValue.then(done);
+        spyMarketDataService.getAllMarketsForBotId.calls.first().returnValue.then(done);
     });
 
     it('should expose Markets retrieved from MarketDataService', () => {
@@ -112,7 +112,7 @@ describe('MarketsComponent tests without TestBed', () => {
         marketsComponent.addMarket();
         expect(marketsComponent.markets.length).toBe(3);
         expect(marketsComponent.markets[2].id).not.toBeNull();
-        expect(marketsComponent.markets[2].exchangeId).toBe('gdax');
+        expect(marketsComponent.markets[2].botId).toBe(2);
         expect(marketsComponent.markets[2].name).toBe(null);
     });
 });

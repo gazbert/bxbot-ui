@@ -56,7 +56,7 @@ export class MarketsComponent implements OnInit {
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
             this.exchangeId = params['id'];
-            this.marketDataService.getAllMarketsForExchange(this.exchangeId)
+            this.marketDataService.getAllMarketsForBotId(this.exchangeId)
                 .then(markets => {
                     this.markets = markets;
                     this.updateFormErrors();

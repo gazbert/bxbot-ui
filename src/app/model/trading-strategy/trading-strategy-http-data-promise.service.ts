@@ -31,7 +31,7 @@ export class TradingStrategyHttpDataPromiseService implements TradingStrategyDat
     }
 
     getAllTradingStrategiesForExchange(exchangeId: string): Promise<TradingStrategy[]> {
-        const url = this.tradingStrategiesUrl + '?exchangeId=' + exchangeId;
+        const url = this.tradingStrategiesUrl + '?botId=' + exchangeId;
         return this.http.get(url)
             .toPromise()
             .then(response => response.json().data as TradingStrategy[])
