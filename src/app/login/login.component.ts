@@ -3,7 +3,9 @@ import {Router} from "@angular/router";
 import {AuthenticationService} from "../shared";
 
 /**
+ * Login component backs the login screen.
  *
+ * @author gazbert
  */
 @Component({
     moduleId: module.id,

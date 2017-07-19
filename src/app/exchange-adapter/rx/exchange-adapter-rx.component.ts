@@ -1,7 +1,7 @@
 import {OnInit, Component} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormGroup, FormBuilder, Validators, FormControl, FormArray} from '@angular/forms';
-import {ExchangeAdapter, ErrorCode, ErrorMessage, ExchangeAdapterHttpDataObservableService} from '../model/exchange-adapter';
+import {ExchangeAdapter, ErrorCode, ErrorMessage, ExchangeAdapterHttpDataObservableService} from '../../model/exchange-adapter';
 
 // Most RxJS operators are not included in Angular's base Observable implementation.
 // The base implementation includes only what Angular itself requires.
@@ -10,13 +10,13 @@ import {ExchangeAdapter, ErrorCode, ErrorMessage, ExchangeAdapterHttpDataObserva
 import 'rxjs/add/operator/map';
 
 /**
- * Reactive (RxJS) version of the Bot Adapter form.
+ * Reactive (RxJS) version of the Exchange Adapter form.
  * See: https://angular.io/docs/ts/latest/guide/reactive-forms.html
  *
  * I'm still not convinced the Reactive form approach is better than the (far) simpler Template form approach -
  * there's so much more code to write... or am I being a noob and missing something here? ;-/
  *
- * For demo purposes, it uses the Observable implementation of the Bot Adapter HTTP Data service.
+ * For demo purposes, it uses the Observable implementation of the Exchange Adapter HTTP Data service.
  *
  * @author gazbert
  */
@@ -24,7 +24,7 @@ import 'rxjs/add/operator/map';
     moduleId: module.id,
     selector: 'bx-exchange-adapter-rx',
     templateUrl: 'exchange-adapter-rx.component.html',
-    styleUrls: ['exchange-adapter.component.css']
+    styleUrls: ['exchange-adapter-rx.component.css']
 })
 export class ExchangeAdapterRxComponent implements OnInit {
 

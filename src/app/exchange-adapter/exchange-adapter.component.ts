@@ -4,7 +4,7 @@ import {NgForm} from '@angular/forms';
 import {ExchangeAdapter, ErrorCode, ErrorMessage, ExchangeAdapterHttpDataPromiseService} from '../model/exchange-adapter';
 
 /**
- * Template-driven version of the Bot Adapter form.
+ * Template-driven version of the Exchange Adapter form.
  *
  * @author gazbert
  */

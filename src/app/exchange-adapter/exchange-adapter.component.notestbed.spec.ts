@@ -3,7 +3,7 @@ import {ExchangeAdapterComponent} from './exchange-adapter.component';
 import {ExchangeAdapter, NetworkConfig, ErrorCode, ErrorMessage} from '../model/exchange-adapter';
 
 /**
- * Tests the behaviour of the Bot Adapter component (Template version) is as expected.
+ * Tests the behaviour of the Exchange Adapter component (Template version) is as expected.
  *
  * Learning ground for writing Jasmine tests without using the TestBed.
  *
