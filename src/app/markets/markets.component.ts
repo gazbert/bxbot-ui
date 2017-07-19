@@ -20,7 +20,7 @@ export class MarketsComponent implements OnInit {
     markets: Market[] = [];
     deletedMarkets: Market[] = [];
     tradingStrategies: TradingStrategy[] = [];
-    exchangeId;
+    botId;
     active = true;
 
     @ViewChild('marketsForm') currentForm: NgForm;
@@ -55,15 +55,15 @@ export class MarketsComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
-            this.exchangeId = params['id'];
-            this.marketDataService.getAllMarketsForBotId(this.exchangeId)
+            this.botId = params['id'];
+            this.marketDataService.getAllMarketsForBotId(this.botId)
                 .then(markets => {
                     this.markets = markets;
                     this.updateFormErrors();
                 });
         }).then(() => {/*done*/});
 
-        this.tradingStrategyDataService.getAllTradingStrategiesForBotId(this.exchangeId)
+        this.tradingStrategyDataService.getAllTradingStrategiesForBotId(this.botId)
             .then(tradingStrategies => this.tradingStrategies = tradingStrategies);
 
     }
@@ -80,8 +80,8 @@ export class MarketsComponent implements OnInit {
     }
 
     addMarket(): void {
-        let tradingStrategy = new TradingStrategy(this.createUuid(), this.exchangeId, null, null, null);
-        this.markets.push(new Market(this.createUuid(), this.exchangeId, null, false, null, null, tradingStrategy));
+        let tradingStrategy = new TradingStrategy(this.createUuid(), this.botId, null, null, null);
+        this.markets.push(new Market(this.createUuid(), this.botId, null, false, null, null, tradingStrategy));
         this.updateFormErrors();
     }
 

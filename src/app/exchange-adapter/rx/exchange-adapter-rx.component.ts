@@ -93,7 +93,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
         if (isValid) {
 
             // TODO - Must be better way to adapt domain model <-> form UI model?
-            this.exchangeAdapter.id = this.exchangeAdapterForm.get('exchangeId').value;
+            this.exchangeAdapter.id = this.exchangeAdapterForm.get('botId').value;
             this.exchangeAdapter.name = this.exchangeAdapterForm.get('adapterName').value;
             this.exchangeAdapter.className = this.exchangeAdapterForm.get('className').value;
             this.exchangeAdapter.networkConfig.connectionTimeout = this.exchangeAdapterForm.get('connectionTimeout').value;
@@ -150,7 +150,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
     buildForm(): void {
 
         this.exchangeAdapterForm = this.fb.group({
-            exchangeId: new FormControl({value: this.exchangeAdapter.id, disabled: true}, Validators.required),
+            botId: new FormControl({value: this.exchangeAdapter.id, disabled: true}, Validators.required),
             adapterName: [this.exchangeAdapter.name, [
                 Validators.required,
                 Validators.minLength(1),

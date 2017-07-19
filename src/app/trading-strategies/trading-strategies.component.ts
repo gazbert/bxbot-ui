@@ -20,7 +20,7 @@ export class TradingStrategiesComponent implements OnInit {
 
     tradingStrategies: TradingStrategy[] = [];
     deletedTradingStrategies: TradingStrategy[] = [];
-    exchangeId;
+    botId;
     active = true;
     canDeleteStrategy = true;
 
@@ -59,8 +59,8 @@ export class TradingStrategiesComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
-            this.exchangeId = params['id'];
-            this.tradingStrategyDataService.getAllTradingStrategiesForBotId(this.exchangeId)
+            this.botId = params['id'];
+            this.tradingStrategyDataService.getAllTradingStrategiesForBotId(this.botId)
                 .then(tradingStrategies => {
                     this.tradingStrategies = tradingStrategies;
                     this.updateFormErrors();
@@ -80,12 +80,12 @@ export class TradingStrategiesComponent implements OnInit {
     }
 
     addTradingStrategy(): void {
-        this.tradingStrategies.push(new TradingStrategy(this.createUuid(), this.exchangeId, null, null, null));
+        this.tradingStrategies.push(new TradingStrategy(this.createUuid(), this.botId, null, null, null));
         this.updateFormErrors();
     }
 
     deleteTradingStrategy(tradingStrategy: TradingStrategy): void {
-        this.marketDataService.getAllMarketsForBotId(this.exchangeId)
+        this.marketDataService.getAllMarketsForBotId(this.botId)
             .then((markets) => {
                 let marketsUsingTheStrategy = markets.filter(m => m.tradingStrategy.id === tradingStrategy.id);
                 if (marketsUsingTheStrategy.length > 0) {

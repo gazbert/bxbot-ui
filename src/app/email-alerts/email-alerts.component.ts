@@ -17,7 +17,7 @@ import {EmailAlertsConfig, EmailAlertsHttpDataPromiseService} from '../model/ema
 export class EmailAlertsComponent implements OnInit {
 
     emailAlertsConfig: EmailAlertsConfig;
-    exchangeId;
+    botId;
     active = true;
 
     @ViewChild('emailAlertsForm') currentForm: NgForm;
@@ -61,8 +61,8 @@ export class EmailAlertsComponent implements OnInit {
 
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
-            this.exchangeId = params['id'];
-            this.emailAlertsService.getEmailAlertsConfigByBotId(this.exchangeId)
+            this.botId = params['id'];
+            this.emailAlertsService.getEmailAlertsConfigByBotId(this.botId)
                 .then(emailAlertsConfig => {
                     this.emailAlertsConfig = emailAlertsConfig;
                     this.updateFormErrors();
