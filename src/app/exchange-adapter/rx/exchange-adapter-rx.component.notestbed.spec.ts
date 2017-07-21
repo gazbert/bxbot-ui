@@ -1,6 +1,6 @@
 import {ActivatedRouteStub} from '../../../testing';
 import {ExchangeAdapterRxComponent} from './exchange-adapter-rx.component';
-import {ExchangeAdapter, NetworkConfig, ErrorCode, ErrorMessage} from '../../model/exchange-adapter';
+import {ExchangeAdapter, NetworkConfig} from '../../model/exchange-adapter';
 import {Observable} from 'rxjs/Observable';
 
 // Most RxJS operators are not included in Angular's base Observable implementation.
@@ -34,8 +34,8 @@ describe('ExchangeAdapterRxComponent tests without TestBed', () => {
 
     let expectedExchangeAdapter: ExchangeAdapter;
     let expectedNetworkConfig: NetworkConfig;
-    let expectedErrorCodes: ErrorCode[];
-    let expectedErrorMsgs: ErrorMessage[];
+    let expectedErrorCodes: number[];
+    let expectedErrorMsgs: string[];
 
     let expectedUpdatedExchangeAdapter: ExchangeAdapter;
 
@@ -47,8 +47,8 @@ describe('ExchangeAdapterRxComponent tests without TestBed', () => {
 
     beforeEach(done => {
 
-        expectedErrorCodes = [{'value': 501}];
-        expectedErrorMsgs = [{'value': 'Connection timeout'}];
+        expectedErrorCodes = [501];
+        expectedErrorMsgs = ['Connection timeout'];
         expectedNetworkConfig = new NetworkConfig(60, expectedErrorCodes, expectedErrorMsgs);
 
         expectedExchangeAdapter = new ExchangeAdapter('btce', 'BTC-e v2 API Adapter', 'com.gazbert.bxbot.adapter.BtceExchangeAdapter',
@@ -87,7 +87,7 @@ describe('ExchangeAdapterRxComponent tests without TestBed', () => {
         // paranoia ;-)
         expect(exchangeAdapterComponent.exchangeAdapter.id).toBe('btce');
         expect(exchangeAdapterComponent.exchangeAdapter.name).toBe('BTC-e v2 API Adapter');
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0].value).toBe(501);
+        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0]).toBe(501);
     });
 
     // FIXME - broken after changing to use Observables
@@ -121,8 +121,8 @@ describe('ExchangeAdapterRxComponent tests without TestBed', () => {
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1]).not.toBeDefined();
         exchangeAdapterComponent.addErrorCode();
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(2);
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1].value).toBeDefined();
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1].value).toBeNull();
+        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1]).toBeDefined();
+        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1]).toBeNull();
     });
 
     // FIXME - broken after changing to use Observables
@@ -131,7 +131,7 @@ describe('ExchangeAdapterRxComponent tests without TestBed', () => {
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages[1]).not.toBeDefined();
         exchangeAdapterComponent.addErrorMessage();
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(2);
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages[1].value).toBe('');
+        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages[1]).toBe('');
     });
 
     // FIXME - broken after changing to use Observables

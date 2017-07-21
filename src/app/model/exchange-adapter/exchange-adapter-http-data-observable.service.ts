@@ -32,7 +32,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class ExchangeAdapterHttpDataObservableService implements ExchangeAdapterDataObservableService {
 
-    private exchangeAdaptersUrl = AppComponent.REST_API_BASE_URL + '/exchangeAdapters';
+    private exchangeAdaptersUrl = AppComponent.REST_API_BASE_URL + '/exchange_adapters';
 
     constructor(private http: Http) {
     }

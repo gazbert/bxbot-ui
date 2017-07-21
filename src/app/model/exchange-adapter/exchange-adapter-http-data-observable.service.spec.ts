@@ -129,18 +129,18 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
                     expect(exchangeAdapter.networkConfig.connectionTimeout).toBe(60);
 
                     expect(exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(3);
-                    expect(exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0].value).toBe(503);
-                    expect(exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1].value).toBe(504);
-                    expect(exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[2].value).toBe(522);
+                    expect(exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0]).toBe(503);
+                    expect(exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1]).toBe(504);
+                    expect(exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[2]).toBe(522);
 
                     expect(exchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(3);
-                    expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[0].value).toBe(
+                    expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[0]).toBe(
                         "Connection reset"
                     );
-                    expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[1].value).toBe(
+                    expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[1]).toBe(
                         "Connection refused"
                     );
-                    expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[2].value).toBe(
+                    expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[2]).toBe(
                         "Remote host closed connection during handshake"
                     );
                 });
@@ -183,14 +183,14 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
                 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapterV2', 1,
                 new NetworkConfig(90,
                     [
-                        {value: 504},
-                        {value: 505},
-                        {value: 506},
+                        504,
+                        505,
+                        506,
                     ],
                     [
-                        {value: "Connection reset again!"},
-                        {value: "Connection refused again!"},
-                        {value: "Remote host closed connection during handshake again!"}
+                        "Connection reset again!",
+                        "Connection refused again!",
+                        "Remote host closed connection during handshake again!"
                     ]
                 ));
 
@@ -249,40 +249,40 @@ const makeExchangeAdapterData = () => [
     new ExchangeAdapter('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter', 1,
         new NetworkConfig(60,
             [
-                {value: 503},
-                {value: 504},
-                {value: 522},
+                503,
+                504,
+                522,
             ],
             [
-                {value: "Connection reset"},
-                {value: "Connection refused"},
-                {value: "Remote host closed connection during handshake"}
+                "Connection reset",
+                "Connection refused",
+                "Remote host closed connection during handshake"
             ]
         )),
     new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter', 2,
         new NetworkConfig(60,
             [
-                {value: 503},
-                {value: 504},
-                {value: 522},
+                503,
+                504,
+                522,
             ],
             [
-                {value: "Connection reset"},
-                {value: "Connection refused"},
-                {value: "Remote host closed connection during handshake"}
+                "Connection reset",
+                "Connection refused",
+                "Remote host closed connection during handshake"
             ]
         )),
     new ExchangeAdapter('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter', 3,
         new NetworkConfig(60,
             [
-                {value: 503},
-                {value: 504},
-                {value: 522},
+                503,
+                504,
+                522,
             ],
             [
-                {value: "Connection reset"},
-                {value: "Connection refused"},
-                {value: "Remote host closed connection during handshake"}
+                "Connection reset",
+                "Connection refused",
+                "Remote host closed connection during handshake"
             ]
         )),
 ] as ExchangeAdapter[];

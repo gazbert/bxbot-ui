@@ -1,7 +1,7 @@
 import {OnInit, Component, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {ExchangeAdapter, ErrorCode, ErrorMessage} from '../model/exchange-adapter';
+import {ExchangeAdapter} from '../model/exchange-adapter';
 import {ExchangeAdapterHttpDataPromiseService} from "../model/exchange-adapter/promise";
 
 /**
@@ -82,22 +82,22 @@ export class ExchangeAdapterComponent implements OnInit {
     }
 
     addErrorCode(): void {
-        this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.push(new ErrorCode(null));
+        this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.push(null);
         this.updateFormErrors();
     }
 
-    deleteErrorCode(code: ErrorCode): void {
+    deleteErrorCode(code: number): void {
         this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes =
             this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.filter(c => c !== code);
         this.updateFormErrors();
     }
 
     addErrorMessage(message: string): void {
-        this.exchangeAdapter.networkConfig.nonFatalErrorMessages.push(new ErrorMessage(message));
+        this.exchangeAdapter.networkConfig.nonFatalErrorMessages.push(message);
         this.updateFormErrors();
     }
 
-    deleteErrorMessage(message: ErrorMessage): void {
+    deleteErrorMessage(message: string): void {
         this.exchangeAdapter.networkConfig.nonFatalErrorMessages =
             this.exchangeAdapter.networkConfig.nonFatalErrorMessages.filter(m => m !== message);
         this.updateFormErrors();

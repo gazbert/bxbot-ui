@@ -62,7 +62,7 @@
                         <div class="form-group">
                             <label for="errorCode_{{i}}">HTTP Status Code</label>
                             <input #httpStatusCode
-                                   [(ngModel)]="exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[i].value"
+                                   [(ngModel)]="exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[i]"
                                    type="text" class="form-control" id="errorCode_{{i}}"
                                    name="errorCode_{{i}}" required #errorCode="ngModel" pattern="\d{3}"
                                    placeholder="502">
@@ -94,7 +94,7 @@
                     <div class="panel-body">
                         <div class="form-group">
                             <label for="errorMessage_{{i}}">Error Message</label>
-                            <input [(ngModel)]="exchangeAdapter.networkConfig.nonFatalErrorMessages[i].value"
+                            <input [(ngModel)]="exchangeAdapter.networkConfig.nonFatalErrorMessages[i]"
                                    type="text" class="form-control" id="errorMessage_{{i}}"
                                    name="errorMessage_{{i}}" required #errorMsg="ngModel" minLength="1"
                                    placeholder="My error message...">

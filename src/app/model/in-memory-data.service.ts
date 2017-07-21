@@ -64,7 +64,7 @@ export class InMemoryDataService implements InMemoryDbService {
          * The Exchange Adapters.
          * There is a 1-1 relationship with the bot - backend server will always set 'id' to the same as the Bot 'id'.
          */
-        let exchangeAdapters = [
+        let exchange_adapters = [
             {
                 id: 1,
                 name: 'Bitstamp REST API Adapter',
@@ -72,12 +72,12 @@ export class InMemoryDataService implements InMemoryDbService {
                 networkConfig: {
                     connectionTimeout: 60,
                     nonFatalErrorHttpStatusCodes: [
-                        {value: 503},
-                        {value: 522},
+                        503,
+                        522
                     ],
                     nonFatalErrorMessages: [
-                        {value: 'Connection reset'},
-                        {value: 'Connection refused'},
+                        'Connection reset',
+                        'Connection refused'
                     ]
                 }
             },
@@ -88,12 +88,12 @@ export class InMemoryDataService implements InMemoryDbService {
                 networkConfig: {
                     connectionTimeout: 120,
                     nonFatalErrorHttpStatusCodes: [
-                        {value: 503},
-                        {value: 522},
+                        503,
+                        522
                     ],
                     nonFatalErrorMessages: [
-                        {value: 'Connection reset'},
-                        {value: 'Connection refused'}
+                        'Connection reset',
+                        'Connection refused'
                     ]
                 }
             },
@@ -104,8 +104,8 @@ export class InMemoryDataService implements InMemoryDbService {
                 networkConfig: {
                     connectionTimeout: 90,
                     nonFatalErrorHttpStatusCodes: [
-                        {value: 503},
-                        {value: 504},
+                        503,
+                        504
                     ],
                     nonFatalErrorMessages: [
                         {value: 'Connection reset'},
@@ -120,12 +120,12 @@ export class InMemoryDataService implements InMemoryDbService {
                 networkConfig: {
                     connectionTimeout: 30,
                     nonFatalErrorHttpStatusCodes: [
-                        {value: 503},
-                        {value: 522},
+                        503,
+                        522
                     ],
                     nonFatalErrorMessages: [
-                        {value: 'Connection reset'},
-                        {value: 'Connection refused'},
+                        'Connection reset',
+                        'Connection refused'
                     ]
                 }
             },
@@ -136,12 +136,12 @@ export class InMemoryDataService implements InMemoryDbService {
                 networkConfig: {
                     connectionTimeout: 45,
                     nonFatalErrorHttpStatusCodes: [
-                        {value: 504},
-                        {value: 522},
+                        504,
+                        522
                     ],
                     nonFatalErrorMessages: [
-                        {value: 'Connection reset'},
-                        {value: 'Remote host closed connection during handshake'}
+                        'Connection reset',
+                        'Remote host closed connection during handshake'
                     ]
                 }
             },
@@ -152,12 +152,12 @@ export class InMemoryDataService implements InMemoryDbService {
                 networkConfig: {
                     connectionTimeout: 50,
                     nonFatalErrorHttpStatusCodes: [
-                        {value: 503},
-                        {value: 504},
+                        503,
+                        504
                     ],
                     nonFatalErrorMessages: [
-                        {value: 'Connection reset'},
-                        {value: 'Connection refused'},
+                        'Connection reset',
+                        'Connection refused'
                     ]
                 }
             },
@@ -168,12 +168,12 @@ export class InMemoryDataService implements InMemoryDbService {
                 networkConfig: {
                     connectionTimeout: 20,
                     nonFatalErrorHttpStatusCodes: [
-                        {value: 504},
-                        {value: 522},
+                        504,
+                        522
                     ],
                     nonFatalErrorMessages: [
-                        {value: 'Connection reset'},
-                        {value: 'Remote host closed connection during handshake'}
+                        'Connection reset',
+                        'Remote host closed connection during handshake'
                     ]
                 }
             },
@@ -184,12 +184,12 @@ export class InMemoryDataService implements InMemoryDbService {
                 networkConfig: {
                     connectionTimeout: 10,
                     nonFatalErrorHttpStatusCodes: [
-                        {value: 503},
-                        {value: 504},
+                        503,
+                        504
                     ],
                     nonFatalErrorMessages: [
-                        {value: 'Connection reset'},
-                        {value: 'Connection refused'},
+                        'Connection reset',
+                        'Connection refused'
                     ]
                 }
             },
@@ -200,11 +200,11 @@ export class InMemoryDataService implements InMemoryDbService {
                 networkConfig: {
                     connectionTimeout: 60,
                     nonFatalErrorHttpStatusCodes: [
-                        {value: 504},
-                        {value: 522},
+                        504,
+                        522
                     ],
                     nonFatalErrorMessages: [
-                        {value: 'Remote host closed connection during handshake'},
+                        'Remote host closed connection during handshake'
                     ]
                 }
             }
@@ -595,6 +595,6 @@ export class InMemoryDataService implements InMemoryDbService {
             }
         ];
 
-        return {bots, exchangeAdapters, markets, tradingStrategies, emailAlerts};
+        return {bots, exchange_adapters, markets, tradingStrategies, emailAlerts};
     }
 }

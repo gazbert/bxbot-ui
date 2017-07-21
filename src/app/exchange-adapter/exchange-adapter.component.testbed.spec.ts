@@ -5,7 +5,7 @@ import {Http} from '@angular/http';
 import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
 import {ActivatedRoute, ActivatedRouteStub, click, newEvent, Router, RouterStub} from '../../testing';
 import {SharedModule} from "../shared/shared.module";
-import {ExchangeAdapter, NetworkConfig, ErrorCode, ErrorMessage} from '../model/exchange-adapter';
+import {ExchangeAdapter, NetworkConfig} from '../model/exchange-adapter';
 import {FakeExchangeAdapterDataPromiseService, SOME_FAKE_PROMISE_EXCHANGE_ADAPTERS} from '../model/exchange-adapter/testing';
 import {ExchangeAdapterModule} from './exchange-adapter.module';
 import {ExchangeAdapterComponent} from './exchange-adapter.component';
@@ -48,15 +48,15 @@ describe('ExchangeAdapterComponent tests using TestBed', () => {
 function overrideExchangeAdapterServiceSetup() {
 
     let expectedNetworkConfig: NetworkConfig;
-    let expectedErrorCodes: ErrorCode[];
-    let expectedErrorMsgs: ErrorMessage[];
+    let expectedErrorCodes: number[];
+    let expectedErrorMsgs: string[];
     let testExchangeAdapter: ExchangeAdapter;
 
     class StubExchangeAdapterHttpDataService implements ExchangeAdapterDataPromiseService {
 
         constructor() {
-            expectedErrorCodes = [{'value': 501}];
-            expectedErrorMsgs = [{'value': 'Connection timeout'}];
+            expectedErrorCodes = [501];
+            expectedErrorMsgs = ['Connection timeout'];
             expectedNetworkConfig = new NetworkConfig(60, expectedErrorCodes, expectedErrorMsgs);
             testExchangeAdapter = new ExchangeAdapter('btce', 'BTC-e',
                 'com.gazbert.bxbot.adapter.BtceExchangeAdapter', 1, expectedNetworkConfig);
@@ -126,10 +126,10 @@ function overrideExchangeAdapterServiceSetup() {
             testExchangeAdapter.networkConfig.connectionTimeout);
 
         expect(page.errorCode_0Input.value).toBe('' + // hack to turn it into a String for comparison ;-)
-            testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0].value);
+            testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0]);
 
         expect(page.errorMessage_0Input.value).toBe(
-            testExchangeAdapter.networkConfig.nonFatalErrorMessages[0].value);
+            testExchangeAdapter.networkConfig.nonFatalErrorMessages[0]);
     });
 
     it('should save and navigate to Dashboard when user clicks Save for valid input', fakeAsync(() => {
@@ -188,8 +188,8 @@ function overrideExchangeAdapterServiceSetup() {
         click(page.addNewErrorCodeLink);
 
         expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(2);
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1].value).toBeDefined();
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1].value).toBeNull();
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1]).toBeDefined();
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1]).toBeNull();
     });
 
     it('should create new Error Message when user adds one', () => {
@@ -199,8 +199,8 @@ function overrideExchangeAdapterServiceSetup() {
         click(page.addNewErrorMessageLink);
 
         expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(2);
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages[1].value).toBeDefined();
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages[1].value).toBe('');
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages[1]).toBeDefined();
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages[1]).toBe('');
     });
 
     it('should remove Error Code when user deletes one', () => {
@@ -265,9 +265,9 @@ function fakeExchangeAdapterServiceSetup() {
                 expectedExchangeAdapter.networkConfig.connectionTimeout);
 
             expect(page.errorCode_0Input.value).toBe('' + // hack to turn it into a String for comparison ;-)
-                expectedExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0].value);
+                expectedExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0]);
 
-            expect(page.errorMessage_0Input.value).toBe(expectedExchangeAdapter.networkConfig.nonFatalErrorMessages[0].value);
+            expect(page.errorMessage_0Input.value).toBe(expectedExchangeAdapter.networkConfig.nonFatalErrorMessages[0]);
         });
 
         it('should save and navigate to Dashboard when user clicks Save for valid input', fakeAsync(() => {
@@ -324,8 +324,8 @@ function fakeExchangeAdapterServiceSetup() {
             click(page.addNewErrorCodeLink);
 
             expect(expectedExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(4);
-            expect(expectedExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[3].value).toBeDefined();
-            expect(expectedExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[3].value).toBeNull();
+            expect(expectedExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[3]).toBeDefined();
+            expect(expectedExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[3]).toBeNull();
         });
 
         it('should remove Error Code when user deletes one', () => {
@@ -345,8 +345,8 @@ function fakeExchangeAdapterServiceSetup() {
             click(page.addNewErrorMessageLink);
 
             expect(expectedExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(4);
-            expect(expectedExchangeAdapter.networkConfig.nonFatalErrorMessages[3].value).toBeDefined();
-            expect(expectedExchangeAdapter.networkConfig.nonFatalErrorMessages[3].value).toBe('');
+            expect(expectedExchangeAdapter.networkConfig.nonFatalErrorMessages[3]).toBeDefined();
+            expect(expectedExchangeAdapter.networkConfig.nonFatalErrorMessages[3]).toBe('');
         });
 
         it('should remove Error Message when user deletes one', () => {

@@ -1,7 +1,7 @@
 import {OnInit, Component} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormGroup, FormBuilder, Validators, FormControl, FormArray} from '@angular/forms';
-import {ExchangeAdapter, ErrorCode, ErrorMessage, ExchangeAdapterHttpDataObservableService} from '../../model/exchange-adapter';
+import {ExchangeAdapter, ExchangeAdapterHttpDataObservableService} from '../../model/exchange-adapter';
 
 // Most RxJS operators are not included in Angular's base Observable implementation.
 // The base implementation includes only what Angular itself requires.
@@ -98,15 +98,13 @@ export class ExchangeAdapterRxComponent implements OnInit {
             this.exchangeAdapter.className = this.exchangeAdapterForm.get('className').value;
             this.exchangeAdapter.networkConfig.connectionTimeout = this.exchangeAdapterForm.get('connectionTimeout').value;
 
-            // hack for now til I sort the JSON integration spec out with Spring Boot app
             this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length = 0;
             this.exchangeAdapterForm.get('nonFatalErrorHttpStatusCodes').value.forEach(
-                (c) => this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.push({'value': parseInt(c, 10)}));
+                (c) => this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.push(parseInt(c, 10)));
 
-            // hack for now til I sort the JSON integration spec out with Spring Boot app
             this.exchangeAdapter.networkConfig.nonFatalErrorMessages.length = 0;
             this.exchangeAdapterForm.get('nonFatalErrorMessages').value.forEach(
-                (m) => this.exchangeAdapter.networkConfig.nonFatalErrorMessages.push({'value': m}));
+                (m) => this.exchangeAdapter.networkConfig.nonFatalErrorMessages.push(m));
 
             this.exchangeAdapterDataService.update(this.exchangeAdapter)
                 .subscribe(
@@ -125,7 +123,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
 
     addErrorCode(): void {
         const control = <FormArray>this.exchangeAdapterForm.controls['nonFatalErrorHttpStatusCodes'];
-        control.push(this.createErrorCodeGroup(new ErrorCode(null)));
+        control.push(this.createErrorCodeGroup(null));
     }
 
     deleteErrorCode(i: number): void {
@@ -135,7 +133,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
 
     addErrorMessage(): void {
         const control = <FormArray>this.exchangeAdapterForm.controls['nonFatalErrorMessages'];
-        control.push(this.createErrorMessageGroup(new ErrorMessage('')));
+        control.push(this.createErrorMessageGroup(''));
     }
 
     deleteErrorMessage(i: number): void {
@@ -185,16 +183,16 @@ export class ExchangeAdapterRxComponent implements OnInit {
         this.onValueChanged(); // (re)set validation messages now
     }
 
-    createErrorMessageGroup(errorMsg: ErrorMessage) {
-        return new FormControl(errorMsg.value, [
+    createErrorMessageGroup(errorMsg: string) {
+        return new FormControl(errorMsg, [
             Validators.required,
             Validators.minLength(1),
             Validators.maxLength(120),
         ]);
     }
 
-    createErrorCodeGroup(code: ErrorCode) {
-        return new FormControl(code.value, [
+    createErrorCodeGroup(code: number) {
+        return new FormControl(code, [
             Validators.required,
             Validators.pattern('\\d{3}'),
             this.httpCodeWhitelistChecker,

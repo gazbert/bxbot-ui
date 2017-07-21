@@ -41,40 +41,40 @@ export const SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
     new ExchangeAdapter('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter', 1,
         new NetworkConfig(60,
             [
-                {value: 503},
-                {value: 504},
-                {value: 522},
+                503,
+                504,
+                522,
             ],
             [
-                {value: "Connection reset"},
-                {value: "Connection refused"},
-                {value: "Remote host closed connection during handshake"}
+                "Connection reset",
+                "Connection refused",
+                "Remote host closed connection during handshake"
             ]
         )),
     new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter', 2,
         new NetworkConfig(60,
             [
-                {value: 503},
-                {value: 504},
-                {value: 522},
+                503,
+                504,
+                522,
             ],
             [
-                {value: "Connection reset"},
-                {value: "Connection refused"},
-                {value: "Remote host closed connection during handshake"}
+                "Connection reset",
+                "Connection refused",
+                "Remote host closed connection during handshake"
             ]
         )),
     new ExchangeAdapter('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter', 3,
         new NetworkConfig(60,
             [
-                {value: 503},
-                {value: 504},
-                {value: 522},
+                503,
+                504,
+                522,
             ],
             [
-                {value: "Connection reset"},
-                {value: "Connection refused"},
-                {value: "Remote host closed connection during handshake"}
+                "Connection reset",
+                "Connection refused",
+                "Remote host closed connection during handshake"
             ]
         ))
 ];

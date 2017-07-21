@@ -1,6 +1,6 @@
 import {ActivatedRouteStub} from '../../testing';
 import {ExchangeAdapterComponent} from './exchange-adapter.component';
-import {ExchangeAdapter, NetworkConfig, ErrorCode, ErrorMessage} from '../model/exchange-adapter';
+import {ExchangeAdapter, NetworkConfig} from '../model/exchange-adapter';
 
 /**
  * Tests the behaviour of the Exchange Adapter component (Template version) is as expected.
@@ -24,8 +24,8 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
 
     let expectedExchangeAdapter: ExchangeAdapter;
     let expectedNetworkConfig: NetworkConfig;
-    let expectedErrorCodes: ErrorCode[];
-    let expectedErrorMsgs: ErrorMessage[];
+    let expectedErrorCodes: number[];
+    let expectedErrorMsgs: string[];
 
     let expectedUpdatedExchangeAdapter: ExchangeAdapter;
 
@@ -34,8 +34,8 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
 
     beforeEach(done => {
 
-        expectedErrorCodes = [{'value': 501}];
-        expectedErrorMsgs = [{'value': 'Connection timeout'}];
+        expectedErrorCodes = [501];
+        expectedErrorMsgs = ['Connection timeout'];
         expectedNetworkConfig = new NetworkConfig(60, expectedErrorCodes, expectedErrorMsgs);
 
         expectedExchangeAdapter = new ExchangeAdapter('btce', 'BTC-e', 'com.gazbert.bxbot.adapter.BtceExchangeAdapter',
@@ -66,7 +66,7 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
         // paranoia ;-)
         expect(exchangeAdapterComponent.exchangeAdapter.id).toBe('btce');
         expect(exchangeAdapterComponent.exchangeAdapter.name).toBe('BTC-e');
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0].value).toBe(501);
+        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0]).toBe(501);
     });
 
     it('should save and navigate to Dashboard when user clicks Save for valid input', done => {
@@ -96,8 +96,8 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1]).not.toBeDefined();
         exchangeAdapterComponent.addErrorCode();
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(2);
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1].value).toBeDefined();
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1].value).toBeNull();
+        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1]).toBeDefined();
+        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1]).toBeNull();
     });
 
     xit('should create new Error Message when user adds one', () => {
@@ -105,7 +105,7 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages[1]).not.toBeDefined();
         exchangeAdapterComponent.addErrorMessage('We are ready at last to set sail for the stars.');
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(2);
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages[1].value).toBe(
+        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages[1]).toBe(
             'We are ready at last to set sail for the stars.');
     });
 

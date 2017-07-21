@@ -1,6 +1,9 @@
 /**
  * Encapsulates an Exchange Adapter.
  *
+ * For now, decision taken not to expose AuthenticationConfig (API key + secret) through REST API - changes have to be
+ * made on the local bot node. Might revisit this in the future.
+ *
  * @author gazbert
  */
 export class ExchangeAdapter {
@@ -18,17 +21,7 @@ export class ExchangeAdapter {
 
 export class NetworkConfig {
     constructor(public connectionTimeout: number,
-                public nonFatalErrorHttpStatusCodes: ErrorCode[],
-                public nonFatalErrorMessages: ErrorMessage[]) {
-    }
-}
-
-export class ErrorCode {
-    constructor(public value: number) {
-    }
-}
-
-export class ErrorMessage {
-    constructor(public value: string) {
+                public nonFatalErrorHttpStatusCodes: number[],
+                public nonFatalErrorMessages: string[]) {
     }
 }
