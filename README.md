@@ -18,7 +18,7 @@ Although being developed as a 'real-world' app, the code _tries_ to showcase dif
 If you want to just play around with the UI, Docker is the way to go.
 
 1. Install [Docker](https://docs.docker.com/engine/installation/) on the machine you want to run the bot.
-1. Fetch the BX-bot image from [Docker Hub](https://hub.docker.com/r/gazbert/bxbot/): `docker pull gazbert/bxbot-ui:0.0.1`
+1. Fetch the BX-bot image from [Docker Hub](https://hub.docker.com/r/gazbert/bxbot-ui/): `docker pull gazbert/bxbot-ui:0.0.1`
 1. Run the Docker container: `docker run --name bxbot-ui-0.0.1 -it --rm -p 3000:3000 -p 3001:3001 gazbert/bxbot-ui:0.0.1`
 1. A browser window should open with the app running in it. If not, open a browser and go to: `http://localhost:3000`
 1. You can stop the container using the `CTRL-c`
