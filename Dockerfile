@@ -1,8 +1,3 @@
-# To build and run with Docker:
-#
-#  $ docker build -t bxbot-ui .
-#  $ docker run -it --rm -p 3000:3000 -p 3001:3001 bxbot-ui
-#
 FROM node:latest
 
 RUN mkdir -p /bxbot-ui /home/nodejs && \

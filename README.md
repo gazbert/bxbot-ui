@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/gazbert/bxbot-ui.svg?branch=master)](https://travis-ci.org/gazbert/bxbot-ui)
 
-**Note:** _This project is very much work in progress and not safe for production._
+**Note:** This project is very much work in progress and not safe for production.
 
 ## What is BX-bot UI?
 
@@ -12,7 +12,21 @@ Although being developed as a 'real-world' app, the code _tries_ to showcase dif
 [TypeScript](https://www.typescriptlang.org/). It's not meant to be an Angular 101 tutorial - the 
 [Angular Documentation](https://angular.io/docs) does a far better job!
 
-## User Guide
+## Installation Guide
+
+### The Docker way
+If you want to just play around with the UI, Docker is the way to go.
+
+1. Install [Docker](https://docs.docker.com/engine/installation/) on the machine you want to run the bot.
+1. Fetch the BX-bot image from [Docker Hub](https://hub.docker.com/r/gazbert/bxbot/): `docker pull gazbert/bxbot-ui:0.0.1`
+1. Run the Docker container: `docker run --name bxbot-ui-0.0.1 -it --rm -p 3000:3000 -p 3001:3001 gazbert/bxbot-ui:0.0.1`
+1. A browser window should open with the app running in it. If not, open a browser and go to: `http://localhost:3000`
+1. You can stop the container using the `CTRL-c`
+   
+A Docker image is available on [Docker Hub](https://hub.docker.com/r/gazbert/bxbot-ui/tags/) - it is not a release, 
+but rather a rolling development version of the UI.
+  
+### The manual way
 
 You'll need [node.js](https://nodejs.org/en/download/) installed to build and run the app.
 
@@ -20,8 +34,11 @@ You'll need [node.js](https://nodejs.org/en/download/) installed to build and ru
 1. Change directory to the root of project.
 1. Run `npm install` to install the dependencies - you'll only need to do this once, unless the versions are updated in 
    the [`package.json`](./package.json).
-1. To start the app: `npm start` - a browser window should open with the app up and running...
+1. To start the app: `npm start` - a browser window should open with the app up and running.  
+   If not, open a browser and go to: `http://localhost:3000`
 1. To stop the app, `CTRL-c` from the command line.
+
+## Build Guide
 
 ### Jasmine Unit Tests
 
@@ -45,7 +62,7 @@ functionality errors.
 
 1. To run the linter: `npm run lint`
 
-### Configuration
+## Configuration
 
 The app uses Angular's [In Memory Web API](https://github.com/angular/in-memory-web-api) as a replacement
 backend for development and local testing. The API config configuration options are set in [`app.module.ts`](/src/app/app.module.ts).
@@ -62,8 +79,7 @@ To communicate with the bots for real, the app will need configuring to use
 This app started life as the [Angular 4 QuickStart](https://github.com/angular/quickstart) app and took (a lot of)
 inspiration from the following awesomeness:
 
-* The official [Angular Tutorial](https://angular.io/tutorial).
-* The [Angular Style Guide](https://angular.io/docs/ts/latest/guide/style-guide.html).
+* The official [Angular Tutorial](https://angular.io/tutorial) and [Angular Style Guide](https://angular.io/docs/ts/latest/guide/style-guide.html).
 * Scotch tutorials by [Jecelyn Yeen](https://pub.scotch.io/@jecelyn).
 * Lots of insightful articles by (former) Angular dev [Victor Savkin](https://vsavkin.com/).
 * [Juri Strumpflohner's](https://juristr.com/blog/collections/angular/) Angular blogs.
