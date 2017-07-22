@@ -12,10 +12,10 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host 0.0.0.0 --port 3000",
+    "start": "ng serve --host 0.0.0.0 --port 4200",
     "build": "ng build",
     "test": "ng test",
-    "test:once": "ng test --watch=false",
+    "test:once": "ng test --single-run",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -33,9 +33,9 @@
     "angular-in-memory-web-api": "~0.3.0",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
+    "reflect-metadata": "^0.1.8",
     "rxjs": "^5.4.1",
-    "zone.js": "^0.8.14",
-    "reflect-metadata": "^0.1.8"
+    "zone.js": "^0.8.14"
   },
   "devDependencies": {
     "@angular/cli": "1.2.3",
@@ -59,4 +59,3 @@
     "typescript": "~2.3.3"
   }
 }
-

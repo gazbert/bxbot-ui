@@ -19,8 +19,8 @@ If you want to just play around with the UI, Docker is the way to go.
 
 1. Install [Docker](https://docs.docker.com/engine/installation/) on the machine you want to run the bot.
 1. Fetch the BX-bot image from [Docker Hub](https://hub.docker.com/r/gazbert/bxbot-ui/): `docker pull gazbert/bxbot-ui:0.0.1`
-1. Run the Docker container: `docker run --name bxbot-ui-0.0.1 -it --rm -p 3000:3000 gazbert/bxbot-ui:0.0.1`
-1. Open a browser and go to: `http://localhost:3000`
+1. Run the Docker container: `docker run --name bxbot-ui-0.0.1 -it --rm -p 4200:4200 gazbert/bxbot-ui:0.0.1`
+1. Open a browser and go to: `http://localhost:4200`
 1. You can stop the container using the `CTRL-c`
    
 A Docker image is available on [Docker Hub](https://hub.docker.com/r/gazbert/bxbot-ui/tags/) - it is not a release, 
@@ -36,7 +36,7 @@ You'll need [node.js](https://nodejs.org/en/download/) (at least node 6.9.x) ins
 1. Run `npm install` to install the dependencies - you'll only need to do this once, unless the versions are updated in 
    the [`package.json`](./package.json)
 1. To start the app: `npm start`
-1. Open a browser and go to: `http://localhost:3000`
+1. Open a browser and go to: `http://localhost:4200`
 1. To stop the app, `CTRL-c` from the command line.
 
 ## Build Guide
