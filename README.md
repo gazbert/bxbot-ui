@@ -33,9 +33,9 @@ You'll need [node.js](https://nodejs.org/en/download/) installed to build and ru
 1. Clone the repo locally.
 1. Change directory to the root of project.
 1. Run `npm install` to install the dependencies - you'll only need to do this once, unless the versions are updated in 
-   the [`package.json`](./package.json).
+   the [`package.json`](./package.json)
 1. To start the app: `npm start`
-1  Open a browser and go to: `http://localhost:3000`
+1. Open a browser and go to: `http://localhost:3000`
 1. To stop the app, `CTRL-c` from the command line.
 
 ## Build Guide
