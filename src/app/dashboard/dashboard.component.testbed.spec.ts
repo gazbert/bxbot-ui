@@ -1,12 +1,12 @@
 import {By} from '@angular/platform-browser';
 import {Router} from '@angular/router';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {DebugElement} from '@angular/core';
 import {Http} from '@angular/http';
-import {async, inject, ComponentFixture, TestBed} from '@angular/core/testing';
+import {async, inject, tick, ComponentFixture, TestBed} from '@angular/core/testing';
 import {Observable} from 'rxjs/Observable';
 import {DashboardComponent} from './dashboard.component';
 import {DashboardModule} from './dashboard.module';
-import {addMatchers, click} from '../../testing';
 import {FakeBotDataObservableService} from '../model/bot/testing';
 import {BotHttpDataObservableService} from '../model/bot';
 import {SOME_FAKE_OBSERVABLE_BOTS} from "../model/bot/testing/fake-bot-data-observable.service";
@@ -173,4 +173,69 @@ class RouterStub {
         return url;
     }
 }
+
+/**
+ * Testing utils below taken from Angular tutorial material:
+ * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
+ */
+export function addMatchers(): void {
+  jasmine.addMatchers({
+    toHaveText: toHaveText
+  });
+}
+function toHaveText(): jasmine.CustomMatcher {
+  return {
+    compare: function (actual: any, expectedText: string, expectationFailOutput?: any): jasmine.CustomMatcherResult {
+      const actualText = elementText(actual);
+      const pass = actualText.indexOf(expectedText) > -1;
+      const message = pass ? '' : composeMessage();
+      return {pass, message};
+
+      function composeMessage() {
+        const a = (actualText.length < 100 ? actualText : actualText.substr(0, 100) + '...');
+        const efo = expectationFailOutput ? ` '${expectationFailOutput}'` : '';
+        return `Expected element to have text content '${expectedText}' instead of '${a}'${efo}`;
+      }
+    }
+  };
+}
+function elementText(n: any): string {
+  if (n instanceof Array) {
+    return n.map(elementText).join('');
+  }
+
+  if (n.nodeType === Node.COMMENT_NODE) {
+    return '';
+  }
+
+  if (n.nodeType === Node.ELEMENT_NODE && n.hasChildNodes()) {
+    return elementText(Array.prototype.slice.call(n.childNodes));
+  }
+
+  if (n.nativeElement) {
+    n = n.nativeElement;
+  }
+
+  return n.textContent;
+}
+
+// See https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button
+/** Button events to pass to `DebugElement.triggerEventHandler` for RouterLink event handler */
+export const ButtonClickEvents = {
+  left: {button: 0},
+  right: {button: 2}
+};
+/** Simulate element click. Defaults to mouse left-button click event. */
+export function click(el: DebugElement | HTMLElement, eventObj: any = ButtonClickEvents.left): void {
+  if (el instanceof HTMLElement) {
+    el.click();
+  } else {
+    el.triggerEventHandler('click', eventObj);
+  }
+}
+/*
+ Copyright 2016 Google Inc. All Rights Reserved.
+ Use of this source code is governed by an MIT-style license that
+ can be found in the LICENSE file at http://angular.io/license
+ */
 

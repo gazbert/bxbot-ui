@@ -32,5 +32,5 @@ const routes: Routes = [
     ],
     declarations: [BotDetailsComponent, TabComponent, TabsComponent]
 })
-export class ExchangeDetailsModule {
+export class BotDetailsModule {
 }

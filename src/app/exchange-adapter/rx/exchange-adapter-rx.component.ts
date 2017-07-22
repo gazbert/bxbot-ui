@@ -21,7 +21,6 @@ import 'rxjs/add/operator/map';
  * @author gazbert
  */
 @Component({
-    moduleId: module.id,
     selector: 'bx-exchange-adapter-rx',
     templateUrl: 'exchange-adapter-rx.component.html',
     styleUrls: ['exchange-adapter-rx.component.css']

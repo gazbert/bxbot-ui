@@ -10,7 +10,7 @@ import {ExchangeAdapterHttpDataObservableService} from './model/exchange-adapter
 import {ExchangeAdapterHttpDataPromiseService} from './model/exchange-adapter/promise';
 import {MarketHttpDataPromiseService} from './model/market';
 import {DashboardModule} from './dashboard/dashboard.module';
-import {ExchangeDetailsModule} from './bot-details/bot-details.module';
+import {BotDetailsModule} from './bot-details/bot-details.module';
 import {ExchangeAdapterModule} from './exchange-adapter/exchange-adapter.module';
 import {EmailAlertsModule} from './email-alerts/email-alerts.module';
 import {AppRoutingModule} from './app-routing.module';
@@ -38,7 +38,7 @@ import {AuthenticationService, CanActivateAuthGuard} from './shared';
         DashboardModule,
         ExchangeAdapterModule,
         EmailAlertsModule,
-        ExchangeDetailsModule,
+        BotDetailsModule,
         TradingStrategiesModule,
         AppRoutingModule,
         LoginModule

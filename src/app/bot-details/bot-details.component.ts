@@ -8,7 +8,6 @@ import {Bot, BotHttpDataObservableService} from '../model/bot';
  * @author gazbert
  */
 @Component({
-    moduleId: module.id,
     selector: 'bx-bot-details',
     templateUrl: 'bot-details.component.html',
     styleUrls: ['bot-details.component.css']

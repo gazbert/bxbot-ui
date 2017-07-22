@@ -11,7 +11,6 @@ import {MarketHttpDataPromiseService} from '../model/market';
  * @author gazbert
  */
 @Component({
-    moduleId: module.id,
     selector: 'bx-trading-strategies',
     templateUrl: 'trading-strategies.component.html',
     styleUrls: ['trading-strategies.component.css']

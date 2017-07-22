@@ -8,7 +8,6 @@ import {AuthenticationService} from "../shared";
  * @author gazbert
  */
 @Component({
-    moduleId: module.id,
     templateUrl: 'login.component.html',
     styleUrls: ['login.component.css']
 })

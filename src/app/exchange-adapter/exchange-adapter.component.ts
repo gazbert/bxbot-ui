@@ -10,7 +10,6 @@ import {ExchangeAdapterHttpDataPromiseService} from "../model/exchange-adapter/p
  * @author gazbert
  */
 @Component({
-    moduleId: module.id,
     selector: 'bx-exchange-adapter',
     templateUrl: 'exchange-adapter.component.html',
     styleUrls: ['exchange-adapter.component.css']

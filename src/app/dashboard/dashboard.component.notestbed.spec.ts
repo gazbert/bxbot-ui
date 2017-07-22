@@ -1,6 +1,5 @@
 import {Router} from '@angular/router';
 import {DashboardComponent} from './dashboard.component';
-import {addMatchers} from '../../testing';
 import {FakeBotDataObservableService} from '../model/bot/testing';
 import {Bot} from '../model/bot';
 
@@ -52,7 +51,7 @@ describe('DashboardComponent tests without TestBed', () => {
         comp.ngOnInit();
         comp.bots.subscribe((bots) => {
             expect(bots.length).toBe(1, 'should have 1 Gemini Bot item');
-            expect(bots[0].id).toBe('gemini');
+            expect(bots[0].id).toBe(2);
 
             done(); // https://github.com/jasmine/jasmine/issues/694
         });
@@ -79,3 +78,54 @@ class FakeRouter {
         return url;
     }
 }
+
+/**
+ * Testing utils below taken from Angular tutorial material:
+ * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
+ */
+export function addMatchers(): void {
+  jasmine.addMatchers({
+    toHaveText: toHaveText
+  });
+}
+function toHaveText(): jasmine.CustomMatcher {
+  return {
+    compare: function (actual: any, expectedText: string, expectationFailOutput?: any): jasmine.CustomMatcherResult {
+      const actualText = elementText(actual);
+      const pass = actualText.indexOf(expectedText) > -1;
+      const message = pass ? '' : composeMessage();
+      return {pass, message};
+
+      function composeMessage() {
+        const a = (actualText.length < 100 ? actualText : actualText.substr(0, 100) + '...');
+        const efo = expectationFailOutput ? ` '${expectationFailOutput}'` : '';
+        return `Expected element to have text content '${expectedText}' instead of '${a}'${efo}`;
+      }
+    }
+  };
+}
+function elementText(n: any): string {
+  if (n instanceof Array) {
+    return n.map(elementText).join('');
+  }
+
+  if (n.nodeType === Node.COMMENT_NODE) {
+    return '';
+  }
+
+  if (n.nodeType === Node.ELEMENT_NODE && n.hasChildNodes()) {
+    return elementText(Array.prototype.slice.call(n.childNodes));
+  }
+
+  if (n.nativeElement) {
+    n = n.nativeElement;
+  }
+
+  return n.textContent;
+}
+/*
+ Copyright 2016 Google Inc. All Rights Reserved.
+ Use of this source code is governed by an MIT-style license that
+ can be found in the LICENSE file at http://angular.io/license
+ */
+

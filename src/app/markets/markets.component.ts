@@ -10,7 +10,6 @@ import {TradingStrategy, TradingStrategyHttpDataPromiseService} from '../model/t
  * @author gazbert
  */
 @Component({
-    moduleId: module.id,
     selector: 'bx-markets',
     templateUrl: 'markets.component.html',
     styleUrls: ['markets.component.css']

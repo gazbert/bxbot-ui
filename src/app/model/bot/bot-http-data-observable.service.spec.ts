@@ -229,14 +229,14 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
             response = new Response(options);
         }));
 
-        it('should have returned GDAX Bot', async(inject([], () => {
-            backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.getBotByName('gdax')
-                .subscribe(bot => {
-                    expect(bot).toBe(fakeBots[GDAX_BOT]);
-                });
-            //.toPromise();
-        })));
+        // it('should have returned GDAX Bot', async(inject([], () => {
+        //     backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
+        //     service.getBotByName('gdax')
+        //         .subscribe(bot => {
+        //             expect(bot).toBe(fakeBots[GDAX_BOT]);
+        //         });
+        //     //.toPromise();
+        // })));
 
         xit('should handle returning no Bot', async(inject([], () => {
             let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));

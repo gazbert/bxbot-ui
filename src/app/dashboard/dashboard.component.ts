@@ -26,7 +26,6 @@ import 'rxjs/add/operator/startWith';
  * @author gazbert
  */
 @Component({
-    moduleId: module.id,
     selector: 'bx-dashboard',
     templateUrl: 'dashboard.component.html',
     styleUrls: ['dashboard.component.css']

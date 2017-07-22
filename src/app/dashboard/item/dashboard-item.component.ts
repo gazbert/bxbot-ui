@@ -8,7 +8,6 @@ import {Bot} from '../../model/bot';
  * @author gazbert
  */
 @Component({
-    moduleId: module.id,
     selector: 'bx-dashboard-item',
     templateUrl: 'dashboard-item.component.html',
     styleUrls: ['dashboard-item.component.css']
