@@ -28,10 +28,11 @@ but rather a rolling development version of the UI.
   
 ### The manual way
 
-You'll need [node.js](https://nodejs.org/en/download/) installed to build and run the app.
+You'll need [node.js](https://nodejs.org/en/download/) (at least node 6.9.x) installed to build and run the app.
 
-1. Clone the repo locally.
-1. Change directory to the root of project.
+1. Install the [Angular CLI](https://cli.angular.io/) globally: `npm install -g @angular/cli`
+1. Clone this repo locally.
+1. Change directory to the root of the project.
 1. Run `npm install` to install the dependencies - you'll only need to do this once, unless the versions are updated in 
    the [`package.json`](./package.json)
 1. To start the app: `npm start`
