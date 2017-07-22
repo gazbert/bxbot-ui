@@ -115,7 +115,7 @@ export class MarketsComponent implements OnInit {
         this.router.navigate(['dashboard']);
     }
 
-    // TODO Only here temporarily for use with angular-in-memory-web-api until server side wired up.
+    // TODO - Only here temporarily for use with angular-in-memory-web-api until server side wired up.
     // Server will create UUID and return in POST response object.
     // Algo by @Broofa - http://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript/2117523#2117523
     createUuid() {

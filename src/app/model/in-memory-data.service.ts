@@ -217,7 +217,7 @@ export class InMemoryDataService implements InMemoryDbService {
          */
         let markets = [
             {
-                id: 1,
+                id: 'bitstamp_btc_usd',
                 botId: 1,
                 marketId: 'btcusd',
                 name: 'BTC/USD',
@@ -233,7 +233,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 4,
+                id: 'gdax_btc_usd',
                 botId: 2,
                 marketId: 'BTC-USD',
                 name: 'BTC/USD',
@@ -249,7 +249,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 5,
+                id: 'gdax_btc_gbp',
                 botId: 2,
                 marketId: 'BTC-GBP',
                 name: 'BTC/GBP',
@@ -265,9 +265,9 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 6,
+                id: 'gemini_eth_btc',
                 botId: 3,
-                marketId: 'etcbtc',
+                marketId: 'ethbtc',
                 name: 'ETH/BTC',
                 enabled: false,
                 baseCurrency: 'ETH',
@@ -281,7 +281,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 11,
+                id: 'itbit_xbt_usd',
                 botId:4,
                 marketId: 'XBTUSD',
                 name: 'XBT/USD',
@@ -297,7 +297,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 2,
+                id: 'btce_btc_usd',
                 botId: 5,
                 marketId: 'btc_usd',
                 name: 'BTC/USD',
@@ -313,7 +313,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 3,
+                id: 'btce_ltc_usd',
                 botId: 5,
                 marketId: 'ltc_usd',
                 name: 'LTC/USD',
@@ -329,7 +329,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 7,
+                id: 'okcoin_btc_usd',
                 botId: 6,
                 marketId: 'okcoin_btc_usd',
                 name: 'BTC/USD',
@@ -345,7 +345,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 9,
+                id: 'bitfinex_btc_usd',
                 botId: 7,
                 marketId: 'btcusd',
                 name: 'BTC/USD',
@@ -361,7 +361,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 8,
+                id: 'huobi_btc_usd',
                 botId: 8,
                 marketId: 'BTC-USD',
                 name: 'BTC/USD',
@@ -377,7 +377,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 10,
+                id: 'kraken_xbt_usd',
                 botId: 9,
                 marketId: 'XBTUSD',
                 name: 'XBT/USD',
