@@ -397,7 +397,7 @@ export class InMemoryDataService implements InMemoryDbService {
         /**
          * The Trading Strategies being executed.
          */
-        let tradingStrategies = [
+        let trading_strategies = [
             {
                 id: 'btce_macd_rsi',
                 botId: 5,
@@ -502,7 +502,7 @@ export class InMemoryDataService implements InMemoryDbService {
          * The Email Alerts config for bots to send alert messages.
          * There is a 1-1 relationship with the bot - backend server will always set 'id' to the same as the Bot 'id'.
          */
-        let emailAlerts = [
+        let email_alerts = [
             {
                 id: 1,
                 enabled: false,
@@ -595,6 +595,6 @@ export class InMemoryDataService implements InMemoryDbService {
             }
         ];
 
-        return {bots, exchange_adapters, markets, tradingStrategies, emailAlerts};
+        return {bots, exchange_adapters, markets, trading_strategies, email_alerts};
     }
 }

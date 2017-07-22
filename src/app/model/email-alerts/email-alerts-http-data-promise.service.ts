@@ -24,7 +24,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class EmailAlertsHttpDataPromiseService implements EmailAlertsDataPromiseService {
 
-    private emailAlertsUrl = AppComponent.REST_API_BASE_URL + '/emailAlerts';
+    private emailAlertsUrl = AppComponent.REST_API_BASE_URL + '/email_alerts';
     private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private http: Http) {
