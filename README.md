@@ -38,7 +38,7 @@ You'll need [node.js](https://nodejs.org/en/download/) (at least node 6.9.x) ins
 1. To stop the app, `CTRL-c` from the command line.
 
 ## Build Guide
-Follow the instructions in the previous [_The manual way_](#he-manual-way) section if you have not already done so.
+Follow the instructions in the [_The manual way_](#he-manual-way) section if you have not already done so.
 
 The project uses Angular CLI [commands](https://github.com/angular/angular-cli/wiki) to build, test, and run the app.
 
