@@ -1,5 +1,5 @@
 import {Router} from '@angular/router';
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 import {Bot, BotHttpDataObservableService} from '../model/bot';
@@ -30,7 +30,7 @@ import 'rxjs/add/operator/startWith';
     templateUrl: 'dashboard.component.html',
     styleUrls: ['dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterViewInit {
 
     /**
      * The Bot Observable is a stream of Bot events that can be processed with array-like operators.

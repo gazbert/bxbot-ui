@@ -7,7 +7,7 @@ import {Component, Input} from '@angular/core';
  * http://juristr.com/blog/2016/02/learning-ng2-creating-tab-component/
  */
 @Component({
-    selector: 'tab',
+    selector: 'app-bxbot-ui-tab',
     styles: [`
     .pane{
       padding: 1em;
@@ -20,7 +20,7 @@ import {Component, Input} from '@angular/core';
   `
 })
 export class TabComponent {
-    @Input('tabTitle') title: string;
-    @Input('tabId') id: string;
+    @Input('title') title: string;
+    @Input('id') id: string;
     @Input() active = false;
 }

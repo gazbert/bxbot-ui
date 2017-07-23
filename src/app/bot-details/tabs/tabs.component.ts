@@ -8,7 +8,7 @@ import {TabComponent} from './tab.component';
  * http://juristr.com/blog/2016/02/learning-ng2-creating-tab-component
  */
 @Component({
-    selector: 'tabs',
+    selector: 'app-bxbot-ui-tabs',
     template: `
     <ul class="nav nav-pills">
       <li *ngFor="let tab of tabs; trackBy:trackByTabTitle" (click)="selectTab(tab)" [class.active]="tab.active">
