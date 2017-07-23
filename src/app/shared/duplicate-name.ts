@@ -7,16 +7,16 @@ import {AbstractControl, NG_VALIDATORS, Validator, ValidatorFn, Validators} from
  * @author gazbert
  */
 @Directive({
-    selector: '[duplicateName]',
+    selector: '[appBxbotUiDuplicateName]',
     providers: [{provide: NG_VALIDATORS, useExisting: DuplicateNameValidatorDirective, multi: true}]
 })
 export class DuplicateNameValidatorDirective implements Validator, OnChanges {
 
-    @Input() duplicateName: string[];
+    @Input() appBxbotUiDuplicateName: string[];
     private validator = Validators.nullValidator;
 
     ngOnChanges(changes: SimpleChanges) {
-        const change = changes['duplicateName'];
+        const change = changes['appBxbotUiDuplicateName'];
         if (change) {
             // TODO - for some reason this is a ',' de-limited string instead of an array of string :-/
             const strategyNames = change.currentValue;

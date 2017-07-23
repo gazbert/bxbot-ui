@@ -23,7 +23,7 @@
                                        class="form-control" id="tradingStrategyName_{{i}}"
                                        name="tradingStrategyName_{{i}}" #tradingStrategyName="ngModel"
                                        required maxlength="50" pattern="[a-zA-Z0-9_\- ]*"
-                                       duplicateName="{{getOtherStrategyNames(tradingStrategies[i].id)}}"/>
+                                       appBxbotUiDuplicateName="{{getOtherStrategyNames(tradingStrategies[i].id)}}"/>
                                 <div id="invalidTradingStrategyName_{{i}}"
                                      *ngIf="formErrors['tradingStrategyName_' + i].length > 0" class="alert alert-danger">
                                     {{ formErrors['tradingStrategyName_' + i] }}
