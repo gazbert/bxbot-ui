@@ -8,7 +8,7 @@
  * https://github.com/angular/protractor/issues/3205
  *
  **********************************************************************************/
-import {browser, element, by} from "protractor";
+import {browser, element, by} from 'protractor';
 
 /**
  * Trading Strategy screen tests.
@@ -25,11 +25,11 @@ describe('Trading Strategy Tests', function () {
 
     it('should update Trading Strategy fields after Save', function () {
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
 
-        let tabLinks = element.all(by.css('li'));
+        const tabLinks = element.all(by.css('li'));
         tabLinks.get(2).click();
 
         // Strat 1
@@ -47,26 +47,26 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
 
         // Update Strat 1 fields
-        let strategyName = element(by.id('tradingStrategyName_0'));
-        let newStrategyName = 'EMA Indicator 2';
+        const strategyName = element(by.id('tradingStrategyName_0'));
+        const newStrategyName = 'EMA Indicator 2';
         strategyName.clear();
         strategyName.sendKeys(newStrategyName);
         expect(strategyName.getAttribute('value')).toBe(newStrategyName);
 
-        let strategyDescription = element(by.id('tradingStrategyDescription_0'));
-        let newStrategyDescription = 'EMA Indicator algo for deciding when to enter and exit trades.';
+        const strategyDescription = element(by.id('tradingStrategyDescription_0'));
+        const newStrategyDescription = 'EMA Indicator algo for deciding when to enter and exit trades.';
         strategyDescription.clear();
         strategyDescription.sendKeys(newStrategyDescription);
         expect(strategyDescription.getAttribute('value')).toBe(newStrategyDescription);
 
-        let strategyClassName = element(by.id('tradingStrategyClassname_0'));
-        let newStrategyClassName = 'com.gazbert.bxbot.strategies2.EmaIndicator2';
+        const strategyClassName = element(by.id('tradingStrategyClassname_0'));
+        const newStrategyClassName = 'com.gazbert.bxbot.strategies2.EmaIndicator2';
         strategyClassName.clear();
         strategyClassName.sendKeys(newStrategyClassName);
         expect(strategyClassName.getAttribute('value')).toBe(newStrategyClassName);
 
         // Save and check the update worked
-        let saveButton = element(by.id('strategySaveButton'));
+        const saveButton = element(by.id('strategySaveButton'));
         saveButton.click();
         dashboardItems.get(3).click();
         tabLinks.get(2).click();
@@ -86,11 +86,11 @@ describe('Trading Strategy Tests', function () {
 
     it('should NOT update Trading Strategy fields after Cancel', function () {
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
 
-        let tabLinks = element.all(by.css('li'));
+        const tabLinks = element.all(by.css('li'));
         tabLinks.get(2).click();
 
         // Strat 1
@@ -108,26 +108,26 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
 
         // Update Strat 1 fields
-        let strategyName = element(by.id('tradingStrategyName_0'));
-        let newStrategyName = 'EMA Indicator';
+        const strategyName = element(by.id('tradingStrategyName_0'));
+        const newStrategyName = 'EMA Indicator';
         strategyName.clear();
         strategyName.sendKeys(newStrategyName);
         expect(strategyName.getAttribute('value')).toBe(newStrategyName);
 
-        let strategyDescription = element(by.id('tradingStrategyDescription_0'));
-        let newStrategyDescription = 'EMA Indicator algo for deciding when to enter and exit trades.';
+        const strategyDescription = element(by.id('tradingStrategyDescription_0'));
+        const newStrategyDescription = 'EMA Indicator algo for deciding when to enter and exit trades.';
         strategyDescription.clear();
         strategyDescription.sendKeys(newStrategyDescription);
         expect(strategyDescription.getAttribute('value')).toBe(newStrategyDescription);
 
-        let strategyClassName = element(by.id('tradingStrategyClassname_0'));
-        let newStrategyClassName = 'com.gazbert.bxbot.strategies.EmaIndicator';
+        const strategyClassName = element(by.id('tradingStrategyClassname_0'));
+        const newStrategyClassName = 'com.gazbert.bxbot.strategies.EmaIndicator';
         strategyClassName.clear();
         strategyClassName.sendKeys(newStrategyClassName);
         expect(strategyClassName.getAttribute('value')).toBe(newStrategyClassName);
 
         // Cancel and check the update did not persist
-        let cancelButton = element(by.id('strategyCancelButton'));
+        const cancelButton = element(by.id('strategyCancelButton'));
         cancelButton.click();
         dashboardItems.get(3).click();
         tabLinks.get(2).click();
@@ -149,11 +149,11 @@ describe('Trading Strategy Tests', function () {
 
     it('should add new Trading Strategy and save it', function () {
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
 
-        let tabLinks = element.all(by.css('li'));
+        const tabLinks = element.all(by.css('li'));
         tabLinks.get(2).click();
 
         // Strat 1
@@ -171,29 +171,29 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
 
         // Add new Strat 3
-        let addTradingStrategyLink = element(by.id('addTradingStrategyLink'));
+        const addTradingStrategyLink = element(by.id('addTradingStrategyLink'));
         addTradingStrategyLink.click();
 
-        let strategyName = element(by.id('tradingStrategyName_2'));
-        let newStrategyName = 'EMA Indicator';
+        const strategyName = element(by.id('tradingStrategyName_2'));
+        const newStrategyName = 'EMA Indicator';
         strategyName.clear();
         strategyName.sendKeys(newStrategyName);
         expect(strategyName.getAttribute('value')).toBe(newStrategyName);
 
-        let strategyDescription = element(by.id('tradingStrategyDescription_2'));
-        let newStrategyDescription = 'EMA Indicator algo for deciding when to enter and exit trades.';
+        const strategyDescription = element(by.id('tradingStrategyDescription_2'));
+        const newStrategyDescription = 'EMA Indicator algo for deciding when to enter and exit trades.';
         strategyDescription.clear();
         strategyDescription.sendKeys(newStrategyDescription);
         expect(strategyDescription.getAttribute('value')).toBe(newStrategyDescription);
 
-        let strategyClassName = element(by.id('tradingStrategyClassname_2'));
-        let newStrategyClassName = 'com.gazbert.bxbot.strategies.EmaIndicator';
+        const strategyClassName = element(by.id('tradingStrategyClassname_2'));
+        const newStrategyClassName = 'com.gazbert.bxbot.strategies.EmaIndicator';
         strategyClassName.clear();
         strategyClassName.sendKeys(newStrategyClassName);
         expect(strategyClassName.getAttribute('value')).toBe(newStrategyClassName);
 
         // Save and check the update worked
-        let saveButton = element(by.id('strategySaveButton'));
+        const saveButton = element(by.id('strategySaveButton'));
         saveButton.click();
         dashboardItems.get(3).click();
         tabLinks.get(2).click();
@@ -220,11 +220,11 @@ describe('Trading Strategy Tests', function () {
 
     it('should delete Trading Strategy and save change', function () {
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
 
-        let tabLinks = element.all(by.css('li'));
+        const tabLinks = element.all(by.css('li'));
         tabLinks.get(2).click();
 
         // Strat 1
@@ -242,11 +242,11 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
 
         // Delete Strat 1
-        let deleteTradingStrategyButton = element(by.id('deleteTradingStrategyButton_0'));
+        const deleteTradingStrategyButton = element(by.id('deleteTradingStrategyButton_0'));
         deleteTradingStrategyButton.click();
 
         // Save and check the update worked
-        let saveButton = element(by.id('strategySaveButton'));
+        const saveButton = element(by.id('strategySaveButton'));
         saveButton.click();
         dashboardItems.get(3).click();
         tabLinks.get(2).click();
@@ -266,11 +266,11 @@ describe('Trading Strategy Tests', function () {
 
     it('should NOT delete Trading Strategy if currently being used by a Market', function () {
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
 
-        let tabLinks = element.all(by.css('li'));
+        const tabLinks = element.all(by.css('li'));
         tabLinks.get(2).click();
 
         // Strat 1
@@ -288,7 +288,7 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
 
         // Delete Strat 2 - will cause error
-        let deleteTradingStrategyButton = element(by.id('deleteTradingStrategyButton_1'));
+        const deleteTradingStrategyButton = element(by.id('deleteTradingStrategyButton_1'));
         deleteTradingStrategyButton.click();
 
         // Expect error modal to pop up to alert user
@@ -296,7 +296,7 @@ describe('Trading Strategy Tests', function () {
         expect(element(by.css('.modal-body')).getText()).toContain(
             'You cannot delete this Trading Strategy because it is still being used by a Market on the Exchange.');
 
-        let modalCloseButton = element(by.id('cannotDeleteStrategyModalCloseButton'));
+        const modalCloseButton = element(by.id('cannotDeleteStrategyModalCloseButton'));
         modalCloseButton.click();
 
         // Strat 1 unchanged
@@ -316,11 +316,11 @@ describe('Trading Strategy Tests', function () {
 
     it('should NOT save Trading Strategy fields if there are validation errors', function () {
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
 
-        let tabLinks = element.all(by.css('li'));
+        const tabLinks = element.all(by.css('li'));
         tabLinks.get(2).click();
 
         // Strat 1
@@ -338,26 +338,26 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
 
         // Update Strat 1 fields with some 'bad' values
-        let strategyName = element(by.id('tradingStrategyName_0'));
+        const strategyName = element(by.id('tradingStrategyName_0'));
         strategyName.clear();
-        let newStrategyName = 'dodgy n@me';
+        const newStrategyName = 'dodgy n@me';
         strategyName.sendKeys(newStrategyName);
         expect(strategyName.getAttribute('value')).toBe(newStrategyName);
 
-        let strategyDescription = element(by.id('tradingStrategyDescription_0'));
-        let newStrategyDescription = 'EMA Indicator algo for deciding when to enter and exit trades.';
+        const strategyDescription = element(by.id('tradingStrategyDescription_0'));
+        const newStrategyDescription = 'EMA Indicator algo for deciding when to enter and exit trades.';
         strategyDescription.clear();
         strategyDescription.sendKeys(newStrategyDescription);
         expect(strategyDescription.getAttribute('value')).toBe(newStrategyDescription);
 
-        let strategyClassName = element(by.id('tradingStrategyClassname_0'));
-        let newStrategyClassName = '123BadClassName';
+        const strategyClassName = element(by.id('tradingStrategyClassname_0'));
+        const newStrategyClassName = '123BadClassName';
         strategyClassName.clear();
         strategyClassName.sendKeys(newStrategyClassName);
         expect(strategyClassName.getAttribute('value')).toBe(newStrategyClassName);
 
         // Save and check the update did not persist
-        let saveButton = element(by.id('strategySaveButton'));
+        const saveButton = element(by.id('strategySaveButton'));
         saveButton.click();
 
         // Strat 1 - check for validation errors
@@ -381,11 +381,11 @@ describe('Trading Strategy Tests', function () {
 
     it('should NOT save new Trading Strategy when Strategy Name already in use', function () {
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
 
-        let tabLinks = element.all(by.css('li'));
+        const tabLinks = element.all(by.css('li'));
         tabLinks.get(2).click();
 
         // Strat 1
@@ -403,29 +403,29 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
 
         // Add new Strat 3 with same name as Strat 2
-        let addTradingStrategyLink = element(by.id('addTradingStrategyLink'));
+        const addTradingStrategyLink = element(by.id('addTradingStrategyLink'));
         addTradingStrategyLink.click();
 
-        let strategyName = element(by.id('tradingStrategyName_2'));
-        let newStrategyName = 'MACD RSI Indicator'; // eek!
+        const strategyName = element(by.id('tradingStrategyName_2'));
+        const newStrategyName = 'MACD RSI Indicator'; // eek!
         strategyName.clear();
         strategyName.sendKeys(newStrategyName);
         expect(strategyName.getAttribute('value')).toBe(newStrategyName);
 
-        let strategyDescription = element(by.id('tradingStrategyDescription_2'));
-        let newStrategyDescription = 'EMA Indicator algo for deciding when to enter and exit trades.';
+        const strategyDescription = element(by.id('tradingStrategyDescription_2'));
+        const newStrategyDescription = 'EMA Indicator algo for deciding when to enter and exit trades.';
         strategyDescription.clear();
         strategyDescription.sendKeys(newStrategyDescription);
         expect(strategyDescription.getAttribute('value')).toBe(newStrategyDescription);
 
-        let strategyClassName = element(by.id('tradingStrategyClassname_2'));
-        let newStrategyClassName = 'com.gazbert.bxbot.strategies.EmaIndicator';
+        const strategyClassName = element(by.id('tradingStrategyClassname_2'));
+        const newStrategyClassName = 'com.gazbert.bxbot.strategies.EmaIndicator';
         strategyClassName.clear();
         strategyClassName.sendKeys(newStrategyClassName);
         expect(strategyClassName.getAttribute('value')).toBe(newStrategyClassName);
 
         // Save and check the update failed
-        let saveButton = element(by.id('strategySaveButton'));
+        const saveButton = element(by.id('strategySaveButton'));
         saveButton.click();
 
         // Strat 3 - check for validation errors

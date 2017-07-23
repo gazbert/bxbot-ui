@@ -8,7 +8,7 @@
  * https://github.com/angular/protractor/issues/3205
  *
  ********************************************************************************/
-import {browser, element, by} from "protractor";
+import {browser, element, by} from 'protractor';
 
 /**
  * Bot Details screen tests.
@@ -25,24 +25,24 @@ describe('Bot Details Tests', function () {
 
     it('should render GDAX Bot Details tab links', function () {
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(1).click();
         expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
 
-        let tabLinks = element.all(by.css('li'));
+        const tabLinks = element.all(by.css('li'));
         expect(tabLinks.count()).toBe(4);
         expect(tabLinks.first().getText()).toEqual('Exchange Adapter');
         expect(tabLinks.get(1).getText()).toEqual('Markets');
         expect(tabLinks.get(2).getText()).toEqual('Trading Strategies');
         expect(tabLinks.last().getText()).toEqual('Email Alerts');
 
-        let tabItems = element.all(by.css('tab'));
+        const tabItems = element.all(by.css('tab'));
         expect(tabItems.count()).toBe(4);
     });
 
     it('should render GDAX Exchange Adapter Details', function () {
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(1).click();
         expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
 
@@ -57,11 +57,11 @@ describe('Bot Details Tests', function () {
 
     it('should render GDAX Markets', function () {
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(1).click();
         expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
 
-        let tabLinks = element.all(by.css('li'));
+        const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
 
         // Market 1
@@ -81,11 +81,11 @@ describe('Bot Details Tests', function () {
 
     it('should render GDAX Trading Strategies', function () {
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(1).click();
         expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
 
-        let tabLinks = element.all(by.css('li'));
+        const tabLinks = element.all(by.css('li'));
         tabLinks.get(2).click();
 
         // Strat 1
@@ -105,11 +105,11 @@ describe('Bot Details Tests', function () {
 
     it('should render GDAX Email Alerts Config', function () {
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(1).click();
         expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
 
-        let tabLinks = element.all(by.css('li'));
+        const tabLinks = element.all(by.css('li'));
         tabLinks.get(3).click();
 
         expect(element(by.id('alertsEnabled')).getAttribute('value')).toBe('on');
@@ -123,11 +123,11 @@ describe('Bot Details Tests', function () {
 
         browser.getCurrentUrl().then(function (url) {
 
-            let dashboardItems = element.all(by.css('bx-dashboard-item'));
+            const dashboardItems = element.all(by.css('bx-dashboard-item'));
             dashboardItems.get(1).click();
             expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
 
-            let dashboardButton = element.all(by.css('dashboardButton'));
+            const dashboardButton = element.all(by.css('dashboardButton'));
             dashboardButton.click();
             expect(url).toContain('/dashboard');
         });

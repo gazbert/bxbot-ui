@@ -8,7 +8,7 @@
  * https://github.com/angular/protractor/issues/3205
  *
  ******************************************************************************/
-import {browser, element, by} from "protractor";
+import {browser, element, by} from 'protractor';
 
 /**
  * Email Alert Config screen tests.
@@ -25,11 +25,11 @@ describe('Email Alerts Config Tests', function () {
 
     it('should update Email Alerts fields after Save', function () {
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(2).click();
         expect(element(by.css('h2')).getText()).toEqual('Gemini Details');
 
-        let tabLinks = element.all(by.css('li'));
+        const tabLinks = element.all(by.css('li'));
         tabLinks.get(3).click();
 
         expect(element(by.id('alertsEnabled')).getAttribute('value')).toBe('on');
@@ -39,41 +39,41 @@ describe('Email Alerts Config Tests', function () {
         expect(element(by.id('fromAddress')).getAttribute('value')).toBe('c-3p0@naboo.space');
 
         // Update Email Alerts fields
-        let emailAlertsEnabled = element(by.id('alertsEnabled'));
+        const emailAlertsEnabled = element(by.id('alertsEnabled'));
         emailAlertsEnabled.click();
         expect(emailAlertsEnabled.getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
 
-        let accountUsername = element(by.id('accountUsername'));
-        let newAccountUsername = 'solo';
+        const accountUsername = element(by.id('accountUsername'));
+        const newAccountUsername = 'solo';
         accountUsername.clear();
         accountUsername.sendKeys(newAccountUsername);
         expect(accountUsername.getAttribute('value')).toBe(newAccountUsername);
 
-        let accountPassword = element(by.id('accountPassword'));
-        let newAccountPassword = 'falcon123';
+        const accountPassword = element(by.id('accountPassword'));
+        const newAccountPassword = 'falcon123';
         accountPassword.clear();
         accountPassword.sendKeys(newAccountPassword);
         expect(accountPassword.getAttribute('value')).toBe(newAccountPassword);
 
-        let retypeAccountPassword = element(by.id('retypeAccountPassword'));
+        const retypeAccountPassword = element(by.id('retypeAccountPassword'));
         retypeAccountPassword.clear();
         retypeAccountPassword.sendKeys(newAccountPassword);
         expect(retypeAccountPassword.getAttribute('value')).toBe(newAccountPassword);
 
-        let toAddress = element(by.id('toAddress'));
-        let newToAddress = 'luke@tatooine.space';
+        const toAddress = element(by.id('toAddress'));
+        const newToAddress = 'luke@tatooine.space';
         toAddress.clear();
         toAddress.sendKeys(newToAddress);
         expect(toAddress.getAttribute('value')).toBe(newToAddress);
 
-        let fromAddress = element(by.id('fromAddress'));
-        let newFromAddress = 'han@falcon.space';
+        const fromAddress = element(by.id('fromAddress'));
+        const newFromAddress = 'han@falcon.space';
         fromAddress.clear();
         fromAddress.sendKeys(newFromAddress);
         expect(fromAddress.getAttribute('value')).toBe(newFromAddress);
 
         // Save and check the update worked
-        let saveButton = element(by.id('emailAlertSaveButton'));
+        const saveButton = element(by.id('emailAlertSaveButton'));
         saveButton.click();
         dashboardItems.get(2).click();
         tabLinks.get(3).click();
@@ -88,11 +88,11 @@ describe('Email Alerts Config Tests', function () {
 
     it('should NOT update Email Alerts fields after Cancel', function () {
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(2).click();
         expect(element(by.css('h2')).getText()).toEqual('Gemini Details');
 
-        let tabLinks = element.all(by.css('li'));
+        const tabLinks = element.all(by.css('li'));
         tabLinks.get(3).click();
 
         expect(element(by.id('alertsEnabled')).getAttribute('value')).toBe('on');
@@ -102,41 +102,41 @@ describe('Email Alerts Config Tests', function () {
         expect(element(by.id('fromAddress')).getAttribute('value')).toBe('c-3p0@naboo.space');
 
         // Update Email Alerts fields
-        let emailAlertsEnabled = element(by.id('alertsEnabled'));
+        const emailAlertsEnabled = element(by.id('alertsEnabled'));
         emailAlertsEnabled.click();
         expect(emailAlertsEnabled.getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
 
-        let accountUsername = element(by.id('accountUsername'));
-        let newAccountUsername = 'solo';
+        const accountUsername = element(by.id('accountUsername'));
+        const newAccountUsername = 'solo';
         accountUsername.clear();
         accountUsername.sendKeys(newAccountUsername);
         expect(accountUsername.getAttribute('value')).toBe(newAccountUsername);
 
-        let accountPassword = element(by.id('accountPassword'));
-        let newAccountPassword = 'falcon123';
+        const accountPassword = element(by.id('accountPassword'));
+        const newAccountPassword = 'falcon123';
         accountPassword.clear();
         accountPassword.sendKeys(newAccountPassword);
         expect(accountPassword.getAttribute('value')).toBe(newAccountPassword);
 
-        let retypeAccountPassword = element(by.id('retypeAccountPassword'));
+        const retypeAccountPassword = element(by.id('retypeAccountPassword'));
         retypeAccountPassword.clear();
         retypeAccountPassword.sendKeys(newAccountPassword);
         expect(retypeAccountPassword.getAttribute('value')).toBe(newAccountPassword);
 
-        let toAddress = element(by.id('toAddress'));
-        let newToAddress = 'luke@tatooine.space';
+        const toAddress = element(by.id('toAddress'));
+        const newToAddress = 'luke@tatooine.space';
         toAddress.clear();
         toAddress.sendKeys(newToAddress);
         expect(toAddress.getAttribute('value')).toBe(newToAddress);
 
-        let fromAddress = element(by.id('fromAddress'));
-        let newFromAddress = 'han@falcon.space';
+        const fromAddress = element(by.id('fromAddress'));
+        const newFromAddress = 'han@falcon.space';
         fromAddress.clear();
         fromAddress.sendKeys(newFromAddress);
         expect(fromAddress.getAttribute('value')).toBe(newFromAddress);
 
         // Cancel and check the update did not persist
-        let cancelButton = element(by.id('emailAlertCancelButton'));
+        const cancelButton = element(by.id('emailAlertCancelButton'));
         cancelButton.click();
         dashboardItems.get(2).click();
         tabLinks.get(3).click();
@@ -151,11 +151,11 @@ describe('Email Alerts Config Tests', function () {
 
     it('should NOT save Email Alerts config fields if there are validation errors', function () {
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(2).click();
         expect(element(by.css('h2')).getText()).toEqual('Gemini Details');
 
-        let tabLinks = element.all(by.css('li'));
+        const tabLinks = element.all(by.css('li'));
         tabLinks.get(3).click();
 
         expect(element(by.id('alertsEnabled')).getAttribute('value')).toBe('on');
@@ -165,42 +165,42 @@ describe('Email Alerts Config Tests', function () {
         expect(element(by.id('fromAddress')).getAttribute('value')).toBe('c-3p0@naboo.space');
 
         // Update Email Alerts fields with some 'bad' values
-        let emailAlertsEnabled = element(by.id('alertsEnabled'));
+        const emailAlertsEnabled = element(by.id('alertsEnabled'));
         emailAlertsEnabled.click();
         expect(emailAlertsEnabled.getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
 
-        let accountUsername = element(by.id('accountUsername'));
-        let newAccountUsername = '@solo ~';
+        const accountUsername = element(by.id('accountUsername'));
+        const newAccountUsername = '@solo ~';
         accountUsername.clear();
         accountUsername.sendKeys(newAccountUsername);
         expect(accountUsername.getAttribute('value')).toBe(newAccountUsername);
 
-        let accountPassword = element(by.id('accountPassword'));
-        let newAccountPassword = '!falcon%123';
+        const accountPassword = element(by.id('accountPassword'));
+        const newAccountPassword = '!falcon%123';
         accountPassword.clear();
         accountPassword.sendKeys(newAccountPassword);
         expect(accountPassword.getAttribute('value')).toBe(newAccountPassword);
 
-        let retypeAccountPassword = element(by.id('retypeAccountPassword'));
-        let confirmedPasswordValidButDifferent = 'confirmedPasswordValidButDifferent';
+        const retypeAccountPassword = element(by.id('retypeAccountPassword'));
+        const confirmedPasswordValidButDifferent = 'confirmedPasswordValidButDifferent';
         retypeAccountPassword.clear();
         retypeAccountPassword.sendKeys(confirmedPasswordValidButDifferent);
         expect(retypeAccountPassword.getAttribute('value')).toBe(confirmedPasswordValidButDifferent);
 
-        let toAddress = element(by.id('toAddress'));
-        let newToAddress = '#luke@tatoo ine.space';
+        const toAddress = element(by.id('toAddress'));
+        const newToAddress = '#luke@tatoo ine.space';
         toAddress.clear();
         toAddress.sendKeys(newToAddress);
         expect(toAddress.getAttribute('value')).toBe(newToAddress);
 
-        let fromAddress = element(by.id('fromAddress'));
-        let newFromAddress = 'han~falcon.space%';
+        const fromAddress = element(by.id('fromAddress'));
+        const newFromAddress = 'han~falcon.space%';
         fromAddress.clear();
         fromAddress.sendKeys(newFromAddress);
         expect(fromAddress.getAttribute('value')).toBe(newFromAddress);
 
         // Save and check the update did not persist
-        let saveButton = element(by.id('emailAlertSaveButton'));
+        const saveButton = element(by.id('emailAlertSaveButton'));
         saveButton.click();
 
         // Email Alerts config - check for validation errors

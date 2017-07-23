@@ -10,7 +10,7 @@
  * @author gazbert
  *
  ********************************************************************************/
-import {browser, element, by} from "protractor";
+import {browser, element, by} from 'protractor';
 
 /**
  * Exchange Adapter screen tests.
@@ -27,7 +27,7 @@ describe('Exchange Adapter Tests', function () {
 
     it('should update Exchange Adapter fields after Save', function () {
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
 
@@ -42,50 +42,50 @@ describe('Exchange Adapter Tests', function () {
         expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe('Connection refused');
 
         // Update fields
-        let adapterName = element(by.id('adapterName'));
-        let newAdapterName = 'Bitstamp REST API v2 Adapter';
+        const adapterName = element(by.id('adapterName'));
+        const newAdapterName = 'Bitstamp REST API v2 Adapter';
         adapterName.clear();
         adapterName.sendKeys(newAdapterName);
         expect(adapterName.getAttribute('value')).toBe(newAdapterName);
 
-        let className = element(by.id('className'));
-        let newClassName = 'my.new2.BitstampExchangeAdapterV2';
+        const className = element(by.id('className'));
+        const newClassName = 'my.new2.BitstampExchangeAdapterV2';
         className.clear();
         className.sendKeys(newClassName);
         expect(className.getAttribute('value')).toBe(newClassName);
 
-        let connectionTimeout = element(by.id('connectionTimeout'));
-        let newConnectionTimeout = '120';
+        const connectionTimeout = element(by.id('connectionTimeout'));
+        const newConnectionTimeout = '120';
         connectionTimeout.clear();
         connectionTimeout.sendKeys(newConnectionTimeout);
         expect(connectionTimeout.getAttribute('value')).toBe(newConnectionTimeout);
 
-        let errorCode_0 = element(by.id('errorCode_0'));
-        let newErrorCode_0 = '525';
+        const errorCode_0 = element(by.id('errorCode_0'));
+        const newErrorCode_0 = '525';
         errorCode_0.clear();
         errorCode_0.sendKeys(newErrorCode_0);
         expect(errorCode_0.getAttribute('value')).toBe(newErrorCode_0);
 
-        let errorCode_1 = element(by.id('errorCode_1'));
-        let newErrorCode_1 = '524';
+        const errorCode_1 = element(by.id('errorCode_1'));
+        const newErrorCode_1 = '524';
         errorCode_1.clear();
         errorCode_1.sendKeys(newErrorCode_1);
         expect(errorCode_1.getAttribute('value')).toBe(newErrorCode_1);
 
-        let errorMessage_0 = element(by.id('errorMessage_0'));
-        let newErrorMessage_0 = 'Connection reset by peer';
+        const errorMessage_0 = element(by.id('errorMessage_0'));
+        const newErrorMessage_0 = 'Connection reset by peer';
         errorMessage_0.clear();
         errorMessage_0.sendKeys(newErrorMessage_0);
         expect(errorMessage_0.getAttribute('value')).toBe(newErrorMessage_0);
 
-        let errorMessage_1 = element(by.id('errorMessage_1'));
-        let newErrorMessage_1 = 'Remote host closed connection during handshake';
+        const errorMessage_1 = element(by.id('errorMessage_1'));
+        const newErrorMessage_1 = 'Remote host closed connection during handshake';
         errorMessage_1.clear();
         errorMessage_1.sendKeys(newErrorMessage_1);
         expect(errorMessage_1.getAttribute('value')).toBe(newErrorMessage_1);
 
         // Save and check the update worked
-        let saveButton = element(by.id('exchangeAdapterSaveButton'));
+        const saveButton = element(by.id('exchangeAdapterSaveButton'));
         saveButton.click();
         dashboardItems.get(0).click();
 
@@ -102,7 +102,7 @@ describe('Exchange Adapter Tests', function () {
 
     it('should NOT update Exchange Adapter fields after Cancel', function () {
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
 
@@ -117,50 +117,50 @@ describe('Exchange Adapter Tests', function () {
         expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe('Connection refused');
 
         // Update fields
-        let adapterName = element(by.id('adapterName'));
-        let newAdapterName = 'Bitstamp REST API v2 Adapter';
+        const adapterName = element(by.id('adapterName'));
+        const newAdapterName = 'Bitstamp REST API v2 Adapter';
         adapterName.clear();
         adapterName.sendKeys(newAdapterName);
         expect(adapterName.getAttribute('value')).toBe(newAdapterName);
 
-        let className = element(by.id('className'));
-        let newClassName = 'my.new.BitstampExchangeAdapterV2';
+        const className = element(by.id('className'));
+        const newClassName = 'my.new.BitstampExchangeAdapterV2';
         className.clear();
         className.sendKeys(newClassName);
         expect(className.getAttribute('value')).toBe(newClassName);
 
-        let connectionTimeout = element(by.id('connectionTimeout'));
-        let newConnectionTimeout = '120';
+        const connectionTimeout = element(by.id('connectionTimeout'));
+        const newConnectionTimeout = '120';
         connectionTimeout.clear();
         connectionTimeout.sendKeys(newConnectionTimeout);
         expect(connectionTimeout.getAttribute('value')).toBe(newConnectionTimeout);
 
-        let errorCode_0 = element(by.id('errorCode_0'));
-        let newErrorCode_0 = '525';
+        const errorCode_0 = element(by.id('errorCode_0'));
+        const newErrorCode_0 = '525';
         errorCode_0.clear();
         errorCode_0.sendKeys(newErrorCode_0);
         expect(errorCode_0.getAttribute('value')).toBe(newErrorCode_0);
 
-        let errorCode_1 = element(by.id('errorCode_1'));
-        let newErrorCode_1 = '524';
+        const errorCode_1 = element(by.id('errorCode_1'));
+        const newErrorCode_1 = '524';
         errorCode_1.clear();
         errorCode_1.sendKeys(newErrorCode_1);
         expect(errorCode_1.getAttribute('value')).toBe(newErrorCode_1);
 
-        let errorMessage_0 = element(by.id('errorMessage_0'));
-        let newErrorMessage_0 = 'Connection reset by peer';
+        const errorMessage_0 = element(by.id('errorMessage_0'));
+        const newErrorMessage_0 = 'Connection reset by peer';
         errorMessage_0.clear();
         errorMessage_0.sendKeys(newErrorMessage_0);
         expect(errorMessage_0.getAttribute('value')).toBe(newErrorMessage_0);
 
-        let errorMessage_1 = element(by.id('errorMessage_1'));
-        let newErrorMessage_1 = 'Remote host closed connection during handshake';
+        const errorMessage_1 = element(by.id('errorMessage_1'));
+        const newErrorMessage_1 = 'Remote host closed connection during handshake';
         errorMessage_1.clear();
         errorMessage_1.sendKeys(newErrorMessage_1);
         expect(errorMessage_1.getAttribute('value')).toBe(newErrorMessage_1);
 
         // Cancel and check the update was not persisted
-        let cancelButton = element(by.id('exchangeAdapterCancelButton'));
+        const cancelButton = element(by.id('exchangeAdapterCancelButton'));
         cancelButton.click();
         dashboardItems.get(0).click();
 
@@ -177,7 +177,7 @@ describe('Exchange Adapter Tests', function () {
 
     it('should add new Error Code and save it', function () {
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
 
@@ -192,17 +192,17 @@ describe('Exchange Adapter Tests', function () {
         expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe('Connection refused');
 
         // Add new Error Code
-        let addErrorCodeLink = element(by.id('addNewErrorCodeLink'));
+        const addErrorCodeLink = element(by.id('addNewErrorCodeLink'));
         addErrorCodeLink.click();
 
-        let errorCode = element(by.id('errorCode_2'));
-        let newErrorCode = '504';
+        const errorCode = element(by.id('errorCode_2'));
+        const newErrorCode = '504';
         errorCode.clear();
         errorCode.sendKeys(newErrorCode);
         expect(errorCode.getAttribute('value')).toBe(newErrorCode);
 
         // Save and check the update worked
-        let saveButton = element(by.id('exchangeAdapterSaveButton'));
+        const saveButton = element(by.id('exchangeAdapterSaveButton'));
         saveButton.click();
         dashboardItems.get(0).click();
 
@@ -223,7 +223,7 @@ describe('Exchange Adapter Tests', function () {
 
     it('should delete Error Code and save change', function () {
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
 
@@ -238,11 +238,11 @@ describe('Exchange Adapter Tests', function () {
         expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe('Connection refused');
 
         // Delete Error Code 1
-        let deleteErrorCodeButton = element(by.id('deleteErrorCodeButton_0'));
+        const deleteErrorCodeButton = element(by.id('deleteErrorCodeButton_0'));
         deleteErrorCodeButton.click();
 
         // Save and check the update worked
-        let saveButton = element(by.id('exchangeAdapterSaveButton'));
+        const saveButton = element(by.id('exchangeAdapterSaveButton'));
         saveButton.click();
         dashboardItems.get(0).click();
 
@@ -261,7 +261,7 @@ describe('Exchange Adapter Tests', function () {
 
     it('should add new Error Message and save it', function () {
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
 
@@ -276,17 +276,17 @@ describe('Exchange Adapter Tests', function () {
         expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe('Connection refused');
 
         // Add new Error Message
-        let addErrorMessageLink = element(by.id('addNewErrorMessageLink'));
+        const addErrorMessageLink = element(by.id('addNewErrorMessageLink'));
         addErrorMessageLink.click();
 
-        let errorMessage = element(by.id('errorMessage_2'));
-        let newErrorMessage = 'Connection reset by peer';
+        const errorMessage = element(by.id('errorMessage_2'));
+        const newErrorMessage = 'Connection reset by peer';
         errorMessage.clear();
         errorMessage.sendKeys(newErrorMessage);
         expect(errorMessage.getAttribute('value')).toBe(newErrorMessage);
 
         // Save and check the update worked
-        let saveButton = element(by.id('exchangeAdapterSaveButton'));
+        const saveButton = element(by.id('exchangeAdapterSaveButton'));
         saveButton.click();
         dashboardItems.get(0).click();
 
@@ -307,7 +307,7 @@ describe('Exchange Adapter Tests', function () {
 
     it('should delete Error Message and save change', function () {
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
 
@@ -322,11 +322,11 @@ describe('Exchange Adapter Tests', function () {
         expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe('Connection refused');
 
         // Delete Error Message 2
-        let deleteErrorMessageButton = element(by.id('deleteErrorMessageButton_1'));
+        const deleteErrorMessageButton = element(by.id('deleteErrorMessageButton_1'));
         deleteErrorMessageButton.click();
 
         // Save and check the update worked
-        let saveButton = element(by.id('exchangeAdapterSaveButton'));
+        const saveButton = element(by.id('exchangeAdapterSaveButton'));
         saveButton.click();
         dashboardItems.get(0).click();
 
@@ -344,7 +344,7 @@ describe('Exchange Adapter Tests', function () {
 
     it('should NOT save Exchange Adapter fields if there are validation errors', function () {
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
 
@@ -359,50 +359,50 @@ describe('Exchange Adapter Tests', function () {
         expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe('Connection refused');
 
         // Update fields with some 'bad' values
-        let adapterName = element(by.id('adapterName'));
-        let newAdapterName = 'Bitstamp REST API v2 Adapter!';
+        const adapterName = element(by.id('adapterName'));
+        const newAdapterName = 'Bitstamp REST API v2 Adapter!';
         adapterName.clear();
         adapterName.sendKeys(newAdapterName);
         expect(adapterName.getAttribute('value')).toBe(newAdapterName);
 
-        let className = element(by.id('className'));
-        let newClassName = 'my.1new.BitstampExchangeAdapterV2';
+        const className = element(by.id('className'));
+        const newClassName = 'my.1new.BitstampExchangeAdapterV2';
         className.clear();
         className.sendKeys(newClassName);
         expect(className.getAttribute('value')).toBe(newClassName);
 
-        let connectionTimeout = element(by.id('connectionTimeout'));
-        let newConnectionTimeout = 'ab1';
+        const connectionTimeout = element(by.id('connectionTimeout'));
+        const newConnectionTimeout = 'ab1';
         connectionTimeout.clear();
         connectionTimeout.sendKeys(newConnectionTimeout);
         expect(connectionTimeout.getAttribute('value')).toBe(newConnectionTimeout);
 
-        let errorCode_0 = element(by.id('errorCode_0'));
-        let newErrorCode_0 = 'a25';
+        const errorCode_0 = element(by.id('errorCode_0'));
+        const newErrorCode_0 = 'a25';
         errorCode_0.clear();
         errorCode_0.sendKeys(newErrorCode_0);
         expect(errorCode_0.getAttribute('value')).toBe(newErrorCode_0);
 
-        let errorCode_1 = element(by.id('errorCode_1'));
-        let newErrorCode_1 = '522';
+        const errorCode_1 = element(by.id('errorCode_1'));
+        const newErrorCode_1 = '522';
         errorCode_1.clear();
         errorCode_1.sendKeys(newErrorCode_1);
         expect(errorCode_1.getAttribute('value')).toBe(newErrorCode_1);
 
-        let errorMessage_0 = element(by.id('errorMessage_0'));
-        let newErrorMessage_0 = 'Connection reset by peer';
+        const errorMessage_0 = element(by.id('errorMessage_0'));
+        const newErrorMessage_0 = 'Connection reset by peer';
         errorMessage_0.clear();
         errorMessage_0.sendKeys(newErrorMessage_0);
         expect(errorMessage_0.getAttribute('value')).toBe(newErrorMessage_0);
 
-        let errorMessage_1 = element(by.id('errorMessage_1'));
-        let newErrorMessage_1 = 'Remote host closed connection during handshake';
+        const errorMessage_1 = element(by.id('errorMessage_1'));
+        const newErrorMessage_1 = 'Remote host closed connection during handshake';
         errorMessage_1.clear();
         errorMessage_1.sendKeys(newErrorMessage_1);
         expect(errorMessage_1.getAttribute('value')).toBe(newErrorMessage_1);
 
         // Save and check the update did not persist
-        let saveButton = element(by.id('exchangeAdapterSaveButton'));
+        const saveButton = element(by.id('exchangeAdapterSaveButton'));
         saveButton.click();
 
         // Check for validation errors
@@ -427,5 +427,4 @@ describe('Exchange Adapter Tests', function () {
         expect(element(by.id('errorMessage_0')).getAttribute('value')).toBe(newErrorMessage_0);
         expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe(newErrorMessage_1);
     });
-
 });

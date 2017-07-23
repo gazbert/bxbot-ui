@@ -1,10 +1,10 @@
-import {Injectable} from "@angular/core";
-import {Headers, Http, Response} from "@angular/http";
-import {Observable} from "rxjs/Rx";
-import "rxjs/add/operator/map";
-import "rxjs/add/operator/catch";
-import "rxjs/add/observable/throw";
-import {AppComponent} from "../app.component";
+import {Injectable} from '@angular/core';
+import {Headers, Http, Response} from '@angular/http';
+import {Observable} from 'rxjs/Rx';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
+import {AppComponent} from '../app.component';
 
 /**
  * Authentication service for authenticating with the backend server.
@@ -23,6 +23,22 @@ export class AuthenticationService {
     constructor(private http: Http) {
     }
 
+    static isLoggedIn(): boolean {
+        const token: String = AuthenticationService.getToken();
+        return token && token.length > 0;
+    }
+
+    static getToken(): String {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        const token = currentUser && currentUser.token;
+        return token ? token : '';
+    }
+
+    static logout(): void {
+        // clear token remove user from local storage to log user out
+        localStorage.removeItem('currentUser');
+    }
+
     login(username: string, password: string): Observable<boolean> {
         return this.http.post(this.authUrl, JSON.stringify({
             username: username,
@@ -30,7 +46,7 @@ export class AuthenticationService {
         }), {headers: this.headers})
             .map((response: Response) => {
                 // login successful if there's a jwt token in the response
-                let token = response.json() && response.json().token;
+                const token = response.json() && response.json().token;
                 if (token) {
                     // store username and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', JSON.stringify({username: username, token: token}));
@@ -40,21 +56,5 @@ export class AuthenticationService {
                     return false;
                 }
             }).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-    }
-
-    static isLoggedIn(): boolean {
-        let token: String = AuthenticationService.getToken();
-        return token && token.length > 0;
-    }
-
-    static getToken(): String {
-        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        let token = currentUser && currentUser.token;
-        return token ? token : "";
-    }
-
-    static logout(): void {
-        // clear token remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
     }
 }

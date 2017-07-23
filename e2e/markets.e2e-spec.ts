@@ -8,7 +8,7 @@
  * https://github.com/angular/protractor/issues/3205
  *
  ******************************************************************************/
-import {browser, element, by} from "protractor";
+import {browser, element, by} from 'protractor';
 
 /**
  * Market screen tests.
@@ -25,11 +25,11 @@ describe('Market Screen Tests', function () {
 
     it('should update Market fields after Save', function () {
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(4).click();
         expect(element(by.css('h2')).getText()).toEqual('BTC-e Details');
 
-        let tabLinks = element.all(by.css('li'));
+        const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
 
         // Market 1
@@ -47,42 +47,42 @@ describe('Market Screen Tests', function () {
         expect(element(by.id('tradingStrategy_1')).getAttribute('value')).toBe('1: Long Scalper');
 
         // Update market fields
-        let marketEnabled = element(by.id('marketEnabled_0'));
+        const marketEnabled = element(by.id('marketEnabled_0'));
         marketEnabled.click();
         expect(marketEnabled.getAttribute('ng-reflect-model')).toBe('true'); // must be better way?
 
-        let marketName = element(by.id('marketName_0'));
-        let newMarketName = 'GBP/ETH';
+        const marketName = element(by.id('marketName_0'));
+        const newMarketName = 'GBP/ETH';
         marketName.clear();
         marketName.sendKeys(newMarketName);
         expect(marketName.getAttribute('value')).toBe(newMarketName);
 
-        let baseCurrency = element(by.id('baseCurrency_0'));
-        let newBaseCurrency = 'GBP';
+        const baseCurrency = element(by.id('baseCurrency_0'));
+        const newBaseCurrency = 'GBP';
         baseCurrency.clear();
         baseCurrency.sendKeys(newBaseCurrency);
         expect(baseCurrency.getAttribute('value')).toBe(newBaseCurrency);
 
-        let counterCurrency = element(by.id('counterCurrency_0'));
-        let newCounterCurrency = 'ETH';
+        const counterCurrency = element(by.id('counterCurrency_0'));
+        const newCounterCurrency = 'ETH';
         counterCurrency.clear();
         counterCurrency.sendKeys(newCounterCurrency);
         expect(counterCurrency.getAttribute('value')).toBe(newCounterCurrency);
 
-        let tradingStrategy = element(by.id('tradingStrategy_0'));
-        let newTradingStrategy = '1: Long Scalper';
+        const tradingStrategy = element(by.id('tradingStrategy_0'));
+        const newTradingStrategy = '1: Long Scalper';
 
         // TODO not supported with Angular 2 yet
-        //element(by.model('tradingStrategy_0')).sendKeys('Long Scalper');
+        // element(by.model('tradingStrategy_0')).sendKeys('Long Scalper');
 
         // Both alts below work...
         element(by.id('tradingStrategy_0')).sendKeys('Long Scalper');
-        //element(by.cssContainingText('option', 'Long Scalper')).click();
+        // element(by.cssContainingText('option', 'Long Scalper')).click();
 
         expect(tradingStrategy.getAttribute('value')).toBe(newTradingStrategy);
 
         // Save and check the update worked
-        let saveButton = element(by.id('marketSaveButton'));
+        const saveButton = element(by.id('marketSaveButton'));
         saveButton.click();
         dashboardItems.get(4).click();
         tabLinks.get(1).click();
@@ -104,11 +104,11 @@ describe('Market Screen Tests', function () {
 
     it('should NOT update Market fields after Cancel', function () {
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(4).click();
         expect(element(by.css('h2')).getText()).toEqual('BTC-e Details');
 
-        let tabLinks = element.all(by.css('li'));
+        const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
 
         expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
@@ -118,42 +118,42 @@ describe('Market Screen Tests', function () {
         expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD RSI Indicator');
 
         // Update market fields
-        let marketEnabled = element(by.id('marketEnabled_0'));
+        const marketEnabled = element(by.id('marketEnabled_0'));
         marketEnabled.click();
         expect(marketEnabled.getAttribute('ng-reflect-model')).toBe('true'); // must be better way?
 
-        let marketName = element(by.id('marketName_0'));
-        let newMarketName = 'GBP/ETH';
+        const marketName = element(by.id('marketName_0'));
+        const newMarketName = 'GBP/ETH';
         marketName.clear();
         marketName.sendKeys(newMarketName);
         expect(marketName.getAttribute('value')).toBe(newMarketName);
 
-        let baseCurrency = element(by.id('baseCurrency_0'));
-        let newBaseCurrency = 'GBP';
+        const baseCurrency = element(by.id('baseCurrency_0'));
+        const newBaseCurrency = 'GBP';
         baseCurrency.clear();
         baseCurrency.sendKeys(newBaseCurrency);
         expect(baseCurrency.getAttribute('value')).toBe(newBaseCurrency);
 
-        let counterCurrency = element(by.id('counterCurrency_0'));
-        let newCounterCurrency = 'ETH';
+        const counterCurrency = element(by.id('counterCurrency_0'));
+        const newCounterCurrency = 'ETH';
         counterCurrency.clear();
         counterCurrency.sendKeys(newCounterCurrency);
         expect(counterCurrency.getAttribute('value')).toBe(newCounterCurrency);
 
-        let tradingStrategy = element(by.id('tradingStrategy_0'));
-        let newTradingStrategy = '1: Long Scalper';
+        const tradingStrategy = element(by.id('tradingStrategy_0'));
+        const newTradingStrategy = '1: Long Scalper';
 
         // TODO not supported with Angular 2 yet
-        //element(by.model('tradingStrategy_0')).sendKeys('Long Scalper');
+        // element(by.model('tradingStrategy_0')).sendKeys('Long Scalper');
 
         // Both alts below work...
         element(by.id('tradingStrategy_0')).sendKeys('Long Scalper');
-        //element(by.cssContainingText('option', 'Long Scalper')).click();
+        // element(by.cssContainingText('option', 'Long Scalper')).click();
 
         expect(tradingStrategy.getAttribute('value')).toBe(newTradingStrategy);
 
         // Cancel and check the update did not persist
-        let cancelButton = element(by.id('marketCancelButton'));
+        const cancelButton = element(by.id('marketCancelButton'));
         cancelButton.click();
         dashboardItems.get(4).click();
         tabLinks.get(1).click();
@@ -175,11 +175,11 @@ describe('Market Screen Tests', function () {
 
     it('should add new Market and save it', function () {
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(4).click();
         expect(element(by.css('h2')).getText()).toEqual('BTC-e Details');
 
-        let tabLinks = element.all(by.css('li'));
+        const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
 
         // Market 1
@@ -197,45 +197,45 @@ describe('Market Screen Tests', function () {
         expect(element(by.id('tradingStrategy_1')).getAttribute('value')).toBe('1: Long Scalper');
 
         // Add new Market 3
-        let addMarketLink = element(by.id('addMarketLink'));
+        const addMarketLink = element(by.id('addMarketLink'));
         addMarketLink.click();
 
-        let marketEnabled = element(by.id('marketEnabled_2'));
+        const marketEnabled = element(by.id('marketEnabled_2'));
         marketEnabled.click();
         expect(marketEnabled.getAttribute('ng-reflect-model')).toBe('true'); // must be better way?
 
-        let marketName = element(by.id('marketName_2'));
-        let newMarketName = 'GBP/BTC';
+        const marketName = element(by.id('marketName_2'));
+        const newMarketName = 'GBP/BTC';
         marketName.clear();
         marketName.sendKeys(newMarketName);
         expect(marketName.getAttribute('value')).toBe(newMarketName);
 
-        let baseCurrency = element(by.id('baseCurrency_2'));
-        let newBaseCurrency = 'GBP';
+        const baseCurrency = element(by.id('baseCurrency_2'));
+        const newBaseCurrency = 'GBP';
         baseCurrency.clear();
         baseCurrency.sendKeys(newBaseCurrency);
         expect(baseCurrency.getAttribute('value')).toBe(newBaseCurrency);
 
-        let counterCurrency = element(by.id('counterCurrency_2'));
-        let newCounterCurrency = 'ETH';
+        const counterCurrency = element(by.id('counterCurrency_2'));
+        const newCounterCurrency = 'ETH';
         counterCurrency.clear();
         counterCurrency.sendKeys(newCounterCurrency);
         expect(counterCurrency.getAttribute('value')).toBe(newCounterCurrency);
 
-        let tradingStrategy = element(by.id('tradingStrategy_2'));
-        let newTradingStrategy = '1: Long Scalper';
+        const tradingStrategy = element(by.id('tradingStrategy_2'));
+        const newTradingStrategy = '1: Long Scalper';
 
         // TODO not supported with Angular 2 yet
-        //element(by.model('tradingStrategy_0')).sendKeys('Long Scalper');
+        // element(by.model('tradingStrategy_0')).sendKeys('Long Scalper');
 
         // Both alts below work...
         element(by.id('tradingStrategy_2')).sendKeys('Long Scalper');
-        //element(by.cssContainingText('option', 'Long Scalper')).click();
+        // element(by.cssContainingText('option', 'Long Scalper')).click();
 
         expect(tradingStrategy.getAttribute('value')).toBe(newTradingStrategy);
 
         // Save and check the update worked
-        let saveButton = element(by.id('marketSaveButton'));
+        const saveButton = element(by.id('marketSaveButton'));
         saveButton.click();
         dashboardItems.get(4).click();
         tabLinks.get(1).click();
@@ -264,11 +264,11 @@ describe('Market Screen Tests', function () {
 
     it('should delete Market and save change', function () {
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(4).click();
         expect(element(by.css('h2')).getText()).toEqual('BTC-e Details');
 
-        let tabLinks = element.all(by.css('li'));
+        const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
 
         // Market 1
@@ -286,11 +286,11 @@ describe('Market Screen Tests', function () {
         expect(element(by.id('tradingStrategy_1')).getAttribute('value')).toBe('1: Long Scalper');
 
         // Delete Market 1
-        let deleteMarketButton = element(by.id('deleteMarketButton_0'));
+        const deleteMarketButton = element(by.id('deleteMarketButton_0'));
         deleteMarketButton.click();
 
         // Save and check the update worked
-        let saveButton = element(by.id('marketSaveButton'));
+        const saveButton = element(by.id('marketSaveButton'));
         saveButton.click();
         dashboardItems.get(4).click();
         tabLinks.get(1).click();
@@ -312,11 +312,11 @@ describe('Market Screen Tests', function () {
 
     it('should NOT save Market fields if there are validation errors', function () {
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(4).click();
         expect(element(by.css('h2')).getText()).toEqual('BTC-e Details');
 
-        let tabLinks = element.all(by.css('li'));
+        const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
 
         expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
@@ -326,35 +326,35 @@ describe('Market Screen Tests', function () {
         expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD RSI Indicator');
 
         // Update Market 1 fields with some 'bad' values
-        let marketEnabled = element(by.id('marketEnabled_0'));
+        const marketEnabled = element(by.id('marketEnabled_0'));
         marketEnabled.click();
         expect(marketEnabled.getAttribute('ng-reflect-model')).toBe('true'); // must be better way?
 
-        let marketName = element(by.id('marketName_0'));
-        let newMarketName = 'GBP # ETH';
+        const marketName = element(by.id('marketName_0'));
+        const newMarketName = 'GBP # ETH';
         marketName.clear();
         marketName.sendKeys(newMarketName);
         expect(marketName.getAttribute('value')).toBe(newMarketName);
 
-        let baseCurrency = element(by.id('baseCurrency_0'));
-        let newBaseCurrency = 'GB2';
+        const baseCurrency = element(by.id('baseCurrency_0'));
+        const newBaseCurrency = 'GB2';
         baseCurrency.clear();
         baseCurrency.sendKeys(newBaseCurrency);
         expect(baseCurrency.getAttribute('value')).toBe(newBaseCurrency);
 
-        let counterCurrency = element(by.id('counterCurrency_0'));
-        let newCounterCurrency = 'E T';
+        const counterCurrency = element(by.id('counterCurrency_0'));
+        const newCounterCurrency = 'E T';
         counterCurrency.clear();
         counterCurrency.sendKeys(newCounterCurrency);
         expect(counterCurrency.getAttribute('value')).toBe(newCounterCurrency);
 
-        let tradingStrategy = element(by.id('tradingStrategy_0'));
-        let newTradingStrategy = '1: Long Scalper';
+        const tradingStrategy = element(by.id('tradingStrategy_0'));
+        const newTradingStrategy = '1: Long Scalper';
         element(by.id('tradingStrategy_0')).sendKeys('Long Scalper');
         expect(tradingStrategy.getAttribute('value')).toBe(newTradingStrategy);
 
         // Save and check the update did not persist
-        let saveButton = element(by.id('marketSaveButton'));
+        const saveButton = element(by.id('marketSaveButton'));
         saveButton.click();
 
         // Market 1 - check for validation errors
@@ -384,11 +384,11 @@ describe('Market Screen Tests', function () {
 
     it('should NOT save new Market when Market Name already in use', function () {
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(4).click();
         expect(element(by.css('h2')).getText()).toEqual('BTC-e Details');
 
-        let tabLinks = element.all(by.css('li'));
+        const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
 
         // Market 1
@@ -406,39 +406,39 @@ describe('Market Screen Tests', function () {
         expect(element(by.id('tradingStrategy_1')).getAttribute('value')).toBe('1: Long Scalper');
 
         // Add new Market 3 with existing Market 2 name
-        let addMarketLink = element(by.id('addMarketLink'));
+        const addMarketLink = element(by.id('addMarketLink'));
         addMarketLink.click();
 
-        let marketEnabled = element(by.id('marketEnabled_2'));
+        const marketEnabled = element(by.id('marketEnabled_2'));
         marketEnabled.click();
         expect(marketEnabled.getAttribute('ng-reflect-model')).toBe('true'); // must be better way?
 
-        let marketName = element(by.id('marketName_2'));
-        let newMarketName = 'LTC/USD'; // already in use
+        const marketName = element(by.id('marketName_2'));
+        const newMarketName = 'LTC/USD'; // already in use
         marketName.clear();
         marketName.sendKeys(newMarketName);
         expect(marketName.getAttribute('value')).toBe(newMarketName);
 
-        let baseCurrency = element(by.id('baseCurrency_2'));
-        let newBaseCurrency = 'GBP';
+        const baseCurrency = element(by.id('baseCurrency_2'));
+        const newBaseCurrency = 'GBP';
         baseCurrency.clear();
         baseCurrency.sendKeys(newBaseCurrency);
         expect(baseCurrency.getAttribute('value')).toBe(newBaseCurrency);
 
-        let counterCurrency = element(by.id('counterCurrency_2'));
-        let newCounterCurrency = 'ETH';
+        const counterCurrency = element(by.id('counterCurrency_2'));
+        const newCounterCurrency = 'ETH';
         counterCurrency.clear();
         counterCurrency.sendKeys(newCounterCurrency);
         expect(counterCurrency.getAttribute('value')).toBe(newCounterCurrency);
 
-        let tradingStrategy = element(by.id('tradingStrategy_2'));
-        let newTradingStrategy = '1: Long Scalper';
+        const tradingStrategy = element(by.id('tradingStrategy_2'));
+        const newTradingStrategy = '1: Long Scalper';
         element(by.id('tradingStrategy_2')).sendKeys('Long Scalper');
 
         expect(tradingStrategy.getAttribute('value')).toBe(newTradingStrategy);
 
         // Save and check the update failed
-        let saveButton = element(by.id('marketSaveButton'));
+        const saveButton = element(by.id('marketSaveButton'));
         saveButton.click();
 
         // Market 3 - check for validation errors

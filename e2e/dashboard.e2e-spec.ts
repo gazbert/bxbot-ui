@@ -10,7 +10,7 @@
  * TODO - Add test for Dashboard search/filter box
  *
  ******************************************************************************/
-import {browser, element, by} from "protractor";
+import {browser, element, by} from 'protractor';
 
 /**
  * Dashboard tests.
@@ -19,7 +19,7 @@ import {browser, element, by} from "protractor";
  */
 describe('Dashboard Tests', function () {
 
-    let expectedMsg = 'BX-bot Admin Console';
+    const expectedMsg = 'BX-bot Admin Console';
 
     beforeEach(function () {
         browser.get('');
@@ -43,25 +43,25 @@ describe('Dashboard Tests', function () {
 
         // TODO below does not work with Angular2 :-(
         // https://github.com/angular/protractor/issues/3205
-        // let dashboardItems = element.all(by.repeater('bot in bots'));
+        // const dashboardItems = element.all(by.repeater('bot in bots'));
 
         // so we'll resort to CSS locator instead
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         expect(dashboardItems.count()).toBe(8);
     });
 
     it('should display Bitstamp as first Dashboard Bot item', function () {
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         expect(dashboardItems.get(0).getText()).toContain('Bitstamp');
     });
 
     it('should display Huobi as last Dashboard Bot item', function () {
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         expect(dashboardItems.get(7).getText()).toContain('Huobi');
     });
 
     it('should render Gemini Bot specific link', function () {
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         dashboardItems.get(2).click();
 
         browser.getCurrentUrl().then(function (url) {
@@ -71,7 +71,7 @@ describe('Dashboard Tests', function () {
 
     it('should stay on Dashboard if user clicks on Dashboard button', function () {
         browser.getCurrentUrl().then(function (url) {
-            let dashboardButton = element.all(by.css('dashboardButton'));
+            const dashboardButton = element.all(by.css('dashboardButton'));
             dashboardButton.click();
             expect(url).toContain('/dashboard');
         });
@@ -79,10 +79,10 @@ describe('Dashboard Tests', function () {
 
     it('should filter displayed Bot items when user searches by Bot name', function () {
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         expect(dashboardItems.count()).toBe(8);
 
-        let searchBox = element.all(by.id('search-box'));
+        const searchBox = element.all(by.id('search-box'));
         searchBox.sendKeys('Bit');
 
         expect(dashboardItems.count()).toBe(3);

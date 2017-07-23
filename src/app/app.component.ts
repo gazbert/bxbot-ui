@@ -7,7 +7,7 @@ import {AuthenticationService} from './shared/authentication.service';
  * @author gazbert
  */
 @Component({
-    selector: 'bxbot-ui',
+    selector: 'app-bxbot-ui',
     template: `
         <div class="container module-bootstrap">
             <h1>{{getTitle()}}</h1>

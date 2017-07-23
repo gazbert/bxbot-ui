@@ -8,7 +8,7 @@
  * https://github.com/angular/protractor/issues/3205
  *
  ****************************************************************************************/
-import {browser, element, by} from "protractor";
+import {browser, element, by} from 'protractor';
 
 /**
  * Miscellaneous Scenario tests.
@@ -25,16 +25,16 @@ describe('Miscellaneous Scenario Tests', function () {
 
     it('should add new Trading Strategy and be able to select it for existing Market', function () {
 
-        let searchBox = element.all(by.id('search-box'));
+        const searchBox = element.all(by.id('search-box'));
         searchBox.sendKeys('ItBit');
 
-        let dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('bx-dashboard-item'));
         expect(dashboardItems.count()).toBe(1);
 
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
 
-        let tabLinks = element.all(by.css('li'));
+        const tabLinks = element.all(by.css('li'));
         tabLinks.get(2).click();
 
         // Existing Strat 1
@@ -52,23 +52,23 @@ describe('Miscellaneous Scenario Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
 
         // Add new Strat 3
-        let addTradingStrategyLink = element(by.id('addTradingStrategyLink'));
+        const addTradingStrategyLink = element(by.id('addTradingStrategyLink'));
         addTradingStrategyLink.click();
 
-        let strategyName = element(by.id('tradingStrategyName_2'));
-        let newStrategyName = 'EMA Indicator';
+        const strategyName = element(by.id('tradingStrategyName_2'));
+        const newStrategyName = 'EMA Indicator';
         strategyName.clear();
         strategyName.sendKeys(newStrategyName);
         expect(strategyName.getAttribute('value')).toBe(newStrategyName);
 
-        let strategyDescription = element(by.id('tradingStrategyDescription_2'));
-        let newStrategyDescription = 'EMA Indicator algo for deciding when to enter and exit trades.';
+        const strategyDescription = element(by.id('tradingStrategyDescription_2'));
+        const newStrategyDescription = 'EMA Indicator algo for deciding when to enter and exit trades.';
         strategyDescription.clear();
         strategyDescription.sendKeys(newStrategyDescription);
         expect(strategyDescription.getAttribute('value')).toBe(newStrategyDescription);
 
-        let strategyClassName = element(by.id('tradingStrategyClassname_2'));
-        let newStrategyClassName = 'com.gazbert.bxbot.strategies.EmaIndicator';
+        const strategyClassName = element(by.id('tradingStrategyClassname_2'));
+        const newStrategyClassName = 'com.gazbert.bxbot.strategies.EmaIndicator';
         strategyClassName.clear();
         strategyClassName.sendKeys(newStrategyClassName);
         expect(strategyClassName.getAttribute('value')).toBe(newStrategyClassName);
@@ -87,8 +87,8 @@ describe('Miscellaneous Scenario Tests', function () {
         expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('1: MACD RSI Indicator');
 
         // Update Market's Trading Strat
-        let tradingStrategy = element(by.id('tradingStrategy_0'));
-        let newTradingStrategy = '2: EMA Indicator';
+        const tradingStrategy = element(by.id('tradingStrategy_0'));
+        const newTradingStrategy = '2: EMA Indicator';
         element(by.id('tradingStrategy_0')).sendKeys('EMA Indicator');
         expect(tradingStrategy.getAttribute('value')).toBe(newTradingStrategy);
 
@@ -107,9 +107,9 @@ describe('Miscellaneous Scenario Tests', function () {
     });
 });
 
-//-----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 // Stuff from previous BX-bot UI that I coded in Angular 1.x ...
-//-----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 
 // describe('*** BX-Bot UI App End-2-End Testing ***', function () {
 //
