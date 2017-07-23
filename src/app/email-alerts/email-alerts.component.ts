@@ -1,4 +1,4 @@
-import {OnInit, Component, ViewChild} from '@angular/core';
+import {OnInit, Component, ViewChild, AfterViewChecked} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {EmailAlertsConfig, EmailAlertsHttpDataPromiseService} from '../model/email-alerts';
@@ -14,7 +14,7 @@ import {EmailAlertsConfig, EmailAlertsHttpDataPromiseService} from '../model/ema
     templateUrl: 'email-alerts.component.html',
     styleUrls: ['email-alerts.component.css']
 })
-export class EmailAlertsComponent implements OnInit {
+export class EmailAlertsComponent implements OnInit, AfterViewChecked {
 
     emailAlertsConfig: EmailAlertsConfig;
     botId;

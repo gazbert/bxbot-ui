@@ -1,4 +1,4 @@
-import {OnInit, Component, ViewChild} from '@angular/core';
+import {OnInit, Component, ViewChild, AfterViewChecked} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {ExchangeAdapter} from '../model/exchange-adapter';
@@ -14,7 +14,7 @@ import {ExchangeAdapterHttpDataPromiseService} from '../model/exchange-adapter/p
     templateUrl: 'exchange-adapter.component.html',
     styleUrls: ['exchange-adapter.component.css']
 })
-export class ExchangeAdapterComponent implements OnInit {
+export class ExchangeAdapterComponent implements OnInit, AfterViewChecked {
 
     exchangeAdapter: ExchangeAdapter;
     active = true;

@@ -1,4 +1,4 @@
-import {OnInit, Component, ViewChild} from '@angular/core';
+import {OnInit, Component, ViewChild, AfterViewChecked} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {Market, MarketHttpDataPromiseService} from '../model/market/';
@@ -14,7 +14,7 @@ import {TradingStrategy, TradingStrategyHttpDataPromiseService} from '../model/t
     templateUrl: 'markets.component.html',
     styleUrls: ['markets.component.css']
 })
-export class MarketsComponent implements OnInit {
+export class MarketsComponent implements OnInit, AfterViewChecked {
 
     markets: Market[] = [];
     deletedMarkets: Market[] = [];

@@ -1,4 +1,4 @@
-import {OnInit, Component, ViewChild} from '@angular/core';
+import {OnInit, Component, ViewChild, AfterViewChecked} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {TradingStrategy} from '../model/trading-strategy';
@@ -15,7 +15,7 @@ import {MarketHttpDataPromiseService} from '../model/market';
     templateUrl: 'trading-strategies.component.html',
     styleUrls: ['trading-strategies.component.css']
 })
-export class TradingStrategiesComponent implements OnInit {
+export class TradingStrategiesComponent implements OnInit, AfterViewChecked {
 
     tradingStrategies: TradingStrategy[] = [];
     deletedTradingStrategies: TradingStrategy[] = [];
