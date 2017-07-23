@@ -5,10 +5,9 @@
 **Note:** This project is very much work in progress and not safe for production.
 
 ## What is BX-bot UI?
-
 BX-bot UI is an Angular app (and learning journey!) for administering [BX-bot](https://github.com/gazbert/bxbot).
 
-Although being developed as a 'real-world' app, the code _tries_ to showcase different features of Angular 4 and 
+Although being developed as a 'real-world' app, the code _tries_ to showcase different features of Angular and 
 [TypeScript](https://www.typescriptlang.org/). It's not meant to be an Angular 101 tutorial - the 
 [Angular Documentation](https://angular.io/docs) does a far better job!
 
@@ -27,7 +26,6 @@ A Docker image is available on [Docker Hub](https://hub.docker.com/r/gazbert/bxb
 but rather a rolling development version of the UI.
   
 ### The manual way
-
 You'll need [node.js](https://nodejs.org/en/download/) (at least node 6.9.x) installed to build and run the app.
 
 1. Install the [Angular CLI](https://cli.angular.io/) globally: `npm install -g @angular/cli`
@@ -40,9 +38,14 @@ You'll need [node.js](https://nodejs.org/en/download/) (at least node 6.9.x) ins
 1. To stop the app, `CTRL-c` from the command line.
 
 ## Build Guide
+Follow the instructions in [The manual way](#he-manual-way) section if you have not already done so.
+
+The project uses Angular CLI [commands](https://github.com/angular/angular-cli/wiki) to build, test, and run the app.
+
+### Building the App
+1. Run `npm run build` to compile the application into the `dist` output directory.                   
 
 ### Jasmine Unit Tests
-
 The app has behaviour-driven unit tests written using the excellent [Jasmine](https://jasmine.github.io/) framework. 
 
 1. To run the tests once: `npm run test:once`
@@ -51,20 +54,17 @@ The app has behaviour-driven unit tests written using the excellent [Jasmine](ht
 1. To stop Karma, `CTRL-c` from the command line.
 
 ### Protractor End-to-End Tests
-
-The app has e2e tests written using [Protractor](http://www.protractortest.org).
+The app has [e2e](e2e) tests written using [Protractor](http://www.protractortest.org).
 
 1. To run the tests once: `npm run e2e`. It's usually best not to have the app running at the same time.
 
 ### TSLint 
-
 The build has a [TSLint](https://palantir.github.io/tslint/) script that checks for code readability, maintainability, and
-functionality errors.
+functionality errors. The [tslint.json](tslint.json) file contains the linting rules.
 
 1. To run the linter: `npm run lint`
 
 ## Configuration
-
 The app uses Angular's [In Memory Web API](https://github.com/angular/in-memory-web-api) as a replacement
 backend for development and local testing. The API config configuration options are set in [`app.module.ts`](/src/app/app.module.ts).
 
