@@ -28,7 +28,7 @@
                             <div class="col-sm-6 form-group">
                                 <label for="marketName_{{i}}">Name</label>
                                 <input [(ngModel)]="markets[i].name"
-                                       type="text" class="form-control" id="marketName_{{i}}"
+                                       class="form-control" id="marketName_{{i}}"
                                        name="marketName_{{i}}" #marketName="ngModel" required maxlength="50"
                                        placeholder="BTC/USD" pattern="[a-zA-Z0-9/_\- ]*"
                                        duplicateName="{{getOtherMarketNames(markets[i].id)}}"/>
@@ -44,7 +44,7 @@
                             <div class="col-sm-6 form-group">
                                 <label for="baseCurrency_{{i}}">Base Currency</label>
                                 <input [(ngModel)]="markets[i].baseCurrency"
-                                       type="text" class="form-control" id="baseCurrency_{{i}}"
+                                       class="form-control" id="baseCurrency_{{i}}"
                                        name="baseCurrency_{{i}}" #baseCurrency="ngModel" required maxlength="3"
                                        pattern="^[A-Z]{3}$" placeholder="USD"/>
                                 <div id="invalidBaseCurrency_{{i}}"
@@ -59,7 +59,7 @@
                             <div class="col-sm-6 form-group">
                                 <label for="counterCurrency_{{i}}">Counter Currency</label>
                                 <input [(ngModel)]="markets[i].counterCurrency"
-                                       type="text" class="form-control" id="counterCurrency_{{i}}"
+                                       class="form-control" id="counterCurrency_{{i}}"
                                        name="counterCurrency_{{i}}" #counterCurrency="ngModel" required maxlength="3"
                                        placeholder="BTC" pattern="^[A-Z]{3}$"/>
                                 <div id="invalidCounterCurrency_{{i}}"
@@ -103,7 +103,7 @@
              http://stackoverflow.com/questions/38120756/angular2-router-navigate-refresh-page
              -->
             <button id="marketCancelButton" type="button" (click)="cancel()" class="btn btn-default">Cancel</button>
-            <button id="marketSaveButton" type="submit" class="btn btn-primary">Save</button>
+            <button id="marketSaveButton" class="btn btn-primary">Save</button>
         </div>
     </form>
 </div>

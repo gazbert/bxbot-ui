@@ -182,9 +182,8 @@ function overrideExchangeAdapterServiceSetup() {
 
     it('should NOT save or navigate to Dashboard when user clicks Save for invalid input', () => {
         const origName = testExchangeAdapter.name;
-        const newName = '!NewBTCe'; // ! is invalid char
-
-        page.adapterNameInput.value = newName;
+        // ! is invalid char
+        page.adapterNameInput.value = '!NewBTCe';
         page.adapterNameInput.dispatchEvent(newEvent('input')); // tell Angular
 
         expect(comp.exchangeAdapter.name).toBe(origName, 'Exchange Adapter Name in model not to be updated');

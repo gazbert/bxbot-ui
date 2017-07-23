@@ -9,7 +9,7 @@
         <div class="row">
             <div class="form-group col-sm-6">
                 <label for="adapterName">Name</label>
-                <input formControlName="adapterName" placeholder="My REST API Adapter" id="adapterName" type="text"
+                <input formControlName="adapterName" placeholder="My REST API Adapter" id="adapterName"
                        class="form-control" maxlength="121" required/>
                 <div id="invalidAdapterName"
                      *ngIf="formErrors.adapterName" class="alert alert-danger">{{ formErrors.adapterName }}
@@ -21,7 +21,7 @@
         <div class="row">
             <div class="form-group col-sm-6">
                 <label for="className">Class Name</label>
-                <input formControlName="className" placeholder="com.my.MyExchangeAdapter" id="className" type="text"
+                <input formControlName="className" placeholder="com.my.MyExchangeAdapter" id="className"
                        class="form-control" maxlength="121" required/>
                 <div id="invalidClassName"
                      *ngIf="formErrors.className" class="alert alert-danger">{{ formErrors.className }}
@@ -34,7 +34,7 @@
             <div class="form-group col-sm-6">
                 <label for="connectionTimeout">Connection Timeout (secs)</label>
                 <input id="connectionTimeout" ngControlGroup="networkConfig" formControlName="connectionTimeout"
-                       type="text" class="form-control" placeholder="60" maxlength="8" required/>
+                       class="form-control" placeholder="60" maxlength="8" required/>
                 <div id="invalidConnectionTimeout"
                         *ngIf="formErrors.connectionTimeout" class="alert alert-danger">{{ formErrors.connectionTimeout }}
                 </div>
@@ -56,7 +56,7 @@
                     <div class="panel-body">
                         <div class="form-group">
                             <label for="errorCode_{{i}}" class="col-sm-6">HTTP Status Code</label>
-                            <input id="errorCode_{{i}}" class="col-sm-6" type="text" [formControlName]="i" maxlength="3" required>
+                            <input id="errorCode_{{i}}" class="col-sm-6" [formControlName]="i" maxlength="3" required>
                             <div id="invalidErrorCode_{{i}}" [hidden]="nonFatalErrorHttpStatusCodes.controls[i].valid ||
                                  (nonFatalErrorHttpStatusCodes.controls[i].pristine && !isFormSaved())"
                                  class="alert alert-danger col-sm-6">
@@ -86,7 +86,7 @@
                     <div class="panel-body">
                         <div class="form-group">
                             <label for="errorMessage_{{i}}" class="col-sm-5">Error Message</label>
-                            <input id="errorMessage_{{i}}" class="col-sm-7" type="text" [formControlName]="i" maxlength="121" required>
+                            <input id="errorMessage_{{i}}" class="col-sm-7" [formControlName]="i" maxlength="121" required>
                             <div id="invalidErrorMessage_{{i}}" [hidden]="nonFatalErrorMessages.controls[i].valid ||
                                  (nonFatalErrorMessages.controls[i].pristine && !isFormSaved())"
                                  class="alert alert-danger col-sm-7">
@@ -110,7 +110,7 @@
                  http://stackoverflow.com/questions/38120756/angular2-router-navigate-refresh-page
              -->
             <button id="exchangeAdapterCancelButton" type="button" (click)="cancel()" class="btn btn-default">Cancel</button>
-            <button id="exchangeAdapterSaveButton" type="submit" class="btn btn-primary">Save</button>
+            <button id="exchangeAdapterSaveButton" class="btn btn-primary">Save</button>
         </div>
     </form>
 </div>

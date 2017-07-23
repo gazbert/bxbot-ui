@@ -221,7 +221,7 @@ describe('Email Alerts Config Tests', function () {
         expect(element(by.id('invalidToAddress')).getText()).toBe(
             'Valid email To Address is required, e.g. solo@falcon.com');
 
-        expect(element(by.id('fromAddress')).getAttribute('value')).toBe(newFromAddress)
+        expect(element(by.id('fromAddress')).getAttribute('value')).toBe(newFromAddress);
         expect(element(by.id('invalidFromAddress')).getText()).toBe(
             'Valid email From Address is required, e.g. boba@hoth.com');
     });

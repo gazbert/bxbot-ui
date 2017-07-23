@@ -1,8 +1,8 @@
 <div (click)="click()" class="module item">
     <h3>{{bot.name}}</h3>
     <h6>
-        <span *ngIf="bot.status === 'Running'" class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
-        <span *ngIf="bot.status === 'Stopped'" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+        <span *ngIf="bot.status === 'Running'" class="glyphicon glyphicon-ok-circle"></span>
+        <span *ngIf="bot.status === 'Stopped'" class="glyphicon glyphicon-remove-circle"></span>
         {{bot.status}}
     </h6>
 </div>
