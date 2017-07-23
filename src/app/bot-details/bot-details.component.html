@@ -1,11 +1,11 @@
 <div *ngIf="bot" class="container module-bootstrap">
     <h2>{{bot.name}} Details</h2>
     <tabs>
-        <tab [tabId]="bot.id" [tabTitle]="'exchange adapter'"><bx-exchange-adapter-rx></bx-exchange-adapter-rx></tab>
-        <!--<tab [tabId]="bot.id" [tabTitle]="'exchange adapter'"><bx-exchange-adapter></bx-exchange-adapter></tab>-->
+        <tab [tabId]="bot.id" [tabTitle]="'exchange adapter'"><app-bxbot-ui-exchange-adapter-rx></app-bxbot-ui-exchange-adapter-rx></tab>
+        <!--<tab [tabId]="bot.id" [tabTitle]="'exchange adapter'"><app-bxbot-ui-exchange-adapter></app-bxbot-ui-exchange-adapter></tab>-->
 
-        <tab [tabId]="bot.id" [tabTitle]="'markets'"><bx-markets></bx-markets></tab>
-        <tab [tabId]="bot.id" [tabTitle]="'trading strategies'"><bx-trading-strategies></bx-trading-strategies></tab>
-        <tab [tabId]="bot.id" [tabTitle]="'email alerts'"><bx-email-alerts></bx-email-alerts></tab>
+        <tab [tabId]="bot.id" [tabTitle]="'markets'"><app-bxbot-ui-markets></app-bxbot-ui-markets></tab>
+        <tab [tabId]="bot.id" [tabTitle]="'trading strategies'"><app-bxbot-ui-trading-strategies></app-bxbot-ui-trading-strategies></tab>
+        <tab [tabId]="bot.id" [tabTitle]="'email alerts'"><app-bxbot-ui-email-alerts></app-bxbot-ui-email-alerts></tab>
     </tabs>
 </div>

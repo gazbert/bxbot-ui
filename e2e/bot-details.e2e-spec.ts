@@ -25,7 +25,7 @@ describe('Bot Details Tests', function () {
 
     it('should render GDAX Bot Details tab links', function () {
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(1).click();
         expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
 
@@ -42,7 +42,7 @@ describe('Bot Details Tests', function () {
 
     it('should render GDAX Exchange Adapter Details', function () {
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(1).click();
         expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
 
@@ -57,7 +57,7 @@ describe('Bot Details Tests', function () {
 
     it('should render GDAX Markets', function () {
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(1).click();
         expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
 
@@ -81,7 +81,7 @@ describe('Bot Details Tests', function () {
 
     it('should render GDAX Trading Strategies', function () {
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(1).click();
         expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
 
@@ -105,7 +105,7 @@ describe('Bot Details Tests', function () {
 
     it('should render GDAX Email Alerts Config', function () {
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(1).click();
         expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
 
@@ -123,7 +123,7 @@ describe('Bot Details Tests', function () {
 
         browser.getCurrentUrl().then(function (url) {
 
-            const dashboardItems = element.all(by.css('bx-dashboard-item'));
+            const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
             dashboardItems.get(1).click();
             expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
 

@@ -1,4 +1,4 @@
-import {EmailAlertsConfig} from "./email-alerts.model";
+import {EmailAlertsConfig} from './email-alerts.model';
 
 /**
  * Tests the Email Alerts model behaves as expected.

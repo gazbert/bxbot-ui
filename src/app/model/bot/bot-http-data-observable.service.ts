@@ -1,11 +1,11 @@
-import {Injectable} from "@angular/core";
-import {Http, Headers, Response, RequestOptions} from "@angular/http";
-import {AppComponent} from "../../app.component";
-import {BotDataObservableService} from "./bot-data-observable.service";
-import {AuthenticationService} from "../../shared";
-import {Bot} from "./bot.model";
+import {Injectable} from '@angular/core';
+import {Http, Headers, Response, RequestOptions} from '@angular/http';
+import {AppComponent} from '../../app.component';
+import {BotDataObservableService} from './bot-data-observable.service';
+import {AuthenticationService} from '../../shared';
+import {Bot} from './bot.model';
 import {Observable} from 'rxjs/Observable';
-import {isObject} from "rxjs/util/isObject";
+import {isObject} from 'rxjs/util/isObject';
 
 // Most RxJS operators are not included in Angular's base Observable implementation.
 // The base implementation includes only what Angular itself requires.
@@ -37,9 +37,32 @@ export class BotHttpDataObservableService implements BotDataObservableService {
     constructor(private http: Http) {
     }
 
+    private static handleError (error: any) {
+        // In a real world app, we might use a remote logging infrastructure
+        // We'd also dig deeper into the error to get a better message
+        // Redirect to friendly error page?
+        const errMsg = (error.message) ? error.message :
+            error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+        console.error(errMsg); // log to console instead
+        return Observable.throw(errMsg);
+    }
+
+    private static extractData(res: Response) {
+        if (res.status < 200 || res.status >= 300) {
+            throw new Error('Bad response status: ' + res.status);
+        }
+        const body = res.json();
+
+        if (isObject(body)) { // vs // if (body !== undefined && body !== null) {
+            return body.data || {};
+        } else {
+            return {};
+        }
+    }
+
     getBots(): Observable<Bot[]> {
 
-        let headers = new Headers({
+        const headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
@@ -51,7 +74,7 @@ export class BotHttpDataObservableService implements BotDataObservableService {
 
     getBot(id: number): Observable<Bot> {
 
-        let headers = new Headers({
+        const headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
@@ -65,7 +88,7 @@ export class BotHttpDataObservableService implements BotDataObservableService {
 
     getBotByName(name: string): Observable<Bot[]> {
 
-        let headers = new Headers({
+        const headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
@@ -79,40 +102,17 @@ export class BotHttpDataObservableService implements BotDataObservableService {
 
     update(bot: Bot): Observable<Bot> {
 
-        let headers = new Headers({
+        const headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
         const url = `${this.botUrl}/${bot.id}`;
-        let body = JSON.stringify(bot);
-        let options = new RequestOptions({ headers: headers });
+        const body = JSON.stringify(bot);
+        const options = new RequestOptions({ headers: headers });
 
         return this.http.put(url, body, options)
             .map(BotHttpDataObservableService.extractData)
             .catch(BotHttpDataObservableService.handleError);
-    }
-
-    private static handleError (error: any) {
-        // In a real world app, we might use a remote logging infrastructure
-        // We'd also dig deeper into the error to get a better message
-        // Redirect to friendly error page?
-        let errMsg = (error.message) ? error.message :
-            error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-        console.error(errMsg); // log to console instead
-        return Observable.throw(errMsg);
-    }
-
-    private static extractData(res: Response) {
-        if (res.status < 200 || res.status >= 300) {
-            throw new Error('Bad response status: ' + res.status);
-        }
-        let body = res.json();
-
-        if (isObject(body)) { // vs // if (body !== undefined && body !== null) {
-            return body.data || {};
-        } else {
-            return {};
-        }
     }
 }

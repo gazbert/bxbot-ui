@@ -1,4 +1,4 @@
-import {Bot} from "./bot.model";
+import {Bot} from './bot.model';
 
 /**
  * Tests the Bot model behaves as expected.

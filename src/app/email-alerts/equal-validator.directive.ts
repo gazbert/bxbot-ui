@@ -27,10 +27,10 @@ export class EqualValidator implements Validator {
     validate(c: AbstractControl): { [key: string]: any } {
 
         // self value
-        let v = c.value;
+        const v = c.value;
 
         // control value
-        let e = c.root.get(this.validateEqual);
+        const e = c.root.get(this.validateEqual);
 
         // value not equal
         if (e && v !== e.value && !this.isReverse) {

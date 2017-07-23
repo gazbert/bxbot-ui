@@ -4,8 +4,8 @@
                placeholder="Search..."/>
     </div>
     <div id="dashboard-grid" class="grid grid-pad">
-        <bx-dashboard-item *ngFor="let bot of bots | async" class="col-1-4"
+        <app-bxbot-ui-dashboard-item *ngFor="let bot of bots | async" class="col-1-4"
                            [bot]=bot (selected)="gotoBotDetails($event)">
-        </bx-dashboard-item>
+        </app-bxbot-ui-dashboard-item>
     </div>
 </div>

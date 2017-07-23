@@ -12,7 +12,7 @@ export class InMemoryDataService implements InMemoryDbService {
         /**
          * The Bots.
          */
-        let bots = [
+        const bots = [
             {
                 id: 1,
                 name: 'Bitstamp',
@@ -64,7 +64,7 @@ export class InMemoryDataService implements InMemoryDbService {
          * The Exchange Adapters.
          * There is a 1-1 relationship with the bot - backend server will always set 'id' to the same as the Bot 'id'.
          */
-        let exchange_adapters = [
+        const exchange_adapters = [
             {
                 id: 1,
                 name: 'Bitstamp REST API Adapter',
@@ -215,7 +215,7 @@ export class InMemoryDataService implements InMemoryDbService {
          * The 'id' field is required because we cannot rely on the marketId being unique across different Exchanges -
          * it is often the same. e.g. btcusd
          */
-        let markets = [
+        const markets = [
             {
                 id: 'bitstamp_btc_usd',
                 botId: 1,
@@ -282,7 +282,7 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 'itbit_xbt_usd',
-                botId:4,
+                botId: 4,
                 marketId: 'XBTUSD',
                 name: 'XBT/USD',
                 enabled: false,
@@ -397,7 +397,7 @@ export class InMemoryDataService implements InMemoryDbService {
         /**
          * The Trading Strategies being executed.
          */
-        let trading_strategies = [
+        const trading_strategies = [
             {
                 id: 'btce_macd_rsi',
                 botId: 5,
@@ -502,7 +502,7 @@ export class InMemoryDataService implements InMemoryDbService {
          * The Email Alerts config for bots to send alert messages.
          * There is a 1-1 relationship with the bot - backend server will always set 'id' to the same as the Bot 'id'.
          */
-        let email_alerts = [
+        const email_alerts = [
             {
                 id: 1,
                 enabled: false,

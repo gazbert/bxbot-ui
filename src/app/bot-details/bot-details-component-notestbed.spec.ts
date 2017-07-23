@@ -1,7 +1,7 @@
 import {ActivatedRouteStub} from '../../testing';
 import {Bot} from '../model/bot';
 import {BotDetailsComponent} from './bot-details.component';
-import {Observable} from "rxjs/Observable";
+import {Observable} from 'rxjs/Observable';
 
 /**
  * Tests the behaviour of the Bot Details component is as expected.

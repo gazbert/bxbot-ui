@@ -1,8 +1,8 @@
-import {MockBackend, MockConnection} from "@angular/http/testing";
-import {HttpModule, Http, XHRBackend, Response, ResponseOptions} from "@angular/http";
-import {async, inject, TestBed} from "@angular/core/testing";
+import {MockBackend, MockConnection} from '@angular/http/testing';
+import {HttpModule, Http, XHRBackend, Response, ResponseOptions} from '@angular/http';
+import {async, inject, TestBed} from '@angular/core/testing';
 import {EmailAlertsHttpDataPromiseService as EmailAlertsDataService} from './email-alerts-http-data-promise.service';
-import {EmailAlertsConfig} from "./email-alerts.model";
+import {EmailAlertsConfig} from './email-alerts.model';
 
 /**
  * Tests the Email Alerts HTTP Data service (Promise flavour) using a mocked HTTP backend.
@@ -29,7 +29,7 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed + Mock HTTP back
 
     it('should instantiate service with "new"', inject([Http], (http: Http) => {
         expect(http).not.toBeNull('http should be provided');
-        let service = new EmailAlertsDataService(http);
+        const service = new EmailAlertsDataService(http);
         expect(service instanceof EmailAlertsDataService).toBe(true,
             'new service should be instance of EmailAlertsDataService');
     }));
@@ -50,7 +50,7 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed + Mock HTTP back
             backend = be;
             service = new EmailAlertsDataService(http);
             fakeEmailAlertsConfig = makeEmailAlertsData();
-            let options = new ResponseOptions({status: 200, body: {data: fakeEmailAlertsConfig}});
+            const options = new ResponseOptions({status: 200, body: {data: fakeEmailAlertsConfig}});
             response = new Response(options);
         }));
 
@@ -70,7 +70,7 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed + Mock HTTP back
         })));
 
         it('should handle returning no matching Email Alerts config', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 200, body: {undefined}}));
+            const resp = new Response(new ResponseOptions({status: 200, body: {undefined}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getEmailAlertsConfigByBotId(100) // unknown id
                 .then(emailAlertsConfig => expect(emailAlertsConfig).toBe(undefined, 'should have no Email Alerts config'));
@@ -92,7 +92,7 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed + Mock HTTP back
 
             backend = be;
             service = new EmailAlertsDataService(http);
-            let options = new ResponseOptions({status: 200, body: {data: updatedEmailAlertsConfig}});
+            const options = new ResponseOptions({status: 200, body: {data: updatedEmailAlertsConfig}});
             response = new Response(options);
         }));
 
@@ -109,7 +109,7 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed + Mock HTTP back
         })));
 
         it('should NOT return Email Alerts config for 401 response', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 401, body: {data: ['Bad request - unknown id']}}));
+            const resp = new Response(new ResponseOptions({status: 401, body: {data: ['Bad request - unknown id']}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.updateEmailAlertsConfig(updatedEmailAlertsConfig)
                 .then(emailAlertsConfig => expect(emailAlertsConfig.id).not.toBeDefined('should not have Email Alerts config'));

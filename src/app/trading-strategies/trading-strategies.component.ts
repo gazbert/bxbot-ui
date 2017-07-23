@@ -11,7 +11,7 @@ import {MarketHttpDataPromiseService} from '../model/market';
  * @author gazbert
  */
 @Component({
-    selector: 'bx-trading-strategies',
+    selector: 'app-bxbot-ui-trading-strategies',
     templateUrl: 'trading-strategies.component.html',
     styleUrls: ['trading-strategies.component.css']
 })
@@ -68,9 +68,9 @@ export class TradingStrategiesComponent implements OnInit {
     }
 
     getOtherStrategyNames(strategyId: string): string[] {
-        let tradingStrategyNames: string[] = [];
+        const tradingStrategyNames: string[] = [];
         for (let i = 0; i < this.tradingStrategies.length; i++) {
-            let tradingStrategy = this.tradingStrategies[i];
+            const tradingStrategy = this.tradingStrategies[i];
             if (tradingStrategy.id !== strategyId) { // excludes current strat name
                 tradingStrategyNames.push(tradingStrategy.name);
             }
@@ -86,7 +86,7 @@ export class TradingStrategiesComponent implements OnInit {
     deleteTradingStrategy(tradingStrategy: TradingStrategy): void {
         this.marketDataService.getAllMarketsForBotId(this.botId)
             .then((markets) => {
-                let marketsUsingTheStrategy = markets.filter(m => m.tradingStrategy.id === tradingStrategy.id);
+                const marketsUsingTheStrategy = markets.filter(m => m.tradingStrategy.id === tradingStrategy.id);
                 if (marketsUsingTheStrategy.length > 0) {
                     this.showCannotDeleteStrategyModal();
                 } else {
@@ -138,7 +138,7 @@ export class TradingStrategiesComponent implements OnInit {
     // Algo by @Broofa - http://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript/2117523#2117523
     createUuid() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            let r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+            const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
             return v.toString(16);
         });
     }

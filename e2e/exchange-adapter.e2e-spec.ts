@@ -27,7 +27,7 @@ describe('Exchange Adapter Tests', function () {
 
     it('should update Exchange Adapter fields after Save', function () {
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
 
@@ -102,7 +102,7 @@ describe('Exchange Adapter Tests', function () {
 
     it('should NOT update Exchange Adapter fields after Cancel', function () {
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
 
@@ -177,7 +177,7 @@ describe('Exchange Adapter Tests', function () {
 
     it('should add new Error Code and save it', function () {
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
 
@@ -223,7 +223,7 @@ describe('Exchange Adapter Tests', function () {
 
     it('should delete Error Code and save change', function () {
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
 
@@ -261,7 +261,7 @@ describe('Exchange Adapter Tests', function () {
 
     it('should add new Error Message and save it', function () {
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
 
@@ -307,7 +307,7 @@ describe('Exchange Adapter Tests', function () {
 
     it('should delete Error Message and save change', function () {
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
 
@@ -344,7 +344,7 @@ describe('Exchange Adapter Tests', function () {
 
     it('should NOT save Exchange Adapter fields if there are validation errors', function () {
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
 

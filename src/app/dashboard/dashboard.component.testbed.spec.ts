@@ -3,13 +3,13 @@ import {Router} from '@angular/router';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {DebugElement} from '@angular/core';
 import {Http} from '@angular/http';
-import {async, inject, tick, ComponentFixture, TestBed} from '@angular/core/testing';
+import {async, inject, ComponentFixture, TestBed} from '@angular/core/testing';
 import {Observable} from 'rxjs/Observable';
 import {DashboardComponent} from './dashboard.component';
 import {DashboardModule} from './dashboard.module';
 import {FakeBotDataObservableService} from '../model/bot/testing';
 import {BotHttpDataObservableService} from '../model/bot';
-import {SOME_FAKE_OBSERVABLE_BOTS} from "../model/bot/testing/fake-bot-data-observable.service";
+import {SOME_FAKE_OBSERVABLE_BOTS} from '../model/bot/testing/fake-bot-data-observable.service';
 
 /**
  * Tests the behaviour of the Dashboard component is as expected.
@@ -66,7 +66,7 @@ describe('DashboardComponent tests with TestBed (shallow)', () => {
     tests(clickForShallow);
 
     function clickForShallow() {
-        const dashboardItemElement = fixture.debugElement.query(By.css('bx-dashboard-item'));
+        const dashboardItemElement = fixture.debugElement.query(By.css('app-bxbot-ui-dashboard-item'));
         // Triggers event to select the first <bx-dashboard-item> DebugElement
         dashboardItemElement.triggerEventHandler('selected', SOME_FAKE_OBSERVABLE_BOTS[BITSTAMP_BOT]);
     }
@@ -143,7 +143,7 @@ function tests(botClick: Function) {
         it('should display 3 Bot items', () => {
             // Find and examine the displayed bots
             // Look for them in the DOM by css class
-            const bots = fixture.debugElement.queryAll(By.css('bx-dashboard-item'));
+            const bots = fixture.debugElement.queryAll(By.css('app-bxbot-ui-dashboard-item'));
             expect(bots.length).toBe(3, 'should display 3 Bot items');
         });
 

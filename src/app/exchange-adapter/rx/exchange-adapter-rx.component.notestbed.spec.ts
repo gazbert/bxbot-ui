@@ -54,8 +54,8 @@ describe('ExchangeAdapterRxComponent tests without TestBed', () => {
         expectedExchangeAdapter = new ExchangeAdapter('btce', 'BTC-e v2 API Adapter', 'com.gazbert.bxbot.adapter.BtceExchangeAdapter',
             1, expectedNetworkConfig);
 
-        expectedUpdatedExchangeAdapter = new ExchangeAdapter('btce', 'BTC-e v3 API Adapter', 'com.gazbert.bxbot.adapter.NewBtceExchangeAdapter',
-            2, expectedNetworkConfig);
+        expectedUpdatedExchangeAdapter = new ExchangeAdapter('btce', 'BTC-e v3 API Adapter',
+            'com.gazbert.bxbot.adapter.NewBtceExchangeAdapter', 2, expectedNetworkConfig);
 
         activatedRoute = new ActivatedRouteStub();
         activatedRoute.testParams = {id: expectedExchangeAdapter.id};

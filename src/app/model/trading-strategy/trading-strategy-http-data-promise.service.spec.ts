@@ -1,8 +1,8 @@
-import {MockBackend, MockConnection} from "@angular/http/testing";
-import {HttpModule, Http, XHRBackend, Response, ResponseOptions} from "@angular/http";
-import {async, inject, TestBed} from "@angular/core/testing";
+import {MockBackend, MockConnection} from '@angular/http/testing';
+import {HttpModule, Http, XHRBackend, Response, ResponseOptions} from '@angular/http';
+import {async, inject, TestBed} from '@angular/core/testing';
 import {TradingStrategyHttpDataPromiseService as TradingStrategyDataService} from './trading-strategy-http-data-promise.service';
-import {TradingStrategy} from "../trading-strategy";
+import {TradingStrategy} from '../trading-strategy';
 
 /**
  * Tests the Trading Strategy HTTP Data service (Promise flavour) using a mocked HTTP backend.
@@ -28,7 +28,7 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
 
     it('should instantiate service with "new"', inject([Http], (http: Http) => {
         expect(http).not.toBeNull('http should be provided');
-        let service = new TradingStrategyDataService(http);
+        const service = new TradingStrategyDataService(http);
         expect(service instanceof TradingStrategyDataService).toBe(true,
             'new service should be instance of TradingStrategyDataService');
     }));
@@ -49,7 +49,7 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
             backend = be;
             service = new TradingStrategyDataService(http);
             fakeTradingStrategies = makeTradingStrategyData();
-            let options = new ResponseOptions({status: 200, body: {data: fakeTradingStrategies}});
+            const options = new ResponseOptions({status: 200, body: {data: fakeTradingStrategies}});
             response = new Response(options);
         }));
 
@@ -60,7 +60,7 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
         })));
 
         it('should handle returning no matching Trading Strategies', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
+            const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getAllTradingStrategiesForBotId(100) // unknown id
                 .then(tradingStrategies => expect(tradingStrategies.length).toBe(0, 'should have no Trading Strategies'));
@@ -82,7 +82,7 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
 
             backend = be;
             service = new TradingStrategyDataService(http);
-            let options = new ResponseOptions({status: 200, body: {data: updatedTradingStrategy}});
+            const options = new ResponseOptions({status: 200, body: {data: updatedTradingStrategy}});
             response = new Response(options);
         }));
 
@@ -100,7 +100,7 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
         })));
 
         it('should NOT return Market for 401 response', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 401, body: {data: ['Bad request - unknown id']}}));
+            const resp = new Response(new ResponseOptions({status: 401, body: {data: ['Bad request - unknown id']}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.updateTradingStrategy(updatedTradingStrategy)
                 .then(tradingStrategy => expect(tradingStrategy.id).not.toBeDefined('should have no Trading Strategy'));
@@ -116,7 +116,7 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
             backend = be;
             service = new TradingStrategyDataService(http);
-            let options = new ResponseOptions({status: 200});
+            const options = new ResponseOptions({status: 200});
             response = new Response(options);
         }));
 
@@ -127,7 +127,7 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
         })));
 
         it('should return status response of \'false\' if NOT successful', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 401}));
+            const resp = new Response(new ResponseOptions({status: 401}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.deleteTradingStrategyById('unknown')
                 .then(status => expect(status).toBe(false));

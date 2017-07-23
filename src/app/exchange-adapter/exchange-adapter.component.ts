@@ -2,7 +2,7 @@ import {OnInit, Component, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {ExchangeAdapter} from '../model/exchange-adapter';
-import {ExchangeAdapterHttpDataPromiseService} from "../model/exchange-adapter/promise";
+import {ExchangeAdapterHttpDataPromiseService} from '../model/exchange-adapter/promise';
 
 /**
  * Template-driven version of the Exchange Adapter form.
@@ -10,7 +10,7 @@ import {ExchangeAdapterHttpDataPromiseService} from "../model/exchange-adapter/p
  * @author gazbert
  */
 @Component({
-    selector: 'bx-exchange-adapter',
+    selector: 'app-bxbot-ui-exchange-adapter',
     templateUrl: 'exchange-adapter.component.html',
     styleUrls: ['exchange-adapter.component.css']
 })
@@ -54,7 +54,7 @@ export class ExchangeAdapterComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
-            let botId = params['id'];
+            const botId = params['id'];
             this.exchangeAdapterDataService.getExchangeAdapterByBotId(botId)
                 .then(exchangeAdapter => {
                     this.exchangeAdapter = exchangeAdapter;

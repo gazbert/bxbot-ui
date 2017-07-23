@@ -20,7 +20,7 @@ export class DuplicateNameValidatorDirective implements Validator, OnChanges {
         if (change) {
             // TODO - for some reason this is a ',' de-limited string instead of an array of string :-/
             const strategyNames = change.currentValue;
-            let stratNameStringArray = strategyNames.split(',');
+            const stratNameStringArray = strategyNames.split(',');
             this.validator = duplicateNameValidator(stratNameStringArray);
         } else {
             this.validator = Validators.nullValidator;
@@ -39,7 +39,7 @@ export function duplicateNameValidator(strategyNames: string[]): ValidatorFn {
         let isDuplicate;
 
         for (let i = 0; i < strategyNames.length; i++) {
-            let strategyName = strategyNames[i];
+            const strategyName = strategyNames[i];
             if (strategyName === inputName) {
                 isDuplicate = true;
                 break;

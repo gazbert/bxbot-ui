@@ -25,7 +25,7 @@ describe('Email Alerts Config Tests', function () {
 
     it('should update Email Alerts fields after Save', function () {
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(2).click();
         expect(element(by.css('h2')).getText()).toEqual('Gemini Details');
 
@@ -88,7 +88,7 @@ describe('Email Alerts Config Tests', function () {
 
     it('should NOT update Email Alerts fields after Cancel', function () {
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(2).click();
         expect(element(by.css('h2')).getText()).toEqual('Gemini Details');
 
@@ -151,7 +151,7 @@ describe('Email Alerts Config Tests', function () {
 
     it('should NOT save Email Alerts config fields if there are validation errors', function () {
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(2).click();
         expect(element(by.css('h2')).getText()).toEqual('Gemini Details');
 

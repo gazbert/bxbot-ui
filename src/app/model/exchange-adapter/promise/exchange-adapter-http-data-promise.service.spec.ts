@@ -1,8 +1,8 @@
-import {MockBackend, MockConnection} from "@angular/http/testing";
-import {HttpModule, Http, XHRBackend, Response, ResponseOptions} from "@angular/http";
-import {async, inject, TestBed} from "@angular/core/testing";
-import {ExchangeAdapterHttpDataPromiseService as ExchangeAdapterDataService} from "./exchange-adapter-http-data-promise.service";
-import {ExchangeAdapter, NetworkConfig} from "../exchange-adapter.model";
+import {MockBackend, MockConnection} from '@angular/http/testing';
+import {HttpModule, Http, XHRBackend, Response, ResponseOptions} from '@angular/http';
+import {async, inject, TestBed} from '@angular/core/testing';
+import {ExchangeAdapterHttpDataPromiseService as ExchangeAdapterDataService} from './exchange-adapter-http-data-promise.service';
+import {ExchangeAdapter, NetworkConfig} from '../exchange-adapter.model';
 
 /**
  * Tests the Exchange Adapter HTTP Data service (Promise flavour) using a Mock HTTP backend.
@@ -28,7 +28,7 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
 
     it('should instantiate service with "new"', inject([Http], (http: Http) => {
         expect(http).not.toBeNull('http should be provided');
-        let service = new ExchangeAdapterDataService(http);
+        const service = new ExchangeAdapterDataService(http);
         expect(service instanceof ExchangeAdapterDataService).toBe(true,
             'new service should be instance of ExchangeAdapterDataService');
     }));
@@ -49,7 +49,7 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
             backend = mockBackend;
             service = new ExchangeAdapterDataService(http);
             fakeExchangeAdapters = makeExchangeAdapterData();
-            let options = new ResponseOptions({status: 200, body: {data: fakeExchangeAdapters}});
+            const options = new ResponseOptions({status: 200, body: {data: fakeExchangeAdapters}});
             response = new Response(options);
         }));
 
@@ -68,7 +68,7 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
         })));
 
         it('should handle returning no Exchange Adapters', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
+            const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getExchangeAdapters()
                 .then(exchangeAdapters => expect(exchangeAdapters.length).toBe(0, 'should have no Exchange Adapters'));
@@ -87,7 +87,7 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
             backend = mockBackend;
             service = new ExchangeAdapterDataService(http);
             fakeExchangeAdapters = makeExchangeAdapterData();
-            let options = new ResponseOptions({status: 200, body: {data: fakeExchangeAdapters[GDAX_EXCHANGE]}});
+            const options = new ResponseOptions({status: 200, body: {data: fakeExchangeAdapters[GDAX_EXCHANGE]}});
             response = new Response(options);
         }));
 
@@ -108,19 +108,19 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
 
                     expect(exchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(3);
                     expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[0]).toBe(
-                        "Connection reset"
+                        'Connection reset'
                     );
                     expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[1]).toBe(
-                        "Connection refused"
+                        'Connection refused'
                     );
                     expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[2]).toBe(
-                        "Remote host closed connection during handshake"
+                        'Remote host closed connection during handshake'
                     );
                 });
         })));
 
         xit('should handle returning no Bot Adapter', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
+            const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getExchangeAdapterByBotId(100) // unknown id
                 .then(exchangeAdapter => expect(exchangeAdapter.id).not.toBeDefined('should have no Exchange Adapter'));
@@ -145,15 +145,15 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
                         506,
                     ],
                     [
-                        "Connection reset again!",
-                        "Connection refused again!",
-                        "Remote host closed connection during handshake again!"
+                        'Connection reset again!',
+                        'Connection refused again!',
+                        'Remote host closed connection during handshake again!'
                     ]
                 ));
 
             backend = mockBackend;
             service = new ExchangeAdapterDataService(http);
-            let options = new ResponseOptions({status: 200, body: {data: updatedExchangeAdapter}});
+            const options = new ResponseOptions({status: 200, body: {data: updatedExchangeAdapter}});
             response = new Response(options);
         }));
 
@@ -171,7 +171,7 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
         })));
 
         it('should NOT return Bot Adapter for 401 response', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 401, body: {data: ['Bad request - unknown id']}}));
+            const resp = new Response(new ResponseOptions({status: 401, body: {data: ['Bad request - unknown id']}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.update(updatedExchangeAdapter)
                 .then(exchangeAdapter => expect(exchangeAdapter.id).not.toBeDefined('should have no Exchange Adapter'));
@@ -188,9 +188,9 @@ const makeExchangeAdapterData = () => [
                 503,
             ],
             [
-                "Connection reset",
-                "Connection refused",
-                "Remote host closed connection during handshake"
+                'Connection reset',
+                'Connection refused',
+                'Remote host closed connection during handshake'
             ]
         )),
     new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter', 2,
@@ -201,9 +201,9 @@ const makeExchangeAdapterData = () => [
                 522,
             ],
             [
-                "Connection reset",
-                "Connection refused",
-                "Remote host closed connection during handshake"
+                'Connection reset',
+                'Connection refused',
+                'Remote host closed connection during handshake'
             ]
         )),
     new ExchangeAdapter('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter', 3,
@@ -214,9 +214,9 @@ const makeExchangeAdapterData = () => [
                 522,
             ],
             [
-                "Connection reset",
-                "Connection refused",
-                "Remote host closed connection during handshake"
+                'Connection reset',
+                'Connection refused',
+                'Remote host closed connection during handshake'
             ]
         ))
 ] as ExchangeAdapter[];

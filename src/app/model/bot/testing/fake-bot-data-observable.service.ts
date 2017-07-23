@@ -1,5 +1,5 @@
-import {BotHttpDataObservableService} from "../bot-http-data-observable.service";
-import {Bot} from "../bot.model";
+import {BotHttpDataObservableService} from '../bot-http-data-observable.service';
+import {Bot} from '../bot.model';
 import {Observable} from 'rxjs/Observable';
 
 /**
@@ -24,7 +24,7 @@ export class FakeBotDataObservableService extends BotHttpDataObservableService {
     }
 
     getBot(id: number): Observable<Bot> {
-        let bot = this.bots.find(e => e.id === id);
+        const bot = this.bots.find(e => e.id === id);
         return Observable.create(observer => {
             observer.next(bot);
             // call complete if you want to close this stream (like a promise)
@@ -33,7 +33,7 @@ export class FakeBotDataObservableService extends BotHttpDataObservableService {
     }
 
     getBotByName(name: string): Observable<Bot[]> {
-        let bot = this.bots.find(e => e.name === name);
+        const bot = this.bots.find(e => e.name === name);
         return Observable.create(observer => {
             observer.next(bot);
             // call complete if you want to close this stream (like a promise)

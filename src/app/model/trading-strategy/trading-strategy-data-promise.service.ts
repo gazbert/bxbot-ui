@@ -1,5 +1,5 @@
-import "rxjs/add/operator/toPromise";
-import {TradingStrategy} from "./trading-strategy.model";
+import 'rxjs/add/operator/toPromise';
+import {TradingStrategy} from './trading-strategy.model';
 
 /**
  * The Trading Strategy Data Service provides operations to update Trading Strategy configuration.

@@ -1,12 +1,12 @@
 import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
-import {ReactiveFormsModule, FormsModule} from "@angular/forms";
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {By} from '@angular/platform-browser';
 import {DebugElement} from '@angular/core';
 import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {ActivatedRoute, ActivatedRouteStub, click, newEvent, Router, RouterStub} from '../../../testing';
-import {FakeExchangeAdapterDataObservableService, SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS} from "../../model/exchange-adapter/testing";
-import {SharedModule} from "../../shared/shared.module";
+import {FakeExchangeAdapterDataObservableService, SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS} from '../../model/exchange-adapter/testing';
+import {SharedModule} from '../../shared/shared.module';
 import {
     ExchangeAdapter,
     NetworkConfig,
@@ -14,7 +14,7 @@ import {
 } from '../../model/exchange-adapter';
 import {ExchangeAdapterModule} from '../exchange-adapter.module';
 import {ExchangeAdapterRxComponent} from './exchange-adapter-rx.component';
-import {ExchangeAdapterDataObservableService} from "../../model/exchange-adapter";
+import {ExchangeAdapterDataObservableService} from '../../model/exchange-adapter';
 
 
 /**

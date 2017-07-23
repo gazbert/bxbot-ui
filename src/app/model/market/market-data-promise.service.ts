@@ -1,5 +1,5 @@
-import "rxjs/add/operator/toPromise";
-import {Market} from "./market.model";
+import 'rxjs/add/operator/toPromise';
+import {Market} from './market.model';
 
 /**
  * The Market Data Service provides operations to update Market configuration.

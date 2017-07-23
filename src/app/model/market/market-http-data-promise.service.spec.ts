@@ -1,9 +1,9 @@
-import {MockBackend, MockConnection} from "@angular/http/testing";
-import {HttpModule, Http, XHRBackend, Response, ResponseOptions} from "@angular/http";
-import {async, inject, TestBed} from "@angular/core/testing";
-import {MarketHttpDataPromiseService as MarketDataService} from "./market-http-data-promise.service";
-import {TradingStrategy} from "../trading-strategy";
-import {Market} from "./market.model";
+import {MockBackend, MockConnection} from '@angular/http/testing';
+import {HttpModule, Http, XHRBackend, Response, ResponseOptions} from '@angular/http';
+import {async, inject, TestBed} from '@angular/core/testing';
+import {MarketHttpDataPromiseService as MarketDataService} from './market-http-data-promise.service';
+import {TradingStrategy} from '../trading-strategy';
+import {Market} from './market.model';
 
 /**
  * Tests the Market HTTP Data service (Promise flavour) using a mocked HTTP backend.
@@ -29,7 +29,7 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
 
     it('should instantiate service with "new"', inject([Http], (http: Http) => {
         expect(http).not.toBeNull('http should be provided');
-        let service = new MarketDataService(http);
+        const service = new MarketDataService(http);
         expect(service instanceof MarketDataService).toBe(true,
             'new service should be instance of MarketDataService');
     }));
@@ -50,7 +50,7 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
             backend = be;
             service = new MarketDataService(http);
             fakeMarkets = makeMarketData();
-            let options = new ResponseOptions({status: 200, body: {data: fakeMarkets}});
+            const options = new ResponseOptions({status: 200, body: {data: fakeMarkets}});
             response = new Response(options);
         }));
 
@@ -67,7 +67,7 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
         })));
 
         it('should handle returning no matching Markets', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
+            const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getAllMarketsForBotId(100) // unknown id
                 .then(markets => expect(markets.length).toBe(0, 'should have no Markets'));
@@ -90,7 +90,7 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
 
             backend = be;
             service = new MarketDataService(http);
-            let options = new ResponseOptions({status: 200, body: {data: updatedMarket}});
+            const options = new ResponseOptions({status: 200, body: {data: updatedMarket}});
             response = new Response(options);
         }));
 
@@ -108,7 +108,7 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
         })));
 
         it('should NOT return Market for 401 response', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 401, body: {data: ['Bad request - unknown id']}}));
+            const resp = new Response(new ResponseOptions({status: 401, body: {data: ['Bad request - unknown id']}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.updateMarket(updatedMarket)
                 .then(market => expect(market.id).not.toBeDefined('should have no Market'));
@@ -124,7 +124,7 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
             backend = be;
             service = new MarketDataService(http);
-            let options = new ResponseOptions({status: 200});
+            const options = new ResponseOptions({status: 200});
             response = new Response(options);
         }));
 
@@ -135,7 +135,7 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
         })));
 
         it('should return status response of \'false\' if NOT successful', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 401}));
+            const resp = new Response(new ResponseOptions({status: 401}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.deleteMarketById('unknown')
                 .then(status => expect(status).toBe(false));

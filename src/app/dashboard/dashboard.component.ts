@@ -1,8 +1,8 @@
-import {Router} from "@angular/router";
-import {Component, OnInit} from "@angular/core";
+import {Router} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
-import {Bot, BotHttpDataObservableService} from "../model/bot";
+import {Bot, BotHttpDataObservableService} from '../model/bot';
 
 // Most RxJS operators are not included in Angular's base Observable implementation.
 // The base implementation includes only what Angular itself requires.
@@ -26,7 +26,7 @@ import 'rxjs/add/operator/startWith';
  * @author gazbert
  */
 @Component({
-    selector: 'bx-dashboard',
+    selector: 'app-bxbot-ui-dashboard',
     templateUrl: 'dashboard.component.html',
     styleUrls: ['dashboard.component.css']
 })
@@ -87,8 +87,8 @@ export class DashboardComponent implements OnInit {
             .catch(error => {
                 // TODO - Show meaningful error to user? Redirect to friendly error page?
                 this.errorMessage = error;
-                console.log("TODO - Barf! : " + error);
-                this.router.navigateByUrl("/login").then();
+                console.log('TODO - Barf! : ' + error);
+                this.router.navigateByUrl('/login').then();
                 return Observable.of<Bot[]>([]);
             });
     }
@@ -107,7 +107,7 @@ export class DashboardComponent implements OnInit {
         // let link = ['/bot', bot.id];
         // this.router.navigate(link);
 
-        let url = `/bot/${bot.id}`;
+        const url = `/bot/${bot.id}`;
         this.router.navigateByUrl(url);
     }
 }

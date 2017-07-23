@@ -30,9 +30,14 @@ export class ExchangeAdapterHttpDataPromiseService implements ExchangeAdapterDat
     constructor(private http: Http) {
     }
 
+    private static handleError(error: any): Promise<any> {
+        console.error('An error occurred', error); // for demo purposes only
+        return Promise.reject(error.message || error);
+    }
+
     getExchangeAdapters(): Promise<ExchangeAdapter[]> {
 
-        let headers = new Headers({
+        const headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
@@ -54,7 +59,7 @@ export class ExchangeAdapterHttpDataPromiseService implements ExchangeAdapterDat
 
     update(exchangeAdapter: ExchangeAdapter): Promise<ExchangeAdapter> {
 
-        let headers = new Headers({
+        const headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
@@ -65,10 +70,5 @@ export class ExchangeAdapterHttpDataPromiseService implements ExchangeAdapterDat
             .toPromise()
             .then(response => response.json().data as ExchangeAdapter)
             .catch(ExchangeAdapterHttpDataPromiseService.handleError);
-    }
-
-    private static handleError(error: any): Promise<any> {
-        console.error('An error occurred', error); // for demo purposes only
-        return Promise.reject(error.message || error);
     }
 }

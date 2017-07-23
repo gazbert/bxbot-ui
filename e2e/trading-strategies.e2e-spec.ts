@@ -25,7 +25,7 @@ describe('Trading Strategy Tests', function () {
 
     it('should update Trading Strategy fields after Save', function () {
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
 
@@ -86,7 +86,7 @@ describe('Trading Strategy Tests', function () {
 
     it('should NOT update Trading Strategy fields after Cancel', function () {
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
 
@@ -149,7 +149,7 @@ describe('Trading Strategy Tests', function () {
 
     it('should add new Trading Strategy and save it', function () {
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
 
@@ -220,7 +220,7 @@ describe('Trading Strategy Tests', function () {
 
     it('should delete Trading Strategy and save change', function () {
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
 
@@ -266,7 +266,7 @@ describe('Trading Strategy Tests', function () {
 
     it('should NOT delete Trading Strategy if currently being used by a Market', function () {
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
 
@@ -316,7 +316,7 @@ describe('Trading Strategy Tests', function () {
 
     it('should NOT save Trading Strategy fields if there are validation errors', function () {
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
 
@@ -381,7 +381,7 @@ describe('Trading Strategy Tests', function () {
 
     it('should NOT save new Trading Strategy when Strategy Name already in use', function () {
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
 

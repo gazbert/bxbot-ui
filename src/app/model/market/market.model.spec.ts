@@ -1,5 +1,5 @@
-import {Market} from "./market.model";
-import {TradingStrategy} from "../trading-strategy/trading-strategy.model";
+import {Market} from './market.model';
+import {TradingStrategy} from '../trading-strategy/trading-strategy.model';
 
 /**
  * Tests the Market model behaves as expected.

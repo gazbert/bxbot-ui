@@ -1,6 +1,6 @@
-import {Component, OnInit} from "@angular/core";
-import {Router} from "@angular/router";
-import {AuthenticationService} from "../shared";
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {AuthenticationService} from '../shared';
 
 /**
  * Login component backs the login screen.

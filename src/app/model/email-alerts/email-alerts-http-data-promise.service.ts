@@ -1,8 +1,8 @@
-import {Injectable} from "@angular/core";
-import {Http, Headers} from "@angular/http";
-import {AppComponent} from "../../app.component";
-import {EmailAlertsConfig} from "./email-alerts.model";
-import {EmailAlertsDataPromiseService} from "./email-alerts-data-promise.service";
+import {Injectable} from '@angular/core';
+import {Http, Headers} from '@angular/http';
+import {AppComponent} from '../../app.component';
+import {EmailAlertsConfig} from './email-alerts.model';
+import {EmailAlertsDataPromiseService} from './email-alerts-data-promise.service';
 
 // Don't forget this else you get runtime error:
 // zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function
@@ -30,6 +30,11 @@ export class EmailAlertsHttpDataPromiseService implements EmailAlertsDataPromise
     constructor(private http: Http) {
     }
 
+    private static handleError(error: any): Promise<any> {
+        console.error('An error occurred', error); // for demo purposes only
+        return Promise.reject(error.message || error);
+    }
+
     getEmailAlertsConfigByBotId(botId: number): Promise<EmailAlertsConfig> {
         const url = this.emailAlertsUrl + '/' + botId;
         return this.http.get(url)
@@ -45,10 +50,5 @@ export class EmailAlertsHttpDataPromiseService implements EmailAlertsDataPromise
             .toPromise()
             .then(response => response.json().data as EmailAlertsConfig)
             .catch(EmailAlertsHttpDataPromiseService.handleError);
-    }
-
-    private static handleError(error: any): Promise<any> {
-        console.error('An error occurred', error); // for demo purposes only
-        return Promise.reject(error.message || error);
     }
 }

@@ -1,18 +1,18 @@
-import {MockBackend, MockConnection} from "@angular/http/testing";
-import {HttpModule, Http, XHRBackend, Response, ResponseOptions} from "@angular/http";
-import {async, inject, TestBed} from "@angular/core/testing";
-import {Bot} from "./bot.model";
-import {BotHttpDataObservableService as BotDataService} from "./bot-http-data-observable.service";
-import {Observable} from "rxjs/Observable";
+import {MockBackend, MockConnection} from '@angular/http/testing';
+import {HttpModule, Http, XHRBackend, Response, ResponseOptions} from '@angular/http';
+import {async, inject, TestBed} from '@angular/core/testing';
+import {Bot} from './bot.model';
+import {BotHttpDataObservableService as BotDataService} from './bot-http-data-observable.service';
+import {Observable} from 'rxjs/Observable';
 
 // Most RxJS operators are not included in Angular's base Observable implementation.
 // The base implementation includes only what Angular itself requires.
 // If you want more RxJS features, you need to explicitly import rxjs operators, else you get runtime error, e.g.
 // 'Failed: this.http.put(...).map is not a function'
-import "rxjs/add/observable/throw";
-import "rxjs/add/operator/do";
-import "rxjs/add/operator/catch";
-import "rxjs/add/operator/map";
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 
 /**
  * Tests the Bot HTTP Data Service (Observables) using a mocked HTTP backend.
@@ -40,7 +40,7 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
 
     it('should instantiate service with "new"', inject([Http], (http: Http) => {
         expect(http).not.toBeNull('http should be provided');
-        let service = new BotDataService(http);
+        const service = new BotDataService(http);
         expect(service instanceof BotDataService).toBe(true,
             'new service should be instance of BotDataService');
     }));
@@ -61,7 +61,7 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
             backend = be;
             service = new BotDataService(http);
             fakeBots = makeBotData();
-            let options = new ResponseOptions({status: 200, body: {data: fakeBots}});
+            const options = new ResponseOptions({status: 200, body: {data: fakeBots}});
             response = new Response(options);
         }));
 
@@ -77,19 +77,19 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
                     expect(bots[1].id).toBe(2);
                     expect(bots[2].id).toBe(3);
                 });
-            //.toPromise();
+            // .toPromise();
         })));
 
         it('should handle returning no Bots', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
+            const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getBots()
                 .subscribe(bots => expect(bots.length).toBe(0, 'should have no Bots'));
-            //.toPromise();
+            // .toPromise();
         })));
 
         it('should treat 404 as an Observable error', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 404}));
+            const resp = new Response(new ResponseOptions({status: 404}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getBots()
                 .do(() => {
@@ -99,7 +99,7 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
                     expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
                     return Observable.of(null); // failure is the expected test result
                 });
-            //.toPromise();
+            // .toPromise();
         })));
     });
 
@@ -115,7 +115,7 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
             backend = be;
             service = new BotDataService(http);
             fakeBots = makeBotData();
-            let options = new ResponseOptions({status: 200, body: {data: fakeBots[GDAX_BOT]}});
+            const options = new ResponseOptions({status: 200, body: {data: fakeBots[GDAX_BOT]}});
             response = new Response(options);
         }));
 
@@ -127,19 +127,19 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
                     expect(bot.name).toBe('GDAX');
                     expect(bot.status).toBe('Stopped');
                 });
-            //.toPromise();
+            // .toPromise();
         })));
 
         it('should handle returning no Bot', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
+            const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getBot(100) // unknown id!
                 .subscribe(bot => expect(bot.id).not.toBeDefined('should have no Bot'));
-            //.toPromise();
+            // .toPromise();
         })));
 
         it('should treat 404 as an Observable error', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 404}));
+            const resp = new Response(new ResponseOptions({status: 404}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getBot(100) // unknown id!
                 .do(() => {
@@ -149,7 +149,7 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
                     expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
                     return Observable.of(null); // failure is the expected test result
                 });
-            //.toPromise();
+            // .toPromise();
         })));
     });
 
@@ -166,7 +166,7 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
 
             backend = be;
             service = new BotDataService(http);
-            let options = new ResponseOptions({status: 200, body: {data: updatedBot}});
+            const options = new ResponseOptions({status: 200, body: {data: updatedBot}});
             response = new Response(options);
         }));
 
@@ -181,11 +181,11 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
                     expect(bot.name).toBe('Bitstamp v2');
                     expect(bot.status).toBe('Stopped');
                 });
-            //.toPromise();
+            // .toPromise();
         })));
 
         it('should NOT return Bot for 401 response', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 401}));
+            const resp = new Response(new ResponseOptions({status: 401}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.update(updatedBot)
                 .do(() => {
@@ -195,11 +195,11 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
                     expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
                     return Observable.of(null); // failure is the expected test result
                 });
-            //.toPromise();
+            // .toPromise();
         })));
 
         it('should treat 404 as an Observable error', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 404}));
+            const resp = new Response(new ResponseOptions({status: 404}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.update(updatedBot)
                 .do(() => {
@@ -209,7 +209,7 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
                     expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
                     return Observable.of(null); // failure is the expected test result
                 });
-            //.toPromise();
+            // .toPromise();
         })));
     });
 
@@ -225,7 +225,7 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
             backend = be;
             service = new BotDataService(http);
             fakeBots = makeBotData();
-            let options = new ResponseOptions({status: 200, body: {data: fakeBots[GDAX_BOT]}});
+            const options = new ResponseOptions({status: 200, body: {data: fakeBots[GDAX_BOT]}});
             response = new Response(options);
         }));
 
@@ -239,7 +239,7 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
         // })));
 
         xit('should handle returning no Bot', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
+            const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getBotByName('unknown')
                 .subscribe(bot => expect(bot).not.toBeDefined('should have no Bot'));
@@ -247,7 +247,7 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
         })));
 
         it('should treat 404 as an Observable error', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 404}));
+            const resp = new Response(new ResponseOptions({status: 404}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getBotByName('unknown')
                 .do(() => {
@@ -257,7 +257,7 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
                     expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
                     return Observable.of(null); // failure is the expected test result
                 });
-            //.toPromise();
+            // .toPromise();
         })));
     });
 });

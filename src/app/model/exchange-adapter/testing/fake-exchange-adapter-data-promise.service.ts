@@ -1,5 +1,5 @@
-import {ExchangeAdapter, NetworkConfig} from "../exchange-adapter.model";
-import {ExchangeAdapterHttpDataPromiseService} from "../../exchange-adapter/promise";
+import {ExchangeAdapter, NetworkConfig} from '../exchange-adapter.model';
+import {ExchangeAdapterHttpDataPromiseService} from '../../exchange-adapter/promise';
 
 /**
  * Fake Exchange Adapter data service (Promise flavour) backend for testing.
@@ -16,7 +16,7 @@ export class FakeExchangeAdapterDataPromiseService extends ExchangeAdapterHttpDa
     }
 
     getExchangeAdapterByBotId(id: number) {
-        let exchangeAdapter = this.exchangeAdapters.find(e => e.botId === id);
+        const exchangeAdapter = this.exchangeAdapters.find(e => e.botId === id);
         return this.lastPromise = Promise.resolve(exchangeAdapter);
     }
 
@@ -38,9 +38,9 @@ export const SOME_FAKE_PROMISE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
                 522,
             ],
             [
-                "Connection reset",
-                "Connection refused",
-                "Remote host closed connection during handshake"
+                'Connection reset',
+                'Connection refused',
+                'Remote host closed connection during handshake'
             ]
         )),
     new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter', 2,
@@ -51,9 +51,9 @@ export const SOME_FAKE_PROMISE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
                 522,
             ],
             [
-                "Connection reset",
-                "Connection refused",
-                "Remote host closed connection during handshake"
+                'Connection reset',
+                'Connection refused',
+                'Remote host closed connection during handshake'
             ]
         )),
     new ExchangeAdapter('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter', 3,
@@ -64,9 +64,9 @@ export const SOME_FAKE_PROMISE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
                 522,
             ],
             [
-                "Connection reset",
-                "Connection refused",
-                "Remote host closed connection during handshake"
+                'Connection reset',
+                'Connection refused',
+                'Remote host closed connection during handshake'
             ]
         ))
 ];

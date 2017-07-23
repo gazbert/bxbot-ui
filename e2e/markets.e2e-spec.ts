@@ -25,7 +25,7 @@ describe('Market Screen Tests', function () {
 
     it('should update Market fields after Save', function () {
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(4).click();
         expect(element(by.css('h2')).getText()).toEqual('BTC-e Details');
 
@@ -104,7 +104,7 @@ describe('Market Screen Tests', function () {
 
     it('should NOT update Market fields after Cancel', function () {
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(4).click();
         expect(element(by.css('h2')).getText()).toEqual('BTC-e Details');
 
@@ -175,7 +175,7 @@ describe('Market Screen Tests', function () {
 
     it('should add new Market and save it', function () {
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(4).click();
         expect(element(by.css('h2')).getText()).toEqual('BTC-e Details');
 
@@ -264,7 +264,7 @@ describe('Market Screen Tests', function () {
 
     it('should delete Market and save change', function () {
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(4).click();
         expect(element(by.css('h2')).getText()).toEqual('BTC-e Details');
 
@@ -312,7 +312,7 @@ describe('Market Screen Tests', function () {
 
     it('should NOT save Market fields if there are validation errors', function () {
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(4).click();
         expect(element(by.css('h2')).getText()).toEqual('BTC-e Details');
 
@@ -384,7 +384,7 @@ describe('Market Screen Tests', function () {
 
     it('should NOT save new Market when Market Name already in use', function () {
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(4).click();
         expect(element(by.css('h2')).getText()).toEqual('BTC-e Details');
 

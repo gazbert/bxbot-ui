@@ -1,6 +1,6 @@
-import "rxjs/add/operator/toPromise";
-import {Observable} from "rxjs";
-import {Bot} from "./bot.model";
+import 'rxjs/add/operator/toPromise';
+import {Observable} from 'rxjs';
+import {Bot} from './bot.model';
 
 /**
  * The Bot Data Service provides operations to fetch Bot metadata and status details.

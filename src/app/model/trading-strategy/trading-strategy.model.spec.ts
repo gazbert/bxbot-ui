@@ -1,4 +1,4 @@
-import {TradingStrategy} from "./trading-strategy.model";
+import {TradingStrategy} from './trading-strategy.model';
 
 /**
  * Tests the Trading Strategy model behaves as expected.

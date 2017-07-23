@@ -1,18 +1,18 @@
-import {MockBackend, MockConnection} from "@angular/http/testing";
-import {HttpModule, Http, XHRBackend, Response, ResponseOptions} from "@angular/http";
-import {async, inject, TestBed} from "@angular/core/testing";
-import {ExchangeAdapterHttpDataObservableService as ExchangeAdapterDataService} from "./exchange-adapter-http-data-observable.service";
-import {ExchangeAdapter, NetworkConfig} from "./exchange-adapter.model";
-import {Observable} from "rxjs/Observable";
+import {MockBackend, MockConnection} from '@angular/http/testing';
+import {HttpModule, Http, XHRBackend, Response, ResponseOptions} from '@angular/http';
+import {async, inject, TestBed} from '@angular/core/testing';
+import {ExchangeAdapterHttpDataObservableService as ExchangeAdapterDataService} from './exchange-adapter-http-data-observable.service';
+import {ExchangeAdapter, NetworkConfig} from './exchange-adapter.model';
+import {Observable} from 'rxjs/Observable';
 
 // Most RxJS operators are not included in Angular's base Observable implementation.
 // The base implementation includes only what Angular itself requires.
 // If you want more RxJS features, you need to explicitly import rxjs operators, else you get runtime error, e.g.
 // 'Failed: this.http.put(...).map is not a function'
-import "rxjs/add/observable/throw";
-import "rxjs/add/operator/do";
-import "rxjs/add/operator/catch";
-import "rxjs/add/operator/map";
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 
 /**
  * Tests the Exchange Adapter HTTP Data service (Observable flavour) using a mocked HTTP backend.
@@ -39,7 +39,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
 
     it('should instantiate service with "new"', inject([Http], (http: Http) => {
         expect(http).not.toBeNull('http should be provided');
-        let service = new ExchangeAdapterDataService(http);
+        const service = new ExchangeAdapterDataService(http);
         expect(service instanceof ExchangeAdapterDataService).toBe(true,
             'new service should be instance of ExchangeAdapterDataService');
     }));
@@ -60,7 +60,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
             backend = be;
             service = new ExchangeAdapterDataService(http);
             fakeExchangeAdapters = makeExchangeAdapterData();
-            let options = new ResponseOptions({status: 200, body: {data: fakeExchangeAdapters}});
+            const options = new ResponseOptions({status: 200, body: {data: fakeExchangeAdapters}});
             response = new Response(options);
         }));
 
@@ -76,19 +76,19 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
                     expect(exchangeAdapters[1].id).toBe('gdax');
                     expect(exchangeAdapters[2].id).toBe('gemini');
                 });
-                //.toPromise();
+                // .toPromise();
         })));
 
         it('should handle returning no Exchange Adapters', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
+            const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getExchangeAdapters()
                 .subscribe(exchangeAdapters => expect(exchangeAdapters.length).toBe(0, 'should have no Exchange Adapters'));
-                //.toPromise();
+                // .toPromise();
         })));
 
         it('should treat 404 as an Observable error', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 404}));
+            const resp = new Response(new ResponseOptions({status: 404}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getExchangeAdapters()
                 .do(() => {
@@ -98,7 +98,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
                     expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
                     return Observable.of(null); // failure is the expected test result
                 });
-                //.toPromise();
+                // .toPromise();
         })));
     });
 
@@ -114,7 +114,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
             backend = be;
             service = new ExchangeAdapterDataService(http);
             fakeExchangeAdapters = makeExchangeAdapterData();
-            let options = new ResponseOptions({status: 200, body: {data: fakeExchangeAdapters[GDAX_EXCHANGE]}});
+            const options = new ResponseOptions({status: 200, body: {data: fakeExchangeAdapters[GDAX_EXCHANGE]}});
             response = new Response(options);
         }));
 
@@ -135,28 +135,28 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
 
                     expect(exchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(3);
                     expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[0]).toBe(
-                        "Connection reset"
+                        'Connection reset'
                     );
                     expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[1]).toBe(
-                        "Connection refused"
+                        'Connection refused'
                     );
                     expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[2]).toBe(
-                        "Remote host closed connection during handshake"
+                        'Remote host closed connection during handshake'
                     );
                 });
-            //.toPromise();
+            // .toPromise();
         })));
 
         it('should handle returning no Exchange Adapter', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
+            const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getExchangeAdapterByBotId(100) // unknown id
                 .subscribe(exchangeAdapter => expect(exchangeAdapter.id).not.toBeDefined('should have no Exchange Adapter'));
-            //.toPromise();
+            // .toPromise();
         })));
 
         it('should treat 404 as an Observable error', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 404}));
+            const resp = new Response(new ResponseOptions({status: 404}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getExchangeAdapterByBotId(100) // unknown id
                 .do(() => {
@@ -166,7 +166,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
                     expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
                     return Observable.of(null); // failure is the expected test result
                 });
-            //.toPromise();
+            // .toPromise();
         })));
     });
 
@@ -188,15 +188,15 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
                         506,
                     ],
                     [
-                        "Connection reset again!",
-                        "Connection refused again!",
-                        "Remote host closed connection during handshake again!"
+                        'Connection reset again!',
+                        'Connection refused again!',
+                        'Remote host closed connection during handshake again!'
                     ]
                 ));
 
             backend = be;
             service = new ExchangeAdapterDataService(http);
-            let options = new ResponseOptions({status: 200, body: {data: updatedExchangeAdapter}});
+            const options = new ResponseOptions({status: 200, body: {data: updatedExchangeAdapter}});
             response = new Response(options);
         }));
 
@@ -212,11 +212,11 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
                     expect(exchangeAdapter.className).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapterV2');
                     expect(exchangeAdapter.botId).toBe(1);
                 });
-            //.toPromise();
+            // .toPromise();
         })));
 
         it('should NOT return Exchange Adapter for 401 response', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 401}));
+            const resp = new Response(new ResponseOptions({status: 401}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.update(updatedExchangeAdapter)
                 .do(() => {
@@ -226,11 +226,11 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
                     expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
                     return Observable.of(null); // failure is the expected test result
                 });
-            //.toPromise();
+            // .toPromise();
         })));
 
         it('should treat 404 as an Observable error', async(inject([], () => {
-            let resp = new Response(new ResponseOptions({status: 404}));
+            const resp = new Response(new ResponseOptions({status: 404}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.update(updatedExchangeAdapter)
                 .do(() => {
@@ -240,7 +240,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
                     expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
                     return Observable.of(null); // failure is the expected test result
                 });
-            //.toPromise();
+            // .toPromise();
         })));
     });
 });
@@ -254,9 +254,9 @@ const makeExchangeAdapterData = () => [
                 522,
             ],
             [
-                "Connection reset",
-                "Connection refused",
-                "Remote host closed connection during handshake"
+                'Connection reset',
+                'Connection refused',
+                'Remote host closed connection during handshake'
             ]
         )),
     new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter', 2,
@@ -267,9 +267,9 @@ const makeExchangeAdapterData = () => [
                 522,
             ],
             [
-                "Connection reset",
-                "Connection refused",
-                "Remote host closed connection during handshake"
+                'Connection reset',
+                'Connection refused',
+                'Remote host closed connection during handshake'
             ]
         )),
     new ExchangeAdapter('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter', 3,
@@ -280,9 +280,9 @@ const makeExchangeAdapterData = () => [
                 522,
             ],
             [
-                "Connection reset",
-                "Connection refused",
-                "Remote host closed connection during handshake"
+                'Connection reset',
+                'Connection refused',
+                'Remote host closed connection during handshake'
             ]
         )),
 ] as ExchangeAdapter[];

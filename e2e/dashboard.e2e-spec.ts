@@ -46,22 +46,22 @@ describe('Dashboard Tests', function () {
         // const dashboardItems = element.all(by.repeater('bot in bots'));
 
         // so we'll resort to CSS locator instead
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         expect(dashboardItems.count()).toBe(8);
     });
 
     it('should display Bitstamp as first Dashboard Bot item', function () {
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         expect(dashboardItems.get(0).getText()).toContain('Bitstamp');
     });
 
     it('should display Huobi as last Dashboard Bot item', function () {
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         expect(dashboardItems.get(7).getText()).toContain('Huobi');
     });
 
     it('should render Gemini Bot specific link', function () {
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(2).click();
 
         browser.getCurrentUrl().then(function (url) {
@@ -79,7 +79,7 @@ describe('Dashboard Tests', function () {
 
     it('should filter displayed Bot items when user searches by Bot name', function () {
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         expect(dashboardItems.count()).toBe(8);
 
         const searchBox = element.all(by.id('search-box'));

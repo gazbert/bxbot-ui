@@ -8,7 +8,7 @@ import {Bot, BotHttpDataObservableService} from '../model/bot';
  * @author gazbert
  */
 @Component({
-    selector: 'bx-bot-details',
+    selector: 'app-bxbot-ui-bot-details',
     templateUrl: 'bot-details.component.html',
     styleUrls: ['bot-details.component.css']
 })
@@ -23,7 +23,7 @@ export class BotDetailsComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
-            let botId = params['id'];
+            const botId = params['id'];
             this.botDataService.getBot(botId)
                 .subscribe(bot => {
                         this.bot = bot;

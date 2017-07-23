@@ -1,4 +1,4 @@
-import {ExchangeAdapter, NetworkConfig} from "./exchange-adapter.model";
+import {ExchangeAdapter, NetworkConfig} from './exchange-adapter.model';
 
 /**
  * Tests the Exchange Adapter model behaves as expected.
@@ -16,9 +16,9 @@ describe('Exchange Adapter model tests', () => {
                         522,
                     ],
                     [
-                        "Connection reset",
-                        "Connection refused",
-                        "Remote host closed connection during handshake"
+                        'Connection reset',
+                        'Connection refused',
+                        'Remote host closed connection during handshake'
                     ]
                 ));
 
@@ -31,9 +31,9 @@ describe('Exchange Adapter model tests', () => {
         expect(exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1]).toBe(504);
         expect(exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[2]).toBe(522);
 
-        expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[0]).toBe("Connection reset");
-        expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[1]).toBe("Connection refused");
-        expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[2]).toBe("Remote host closed connection during handshake");
+        expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[0]).toBe('Connection reset');
+        expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[1]).toBe('Connection refused');
+        expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[2]).toBe('Remote host closed connection during handshake');
     });
 
     it('should clone itself', () => {
@@ -45,9 +45,9 @@ describe('Exchange Adapter model tests', () => {
                         522,
                     ],
                     [
-                        "Connection reset",
-                        "Connection refused",
-                        "Remote host closed connection during handshake"
+                        'Connection reset',
+                        'Connection refused',
+                        'Remote host closed connection during handshake'
                     ]
                 ));
 

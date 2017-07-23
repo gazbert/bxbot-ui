@@ -10,7 +10,7 @@ import {TradingStrategy, TradingStrategyHttpDataPromiseService} from '../model/t
  * @author gazbert
  */
 @Component({
-    selector: 'bx-markets',
+    selector: 'app-bxbot-ui-markets',
     templateUrl: 'markets.component.html',
     styleUrls: ['markets.component.css']
 })
@@ -68,9 +68,9 @@ export class MarketsComponent implements OnInit {
     }
 
     getOtherMarketNames(marketId: string): string[] {
-        let marketNames: string[] = [];
+        const marketNames: string[] = [];
         for (let i = 0; i < this.markets.length; i++) {
-            let market = this.markets[i];
+            const market = this.markets[i];
             if (market.id !== marketId) { // excludes current market name
                 marketNames.push(market.name);
             }
@@ -79,7 +79,7 @@ export class MarketsComponent implements OnInit {
     }
 
     addMarket(): void {
-        let tradingStrategy = new TradingStrategy(this.createUuid(), this.botId, null, null, null);
+        const tradingStrategy = new TradingStrategy(this.createUuid(), this.botId, null, null, null);
         this.markets.push(new Market(this.createUuid(), this.botId, null, false, null, null, tradingStrategy));
         this.updateFormErrors();
     }
@@ -119,7 +119,7 @@ export class MarketsComponent implements OnInit {
     // Algo by @Broofa - http://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript/2117523#2117523
     createUuid() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            let r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+            const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
             return v.toString(16);
         });
     }

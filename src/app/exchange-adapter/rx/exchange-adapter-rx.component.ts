@@ -21,7 +21,7 @@ import 'rxjs/add/operator/map';
  * @author gazbert
  */
 @Component({
-    selector: 'bx-exchange-adapter-rx',
+    selector: 'app-bxbot-ui-exchange-adapter-rx',
     templateUrl: 'exchange-adapter-rx.component.html',
     styleUrls: ['exchange-adapter-rx.component.css']
 })
@@ -73,7 +73,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
-            let botId = params['id'];
+            const botId = params['id'];
             this.exchangeAdapterDataService.getExchangeAdapterByBotId(botId)
                 .subscribe(exchangeAdapter => {
                     this.exchangeAdapter = exchangeAdapter;

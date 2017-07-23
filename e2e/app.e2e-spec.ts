@@ -28,7 +28,7 @@ describe('Miscellaneous Scenario Tests', function () {
         const searchBox = element.all(by.id('search-box'));
         searchBox.sendKeys('ItBit');
 
-        const dashboardItems = element.all(by.css('bx-dashboard-item'));
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         expect(dashboardItems.count()).toBe(1);
 
         dashboardItems.get(0).click();

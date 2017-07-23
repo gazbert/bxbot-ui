@@ -37,9 +37,31 @@ export class ExchangeAdapterHttpDataObservableService implements ExchangeAdapter
     constructor(private http: Http) {
     }
 
+    private static handleError (error: any) {
+        // In a real world app, we might use a remote logging infrastructure
+        // We'd also dig deeper into the error to get a better message
+        const errMsg = (error.message) ? error.message :
+            error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+        console.error(errMsg); // log to console instead
+        return Observable.throw(errMsg);
+    }
+
+    private static extractData(res: Response) {
+        if (res.status < 200 || res.status >= 300) {
+            throw new Error('Bad response status: ' + res.status);
+        }
+        const body = res.json();
+
+        if (isObject(body)) { // vs // if (body !== undefined && body !== null) {
+            return body.data || {};
+        } else {
+            return {};
+        }
+    }
+
     getExchangeAdapters(): Observable<ExchangeAdapter[]> {
 
-        let headers = new Headers({
+        const headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
@@ -51,7 +73,7 @@ export class ExchangeAdapterHttpDataObservableService implements ExchangeAdapter
 
     getExchangeAdapterByBotId(botId: number): Observable<ExchangeAdapter> {
 
-        let headers = new Headers({
+        const headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
@@ -64,39 +86,17 @@ export class ExchangeAdapterHttpDataObservableService implements ExchangeAdapter
 
     update(exchangeAdapter: ExchangeAdapter): Observable<ExchangeAdapter> {
 
-        let headers = new Headers({
+        const headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
         const url = this.exchangeAdaptersUrl + '/' + exchangeAdapter.id;
-        let body = JSON.stringify(exchangeAdapter);
-        let options = new RequestOptions({headers: headers});
+        const body = JSON.stringify(exchangeAdapter);
+        const options = new RequestOptions({headers: headers});
 
         return this.http.put(url, body, options)
             .map(ExchangeAdapterHttpDataObservableService.extractData)
             .catch(ExchangeAdapterHttpDataObservableService.handleError);
-    }
-
-    private static handleError (error: any) {
-        // In a real world app, we might use a remote logging infrastructure
-        // We'd also dig deeper into the error to get a better message
-        let errMsg = (error.message) ? error.message :
-            error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-        console.error(errMsg); // log to console instead
-        return Observable.throw(errMsg);
-    }
-
-    private static extractData(res: Response) {
-        if (res.status < 200 || res.status >= 300) {
-            throw new Error('Bad response status: ' + res.status);
-        }
-        let body = res.json();
-
-        if (isObject(body)) { // vs // if (body !== undefined && body !== null) {
-            return body.data || {};
-        } else {
-            return {};
-        }
     }
 }

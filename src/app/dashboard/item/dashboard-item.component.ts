@@ -8,7 +8,7 @@ import {Bot} from '../../model/bot';
  * @author gazbert
  */
 @Component({
-    selector: 'bx-dashboard-item',
+    selector: 'app-bxbot-ui-dashboard-item',
     templateUrl: 'dashboard-item.component.html',
     styleUrls: ['dashboard-item.component.css']
 })

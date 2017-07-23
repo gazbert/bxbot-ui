@@ -10,7 +10,7 @@ import {EmailAlertsConfig, EmailAlertsHttpDataPromiseService} from '../model/ema
  */
 @Component({
     moduleId: module.id,
-    selector: 'bx-email-alerts',
+    selector: 'app-bxbot-ui-email-alerts',
     templateUrl: 'email-alerts.component.html',
     styleUrls: ['email-alerts.component.css']
 })

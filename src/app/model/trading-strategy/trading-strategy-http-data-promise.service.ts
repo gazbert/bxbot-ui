@@ -1,8 +1,8 @@
-import {Injectable} from "@angular/core";
-import {Http, Headers} from "@angular/http";
-import {AppComponent} from "../../app.component";
-import {TradingStrategy} from "./trading-strategy.model";
-import {TradingStrategyDataPromiseService} from "./trading-strategy-data-promise.service";
+import {Injectable} from '@angular/core';
+import {Http, Headers} from '@angular/http';
+import {AppComponent} from '../../app.component';
+import {TradingStrategy} from './trading-strategy.model';
+import {TradingStrategyDataPromiseService} from './trading-strategy-data-promise.service';
 
 // Don't forget this else you get runtime error:
 // zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function
