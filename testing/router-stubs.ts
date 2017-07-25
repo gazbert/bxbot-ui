@@ -28,7 +28,7 @@ export class RouterLinkStubDirective {
 }
 
 // tslint:disable-next-line
-@Component({selector: 'router-outlet', template: ''})
+@Component({selector: 'router-outlet', template: '``'})
 export class RouterOutletStubComponent {
 }
 
