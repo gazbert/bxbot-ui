@@ -1,4 +1,4 @@
-import {ActivatedRouteStub} from '../../testing';
+import {ActivatedRouteStub} from '../../../testing';
 import {ExchangeAdapterComponent} from './exchange-adapter.component';
 import {ExchangeAdapter, NetworkConfig} from '../model/exchange-adapter';
 

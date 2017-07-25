@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/toPromise';
-import {Observable} from 'rxjs';
+import {Observable} from 'rxjs/Observable';
 import {ExchangeAdapter} from './exchange-adapter.model';
 
 /**
@@ -11,7 +11,9 @@ import {ExchangeAdapter} from './exchange-adapter.model';
 export interface ExchangeAdapterDataObservableService {
 
     getExchangeAdapters(): Observable<ExchangeAdapter[]>;
+
     getExchangeAdapterByBotId(botId: number): Observable<ExchangeAdapter>;
+
     update(exchangeAdapter: ExchangeAdapter): Observable<ExchangeAdapter>;
 }
 

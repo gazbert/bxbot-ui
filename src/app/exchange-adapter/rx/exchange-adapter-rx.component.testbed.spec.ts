@@ -4,7 +4,7 @@ import {By} from '@angular/platform-browser';
 import {DebugElement} from '@angular/core';
 import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
-import {ActivatedRoute, ActivatedRouteStub, click, newEvent, Router, RouterStub} from '../../../testing';
+import {ActivatedRoute, ActivatedRouteStub, click, newEvent, Router, RouterStub} from '../../../../testing';
 import {FakeExchangeAdapterDataObservableService, SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS} from '../../model/exchange-adapter/testing';
 import {SharedModule} from '../../shared/shared.module';
 import {

@@ -1,4 +1,4 @@
-import {ActivatedRouteStub} from '../../testing';
+import {ActivatedRouteStub} from '../../../testing';
 import {EmailAlertsComponent} from './email-alerts.component';
 import {EmailAlertsConfig} from '../model/email-alerts';
 

@@ -32,7 +32,7 @@
             <div class="form-group col-sm-6">
                 <label for="accountPassword">Account Password</label>
                 <input type="password" class="form-control" name="password" [(ngModel)]="emailAlertsConfig.accountPassword"
-                       required validateEqual="confirmPassword" reverse="true" #password="ngModel" id="accountPassword"
+                       required appBxBotUiValidateEqual="confirmPassword" reverse="true" #password="ngModel" id="accountPassword"
                        maxlength="50" pattern="[a-zA-Z0-9_\-,.@£$ ]*">
                 <div id="invalidAccountPassword"
                      *ngIf="formErrors['password'].length > 0" class="alert alert-danger">
@@ -46,7 +46,7 @@
             <div class="form-group col-sm-6">
                 <label for="retypeAccountPassword">Retype Password</label>
                 <input type="password" class="form-control" name="confirmPassword" [ngModel]="emailAlertsConfig.confirmPassword"
-                       required validateEqual="password" reverse="false" #confirmPassword="ngModel" pattern="[a-zA-Z0-9_\-,.@£$ ]*"
+                       required appBxBotUiValidateEqual="password" reverse="false" #confirmPassword="ngModel" pattern="[a-zA-Z0-9_\-,.@£$ ]*"
                        id="retypeAccountPassword" maxlength="50">
                 <div id="invalidRetypeAccountPassword"
                      *ngIf="formErrors['confirmPassword'].length > 0" class="alert alert-danger">

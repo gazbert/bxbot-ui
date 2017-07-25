@@ -8,12 +8,12 @@ import {Validator, AbstractControl, NG_VALIDATORS} from '@angular/forms';
  * https://scotch.io/tutorials/how-to-implement-a-custom-validator-directive-confirm-password-in-angular-2
  */
 @Directive({
-    selector: '[validateEqual][formControlName],[validateEqual][formControl],[validateEqual][ngModel]',
-    providers: [{provide: NG_VALIDATORS, useExisting: forwardRef(() => EqualValidator), multi: true}]
+    selector: '[appBxBotUiValidateEqual][formControlName],[appBxBotUiValidateEqual][formControl],[appBxBotUiValidateEqual][ngModel]',
+    providers: [{provide: NG_VALIDATORS, useExisting: forwardRef(() => EqualValidatorDirective), multi: true}]
 })
-export class EqualValidator implements Validator {
+export class EqualValidatorDirective implements Validator {
 
-    constructor(@Attribute('validateEqual') public validateEqual: string,
+    constructor(@Attribute('appBxBotUiValidateEqual') public validateEqual: string,
                 @Attribute('reverse') public reverse: string) {
     }
 
@@ -41,7 +41,7 @@ export class EqualValidator implements Validator {
 
         // value equal and reverse
         if (e && v === e.value && this.isReverse) {
-            delete e.errors['validateEqual'];
+            delete e.errors['appBxBotUiValidateEqual'];
             if (!Object.keys(e.errors).length) {
                 e.setErrors(null);
             }

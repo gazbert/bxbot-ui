@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/toPromise';
-import {Observable} from 'rxjs';
+import {Observable} from 'rxjs/Observable';
 import {Bot} from './bot.model';
 
 /**
@@ -11,7 +11,10 @@ import {Bot} from './bot.model';
 export interface BotDataObservableService {
 
     getBots(): Observable<Bot[]>;
+
     getBot(id: number): Observable<Bot>;
+
     getBotByName(name: string): Observable<Bot[]>;
+
     update(exchange: Bot): Observable<Bot>;
 }

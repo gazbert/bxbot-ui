@@ -1,4 +1,4 @@
-import {ActivatedRouteStub} from '../../../testing';
+import {ActivatedRouteStub} from '../../../../testing';
 import {ExchangeAdapterRxComponent} from './exchange-adapter-rx.component';
 import {ExchangeAdapter, NetworkConfig} from '../../model/exchange-adapter';
 import {Observable} from 'rxjs/Observable';

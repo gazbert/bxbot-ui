@@ -1,4 +1,4 @@
-import {ActivatedRouteStub} from '../../testing';
+import {ActivatedRouteStub} from '../../../testing';
 import {TradingStrategiesComponent} from './trading-strategies.component';
 import {TradingStrategy} from '../model/trading-strategy';
 import {Market} from '../model/market';

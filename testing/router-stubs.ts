@@ -1,3 +1,4 @@
+// export for convenience.
 export {ActivatedRoute, Router, RouterLink, RouterOutlet} from '@angular/router';
 
 import {Component, Directive, Injectable, Input} from '@angular/core';
@@ -8,14 +9,17 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
  * Testing utils taken from Angular tutorial material:
  * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html
  */
+
 @Directive({
+    // tslint:disable-next-line
     selector: '[routerLink]',
+    // tslint:disable-next-line
     host: {
         '(click)': 'onClick()'
     }
 })
 export class RouterLinkStubDirective {
-    @Input('routerLink') linkParams: any;
+    @Input() linkParams: string;
     navigatedTo: any = null;
 
     onClick() {
@@ -23,6 +27,7 @@ export class RouterLinkStubDirective {
     }
 }
 
+// tslint:disable-next-line
 @Component({selector: 'router-outlet', template: ''})
 export class RouterOutletStubComponent {
 }

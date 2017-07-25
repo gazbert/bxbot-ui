@@ -3,7 +3,7 @@ import {DebugElement} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {Http} from '@angular/http';
 import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
-import {ActivatedRoute, ActivatedRouteStub, click, newEvent, Router, RouterStub} from '../../testing';
+import {ActivatedRoute, ActivatedRouteStub, click, newEvent, Router, RouterStub} from '../../../testing';
 import {SharedModule} from '../shared/shared.module';
 import {ExchangeAdapter, NetworkConfig} from '../model/exchange-adapter';
 import {FakeExchangeAdapterDataPromiseService, SOME_FAKE_PROMISE_EXCHANGE_ADAPTERS} from '../model/exchange-adapter/testing';
