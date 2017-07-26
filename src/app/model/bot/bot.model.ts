@@ -5,7 +5,7 @@
  */
 export class Bot {
 
-    constructor(public id: number,
+    constructor(public id: string,
                 public name: string,
                 public status: string) {
     }

@@ -30,7 +30,7 @@ export class MarketHttpDataPromiseService implements MarketDataPromiseService {
     constructor(private http: Http) {
     }
 
-    getAllMarketsForBotId(botId: number): Promise<Market[]> {
+    getAllMarketsForBotId(botId: string): Promise<Market[]> {
         const url = this.marketsUrl + '?botId=' + botId;
         return this.http.get(url)
             .toPromise()

@@ -12,7 +12,7 @@ export interface BotDataObservableService {
 
     getBots(): Observable<Bot[]>;
 
-    getBot(id: number): Observable<Bot>;
+    getBot(id: string): Observable<Bot>;
 
     getBotByName(name: string): Observable<Bot[]>;
 

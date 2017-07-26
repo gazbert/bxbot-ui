@@ -34,21 +34,21 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
 
     beforeEach(done => {
 
-        expectedTradingStrategy_1 = new TradingStrategy('gdax_macd', 2, 'MACD Indicator',
+        expectedTradingStrategy_1 = new TradingStrategy('gdax_macd', 'gdax-2', 'MACD Indicator',
             'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy');
-        expectedTradingStrategy_2 = new TradingStrategy('gdax_ema', 2, 'EMA Indicator',
+        expectedTradingStrategy_2 = new TradingStrategy('gdax_ema', 'gdax-2', 'EMA Indicator',
             'EMA Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.EmaStrategy');
 
-        unusedTradingStrategy = new TradingStrategy('gdax_not_used', 2, 'EMA Indicator',
+        unusedTradingStrategy = new TradingStrategy('gdax_not_used', 'gdax-2', 'EMA Indicator',
             'EMA Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.EmaStrategy');
 
-        expectedUpdatedTradingStrategy_2 = new TradingStrategy('gdax_scalper', 2, 'Long Scalper',
+        expectedUpdatedTradingStrategy_2 = new TradingStrategy('gdax_scalper', 'gdax-2', 'Long Scalper',
             'Scalper that buys low and sells high, like duh.', 'com.gazbert.bxbot.strategies.LongScalper');
 
         expectedTradingStrategies = [expectedTradingStrategy_1, expectedTradingStrategy_2, unusedTradingStrategy];
 
-        expectedMarket_1 = new Market('gdax_btc_usd', 2, 'BTC/USD', true, 'BTC', 'USD', expectedTradingStrategy_1);
-        expectedMarket_2 = new Market('gdax_btc_gbp', 2, 'BTC/GBP', true, 'BTC', 'GBP', expectedTradingStrategy_2);
+        expectedMarket_1 = new Market('gdax_btc_usd', 'gdax-2', 'BTC/USD', true, 'BTC', 'USD', expectedTradingStrategy_1);
+        expectedMarket_2 = new Market('gdax_btc_gbp', 'gdax-2', 'BTC/GBP', true, 'BTC', 'GBP', expectedTradingStrategy_2);
         expectedMarkets = [expectedMarket_1, expectedMarket_2];
 
         activatedRoute = new ActivatedRouteStub();
@@ -146,7 +146,7 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
         tradingStrategiesComponent.addTradingStrategy();
         expect(tradingStrategiesComponent.tradingStrategies.length).toBe(4);
         expect(tradingStrategiesComponent.tradingStrategies[3].id).not.toBeNull();
-        expect(tradingStrategiesComponent.tradingStrategies[3].botId).toBe(2);
+        expect(tradingStrategiesComponent.tradingStrategies[3].botId).toBe('gdax-2');
         expect(tradingStrategiesComponent.tradingStrategies[3].name).toBe(null);
     });
 });

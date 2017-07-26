@@ -69,8 +69,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
      * switchMap preserves the original request order and only returns the Observable from the most recent HTTP
      * method call. Results from prior calls are canceled and discarded.
      *
-     * If the search text is empty, we short-circuit the HTTP method call, and return an Observable containing the
-     * first 8 Bots.
+     * If the search text is empty, we short-circuit the HTTP method call, and return an Observable containing all of the bots.
      *
      * NOTE: canceling the BotHttpDataService observable won't actually abort a pending HTTP request. Angular does
      * not support this yet - it just discards unwanted results.
@@ -82,8 +81,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
             .switchMap(term => term   // switch to new Observable each time the term changes
                 // return the http search Observable
                 ? this.botDataService.getBotByName(term)
-                // or the first 8 Bots if there was no search term entered by user
-                : this.botDataService.getBots().toPromise().then((bots) => bots.slice(0, 8)))
+                // or all of the Bots if there was no search term entered by user
+                : this.botDataService.getBots().toPromise())
             .catch(error => {
                 // TODO - Show meaningful error to user? Redirect to friendly error page?
                 this.errorMessage = error;

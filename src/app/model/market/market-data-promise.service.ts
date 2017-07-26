@@ -9,7 +9,9 @@ import {Market} from './market.model';
  */
 export interface MarketDataPromiseService {
 
-    getAllMarketsForBotId(botId: number): Promise<Market[]>;
+    getAllMarketsForBotId(botId: string): Promise<Market[]>;
+
     updateMarket(market: Market): Promise<Market>;
+
     deleteMarketById(marketId: string): Promise<boolean>;
 }

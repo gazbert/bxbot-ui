@@ -56,7 +56,7 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
 
         it('should return 2 BTC-e Markets', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.getAllMarketsForBotId(3)
+            service.getAllMarketsForBotId('btce-1')
                 .then(markets => {
                     expect(markets.length).toBe(2, 'should return 2 BTC-e Markets');
 
@@ -69,7 +69,7 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
         it('should handle returning no matching Markets', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.getAllMarketsForBotId(100) // unknown id
+            service.getAllMarketsForBotId('unknown')
                 .then(markets => expect(markets.length).toBe(0, 'should have no Markets'));
         })));
     });
@@ -83,8 +83,8 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
 
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
 
-            updatedMarket = new Market('btce_btc_usd', 3, 'BTC/USD', true, 'BTC', 'USD',
-                new TradingStrategy('btce_macd', 3, 'MACD Indicator',
+            updatedMarket = new Market('btce_btc_usd', 'btce-1', 'BTC/USD', true, 'BTC', 'USD',
+                new TradingStrategy('btce_macd', 'btce-1', 'MACD Indicator',
                     'MACD Indicator for deciding when to enter and exit trades.',
                     'com.gazbert.bxbot.strategies.MacdStrategy'));
 
@@ -145,13 +145,13 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
 
 const makeMarketData = () => [
 
-    new Market('btce_btc_usd', 3, 'BTC/USD', true, 'BTC', 'USD',
-        new TradingStrategy('btce_macd_rsi', 3, 'MACD RSI Indicator',
+    new Market('btce_btc_usd', 'btce-1', 'BTC/USD', true, 'BTC', 'USD',
+        new TradingStrategy('btce_macd_rsi', 'btce-1', 'MACD RSI Indicator',
             'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
             'com.gazbert.bxbot.strategies.MacdRsiStrategy')),
 
-    new Market('btce_ltc_usd', 3, 'LTC/USD', true, 'LTC', 'USD',
-        new TradingStrategy('btce_macd', 3, 'MACD Indicator',
+    new Market('btce_ltc_usd', 'btce-1', 'LTC/USD', true, 'LTC', 'USD',
+        new TradingStrategy('btce_macd', 'btce-1', 'MACD Indicator',
             'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy')),
 
 ] as Market[];

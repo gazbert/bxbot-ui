@@ -131,9 +131,9 @@ function tests(botClick: Function) {
                 expect(bots.length).toBe(3, 'should have 3 Bot items after ngAfterViewInit');
 
                 // paranoia!
-                expect(bots[0].id).toBe(1);
-                expect(bots[1].id).toBe(2);
-                expect(bots[2].id).toBe(3);
+                expect(bots[0].id).toBe('bitstamp-1');
+                expect(bots[1].id).toBe('gdax-2');
+                expect(bots[2].id).toBe('gemini-3');
 
                 done();
             }).toPromise(); // MUST have this for test to work!

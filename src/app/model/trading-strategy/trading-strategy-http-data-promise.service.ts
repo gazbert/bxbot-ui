@@ -30,7 +30,7 @@ export class TradingStrategyHttpDataPromiseService implements TradingStrategyDat
     constructor(private http: Http) {
     }
 
-    getAllTradingStrategiesForBotId(botId: number): Promise<TradingStrategy[]> {
+    getAllTradingStrategiesForBotId(botId: string): Promise<TradingStrategy[]> {
         const url = this.tradingStrategiesUrl + '?botId=' + botId;
         return this.http.get(url)
             .toPromise()

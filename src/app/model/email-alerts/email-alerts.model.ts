@@ -5,7 +5,7 @@
  */
 export class EmailAlertsConfig {
 
-    constructor(public id: number,
+    constructor(public id: string,
                 public enabled: boolean,
                 public smtpHost: string,
                 public smtpPort: number,

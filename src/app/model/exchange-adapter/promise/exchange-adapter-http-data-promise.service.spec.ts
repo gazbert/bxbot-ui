@@ -75,13 +75,13 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
         })));
     });
 
-    describe('when getExchangeAdapterByBotId() operation called with \'2\'', () => {
+    describe('when getExchangeAdapterByBotId() operation called with \'gdax\'', () => {
 
         let backend: MockBackend;
         let service: ExchangeAdapterDataService;
         let fakeExchangeAdapters: ExchangeAdapter[];
         let response: Response;
-        const GDAX_EXCHANGE = 1;
+        const GDAX_EXCHANGE = 'gdax';
 
         beforeEach(inject([Http, XHRBackend], (http: Http, mockBackend: MockBackend) => {
             backend = mockBackend;
@@ -93,12 +93,11 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
 
         xit('should return GDAX Exchange Adapter', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.getExchangeAdapterByBotId(2)
+            service.getExchangeAdapterByBotId('gdax')
                 .then(exchangeAdapter => {
                     expect(exchangeAdapter.id).toBe('gdax');
                     expect(exchangeAdapter.name).toBe('GDAX');
                     expect(exchangeAdapter.className).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
-                    expect(exchangeAdapter.botId).toBe(2);
                     expect(exchangeAdapter.networkConfig.connectionTimeout).toBe(60);
 
                     expect(exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(3);
@@ -122,7 +121,7 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
         xit('should handle returning no Bot Adapter', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.getExchangeAdapterByBotId(100) // unknown id
+            service.getExchangeAdapterByBotId('unknown')
                 .then(exchangeAdapter => expect(exchangeAdapter.id).not.toBeDefined('should have no Exchange Adapter'));
         })));
     });
@@ -137,7 +136,7 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
         beforeEach(inject([Http, XHRBackend], (http: Http, mockBackend: MockBackend) => {
 
             updatedExchangeAdapter = new ExchangeAdapter('bitstamp', 'Bitstamp v2',
-                'com.gazbert.bxbot.exchanges.BitstampExchangeAdapterV2', 1,
+                'com.gazbert.bxbot.exchanges.BitstampExchangeAdapterV2',
                 new NetworkConfig(90,
                     [
                         504,
@@ -180,7 +179,7 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
 });
 
 const makeExchangeAdapterData = () => [
-    new ExchangeAdapter('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter', 1,
+    new ExchangeAdapter('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
         new NetworkConfig(60,
             [
                 501,
@@ -193,7 +192,7 @@ const makeExchangeAdapterData = () => [
                 'Remote host closed connection during handshake'
             ]
         )),
-    new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter', 2,
+    new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
         new NetworkConfig(60,
             [
                 503,
@@ -206,7 +205,7 @@ const makeExchangeAdapterData = () => [
                 'Remote host closed connection during handshake'
             ]
         )),
-    new ExchangeAdapter('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter', 3,
+    new ExchangeAdapter('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
         new NetworkConfig(60,
             [
                 504,

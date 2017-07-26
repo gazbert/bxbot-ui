@@ -55,14 +55,14 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
 
         it('should return 2 BTC-e Trading Strategies', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.getAllTradingStrategiesForBotId(2)
+            service.getAllTradingStrategiesForBotId('btce-2')
                 .then(tradingStrategies => expect(tradingStrategies.length).toBe(2, 'should return 2 BTC-e Trading Strategies'));
         })));
 
         it('should handle returning no matching Trading Strategies', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.getAllTradingStrategiesForBotId(100) // unknown id
+            service.getAllTradingStrategiesForBotId('unknown')
                 .then(tradingStrategies => expect(tradingStrategies.length).toBe(0, 'should have no Trading Strategies'));
         })));
     });
@@ -76,7 +76,7 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
 
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
 
-            updatedTradingStrategy = new TradingStrategy('btce_macd_rsi', 2, 'MACD Indicator',
+            updatedTradingStrategy = new TradingStrategy('btce_macd_rsi', 'btce-2', 'MACD Indicator',
                 'MACD Indicator algo for deciding when to enter and exit trades.',
                 'com.gazbert.bxbot.strategies.MacdStrategy');
 
@@ -137,11 +137,11 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
 
 const makeTradingStrategyData = () => [
 
-        new TradingStrategy('btce_macd_rsi', 2, 'MACD RSI Indicator',
+        new TradingStrategy('btce_macd_rsi', 'btce-2', 'MACD RSI Indicator',
             'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
             'com.gazbert.bxbot.strategies.MacdRsiStrategy'),
 
-        new TradingStrategy('btce_macd', 2, 'MACD Indicator',
+        new TradingStrategy('btce_macd', 'btce-2', 'MACD Indicator',
             'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy')
 
 ] as TradingStrategy[];

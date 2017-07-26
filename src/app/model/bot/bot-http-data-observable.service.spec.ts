@@ -73,9 +73,9 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
                         'should have returned 3 Bots');
 
                     // paranoia!
-                    expect(bots[0].id).toBe(1);
-                    expect(bots[1].id).toBe(2);
-                    expect(bots[2].id).toBe(3);
+                    expect(bots[0].id).toBe('bitstamp-1');
+                    expect(bots[1].id).toBe('gdax-2');
+                    expect(bots[2].id).toBe('gemini-3');
                 });
             // .toPromise();
         })));
@@ -121,9 +121,9 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
 
         it('should have returned GDAX Bot', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.getBot(1)
+            service.getBot('gdax-2')
                 .subscribe(bot => {
-                    expect(bot.id).toBe(2);
+                    expect(bot.id).toBe('gdax-2');
                     expect(bot.name).toBe('GDAX');
                     expect(bot.status).toBe('Stopped');
                 });
@@ -133,7 +133,7 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
         it('should handle returning no Bot', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.getBot(100) // unknown id!
+            service.getBot('unknown')
                 .subscribe(bot => expect(bot.id).not.toBeDefined('should have no Bot'));
             // .toPromise();
         })));
@@ -141,7 +141,7 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
         it('should treat 404 as an Observable error', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 404}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.getBot(100) // unknown id!
+            service.getBot('unknown')
                 .do(() => {
                     fail('should not respond with Bot');
                 })
@@ -162,7 +162,7 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
 
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
 
-            updatedBot = new Bot(2, 'Bitstamp v2', 'Stopped');
+            updatedBot = new Bot('bitstamp-1', 'Bitstamp v2', 'Stopped');
 
             backend = be;
             service = new BotDataService(http);
@@ -177,7 +177,7 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
                     expect(bot).toBe(updatedBot);
 
                     // paranoia!
-                    expect(bot.id).toBe(2);
+                    expect(bot.id).toBe('bitstamp-1');
                     expect(bot.name).toBe('Bitstamp v2');
                     expect(bot.status).toBe('Stopped');
                 });
@@ -263,7 +263,7 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
 });
 
 const makeBotData = () => [
-    new Bot(1, 'Bitstamp', 'Running'),
-    new Bot(2, 'GDAX', 'Stopped'),
-    new Bot(3, 'Gemini', 'Running')
+    new Bot('bitstamp-1', 'Bitstamp', 'Running'),
+    new Bot('gdax-2', 'GDAX', 'Stopped'),
+    new Bot('gemini-3', 'Gemini', 'Running')
 ] as Bot[];

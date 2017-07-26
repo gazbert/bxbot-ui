@@ -120,12 +120,11 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
 
         it('should return GDAX Exchange Adapter', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.getExchangeAdapterByBotId(2)
+            service.getExchangeAdapterByBotId('gdax')
                 .subscribe(exchangeAdapter => {
                     expect(exchangeAdapter.id).toBe('gdax');
                     expect(exchangeAdapter.name).toBe('GDAX');
                     expect(exchangeAdapter.className).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
-                    expect(exchangeAdapter.botId).toBe(2);
                     expect(exchangeAdapter.networkConfig.connectionTimeout).toBe(60);
 
                     expect(exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(3);
@@ -150,7 +149,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
         it('should handle returning no Exchange Adapter', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.getExchangeAdapterByBotId(100) // unknown id
+            service.getExchangeAdapterByBotId('unknown')
                 .subscribe(exchangeAdapter => expect(exchangeAdapter.id).not.toBeDefined('should have no Exchange Adapter'));
             // .toPromise();
         })));
@@ -158,7 +157,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
         it('should treat 404 as an Observable error', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 404}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.getExchangeAdapterByBotId(100) // unknown id
+            service.getExchangeAdapterByBotId('unknown')
                 .do(() => {
                     fail('should not respond with Exchange Adapter');
                 })
@@ -180,7 +179,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
 
             updatedExchangeAdapter = new ExchangeAdapter('bitstamp', 'Bitstamp v2',
-                'com.gazbert.bxbot.exchanges.BitstampExchangeAdapterV2', 1,
+                'com.gazbert.bxbot.exchanges.BitstampExchangeAdapterV2',
                 new NetworkConfig(90,
                     [
                         504,
@@ -209,8 +208,6 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
                     // paranoia!
                     expect(exchangeAdapter.id).toBe('bitstamp');
                     expect(exchangeAdapter.name).toBe('Bitstamp v2');
-                    expect(exchangeAdapter.className).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapterV2');
-                    expect(exchangeAdapter.botId).toBe(1);
                 });
             // .toPromise();
         })));
@@ -246,7 +243,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
 });
 
 const makeExchangeAdapterData = () => [
-    new ExchangeAdapter('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter', 1,
+    new ExchangeAdapter('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
         new NetworkConfig(60,
             [
                 503,
@@ -259,7 +256,7 @@ const makeExchangeAdapterData = () => [
                 'Remote host closed connection during handshake'
             ]
         )),
-    new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter', 2,
+    new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
         new NetworkConfig(60,
             [
                 503,
@@ -272,7 +269,7 @@ const makeExchangeAdapterData = () => [
                 'Remote host closed connection during handshake'
             ]
         )),
-    new ExchangeAdapter('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter', 3,
+    new ExchangeAdapter('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
         new NetworkConfig(60,
             [
                 503,

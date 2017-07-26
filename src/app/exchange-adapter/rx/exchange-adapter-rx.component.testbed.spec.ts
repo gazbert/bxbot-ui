@@ -66,14 +66,14 @@ function overrideExchangeAdapterServiceSetup() {
             expectedErrorMsgs = ['Connection timeout'];
             expectedNetworkConfig = new NetworkConfig(60, expectedErrorCodes, expectedErrorMsgs);
             testExchangeAdapter = new ExchangeAdapter('btce', 'BTC-e',
-                'com.gazbert.bxbot.adapter.BtceExchangeAdapter', 1, expectedNetworkConfig);
+                'com.gazbert.bxbot.adapter.BtceExchangeAdapter', expectedNetworkConfig);
         }
 
         getExchangeAdapters(): Observable<ExchangeAdapter[]> {
             return undefined;
         }
 
-        getExchangeAdapterByBotId(id: number): Observable<ExchangeAdapter> {
+        getExchangeAdapterByBotId(id: string): Observable<ExchangeAdapter> {
             return Observable.create(observer => {
                 observer.next(testExchangeAdapter);
                 // call complete if you want to close this stream (like a promise)
@@ -285,7 +285,7 @@ function fakeExchangeAdapterServiceSetup() {
 
         beforeEach(async(() => {
             expectedExchangeAdapter = firstExchangeAdapter;
-            activatedRoute.testParams = {id: expectedExchangeAdapter.botId};
+            activatedRoute.testParams = {id: expectedExchangeAdapter.id};
             createComponent().then(() => {/*done*/
             });
         }));

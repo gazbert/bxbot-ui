@@ -56,9 +56,9 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed + Mock HTTP back
 
         it('should expect GDAX Email Alerts config', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.getEmailAlertsConfigByBotId(1)
+            service.getEmailAlertsConfigByBotId('gdax-1')
                 .then(emailAlertsConfig => {
-                    expect(emailAlertsConfig.id).toBe(1);
+                    expect(emailAlertsConfig.id).toBe('gdax-1');
                     expect(emailAlertsConfig.enabled).toBe(true);
                     expect(emailAlertsConfig.smtpHost).toBe('smtp.gmail.com');
                     expect(emailAlertsConfig.smtpPort).toBe(587);
@@ -72,7 +72,7 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed + Mock HTTP back
         it('should handle returning no matching Email Alerts config', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 200, body: {undefined}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.getEmailAlertsConfigByBotId(100) // unknown id
+            service.getEmailAlertsConfigByBotId('unknown')
                 .then(emailAlertsConfig => expect(emailAlertsConfig).toBe(undefined, 'should have no Email Alerts config'));
         })));
     });
@@ -86,7 +86,7 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed + Mock HTTP back
 
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
 
-            updatedEmailAlertsConfig = new EmailAlertsConfig(1, true,
+            updatedEmailAlertsConfig = new EmailAlertsConfig('gdax-1', true,
                 'new.smtp.gmail.com', 589, 'new_bobfett', 'new_iLoveHoth',
                 'new_jabba@tatooine.space', 'new_boba.fett@hoth.space');
 
@@ -103,7 +103,7 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed + Mock HTTP back
                     expect(emailAlertsConfig).toBe(updatedEmailAlertsConfig);
 
                     // paranoia!
-                    expect(emailAlertsConfig.id).toBe(1);
+                    expect(emailAlertsConfig.id).toBe('gdax-1');
                     expect(emailAlertsConfig.smtpHost).toBe('new.smtp.gmail.com');
                 });
         })));
@@ -118,7 +118,7 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed + Mock HTTP back
 });
 
 function makeEmailAlertsData() {
-    return new EmailAlertsConfig(1, true, 'smtp.gmail.com', 587, 'bobfett', 'iLoveHoth',
+    return new EmailAlertsConfig('gdax-1', true, 'smtp.gmail.com', 587, 'bobfett', 'iLoveHoth',
         'jabba@tatooine.space', 'boba.fett@hoth.space');
 }
 

@@ -9,7 +9,9 @@ import {TradingStrategy} from './trading-strategy.model';
  */
 export interface TradingStrategyDataPromiseService {
 
-    getAllTradingStrategiesForBotId(botId: number): Promise<TradingStrategy[]>;
+    getAllTradingStrategiesForBotId(botId: string): Promise<TradingStrategy[]>;
+
     updateTradingStrategy(tradingStrategy: TradingStrategy): Promise<TradingStrategy>;
+
     deleteTradingStrategyById(tradingStrategyId: string): Promise<boolean>;
 }

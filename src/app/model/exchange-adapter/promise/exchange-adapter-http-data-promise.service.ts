@@ -49,7 +49,7 @@ export class ExchangeAdapterHttpDataPromiseService implements ExchangeAdapterDat
             .catch(ExchangeAdapterHttpDataPromiseService.handleError);
     }
 
-    getExchangeAdapterByBotId(botId: number): Promise<ExchangeAdapter> {
+    getExchangeAdapterByBotId(botId: string): Promise<ExchangeAdapter> {
         const url = this.exchangeAdaptersUrl + '/' + botId;
         return this.http.get(url)
             .toPromise()

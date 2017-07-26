@@ -71,7 +71,7 @@ export class ExchangeAdapterHttpDataObservableService implements ExchangeAdapter
             .catch(ExchangeAdapterHttpDataObservableService.handleError);
     }
 
-    getExchangeAdapterByBotId(botId: number): Observable<ExchangeAdapter> {
+    getExchangeAdapterByBotId(botId: string): Observable<ExchangeAdapter> {
 
         const headers = new Headers({
             'Content-Type': 'application/json',

@@ -8,7 +8,7 @@ import {TradingStrategy} from '../trading-strategy/trading-strategy.model';
 export class Market {
 
     constructor(public id: string,
-                public botId: number,
+                public botId: string,
                 public name: string,
                 public enabled: boolean,
                 public baseCurrency: string,

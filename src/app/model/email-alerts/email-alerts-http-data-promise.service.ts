@@ -35,7 +35,7 @@ export class EmailAlertsHttpDataPromiseService implements EmailAlertsDataPromise
         return Promise.reject(error.message || error);
     }
 
-    getEmailAlertsConfigByBotId(botId: number): Promise<EmailAlertsConfig> {
+    getEmailAlertsConfigByBotId(botId: string): Promise<EmailAlertsConfig> {
         const url = this.emailAlertsUrl + '/' + botId;
         return this.http.get(url)
             .toPromise()

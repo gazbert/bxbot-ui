@@ -6,7 +6,7 @@
 export class TradingStrategy {
 
     constructor(public id: string,
-                public botId: number,
+                public botId: string,
                 public name: string,
                 public description: string,
                 public className: string) {

@@ -33,17 +33,17 @@ describe('MarketsComponent tests without TestBed', () => {
 
     beforeEach(done => {
 
-        expectedTradingStrategy_1 = new TradingStrategy('gdax_macd', 2, 'MACD Indicator',
+        expectedTradingStrategy_1 = new TradingStrategy('gdax_macd', 'gdax-2', 'MACD Indicator',
             'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy');
-        expectedMarket_1 = new Market('gdax_btc_usd', 2, 'BTC/USD', true, 'BTC', 'USD', expectedTradingStrategy_1);
+        expectedMarket_1 = new Market('gdax_btc_usd', 'gdax-2', 'BTC/USD', true, 'BTC', 'USD', expectedTradingStrategy_1);
 
-        expectedTradingStrategy_2 = new TradingStrategy('gdax_ema', 2, 'MACD Indicator',
+        expectedTradingStrategy_2 = new TradingStrategy('gdax_ema', 'gdax-2', 'MACD Indicator',
             'EMA Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.EmaStrategy');
-        expectedMarket_2 = new Market('gdax_btc_gbp', 2, 'BTC/GBP', true, 'BTC', 'GBP', expectedTradingStrategy_2);
+        expectedMarket_2 = new Market('gdax_btc_gbp', 'gdax-2', 'BTC/GBP', true, 'BTC', 'GBP', expectedTradingStrategy_2);
 
         expectedMarkets = [expectedMarket_1, expectedMarket_2];
 
-        expectedUpdatedMarket_2 = new Market('gdax_btc_gbp', 2, 'ETH/USD', true, 'ETH', 'USD', expectedTradingStrategy_2);
+        expectedUpdatedMarket_2 = new Market('gdax_btc_gbp', 'gdax-2', 'ETH/USD', true, 'ETH', 'USD', expectedTradingStrategy_2);
 
         activatedRoute = new ActivatedRouteStub();
         activatedRoute.testParams = {id: expectedMarket_1.botId};
@@ -112,7 +112,7 @@ describe('MarketsComponent tests without TestBed', () => {
         marketsComponent.addMarket();
         expect(marketsComponent.markets.length).toBe(3);
         expect(marketsComponent.markets[2].id).not.toBeNull();
-        expect(marketsComponent.markets[2].botId).toBe(2);
+        expect(marketsComponent.markets[2].botId).toBe('gdax-2');
         expect(marketsComponent.markets[2].name).toBe(null);
     });
 });

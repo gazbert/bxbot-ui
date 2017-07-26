@@ -39,13 +39,13 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
         expectedNetworkConfig = new NetworkConfig(60, expectedErrorCodes, expectedErrorMsgs);
 
         expectedExchangeAdapter = new ExchangeAdapter('btce', 'BTC-e', 'com.gazbert.bxbot.adapter.BtceExchangeAdapter',
-            1, expectedNetworkConfig);
+            expectedNetworkConfig);
 
         expectedUpdatedExchangeAdapter = new ExchangeAdapter('btce', 'BTC-e', 'com.gazbert.bxbot.adapter.NewBtceExchangeAdapter',
-            2, expectedNetworkConfig);
+            expectedNetworkConfig);
 
         activatedRoute = new ActivatedRouteStub();
-        activatedRoute.testParams = {id: expectedExchangeAdapter.botId};
+        activatedRoute.testParams = {id: expectedExchangeAdapter.id};
 
         router = jasmine.createSpyObj('router', ['navigate']);
 

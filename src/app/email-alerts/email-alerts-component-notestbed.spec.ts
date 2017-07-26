@@ -25,10 +25,10 @@ describe('EmailAlertsComponent tests without TestBed', () => {
 
     beforeEach(done => {
 
-        expectedEmailAlertsConfig = new EmailAlertsConfig(2, true, 'smtp.gmail.com', 587,
+        expectedEmailAlertsConfig = new EmailAlertsConfig('gdax-2', true, 'smtp.gmail.com', 587,
             'yoda', 'DoOrDoNotThereIsNoTry', 'r2d2@naboo.space', 'master.yoda@dagobah.space');
 
-        expectedUpdatedEmailAlertsConfig = new EmailAlertsConfig(2, true, 'smtp.gmail.com', 587,
+        expectedUpdatedEmailAlertsConfig = new EmailAlertsConfig('gdax-2', true, 'smtp.gmail.com', 587,
             'yoda', 'aNewPassword', 'r2d2@naboo.space', 'yoda.the.boss@dagobah.space');
 
         activatedRoute = new ActivatedRouteStub();
@@ -51,7 +51,7 @@ describe('EmailAlertsComponent tests without TestBed', () => {
         expect(emailAlertsComponent.emailAlertsConfig).toBe(expectedEmailAlertsConfig);
 
         // paranoia ;-)
-        expect(emailAlertsComponent.emailAlertsConfig.id).toBe(2);
+        expect(emailAlertsComponent.emailAlertsConfig.id).toBe('gdax-2');
         expect(emailAlertsComponent.emailAlertsConfig.fromAddress).toBe('master.yoda@dagobah.space');
     });
 

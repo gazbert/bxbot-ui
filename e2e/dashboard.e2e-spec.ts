@@ -55,9 +55,9 @@ describe('Dashboard Tests', function () {
         expect(dashboardItems.get(0).getText()).toContain('Bitstamp');
     });
 
-    it('should display Huobi as last Dashboard Bot item', function () {
+    it('should display Kraken as last Dashboard Bot item', function () {
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
-        expect(dashboardItems.get(7).getText()).toContain('Huobi');
+        expect(dashboardItems.get(7).getText()).toContain('Kraken');
     });
 
     it('should render Gemini Bot specific link', function () {
@@ -65,7 +65,7 @@ describe('Dashboard Tests', function () {
         dashboardItems.get(2).click();
 
         browser.getCurrentUrl().then(function (url) {
-            expect(url).toContain('/bot/3');
+            expect(url).toContain('/bot/gemini-1');
         });
     });
 

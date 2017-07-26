@@ -10,6 +10,8 @@ import {ExchangeAdapter} from '../exchange-adapter.model';
 export interface ExchangeAdapterDataPromiseService {
 
     getExchangeAdapters(): Promise<ExchangeAdapter[]>;
-    getExchangeAdapterByBotId(id: number): Promise<ExchangeAdapter>;
+
+    getExchangeAdapterByBotId(id: string): Promise<ExchangeAdapter>;
+
     update(exchangeAdapter: ExchangeAdapter): Promise<ExchangeAdapter>;
 }
