@@ -1,13 +1,13 @@
 import {Observable} from 'rxjs/Observable';
 import {ExchangeAdapter, NetworkConfig} from '../exchange-adapter.model';
-import {ExchangeAdapterHttpDataObservableService} from '../exchange-adapter-http-data-observable.service';
+import {ExchangeAdapterDataObservableService} from '../exchange-adapter-data-observable.service';
 
 /**
  * Fake Exchange Adapter data service (Observable flavour) backend for testing.
  *
  * @author gazbert
  */
-export class FakeExchangeAdapterDataObservableService extends ExchangeAdapterHttpDataObservableService {
+export class FakeExchangeAdapterDataObservableService implements ExchangeAdapterDataObservableService {
 
     exchangeAdapters = SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS.map(e => e.clone());
 

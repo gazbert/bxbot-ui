@@ -1,12 +1,12 @@
 import {ExchangeAdapter, NetworkConfig} from '../exchange-adapter.model';
-import {ExchangeAdapterHttpDataPromiseService} from '../../exchange-adapter/promise';
+import {ExchangeAdapterDataPromiseService} from '../promise/exchange-adapter-data-promise.service';
 
 /**
  * Fake Exchange Adapter data service (Promise flavour) backend for testing.
  *
  * @author gazbert
  */
-export class FakeExchangeAdapterDataPromiseService extends ExchangeAdapterHttpDataPromiseService {
+export class FakeExchangeAdapterDataPromiseService implements ExchangeAdapterDataPromiseService {
 
     exchangeAdapters = SOME_FAKE_PROMISE_EXCHANGE_ADAPTERS.map(e => e.clone());
     lastPromise: Promise<any>;  // remember so we can spy on promise calls

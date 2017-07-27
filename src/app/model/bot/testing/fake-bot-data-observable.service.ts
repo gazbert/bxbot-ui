@@ -5,9 +5,11 @@ import {Observable} from 'rxjs/Observable';
 /**
  * Fake Bot data service (Observable flavour) backend for testing.
  *
- * Constructor is inherited from FakeBotDataObservableService - calling code should pass null when creating this object.
- * This seems very hacky.
- * Must be better way of doing this, but we have to inject concrete service classes into the components...
+ * Constructor is inherited from BotHttpDataObservableService - calling code should pass null when creating this object.
+ *
+ * This seems very hacky using extending BotHttpDataObservableService instead of implementing BotDataObservableService interface?
+ *
+ * Must be better way of doing this, but we have to inject concrete service classes into the DashboardComponent constructor.
  *
  * @author gazbert
  */
@@ -17,10 +19,10 @@ export class FakeBotDataObservableService extends BotHttpDataObservableService {
 
     getBots(): Observable<Bot[]> {
         return Observable.create(observer => {
-                observer.next(this.bots);
-                // call complete if you want to close this stream (like a promise)
-                observer.complete();
-            });
+            observer.next(this.bots);
+            // call complete if you want to close this stream (like a promise)
+            observer.complete();
+        });
     }
 
     getBot(id: string): Observable<Bot> {
