@@ -153,66 +153,6 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
         })));
     });
 
-    describe('when update() operation called for Bitstamp', () => {
-
-        let backend: MockBackend;
-        let service: BotDataService;
-        let response: Response;
-        let updatedBot: Bot;
-
-        beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
-
-            updatedBot = new Bot('bitstamp-1', 'Bitstamp v2', 'Stopped');
-
-            backend = be;
-            service = new BotDataService(http);
-            const options = new ResponseOptions({status: 200, body: {data: updatedBot}});
-            response = new Response(options);
-        }));
-
-        it('should return updated Bitstamp Bot Adapter on success', async(inject([], () => {
-            backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.update(updatedBot)
-                .subscribe(bot => {
-                    expect(bot).toBe(updatedBot);
-
-                    // paranoia!
-                    expect(bot.id).toBe('bitstamp-1');
-                    expect(bot.name).toBe('Bitstamp v2');
-                    expect(bot.status).toBe('Stopped');
-                });
-            // .toPromise();
-        })));
-
-        it('should NOT return Bot for 401 response', async(inject([], () => {
-            const resp = new Response(new ResponseOptions({status: 401}));
-            backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.update(updatedBot)
-                .do(() => {
-                    fail('should not respond with Bot');
-                })
-                .catch(err => {
-                    expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
-                    return Observable.of(null); // failure is the expected test result
-                });
-            // .toPromise();
-        })));
-
-        it('should treat 404 as an Observable error', async(inject([], () => {
-            const resp = new Response(new ResponseOptions({status: 404}));
-            backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.update(updatedBot)
-                .do(() => {
-                    fail('should not respond with Bot');
-                })
-                .catch(err => {
-                    expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
-                    return Observable.of(null); // failure is the expected test result
-                });
-            // .toPromise();
-        })));
-    });
-
     describe('when getBotByName() operation called with \'gdax\'', () => {
 
         let backend: MockBackend;

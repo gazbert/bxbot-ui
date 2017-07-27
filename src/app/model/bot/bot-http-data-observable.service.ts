@@ -99,20 +99,4 @@ export class BotHttpDataObservableService implements BotDataObservableService {
             // .map((r: Response) => r.json().data as Bot[])
             .catch(BotHttpDataObservableService.handleError);
     }
-
-    update(bot: Bot): Observable<Bot> {
-
-        const headers = new Headers({
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + AuthenticationService.getToken()
-        });
-
-        const url = `${this.botUrl}/${bot.id}`;
-        const body = JSON.stringify(bot);
-        const options = new RequestOptions({ headers: headers });
-
-        return this.http.put(url, body, options)
-            .map(BotHttpDataObservableService.extractData)
-            .catch(BotHttpDataObservableService.handleError);
-    }
 }
