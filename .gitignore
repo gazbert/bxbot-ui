@@ -48,7 +48,6 @@ Thumbs.db
 # Protractor test output
 _test-output
 
-# Transpiled main js/map
-src/main.js
-src/main.js.map
-
+# Transpiled js/map
+src/**/*.js
+*.js.map
