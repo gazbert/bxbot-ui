@@ -42,14 +42,6 @@ export class FakeBotDataObservableService extends BotHttpDataObservableService {
             observer.complete();
         });
     }
-
-    update(bot: Bot): Observable<Bot> {
-        return Observable.create(observer => {
-            observer.next(bot);
-            // call complete if you want to close this stream (like a promise)
-            observer.complete();
-        });
-    }
 }
 
 export const SOME_FAKE_OBSERVABLE_BOTS: Bot[] = [
