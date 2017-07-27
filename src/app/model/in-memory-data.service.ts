@@ -56,6 +56,68 @@ export class InMemoryDataService implements InMemoryDbService {
         ];
 
         /**
+         * The Trading Engines.
+         */
+        const engines = [
+            {
+                id: 'bitstamp-1',
+                botName: 'Bitstamp',
+                tradingCycleInterval: 30,
+                emergencyStopCurrency: 'BTC',
+                emergencyStopBalance: 0.5
+            },
+            {
+                id: 'gdax-1',
+                name: 'GDAX',
+                tradingCycleInterval: 10,
+                emergencyStopCurrency: 'BTC',
+                emergencyStopBalance: 0.8
+            },
+            {
+                id: 'gemini-1',
+                name: 'Gemini',
+                tradingCycleInterval: 30,
+                emergencyStopCurrency: 'ETH',
+                emergencyStopBalance: 10.5
+            },
+            {
+                id: 'itbit-1',
+                name: 'ItBit',
+                tradingCycleInterval: 10,
+                emergencyStopCurrency: 'XBT',
+                emergencyStopBalance: 3.1
+            },
+            {
+                id: 'btce-1',
+                name: 'BTC-e',
+                tradingCycleInterval: 120,
+                emergencyStopCurrency: 'BTC',
+                emergencyStopBalance: 0.9
+            },
+            {
+                id: 'okcoin-1',
+                name: 'OKCoin',
+                tradingCycleInterval: 60,
+                emergencyStopCurrency: 'BTC',
+                emergencyStopBalance: 2.1
+            },
+            {
+                id: 'bitfinex-1',
+                name: 'Bitfinex',
+                tradingCycleInterval: 3600,
+                emergencyStopCurrency: 'BTC',
+                emergencyStopBalance: 5.5
+            },
+            {
+                id: 'kraken-1',
+                name: 'Kraken',
+                tradingCycleInterval: 360,
+                emergencyStopCurrency: 'XBT',
+                emergencyStopBalance: 7.5
+            }
+        ];
+
+        /**
          * The Exchange Adapters.
          * There is a 1-1 relationship with the bot - backend server will always set 'id' to the same as the Bot 'id'.
          */
@@ -541,6 +603,6 @@ export class InMemoryDataService implements InMemoryDbService {
             }
         ];
 
-        return {bots, exchange_adapters, markets, trading_strategies, email_alerts};
+        return {bots, engines, exchange_adapters, markets, trading_strategies, email_alerts};
     }
 }
