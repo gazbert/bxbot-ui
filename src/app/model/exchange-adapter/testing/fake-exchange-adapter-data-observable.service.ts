@@ -11,14 +11,6 @@ export class FakeExchangeAdapterDataObservableService implements ExchangeAdapter
 
     exchangeAdapters = SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS.map(e => e.clone());
 
-    getExchangeAdapters(): Observable<ExchangeAdapter[]> {
-        return Observable.create(observer => {
-            observer.next(this.exchangeAdapters);
-            // call complete if you want to close this stream (like a promise)
-            observer.complete();
-        });
-    }
-
     getExchangeAdapterByBotId(id: string): Observable<ExchangeAdapter> {
         const exchangeAdapter = this.exchangeAdapters.find(e => e.id === id);
         return Observable.create(observer => {

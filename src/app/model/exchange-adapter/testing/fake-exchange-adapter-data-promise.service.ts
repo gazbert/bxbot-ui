@@ -11,10 +11,6 @@ export class FakeExchangeAdapterDataPromiseService implements ExchangeAdapterDat
     exchangeAdapters = SOME_FAKE_PROMISE_EXCHANGE_ADAPTERS.map(e => e.clone());
     lastPromise: Promise<any>;  // remember so we can spy on promise calls
 
-    getExchangeAdapters() {
-        return this.lastPromise = Promise.resolve<ExchangeAdapter[]>(this.exchangeAdapters);
-    }
-
     getExchangeAdapterByBotId(id: string) {
         const exchangeAdapter = this.exchangeAdapters.find(e => e.id === id);
         return this.lastPromise = Promise.resolve(exchangeAdapter);

@@ -69,10 +69,6 @@ function overrideExchangeAdapterServiceSetup() {
                 'com.gazbert.bxbot.adapter.BtceExchangeAdapter', expectedNetworkConfig);
         }
 
-        getExchangeAdapters(): Observable<ExchangeAdapter[]> {
-            return undefined;
-        }
-
         getExchangeAdapterByBotId(id: string): Observable<ExchangeAdapter> {
             return Observable.create(observer => {
                 observer.next(testExchangeAdapter);

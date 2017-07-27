@@ -35,20 +35,6 @@ export class ExchangeAdapterHttpDataPromiseService implements ExchangeAdapterDat
         return Promise.reject(error.message || error);
     }
 
-    getExchangeAdapters(): Promise<ExchangeAdapter[]> {
-
-        const headers = new Headers({
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + AuthenticationService.getToken()
-        });
-
-        return this.http
-            .get(this.exchangeAdaptersUrl, {headers: headers})
-            .toPromise()
-            .then(response => response.json().data as ExchangeAdapter[])
-            .catch(ExchangeAdapterHttpDataPromiseService.handleError);
-    }
-
     getExchangeAdapterByBotId(botId: string): Promise<ExchangeAdapter> {
         const url = this.exchangeAdaptersUrl + '/' + botId;
         return this.http.get(url)

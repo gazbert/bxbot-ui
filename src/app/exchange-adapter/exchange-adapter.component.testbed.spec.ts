@@ -69,10 +69,6 @@ function overrideExchangeAdapterServiceSetup() {
         update(exchangeAdapter: ExchangeAdapter): Promise<ExchangeAdapter> {
             return Promise.resolve(true).then(() => Object.assign(testExchangeAdapter, exchangeAdapter));
         }
-
-        getExchangeAdapters(): Promise<ExchangeAdapter[]> {
-            return undefined;
-        }
     }
 
     // The `id` value is irrelevant because it's ignored by service stub

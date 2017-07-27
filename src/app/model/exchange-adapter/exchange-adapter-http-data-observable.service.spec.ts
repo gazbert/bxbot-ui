@@ -49,59 +49,6 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
             expect(backend).not.toBeNull('MockBackend backend should be provided');
     }));
 
-    describe('when getExchangeAdapters() operation called', () => {
-
-        let backend: MockBackend;
-        let service: ExchangeAdapterDataService;
-        let fakeExchangeAdapters: ExchangeAdapter[];
-        let response: Response;
-
-        beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
-            backend = be;
-            service = new ExchangeAdapterDataService(http);
-            fakeExchangeAdapters = makeExchangeAdapterData();
-            const options = new ResponseOptions({status: 200, body: {data: fakeExchangeAdapters}});
-            response = new Response(options);
-        }));
-
-        it('should return 3 Exchange Adapters ', async(inject([], () => {
-            backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.getExchangeAdapters()
-                .subscribe(exchangeAdapters => {
-                    expect(exchangeAdapters.length).toBe(fakeExchangeAdapters.length,
-                        'should have returned 3 Exchange Adapters');
-
-                    // basic sanity check
-                    expect(exchangeAdapters[0].id).toBe('bitstamp');
-                    expect(exchangeAdapters[1].id).toBe('gdax');
-                    expect(exchangeAdapters[2].id).toBe('gemini');
-                });
-                // .toPromise();
-        })));
-
-        it('should handle returning no Exchange Adapters', async(inject([], () => {
-            const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
-            backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.getExchangeAdapters()
-                .subscribe(exchangeAdapters => expect(exchangeAdapters.length).toBe(0, 'should have no Exchange Adapters'));
-                // .toPromise();
-        })));
-
-        it('should treat 404 as an Observable error', async(inject([], () => {
-            const resp = new Response(new ResponseOptions({status: 404}));
-            backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.getExchangeAdapters()
-                .do(() => {
-                    fail('should not respond with Exchange Adapters');
-                })
-                .catch(err => {
-                    expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
-                    return Observable.of(null); // failure is the expected test result
-                });
-                // .toPromise();
-        })));
-    });
-
     describe('when getExchangeAdapterByBotId() operation called with \'2\'', () => {
 
         let backend: MockBackend;

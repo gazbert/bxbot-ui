@@ -38,43 +38,6 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
             expect(backend).not.toBeNull('MockBackend should be provided');
     }));
 
-    describe('when getExchangeAdapters() operation called', () => {
-
-        let backend: MockBackend;
-        let service: ExchangeAdapterDataService;
-        let fakeExchangeAdapters: ExchangeAdapter[];
-        let response: Response;
-
-        beforeEach(inject([Http, XHRBackend], (http: Http, mockBackend: MockBackend) => {
-            backend = mockBackend;
-            service = new ExchangeAdapterDataService(http);
-            fakeExchangeAdapters = makeExchangeAdapterData();
-            const options = new ResponseOptions({status: 200, body: {data: fakeExchangeAdapters}});
-            response = new Response(options);
-        }));
-
-        it('should return 3 Exchanges Adapters', async(inject([], () => {
-            backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.getExchangeAdapters()
-                .then(exchangeAdapters => {
-                    expect(exchangeAdapters.length).toBe(fakeExchangeAdapters.length,
-                        'should have returned 3 Exchange Adapters');
-
-                    // basic sanity check
-                    expect(exchangeAdapters[0].id).toBe('bitstamp');
-                    expect(exchangeAdapters[1].id).toBe('gdax');
-                    expect(exchangeAdapters[2].id).toBe('gemini');
-                });
-        })));
-
-        it('should handle returning no Exchange Adapters', async(inject([], () => {
-            const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
-            backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.getExchangeAdapters()
-                .then(exchangeAdapters => expect(exchangeAdapters.length).toBe(0, 'should have no Exchange Adapters'));
-        })));
-    });
-
     describe('when getExchangeAdapterByBotId() operation called with \'gdax\'', () => {
 
         let backend: MockBackend;

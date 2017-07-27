@@ -59,18 +59,6 @@ export class ExchangeAdapterHttpDataObservableService implements ExchangeAdapter
         }
     }
 
-    getExchangeAdapters(): Observable<ExchangeAdapter[]> {
-
-        const headers = new Headers({
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + AuthenticationService.getToken()
-        });
-
-        return this.http.get(this.exchangeAdaptersUrl, {headers: headers})
-            .map(ExchangeAdapterHttpDataObservableService.extractData)
-            .catch(ExchangeAdapterHttpDataObservableService.handleError);
-    }
-
     getExchangeAdapterByBotId(botId: string): Observable<ExchangeAdapter> {
 
         const headers = new Headers({
