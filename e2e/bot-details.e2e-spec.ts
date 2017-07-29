@@ -30,14 +30,29 @@ describe('Bot Details Tests', function () {
         expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
 
         const tabLinks = element.all(by.css('li'));
-        expect(tabLinks.count()).toBe(4);
-        expect(tabLinks.first().getText()).toEqual('Exchange Adapter');
-        expect(tabLinks.get(1).getText()).toEqual('Markets');
-        expect(tabLinks.get(2).getText()).toEqual('Trading Strategies');
+        expect(tabLinks.count()).toBe(5);
+        expect(tabLinks.first().getText()).toEqual('Engine');
+        expect(tabLinks.get(1).getText()).toEqual('Exchange Adapter');
+        expect(tabLinks.get(2).getText()).toEqual('Markets');
+        expect(tabLinks.get(3).getText()).toEqual('Trading Strategies');
         expect(tabLinks.last().getText()).toEqual('Email Alerts');
 
         const tabItems = element.all(by.css('app-bxbot-ui-tab'));
-        expect(tabItems.count()).toBe(4);
+        expect(tabItems.count()).toBe(5);
+    });
+
+    it('should render GDAX Engine Details', function () {
+
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+        dashboardItems.get(1).click();
+        expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
+
+        expect(element(by.id('botId')).getAttribute('value')).toBe('gdax-1');
+        // expect(element(by.id('botName')).getAttribute('value')).toBe('GDAX'); // FIXME - not working!
+        expect(element(by.id('tradingCycleInterval')).getAttribute('value')).toBe('10');
+        expect(element(by.id('emergencyStopCurrency')).getAttribute('value')).toBe('BTC');
+        expect(element(by.id('emergencyStopBalance')).getAttribute('value')).toBe('0.8');
+
     });
 
     it('should render GDAX Exchange Adapter Details', function () {
@@ -45,6 +60,9 @@ describe('Bot Details Tests', function () {
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(1).click();
         expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
+
+        const tabLinks = element.all(by.css('li'));
+        tabLinks.get(1).click();
 
         expect(element(by.id('adapterName')).getAttribute('value')).toBe('GDAX REST API Adapter');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
@@ -62,7 +80,7 @@ describe('Bot Details Tests', function () {
         expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
 
         const tabLinks = element.all(by.css('li'));
-        tabLinks.get(1).click();
+        tabLinks.get(2).click();
 
         // Market 1
         expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
@@ -86,7 +104,7 @@ describe('Bot Details Tests', function () {
         expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
 
         const tabLinks = element.all(by.css('li'));
-        tabLinks.get(2).click();
+        tabLinks.get(3).click();
 
         // Strat 1
         expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');
@@ -110,7 +128,7 @@ describe('Bot Details Tests', function () {
         expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
 
         const tabLinks = element.all(by.css('li'));
-        tabLinks.get(3).click();
+        tabLinks.get(4).click();
 
         expect(element(by.id('alertsEnabled')).getAttribute('value')).toBe('on');
         expect(element(by.id('accountUsername')).getAttribute('value')).toBe('solo');

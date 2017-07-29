@@ -15,4 +15,6 @@ export interface BotDataObservableService {
     getBot(id: string): Observable<Bot>;
 
     getBotByName(name: string): Observable<Bot[]>;
+
+    // TODO - need to add updateBotName(id: string, newName: string)
 }

@@ -24,7 +24,7 @@ import {Engine} from './engine.model';
 @Injectable()
 export class EngineHttpDataPromiseService implements EngineDataPromiseService {
 
-    private engineUrl = AppComponent.REST_API_BASE_URL + '/engine';
+    private engineUrl = AppComponent.REST_API_BASE_URL + '/engines';
 
     constructor(private http: Http) {
     }

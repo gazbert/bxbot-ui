@@ -30,7 +30,7 @@ describe('Trading Strategy Tests', function () {
         expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
 
         const tabLinks = element.all(by.css('li'));
-        tabLinks.get(2).click();
+        tabLinks.get(3).click();
 
         // Strat 1
         expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');
@@ -69,7 +69,7 @@ describe('Trading Strategy Tests', function () {
         const saveButton = element(by.id('strategySaveButton'));
         saveButton.click();
         dashboardItems.get(3).click();
-        tabLinks.get(2).click();
+        tabLinks.get(3).click();
 
         // Strat 1 updated
         expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe(newStrategyName);
@@ -91,7 +91,7 @@ describe('Trading Strategy Tests', function () {
         expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
 
         const tabLinks = element.all(by.css('li'));
-        tabLinks.get(2).click();
+        tabLinks.get(3).click();
 
         // Strat 1
         expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');
@@ -130,7 +130,7 @@ describe('Trading Strategy Tests', function () {
         const cancelButton = element(by.id('strategyCancelButton'));
         cancelButton.click();
         dashboardItems.get(3).click();
-        tabLinks.get(2).click();
+        tabLinks.get(3).click();
 
         // Strat 1 unchanged
         expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');
@@ -154,7 +154,7 @@ describe('Trading Strategy Tests', function () {
         expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
 
         const tabLinks = element.all(by.css('li'));
-        tabLinks.get(2).click();
+        tabLinks.get(3).click();
 
         // Strat 1
         expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');
@@ -196,7 +196,7 @@ describe('Trading Strategy Tests', function () {
         const saveButton = element(by.id('strategySaveButton'));
         saveButton.click();
         dashboardItems.get(3).click();
-        tabLinks.get(2).click();
+        tabLinks.get(3).click();
 
         // Strat 1 unchanged
         expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');
@@ -225,7 +225,7 @@ describe('Trading Strategy Tests', function () {
         expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
 
         const tabLinks = element.all(by.css('li'));
-        tabLinks.get(2).click();
+        tabLinks.get(3).click();
 
         // Strat 1
         expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');
@@ -249,7 +249,7 @@ describe('Trading Strategy Tests', function () {
         const saveButton = element(by.id('strategySaveButton'));
         saveButton.click();
         dashboardItems.get(3).click();
-        tabLinks.get(2).click();
+        tabLinks.get(3).click();
 
         // Original Strat 1 'Long Scalper' deleted; new Strat 1 is 'MACD RSI Indicator' (previously Strat 2).
         expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('MACD RSI Indicator');
@@ -271,7 +271,7 @@ describe('Trading Strategy Tests', function () {
         expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
 
         const tabLinks = element.all(by.css('li'));
-        tabLinks.get(2).click();
+        tabLinks.get(3).click();
 
         // Strat 1
         expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');
@@ -321,7 +321,7 @@ describe('Trading Strategy Tests', function () {
         expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
 
         const tabLinks = element.all(by.css('li'));
-        tabLinks.get(2).click();
+        tabLinks.get(3).click();
 
         // Strat 1
         expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');
@@ -386,7 +386,7 @@ describe('Trading Strategy Tests', function () {
         expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
 
         const tabLinks = element.all(by.css('li'));
-        tabLinks.get(2).click();
+        tabLinks.get(3).click();
 
         // Strat 1
         expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');

@@ -15,10 +15,12 @@ import {ExchangeAdapterModule} from './exchange-adapter/exchange-adapter.module'
 import {EmailAlertsModule} from './email-alerts/email-alerts.module';
 import {AppRoutingModule} from './app-routing.module';
 import {EmailAlertsHttpDataPromiseService} from './model/email-alerts';
+import {EngineHttpDataPromiseService} from './model/engine';
 import {TradingStrategiesModule} from './trading-strategies/trading-strategies.module';
 import {TradingStrategyHttpDataPromiseService} from './model/trading-strategy/trading-strategy-http-data-promise.service';
 import {LoginModule} from './login/login.module';
 import {AuthenticationService, CanActivateAuthGuard} from './shared';
+import {EngineModule} from './engine/engine.module';
 
 /**
  * BX-bot UI main module.
@@ -40,6 +42,7 @@ import {AuthenticationService, CanActivateAuthGuard} from './shared';
         EmailAlertsModule,
         BotDetailsModule,
         TradingStrategiesModule,
+        EngineModule,
         AppRoutingModule,
         LoginModule
     ],
@@ -53,6 +56,7 @@ import {AuthenticationService, CanActivateAuthGuard} from './shared';
         MarketHttpDataPromiseService,
         TradingStrategyHttpDataPromiseService,
         EmailAlertsHttpDataPromiseService,
+        EngineHttpDataPromiseService,
         AuthenticationService,
         CanActivateAuthGuard
     ],

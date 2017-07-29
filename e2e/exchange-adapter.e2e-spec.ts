@@ -31,6 +31,9 @@ describe('Exchange Adapter Tests', function () {
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
 
+        const tabLinks = element.all(by.css('li'));
+        tabLinks.get(1).click();
+
         expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
@@ -105,6 +108,9 @@ describe('Exchange Adapter Tests', function () {
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
+
+        const tabLinks = element.all(by.css('li'));
+        tabLinks.get(1).click();
 
         expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
@@ -181,6 +187,9 @@ describe('Exchange Adapter Tests', function () {
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
 
+        const tabLinks = element.all(by.css('li'));
+        tabLinks.get(1).click();
+
         expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
@@ -227,6 +236,9 @@ describe('Exchange Adapter Tests', function () {
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
 
+        const tabLinks = element.all(by.css('li'));
+        tabLinks.get(1).click();
+
         expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
@@ -264,6 +276,9 @@ describe('Exchange Adapter Tests', function () {
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
+
+        const tabLinks = element.all(by.css('li'));
+        tabLinks.get(1).click();
 
         expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
@@ -311,6 +326,9 @@ describe('Exchange Adapter Tests', function () {
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
 
+        const tabLinks = element.all(by.css('li'));
+        tabLinks.get(1).click();
+
         expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
@@ -347,6 +365,9 @@ describe('Exchange Adapter Tests', function () {
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
+
+        const tabLinks = element.all(by.css('li'));
+        tabLinks.get(1).click();
 
         expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');

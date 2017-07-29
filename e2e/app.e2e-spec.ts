@@ -35,7 +35,7 @@ describe('Miscellaneous Scenario Tests', function () {
         expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
 
         const tabLinks = element.all(by.css('li'));
-        tabLinks.get(2).click();
+        tabLinks.get(3).click();
 
         // Existing Strat 1
         expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');
@@ -77,7 +77,7 @@ describe('Miscellaneous Scenario Tests', function () {
         let saveButton = element(by.id('strategySaveButton'));
         saveButton.click();
         dashboardItems.get(3).click();
-        tabLinks.get(1).click();
+        tabLinks.get(2).click();
 
         // Existing Market fields
         expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
@@ -96,7 +96,7 @@ describe('Miscellaneous Scenario Tests', function () {
         saveButton = element(by.id('marketSaveButton'));
         saveButton.click();
         dashboardItems.get(3).click();
-        tabLinks.get(1).click();
+        tabLinks.get(2).click();
 
         // Market updated with new strat
         expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('false'); // must be better way?

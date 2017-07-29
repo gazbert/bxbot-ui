@@ -1,0 +1,85 @@
+<!--
+    Template-driven version of Engine form.
+ -->
+<div *ngIf="engine">
+    <form *ngIf="active" #engineForm="ngForm" novalidate (ngSubmit)="save(engineForm.valid)">
+
+        <!-- Bot Id -->
+        <div class="row">
+            <div class="form-group col-sm-6">
+                <label for="botId">Bot Id</label>
+                <input [(ngModel)]="engine.id" name="botId" id="botId" class="form-control" required
+                       #botId="ngModel" disabled>
+            </div>
+        </div>
+
+        <!-- Bot Name -->
+        <div class="row">
+            <div class="form-group col-sm-6">
+                <label for="botName">Bot Name</label>
+                <input [(ngModel)]="engine.botName" name="botName" placeholder="My Bot Name"
+                       id="botName" class="form-control" required maxlength="120" #adapterName="ngModel"
+                       pattern="[a-zA-Z0-9_\- ]*">
+                <div id="invalidBotName"
+                     *ngIf="formErrors['botName'].length > 0" class="alert alert-danger">
+                    {{ formErrors['botName']}}
+                </div>
+            </div>
+        </div>
+
+        <!-- Trading Cycle Interval -->
+        <div class="row">
+            <div class="form-group col-sm-6">
+                <label for="tradingCycleInterval">Trading Cycle Interval (secs)</label>
+                <input [(ngModel)]="engine.tradingCycleInterval" id="tradingCycleInterval"
+                       name="tradingCycleInterval" class="form-control" placeholder="60" required
+                       pattern="\d+" #tradingCycleInterval="ngModel"/>
+                <div id="invalidTradingCycleInterval"
+                     *ngIf="formErrors['tradingCycleInterval'].length > 0" class="alert alert-danger">
+                    {{ formErrors['tradingCycleInterval']}}
+                </div>
+            </div>
+        </div>
+
+        <!-- Emergency Stop Currency -->
+        <div class="row">
+            <div class="col-sm-6 form-group">
+                <label for="emergencyStopCurrency">Emergency Stop Currency</label>
+                <input [(ngModel)]="engine.emergencyStopCurrency"
+                       class="form-control" id="emergencyStopCurrency"
+                       name="emergencyStopCurrency" #emergencyStopCurrency="ngModel" required maxlength="3"
+                       pattern="^[A-Z]{3}$" placeholder="BTC"/>
+                <div id="invalidEmergencyStopCurrency"
+                     *ngIf="formErrors['emergencyStopCurrency'].length > 0" class="alert alert-danger">
+                    {{ formErrors['emergencyStopCurrency'] }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Emergency Stop Balance -->
+        <div class="row">
+            <div class="col-sm-6 form-group">
+                <label for="emergencyStopBalance">Emergency Stop Balance</label>
+                <input [(ngModel)]="engine.emergencyStopBalance"
+                       class="form-control" id="emergencyStopBalance"
+                       name="emergencyStopBalance" #emergencyStopCurrency="ngModel" required
+                       pattern="^[0-9]*.[0-9]*$" placeholder="0.4"/>
+                <div id="invalidemergencyStopBalance"
+                     *ngIf="formErrors['emergencyStopBalance'].length > 0" class="alert alert-danger">
+                    {{ formErrors['emergencyStopBalance'] }}
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <hr>
+        </div>
+        <div>
+            <!-- Must have type for button else Chrome reloads entire app on Cancel click!
+                 http://stackoverflow.com/questions/38120756/angular2-router-navigate-refresh-page
+             -->
+            <button id="engineCancelButton" type="button" (click)="cancel()" class="btn btn-default">Cancel</button>
+            <button id="engineSaveButton" class="btn btn-primary">Save</button>
+        </div>
+    </form>
+</div>

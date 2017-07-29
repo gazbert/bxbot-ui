@@ -103,7 +103,7 @@ export class ExchangeAdapterComponent implements OnInit, AfterViewChecked {
     }
 
     updateFormErrors(): void {
-            this.formErrors['adapterName'] = '';
+        this.formErrors['adapterName'] = '';
         this.formErrors['className'] = '';
         this.formErrors['connectionTimeout'] = '';
 

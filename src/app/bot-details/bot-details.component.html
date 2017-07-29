@@ -1,6 +1,8 @@
 <div *ngIf="bot" class="container module-bootstrap">
     <h2>{{bot.name}} Details</h2>
     <app-bxbot-ui-tabs>
+        <app-bxbot-ui-tab [id]="bot.id" [title]="'engine'"><app-bxbot-ui-engine></app-bxbot-ui-engine></app-bxbot-ui-tab>
+
         <app-bxbot-ui-tab [id]="bot.id" [title]="'exchange adapter'"><app-bxbot-ui-exchange-adapter-rx></app-bxbot-ui-exchange-adapter-rx></app-bxbot-ui-tab>
         <!--<app-bxbot-ui-tab [id]="bot.id" [title]="'exchange adapter'"><app-bxbot-ui-exchange-adapter></app-bxbot-ui-exchange-adapter></app-bxbot-ui-tab>-->
 

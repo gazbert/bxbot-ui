@@ -57,6 +57,7 @@ export class InMemoryDataService implements InMemoryDbService {
 
         /**
          * The Trading Engines.
+         * There is a 1-1 relationship with the bot - backend server will always set 'id' to the same as the Bot 'id'.
          */
         const engines = [
             {

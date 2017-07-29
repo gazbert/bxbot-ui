@@ -8,6 +8,7 @@ import {MarketsModule} from '../markets/markets.module';
 import {EmailAlertsModule} from '../email-alerts/email-alerts.module';
 import {SharedModule} from '../shared/shared.module';
 import {TradingStrategiesModule} from '../trading-strategies/trading-strategies.module';
+import {EngineModule} from '../engine/engine.module';
 
 const routes: Routes = [
     {
@@ -27,6 +28,7 @@ const routes: Routes = [
         EmailAlertsModule,
         MarketsModule,
         TradingStrategiesModule,
+        EngineModule,
         SharedModule,
         RouterModule.forChild(routes),
     ],

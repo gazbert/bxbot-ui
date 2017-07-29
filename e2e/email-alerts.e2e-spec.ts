@@ -30,7 +30,7 @@ describe('Email Alerts Config Tests', function () {
         expect(element(by.css('h2')).getText()).toEqual('Gemini Details');
 
         const tabLinks = element.all(by.css('li'));
-        tabLinks.get(3).click();
+        tabLinks.get(4).click();
 
         expect(element(by.id('alertsEnabled')).getAttribute('value')).toBe('on');
         expect(element(by.id('accountUsername')).getAttribute('value')).toBe('c3po');
@@ -76,7 +76,7 @@ describe('Email Alerts Config Tests', function () {
         const saveButton = element(by.id('emailAlertSaveButton'));
         saveButton.click();
         dashboardItems.get(2).click();
-        tabLinks.get(3).click();
+        tabLinks.get(4).click();
 
         // Email Alerts config updated
         expect(element(by.id('alertsEnabled')).getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
@@ -93,7 +93,7 @@ describe('Email Alerts Config Tests', function () {
         expect(element(by.css('h2')).getText()).toEqual('Gemini Details');
 
         const tabLinks = element.all(by.css('li'));
-        tabLinks.get(3).click();
+        tabLinks.get(4).click();
 
         expect(element(by.id('alertsEnabled')).getAttribute('value')).toBe('on');
         expect(element(by.id('accountUsername')).getAttribute('value')).toBe('c3po');
@@ -139,7 +139,7 @@ describe('Email Alerts Config Tests', function () {
         const cancelButton = element(by.id('emailAlertCancelButton'));
         cancelButton.click();
         dashboardItems.get(2).click();
-        tabLinks.get(3).click();
+        tabLinks.get(4).click();
 
         // Email Alerts config unchanged
         expect(element(by.id('alertsEnabled')).getAttribute('value')).toBe('on');
@@ -156,7 +156,7 @@ describe('Email Alerts Config Tests', function () {
         expect(element(by.css('h2')).getText()).toEqual('Gemini Details');
 
         const tabLinks = element.all(by.css('li'));
-        tabLinks.get(3).click();
+        tabLinks.get(4).click();
 
         expect(element(by.id('alertsEnabled')).getAttribute('value')).toBe('on');
         expect(element(by.id('accountUsername')).getAttribute('value')).toBe('c3po');

@@ -30,7 +30,7 @@ describe('Market Screen Tests', function () {
         expect(element(by.css('h2')).getText()).toEqual('BTC-e Details');
 
         const tabLinks = element.all(by.css('li'));
-        tabLinks.get(1).click();
+        tabLinks.get(2).click();
 
         // Market 1
         expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
@@ -85,7 +85,7 @@ describe('Market Screen Tests', function () {
         const saveButton = element(by.id('marketSaveButton'));
         saveButton.click();
         dashboardItems.get(4).click();
-        tabLinks.get(1).click();
+        tabLinks.get(2).click();
 
         // Market 1 updated
         expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('true');
@@ -109,7 +109,7 @@ describe('Market Screen Tests', function () {
         expect(element(by.css('h2')).getText()).toEqual('BTC-e Details');
 
         const tabLinks = element.all(by.css('li'));
-        tabLinks.get(1).click();
+        tabLinks.get(2).click();
 
         expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
@@ -156,7 +156,7 @@ describe('Market Screen Tests', function () {
         const cancelButton = element(by.id('marketCancelButton'));
         cancelButton.click();
         dashboardItems.get(4).click();
-        tabLinks.get(1).click();
+        tabLinks.get(2).click();
 
         // Market 1 unchanged
         expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
@@ -180,7 +180,7 @@ describe('Market Screen Tests', function () {
         expect(element(by.css('h2')).getText()).toEqual('BTC-e Details');
 
         const tabLinks = element.all(by.css('li'));
-        tabLinks.get(1).click();
+        tabLinks.get(2).click();
 
         // Market 1
         expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
@@ -238,7 +238,7 @@ describe('Market Screen Tests', function () {
         const saveButton = element(by.id('marketSaveButton'));
         saveButton.click();
         dashboardItems.get(4).click();
-        tabLinks.get(1).click();
+        tabLinks.get(2).click();
 
         // Market 1 unchanged
         expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
@@ -269,7 +269,7 @@ describe('Market Screen Tests', function () {
         expect(element(by.css('h2')).getText()).toEqual('BTC-e Details');
 
         const tabLinks = element.all(by.css('li'));
-        tabLinks.get(1).click();
+        tabLinks.get(2).click();
 
         // Market 1
         expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
@@ -293,7 +293,7 @@ describe('Market Screen Tests', function () {
         const saveButton = element(by.id('marketSaveButton'));
         saveButton.click();
         dashboardItems.get(4).click();
-        tabLinks.get(1).click();
+        tabLinks.get(2).click();
 
         // Original Market 1 'BTC/USD' deleted; new Market 1 is 'LTC/USD' (previously Market 2).
         expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('true');
@@ -317,7 +317,7 @@ describe('Market Screen Tests', function () {
         expect(element(by.css('h2')).getText()).toEqual('BTC-e Details');
 
         const tabLinks = element.all(by.css('li'));
-        tabLinks.get(1).click();
+        tabLinks.get(2).click();
 
         expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
@@ -389,7 +389,7 @@ describe('Market Screen Tests', function () {
         expect(element(by.css('h2')).getText()).toEqual('BTC-e Details');
 
         const tabLinks = element.all(by.css('li'));
-        tabLinks.get(1).click();
+        tabLinks.get(2).click();
 
         // Market 1
         expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
