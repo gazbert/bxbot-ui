@@ -37,7 +37,7 @@ export class BotHttpDataObservableService implements BotDataObservableService {
     constructor(private http: Http) {
     }
 
-    private static handleError (error: any) {
+    private static handleError(error: any) {
         // In a real world app, we might use a remote logging infrastructure
         // We'd also dig deeper into the error to get a better message
         // Redirect to friendly error page?
@@ -98,5 +98,24 @@ export class BotHttpDataObservableService implements BotDataObservableService {
             .map(BotHttpDataObservableService.extractData)
             // .map((r: Response) => r.json().data as Bot[])
             .catch(BotHttpDataObservableService.handleError);
+    }
+
+    updateBotName(id: string, name: string) {
+
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + AuthenticationService.getToken()
+        });
+
+        this.getBot(id)
+            .subscribe((bot) => {
+                bot.name = name;
+                const url = this.botUrl + '/' + bot.id;
+                this.http
+                    .put(url, JSON.stringify(bot), {headers: headers})
+                    .toPromise()
+                    .then(response => response.json().data as Bot)
+                    .catch(BotHttpDataObservableService.handleError);
+            });
     }
 }

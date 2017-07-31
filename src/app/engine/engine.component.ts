@@ -1,8 +1,8 @@
 import {OnInit, Component, ViewChild, AfterViewChecked} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {Engine} from '../model/engine';
-import {EngineHttpDataPromiseService} from '../model/engine/engine-http-data-promise.service';
+import {Engine, EngineHttpDataPromiseService} from '../model/engine';
+import {BotHttpDataObservableService} from '../model/bot';
 
 /**
  * Template-driven version of the Engine form.
@@ -44,7 +44,8 @@ export class EngineComponent implements OnInit, AfterViewChecked {
         },
     };
 
-    constructor(private engineDataService: EngineHttpDataPromiseService, private route: ActivatedRoute,
+    constructor(private engineDataService: EngineHttpDataPromiseService,
+                private botDataService: BotHttpDataObservableService, private route: ActivatedRoute,
                 private router: Router) {
     }
 
@@ -70,7 +71,10 @@ export class EngineComponent implements OnInit, AfterViewChecked {
     save(isValid: boolean): void {
         if (isValid) {
             this.engineDataService.update(this.engine)
-                .then((/* TODO - call BotHttpDataObservableService.updateBotName() if botName has been changed */) => this.goToDashboard());
+                .then( () => {
+                    this.botDataService.updateBotName(this.engine.id, this.engine.botName);
+                    this.goToDashboard();
+                });
         } else {
             this.onValueChanged(); // force validation for new/untouched fields
         }
