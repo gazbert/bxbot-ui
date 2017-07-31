@@ -1,12 +1,11 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers, Response, RequestOptions} from '@angular/http';
+import {Headers, Http, RequestOptions, Response} from '@angular/http';
 import {AppComponent} from '../../app.component';
 import {BotDataObservableService} from './bot-data-observable.service';
 import {AuthenticationService} from '../../shared';
 import {Bot} from './bot.model';
 import {Observable} from 'rxjs/Observable';
 import {isObject} from 'rxjs/util/isObject';
-
 // Most RxJS operators are not included in Angular's base Observable implementation.
 // The base implementation includes only what Angular itself requires.
 // If you want more RxJS features, you need to explicitly import rxjs operators, else you get runtime error, e.g.
@@ -100,22 +99,19 @@ export class BotHttpDataObservableService implements BotDataObservableService {
             .catch(BotHttpDataObservableService.handleError);
     }
 
-    updateBotName(id: string, name: string) {
+    update(bot: Bot): Observable<Bot> {
 
         const headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        this.getBot(id)
-            .subscribe((bot) => {
-                bot.name = name;
-                const url = this.botUrl + '/' + bot.id;
-                this.http
-                    .put(url, JSON.stringify(bot), {headers: headers})
-                    .toPromise()
-                    .then(response => response.json().data as Bot)
-                    .catch(BotHttpDataObservableService.handleError);
-            });
+        const url = this.botUrl + '/' + bot.id;
+        const body = JSON.stringify(bot);
+        const options = new RequestOptions({headers: headers});
+
+        return this.http.put(url, body, options)
+            .map(BotHttpDataObservableService.extractData)
+            .catch(BotHttpDataObservableService.handleError);
     }
 }

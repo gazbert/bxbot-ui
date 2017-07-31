@@ -1,4 +1,4 @@
-import {OnInit, Component, ViewChild, AfterViewChecked} from '@angular/core';
+import {AfterViewChecked, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {Engine, EngineHttpDataPromiseService} from '../model/engine';
@@ -44,6 +44,8 @@ export class EngineComponent implements OnInit, AfterViewChecked {
         },
     };
 
+    private errorMessage: string;
+
     constructor(private engineDataService: EngineHttpDataPromiseService,
                 private botDataService: BotHttpDataObservableService, private route: ActivatedRoute,
                 private router: Router) {
@@ -71,9 +73,13 @@ export class EngineComponent implements OnInit, AfterViewChecked {
     save(isValid: boolean): void {
         if (isValid) {
             this.engineDataService.update(this.engine)
-                .then( () => {
-                    this.botDataService.updateBotName(this.engine.id, this.engine.botName);
-                    this.goToDashboard();
+                .then(() => {
+                    this.botDataService.getBot(this.engine.id).subscribe((bot) => {
+                            bot.name = this.engine.botName;
+                            this.botDataService.update(bot).toPromise()
+                                .then(() => this.goToDashboard());
+                        },
+                        error => this.errorMessage = <any>error); // TODO - Show meaningful error to user?
                 });
         } else {
             this.onValueChanged(); // force validation for new/untouched fields
