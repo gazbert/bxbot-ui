@@ -18,7 +18,7 @@
             <div class="form-group col-sm-6">
                 <label for="botName">Bot Name</label>
                 <input [(ngModel)]="engine.botName" name="botName" placeholder="My Bot Name"
-                       id="botName" class="form-control" required maxlength="120" #adapterName="ngModel"
+                       id="botName" class="form-control" required maxlength="120" #botName="ngModel"
                        pattern="[a-zA-Z0-9_\- ]*">
                 <div id="invalidBotName"
                      *ngIf="formErrors['botName'].length > 0" class="alert alert-danger">

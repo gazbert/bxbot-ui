@@ -69,49 +69,49 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 'gdax-1',
-                name: 'GDAX',
+                botName: 'GDAX',
                 tradingCycleInterval: 10,
                 emergencyStopCurrency: 'BTC',
                 emergencyStopBalance: 0.8
             },
             {
                 id: 'gemini-1',
-                name: 'Gemini',
+                botName: 'Gemini',
                 tradingCycleInterval: 30,
                 emergencyStopCurrency: 'ETH',
                 emergencyStopBalance: 10.5
             },
             {
                 id: 'itbit-1',
-                name: 'ItBit',
+                botName: 'ItBit',
                 tradingCycleInterval: 10,
                 emergencyStopCurrency: 'XBT',
                 emergencyStopBalance: 3.1
             },
             {
                 id: 'btce-1',
-                name: 'BTC-e',
+                botName: 'BTC-e',
                 tradingCycleInterval: 120,
                 emergencyStopCurrency: 'BTC',
                 emergencyStopBalance: 0.9
             },
             {
                 id: 'okcoin-1',
-                name: 'OKCoin',
+                botName: 'OKCoin',
                 tradingCycleInterval: 60,
                 emergencyStopCurrency: 'BTC',
                 emergencyStopBalance: 2.1
             },
             {
                 id: 'bitfinex-1',
-                name: 'Bitfinex',
+                botName: 'Bitfinex',
                 tradingCycleInterval: 3600,
                 emergencyStopCurrency: 'BTC',
                 emergencyStopBalance: 5.5
             },
             {
                 id: 'kraken-1',
-                name: 'Kraken',
+                botName: 'Kraken',
                 tradingCycleInterval: 360,
                 emergencyStopCurrency: 'XBT',
                 emergencyStopBalance: 7.5
