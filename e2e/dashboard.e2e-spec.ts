@@ -1,4 +1,7 @@
-/******************************************************************************
+import {browser, element, by} from 'protractor';
+
+/**
+ * Dashboard tests.
  *
  * End 2 End Protractor tests (using Jasmine) for testing Dashboard screen.
  * See: http://www.protractortest.org/#/tutorial
@@ -6,14 +9,6 @@
  * TODO - Use by.repeater()/model() instead of by.css() once Angular implement it for lists:
  * https://angular.io/docs/ts/latest/guide/upgrade.html
  * https://github.com/angular/protractor/issues/3205
- *
- * TODO - Add test for Dashboard search/filter box
- *
- ******************************************************************************/
-import {browser, element, by} from 'protractor';
-
-/**
- * Dashboard tests.
  *
  * @author gazbert
  */

@@ -64,7 +64,7 @@
                        class="form-control" id="emergencyStopBalance"
                        name="emergencyStopBalance" #emergencyStopCurrency="ngModel" required
                        pattern="^[0-9]*.[0-9]*$" placeholder="0.4"/>
-                <div id="invalidemergencyStopBalance"
+                <div id="invalidEmergencyStopBalance"
                      *ngIf="formErrors['emergencyStopBalance'].length > 0" class="alert alert-danger">
                     {{ formErrors['emergencyStopBalance'] }}
                 </div>

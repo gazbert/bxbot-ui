@@ -1,19 +1,13 @@
-/**********************************************************************************
- *
- * End 2 End Protractor tests (using Jasmine) for testing Trading Strategies screen.
- * See: http://www.protractortest.org/#/tutorial
- *
- * TODO - Use by.repeater()/model() instead of by.css() once Angular implement it for lists:
- * https://angular.io/docs/ts/latest/guide/upgrade.html
- * https://github.com/angular/protractor/issues/3205
- *
- **********************************************************************************/
 import {browser, element, by} from 'protractor';
 
 /**
  * Trading Strategy screen tests.
  *
- * TODO - Test code seems very brittle: can we have access to the model please Angular :-)
+ * See: http://www.protractortest.org/#/tutorial
+ *
+ * TODO - Use by.repeater()/model() instead of by.css() once Angular implement it for lists:
+ * https://angular.io/docs/ts/latest/guide/upgrade.html
+ * https://github.com/angular/protractor/issues/3205
  *
  * @author gazbert
  */

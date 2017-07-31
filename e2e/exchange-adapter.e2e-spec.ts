@@ -1,4 +1,7 @@
-/*********************************************************************************
+import {browser, element, by} from 'protractor';
+
+/**
+ * Exchange Adapter screen tests.
  *
  * End 2 End Protractor tests (using Jasmine) for testing Exchange Adapter screen.
  * See: http://www.protractortest.org/#/tutorial
@@ -6,16 +9,6 @@
  * TODO - Use by.repeater()/model() instead of by.css() once Angular implement it for lists:
  * https://angular.io/docs/ts/latest/guide/upgrade.html
  * https://github.com/angular/protractor/issues/3205
- *
- * @author gazbert
- *
- ********************************************************************************/
-import {browser, element, by} from 'protractor';
-
-/**
- * Exchange Adapter screen tests.
- *
- * TODO - Test code seems very brittle: can we have access to the model please Angular :-)
  *
  * @author gazbert
  */

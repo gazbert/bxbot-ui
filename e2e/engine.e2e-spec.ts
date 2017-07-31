@@ -1,0 +1,188 @@
+import {browser, element, by} from 'protractor';
+
+/**
+ * Engine screen tests.
+ *
+ * End 2 End Protractor tests (using Jasmine) for testing Engine screen.
+ * See: http://www.protractortest.org/#/tutorial
+ *
+ * TODO - Use by.repeater()/model() instead of by.css() once Angular implement it for lists:
+ * https://angular.io/docs/ts/latest/guide/upgrade.html
+ * https://github.com/angular/protractor/issues/3205
+ *
+ * @author gazbert
+ */
+describe('Engine Tests', function () {
+
+    beforeEach(function () {
+        browser.get('');
+    });
+
+    it('should update Engine fields after Save', function () {
+
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+        dashboardItems.get(0).click();
+        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
+
+        const tabLinks = element.all(by.css('li'));
+        tabLinks.get(0).click();
+
+        expect(element(by.id('botId')).getAttribute('value')).toBe('bitstamp-1');
+        expect(element(by.id('botName')).getAttribute('value')).toBe('Bitstamp');
+        expect(element(by.id('tradingCycleInterval')).getAttribute('value')).toBe('30');
+        expect(element(by.id('emergencyStopCurrency')).getAttribute('value')).toBe('BTC');
+        expect(element(by.id('emergencyStopBalance')).getAttribute('value')).toBe('0.5');
+
+        // Update fields
+        const botName = element(by.id('botName'));
+        const newBotName = 'Bitstamp V2';
+        botName.clear();
+        botName.sendKeys(newBotName);
+        expect(botName.getAttribute('value')).toBe(newBotName);
+
+        const tradingCycleInterval = element(by.id('tradingCycleInterval'));
+        const newTradingCycleInterval = '10';
+        tradingCycleInterval.clear();
+        tradingCycleInterval.sendKeys(newTradingCycleInterval);
+        expect(tradingCycleInterval.getAttribute('value')).toBe(newTradingCycleInterval);
+
+        const emergencyStopCurrency = element(by.id('emergencyStopCurrency'));
+        const newEmergencyStopCurrency = 'USD';
+        emergencyStopCurrency.clear();
+        emergencyStopCurrency.sendKeys(newEmergencyStopCurrency);
+        expect(emergencyStopCurrency.getAttribute('value')).toBe(newEmergencyStopCurrency);
+
+        const emergencyStopBalance = element(by.id('emergencyStopBalance'));
+        const newEmergencyStopBalance = '0.7';
+        emergencyStopBalance.clear();
+        emergencyStopBalance.sendKeys(newEmergencyStopBalance);
+        expect(emergencyStopBalance.getAttribute('value')).toBe(newEmergencyStopBalance);
+
+        // Save and check the update worked
+        const saveButton = element(by.id('engineSaveButton'));
+        saveButton.click();
+        dashboardItems.get(0).click();
+
+        expect(element(by.id('botName')).getAttribute('value')).toBe(newBotName);
+        expect(element(by.id('tradingCycleInterval')).getAttribute('value')).toBe(newTradingCycleInterval);
+        expect(element(by.id('emergencyStopCurrency')).getAttribute('value')).toBe(newEmergencyStopCurrency);
+        expect(element(by.id('emergencyStopBalance')).getAttribute('value')).toBe(newEmergencyStopBalance);
+    });
+
+    it('should NOT update Engine fields after Cancel', function () {
+
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+        dashboardItems.get(0).click();
+        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
+
+        const tabLinks = element.all(by.css('li'));
+        tabLinks.get(0).click();
+
+        expect(element(by.id('botId')).getAttribute('value')).toBe('bitstamp-1');
+        expect(element(by.id('botName')).getAttribute('value')).toBe('Bitstamp');
+        expect(element(by.id('tradingCycleInterval')).getAttribute('value')).toBe('30');
+        expect(element(by.id('emergencyStopCurrency')).getAttribute('value')).toBe('BTC');
+        expect(element(by.id('emergencyStopBalance')).getAttribute('value')).toBe('0.5');
+
+        // Update fields
+        const botName = element(by.id('botName'));
+        const newBotName = 'Bitstamp V2';
+        botName.clear();
+        botName.sendKeys(newBotName);
+        expect(botName.getAttribute('value')).toBe(newBotName);
+
+        const tradingCycleInterval = element(by.id('tradingCycleInterval'));
+        const newTradingCycleInterval = '10';
+        tradingCycleInterval.clear();
+        tradingCycleInterval.sendKeys(newTradingCycleInterval);
+        expect(tradingCycleInterval.getAttribute('value')).toBe(newTradingCycleInterval);
+
+        const emergencyStopCurrency = element(by.id('emergencyStopCurrency'));
+        const newEmergencyStopCurrency = 'USD';
+        emergencyStopCurrency.clear();
+        emergencyStopCurrency.sendKeys(newEmergencyStopCurrency);
+        expect(emergencyStopCurrency.getAttribute('value')).toBe(newEmergencyStopCurrency);
+
+        const emergencyStopBalance = element(by.id('emergencyStopBalance'));
+        const newEmergencyStopBalance = '0.7';
+        emergencyStopBalance.clear();
+        emergencyStopBalance.sendKeys(newEmergencyStopBalance);
+        expect(emergencyStopBalance.getAttribute('value')).toBe(newEmergencyStopBalance);
+
+        // Cancel and check the update was not persisted
+        const cancelButton = element(by.id('engineCancelButton'));
+        cancelButton.click();
+        dashboardItems.get(0).click();
+
+        expect(element(by.id('botId')).getAttribute('value')).toBe('bitstamp-1');
+        expect(element(by.id('botName')).getAttribute('value')).toBe('Bitstamp');
+        expect(element(by.id('tradingCycleInterval')).getAttribute('value')).toBe('30');
+        expect(element(by.id('emergencyStopCurrency')).getAttribute('value')).toBe('BTC');
+        expect(element(by.id('emergencyStopBalance')).getAttribute('value')).toBe('0.5');
+    });
+
+    it('should NOT save Engine fields if there are validation errors', function () {
+
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+        dashboardItems.get(0).click();
+        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
+
+        const tabLinks = element.all(by.css('li'));
+        tabLinks.get(0).click();
+
+        expect(element(by.id('botId')).getAttribute('value')).toBe('bitstamp-1');
+        expect(element(by.id('botName')).getAttribute('value')).toBe('Bitstamp');
+        expect(element(by.id('tradingCycleInterval')).getAttribute('value')).toBe('30');
+        expect(element(by.id('emergencyStopCurrency')).getAttribute('value')).toBe('BTC');
+        expect(element(by.id('emergencyStopBalance')).getAttribute('value')).toBe('0.5');
+
+        // Update fields with some 'bad' values
+        const botName = element(by.id('botName'));
+        const newBotName = 'Bitstamp V3!';
+        botName.clear();
+        botName.sendKeys(newBotName);
+        expect(botName.getAttribute('value')).toBe(newBotName);
+
+        const tradingCycleInterval = element(by.id('tradingCycleInterval'));
+        const newTradingCycleInterval = 'a10';
+        tradingCycleInterval.clear();
+        tradingCycleInterval.sendKeys(newTradingCycleInterval);
+        expect(tradingCycleInterval.getAttribute('value')).toBe(newTradingCycleInterval);
+
+        const emergencyStopCurrency = element(by.id('emergencyStopCurrency'));
+        const newEmergencyStopCurrency = 'US_';
+        emergencyStopCurrency.clear();
+        emergencyStopCurrency.sendKeys(newEmergencyStopCurrency);
+        expect(emergencyStopCurrency.getAttribute('value')).toBe(newEmergencyStopCurrency);
+
+        const emergencyStopBalance = element(by.id('emergencyStopBalance'));
+        const newEmergencyStopBalance = '0.k7';
+        emergencyStopBalance.clear();
+        emergencyStopBalance.sendKeys(newEmergencyStopBalance);
+        expect(emergencyStopBalance.getAttribute('value')).toBe(newEmergencyStopBalance);
+
+        // Save and check the update did not persist
+        const saveButton = element(by.id('engineSaveButton'));
+        saveButton.click();
+
+        // Check for validation errors
+        expect(element(by.id('botId')).getAttribute('value')).toBe('bitstamp-1');
+
+        expect(element(by.id('botName')).getAttribute('value')).toBe(newBotName);
+        expect(element(by.id('invalidBotName')).getText()).toBe(
+            'Name must be alphanumeric and can only include the following special characters: _ -');
+
+        expect(element(by.id('tradingCycleInterval')).getAttribute('value')).toBe(newTradingCycleInterval);
+        expect(element(by.id('invalidTradingCycleInterval')).getText()).toBe(
+            'Trading Cycle Interval must be a whole number.');
+
+        expect(element(by.id('emergencyStopCurrency')).getAttribute('value')).toBe(newEmergencyStopCurrency);
+        expect(element(by.id('invalidEmergencyStopCurrency')).getText()).toBe(
+            'Emergency Stop Currency must be valid 3 character currency id, e.g. BTC');
+
+        expect(element(by.id('emergencyStopBalance')).getAttribute('value')).toBe(newEmergencyStopBalance);
+        expect(element(by.id('invalidEmergencyStopBalance')).getText()).toBe(
+            'Emergency Stop Balance must be a decimal number.');
+    });
+
+});
