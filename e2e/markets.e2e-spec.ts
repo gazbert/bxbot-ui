@@ -22,7 +22,7 @@ describe('Market Screen Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(4).click();
-        expect(element(by.css('h2')).getText()).toEqual('BTC-e Details');
+        expect(element(by.css('h2')).getText()).toEqual('Huobi Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(2).click();
@@ -101,7 +101,7 @@ describe('Market Screen Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(4).click();
-        expect(element(by.css('h2')).getText()).toEqual('BTC-e Details');
+        expect(element(by.css('h2')).getText()).toEqual('Huobi Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(2).click();
@@ -172,7 +172,7 @@ describe('Market Screen Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(4).click();
-        expect(element(by.css('h2')).getText()).toEqual('BTC-e Details');
+        expect(element(by.css('h2')).getText()).toEqual('Huobi Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(2).click();
@@ -261,7 +261,7 @@ describe('Market Screen Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(4).click();
-        expect(element(by.css('h2')).getText()).toEqual('BTC-e Details');
+        expect(element(by.css('h2')).getText()).toEqual('Huobi Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(2).click();
@@ -309,7 +309,7 @@ describe('Market Screen Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(4).click();
-        expect(element(by.css('h2')).getText()).toEqual('BTC-e Details');
+        expect(element(by.css('h2')).getText()).toEqual('Huobi Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(2).click();
@@ -381,7 +381,7 @@ describe('Market Screen Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(4).click();
-        expect(element(by.css('h2')).getText()).toEqual('BTC-e Details');
+        expect(element(by.css('h2')).getText()).toEqual('Huobi Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(2).click();

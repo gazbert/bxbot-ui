@@ -37,7 +37,7 @@ describe('Exchange Adapter model tests', () => {
     });
 
     it('should clone itself', () => {
-        const exchangeAdapter = new ExchangeAdapter('btce', 'BTC-e', 'com.gazbert.bxbot.exchanges.BtceExchangeAdapter',
+        const exchangeAdapter = new ExchangeAdapter('huobi', 'Huobi', 'com.gazbert.bxbot.exchanges.HuobiExchangeAdapter',
                 new NetworkConfig(60,
                     [
                         503,

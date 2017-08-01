@@ -1,10 +1,10 @@
+import {Engine} from './engine.model';
+
 /**
  * Tests the Engine model behaves as expected.
  *
  * @author gazbert
  */
-import {Engine} from './engine.model';
-
 describe('Engine model tests', () => {
 
     it('should have correct initial values', () => {
@@ -18,7 +18,7 @@ describe('Engine model tests', () => {
     });
 
     it('should clone itself', () => {
-        const exchangeAdapter = new Engine('btce', 'BTC-e', 15, 'BTC', 1.20);
+        const exchangeAdapter = new Engine('huobi', 'Huobi', 15, 'BTC', 1.20);
         const clone = exchangeAdapter.clone();
         expect(exchangeAdapter).toEqual(clone);
     });

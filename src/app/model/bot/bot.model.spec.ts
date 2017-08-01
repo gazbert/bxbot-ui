@@ -15,7 +15,7 @@ describe('Bot model tests', () => {
     });
 
     it('should clone itself', () => {
-        const bot = new Bot('btce-1', 'BTC-e', 'Stopped');
+        const bot = new Bot('huobi-1', 'Huobi', 'Stopped');
         const clone = bot.clone();
         expect(bot).toEqual(clone);
     });

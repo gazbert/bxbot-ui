@@ -65,8 +65,8 @@ function overrideExchangeAdapterServiceSetup() {
             expectedErrorCodes = [501];
             expectedErrorMsgs = ['Connection timeout'];
             expectedNetworkConfig = new NetworkConfig(60, expectedErrorCodes, expectedErrorMsgs);
-            testExchangeAdapter = new ExchangeAdapter('btce', 'BTC-e',
-                'com.gazbert.bxbot.adapter.BtceExchangeAdapter', expectedNetworkConfig);
+            testExchangeAdapter = new ExchangeAdapter('huobi', 'Huobi',
+                'com.gazbert.bxbot.adapter.HuobiExchangeAdapter', expectedNetworkConfig);
         }
 
         getExchangeAdapterByBotId(id: string): Observable<ExchangeAdapter> {
@@ -150,7 +150,7 @@ function overrideExchangeAdapterServiceSetup() {
     it('should save and navigate to Dashboard when user clicks Save for valid input', fakeAsync(() => {
 
         const origName = testExchangeAdapter.name;
-        const newName = 'NewBTCe';
+        const newName = 'NewHuobi';
 
         page.adapterNameInput.value = newName;
         page.adapterNameInput.dispatchEvent(newEvent('input')); // tell Angular
@@ -179,7 +179,7 @@ function overrideExchangeAdapterServiceSetup() {
     it('should NOT save or navigate to Dashboard when user clicks Save for invalid input', () => {
         const origName = testExchangeAdapter.name;
         // ! is invalid char
-        page.adapterNameInput.value = '!NewBTCe';
+        page.adapterNameInput.value = '!NewHuobi';
         page.adapterNameInput.dispatchEvent(newEvent('input')); // tell Angular
 
         expect(comp.exchangeAdapter.name).toBe(origName, 'Exchange Adapter Name in model not to be updated');
@@ -329,7 +329,7 @@ function fakeExchangeAdapterServiceSetup() {
 
         it('should NOT save or navigate to Dashboard when user clicks Save for invalid input', () => {
             const origName = expectedExchangeAdapter.name;
-            const newName = '!NewBTCe'; // ! is invalid char
+            const newName = '!NewHuobi'; // ! is invalid char
 
             page.adapterNameInput.value = newName;
             page.adapterNameInput.dispatchEvent(newEvent('input')); // tell Angular

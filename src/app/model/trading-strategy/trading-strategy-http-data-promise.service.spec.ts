@@ -38,7 +38,7 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
             expect(backend).not.toBeNull('MockBackend backend should be provided');
     }));
 
-    describe('when getAllTradingStrategiesForBotId() operation called with \'btce\'', () => {
+    describe('when getAllTradingStrategiesForBotId() operation called with \'huobi\'', () => {
 
         let backend: MockBackend;
         let service: TradingStrategyDataService;
@@ -53,10 +53,10 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
             response = new Response(options);
         }));
 
-        it('should return 2 BTC-e Trading Strategies', async(inject([], () => {
+        it('should return 2 Huobi Trading Strategies', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.getAllTradingStrategiesForBotId('btce-2')
-                .then(tradingStrategies => expect(tradingStrategies.length).toBe(2, 'should return 2 BTC-e Trading Strategies'));
+            service.getAllTradingStrategiesForBotId('huobi-2')
+                .then(tradingStrategies => expect(tradingStrategies.length).toBe(2, 'should return 2 Huobi Trading Strategies'));
         })));
 
         it('should handle returning no matching Trading Strategies', async(inject([], () => {
@@ -67,7 +67,7 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
         })));
     });
 
-    describe('when updateTradingStrategy() operation called for BTC-e', () => {
+    describe('when updateTradingStrategy() operation called for Huobi', () => {
 
         let backend: MockBackend;
         let service: TradingStrategyDataService;
@@ -76,7 +76,7 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
 
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
 
-            updatedTradingStrategy = new TradingStrategy('btce_macd_rsi', 'btce-2', 'MACD Indicator',
+            updatedTradingStrategy = new TradingStrategy('huobi_macd_rsi', 'huobi-2', 'MACD Indicator',
                 'MACD Indicator algo for deciding when to enter and exit trades.',
                 'com.gazbert.bxbot.strategies.MacdStrategy');
 
@@ -86,7 +86,7 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
             response = new Response(options);
         }));
 
-        it('should return updated BTC-e Trading Strategy on success', async(inject([], () => {
+        it('should return updated Huobi Trading Strategy on success', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.updateTradingStrategy(updatedTradingStrategy)
                 .then(tradingStrategy => {
@@ -107,7 +107,7 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
         })));
     });
 
-    describe('when deleteTradingStrategyById() operation called with \'btce_macd_rsi\'', () => {
+    describe('when deleteTradingStrategyById() operation called with \'huobi_macd_rsi\'', () => {
 
         let backend: MockBackend;
         let service: TradingStrategyDataService;
@@ -122,7 +122,7 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
 
         it('should return status response of \'true\' if successful', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.deleteTradingStrategyById('btce_macd_rsi')
+            service.deleteTradingStrategyById('huobi_macd_rsi')
                 .then(status => expect(status).toBe(true));
         })));
 
@@ -137,11 +137,11 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
 
 const makeTradingStrategyData = () => [
 
-        new TradingStrategy('btce_macd_rsi', 'btce-2', 'MACD RSI Indicator',
+        new TradingStrategy('huobi_macd_rsi', 'huobi-2', 'MACD RSI Indicator',
             'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
             'com.gazbert.bxbot.strategies.MacdRsiStrategy'),
 
-        new TradingStrategy('btce_macd', 'btce-2', 'MACD Indicator',
+        new TradingStrategy('huobi_macd', 'huobi-2', 'MACD Indicator',
             'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy')
 
 ] as TradingStrategy[];

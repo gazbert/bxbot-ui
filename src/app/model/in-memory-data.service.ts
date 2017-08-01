@@ -34,8 +34,8 @@ export class InMemoryDataService implements InMemoryDbService {
                 status: 'Running'
             },
             {
-                id: 'btce-1',
-                name: 'BTC-e',
+                id: 'huobi-1',
+                name: 'Huobi',
                 status: 'Running'
             },
             {
@@ -89,8 +89,8 @@ export class InMemoryDataService implements InMemoryDbService {
                 emergencyStopBalance: 3.1
             },
             {
-                id: 'btce-1',
-                botName: 'BTC-e',
+                id: 'huobi-1',
+                botName: 'Huobi',
                 tradingCycleInterval: 120,
                 emergencyStopCurrency: 'BTC',
                 emergencyStopBalance: 0.9
@@ -188,9 +188,9 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 'btce-1',
-                name: 'BTC-e API Adapter',
-                className: 'com.gazbert.bxbot.exchanges.BtceExchangeAdapter',
+                id: 'huobi-1',
+                name: 'Huobi API Adapter',
+                className: 'com.gazbert.bxbot.exchanges.HuobiExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 45,
                     nonFatalErrorHttpStatusCodes: [
@@ -339,32 +339,32 @@ export class InMemoryDataService implements InMemoryDbService {
                 }
             },
             {
-                id: 'btce_btc_usd',
-                botId: 'btce-1',
-                marketId: 'btc_usd',
+                id: 'huobi_btc_usd',
+                botId: 'huobi-1',
+                marketId: 'BTC-USD',
                 name: 'BTC/USD',
                 enabled: false,
                 baseCurrency: 'BTC',
                 counterCurrency: 'USD',
                 tradingStrategy: {
-                    id: 'btce_macd_rsi',
-                    exchangeId: 'btce',
+                    id: 'huobi_macd_rsi',
+                    exchangeId: 'huobi',
                     name: 'MACD RSI Indicator',
                     description: 'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
                     className: 'com.gazbert.bxbot.strategies.MacdRsiStrategy'
                 }
             },
             {
-                id: 'btce_ltc_usd',
-                botId: 'btce-1',
-                marketId: 'ltc_usd',
+                id: 'huobi_ltc_usd',
+                botId: 'huobi-1',
+                marketId: 'BTC-LTC',
                 name: 'LTC/USD',
                 enabled: true,
                 baseCurrency: 'LTC',
                 counterCurrency: 'USD',
                 tradingStrategy: {
-                    id: 'btce_long-scalper',
-                    exchangeId: 'btce',
+                    id: 'huobi_long-scalper',
+                    exchangeId: 'huobi',
                     name: 'Long Scalper',
                     description: 'Scalping strategy that buys low and sells high.',
                     className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
@@ -425,22 +425,22 @@ export class InMemoryDataService implements InMemoryDbService {
          */
         const trading_strategies = [
             {
-                id: 'btce_macd_rsi',
-                botId: 'btce-1',
+                id: 'huobi_macd_rsi',
+                botId: 'huobi-1',
                 name: 'MACD RSI Indicator',
                 description: 'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
                 className: 'com.gazbert.bxbot.strategies.MacdRsiStrategy'
             },
             {
-                id: 'btce_long-scalper',
-                botId: 'btce-1',
+                id: 'huobi_long-scalper',
+                botId: 'huobi-1',
                 name: 'Long Scalper',
                 description: 'Scalping strategy that buys low and sells high.',
                 className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
             },
             {
-                id: 'btce_short-scalper',
-                botId: 'btce-1',
+                id: 'huobi_short-scalper',
+                botId: 'huobi-1',
                 name: 'Short Scalper',
                 description: 'Scalping strategy that sells and buys back more units at lower price.',
                 className: 'com.gazbert.bxbot.strategies.ShortScalperStrategy'
@@ -563,7 +563,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 fromAddress: 'gold5@x-wing.space'
             },
             {
-                id: 'btce-1',
+                id: 'huobi-1',
                 enabled: false,
                 smtpHost: 'smtp.gmail.com',
                 smtpPort: 587,

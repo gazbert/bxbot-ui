@@ -39,7 +39,7 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
             expect(backend).not.toBeNull('MockBackend backend should be provided');
     }));
 
-    describe('when getAllMarketsForBotId() operation called with \'btce\'', () => {
+    describe('when getAllMarketsForBotId() operation called with \'huobi\'', () => {
 
         let backend: MockBackend;
         let service: MarketDataService;
@@ -54,15 +54,15 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
             response = new Response(options);
         }));
 
-        it('should return 2 BTC-e Markets', async(inject([], () => {
+        it('should return 2 Huobi Markets', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.getAllMarketsForBotId('btce-1')
+            service.getAllMarketsForBotId('huobi-1')
                 .then(markets => {
-                    expect(markets.length).toBe(2, 'should return 2 BTC-e Markets');
+                    expect(markets.length).toBe(2, 'should return 2 Huobi Markets');
 
                     // basic sanity check
-                    expect(markets[0].id).toBe('btce_btc_usd');
-                    expect(markets[1].id).toBe('btce_ltc_usd');
+                    expect(markets[0].id).toBe('huobi_btc_usd');
+                    expect(markets[1].id).toBe('huobi_ltc_usd');
                 });
         })));
 
@@ -74,7 +74,7 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
         })));
     });
 
-    describe('when updateMarket() operation called for BTC-e', () => {
+    describe('when updateMarket() operation called for Huobi', () => {
 
         let backend: MockBackend;
         let service: MarketDataService;
@@ -83,8 +83,8 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
 
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
 
-            updatedMarket = new Market('btce_btc_usd', 'btce-1', 'BTC/USD', true, 'BTC', 'USD',
-                new TradingStrategy('btce_macd', 'btce-1', 'MACD Indicator',
+            updatedMarket = new Market('huobi_btc_usd', 'huobi-1', 'BTC/USD', true, 'BTC', 'USD',
+                new TradingStrategy('huobi_macd', 'huobi-1', 'MACD Indicator',
                     'MACD Indicator for deciding when to enter and exit trades.',
                     'com.gazbert.bxbot.strategies.MacdStrategy'));
 
@@ -94,7 +94,7 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
             response = new Response(options);
         }));
 
-        it('should return updated BTC-e Market on success', async(inject([], () => {
+        it('should return updated Huobi Market on success', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.updateMarket(updatedMarket)
                 .then(market => {
@@ -115,7 +115,7 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
         })));
     });
 
-    describe('when deleteMarketById() operation called with \'btce_btc_usd\'', () => {
+    describe('when deleteMarketById() operation called with \'huobi_btc_usd\'', () => {
 
         let backend: MockBackend;
         let service: MarketDataService;
@@ -130,7 +130,7 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
 
         it('should return status response of \'true\' if successful', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.deleteMarketById('btce_btc_usd')
+            service.deleteMarketById('huobi_btc_usd')
                 .then(status => expect(status).toBe(true));
         })));
 
@@ -145,13 +145,13 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
 
 const makeMarketData = () => [
 
-    new Market('btce_btc_usd', 'btce-1', 'BTC/USD', true, 'BTC', 'USD',
-        new TradingStrategy('btce_macd_rsi', 'btce-1', 'MACD RSI Indicator',
+    new Market('huobi_btc_usd', 'huobi-1', 'BTC/USD', true, 'BTC', 'USD',
+        new TradingStrategy('huobi_macd_rsi', 'huobi-1', 'MACD RSI Indicator',
             'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
             'com.gazbert.bxbot.strategies.MacdRsiStrategy')),
 
-    new Market('btce_ltc_usd', 'btce-1', 'LTC/USD', true, 'LTC', 'USD',
-        new TradingStrategy('btce_macd', 'btce-1', 'MACD Indicator',
+    new Market('huobi_ltc_usd', 'huobi-1', 'LTC/USD', true, 'LTC', 'USD',
+        new TradingStrategy('huobi_macd', 'huobi-1', 'MACD Indicator',
             'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy')),
 
 ] as Market[];

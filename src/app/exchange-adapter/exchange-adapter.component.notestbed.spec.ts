@@ -38,10 +38,10 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
         expectedErrorMsgs = ['Connection timeout'];
         expectedNetworkConfig = new NetworkConfig(60, expectedErrorCodes, expectedErrorMsgs);
 
-        expectedExchangeAdapter = new ExchangeAdapter('btce', 'BTC-e', 'com.gazbert.bxbot.adapter.BtceExchangeAdapter',
+        expectedExchangeAdapter = new ExchangeAdapter('huobi', 'Huobi', 'com.gazbert.bxbot.adapter.HuobiExchangeAdapter',
             expectedNetworkConfig);
 
-        expectedUpdatedExchangeAdapter = new ExchangeAdapter('btce', 'BTC-e', 'com.gazbert.bxbot.adapter.NewBtceExchangeAdapter',
+        expectedUpdatedExchangeAdapter = new ExchangeAdapter('huobi', 'Huobi', 'com.gazbert.bxbot.adapter.NewHuobiExchangeAdapter',
             expectedNetworkConfig);
 
         activatedRoute = new ActivatedRouteStub();
@@ -64,8 +64,8 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
         expect(exchangeAdapterComponent.exchangeAdapter).toBe(expectedExchangeAdapter);
 
         // paranoia ;-)
-        expect(exchangeAdapterComponent.exchangeAdapter.id).toBe('btce');
-        expect(exchangeAdapterComponent.exchangeAdapter.name).toBe('BTC-e');
+        expect(exchangeAdapterComponent.exchangeAdapter.id).toBe('huobi');
+        expect(exchangeAdapterComponent.exchangeAdapter.name).toBe('Huobi');
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0]).toBe(501);
     });
 
