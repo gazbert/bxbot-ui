@@ -21,6 +21,7 @@ import {TradingStrategyHttpDataPromiseService} from './model/trading-strategy/tr
 import {LoginModule} from './login/login.module';
 import {AuthenticationService, CanActivateAuthGuard} from './shared';
 import {EngineModule} from './engine/engine.module';
+import {SettingsModule} from './settings/settings.module';
 
 /**
  * BX-bot UI main module.
@@ -44,7 +45,8 @@ import {EngineModule} from './engine/engine.module';
         TradingStrategiesModule,
         EngineModule,
         AppRoutingModule,
-        LoginModule
+        LoginModule,
+        SettingsModule
     ],
     declarations: [
         AppComponent

@@ -1,0 +1,27 @@
+<!--
+    Template-driven version of Settings form.
+ -->
+<div *ngIf="uiVersion" class="container module-bootstrap">
+    <h2>BX-bot UI Settings</h2>
+    <form *ngIf="active" #settingsForm="ngForm" novalidate (ngSubmit)="save(settingsForm.valid)">
+
+        <!-- UI Version -->
+        <div class="row">
+            <div class="form-group col-sm-6">
+                <label for="uiVersion">Version</label>
+                <input [(ngModel)]="uiVersion" name="uiVersion"
+                       id="uiVersion" class="form-control" required #botName="ngModel" disabled>
+            </div>
+        </div>
+
+        <div>
+            <hr>
+        </div>
+        <div>
+            <!-- Must have type for button else Chrome reloads entire app on Cancel click!
+                 http://stackoverflow.com/questions/38120756/angular2-router-navigate-refresh-page
+             -->
+            <button id="settingsCancelButton" type="button" (click)="cancel()" class="btn btn-default">Cancel</button>
+        </div>
+    </form>
+</div>

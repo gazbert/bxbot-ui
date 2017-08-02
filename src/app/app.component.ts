@@ -13,7 +13,7 @@ import {AuthenticationService} from './shared/authentication.service';
             <h1>{{getTitle()}}</h1>
             <nav>
                 <a id="dashboardButton" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-                <a id="settingsButton">Settings</a>
+                <a id="settingsButton" routerLink="/settings" routerLinkActive="active">Settings</a>
                 <a id="logoutButton" class="logout-btn" routerLink="/login" routerLinkActive="active"
                    *ngIf="isLoggedIn()">Logout</a>
             </nav>
