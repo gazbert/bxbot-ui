@@ -57,6 +57,9 @@ export class SettingsComponent implements OnInit, AfterViewChecked {
         this.router.navigate(['dashboard']);
     }
 
+    save(isValid: boolean): void {
+    }
+
     cancel() {
         this.goToDashboard();
     }
