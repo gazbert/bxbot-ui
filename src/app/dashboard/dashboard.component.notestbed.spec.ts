@@ -47,13 +47,13 @@ describe('DashboardComponent tests without TestBed', () => {
         comp.ngAfterViewInit();
     });
 
-    // FIXME - search not working ;-/
+    // FIXME - search test code stopped working ;-/
     xit('should have Gemini Bot item after user searches for \'ge\'', (done) => {
         comp.ngOnInit();
         comp.bots.subscribe((bots) => {
             expect(bots.length).toBe(1, 'should have 1 Gemini Bot item');
             expect(bots[0].id).toBe('gemini-3');
-
+            expect(bots[0].name).toBe('Gemini');
             done(); // https://github.com/jasmine/jasmine/issues/694
         });
         // comp.ngAfterViewInit();

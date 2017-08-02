@@ -2,7 +2,7 @@
     Template-driven version of Settings form.
  -->
 <div *ngIf="uiVersion" class="container module-bootstrap">
-    <h2>BX-bot UI Settings</h2>
+    <h2>Admin Console Settings</h2>
     <form *ngIf="active" #settingsForm="ngForm" novalidate (ngSubmit)="save(settingsForm.valid)">
 
         <!-- UI Version -->
