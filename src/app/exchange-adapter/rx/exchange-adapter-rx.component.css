@@ -12,4 +12,14 @@ input {
     padding-left: .4em;
 }
 
+/* Show/hide Optional Config glyph */
+a[aria-expanded=true] .glyphicon-menu-down {
+    display: none;
+}
+a[aria-expanded=false] .glyphicon-menu-up {
+    display: none;
+}
 
+.glyphicon-padding {
+    padding-right: 10px;
+}
