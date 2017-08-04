@@ -23,3 +23,8 @@ a[aria-expanded=false] .glyphicon-menu-up {
 .glyphicon-padding {
     padding-right: 10px;
 }
+
+nav a:visited, a:link {
+    color: #FFFFFF;
+    text-decoration: none;
+}
