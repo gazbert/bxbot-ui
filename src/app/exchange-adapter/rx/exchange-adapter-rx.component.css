@@ -13,10 +13,10 @@ input {
 }
 
 /* Show/hide Optional Config glyph */
-a[aria-expanded=true] .glyphicon-menu-down {
+a[aria-expanded=true] .glyphicon-menu-right {
     display: none;
 }
-a[aria-expanded=false] .glyphicon-menu-up {
+a[aria-expanded=false] .glyphicon-menu-down {
     display: none;
 }
 
