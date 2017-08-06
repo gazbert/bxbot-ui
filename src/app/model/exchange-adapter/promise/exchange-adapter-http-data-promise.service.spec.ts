@@ -1,8 +1,8 @@
 import {MockBackend, MockConnection} from '@angular/http/testing';
-import {HttpModule, Http, XHRBackend, Response, ResponseOptions} from '@angular/http';
+import {Http, HttpModule, Response, ResponseOptions, XHRBackend} from '@angular/http';
 import {async, inject, TestBed} from '@angular/core/testing';
 import {ExchangeAdapterHttpDataPromiseService as ExchangeAdapterDataService} from './exchange-adapter-http-data-promise.service';
-import {ExchangeAdapter, NetworkConfig} from '../exchange-adapter.model';
+import {ExchangeAdapter, NetworkConfig, OtherConfig} from '../exchange-adapter.model';
 
 /**
  * Tests the Exchange Adapter HTTP Data service (Promise flavour) using a Mock HTTP backend.
@@ -18,7 +18,8 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
                 ExchangeAdapterDataService,
                 {provide: XHRBackend, useClass: MockBackend}
             ]
-        }).compileComponents().then(() => {/*done*/});
+        }).compileComponents().then(() => {/*done*/
+        });
     }));
 
     it('should instantiate implementation of ExchangeAdapterDataService when injected',
@@ -36,7 +37,7 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
     it('should provide MockBackend as replacement for XHRBackend',
         inject([XHRBackend], (backend: MockBackend) => {
             expect(backend).not.toBeNull('MockBackend should be provided');
-    }));
+        }));
 
     describe('when getExchangeAdapterByBotId() operation called with \'gdax\'', () => {
 
@@ -111,6 +112,17 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
                         'Connection refused again!',
                         'Remote host closed connection during handshake again!'
                     ]
+                ),
+                new OtherConfig([
+                        {
+                            name: 'buy-fee',
+                            value: '0.2'
+                        },
+                        {
+                            name: 'sell-fee',
+                            value: '0.25'
+                        }
+                    ]
                 ));
 
             backend = mockBackend;
@@ -154,7 +166,19 @@ const makeExchangeAdapterData = () => [
                 'Connection refused',
                 'Remote host closed connection during handshake'
             ]
-        )),
+        ),
+        new OtherConfig([
+                {
+                    name: 'buy-fee',
+                    value: '0.2'
+                },
+                {
+                    name: 'sell-fee',
+                    value: '0.25'
+                }
+            ]
+        )
+    ),
     new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
         new NetworkConfig(60,
             [
@@ -166,6 +190,17 @@ const makeExchangeAdapterData = () => [
                 'Connection reset',
                 'Connection refused',
                 'Remote host closed connection during handshake'
+            ]
+        ),
+        new OtherConfig([
+                {
+                    name: 'buy-fee',
+                    value: '0.2'
+                },
+                {
+                    name: 'sell-fee',
+                    value: '0.25'
+                }
             ]
         )),
     new ExchangeAdapter('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
@@ -179,6 +214,17 @@ const makeExchangeAdapterData = () => [
                 'Connection reset',
                 'Connection refused',
                 'Remote host closed connection during handshake'
+            ]
+        ),
+        new OtherConfig([
+                {
+                    name: 'buy-fee',
+                    value: '0.2'
+                },
+                {
+                    name: 'sell-fee',
+                    value: '0.25'
+                }
             ]
         ))
 ] as ExchangeAdapter[];

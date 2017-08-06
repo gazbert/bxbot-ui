@@ -36,7 +36,7 @@
                 <input id="connectionTimeout" ngControlGroup="networkConfig" formControlName="connectionTimeout"
                        class="form-control" placeholder="60" maxlength="8" required/>
                 <div id="invalidConnectionTimeout"
-                        *ngIf="formErrors.connectionTimeout" class="alert alert-danger">{{ formErrors.connectionTimeout }}
+                     *ngIf="formErrors.connectionTimeout" class="alert alert-danger">{{ formErrors.connectionTimeout }}
                 </div>
             </div>
         </div>
@@ -87,7 +87,8 @@
                     <div class="panel-body">
                         <div class="form-group">
                             <label for="errorMessage_{{i}}" class="col-sm-5">Error Message</label>
-                            <input id="errorMessage_{{i}}" class="col-sm-7" [formControlName]="i" maxlength="121" required>
+                            <input id="errorMessage_{{i}}" class="col-sm-7" [formControlName]="i" maxlength="121"
+                                   required>
                             <div id="invalidErrorMessage_{{i}}" [hidden]="nonFatalErrorMessages.controls[i].valid ||
                                  (nonFatalErrorMessages.controls[i].pristine && !isFormSaved())"
                                  class="alert alert-danger col-sm-7">
@@ -105,7 +106,7 @@
             </div>
         </div>
 
-        <!-- TODO - Prototype Collapsible for adding optional Exchange config -->
+        <!-- Other (optional) Exchange Config -->
         <div>
             <hr>
         </div>
@@ -116,8 +117,61 @@
             Optional Config
         </a>
         <div class="collapse" id="optionalExchangeConfig">
-            <div class="well">
-                A new panel for adding/deleting optional Exchange config will go here.
+
+            <!--
+             Optional Config Items
+             TODO - wire up to new OtherConfig model instead of nonFatalErrorMessages :-)
+             -->
+            <div class="row">
+                <div class="col-sm-12" formArrayName="nonFatalErrorMessages">
+                    <div *ngFor="let nonFatalErrorMessage of nonFatalErrorMessages.controls; let i=index"
+                         class="panel panel-default">
+
+                        <div class="panel-heading">
+                            <span>Config Item {{i + 1}}</span>
+                            <span id="deleteConfigItemButton_{{i}}" class="glyphicon glyphicon-remove pull-right"
+                                  *ngIf="nonFatalErrorMessages.controls.length > 0"
+                                  (click)="deleteErrorMessage(i)"></span>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="form-group col-sm-12">
+                                    <label for="configItemName_{{i}}" class="col-sm-4">Name</label>
+                                    <input id="configItemName_{{i}}" class="col-sm-8" [formControlName]="i"
+                                           maxlength="121"
+                                           required>
+                                    <div id="invalidConfigItemName_{{i}}" [hidden]="nonFatalErrorMessages.controls[i].valid ||
+                                 (nonFatalErrorMessages.controls[i].pristine && !isFormSaved())"
+                                         class="alert alert-danger col-sm-12">
+                                        {{ formErrors.nonFatalErrorMessages }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-sm-12">
+                                    <label for="configItemValue_{{i}}" class="col-sm-4">Value</label>
+                                    <input id="configItemValue_{{i}}" class="col-sm-8" [formControlName]="i"
+                                           maxlength="121"
+                                           required>
+                                    <div id="invalidConfigItemValue_{{i}}" [hidden]="nonFatalErrorMessages.controls[i].valid ||
+                                 (nonFatalErrorMessages.controls[i].pristine && !isFormSaved())"
+                                         class="alert alert-danger col-sm-12">
+                                        {{ formErrors.nonFatalErrorMessages }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="margin-20">
+                        <i class="glyphicon glyphicon-plus pull-left glyphicon-padding"></i>
+                        <a id="addNewConfigItemLink" (click)="addErrorMessage()" style="cursor: default">
+                            Add new Config Item
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -128,7 +182,8 @@
             <!-- Must have type for button else Chrome reloads entire app on Cancel click!
                  http://stackoverflow.com/questions/38120756/angular2-router-navigate-refresh-page
              -->
-            <button id="exchangeAdapterCancelButton" type="button" (click)="cancel()" class="btn btn-default">Cancel</button>
+            <button id="exchangeAdapterCancelButton" type="button" (click)="cancel()" class="btn btn-default">Cancel
+            </button>
             <button id="exchangeAdapterSaveButton" class="btn btn-primary">Save</button>
         </div>
     </form>

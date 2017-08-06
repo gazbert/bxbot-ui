@@ -1,6 +1,7 @@
 import {ActivatedRouteStub} from '../../../testing';
 import {ExchangeAdapterComponent} from './exchange-adapter.component';
 import {ExchangeAdapter, NetworkConfig} from '../model/exchange-adapter';
+import {OtherConfig} from '../model/exchange-adapter/exchange-adapter.model';
 
 /**
  * Tests the behaviour of the Exchange Adapter component (Template version) is as expected.
@@ -26,6 +27,7 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
     let expectedNetworkConfig: NetworkConfig;
     let expectedErrorCodes: number[];
     let expectedErrorMsgs: string[];
+    let expectedOtherConfig: OtherConfig;
 
     let expectedUpdatedExchangeAdapter: ExchangeAdapter;
 
@@ -37,12 +39,23 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
         expectedErrorCodes = [501];
         expectedErrorMsgs = ['Connection timeout'];
         expectedNetworkConfig = new NetworkConfig(60, expectedErrorCodes, expectedErrorMsgs);
+        expectedOtherConfig = new OtherConfig([
+                {
+                    name: 'buy-fee',
+                    value: '0.2'
+                },
+                {
+                    name: 'sell-fee',
+                    value: '0.25'
+                }
+            ]
+        );
 
         expectedExchangeAdapter = new ExchangeAdapter('huobi', 'Huobi', 'com.gazbert.bxbot.adapter.HuobiExchangeAdapter',
-            expectedNetworkConfig);
+            expectedNetworkConfig, expectedOtherConfig);
 
         expectedUpdatedExchangeAdapter = new ExchangeAdapter('huobi', 'Huobi', 'com.gazbert.bxbot.adapter.NewHuobiExchangeAdapter',
-            expectedNetworkConfig);
+            expectedNetworkConfig, expectedOtherConfig);
 
         activatedRoute = new ActivatedRouteStub();
         activatedRoute.testParams = {id: expectedExchangeAdapter.id};

@@ -1,5 +1,5 @@
 import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
-import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {By} from '@angular/platform-browser';
 import {DebugElement} from '@angular/core';
 import {Http} from '@angular/http';
@@ -9,12 +9,13 @@ import {FakeExchangeAdapterDataObservableService, SOME_FAKE_OBSERVABLE_EXCHANGE_
 import {SharedModule} from '../../shared/shared.module';
 import {
     ExchangeAdapter,
-    NetworkConfig,
-    ExchangeAdapterHttpDataObservableService
+    ExchangeAdapterDataObservableService,
+    ExchangeAdapterHttpDataObservableService,
+    NetworkConfig
 } from '../../model/exchange-adapter';
 import {ExchangeAdapterModule} from '../exchange-adapter.module';
 import {ExchangeAdapterRxComponent} from './exchange-adapter-rx.component';
-import {ExchangeAdapterDataObservableService} from '../../model/exchange-adapter';
+import {OtherConfig} from '../../model/exchange-adapter/exchange-adapter.model';
 
 
 /**
@@ -57,6 +58,7 @@ function overrideExchangeAdapterServiceSetup() {
     let expectedNetworkConfig: NetworkConfig;
     let expectedErrorCodes: number[];
     let expectedErrorMsgs: string[];
+    let expectedOtherConfig: OtherConfig;
     let testExchangeAdapter: ExchangeAdapter;
 
     class StubExchangeAdapterHttpDataService implements ExchangeAdapterDataObservableService {
@@ -65,8 +67,20 @@ function overrideExchangeAdapterServiceSetup() {
             expectedErrorCodes = [501];
             expectedErrorMsgs = ['Connection timeout'];
             expectedNetworkConfig = new NetworkConfig(60, expectedErrorCodes, expectedErrorMsgs);
+            expectedOtherConfig = new OtherConfig([
+                    {
+                        name: 'buy-fee',
+                        value: '0.2'
+                    },
+                    {
+                        name: 'sell-fee',
+                        value: '0.25'
+                    }
+                ]
+            );
+
             testExchangeAdapter = new ExchangeAdapter('huobi', 'Huobi',
-                'com.gazbert.bxbot.adapter.HuobiExchangeAdapter', expectedNetworkConfig);
+                'com.gazbert.bxbot.adapter.HuobiExchangeAdapter', expectedNetworkConfig, expectedOtherConfig);
         }
 
         getExchangeAdapterByBotId(id: string): Observable<ExchangeAdapter> {
@@ -257,6 +271,7 @@ function overrideExchangeAdapterServiceSetup() {
  */
 const BITSTAMP = 0;
 const firstExchangeAdapter = SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS[BITSTAMP];
+
 function fakeExchangeAdapterServiceSetup() {
 
     beforeEach(async(() => {

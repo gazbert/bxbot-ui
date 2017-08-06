@@ -28,3 +28,7 @@ nav a:visited, a:link {
     color: #FFFFFF;
     text-decoration: none;
 }
+
+.collapse {
+    padding-top: 10px;
+}

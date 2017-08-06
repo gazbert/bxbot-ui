@@ -1,10 +1,9 @@
 import {MockBackend, MockConnection} from '@angular/http/testing';
-import {HttpModule, Http, XHRBackend, Response, ResponseOptions} from '@angular/http';
+import {Http, HttpModule, Response, ResponseOptions, XHRBackend} from '@angular/http';
 import {async, inject, TestBed} from '@angular/core/testing';
 import {ExchangeAdapterHttpDataObservableService as ExchangeAdapterDataService} from './exchange-adapter-http-data-observable.service';
-import {ExchangeAdapter, NetworkConfig} from './exchange-adapter.model';
+import {ExchangeAdapter, NetworkConfig, OtherConfig} from './exchange-adapter.model';
 import {Observable} from 'rxjs/Observable';
-
 // Most RxJS operators are not included in Angular's base Observable implementation.
 // The base implementation includes only what Angular itself requires.
 // If you want more RxJS features, you need to explicitly import rxjs operators, else you get runtime error, e.g.
@@ -29,7 +28,8 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
                 {provide: XHRBackend, useClass: MockBackend}
             ]
         })
-            .compileComponents().then(() => {/*done*/});
+            .compileComponents().then(() => {/*done*/
+        });
     }));
 
     it('should instantiate implementation of ExchangeAdapterDataService when injected',
@@ -47,7 +47,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
     it('should provide MockBackend as replacement for XHRBackend',
         inject([XHRBackend], (backend: MockBackend) => {
             expect(backend).not.toBeNull('MockBackend backend should be provided');
-    }));
+        }));
 
     describe('when getExchangeAdapterByBotId() operation called with \'2\'', () => {
 
@@ -89,6 +89,8 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
                     expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[2]).toBe(
                         'Remote host closed connection during handshake'
                     );
+
+                    // TODO - assert OtherConfig is valid!
                 });
             // .toPromise();
         })));
@@ -137,6 +139,17 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
                         'Connection reset again!',
                         'Connection refused again!',
                         'Remote host closed connection during handshake again!'
+                    ]
+                ),
+                new OtherConfig([
+                        {
+                            name: 'buy-fee',
+                            value: '0.2'
+                        },
+                        {
+                            name: 'sell-fee',
+                            value: '0.25'
+                        }
                     ]
                 ));
 
@@ -202,6 +215,17 @@ const makeExchangeAdapterData = () => [
                 'Connection refused',
                 'Remote host closed connection during handshake'
             ]
+        ),
+        new OtherConfig([
+                {
+                    name: 'buy-fee',
+                    value: '0.2'
+                },
+                {
+                    name: 'sell-fee',
+                    value: '0.25'
+                }
+            ]
         )),
     new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
         new NetworkConfig(60,
@@ -215,6 +239,17 @@ const makeExchangeAdapterData = () => [
                 'Connection refused',
                 'Remote host closed connection during handshake'
             ]
+        ),
+        new OtherConfig([
+                {
+                    name: 'buy-fee',
+                    value: '0.2'
+                },
+                {
+                    name: 'sell-fee',
+                    value: '0.25'
+                }
+            ]
         )),
     new ExchangeAdapter('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
         new NetworkConfig(60,
@@ -227,6 +262,17 @@ const makeExchangeAdapterData = () => [
                 'Connection reset',
                 'Connection refused',
                 'Remote host closed connection during handshake'
+            ]
+        ),
+        new OtherConfig([
+                {
+                    name: 'buy-fee',
+                    value: '0.2'
+                },
+                {
+                    name: 'sell-fee',
+                    value: '0.25'
+                }
             ]
         )),
 ] as ExchangeAdapter[];

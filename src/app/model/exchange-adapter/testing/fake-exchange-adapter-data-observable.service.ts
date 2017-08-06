@@ -1,5 +1,5 @@
 import {Observable} from 'rxjs/Observable';
-import {ExchangeAdapter, NetworkConfig} from '../exchange-adapter.model';
+import {ExchangeAdapter, NetworkConfig, OtherConfig} from '../exchange-adapter.model';
 import {ExchangeAdapterDataObservableService} from '../exchange-adapter-data-observable.service';
 
 /**
@@ -42,6 +42,17 @@ export const SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
                 'Connection refused',
                 'Remote host closed connection during handshake'
             ]
+        ),
+        new OtherConfig([
+                {
+                    name: 'buy-fee',
+                    value: '0.2'
+                },
+                {
+                    name: 'sell-fee',
+                    value: '0.25'
+                }
+            ]
         )),
     new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
         new NetworkConfig(60,
@@ -55,6 +66,17 @@ export const SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
                 'Connection refused',
                 'Remote host closed connection during handshake'
             ]
+        ),
+        new OtherConfig([
+                {
+                    name: 'buy-fee',
+                    value: '0.2'
+                },
+                {
+                    name: 'sell-fee',
+                    value: '0.25'
+                }
+            ]
         )),
     new ExchangeAdapter('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
         new NetworkConfig(60,
@@ -67,6 +89,17 @@ export const SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
                 'Connection reset',
                 'Connection refused',
                 'Remote host closed connection during handshake'
+            ]
+        ),
+        new OtherConfig([
+                {
+                    name: 'buy-fee',
+                    value: '0.2'
+                },
+                {
+                    name: 'sell-fee',
+                    value: '0.25'
+                }
             ]
         ))
 ];

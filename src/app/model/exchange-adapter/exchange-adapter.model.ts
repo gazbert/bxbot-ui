@@ -10,11 +10,12 @@ export class ExchangeAdapter {
     constructor(public id: string,
                 public name: string,
                 public className: string,
-                public networkConfig: NetworkConfig) {
+                public networkConfig: NetworkConfig,
+                public otherConfig: OtherConfig) {
     }
 
     clone() {
-        return new ExchangeAdapter(this.id, this.name, this.className, this.networkConfig);
+        return new ExchangeAdapter(this.id, this.name, this.className, this.networkConfig, this.otherConfig);
     }
 }
 
@@ -22,5 +23,16 @@ export class NetworkConfig {
     constructor(public connectionTimeout: number,
                 public nonFatalErrorHttpStatusCodes: number[],
                 public nonFatalErrorMessages: string[]) {
+    }
+}
+
+export class OtherConfig {
+    constructor(public configItems: ConfigItem[]) {
+    }
+}
+
+export class ConfigItem {
+    constructor(public name: string,
+                public value: string) {
     }
 }

@@ -153,7 +153,17 @@ export class InMemoryDataService implements InMemoryDbService {
                         'Connection reset',
                         'Connection refused'
                     ]
-                }
+                },
+                otherConfig: [
+                    {
+                        name: 'buy-fee',
+                        value: '0.2'
+                    },
+                    {
+                        name: 'sell-fee',
+                        value: '0.25'
+                    }
+                ]
             },
             {
                 id: 'gemini-1',
