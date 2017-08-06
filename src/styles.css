@@ -108,3 +108,8 @@ nav a.router-link-active {
     float: right;
     /*margin-right: 20px;*/
 }
+
+.glyphicon-padding {
+    padding-top: 2px;
+    padding-right: 5px;
+}

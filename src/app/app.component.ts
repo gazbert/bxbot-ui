@@ -12,10 +12,18 @@ import {AuthenticationService} from './shared/authentication.service';
         <div class="container module-bootstrap">
             <h1>{{getTitle()}}</h1>
             <nav>
-                <a id="dashboardButton" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-                <a id="settingsButton" routerLink="/settings" routerLinkActive="active">Settings</a>
-                <a id="logoutButton" class="logout-btn" routerLink="/login" routerLinkActive="active"
-                   *ngIf="isLoggedIn()">Logout</a>
+                <a id="dashboardButton" routerLink="/dashboard" routerLinkActive="active">
+                    <i class="glyphicon glyphicon-th pull-left glyphicon-padding"></i>
+                    Dashboard
+                </a>
+                <a id="settingsButton" routerLink="/settings" routerLinkActive="active">
+                    <i class="glyphicon glyphicon-cog pull-left glyphicon-padding"></i>
+                    Settings
+                </a>
+                <a id="logoutButton" class="logout-btn" routerLink="/login" routerLinkActive="active" *ngIf="isLoggedIn()">
+                    <i class="glyphicon glyphicon-log-out pull-left glyphicon-padding"></i>
+                    Logout
+                </a>
             </nav>
             <router-outlet></router-outlet>
         </div>`

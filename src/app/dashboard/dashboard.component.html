@@ -1,7 +1,7 @@
 <div id="dashboard">
     <div id="dashboard-item-filter">
         <input #searchBox id="search-box" class="form-control center" (keyup)="search(searchBox.value)"
-               placeholder="Search..."/>
+               placeholder=" Search..."/>
     </div>
     <div id="dashboard-grid" class="grid grid-pad">
         <app-bxbot-ui-dashboard-item *ngFor="let bot of bots | async" class="col-1-4"
