@@ -65,12 +65,30 @@
                     </div>
                 </div>
                 <div class="margin-20">
+                    <i class="glyphicon glyphicon-plus pull-left glyphicon-padding"></i>
                     <a id="addTradingStrategyLink" (click)="addTradingStrategy()" style="cursor: default">
-                        Add Trading Strategy +
+                        Add Trading Strategy
                     </a>
                 </div>
             </div>
         </div>
+
+        <!-- TODO - Prototype Collapsible for adding optional Strategy config -->
+        <div>
+            <hr>
+        </div>
+        <a class="btn btn-primary" data-toggle="collapse" href="#optionalStrategyConfig" aria-expanded="false"
+           aria-controls="optionalStrategyConfig">
+            <i class="glyphicon glyphicon-triangle-right pull-left glyphicon-padding"></i>
+            <i class="glyphicon glyphicon-triangle-bottom pull-left glyphicon-padding"></i>
+            Optional Config
+        </a>
+        <div class="collapse" id="optionalStrategyConfig">
+            <div class="well">
+                A new panel for adding/deleting optional Strategy config will go here.
+            </div>
+        </div>
+
         <div>
             <hr>
         </div>
