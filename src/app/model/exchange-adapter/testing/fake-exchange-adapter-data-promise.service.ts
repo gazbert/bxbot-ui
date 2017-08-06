@@ -1,4 +1,4 @@
-import {ExchangeAdapter, NetworkConfig, OtherConfig} from '../exchange-adapter.model';
+import {ExchangeAdapter, NetworkConfig, OptionalConfig} from '../exchange-adapter.model';
 import {ExchangeAdapterDataPromiseService} from '../promise/exchange-adapter-data-promise.service';
 
 /**
@@ -39,7 +39,7 @@ export const SOME_FAKE_PROMISE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
                 'Remote host closed connection during handshake'
             ]
         ),
-        new OtherConfig([
+        new OptionalConfig([
                 {
                     name: 'buy-fee',
                     value: '0.2'
@@ -63,7 +63,7 @@ export const SOME_FAKE_PROMISE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
                 'Remote host closed connection during handshake'
             ]
         ),
-        new OtherConfig([
+        new OptionalConfig([
                 {
                     name: 'buy-fee',
                     value: '0.2'
@@ -87,7 +87,7 @@ export const SOME_FAKE_PROMISE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
                 'Remote host closed connection during handshake'
             ]
         ),
-        new OtherConfig([
+        new OptionalConfig([
                 {
                     name: 'buy-fee',
                     value: '0.2'

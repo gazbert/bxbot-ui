@@ -154,7 +154,7 @@ export class InMemoryDataService implements InMemoryDbService {
                         'Connection refused'
                     ]
                 },
-                otherConfig: [
+                optionalConfig: [
                     {
                         name: 'buy-fee',
                         value: '0.2'

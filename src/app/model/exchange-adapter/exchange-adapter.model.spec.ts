@@ -1,4 +1,4 @@
-import {ExchangeAdapter, NetworkConfig, OtherConfig} from './exchange-adapter.model';
+import {ExchangeAdapter, NetworkConfig, OptionalConfig} from './exchange-adapter.model';
 
 /**
  * Tests the Exchange Adapter model behaves as expected.
@@ -21,7 +21,7 @@ describe('Exchange Adapter model tests', () => {
                     'Remote host closed connection during handshake'
                 ]
             ),
-            new OtherConfig([
+            new OptionalConfig([
                     {
                         name: 'buy-fee',
                         value: '0.2'
@@ -46,10 +46,10 @@ describe('Exchange Adapter model tests', () => {
         expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[1]).toBe('Connection refused');
         expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[2]).toBe('Remote host closed connection during handshake');
 
-        expect(exchangeAdapter.otherConfig.configItems[0].name).toBe('buy-fee');
-        expect(exchangeAdapter.otherConfig.configItems[0].value).toBe('0.2');
-        expect(exchangeAdapter.otherConfig.configItems[1].name).toBe('sell-fee');
-        expect(exchangeAdapter.otherConfig.configItems[1].value).toBe('0.25');
+        expect(exchangeAdapter.optionalConfig.configItems[0].name).toBe('buy-fee');
+        expect(exchangeAdapter.optionalConfig.configItems[0].value).toBe('0.2');
+        expect(exchangeAdapter.optionalConfig.configItems[1].name).toBe('sell-fee');
+        expect(exchangeAdapter.optionalConfig.configItems[1].value).toBe('0.25');
     });
 
     it('should clone itself', () => {
@@ -66,7 +66,7 @@ describe('Exchange Adapter model tests', () => {
                     'Remote host closed connection during handshake'
                 ]
             ),
-            new OtherConfig([
+            new OptionalConfig([
                     {
                         name: 'buy-fee',
                         value: '0.2'

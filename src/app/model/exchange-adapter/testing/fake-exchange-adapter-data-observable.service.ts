@@ -1,5 +1,5 @@
 import {Observable} from 'rxjs/Observable';
-import {ExchangeAdapter, NetworkConfig, OtherConfig} from '../exchange-adapter.model';
+import {ExchangeAdapter, NetworkConfig, OptionalConfig} from '../exchange-adapter.model';
 import {ExchangeAdapterDataObservableService} from '../exchange-adapter-data-observable.service';
 
 /**
@@ -43,7 +43,7 @@ export const SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
                 'Remote host closed connection during handshake'
             ]
         ),
-        new OtherConfig([
+        new OptionalConfig([
                 {
                     name: 'buy-fee',
                     value: '0.2'
@@ -67,7 +67,7 @@ export const SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
                 'Remote host closed connection during handshake'
             ]
         ),
-        new OtherConfig([
+        new OptionalConfig([
                 {
                     name: 'buy-fee',
                     value: '0.2'
@@ -91,7 +91,7 @@ export const SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
                 'Remote host closed connection during handshake'
             ]
         ),
-        new OtherConfig([
+        new OptionalConfig([
                 {
                     name: 'buy-fee',
                     value: '0.2'

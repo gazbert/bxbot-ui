@@ -11,11 +11,11 @@ export class ExchangeAdapter {
                 public name: string,
                 public className: string,
                 public networkConfig: NetworkConfig,
-                public otherConfig: OtherConfig) {
+                public optionalConfig: OptionalConfig) {
     }
 
     clone() {
-        return new ExchangeAdapter(this.id, this.name, this.className, this.networkConfig, this.otherConfig);
+        return new ExchangeAdapter(this.id, this.name, this.className, this.networkConfig, this.optionalConfig);
     }
 }
 
@@ -26,7 +26,7 @@ export class NetworkConfig {
     }
 }
 
-export class OtherConfig {
+export class OptionalConfig {
     constructor(public configItems: ConfigItem[]) {
     }
 }

@@ -10,7 +10,7 @@ import {FakeExchangeAdapterDataPromiseService, SOME_FAKE_PROMISE_EXCHANGE_ADAPTE
 import {ExchangeAdapterModule} from './exchange-adapter.module';
 import {ExchangeAdapterComponent} from './exchange-adapter.component';
 import {ExchangeAdapterDataPromiseService, ExchangeAdapterHttpDataPromiseService} from '../model/exchange-adapter/promise';
-import {OtherConfig} from '../model/exchange-adapter/exchange-adapter.model';
+import {OptionalConfig} from '../model/exchange-adapter/exchange-adapter.model';
 
 /**
  * Tests the behaviour of the Exchange Adapter component (Template version) is as expected.
@@ -51,7 +51,7 @@ function overrideExchangeAdapterServiceSetup() {
     let expectedNetworkConfig: NetworkConfig;
     let expectedErrorCodes: number[];
     let expectedErrorMsgs: string[];
-    let expectedOtherConfig: OtherConfig;
+    let expectedOtherConfig: OptionalConfig;
     let testExchangeAdapter: ExchangeAdapter;
 
     class StubExchangeAdapterHttpDataService implements ExchangeAdapterDataPromiseService {
@@ -60,7 +60,7 @@ function overrideExchangeAdapterServiceSetup() {
             expectedErrorCodes = [501];
             expectedErrorMsgs = ['Connection timeout'];
             expectedNetworkConfig = new NetworkConfig(60, expectedErrorCodes, expectedErrorMsgs);
-            expectedOtherConfig = new OtherConfig([
+            expectedOtherConfig = new OptionalConfig([
                     {
                         name: 'buy-fee',
                         value: '0.2'

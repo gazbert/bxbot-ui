@@ -2,7 +2,7 @@ import {MockBackend, MockConnection} from '@angular/http/testing';
 import {Http, HttpModule, Response, ResponseOptions, XHRBackend} from '@angular/http';
 import {async, inject, TestBed} from '@angular/core/testing';
 import {ExchangeAdapterHttpDataObservableService as ExchangeAdapterDataService} from './exchange-adapter-http-data-observable.service';
-import {ExchangeAdapter, NetworkConfig, OtherConfig} from './exchange-adapter.model';
+import {ExchangeAdapter, NetworkConfig, OptionalConfig} from './exchange-adapter.model';
 import {Observable} from 'rxjs/Observable';
 // Most RxJS operators are not included in Angular's base Observable implementation.
 // The base implementation includes only what Angular itself requires.
@@ -90,7 +90,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
                         'Remote host closed connection during handshake'
                     );
 
-                    // TODO - assert OtherConfig is valid!
+                    // TODO - assert OptionalConfig is valid!
                 });
             // .toPromise();
         })));
@@ -141,7 +141,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
                         'Remote host closed connection during handshake again!'
                     ]
                 ),
-                new OtherConfig([
+                new OptionalConfig([
                         {
                             name: 'buy-fee',
                             value: '0.2'
@@ -216,7 +216,7 @@ const makeExchangeAdapterData = () => [
                 'Remote host closed connection during handshake'
             ]
         ),
-        new OtherConfig([
+        new OptionalConfig([
                 {
                     name: 'buy-fee',
                     value: '0.2'
@@ -240,7 +240,7 @@ const makeExchangeAdapterData = () => [
                 'Remote host closed connection during handshake'
             ]
         ),
-        new OtherConfig([
+        new OptionalConfig([
                 {
                     name: 'buy-fee',
                     value: '0.2'
@@ -264,7 +264,7 @@ const makeExchangeAdapterData = () => [
                 'Remote host closed connection during handshake'
             ]
         ),
-        new OtherConfig([
+        new OptionalConfig([
                 {
                     name: 'buy-fee',
                     value: '0.2'

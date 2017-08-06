@@ -2,7 +2,7 @@ import {MockBackend, MockConnection} from '@angular/http/testing';
 import {Http, HttpModule, Response, ResponseOptions, XHRBackend} from '@angular/http';
 import {async, inject, TestBed} from '@angular/core/testing';
 import {ExchangeAdapterHttpDataPromiseService as ExchangeAdapterDataService} from './exchange-adapter-http-data-promise.service';
-import {ExchangeAdapter, NetworkConfig, OtherConfig} from '../exchange-adapter.model';
+import {ExchangeAdapter, NetworkConfig, OptionalConfig} from '../exchange-adapter.model';
 
 /**
  * Tests the Exchange Adapter HTTP Data service (Promise flavour) using a Mock HTTP backend.
@@ -113,7 +113,7 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
                         'Remote host closed connection during handshake again!'
                     ]
                 ),
-                new OtherConfig([
+                new OptionalConfig([
                         {
                             name: 'buy-fee',
                             value: '0.2'
@@ -167,7 +167,7 @@ const makeExchangeAdapterData = () => [
                 'Remote host closed connection during handshake'
             ]
         ),
-        new OtherConfig([
+        new OptionalConfig([
                 {
                     name: 'buy-fee',
                     value: '0.2'
@@ -192,7 +192,7 @@ const makeExchangeAdapterData = () => [
                 'Remote host closed connection during handshake'
             ]
         ),
-        new OtherConfig([
+        new OptionalConfig([
                 {
                     name: 'buy-fee',
                     value: '0.2'
@@ -216,7 +216,7 @@ const makeExchangeAdapterData = () => [
                 'Remote host closed connection during handshake'
             ]
         ),
-        new OtherConfig([
+        new OptionalConfig([
                 {
                     name: 'buy-fee',
                     value: '0.2'

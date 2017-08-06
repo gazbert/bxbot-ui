@@ -1,7 +1,7 @@
 import {ActivatedRouteStub} from '../../../testing';
 import {ExchangeAdapterComponent} from './exchange-adapter.component';
 import {ExchangeAdapter, NetworkConfig} from '../model/exchange-adapter';
-import {OtherConfig} from '../model/exchange-adapter/exchange-adapter.model';
+import {OptionalConfig} from '../model/exchange-adapter/exchange-adapter.model';
 
 /**
  * Tests the behaviour of the Exchange Adapter component (Template version) is as expected.
@@ -27,7 +27,7 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
     let expectedNetworkConfig: NetworkConfig;
     let expectedErrorCodes: number[];
     let expectedErrorMsgs: string[];
-    let expectedOtherConfig: OtherConfig;
+    let expectedOtherConfig: OptionalConfig;
 
     let expectedUpdatedExchangeAdapter: ExchangeAdapter;
 
@@ -39,7 +39,7 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
         expectedErrorCodes = [501];
         expectedErrorMsgs = ['Connection timeout'];
         expectedNetworkConfig = new NetworkConfig(60, expectedErrorCodes, expectedErrorMsgs);
-        expectedOtherConfig = new OtherConfig([
+        expectedOtherConfig = new OptionalConfig([
                 {
                     name: 'buy-fee',
                     value: '0.2'

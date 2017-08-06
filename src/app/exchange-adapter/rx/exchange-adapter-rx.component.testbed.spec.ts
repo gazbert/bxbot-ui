@@ -15,7 +15,7 @@ import {
 } from '../../model/exchange-adapter';
 import {ExchangeAdapterModule} from '../exchange-adapter.module';
 import {ExchangeAdapterRxComponent} from './exchange-adapter-rx.component';
-import {OtherConfig} from '../../model/exchange-adapter/exchange-adapter.model';
+import {OptionalConfig} from '../../model/exchange-adapter/exchange-adapter.model';
 
 
 /**
@@ -58,7 +58,7 @@ function overrideExchangeAdapterServiceSetup() {
     let expectedNetworkConfig: NetworkConfig;
     let expectedErrorCodes: number[];
     let expectedErrorMsgs: string[];
-    let expectedOtherConfig: OtherConfig;
+    let expectedOtherConfig: OptionalConfig;
     let testExchangeAdapter: ExchangeAdapter;
 
     class StubExchangeAdapterHttpDataService implements ExchangeAdapterDataObservableService {
@@ -67,7 +67,7 @@ function overrideExchangeAdapterServiceSetup() {
             expectedErrorCodes = [501];
             expectedErrorMsgs = ['Connection timeout'];
             expectedNetworkConfig = new NetworkConfig(60, expectedErrorCodes, expectedErrorMsgs);
-            expectedOtherConfig = new OtherConfig([
+            expectedOtherConfig = new OptionalConfig([
                     {
                         name: 'buy-fee',
                         value: '0.2'
