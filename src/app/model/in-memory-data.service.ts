@@ -382,7 +382,7 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 'okcoin_btc_usd',
-                botId: 6,
+                botId: 'okcoin-1',
                 marketId: 'okcoin_btc_usd',
                 name: 'BTC/USD',
                 enabled: false,
