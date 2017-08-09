@@ -39,8 +39,7 @@ let comp: ExchangeAdapterRxComponent;
 let fixture: ComponentFixture<ExchangeAdapterRxComponent>;
 let page: Page;
 
-// FIXME - broken tests!
-xdescribe('ExchangeAdapterRxComponent tests with TestBed', () => {
+describe('ExchangeAdapterRxComponent tests with TestBed', () => {
 
     beforeEach(() => {
         activatedRoute = new ActivatedRouteStub();
@@ -59,7 +58,7 @@ function overrideExchangeAdapterServiceSetup() {
     let expectedNetworkConfig: NetworkConfig;
     let expectedErrorCodes: number[];
     let expectedErrorMsgs: string[];
-    let expectedOtherConfig: OptionalConfig;
+    let expectedOptionalConfig: OptionalConfig;
     let testExchangeAdapter: ExchangeAdapter;
 
     class StubExchangeAdapterHttpDataService implements ExchangeAdapterDataObservableService {
@@ -68,7 +67,7 @@ function overrideExchangeAdapterServiceSetup() {
             expectedErrorCodes = [501];
             expectedErrorMsgs = ['Connection timeout'];
             expectedNetworkConfig = new NetworkConfig(60, expectedErrorCodes, expectedErrorMsgs);
-            expectedOtherConfig = new OptionalConfig([
+            expectedOptionalConfig = new OptionalConfig([
                     {
                         name: 'buy-fee',
                         value: '0.2'
@@ -81,7 +80,7 @@ function overrideExchangeAdapterServiceSetup() {
             );
 
             testExchangeAdapter = new ExchangeAdapter('huobi', 'Huobi',
-                'com.gazbert.bxbot.adapter.HuobiExchangeAdapter', expectedNetworkConfig, expectedOtherConfig);
+                'com.gazbert.bxbot.adapter.HuobiExchangeAdapter', expectedNetworkConfig, expectedOptionalConfig);
         }
 
         getExchangeAdapterByBotId(id: string): Observable<ExchangeAdapter> {

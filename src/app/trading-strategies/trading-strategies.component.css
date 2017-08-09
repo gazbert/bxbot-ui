@@ -28,3 +28,7 @@ nav a:visited, a:link {
     color: #FFFFFF;
     text-decoration: none;
 }
+
+.bottom-margin-10 {
+    margin-bottom: 10px;
+}

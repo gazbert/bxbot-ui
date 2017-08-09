@@ -27,7 +27,7 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
     let expectedNetworkConfig: NetworkConfig;
     let expectedErrorCodes: number[];
     let expectedErrorMsgs: string[];
-    let expectedOtherConfig: OptionalConfig;
+    let expectedOptionalConfig: OptionalConfig;
 
     let expectedUpdatedExchangeAdapter: ExchangeAdapter;
 
@@ -39,7 +39,7 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
         expectedErrorCodes = [501];
         expectedErrorMsgs = ['Connection timeout'];
         expectedNetworkConfig = new NetworkConfig(60, expectedErrorCodes, expectedErrorMsgs);
-        expectedOtherConfig = new OptionalConfig([
+        expectedOptionalConfig = new OptionalConfig([
                 {
                     name: 'buy-fee',
                     value: '0.2'
@@ -52,10 +52,10 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
         );
 
         expectedExchangeAdapter = new ExchangeAdapter('huobi', 'Huobi', 'com.gazbert.bxbot.adapter.HuobiExchangeAdapter',
-            expectedNetworkConfig, expectedOtherConfig);
+            expectedNetworkConfig, expectedOptionalConfig);
 
         expectedUpdatedExchangeAdapter = new ExchangeAdapter('huobi', 'Huobi', 'com.gazbert.bxbot.adapter.NewHuobiExchangeAdapter',
-            expectedNetworkConfig, expectedOtherConfig);
+            expectedNetworkConfig, expectedOptionalConfig);
 
         activatedRoute = new ActivatedRouteStub();
         activatedRoute.testParams = {id: expectedExchangeAdapter.id};

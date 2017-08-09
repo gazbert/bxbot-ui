@@ -1,8 +1,7 @@
-import {OnInit, Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {FormGroup, FormBuilder, Validators, FormControl, FormArray} from '@angular/forms';
-import {ExchangeAdapter, ExchangeAdapterHttpDataObservableService, ConfigItem} from '../../model/exchange-adapter';
-
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ConfigItem, ExchangeAdapter, ExchangeAdapterHttpDataObservableService} from '../../model/exchange-adapter';
 // Most RxJS operators are not included in Angular's base Observable implementation.
 // The base implementation includes only what Angular itself requires.
 // If you want more RxJS features, you need to explicitly import rxjs operators, else you get runtime error, e.g.
@@ -40,7 +39,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
         'nonFatalErrorHttpStatusCodes': '',
         'nonFatalErrorMessages': '',
         'optionalConfigItemNames': '',
-        'optionalConfigItemValues': ''
+        'optionalConfigItems': ''
     };
 
     validationMessages = {
@@ -68,8 +67,19 @@ export class ExchangeAdapterRxComponent implements OnInit {
             'maxlength': 'Message length cannot be more than 120 characters long.'
         },
         'optionalConfigItems': {
-            'required': 'Config Item Name is required.',
-            'maxlength': 'Config Item Name max length is 50 characters.'
+            'required': 'Name is required.',
+            'maxlength': 'Name max length is 50 characters.',
+            'pattern': 'Name must be alphanumeric and can only include the following special characters: _ -'
+        },
+        'optionalConfigItemNames': {
+            'required': 'Name is required.',
+            'maxlength': 'Name max length is 50 characters.',
+            'pattern': 'Name must be alphanumeric and can only include the following special characters: _ -'
+        },
+        'optionalConfigItemValues': {
+            'required': 'Value is required.',
+            'maxlength': 'Value max length is 120 characters.',
+            'pattern': 'Value must be alphanumeric and can only include the following special characters: _ -'
         }
     };
 
@@ -112,6 +122,10 @@ export class ExchangeAdapterRxComponent implements OnInit {
             this.exchangeAdapterForm.get('nonFatalErrorMessages').value.forEach(
                 (m) => this.exchangeAdapter.networkConfig.nonFatalErrorMessages.push(m));
 
+            this.exchangeAdapter.optionalConfig.configItems.length = 0;
+            this.exchangeAdapterForm.get('optionalConfigItems').value.forEach(
+                (i) => this.exchangeAdapter.optionalConfig.configItems.push(i));
+
             this.exchangeAdapterDataService.update(this.exchangeAdapter)
                 .subscribe(
                     () => this.goToDashboard(),
@@ -147,6 +161,11 @@ export class ExchangeAdapterRxComponent implements OnInit {
         control.removeAt(i);
     }
 
+    addOptionalConfigItem(): void {
+        const control = <FormArray>this.exchangeAdapterForm.controls['optionalConfigItems'];
+        control.push(this.createOptionalConfigItemGroup(new ConfigItem('', '')));
+    }
+
     deleteOptionalConfigItem(i: number): void {
         const control = <FormArray>this.exchangeAdapterForm.controls['optionalConfigItems'];
         control.removeAt(i);
@@ -178,10 +197,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
             ]],
             nonFatalErrorHttpStatusCodes: new FormArray([]),
             nonFatalErrorMessages: new FormArray([]),
-
-            optionalConfigItems: this.fb.array([
-               // this.initOptionalConfigItems(),
-            ])
+            optionalConfigItems: this.fb.array([])
         });
 
         // TODO - Must be better way to automatically init the arrays from the model?
@@ -203,18 +219,25 @@ export class ExchangeAdapterRxComponent implements OnInit {
         this.onValueChanged(); // (re)set validation messages now
     }
 
-    initOptionalConfigItems() {
-        return this.fb.group({
-            name: ['name', Validators.required],
-            value: ['value']
-        });
-    }
-
-    // patch optional config items
+    // Patch optional config items
     createOptionalConfigItemGroup(configItem: ConfigItem) {
         return this.fb.group({
-            name: [configItem.name, Validators.required],
-            value: [configItem.value]
+            name: [configItem.name,
+                [
+                    Validators.required,
+                    Validators.minLength(1),
+                    Validators.maxLength(50),
+                    Validators.pattern('[a-zA-Z0-9_\\- ]*')
+                ]
+            ],
+            value: [configItem.value,
+                [
+                    Validators.required,
+                    Validators.minLength(1),
+                    Validators.maxLength(120),
+                    // Validators.pattern('[a-zA-Z0-9_\\- ]*')
+                ]
+            ]
         });
     }
 
@@ -300,14 +323,14 @@ export class ExchangeAdapterRxComponent implements OnInit {
         });
 
         // Set errors for any invalid Config Item Names
-        // const configItemNameControl = <FormArray>this.exchangeAdapterForm.controls['optionalConfigItemNames'];
+        // const configItemNameControl = <FormArray>this.exchangeAdapterForm.controls['optionalConfigItems'];
         // configItemNameControl.controls.forEach((msg) => {
         //     if (msg && !msg.valid) {
-        //         this.formErrors['optionalConfigItemNames'] = '';
-        //         const messages = this.validationMessages['optionalConfigItemNames'];
+        //         this.formErrors['optionalConfigItems'] = '';
+        //         const messages = this.validationMessages['optionalConfigItems'];
         //         for (const key in msg.errors) {
         //             if (msg.errors.hasOwnProperty(key)) {
-        //                 this.formErrors['optionalConfigItemNames'] += messages[key] + ' ';
+        //                 this.formErrors['optionalConfigItems'] += messages[key] + ' ';
         //             }
         //         }
         //     }

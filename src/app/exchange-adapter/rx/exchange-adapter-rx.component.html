@@ -110,7 +110,8 @@
         <div>
             <hr>
         </div>
-        <a class="btn btn-primary" data-toggle="collapse" href="#optionalExchangeConfig" aria-expanded="false"
+        <a class="btn btn-primary bottom-margin-10" data-toggle="collapse" href="#optionalExchangeConfig"
+           aria-expanded="false"
            aria-controls="optionalExchangeConfig">
             <i class="glyphicon glyphicon-triangle-right pull-left glyphicon-padding"></i>
             <i class="glyphicon glyphicon-triangle-bottom pull-left glyphicon-padding"></i>
@@ -137,33 +138,31 @@
                                 <div class="form-group col-sm-12">
                                     <label for="configItemName_{{i}}" class="col-sm-4">Name</label>
                                     <input id="configItemName_{{i}}" class="col-sm-8" formControlName="name"
-                                           maxlength="121"
-                                           required>
-                                    <div id="invalidConfigItemName_{{i}}" [hidden]="optionalConfigItems.controls[i].valid ||
-                                 (optionalConfigItems.controls[i].pristine && !isFormSaved())"
-                                         class="alert alert-danger col-sm-12">
-                                        {{ formErrors.optionalConfigItemNames }}
-                                    </div>
+                                           maxlength="121" required>
+                                    <!--<div id="invalidConfigItemName_{{i}}" [hidden]="optionalConfigItems.controls[i].valid ||-->
+                                 <!--(optionalConfigItems.controls[i].pristine && !isFormSaved())"-->
+                                         <!--class="alert alert-danger col-sm-12">-->
+                                        <!--{{formErrors.optionalConfigItemNames}}-->
+                                    <!--</div>-->
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-sm-12">
                                     <label for="configItemValue_{{i}}" class="col-sm-4">Value</label>
                                     <input id="configItemValue_{{i}}" class="col-sm-8" formControlName="value"
-                                           maxlength="121"
-                                           required>
-                                    <div id="invalidConfigItemValue_{{i}}" [hidden]="optionalConfigItems.controls[i].valid ||
-                                 (optionalConfigItems.controls[i].pristine && !isFormSaved())"
-                                         class="alert alert-danger col-sm-12">
-                                        {{ formErrors.optionalConfigItemValues }}
-                                    </div>
+                                           maxlength="121" required>
+                                    <!--<div id="invalidConfigItemValue_{{i}}" [hidden]="optionalConfigItems.controls[i].valid ||-->
+                                 <!--(optionalConfigItems.controls[i].pristine && !isFormSaved())"-->
+                                         <!--class="alert alert-danger col-sm-12">-->
+                                        <!--{{"todo"}}-->
+                                    <!--</div>-->
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="margin-20">
                         <i class="glyphicon glyphicon-plus pull-left glyphicon-padding"></i>
-                        <a id="addNewConfigItemLink" (click)="addErrorMessage()" style="cursor: default">
+                        <a id="addNewConfigItemLink" (click)="addOptionalConfigItem()" style="cursor: default">
                             Add new Config Item
                         </a>
                     </div>

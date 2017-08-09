@@ -158,7 +158,7 @@ export class InMemoryDataService implements InMemoryDbService {
                     configItems: [
                         {
                             name: 'buy-fee',
-                            value: '0.2'
+                            value: '0.25'
                         },
                         {
                             name: 'sell-fee',
@@ -178,8 +178,20 @@ export class InMemoryDataService implements InMemoryDbService {
                         504
                     ],
                     nonFatalErrorMessages: [
-                        {value: 'Connection reset'},
-                        {value: 'Remote host closed connection during handshake'}
+                        'Connection reset',
+                        'Remote host closed connection during handshake'
+                    ]
+                },
+                optionalConfig: {
+                    configItems: [
+                        {
+                            name: 'buy-fee',
+                            value: '0.25'
+                        },
+                        {
+                            name: 'sell-fee',
+                            value: '0.25'
+                        }
                     ]
                 }
             },
@@ -197,6 +209,18 @@ export class InMemoryDataService implements InMemoryDbService {
                         'Connection reset',
                         'Connection refused'
                     ]
+                },
+                optionalConfig: {
+                    configItems: [
+                        {
+                            name: 'buy-fee',
+                            value: '0.2'
+                        },
+                        {
+                            name: 'sell-fee',
+                            value: '0.2'
+                        }
+                    ]
                 }
             },
             {
@@ -213,6 +237,18 @@ export class InMemoryDataService implements InMemoryDbService {
                         'Connection reset',
                         'Remote host closed connection during handshake'
                     ]
+                },
+                optionalConfig: {
+                    configItems: [
+                        {
+                            name: 'buy-fee',
+                            value: '0.2'
+                        },
+                        {
+                            name: 'sell-fee',
+                            value: '0.2'
+                        }
+                    ]
                 }
             },
             {
@@ -228,6 +264,18 @@ export class InMemoryDataService implements InMemoryDbService {
                     nonFatalErrorMessages: [
                         'Connection reset',
                         'Connection refused'
+                    ]
+                },
+                optionalConfig: {
+                    configItems: [
+                        {
+                            name: 'buy-fee',
+                            value: '0.25'
+                        },
+                        {
+                            name: 'sell-fee',
+                            value: '0.25'
+                        }
                     ]
                 }
             },
@@ -259,6 +307,18 @@ export class InMemoryDataService implements InMemoryDbService {
                     ],
                     nonFatalErrorMessages: [
                         'Remote host closed connection during handshake'
+                    ]
+                },
+                optionalConfig: {
+                    configItems: [
+                        {
+                            name: 'buy-fee',
+                            value: '0.26'
+                        },
+                        {
+                            name: 'sell-fee',
+                            value: '0.26'
+                        }
                     ]
                 }
             }
