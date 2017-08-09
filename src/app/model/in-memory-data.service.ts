@@ -154,16 +154,18 @@ export class InMemoryDataService implements InMemoryDbService {
                         'Connection refused'
                     ]
                 },
-                optionalConfig: [
-                    {
-                        name: 'buy-fee',
-                        value: '0.2'
-                    },
-                    {
-                        name: 'sell-fee',
-                        value: '0.25'
-                    }
-                ]
+                optionalConfig: {
+                    configItems: [
+                        {
+                            name: 'buy-fee',
+                            value: '0.2'
+                        },
+                        {
+                            name: 'sell-fee',
+                            value: '0.25'
+                        }
+                    ]
+                }
             },
             {
                 id: 'gemini-1',

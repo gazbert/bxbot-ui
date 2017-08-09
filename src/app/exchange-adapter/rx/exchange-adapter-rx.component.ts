@@ -1,7 +1,7 @@
 import {OnInit, Component} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormGroup, FormBuilder, Validators, FormControl, FormArray} from '@angular/forms';
-import {ExchangeAdapter, ExchangeAdapterHttpDataObservableService} from '../../model/exchange-adapter';
+import {ExchangeAdapter, ExchangeAdapterHttpDataObservableService, ConfigItem} from '../../model/exchange-adapter';
 
 // Most RxJS operators are not included in Angular's base Observable implementation.
 // The base implementation includes only what Angular itself requires.
@@ -38,7 +38,9 @@ export class ExchangeAdapterRxComponent implements OnInit {
         'className': '',
         'connectionTimeout': '',
         'nonFatalErrorHttpStatusCodes': '',
-        'nonFatalErrorMessages': ''
+        'nonFatalErrorMessages': '',
+        'optionalConfigItemNames': '',
+        'optionalConfigItemValues': ''
     };
 
     validationMessages = {
@@ -64,6 +66,10 @@ export class ExchangeAdapterRxComponent implements OnInit {
         'nonFatalErrorMessages': {
             'required': 'Message must not be empty.',
             'maxlength': 'Message length cannot be more than 120 characters long.'
+        },
+        'optionalConfigItems': {
+            'required': 'Config Item Name is required.',
+            'maxlength': 'Config Item Name max length is 50 characters.'
         }
     };
 
@@ -76,15 +82,16 @@ export class ExchangeAdapterRxComponent implements OnInit {
             const botId = params['id'];
             this.exchangeAdapterDataService.getExchangeAdapterByBotId(botId)
                 .subscribe(exchangeAdapter => {
-                    this.exchangeAdapter = exchangeAdapter;
-                    this.buildForm();
-                },
-                error => this.errorMessage = <any>error); // TODO - Show meaningful error to user?
-        }).then(() => {/*done*/});
+                        this.exchangeAdapter = exchangeAdapter;
+                        this.buildForm();
+                    },
+                    error => this.errorMessage = <any>error); // TODO - Show meaningful error to user?
+        }).then(() => {/*done*/
+        });
     }
 
     goToDashboard(): void {
-         this.router.navigate(['dashboard']);
+        this.router.navigate(['dashboard']);
     }
 
     save(isValid: boolean): void {
@@ -140,6 +147,11 @@ export class ExchangeAdapterRxComponent implements OnInit {
         control.removeAt(i);
     }
 
+    deleteOptionalConfigItem(i: number): void {
+        const control = <FormArray>this.exchangeAdapterForm.controls['optionalConfigItems'];
+        control.removeAt(i);
+    }
+
     // ------------------------------------------------------------------
     // Form validation stuff
     // ------------------------------------------------------------------
@@ -166,6 +178,10 @@ export class ExchangeAdapterRxComponent implements OnInit {
             ]],
             nonFatalErrorHttpStatusCodes: new FormArray([]),
             nonFatalErrorMessages: new FormArray([]),
+
+            optionalConfigItems: this.fb.array([
+               // this.initOptionalConfigItems(),
+            ])
         });
 
         // TODO - Must be better way to automatically init the arrays from the model?
@@ -178,8 +194,28 @@ export class ExchangeAdapterRxComponent implements OnInit {
             (msg) => this.nonFatalErrorMessages.push(this.createErrorMessageGroup(msg))
         );
 
+        // TODO - Must be better way to automatically init the arrays from the model?
+        this.exchangeAdapter.optionalConfig.configItems.forEach(
+            (item) => this.optionalConfigItems.push(this.createOptionalConfigItemGroup(item))
+        );
+
         this.exchangeAdapterForm.valueChanges.subscribe(data => this.onValueChanged(data));
         this.onValueChanged(); // (re)set validation messages now
+    }
+
+    initOptionalConfigItems() {
+        return this.fb.group({
+            name: ['name', Validators.required],
+            value: ['value']
+        });
+    }
+
+    // patch optional config items
+    createOptionalConfigItemGroup(configItem: ConfigItem) {
+        return this.fb.group({
+            name: [configItem.name, Validators.required],
+            value: [configItem.value]
+        });
     }
 
     createErrorMessageGroup(errorMsg: string) {
@@ -204,6 +240,10 @@ export class ExchangeAdapterRxComponent implements OnInit {
 
     get nonFatalErrorMessages(): FormArray {
         return this.exchangeAdapterForm.get('nonFatalErrorMessages') as FormArray;
+    }
+
+    get optionalConfigItems(): FormArray {
+        return this.exchangeAdapterForm.get('optionalConfigItems') as FormArray;
     }
 
     onValueChanged(data?: any) {
@@ -258,6 +298,34 @@ export class ExchangeAdapterRxComponent implements OnInit {
                 }
             }
         });
+
+        // Set errors for any invalid Config Item Names
+        // const configItemNameControl = <FormArray>this.exchangeAdapterForm.controls['optionalConfigItemNames'];
+        // configItemNameControl.controls.forEach((msg) => {
+        //     if (msg && !msg.valid) {
+        //         this.formErrors['optionalConfigItemNames'] = '';
+        //         const messages = this.validationMessages['optionalConfigItemNames'];
+        //         for (const key in msg.errors) {
+        //             if (msg.errors.hasOwnProperty(key)) {
+        //                 this.formErrors['optionalConfigItemNames'] += messages[key] + ' ';
+        //             }
+        //         }
+        //     }
+        // });
+
+        // Set errors for any invalid Config Item Values
+        // const configItemValueControl = <FormArray>this.exchangeAdapterForm.controls['optionalConfigItemValues'];
+        // configItemValueControl.controls.forEach((msg) => {
+        //     if (msg && !msg.valid) {
+        //         this.formErrors['optionalConfigItemValues'] = '';
+        //         const messages = this.validationMessages['optionalConfigItemValues'];
+        //         for (const key in msg.errors) {
+        //             if (msg.errors.hasOwnProperty(key)) {
+        //                 this.formErrors['optionalConfigItemValues'] += messages[key] + ' ';
+        //             }
+        //         }
+        //     }
+        // });
 
         // reset so we don't error new (empty) errorCode/errorMsg before user gets chance to save
         if (form.valid) {

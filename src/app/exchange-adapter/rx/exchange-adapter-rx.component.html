@@ -106,8 +106,7 @@
             </div>
         </div>
 
-
-        <!-- TODO - Prototype Collapsible for adding optional Strategy config -->
+        <!-- Optional Exchange Config -->
         <div>
             <hr>
         </div>
@@ -117,80 +116,60 @@
             <i class="glyphicon glyphicon-triangle-bottom pull-left glyphicon-padding"></i>
             Optional Config
         </a>
+
+        <!--
+        Optional Config Items
+         -->
         <div class="collapse" id="optionalExchangeConfig">
-            <div class="well">
-                A new panel for adding/deleting optional Exchange config will go here.
+            <div class="row">
+                <div class="col-sm-12" formArrayName="optionalConfigItems">
+                    <div *ngFor="let optionalConfigItem of optionalConfigItems.controls; let i=index"
+                         class="panel panel-default">
+
+                        <div class="panel-heading">
+                            <span>Config Item {{i + 1}}</span>
+                            <span id="deleteConfigItemButton_{{i}}" class="glyphicon glyphicon-remove pull-right"
+                                  *ngIf="optionalConfigItems.controls.length > 0"
+                                  (click)="deleteOptionalConfigItem(i)"></span>
+                        </div>
+                        <div class="panel-body" [formGroupName]="i">
+                            <div class="row">
+                                <div class="form-group col-sm-12">
+                                    <label for="configItemName_{{i}}" class="col-sm-4">Name</label>
+                                    <input id="configItemName_{{i}}" class="col-sm-8" formControlName="name"
+                                           maxlength="121"
+                                           required>
+                                    <div id="invalidConfigItemName_{{i}}" [hidden]="optionalConfigItems.controls[i].valid ||
+                                 (optionalConfigItems.controls[i].pristine && !isFormSaved())"
+                                         class="alert alert-danger col-sm-12">
+                                        {{ formErrors.optionalConfigItemNames }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-12">
+                                    <label for="configItemValue_{{i}}" class="col-sm-4">Value</label>
+                                    <input id="configItemValue_{{i}}" class="col-sm-8" formControlName="value"
+                                           maxlength="121"
+                                           required>
+                                    <div id="invalidConfigItemValue_{{i}}" [hidden]="optionalConfigItems.controls[i].valid ||
+                                 (optionalConfigItems.controls[i].pristine && !isFormSaved())"
+                                         class="alert alert-danger col-sm-12">
+                                        {{ formErrors.optionalConfigItemValues }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="margin-20">
+                        <i class="glyphicon glyphicon-plus pull-left glyphicon-padding"></i>
+                        <a id="addNewConfigItemLink" (click)="addErrorMessage()" style="cursor: default">
+                            Add new Config Item
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <!-- Other (optional) Exchange Config -->
-        <!--<div>-->
-            <!--<hr>-->
-        <!--</div>-->
-        <!--<a class="btn btn-primary" data-toggle="collapse" href="#optionalExchangeConfig" aria-expanded="false"-->
-           <!--aria-controls="optionalExchangeConfig">-->
-            <!--<i class="glyphicon glyphicon-triangle-right pull-left glyphicon-padding"></i>-->
-            <!--<i class="glyphicon glyphicon-triangle-bottom pull-left glyphicon-padding"></i>-->
-            <!--Optional Config-->
-        <!--</a>-->
-        <!--<div class="collapse" id="optionalExchangeConfig">-->
-
-            <!--&lt;!&ndash;-->
-             <!--Optional Config Items-->
-             <!--TODO - wire up to new OptionalConfig model instead of nonFatalErrorMessages :-)-->
-             <!--&ndash;&gt;-->
-            <!--<div class="row">-->
-                <!--<div class="col-sm-12" formArrayName="nonFatalErrorMessages">-->
-                    <!--<div *ngFor="let nonFatalErrorMessage of nonFatalErrorMessages.controls; let i=index"-->
-                         <!--class="panel panel-default">-->
-
-                        <!--<div class="panel-heading">-->
-                            <!--<span>Config Item {{i + 1}}</span>-->
-                            <!--<span id="deleteConfigItemButton_{{i}}" class="glyphicon glyphicon-remove pull-right"-->
-                                  <!--*ngIf="nonFatalErrorMessages.controls.length > 0"-->
-                                  <!--(click)="deleteErrorMessage(i)"></span>-->
-                        <!--</div>-->
-
-                        <!--<div class="panel-body">-->
-                            <!--<div class="row">-->
-                                <!--<div class="form-group col-sm-12">-->
-                                    <!--<label for="configItemName_{{i}}" class="col-sm-4">Name</label>-->
-                                    <!--<input id="configItemName_{{i}}" class="col-sm-8" [formControlName]="i"-->
-                                           <!--maxlength="121"-->
-                                           <!--required>-->
-                                    <!--<div id="invalidConfigItemName_{{i}}" [hidden]="nonFatalErrorMessages.controls[i].valid ||-->
-                                 <!--(nonFatalErrorMessages.controls[i].pristine && !isFormSaved())"-->
-                                         <!--class="alert alert-danger col-sm-12">-->
-                                        <!--{{ formErrors.nonFatalErrorMessages }}-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</div>-->
-
-                            <!--<div class="row">-->
-                                <!--<div class="form-group col-sm-12">-->
-                                    <!--<label for="configItemValue_{{i}}" class="col-sm-4">Value</label>-->
-                                    <!--<input id="configItemValue_{{i}}" class="col-sm-8" [formControlName]="i"-->
-                                           <!--maxlength="121"-->
-                                           <!--required>-->
-                                    <!--<div id="invalidConfigItemValue_{{i}}" [hidden]="nonFatalErrorMessages.controls[i].valid ||-->
-                                 <!--(nonFatalErrorMessages.controls[i].pristine && !isFormSaved())"-->
-                                         <!--class="alert alert-danger col-sm-12">-->
-                                        <!--{{ formErrors.nonFatalErrorMessages }}-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-
-                    <!--</div>-->
-                    <!--<div class="margin-20">-->
-                        <!--<i class="glyphicon glyphicon-plus pull-left glyphicon-padding"></i>-->
-                        <!--<a id="addNewConfigItemLink" (click)="addErrorMessage()" style="cursor: default">-->
-                            <!--Add new Config Item-->
-                        <!--</a>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
 
         <div>
             <hr>
