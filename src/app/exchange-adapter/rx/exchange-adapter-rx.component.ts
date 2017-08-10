@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {ConfigItem, ExchangeAdapter, ExchangeAdapterHttpDataObservableService} from '../../model/exchange-adapter';
+import {ConfigItem, OptionalConfig, ExchangeAdapter, ExchangeAdapterHttpDataObservableService} from '../../model/exchange-adapter';
 // Most RxJS operators are not included in Angular's base Observable implementation.
 // The base implementation includes only what Angular itself requires.
 // If you want more RxJS features, you need to explicitly import rxjs operators, else you get runtime error, e.g.
@@ -122,11 +122,9 @@ export class ExchangeAdapterRxComponent implements OnInit {
             this.exchangeAdapterForm.get('nonFatalErrorMessages').value.forEach(
                 (m) => this.exchangeAdapter.networkConfig.nonFatalErrorMessages.push(m));
 
-            if (this.exchangeAdapter.optionalConfig != null) {
-                this.exchangeAdapter.optionalConfig.configItems.length = 0;
-                this.exchangeAdapterForm.get('optionalConfigItems').value.forEach(
-                    (i) => this.exchangeAdapter.optionalConfig.configItems.push(i));
-            }
+            this.exchangeAdapter.optionalConfig.configItems.length = 0;
+            this.exchangeAdapterForm.get('optionalConfigItems').value.forEach(
+                (i) => this.exchangeAdapter.optionalConfig.configItems.push(i));
 
             this.exchangeAdapterDataService.update(this.exchangeAdapter)
                 .subscribe(
@@ -217,6 +215,8 @@ export class ExchangeAdapterRxComponent implements OnInit {
             this.exchangeAdapter.optionalConfig.configItems.forEach(
                 (item) => this.optionalConfigItems.push(this.createOptionalConfigItemGroup(item))
             );
+        } else {
+            this.exchangeAdapter.optionalConfig = new OptionalConfig([]);
         }
 
         this.exchangeAdapterForm.valueChanges.subscribe(data => this.onValueChanged(data));
@@ -379,6 +379,3 @@ export class ExchangeAdapterRxComponent implements OnInit {
         }
     }
 }
-
-
-

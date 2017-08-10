@@ -17,7 +17,6 @@ import {ExchangeAdapterModule} from '../exchange-adapter.module';
 import {ExchangeAdapterRxComponent} from './exchange-adapter-rx.component';
 import {OptionalConfig} from '../../model/exchange-adapter/exchange-adapter.model';
 
-
 /**
  * Tests the behaviour of the Exchange Adapter component (RxJS version) is as expected.
  *
@@ -140,6 +139,7 @@ function overrideExchangeAdapterServiceSetup() {
         stubExchangeAdapterDataService = fixture.debugElement.injector.get(ExchangeAdapterHttpDataObservableService);
     }));
 
+    // FIXME - broken test
     // it('should inject the stubbed Exchange Adapter service',
     //     inject([ExchangeAdapterHttpDataObservableService], (service: ExchangeAdapterHttpDataObservableService) => {
     //         expect(service).toEqual({}, 'service injected from fixture');
@@ -159,6 +159,12 @@ function overrideExchangeAdapterServiceSetup() {
 
         expect(page.errorMessage_0Input.value).toBe(
             testExchangeAdapter.networkConfig.nonFatalErrorMessages[0]);
+
+        expect(page.configItemName_0Input.value).toBe(
+            testExchangeAdapter.optionalConfig.configItems[0].name);
+
+        expect(page.configItemValue_0Input.value).toBe(
+            testExchangeAdapter.optionalConfig.configItems[0].value);
     });
 
     it('should save and navigate to Dashboard when user clicks Save for valid input', fakeAsync(() => {
@@ -224,6 +230,20 @@ function overrideExchangeAdapterServiceSetup() {
         expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1]).toBeNaN();
     }));
 
+    // FIXME - TypeError: Cannot read property 'triggerEventHandler' of null
+    xit('should remove Error Code when user deletes one', fakeAsync(() => {
+
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
+
+        click(page.deleteErrorCodeBtn);
+        click(page.saveBtn);
+        comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
+        tick(); // wait for async save to complete
+
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(0);
+        // expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0]).not.toBeDefined();
+    }));
+
     it('should create new Error Message when user adds one', fakeAsync(() => {
 
         expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(1);
@@ -238,20 +258,6 @@ function overrideExchangeAdapterServiceSetup() {
         expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages[1]).toBe('');
     }));
 
-    // FIXME - TypeError: Cannot read property 'triggerEventHandler' of null
-    xit('should remove Error Code when user deletes one', fakeAsync(() => {
-
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
-
-        click(page.deleteErrorCodeBtn);
-        click(page.saveBtn);
-        comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
-        tick(); // wait for async save to complete
-
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(0);
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0]).not.toBeDefined();
-    }));
-
     it('should remove Error Message when user deletes one', fakeAsync(() => {
 
         expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(1);
@@ -263,6 +269,33 @@ function overrideExchangeAdapterServiceSetup() {
 
         expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(0);
         expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages[0]).not.toBeDefined();
+    }));
+
+    it('should create new Optional Config Item when user adds one', fakeAsync(() => {
+
+        expect(testExchangeAdapter.optionalConfig.configItems.length).toBe(2);
+
+        click(page.addNewConfigItemLink);
+        click(page.saveBtn);
+        comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
+        tick(); // wait for async save to complete
+
+        expect(testExchangeAdapter.optionalConfig.configItems.length).toBe(3);
+        expect(testExchangeAdapter.optionalConfig.configItems[1].name).toBeDefined();
+        expect(testExchangeAdapter.optionalConfig.configItems[1].value).toBeDefined();
+    }));
+
+    it('should remove Optional Config Item when user deletes one', fakeAsync(() => {
+
+        expect(testExchangeAdapter.optionalConfig.configItems.length).toBe(2);
+
+        click(page.deleteConfigItemBtn);
+        click(page.saveBtn);
+        comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
+        tick(); // wait for async save to complete
+
+        expect(testExchangeAdapter.optionalConfig.configItems.length).toBe(1);
+        expect(testExchangeAdapter.optionalConfig.configItems[1]).not.toBeDefined();
     }));
 }
 
@@ -416,6 +449,33 @@ function fakeExchangeAdapterServiceSetup() {
             expect(expectedExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(3);
             expect(expectedExchangeAdapter.networkConfig.nonFatalErrorMessages[3]).not.toBeDefined();
         }));
+
+        it('should create new Optional Config Item when user adds one', fakeAsync(() => {
+
+            expect(expectedExchangeAdapter.optionalConfig.configItems.length).toBe(2);
+
+            click(page.addNewConfigItemLink);
+            click(page.saveBtn);
+            comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
+            tick(); // wait for async save to complete
+
+            expect(expectedExchangeAdapter.optionalConfig.configItems.length).toBe(3);
+            expect(expectedExchangeAdapter.optionalConfig.configItems[2].name).toBeDefined();
+            expect(expectedExchangeAdapter.optionalConfig.configItems[2].value).toBe('');
+        }));
+
+        it('should remove Optional Config Item when user deletes one', fakeAsync(() => {
+
+            expect(expectedExchangeAdapter.optionalConfig.configItems.length).toBe(3);
+
+            click(page.deleteConfigItemBtn);
+            click(page.saveBtn);
+            comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
+            tick(); // wait for async save to complete
+
+            expect(expectedExchangeAdapter.optionalConfig.configItems.length).toBe(2);
+            expect(expectedExchangeAdapter.optionalConfig.configItems[2]).not.toBeDefined();
+        }));
     });
 }
 
@@ -453,16 +513,23 @@ class Page {
     cancelBtn: DebugElement;
 
     addNewErrorCodeLink: DebugElement;
-    addNewErrorMessageLink: DebugElement;
-
     deleteErrorCodeBtn: DebugElement;
+
+    addNewErrorMessageLink: DebugElement;
     deleteErrorMessageBtn: DebugElement;
+
+    addNewConfigItemLink: DebugElement;
+    deleteConfigItemBtn: DebugElement;
 
     adapterNameInput: HTMLInputElement;
     classNameInput: HTMLInputElement;
     connectionTimeoutInput: HTMLInputElement;
+
     errorCode_0Input: HTMLInputElement;
     errorMessage_0Input: HTMLInputElement;
+
+    configItemName_0Input: HTMLInputElement;
+    configItemValue_0Input: HTMLInputElement;
 
     constructor() {
         // Use component's injector to see the services it injected.
@@ -483,16 +550,22 @@ class Page {
             this.cancelBtn = fixture.debugElement.query(By.css('#exchangeAdapterCancelButton'));
 
             this.addNewErrorCodeLink = fixture.debugElement.query(By.css('#addNewErrorCodeLink'));
-            this.addNewErrorMessageLink = fixture.debugElement.query(By.css('#addNewErrorMessageLink'));
-
             this.deleteErrorCodeBtn = fixture.debugElement.query(By.css('#deleteErrorCodeButton_0'));
+
+            this.addNewErrorMessageLink = fixture.debugElement.query(By.css('#addNewErrorMessageLink'));
             this.deleteErrorMessageBtn = fixture.debugElement.query(By.css('#deleteErrorMessageButton_0'));
+
+            this.addNewConfigItemLink = fixture.debugElement.query(By.css('#addNewConfigItemLink'));
+            this.deleteConfigItemBtn = fixture.debugElement.query(By.css('#deleteConfigItemButton_0'));
 
             this.adapterNameInput = fixture.debugElement.query(By.css('#adapterName')).nativeElement;
             this.classNameInput = fixture.debugElement.query(By.css('#className')).nativeElement;
             this.connectionTimeoutInput = fixture.debugElement.query(By.css('#connectionTimeout')).nativeElement;
             this.errorCode_0Input = fixture.debugElement.query(By.css('#errorCode_0')).nativeElement;
             this.errorMessage_0Input = fixture.debugElement.query(By.css('#errorMessage_0')).nativeElement;
+
+            this.configItemName_0Input = fixture.debugElement.query(By.css('#configItemName_0')).nativeElement;
+            this.configItemValue_0Input = fixture.debugElement.query(By.css('#configItemValue_0')).nativeElement;
         }
     }
 }
