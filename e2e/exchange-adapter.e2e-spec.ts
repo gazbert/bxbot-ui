@@ -12,14 +12,13 @@ import {browser, element, by} from 'protractor';
  *
  * @author gazbert
  */
-fdescribe('Exchange Adapter Tests', function () {
+describe('Exchange Adapter Tests', function () {
 
     beforeEach(function () {
         browser.get('');
     });
 
-    // FIXME - test broken!
-    xit('should update Exchange Adapter fields after Save', function () {
+    it('should update Exchange Adapter fields after Save', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
@@ -175,8 +174,7 @@ fdescribe('Exchange Adapter Tests', function () {
         expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe('Connection refused');
     });
 
-    // FIXME - test broken!
-    xit('should add new Error Code and save it', function () {
+    it('should add new Error Code and save it', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
@@ -225,8 +223,7 @@ fdescribe('Exchange Adapter Tests', function () {
         expect(element(by.id('errorCode_2')).getAttribute('value')).toBe('504');
     });
 
-    // FIXME - test broken!
-    xit('should delete Error Code and save change', function () {
+    it('should delete Error Code and save change', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
@@ -267,8 +264,7 @@ fdescribe('Exchange Adapter Tests', function () {
         expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe('Connection refused');
     });
 
-    // FIXME - test broken!
-    xit('should add new Error Message and save it', function () {
+    it('should add new Error Message and save it', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
@@ -317,8 +313,7 @@ fdescribe('Exchange Adapter Tests', function () {
         expect(element(by.id('errorMessage_2')).getAttribute('value')).toBe('Connection reset by peer');
     });
 
-    // FIXME - test broken!
-    xit('should delete Error Message and save change', function () {
+    it('should delete Error Message and save change', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
@@ -358,8 +353,7 @@ fdescribe('Exchange Adapter Tests', function () {
         expect(element(by.id('errorMessage_1')).isPresent()).toBe(false); // gone!
     });
 
-    // FIXME - broken e2e test
-    xit('should NOT save Exchange Adapter fields if there are validation errors', function () {
+    it('should NOT save Exchange Adapter fields if there are validation errors', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();

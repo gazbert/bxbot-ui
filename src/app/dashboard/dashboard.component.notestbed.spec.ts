@@ -4,6 +4,17 @@ import {FakeBotDataObservableService} from '../model/bot/testing';
 import {Bot} from '../model/bot';
 import {addMatchers} from '../../../testing/';
 
+class FakeRouter {
+
+    navigateByUrl(url: string) {
+        return url;
+    }
+
+    navigate(url: string) {
+        return url;
+    }
+}
+
 /**
  * Tests the behaviour of the Dashboard component is as expected.
  *
@@ -68,15 +79,4 @@ describe('DashboardComponent tests without TestBed', () => {
         expect(navArgs).toBe('/bot/gdax-1', 'should navigate to GDAX Bot Details for selected Bot');
     });
 });
-
-class FakeRouter {
-
-    navigateByUrl(url: string) {
-        return url;
-    }
-
-    navigate(url: string) {
-        return url;
-    }
-}
 

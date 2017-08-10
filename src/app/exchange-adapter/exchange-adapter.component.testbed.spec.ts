@@ -13,6 +13,62 @@ import {ExchangeAdapterDataPromiseService, ExchangeAdapterHttpDataPromiseService
 import {OptionalConfig} from '../model/exchange-adapter/exchange-adapter.model';
 
 /**
+ * This helper class represents the Exchange Adapter screen.
+ */
+class Page {
+
+    navSpy: jasmine.Spy;
+    saveSpy: jasmine.Spy;
+
+    saveBtn: DebugElement;
+    cancelBtn: DebugElement;
+
+    addNewErrorCodeLink: DebugElement;
+    addNewErrorMessageLink: DebugElement;
+
+    deleteErrorCodeBtn: DebugElement;
+    deleteErrorMessageBtn: DebugElement;
+
+    adapterNameInput: HTMLInputElement;
+    classNameInput: HTMLInputElement;
+    connectionTimeoutInput: HTMLInputElement;
+    errorCode_0Input: HTMLInputElement;
+    errorMessage_0Input: HTMLInputElement;
+
+    constructor() {
+        // Use component's injector to see the services it injected.
+        const compInjector = fixture.debugElement.injector;
+        const exchangeAdapterDataService = compInjector.get(ExchangeAdapterHttpDataPromiseService);
+        const router = compInjector.get(Router);
+
+        this.navSpy = spyOn(router, 'navigate');
+        this.saveSpy = spyOn(exchangeAdapterDataService, 'update').and.callThrough();
+    }
+
+    addPageElements() {
+
+        if (comp.exchangeAdapter) {
+
+            // We have a Exchange Adapter so these elements are now in the DOM...
+            this.saveBtn = fixture.debugElement.query(By.css('#exchangeAdapterSaveButton'));
+            this.cancelBtn = fixture.debugElement.query(By.css('#exchangeAdapterCancelButton'));
+
+            this.addNewErrorCodeLink = fixture.debugElement.query(By.css('#addNewErrorCodeLink'));
+            this.addNewErrorMessageLink = fixture.debugElement.query(By.css('#addNewErrorMessageLink'));
+
+            this.deleteErrorCodeBtn = fixture.debugElement.query(By.css('#deleteErrorCodeButton_0'));
+            this.deleteErrorMessageBtn = fixture.debugElement.query(By.css('#deleteErrorMessageButton_0'));
+
+            this.adapterNameInput = fixture.debugElement.query(By.css('#adapterName')).nativeElement;
+            this.classNameInput = fixture.debugElement.query(By.css('#className')).nativeElement;
+            this.connectionTimeoutInput = fixture.debugElement.query(By.css('#connectionTimeout')).nativeElement;
+            this.errorCode_0Input = fixture.debugElement.query(By.css('#errorCode_0')).nativeElement;
+            this.errorMessage_0Input = fixture.debugElement.query(By.css('#errorMessage_0')).nativeElement;
+        }
+    }
+}
+
+/**
  * Tests the behaviour of the Exchange Adapter component (Template version) is as expected.
  *
  * Learning ground for writing Jasmine tests using the TestBed.
@@ -393,58 +449,3 @@ function createComponent() {
     });
 }
 
-/**
- * This helper class represents the Exchange Adapter screen.
- */
-class Page {
-
-    navSpy: jasmine.Spy;
-    saveSpy: jasmine.Spy;
-
-    saveBtn: DebugElement;
-    cancelBtn: DebugElement;
-
-    addNewErrorCodeLink: DebugElement;
-    addNewErrorMessageLink: DebugElement;
-
-    deleteErrorCodeBtn: DebugElement;
-    deleteErrorMessageBtn: DebugElement;
-
-    adapterNameInput: HTMLInputElement;
-    classNameInput: HTMLInputElement;
-    connectionTimeoutInput: HTMLInputElement;
-    errorCode_0Input: HTMLInputElement;
-    errorMessage_0Input: HTMLInputElement;
-
-    constructor() {
-        // Use component's injector to see the services it injected.
-        const compInjector = fixture.debugElement.injector;
-        const exchangeAdapterDataService = compInjector.get(ExchangeAdapterHttpDataPromiseService);
-        const router = compInjector.get(Router);
-
-        this.navSpy = spyOn(router, 'navigate');
-        this.saveSpy = spyOn(exchangeAdapterDataService, 'update').and.callThrough();
-    }
-
-    addPageElements() {
-
-        if (comp.exchangeAdapter) {
-
-            // We have a Exchange Adapter so these elements are now in the DOM...
-            this.saveBtn = fixture.debugElement.query(By.css('#exchangeAdapterSaveButton'));
-            this.cancelBtn = fixture.debugElement.query(By.css('#exchangeAdapterCancelButton'));
-
-            this.addNewErrorCodeLink = fixture.debugElement.query(By.css('#addNewErrorCodeLink'));
-            this.addNewErrorMessageLink = fixture.debugElement.query(By.css('#addNewErrorMessageLink'));
-
-            this.deleteErrorCodeBtn = fixture.debugElement.query(By.css('#deleteErrorCodeButton_0'));
-            this.deleteErrorMessageBtn = fixture.debugElement.query(By.css('#deleteErrorMessageButton_0'));
-
-            this.adapterNameInput = fixture.debugElement.query(By.css('#adapterName')).nativeElement;
-            this.classNameInput = fixture.debugElement.query(By.css('#className')).nativeElement;
-            this.connectionTimeoutInput = fixture.debugElement.query(By.css('#connectionTimeout')).nativeElement;
-            this.errorCode_0Input = fixture.debugElement.query(By.css('#errorCode_0')).nativeElement;
-            this.errorMessage_0Input = fixture.debugElement.query(By.css('#errorMessage_0')).nativeElement;
-        }
-    }
-}

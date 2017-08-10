@@ -122,9 +122,11 @@ export class ExchangeAdapterRxComponent implements OnInit {
             this.exchangeAdapterForm.get('nonFatalErrorMessages').value.forEach(
                 (m) => this.exchangeAdapter.networkConfig.nonFatalErrorMessages.push(m));
 
-            this.exchangeAdapter.optionalConfig.configItems.length = 0;
-            this.exchangeAdapterForm.get('optionalConfigItems').value.forEach(
-                (i) => this.exchangeAdapter.optionalConfig.configItems.push(i));
+            if (this.exchangeAdapter.optionalConfig != null) {
+                this.exchangeAdapter.optionalConfig.configItems.length = 0;
+                this.exchangeAdapterForm.get('optionalConfigItems').value.forEach(
+                    (i) => this.exchangeAdapter.optionalConfig.configItems.push(i));
+            }
 
             this.exchangeAdapterDataService.update(this.exchangeAdapter)
                 .subscribe(
@@ -211,9 +213,11 @@ export class ExchangeAdapterRxComponent implements OnInit {
         );
 
         // TODO - Must be better way to automatically init the arrays from the model?
-        this.exchangeAdapter.optionalConfig.configItems.forEach(
-            (item) => this.optionalConfigItems.push(this.createOptionalConfigItemGroup(item))
-        );
+        if (this.exchangeAdapter.optionalConfig != null) {
+            this.exchangeAdapter.optionalConfig.configItems.forEach(
+                (item) => this.optionalConfigItems.push(this.createOptionalConfigItemGroup(item))
+            );
+        }
 
         this.exchangeAdapterForm.valueChanges.subscribe(data => this.onValueChanged(data));
         this.onValueChanged(); // (re)set validation messages now

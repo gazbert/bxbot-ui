@@ -11,6 +11,12 @@ import {BotHttpDataObservableService} from '../model/bot';
 import {SOME_FAKE_OBSERVABLE_BOTS} from '../model/bot/testing/fake-bot-data-observable.service';
 import {addMatchers, click} from '../../../testing';
 
+class RouterStub {
+    navigateByUrl(url: string) {
+        return url;
+    }
+}
+
 /**
  * Tests the behaviour of the Dashboard component is as expected.
  *
@@ -168,8 +174,3 @@ function tests(botClick: Function) {
     });
 }
 
-class RouterStub {
-    navigateByUrl(url: string) {
-        return url;
-    }
-}
