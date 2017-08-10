@@ -1,4 +1,4 @@
-import {browser, element, by} from 'protractor';
+import {browser, by, element, protractor} from 'protractor';
 
 /**
  * Exchange Adapter screen tests.
@@ -351,6 +351,71 @@ describe('Exchange Adapter Tests', function () {
 
         expect(element(by.id('errorMessage_0')).getAttribute('value')).toBe('Connection reset');
         expect(element(by.id('errorMessage_1')).isPresent()).toBe(false); // gone!
+    });
+
+    it('should add new Optional Config Item and save it', function () {
+
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+        dashboardItems.get(0).click();
+        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
+
+        const tabLinks = element.all(by.css('li'));
+        tabLinks.get(1).click();
+
+        expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
+
+        expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
+        expect(element(by.id('errorCode_1')).getAttribute('value')).toBe('522');
+
+        expect(element(by.id('errorMessage_0')).getAttribute('value')).toBe('Connection reset');
+        expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe('Connection refused');
+
+        // Add new Config Item
+        const optionalConfigButton = element(by.id('optionalConfigButton'));
+        optionalConfigButton.click();
+
+        // Need to wait for link to become visible...
+        const EC = protractor.ExpectedConditions;
+        const addConfigItemLink = element(by.id('addNewConfigItemLink'));
+        browser.wait(EC.visibilityOf(addConfigItemLink), 5000);
+        addConfigItemLink.click();
+
+        // Wait for new item to panel to become visible...
+        const configItemName = element(by.id('configItemName_0'));
+        browser.wait(EC.visibilityOf(configItemName), 5000);
+
+        const newConfigItemName = 'buy-fee';
+        configItemName.clear();
+        configItemName.sendKeys(newConfigItemName);
+        expect(configItemName.getAttribute('value')).toBe(newConfigItemName);
+
+        const configItemValue = element(by.id('configItemValue_0'));
+        const newConfigItemValue = '0.25';
+        configItemValue.clear();
+        configItemValue.sendKeys(newConfigItemValue);
+        expect(configItemValue.getAttribute('value')).toBe(newConfigItemValue);
+
+        // Save and check the update worked
+        const saveButton = element(by.id('exchangeAdapterSaveButton'));
+        saveButton.click();
+        dashboardItems.get(0).click();
+
+        // Same as before
+        expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
+
+        expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
+        expect(element(by.id('errorCode_1')).getAttribute('value')).toBe('522');
+
+        expect(element(by.id('errorMessage_0')).getAttribute('value')).toBe('Connection reset');
+        expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe('Connection refused');
+
+        // Hello new Config Item!
+        expect(element(by.id('configItemName_0')).getAttribute('value')).toBe('buy-fee');
+        expect(element(by.id('configItemValue_0')).getAttribute('value')).toBe('0.25');
     });
 
     it('should NOT save Exchange Adapter fields if there are validation errors', function () {
