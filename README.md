@@ -71,7 +71,7 @@ backend for development and local testing. The API config configuration options 
 The application config is in JSON format and lives in the [`in-memory-data.service.ts`](/src/app/model/in-memory-data.service.ts) file.
 
 To communicate with the bots for real, the app will need configuring to use 
-[BX-bot UI Server](https://github.com/gazbert/bxbot-ui-server) - currently work in progress...
+[BX-bot UI Server](https://github.com/gazbert/bxbot-ui-server) - currently work in progress.
 
 ## Coming Soon
 * Integration with [BX-bot UI Server](https://github.com/gazbert/bxbot-ui-server).
