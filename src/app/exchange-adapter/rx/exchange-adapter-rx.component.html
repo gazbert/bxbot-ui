@@ -137,25 +137,27 @@
                             <div class="row">
                                 <div class="form-group col-sm-12">
                                     <label for="configItemName_{{i}}" class="col-sm-4">Name</label>
-                                    <input id="configItemName_{{i}}" class="col-sm-8" formControlName="name"
+                                    <input id="configItemName_{{i}}" class="col-sm-8" formControlName="configItemName"
                                            maxlength="121" required>
-                                    <!--<div id="invalidConfigItemName_{{i}}" [hidden]="optionalConfigItems.controls[i].valid ||-->
-                                 <!--(optionalConfigItems.controls[i].pristine && !isFormSaved())"-->
-                                         <!--class="alert alert-danger col-sm-12">-->
-                                        <!--{{formErrors.optionalConfigItemNames}}-->
-                                    <!--</div>-->
+                                    <div id="invalidConfigItemName_{{i}}"
+                                         [hidden]="optionalConfigItems.controls[i]['controls'].configItemName.valid ||
+                                         (optionalConfigItems.controls[i]['controls'].configItemName.pristine && !isFormSaved())"
+                                         class="alert alert-danger col-sm-8">
+                                        {{formErrors.optionalConfigItemNames}}
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-sm-12">
                                     <label for="configItemValue_{{i}}" class="col-sm-4">Value</label>
-                                    <input id="configItemValue_{{i}}" class="col-sm-8" formControlName="value"
+                                    <input id="configItemValue_{{i}}" class="col-sm-8" formControlName="configItemValue"
                                            maxlength="121" required>
-                                    <!--<div id="invalidConfigItemValue_{{i}}" [hidden]="optionalConfigItems.controls[i].valid ||-->
-                                 <!--(optionalConfigItems.controls[i].pristine && !isFormSaved())"-->
-                                         <!--class="alert alert-danger col-sm-12">-->
-                                        <!--{{"todo"}}-->
-                                    <!--</div>-->
+                                    <div id="invalidConfigItemValue_{{i}}"
+                                         [hidden]="optionalConfigItems.controls[i]['controls'].configItemValue.valid ||
+                                         (optionalConfigItems.controls[i]['controls'].configItemValue.pristine && !isFormSaved())"
+                                         class="alert alert-danger col-sm-8">
+                                        {{formErrors.optionalConfigItemValues}}
+                                    </div>
                                 </div>
                             </div>
                         </div>

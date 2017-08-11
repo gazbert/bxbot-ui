@@ -39,7 +39,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
         'nonFatalErrorHttpStatusCodes': '',
         'nonFatalErrorMessages': '',
         'optionalConfigItemNames': '',
-        'optionalConfigItems': ''
+        'optionalConfigItemValues': ''
     };
 
     validationMessages = {
@@ -66,11 +66,6 @@ export class ExchangeAdapterRxComponent implements OnInit {
             'required': 'Message must not be empty.',
             'maxlength': 'Message length cannot be more than 120 characters long.'
         },
-        'optionalConfigItems': {
-            'required': 'Name is required.',
-            'maxlength': 'Name max length is 50 characters.',
-            'pattern': 'Name must be alphanumeric and can only include the following special characters: _ -'
-        },
         'optionalConfigItemNames': {
             'required': 'Name is required.',
             'maxlength': 'Name max length is 50 characters.',
@@ -78,8 +73,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
         },
         'optionalConfigItemValues': {
             'required': 'Value is required.',
-            'maxlength': 'Value max length is 120 characters.',
-            'pattern': 'Value must be alphanumeric and can only include the following special characters: _ -'
+            'maxlength': 'Value max length is 120 characters.'
         }
     };
 
@@ -96,8 +90,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
                         this.buildForm();
                     },
                     error => this.errorMessage = <any>error); // TODO - Show meaningful error to user?
-        }).then(() => {/*done*/
-        });
+        }).then(() => {/*done*/});
     }
 
     goToDashboard(): void {
@@ -226,7 +219,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
     // Patch optional config items
     createOptionalConfigItemGroup(configItem: ConfigItem) {
         return this.fb.group({
-            name: [configItem.name,
+            configItemName: [configItem.name,
                 [
                     Validators.required,
                     Validators.minLength(1),
@@ -234,12 +227,11 @@ export class ExchangeAdapterRxComponent implements OnInit {
                     Validators.pattern('[a-zA-Z0-9_\\- ]*')
                 ]
             ],
-            value: [configItem.value,
+            configItemValue: [configItem.value,
                 [
                     Validators.required,
                     Validators.minLength(1),
-                    Validators.maxLength(120),
-                    // Validators.pattern('[a-zA-Z0-9_\\- ]*')
+                    Validators.maxLength(120)
                 ]
             ]
         });
@@ -326,33 +318,34 @@ export class ExchangeAdapterRxComponent implements OnInit {
             }
         });
 
-        // Set errors for any invalid Config Item Names
-        // const configItemNameControl = <FormArray>this.exchangeAdapterForm.controls['optionalConfigItems'];
-        // configItemNameControl.controls.forEach((msg) => {
-        //     if (msg && !msg.valid) {
-        //         this.formErrors['optionalConfigItems'] = '';
-        //         const messages = this.validationMessages['optionalConfigItems'];
-        //         for (const key in msg.errors) {
-        //             if (msg.errors.hasOwnProperty(key)) {
-        //                 this.formErrors['optionalConfigItems'] += messages[key] + ' ';
-        //             }
-        //         }
-        //     }
-        // });
+        // Set errors for any invalid Config Items - this is horrible...
+        const configItemsControl = <FormArray>this.exchangeAdapterForm.controls['optionalConfigItems'];
 
-        // Set errors for any invalid Config Item Values
-        // const configItemValueControl = <FormArray>this.exchangeAdapterForm.controls['optionalConfigItemValues'];
-        // configItemValueControl.controls.forEach((msg) => {
-        //     if (msg && !msg.valid) {
-        //         this.formErrors['optionalConfigItemValues'] = '';
-        //         const messages = this.validationMessages['optionalConfigItemValues'];
-        //         for (const key in msg.errors) {
-        //             if (msg.errors.hasOwnProperty(key)) {
-        //                 this.formErrors['optionalConfigItemValues'] += messages[key] + ' ';
-        //             }
-        //         }
-        //     }
-        // });
+        configItemsControl.controls.forEach((item) => {
+            const configItemNameControl = item['controls'].configItemName;
+            if (configItemNameControl && !configItemNameControl.valid) {
+                this.formErrors['optionalConfigItemNames'] = '';
+                const configItemNames = this.validationMessages['optionalConfigItemNames'];
+                for (const key in configItemNameControl.errors) {
+                    if (configItemNameControl.errors.hasOwnProperty(key)) {
+                        this.formErrors['optionalConfigItemNames'] += configItemNames[key] + ' ';
+                    }
+                }
+            }
+        });
+
+        configItemsControl.controls.forEach((item) => {
+            const configItemValueControl = item['controls'].configItemValue;
+            if (configItemValueControl && !configItemValueControl.valid) {
+                this.formErrors['optionalConfigItemValues'] = '';
+                const configItemValues = this.validationMessages['optionalConfigItemValues'];
+                for (const key in configItemValueControl.errors) {
+                    if (configItemValueControl.errors.hasOwnProperty(key)) {
+                        this.formErrors['optionalConfigItemValues'] += configItemValues[key] + ' ';
+                    }
+                }
+            }
+        });
 
         // reset so we don't error new (empty) errorCode/errorMsg before user gets chance to save
         if (form.valid) {
