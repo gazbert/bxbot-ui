@@ -44,18 +44,17 @@ describe('EngineHttpDataPromiseService tests using TestBed + Mock HTTP backend',
         let service: EngineDataService;
         let fakeEngines: Engine[];
         let response: Response;
-        const GDAX_BOT_ID = 'gdax';
+        const GDAX_BOT_INDEX = 0;
 
         beforeEach(inject([Http, XHRBackend], (http: Http, mockBackend: MockBackend) => {
             backend = mockBackend;
             service = new EngineDataService(http);
             fakeEngines = makeEngineData();
-            const options = new ResponseOptions({status: 200, body: {data: fakeEngines[GDAX_BOT_ID]}});
+            const options = new ResponseOptions({status: 200, body: {data: fakeEngines[GDAX_BOT_INDEX]}});
             response = new Response(options);
         }));
 
-        // FIXME - test broken!
-        xit('should return GDAX Engine', async(inject([], () => {
+        it('should return GDAX Engine', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.getEngineByBotId('gdax')
                 .then(engine => {

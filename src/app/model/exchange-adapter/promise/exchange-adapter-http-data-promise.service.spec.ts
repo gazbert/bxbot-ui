@@ -45,18 +45,17 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
         let service: ExchangeAdapterDataService;
         let fakeExchangeAdapters: ExchangeAdapter[];
         let response: Response;
-        const GDAX_EXCHANGE = 'gdax';
+        const GDAX_EXCHANGE_INDEX = 2;
 
         beforeEach(inject([Http, XHRBackend], (http: Http, mockBackend: MockBackend) => {
             backend = mockBackend;
             service = new ExchangeAdapterDataService(http);
             fakeExchangeAdapters = makeExchangeAdapterData();
-            const options = new ResponseOptions({status: 200, body: {data: fakeExchangeAdapters[GDAX_EXCHANGE]}});
+            const options = new ResponseOptions({status: 200, body: {data: fakeExchangeAdapters[GDAX_EXCHANGE_INDEX]}});
             response = new Response(options);
         }));
 
-        // FIXME - test broken!
-        xit('should return GDAX Exchange Adapter', async(inject([], () => {
+        it('should return GDAX Exchange Adapter', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.getExchangeAdapterByBotId('gdax')
                 .then(exchangeAdapter => {
@@ -180,30 +179,6 @@ const makeExchangeAdapterData = () => [
             ]
         )
     ),
-    new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
-        new NetworkConfig(60,
-            [
-                503,
-                504,
-                522,
-            ],
-            [
-                'Connection reset',
-                'Connection refused',
-                'Remote host closed connection during handshake'
-            ]
-        ),
-        new OptionalConfig([
-                {
-                    name: 'buy-fee',
-                    value: '0.2'
-                },
-                {
-                    name: 'sell-fee',
-                    value: '0.25'
-                }
-            ]
-        )),
     new ExchangeAdapter('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
         new NetworkConfig(60,
             [
@@ -227,6 +202,32 @@ const makeExchangeAdapterData = () => [
                     value: '0.25'
                 }
             ]
-        ))
+        )
+    ),
+    new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
+        new NetworkConfig(60,
+            [
+                503,
+                504,
+                522,
+            ],
+            [
+                'Connection reset',
+                'Connection refused',
+                'Remote host closed connection during handshake'
+            ]
+        ),
+        new OptionalConfig([
+                {
+                    name: 'buy-fee',
+                    value: '0.2'
+                },
+                {
+                    name: 'sell-fee',
+                    value: '0.25'
+                }
+            ]
+        )
+    )
 ] as ExchangeAdapter[];
 
