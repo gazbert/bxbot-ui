@@ -535,6 +535,31 @@ describe('Exchange Adapter Tests', function () {
         errorMessage_1.sendKeys(newErrorMessage_1);
         expect(errorMessage_1.getAttribute('value')).toBe(newErrorMessage_1);
 
+        // Add new Config Item
+        const optionalConfigButton = element(by.id('optionalConfigButton'));
+        optionalConfigButton.click();
+
+        // Need to wait for link to become visible...
+        const EC = protractor.ExpectedConditions;
+        const addConfigItemLink = element(by.id('addNewConfigItemLink'));
+        browser.wait(EC.visibilityOf(addConfigItemLink), 1000);
+        addConfigItemLink.click();
+
+        // Wait for new item to panel to become visible...
+        const configItemName = element(by.id('configItemName_0'));
+        browser.wait(EC.visibilityOf(configItemName), 1000);
+
+        const newConfigItemName = 'buy-fee!';
+        configItemName.clear();
+        configItemName.sendKeys(newConfigItemName);
+        expect(configItemName.getAttribute('value')).toBe(newConfigItemName);
+
+        const configItemValue = element(by.id('configItemValue_0'));
+        const newConfigItemValue = '';
+        configItemValue.clear();
+        configItemValue.sendKeys(newConfigItemValue);
+        expect(configItemValue.getAttribute('value')).toBe(newConfigItemValue);
+
         // Save and check the update did not persist
         const saveButton = element(by.id('exchangeAdapterSaveButton'));
         saveButton.click();
@@ -560,5 +585,12 @@ describe('Exchange Adapter Tests', function () {
 
         expect(element(by.id('errorMessage_0')).getAttribute('value')).toBe(newErrorMessage_0);
         expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe(newErrorMessage_1);
+
+        expect(element(by.id('configItemName_0')).getAttribute('value')).toBe('buy-fee!');
+        expect(element(by.id('invalidConfigItemName_0')).getText()).toContain(
+            'Name must be alphanumeric and can only include the following special characters: _ -');
+
+        expect(element(by.id('configItemValue_0')).getAttribute('value')).toBe('');
+        expect(element(by.id('invalidConfigItemValue_0')).getText()).toContain('Value is required');
     });
 });
