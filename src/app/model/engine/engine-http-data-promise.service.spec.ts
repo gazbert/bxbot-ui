@@ -54,6 +54,7 @@ describe('EngineHttpDataPromiseService tests using TestBed + Mock HTTP backend',
             response = new Response(options);
         }));
 
+        // FIXME - test broken!
         xit('should return GDAX Engine', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.getEngineByBotId('gdax')
@@ -66,7 +67,7 @@ describe('EngineHttpDataPromiseService tests using TestBed + Mock HTTP backend',
                 });
         })));
 
-        xit('should handle returning no Engine', async(inject([], () => {
+        it('should handle returning no Engine', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getEngineByBotId('unknown')

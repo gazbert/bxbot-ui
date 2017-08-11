@@ -58,7 +58,7 @@ describe('DashboardComponent tests without TestBed', () => {
         comp.ngAfterViewInit();
     });
 
-    // FIXME - search test code stopped working ;-/
+    // FIXME - test broken!
     xit('should have Gemini Bot item after user searches for \'ge\'', (done) => {
         comp.ngOnInit();
         comp.bots.subscribe((bots) => {

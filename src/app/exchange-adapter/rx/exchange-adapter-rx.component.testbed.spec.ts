@@ -63,8 +63,8 @@ function overrideExchangeAdapterServiceSetup() {
     class StubExchangeAdapterHttpDataService implements ExchangeAdapterDataObservableService {
 
         constructor() {
-            expectedErrorCodes = [501];
-            expectedErrorMsgs = ['Connection timeout'];
+            expectedErrorCodes = [501, 502];
+            expectedErrorMsgs = ['Connection timeout', 'Connection reset'];
             expectedNetworkConfig = new NetworkConfig(60, expectedErrorCodes, expectedErrorMsgs);
             expectedOptionalConfig = new OptionalConfig([
                     {
@@ -217,57 +217,56 @@ function overrideExchangeAdapterServiceSetup() {
 
     it('should create new Error Code when user adds one', fakeAsync(() => {
 
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(2);
 
         click(page.addNewErrorCodeLink);
         click(page.saveBtn);
         comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
         tick(); // wait for async save to complete
 
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(2);
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1]).toBeDefined();
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1]).toBeNaN();
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(3);
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[2]).toBeDefined();
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[2]).toBeNaN();
     }));
 
-    // FIXME - TypeError: Cannot read property 'triggerEventHandler' of null
-    xit('should remove Error Code when user deletes one', fakeAsync(() => {
+    it('should remove Error Code when user deletes one', fakeAsync(() => {
 
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(2);
 
         click(page.deleteErrorCodeBtn);
         click(page.saveBtn);
         comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
         tick(); // wait for async save to complete
 
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(0);
-        // expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0]).not.toBeDefined();
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1]).not.toBeDefined();
     }));
 
     it('should create new Error Message when user adds one', fakeAsync(() => {
 
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(1);
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(2);
 
         click(page.addNewErrorMessageLink);
         click(page.saveBtn);
         comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
         tick(); // wait for async save to complete
 
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(2);
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages[1]).toBeDefined();
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages[1]).toBe('');
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(3);
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages[2]).toBeDefined();
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages[2]).toBe('');
     }));
 
     it('should remove Error Message when user deletes one', fakeAsync(() => {
 
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(1);
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(2);
 
         click(page.deleteErrorMessageBtn);
         click(page.saveBtn);
         comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
         tick(); // wait for async save to complete
 
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(0);
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages[0]).not.toBeDefined();
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(1);
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages[1]).not.toBeDefined();
     }));
 
     it('should create new Optional Config Item when user adds one', fakeAsync(() => {

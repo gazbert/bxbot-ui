@@ -50,7 +50,7 @@
                     <div class="panel-heading">
                         <span>Code {{i + 1}}</span>
                         <span id="deleteErrorCodeButton_{{i}}" class="glyphicon glyphicon-remove pull-right"
-                              *ngIf="nonFatalErrorHttpStatusCodes.controls.length > 1"
+                              *ngIf="nonFatalErrorHttpStatusCodes.controls.length > 0"
                               (click)="deleteErrorCode(i)"></span>
                     </div>
                     <div class="panel-body">

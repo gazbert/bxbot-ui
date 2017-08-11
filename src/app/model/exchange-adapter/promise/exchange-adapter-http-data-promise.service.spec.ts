@@ -55,6 +55,7 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
             response = new Response(options);
         }));
 
+        // FIXME - test broken!
         xit('should return GDAX Exchange Adapter', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.getExchangeAdapterByBotId('gdax')
@@ -82,7 +83,7 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
                 });
         })));
 
-        xit('should handle returning no Bot Adapter', async(inject([], () => {
+        it('should handle returning no Bot Adapter', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getExchangeAdapterByBotId('unknown')

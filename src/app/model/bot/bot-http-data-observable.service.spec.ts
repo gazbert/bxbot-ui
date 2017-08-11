@@ -77,7 +77,6 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
                     expect(bots[1].id).toBe('gdax-2');
                     expect(bots[2].id).toBe('gemini-3');
                 });
-            // .toPromise();
         })));
 
         it('should handle returning no Bots', async(inject([], () => {
@@ -99,7 +98,6 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
                     expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
                     return Observable.of(null); // failure is the expected test result
                 });
-            // .toPromise();
         })));
     });
 
@@ -127,7 +125,6 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
                     expect(bot.name).toBe('GDAX');
                     expect(bot.status).toBe('Stopped');
                 });
-            // .toPromise();
         })));
 
         it('should handle returning no Bot', async(inject([], () => {
@@ -135,7 +132,6 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getBot('unknown')
                 .subscribe(bot => expect(bot.id).not.toBeDefined('should have no Bot'));
-            // .toPromise();
         })));
 
         it('should treat 404 as an Observable error', async(inject([], () => {
@@ -149,11 +145,10 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
                     expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
                     return Observable.of(null); // failure is the expected test result
                 });
-            // .toPromise();
         })));
     });
 
-    describe('when getBotByName() operation called with \'gdax\'', () => {
+    describe('when getBotByName() operation called with \'GDAX\'', () => {
 
         let backend: MockBackend;
         let service: BotDataService;
@@ -165,25 +160,24 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
             backend = be;
             service = new BotDataService(http);
             fakeBots = makeBotData();
-            const options = new ResponseOptions({status: 200, body: {data: fakeBots[GDAX_BOT]}});
+            const options = new ResponseOptions({status: 200, body: {data: [fakeBots[GDAX_BOT]]}});
             response = new Response(options);
         }));
 
-        // it('should have returned GDAX Bot', async(inject([], () => {
-        //     backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-        //     service.getBotByName('gdax')
-        //         .subscribe(bot => {
-        //             expect(bot).toBe(fakeBots[GDAX_BOT]);
-        //         });
-        //     //.toPromise();
-        // })));
+        it('should have returned GDAX Bot', async(inject([], () => {
+            backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
+            service.getBotByName('GDAX')
+                .subscribe(bots => {
+                    expect(bots.length).toBe(1, 'should have no Bot');
+                    expect(bots[0]).toBe(fakeBots[GDAX_BOT]);
+                });
+        })));
 
-        xit('should handle returning no Bot', async(inject([], () => {
+        it('should handle returning no Bot', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getBotByName('unknown')
-                .subscribe(bot => expect(bot).not.toBeDefined('should have no Bot'));
-            // .toPromise();
+                .subscribe(bots => expect(bots.length).toBe(0, 'should have no Bot'));
         })));
 
         it('should treat 404 as an Observable error', async(inject([], () => {
@@ -197,7 +191,6 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
                     expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
                     return Observable.of(null); // failure is the expected test result
                 });
-            // .toPromise();
         })));
     });
 });

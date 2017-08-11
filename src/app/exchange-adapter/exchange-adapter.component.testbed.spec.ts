@@ -2,7 +2,7 @@ import {By} from '@angular/platform-browser';
 import {DebugElement} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {Http} from '@angular/http';
-import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
 import {ActivatedRoute, ActivatedRouteStub, click, newEvent, Router, RouterStub} from '../../../testing';
 import {SharedModule} from '../shared/shared.module';
 import {ExchangeAdapter, NetworkConfig} from '../model/exchange-adapter';
@@ -121,11 +121,11 @@ function overrideExchangeAdapterServiceSetup() {
         stubExchangeAdapterDataService = fixture.debugElement.injector.get(ExchangeAdapterHttpDataPromiseService);
     }));
 
-    // xit('should inject the stubbed Exchange Adapter service',
-    //     inject([ExchangeAdapterHttpDataPromiseService], (service: ExchangeAdapterHttpDataPromiseService) => {
-    //         expect(service).toEqual({}, 'service injected from fixture');
-    //         expect(stubExchangeAdapterDataService).toBeTruthy('service injected into component is the stub');
-    //     }));
+    it('should inject the stubbed Exchange Adapter service',
+        inject([ExchangeAdapterHttpDataPromiseService], (service: ExchangeAdapterHttpDataPromiseService) => {
+            expect(service).toBeDefined('service injected from fixture');
+            expect(stubExchangeAdapterDataService).toBeTruthy('service injected into component is the stub');
+    }));
 
     it('should expose ExchangeAdapter config retrieved from ExchangeAdapterDataService', () => {
 
