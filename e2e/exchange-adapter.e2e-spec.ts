@@ -379,12 +379,12 @@ describe('Exchange Adapter Tests', function () {
         // Need to wait for link to become visible...
         const EC = protractor.ExpectedConditions;
         const addConfigItemLink = element(by.id('addNewConfigItemLink'));
-        browser.wait(EC.visibilityOf(addConfigItemLink), 5000);
+        browser.wait(EC.visibilityOf(addConfigItemLink), 1000);
         addConfigItemLink.click();
 
         // Wait for new item to panel to become visible...
         const configItemName = element(by.id('configItemName_0'));
-        browser.wait(EC.visibilityOf(configItemName), 5000);
+        browser.wait(EC.visibilityOf(configItemName), 1000);
 
         const newConfigItemName = 'buy-fee';
         configItemName.clear();
@@ -416,6 +416,61 @@ describe('Exchange Adapter Tests', function () {
         // Hello new Config Item!
         expect(element(by.id('configItemName_0')).getAttribute('value')).toBe('buy-fee');
         expect(element(by.id('configItemValue_0')).getAttribute('value')).toBe('0.25');
+    });
+
+    it('should delete Optional Config Item and save change', function () {
+
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+        dashboardItems.get(1).click();
+        expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
+
+        const tabLinks = element.all(by.css('li'));
+        tabLinks.get(1).click();
+
+        expect(element(by.id('adapterName')).getAttribute('value')).toBe('GDAX REST API Adapter');
+        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
+        expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('120');
+
+        expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
+        expect(element(by.id('errorCode_1')).getAttribute('value')).toBe('522');
+
+        expect(element(by.id('errorMessage_0')).getAttribute('value')).toBe('Connection reset');
+        expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe('Connection refused');
+
+        const optionalConfigButton = element(by.id('optionalConfigButton'));
+        optionalConfigButton.click();
+
+        // Delete Config Item 2
+        // Need to wait for link + config items to become visible...
+        const EC = protractor.ExpectedConditions;
+        const deleteConfigItemButton = element(by.id('deleteConfigItemButton_1'));
+        browser.wait(EC.visibilityOf(deleteConfigItemButton), 1000);
+
+        expect(element(by.id('configItemName_0')).getAttribute('value')).toBe('buy-fee');
+        expect(element(by.id('configItemValue_0')).getAttribute('value')).toBe('0.25');
+
+        expect(element(by.id('configItemName_1')).getAttribute('value')).toBe('sell-fee');
+        expect(element(by.id('configItemValue_1')).getAttribute('value')).toBe('0.25');
+
+        deleteConfigItemButton.click();
+
+        // Save and check the update worked
+        const saveButton = element(by.id('exchangeAdapterSaveButton'));
+        saveButton.click();
+        dashboardItems.get(1).click();
+
+        // Same as before
+        expect(element(by.id('adapterName')).getAttribute('value')).toBe('GDAX REST API Adapter');
+        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
+        expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('120');
+
+        expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
+        expect(element(by.id('errorCode_1')).getAttribute('value')).toBe('522');
+
+        expect(element(by.id('configItemName_0')).getAttribute('value')).toBe('buy-fee');
+        expect(element(by.id('configItemValue_0')).getAttribute('value')).toBe('0.25');
+        expect(element(by.id('configItemName_1')).isPresent()).toBe(false); // gone!
+        expect(element(by.id('configItemValue_1')).isPresent()).toBe(false); // gone!
     });
 
     it('should NOT save Exchange Adapter fields if there are validation errors', function () {
