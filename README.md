@@ -20,7 +20,7 @@ If you want to just play around with the UI, Docker is the way to go.
 1. Fetch the BX-bot image from [Docker Hub](https://hub.docker.com/r/gazbert/bxbot-ui/): `docker pull gazbert/bxbot-ui:0.0.1`
 1. Run the Docker container: `docker run --name bxbot-ui-0.0.1 -it --rm -p 4200:4200 gazbert/bxbot-ui:0.0.1`
 1. Open a browser and go to: `http://localhost:4200`
-1. You can stop the container using the `CTRL-c`
+1. You can stop the container using `CTRL-c`
    
 A Docker image is available on [Docker Hub](https://hub.docker.com/r/gazbert/bxbot-ui/tags/) - it is not a release, 
 but rather a rolling development version of the UI.
@@ -38,7 +38,7 @@ You'll need [node.js](https://nodejs.org/en/download/) (at least node 6.9.x) ins
 1. To stop the app, `CTRL-c` from the command line.
 
 ## Build Guide
-Follow the instructions in the [_The manual way_](#the-manual-way) section if you have not already done so.
+Follow the instructions in the [_The manual way_](#the-manual-way) section if you've not already done so.
 
 The project uses Angular CLI [commands](https://github.com/angular/angular-cli/wiki) to build, test, and run the app.
 
@@ -71,7 +71,7 @@ backend for development and local testing. The API config configuration options 
 The application config is in JSON format and lives in the [`in-memory-data.service.ts`](/src/app/model/in-memory-data.service.ts) file.
 
 To communicate with the bots for real, the app will need configuring to use 
-[BX-bot UI Server](https://github.com/gazbert/bxbot-ui-server) - currently work in progress.
+[BX-bot UI Server](https://github.com/gazbert/bxbot-ui-server) - currently work in progress...
 
 ## Coming Soon
 * Integration with [BX-bot UI Server](https://github.com/gazbert/bxbot-ui-server).
