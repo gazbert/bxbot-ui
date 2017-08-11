@@ -117,7 +117,10 @@ export class ExchangeAdapterRxComponent implements OnInit {
 
             this.exchangeAdapter.optionalConfig.configItems.length = 0;
             this.exchangeAdapterForm.get('optionalConfigItems').value.forEach(
-                (i) => this.exchangeAdapter.optionalConfig.configItems.push(i));
+                    (i) => {
+                    const configItem = new ConfigItem(i.configItemName, i.configItemValue);
+                    this.exchangeAdapter.optionalConfig.configItems.push(configItem);
+                });
 
             this.exchangeAdapterDataService.update(this.exchangeAdapter)
                 .subscribe(
