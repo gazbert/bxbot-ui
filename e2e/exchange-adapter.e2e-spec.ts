@@ -444,7 +444,7 @@ describe('Exchange Adapter Tests', function () {
         // Need to wait for link + config items to become visible...
         const EC = protractor.ExpectedConditions;
         const deleteConfigItemButton = element(by.id('deleteConfigItemButton_1'));
-        browser.wait(EC.visibilityOf(deleteConfigItemButton), 2000);
+        browser.wait(EC.visibilityOf(deleteConfigItemButton), 3000);
 
         expect(element(by.id('configItemName_0')).getAttribute('value')).toBe('buy-fee');
         expect(element(by.id('configItemValue_0')).getAttribute('value')).toBe('0.25');
@@ -542,12 +542,12 @@ describe('Exchange Adapter Tests', function () {
         // Need to wait for link to become visible...
         const EC = protractor.ExpectedConditions;
         const addConfigItemLink = element(by.id('addNewConfigItemLink'));
-        browser.wait(EC.visibilityOf(addConfigItemLink), 2000);
+        browser.wait(EC.visibilityOf(addConfigItemLink), 3000);
         addConfigItemLink.click();
 
         // Wait for new item to panel to become visible...
         const configItemName = element(by.id('configItemName_0'));
-        browser.wait(EC.visibilityOf(configItemName), 2000);
+        browser.wait(EC.visibilityOf(configItemName), 3000);
 
         const newConfigItemName = 'buy-fee!';
         configItemName.clear();
