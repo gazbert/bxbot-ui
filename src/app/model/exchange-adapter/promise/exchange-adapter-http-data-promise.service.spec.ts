@@ -70,15 +70,16 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
                     expect(exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[2]).toBe(522);
 
                     expect(exchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(3);
-                    expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[0]).toBe(
-                        'Connection reset'
-                    );
-                    expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[1]).toBe(
-                        'Connection refused'
-                    );
+                    expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[0]).toBe('Connection reset');
+                    expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[1]).toBe('Connection refused');
                     expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[2]).toBe(
-                        'Remote host closed connection during handshake'
-                    );
+                        'Remote host closed connection during handshake');
+
+                    expect(exchangeAdapter.optionalConfig.configItems.length).toBe(2);
+                    expect(exchangeAdapter.optionalConfig.configItems[0].name).toBe('buy-fee');
+                    expect(exchangeAdapter.optionalConfig.configItems[0].value).toBe('0.2');
+                    expect(exchangeAdapter.optionalConfig.configItems[1].name).toBe('sell-fee');
+                    expect(exchangeAdapter.optionalConfig.configItems[1].value).toBe('0.25');
                 });
         })));
 

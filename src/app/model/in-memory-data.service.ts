@@ -137,6 +137,9 @@ export class InMemoryDataService implements InMemoryDbService {
                         'Connection reset',
                         'Connection refused'
                     ]
+                },
+                optionalConfig: {
+                    configItems: []
                 }
             },
             {
@@ -293,6 +296,9 @@ export class InMemoryDataService implements InMemoryDbService {
                         'Connection reset',
                         'Remote host closed connection during handshake'
                     ]
+                },
+                optionalConfig: {
+                    configItems: []
                 }
             },
             {

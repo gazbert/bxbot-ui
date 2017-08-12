@@ -12,4 +12,27 @@ input {
     padding-left: .4em;
 }
 
+/* Show/hide Optional Config glyph */
+a[aria-expanded=true] .glyphicon-triangle-right {
+    display: none;
+}
+a[aria-expanded=false] .glyphicon-triangle-bottom {
+    display: none;
+}
 
+.glyphicon-padding {
+    padding-right: 10px;
+}
+
+nav a:visited, a:link {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.collapse {
+    padding-top: 0px;
+}
+
+.bottom-margin-10 {
+    margin-bottom: 10px;
+}

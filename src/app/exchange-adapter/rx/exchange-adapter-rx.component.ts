@@ -36,10 +36,10 @@ export class ExchangeAdapterRxComponent implements OnInit {
         'adapterName': '',
         'className': '',
         'connectionTimeout': '',
-        'nonFatalErrorHttpStatusCodes': '',
-        'nonFatalErrorMessages': '',
-        'optionalConfigItemNames': '',
-        'optionalConfigItemValues': ''
+        'nonFatalErrorHttpStatusCode': '',
+        'nonFatalErrorMessage': '',
+        'optionalConfigItemName': '',
+        'optionalConfigItemValue': ''
     };
 
     validationMessages = {
@@ -57,21 +57,21 @@ export class ExchangeAdapterRxComponent implements OnInit {
             'required': 'Connection timeout is required.',
             'pattern': 'Connection timeout must be a whole number.'
         },
-        'nonFatalErrorHttpStatusCodes': {
+        'nonFatalErrorHttpStatusCode': {
             'required': 'Connection timeout is required.',
             'pattern': 'HTTP Status Code must be a 3 digit number.',
             'httpCodeWhitelistChecker': 'HTTP Status Code not in whitelist.'
         },
-        'nonFatalErrorMessages': {
+        'nonFatalErrorMessage': {
             'required': 'Message must not be empty.',
             'maxlength': 'Message length cannot be more than 120 characters long.'
         },
-        'optionalConfigItemNames': {
+        'optionalConfigItemName': {
             'required': 'Name is required.',
             'maxlength': 'Name max length is 50 characters.',
             'pattern': 'Name must be alphanumeric and can only include the following special characters: _ -'
         },
-        'optionalConfigItemValues': {
+        'optionalConfigItemValue': {
             'required': 'Value is required.',
             'maxlength': 'Value max length is 120 characters.'
         }
@@ -297,11 +297,11 @@ export class ExchangeAdapterRxComponent implements OnInit {
         const errorCodeControl = <FormArray>this.exchangeAdapterForm.controls['nonFatalErrorHttpStatusCodes'];
         errorCodeControl.controls.forEach((code) => {
             if (code && !code.valid) {
-                this.formErrors['nonFatalErrorHttpStatusCodes'] = '';
-                const messages = this.validationMessages['nonFatalErrorHttpStatusCodes'];
+                this.formErrors['nonFatalErrorHttpStatusCode'] = '';
+                const messages = this.validationMessages['nonFatalErrorHttpStatusCode'];
                 for (const key in code.errors) {
                     if (code.errors.hasOwnProperty(key)) {
-                        this.formErrors['nonFatalErrorHttpStatusCodes'] += messages[key] + ' ';
+                        this.formErrors['nonFatalErrorHttpStatusCode'] += messages[key] + ' ';
                     }
                 }
             }
@@ -311,11 +311,11 @@ export class ExchangeAdapterRxComponent implements OnInit {
         const errorMessageControl = <FormArray>this.exchangeAdapterForm.controls['nonFatalErrorMessages'];
         errorMessageControl.controls.forEach((msg) => {
             if (msg && !msg.valid) {
-                this.formErrors['nonFatalErrorMessages'] = '';
-                const messages = this.validationMessages['nonFatalErrorMessages'];
+                this.formErrors['nonFatalErrorMessage'] = '';
+                const messages = this.validationMessages['nonFatalErrorMessage'];
                 for (const key in msg.errors) {
                     if (msg.errors.hasOwnProperty(key)) {
-                        this.formErrors['nonFatalErrorMessages'] += messages[key] + ' ';
+                        this.formErrors['nonFatalErrorMessage'] += messages[key] + ' ';
                     }
                 }
             }
@@ -327,11 +327,11 @@ export class ExchangeAdapterRxComponent implements OnInit {
         configItemsControl.controls.forEach((item) => {
             const configItemNameControl = item['controls'].configItemName;
             if (configItemNameControl && !configItemNameControl.valid) {
-                this.formErrors['optionalConfigItemNames'] = '';
-                const configItemNames = this.validationMessages['optionalConfigItemNames'];
+                this.formErrors['optionalConfigItemName'] = '';
+                const configItemNames = this.validationMessages['optionalConfigItemName'];
                 for (const key in configItemNameControl.errors) {
                     if (configItemNameControl.errors.hasOwnProperty(key)) {
-                        this.formErrors['optionalConfigItemNames'] += configItemNames[key] + ' ';
+                        this.formErrors['optionalConfigItemName'] += configItemNames[key] + ' ';
                     }
                 }
             }
@@ -340,11 +340,11 @@ export class ExchangeAdapterRxComponent implements OnInit {
         configItemsControl.controls.forEach((item) => {
             const configItemValueControl = item['controls'].configItemValue;
             if (configItemValueControl && !configItemValueControl.valid) {
-                this.formErrors['optionalConfigItemValues'] = '';
-                const configItemValues = this.validationMessages['optionalConfigItemValues'];
+                this.formErrors['optionalConfigItemValue'] = '';
+                const configItemValues = this.validationMessages['optionalConfigItemValue'];
                 for (const key in configItemValueControl.errors) {
                     if (configItemValueControl.errors.hasOwnProperty(key)) {
-                        this.formErrors['optionalConfigItemValues'] += configItemValues[key] + ' ';
+                        this.formErrors['optionalConfigItemValue'] += configItemValues[key] + ' ';
                     }
                 }
             }

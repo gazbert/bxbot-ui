@@ -60,7 +60,7 @@
                             <div id="invalidErrorCode_{{i}}" [hidden]="nonFatalErrorHttpStatusCodes.controls[i].valid ||
                                  (nonFatalErrorHttpStatusCodes.controls[i].pristine && !isFormSaved())"
                                  class="alert alert-danger col-sm-6">
-                                {{ formErrors.nonFatalErrorHttpStatusCodes }}
+                                {{ formErrors.nonFatalErrorHttpStatusCode}}
                             </div>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
                             <div id="invalidErrorMessage_{{i}}" [hidden]="nonFatalErrorMessages.controls[i].valid ||
                                  (nonFatalErrorMessages.controls[i].pristine && !isFormSaved())"
                                  class="alert alert-danger col-sm-7">
-                                {{ formErrors.nonFatalErrorMessages }}
+                                {{ formErrors.nonFatalErrorMessage}}
                             </div>
                         </div>
                     </div>
@@ -143,7 +143,7 @@
                                          [hidden]="optionalConfigItems.controls[i]['controls'].configItemName.valid ||
                                          (optionalConfigItems.controls[i]['controls'].configItemName.pristine && !isFormSaved())"
                                          class="alert alert-danger col-sm-8">
-                                        {{formErrors.optionalConfigItemNames}}
+                                        {{formErrors.optionalConfigItemName}}
                                     </div>
                                 </div>
                             </div>
@@ -156,7 +156,7 @@
                                          [hidden]="optionalConfigItems.controls[i]['controls'].configItemValue.valid ||
                                          (optionalConfigItems.controls[i]['controls'].configItemValue.pristine && !isFormSaved())"
                                          class="alert alert-danger col-sm-8">
-                                        {{formErrors.optionalConfigItemValues}}
+                                        {{formErrors.optionalConfigItemValue}}
                                     </div>
                                 </div>
                             </div>

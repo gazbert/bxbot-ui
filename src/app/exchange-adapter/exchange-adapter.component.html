@@ -112,6 +112,77 @@
                 </div>
             </div>
         </div>
+
+        <!-- Optional Exchange Config -->
+        <div>
+            <hr>
+        </div>
+        <a class="btn btn-primary bottom-margin-10" data-toggle="collapse" href="#optionalExchangeConfig"
+           aria-expanded="false"
+           aria-controls="optionalExchangeConfig" id="optionalConfigButton">
+            <i class="glyphicon glyphicon-triangle-right pull-left glyphicon-padding"></i>
+            <i class="glyphicon glyphicon-triangle-bottom pull-left glyphicon-padding"></i>
+            Optional Config
+        </a>
+
+        <!--
+        Optional Config Items
+        -->
+        <div class="collapse" id="optionalExchangeConfig">
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <div *ngFor="let optionalConfigItem of exchangeAdapter.optionalConfig.configItems; let i=index"
+                         class="panel panel-default">
+
+                        <div class="panel-heading">
+                            <span>Config Item {{i + 1}}</span>
+                            <span id="deleteConfigItemButton_{{i}}" class="glyphicon glyphicon-remove pull-right"
+                                  *ngIf="exchangeAdapter.optionalConfig.configItems.length > 0"
+                                  (click)="deleteOptionalConfigItem(i)"></span>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="form-group col-sm-12">
+                                    <label for="configItemName_{{i}}" class="col-sm-4">Name</label>
+                                    <input [(ngModel)]="optionalConfigItem.name"
+                                           id="configItemName_{{i}}" name="configItemName_{{i}}" class="form-control"
+                                           maxlength="121" placeholder="but-fee" minLength="1" required
+                                           #configItemName="ngModel" pattern="[a-zA-Z0-9/_\- ]*">
+                                    <!--<div id="invalidConfigItemName_{{i}}"-->
+                                    <!--[hidden]="optionalConfigItems.controls[i]['controls'].configItemName.valid ||-->
+                                    <!--(optionalConfigItems.controls[i]['controls'].configItemName.pristine && !isFormSaved())"-->
+                                    <!--class="alert alert-danger col-sm-8">-->
+                                    <!--{{formErrors.optionalConfigItemName}}-->
+                                    <!--</div>-->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-12">
+                                    <label for="configItemValue_{{i}}" class="col-sm-4">Value</label>
+                                    <input [(ngModel)]="optionalConfigItem.value"
+                                           id="configItemValue_{{i}}" name="configItemValue_{{i}}" class="form-control"
+                                           maxlength="121" placeholder="0.25" minLength="1" required #configItemValue="ngModel">
+                                    <!--<div id="invalidConfigItemValue_{{i}}"-->
+                                    <!--[hidden]="optionalConfigItems.controls[i]['controls'].configItemValue.valid ||-->
+                                    <!--(optionalConfigItems.controls[i]['controls'].configItemValue.pristine && !isFormSaved())"-->
+                                    <!--class="alert alert-danger col-sm-8">-->
+                                    <!--{{formErrors.optionalConfigItemValue}}-->
+                                    <!--</div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="margin-20">
+                        <i class="glyphicon glyphicon-plus pull-left glyphicon-padding"></i>
+                        <a id="addNewConfigItemLink" (click)="addOptionalConfigItem()" style="cursor: default">
+                            Add new Config Item
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div>
             <hr>
         </div>

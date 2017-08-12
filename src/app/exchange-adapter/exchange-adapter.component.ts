@@ -3,6 +3,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {ExchangeAdapter} from '../model/exchange-adapter';
 import {ExchangeAdapterHttpDataPromiseService} from '../model/exchange-adapter/promise';
+import {ConfigItem} from '../model/exchange-adapter/exchange-adapter.model';
 
 /**
  * Template-driven version of the Exchange Adapter form.
@@ -45,6 +46,15 @@ export class ExchangeAdapterComponent implements OnInit, AfterViewChecked {
         },
         'errorMessage': {
             'required': 'Error message must not be empty.'
+        },
+        'optionalConfigItemName': {
+            'required': 'Name is required.',
+            'maxlength': 'Name max length is 50 characters.',
+            'pattern': 'Name must be alphanumeric and can only include the following special characters: _ -'
+        },
+        'optionalConfigItemValue': {
+            'required': 'Value is required.',
+            'maxlength': 'Value max length is 120 characters.'
         }
     };
 
@@ -102,6 +112,17 @@ export class ExchangeAdapterComponent implements OnInit, AfterViewChecked {
         this.updateFormErrors();
     }
 
+    addOptionalConfigItem(configItem: ConfigItem): void {
+        this.exchangeAdapter.optionalConfig.configItems.push(configItem);
+        this.updateFormErrors();
+    }
+
+    deleteOptionalConfigItem(configItem: ConfigItem): void {
+        this.exchangeAdapter.optionalConfig.configItems =
+            this.exchangeAdapter.optionalConfig.configItems.filter(c => c !== configItem);
+        this.updateFormErrors();
+    }
+
     updateFormErrors(): void {
         this.formErrors['adapterName'] = '';
         this.formErrors['className'] = '';
@@ -112,6 +133,11 @@ export class ExchangeAdapterComponent implements OnInit, AfterViewChecked {
         }
         for (let i = 0; i < this.exchangeAdapter.networkConfig.nonFatalErrorMessages.length; i++) {
             this.formErrors['errorMessage_' + i] = '';
+        }
+
+        for (let i = 0; i < this.exchangeAdapter.optionalConfig.configItems.length; i++) {
+            this.formErrors['optionalConfigItemName_' + i] = '';
+            this.formErrors['optionalConfigItemValue_' + i] = '';
         }
     }
 
