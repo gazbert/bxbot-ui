@@ -139,7 +139,7 @@
                             <span>Config Item {{i + 1}}</span>
                             <span id="deleteConfigItemButton_{{i}}" class="glyphicon glyphicon-remove pull-right"
                                   *ngIf="exchangeAdapter.optionalConfig.configItems.length > 0"
-                                  (click)="deleteOptionalConfigItem(i)"></span>
+                                  (click)="deleteOptionalConfigItem(exchangeAdapter.optionalConfig.configItems[i])"></span>
                         </div>
                         <div class="panel-body">
                             <div class="row">

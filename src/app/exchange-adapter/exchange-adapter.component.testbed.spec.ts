@@ -10,7 +10,7 @@ import {FakeExchangeAdapterDataPromiseService, SOME_FAKE_PROMISE_EXCHANGE_ADAPTE
 import {ExchangeAdapterModule} from './exchange-adapter.module';
 import {ExchangeAdapterComponent} from './exchange-adapter.component';
 import {ExchangeAdapterDataPromiseService, ExchangeAdapterHttpDataPromiseService} from '../model/exchange-adapter/promise';
-import {OptionalConfig} from '../model/exchange-adapter/exchange-adapter.model';
+import {ConfigItem, OptionalConfig} from '../model/exchange-adapter/exchange-adapter.model';
 
 /**
  * Tests the behaviour of the Exchange Adapter component (Template version) is as expected.
@@ -51,7 +51,11 @@ function overrideExchangeAdapterServiceSetup() {
     let expectedNetworkConfig: NetworkConfig;
     let expectedErrorCodes: number[];
     let expectedErrorMsgs: string[];
+
+    let expectedBuyFeeConfigItem: ConfigItem;
+    let expectedSellFeeConfigItem: ConfigItem;
     let expectedOptionalConfig: OptionalConfig;
+
     let testExchangeAdapter: ExchangeAdapter;
 
     class StubExchangeAdapterHttpDataService implements ExchangeAdapterDataPromiseService {
@@ -60,16 +64,9 @@ function overrideExchangeAdapterServiceSetup() {
             expectedErrorCodes = [501];
             expectedErrorMsgs = ['Connection timeout'];
             expectedNetworkConfig = new NetworkConfig(60, expectedErrorCodes, expectedErrorMsgs);
-            expectedOptionalConfig = new OptionalConfig([
-                {
-                    name: 'buy-fee',
-                    value: '0.2'
-                },
-                {
-                    name: 'sell-fee',
-                    value: '0.25'
-                }
-            ]);
+            expectedBuyFeeConfigItem = new ConfigItem('buy-fee', '0.2');
+            expectedSellFeeConfigItem = new ConfigItem('sell-fee', '0.25');
+            expectedOptionalConfig = new OptionalConfig([expectedBuyFeeConfigItem, expectedSellFeeConfigItem]);
 
             testExchangeAdapter = new ExchangeAdapter('huobi', 'Huobi',
                 'com.gazbert.bxbot.adapter.HuobiExchangeAdapter', expectedNetworkConfig, expectedOptionalConfig);
@@ -249,8 +246,7 @@ function overrideExchangeAdapterServiceSetup() {
         expect(testExchangeAdapter.optionalConfig.configItems[2].value).toBe('');
     });
 
-    // FIXME - Broken test!
-    xit('should remove Optional Config Item when user deletes one', () => {
+    it('should remove Optional Config Item when user deletes one', () => {
 
         expect(testExchangeAdapter.optionalConfig.configItems.length).toBe(2);
 
@@ -408,15 +404,14 @@ function fakeExchangeAdapterServiceSetup() {
             expect(expectedExchangeAdapter.optionalConfig.configItems[2].value).toBe('');
         });
 
-        // FIXME - Broken test!
-        xit('should remove Optional Config Item when user deletes one', () => {
+        it('should remove Optional Config Item when user deletes one', () => {
 
             expect(expectedExchangeAdapter.optionalConfig.configItems.length).toBe(3);
 
             click(page.deleteConfigItemBtn);
 
-            expect(expectedExchangeAdapter.optionalConfig.configItems.length).toBe(3);
-            expect(expectedExchangeAdapter.optionalConfig.configItems[0]).not.toBeDefined();
+            expect(expectedExchangeAdapter.optionalConfig.configItems.length).toBe(2);
+            expect(expectedExchangeAdapter.optionalConfig.configItems[2]).not.toBeDefined();
         });
     });
 }
