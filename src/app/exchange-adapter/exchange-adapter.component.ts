@@ -141,6 +141,14 @@ export class ExchangeAdapterComponent implements OnInit, AfterViewChecked {
         }
     }
 
+    /**
+     * Need this because we iterate over primitive arrays for errorCode and errorMessage:
+     * https://stackoverflow.com/questions/42322968/angular2-dynamic-input-field-lose-focus-when-input-changes
+     */
+    trackByIndex(index: any, item: any) {
+        return index;
+    }
+
     // ------------------------------------------------------------------------
     // Form validation
     // TODO - Move into new shared validation component
@@ -199,4 +207,3 @@ export class ExchangeAdapterComponent implements OnInit, AfterViewChecked {
         }
     }
 }
-

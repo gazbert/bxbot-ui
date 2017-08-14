@@ -50,8 +50,8 @@
         <div class="row">
             <div class="col-sm-6">
                 <h4>Non Fatal HTTP Status Codes</h4>
-                <div *ngFor="let errorCode of exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes; let i=index;"
-                     class="panel panel-default">
+                <div *ngFor="let errorCode of exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes;
+                     let i=index; trackBy:trackByIndex" class="panel panel-default">
                     <div class="panel-heading">
                         <span>Code {{i + 1}}</span>
                         <span id="deleteErrorCodeButton_{{i}}" class="glyphicon glyphicon-remove pull-right"
@@ -61,8 +61,7 @@
                     <div class="panel-body">
                         <div class="form-group">
                             <label for="errorCode_{{i}}">HTTP Status Code</label>
-                            <input #httpStatusCode
-                                   [(ngModel)]="exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[i]"
+                            <input [(ngModel)]="exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[i]"
                                    class="form-control" id="errorCode_{{i}}"
                                    name="errorCode_{{i}}" required #errorCode="ngModel" pattern="\d{3}"
                                    placeholder="502">
@@ -83,7 +82,7 @@
             <!-- Error Messages -->
             <div class="col-sm-6">
                 <h4>Non Fatal Error Messages</h4>
-                <div *ngFor="let errorMsg of exchangeAdapter.networkConfig.nonFatalErrorMessages; let i=index;"
+                <div *ngFor="let errorMsg of exchangeAdapter.networkConfig.nonFatalErrorMessages; let i=index; trackBy:trackByIndex"
                      class="panel panel-default">
                     <div class="panel-heading">
                         <span>Message {{i + 1}}</span>
@@ -96,7 +95,7 @@
                             <label for="errorMessage_{{i}}">Error Message</label>
                             <input [(ngModel)]="exchangeAdapter.networkConfig.nonFatalErrorMessages[i]"
                                    class="form-control" id="errorMessage_{{i}}"
-                                   name="errorMessage_{{i}}" required #errorMsg="ngModel" minLength="1"
+                                   name="errorMessage_{{i}}" required #errorMsg="ngModel"
                                    placeholder="My error message...">
                             <div id="invalidErrorMessage_{{i}}"
                                  *ngIf="formErrors['errorMessage_' + i].length > 0" class="alert alert-danger">
@@ -132,7 +131,7 @@
             <div class="row">
                 <div class="col-sm-12">
 
-                    <div *ngFor="let optionalConfigItem of exchangeAdapter.optionalConfig.configItems; let i=index"
+                    <div *ngFor="let optionalConfigItem of exchangeAdapter.optionalConfig.configItems; let i=index; trackBy:trackByIndex"
                          class="panel panel-default">
 
                         <div class="panel-heading">
