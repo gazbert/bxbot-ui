@@ -269,7 +269,7 @@ function overrideExchangeAdapterServiceSetup() {
         expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages[1]).not.toBeDefined();
     }));
 
-    fit('should create new Optional Config Item when user adds one', fakeAsync(() => {
+    it('should create new Optional Config Item when user adds one', fakeAsync(() => {
 
         expect(testExchangeAdapter.optionalConfig.configItems.length).toBe(2);
 
