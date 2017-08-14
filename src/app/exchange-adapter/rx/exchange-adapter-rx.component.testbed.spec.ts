@@ -269,7 +269,7 @@ function overrideExchangeAdapterServiceSetup() {
         expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages[1]).not.toBeDefined();
     }));
 
-    it('should create new Optional Config Item when user adds one', fakeAsync(() => {
+    fit('should create new Optional Config Item when user adds one', fakeAsync(() => {
 
         expect(testExchangeAdapter.optionalConfig.configItems.length).toBe(2);
 
@@ -279,8 +279,8 @@ function overrideExchangeAdapterServiceSetup() {
         tick(); // wait for async save to complete
 
         expect(testExchangeAdapter.optionalConfig.configItems.length).toBe(3);
-        expect(testExchangeAdapter.optionalConfig.configItems[1].name).toBeDefined();
-        expect(testExchangeAdapter.optionalConfig.configItems[1].value).toBeDefined();
+        expect(testExchangeAdapter.optionalConfig.configItems[2].name).toBeDefined();
+        expect(testExchangeAdapter.optionalConfig.configItems[2].value).toBeDefined();
     }));
 
     it('should remove Optional Config Item when user deletes one', fakeAsync(() => {

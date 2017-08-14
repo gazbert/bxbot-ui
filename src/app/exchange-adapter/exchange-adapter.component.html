@@ -149,12 +149,10 @@
                                            id="configItemName_{{i}}" name="configItemName_{{i}}" class="form-control"
                                            maxlength="121" placeholder="but-fee" minLength="1" required
                                            #configItemName="ngModel" pattern="[a-zA-Z0-9/_\- ]*">
-                                    <!--<div id="invalidConfigItemName_{{i}}"-->
-                                    <!--[hidden]="optionalConfigItems.controls[i]['controls'].configItemName.valid ||-->
-                                    <!--(optionalConfigItems.controls[i]['controls'].configItemName.pristine && !isFormSaved())"-->
-                                    <!--class="alert alert-danger col-sm-8">-->
-                                    <!--{{formErrors.optionalConfigItemName}}-->
-                                    <!--</div>-->
+                                    <div id="invalidConfigItemName_{{i}}"
+                                         *ngIf="formErrors['configItemName_' + i].length > 0" class="alert alert-danger">
+                                        {{ formErrors['configItemName_' + i] }}
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -163,12 +161,10 @@
                                     <input [(ngModel)]="optionalConfigItem.value"
                                            id="configItemValue_{{i}}" name="configItemValue_{{i}}" class="form-control"
                                            maxlength="121" placeholder="0.25" minLength="1" required #configItemValue="ngModel">
-                                    <!--<div id="invalidConfigItemValue_{{i}}"-->
-                                    <!--[hidden]="optionalConfigItems.controls[i]['controls'].configItemValue.valid ||-->
-                                    <!--(optionalConfigItems.controls[i]['controls'].configItemValue.pristine && !isFormSaved())"-->
-                                    <!--class="alert alert-danger col-sm-8">-->
-                                    <!--{{formErrors.optionalConfigItemValue}}-->
-                                    <!--</div>-->
+                                    <div id="invalidConfigItemValue_{{i}}"
+                                         *ngIf="formErrors['configItemValue_' + i].length > 0" class="alert alert-danger">
+                                        {{ formErrors['configItemValue_' + i] }}
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -47,12 +47,12 @@ export class ExchangeAdapterComponent implements OnInit, AfterViewChecked {
         'errorMessage': {
             'required': 'Error message must not be empty.'
         },
-        'optionalConfigItemName': {
+        'configItemName': {
             'required': 'Name is required.',
             'maxlength': 'Name max length is 50 characters.',
             'pattern': 'Name must be alphanumeric and can only include the following special characters: _ -'
         },
-        'optionalConfigItemValue': {
+        'configItemValue': {
             'required': 'Value is required.',
             'maxlength': 'Value max length is 120 characters.'
         }
@@ -136,8 +136,8 @@ export class ExchangeAdapterComponent implements OnInit, AfterViewChecked {
         }
 
         for (let i = 0; i < this.exchangeAdapter.optionalConfig.configItems.length; i++) {
-            this.formErrors['optionalConfigItemName_' + i] = '';
-            this.formErrors['optionalConfigItemValue_' + i] = '';
+            this.formErrors['configItemName_' + i] = '';
+            this.formErrors['configItemValue_' + i] = '';
         }
     }
 

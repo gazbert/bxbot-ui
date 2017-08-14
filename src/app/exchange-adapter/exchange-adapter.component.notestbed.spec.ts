@@ -1,7 +1,7 @@
 import {ActivatedRouteStub} from '../../../testing';
 import {ExchangeAdapterComponent} from './exchange-adapter.component';
 import {ExchangeAdapter, NetworkConfig} from '../model/exchange-adapter';
-import {OptionalConfig} from '../model/exchange-adapter/exchange-adapter.model';
+import {ConfigItem, OptionalConfig} from '../model/exchange-adapter/exchange-adapter.model';
 
 /**
  * Tests the behaviour of the Exchange Adapter component (Template version) is as expected.
@@ -113,6 +113,13 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1]).toBeNull();
     });
 
+    it('should remove Error Code when user deletes one', () => {
+        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
+        exchangeAdapterComponent.deleteErrorCode(expectedErrorCodes[0]);
+        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(0);
+        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0]).not.toBeDefined();
+    });
+
     it('should create new Error Message when user adds one', () => {
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(1);
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages[1]).not.toBeDefined();
@@ -122,19 +129,29 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
             'We are ready at last to set sail for the stars.');
     });
 
-    it('should remove Error Code when user deletes one', () => {
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1]).not.toBeDefined();
-        exchangeAdapterComponent.deleteErrorCode(expectedErrorCodes[0]);
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(0);
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0]).not.toBeDefined();
-    });
-
     it('should remove Error Message when user deletes one', () => {
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(1);
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages[1]).not.toBeDefined();
         exchangeAdapterComponent.deleteErrorMessage(expectedErrorMsgs[0]);
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(0);
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages[0]).not.toBeDefined();
+    });
+
+    it('should create new Config Item when user adds one', () => {
+        expect(exchangeAdapterComponent.exchangeAdapter.optionalConfig.configItems.length).toBe(2);
+        expect(exchangeAdapterComponent.exchangeAdapter.optionalConfig.configItems[2]).not.toBeDefined();
+
+        const newConfigItem = new ConfigItem('space', 'We are ready at last to set sail for the stars.');
+        exchangeAdapterComponent.addOptionalConfigItem(newConfigItem);
+        expect(exchangeAdapterComponent.exchangeAdapter.optionalConfig.configItems.length).toBe(3);
+        expect(exchangeAdapterComponent.exchangeAdapter.optionalConfig.configItems[2]).toBe(newConfigItem);
+    });
+
+    // FIXME - Test broken!
+    xit('should remove Config Item when user deletes one', () => {
+        expect(exchangeAdapterComponent.exchangeAdapter.optionalConfig.configItems.length).toBe(2);
+        const configItemToDelete = new ConfigItem('space', 'We are ready at last to set sail for the stars.');
+        exchangeAdapterComponent.deleteOptionalConfigItem(configItemToDelete);
+        expect(exchangeAdapterComponent.exchangeAdapter.optionalConfig.configItems.length).toBe(1);
+        expect(exchangeAdapterComponent.exchangeAdapter.optionalConfig.configItems[1]).not.toBeDefined();
     });
 });
