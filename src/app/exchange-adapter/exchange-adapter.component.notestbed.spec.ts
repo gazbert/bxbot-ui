@@ -27,6 +27,9 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
     let expectedNetworkConfig: NetworkConfig;
     let expectedErrorCodes: number[];
     let expectedErrorMsgs: string[];
+
+    let expectedBuyFeeConfigItem: ConfigItem;
+    let expectedSellFeeConfigItem: ConfigItem;
     let expectedOptionalConfig: OptionalConfig;
 
     let expectedUpdatedExchangeAdapter: ExchangeAdapter;
@@ -39,17 +42,10 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
         expectedErrorCodes = [501];
         expectedErrorMsgs = ['Connection timeout'];
         expectedNetworkConfig = new NetworkConfig(60, expectedErrorCodes, expectedErrorMsgs);
-        expectedOptionalConfig = new OptionalConfig([
-                {
-                    name: 'buy-fee',
-                    value: '0.2'
-                },
-                {
-                    name: 'sell-fee',
-                    value: '0.25'
-                }
-            ]
-        );
+
+        expectedBuyFeeConfigItem = new ConfigItem('buy-fee', '0.2');
+        expectedSellFeeConfigItem = new ConfigItem('sell-fee', '0.25');
+        expectedOptionalConfig = new OptionalConfig([expectedBuyFeeConfigItem, expectedSellFeeConfigItem]);
 
         expectedExchangeAdapter = new ExchangeAdapter('huobi', 'Huobi', 'com.gazbert.bxbot.adapter.HuobiExchangeAdapter',
             expectedNetworkConfig, expectedOptionalConfig);
@@ -110,7 +106,6 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
         exchangeAdapterComponent.addErrorCode();
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(2);
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1]).toBeDefined();
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1]).toBeNull();
     });
 
     it('should remove Error Code when user deletes one', () => {
@@ -123,10 +118,9 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
     it('should create new Error Message when user adds one', () => {
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(1);
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages[1]).not.toBeDefined();
-        exchangeAdapterComponent.addErrorMessage('We are ready at last to set sail for the stars.');
+        exchangeAdapterComponent.addErrorMessage();
         expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(2);
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages[1]).toBe(
-            'We are ready at last to set sail for the stars.');
+        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages[1]).toBe('');
     });
 
     it('should remove Error Message when user deletes one', () => {
@@ -140,17 +134,15 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
         expect(exchangeAdapterComponent.exchangeAdapter.optionalConfig.configItems.length).toBe(2);
         expect(exchangeAdapterComponent.exchangeAdapter.optionalConfig.configItems[2]).not.toBeDefined();
 
-        const newConfigItem = new ConfigItem('space', 'We are ready at last to set sail for the stars.');
-        exchangeAdapterComponent.addOptionalConfigItem(newConfigItem);
+        exchangeAdapterComponent.addOptionalConfigItem();
         expect(exchangeAdapterComponent.exchangeAdapter.optionalConfig.configItems.length).toBe(3);
-        expect(exchangeAdapterComponent.exchangeAdapter.optionalConfig.configItems[2]).toBe(newConfigItem);
+        expect(exchangeAdapterComponent.exchangeAdapter.optionalConfig.configItems[2].name).toBe('');
+        expect(exchangeAdapterComponent.exchangeAdapter.optionalConfig.configItems[2].value).toBe('');
     });
 
-    // FIXME - Test broken!
-    xit('should remove Config Item when user deletes one', () => {
+    it('should remove Config Item when user deletes one', () => {
         expect(exchangeAdapterComponent.exchangeAdapter.optionalConfig.configItems.length).toBe(2);
-        const configItemToDelete = new ConfigItem('space', 'We are ready at last to set sail for the stars.');
-        exchangeAdapterComponent.deleteOptionalConfigItem(configItemToDelete);
+        exchangeAdapterComponent.deleteOptionalConfigItem(expectedBuyFeeConfigItem);
         expect(exchangeAdapterComponent.exchangeAdapter.optionalConfig.configItems.length).toBe(1);
         expect(exchangeAdapterComponent.exchangeAdapter.optionalConfig.configItems[1]).not.toBeDefined();
     });

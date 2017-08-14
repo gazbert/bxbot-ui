@@ -61,16 +61,15 @@ function overrideExchangeAdapterServiceSetup() {
             expectedErrorMsgs = ['Connection timeout'];
             expectedNetworkConfig = new NetworkConfig(60, expectedErrorCodes, expectedErrorMsgs);
             expectedOptionalConfig = new OptionalConfig([
-                    {
-                        name: 'buy-fee',
-                        value: '0.2'
-                    },
-                    {
-                        name: 'sell-fee',
-                        value: '0.25'
-                    }
-                ]
-            );
+                {
+                    name: 'buy-fee',
+                    value: '0.2'
+                },
+                {
+                    name: 'sell-fee',
+                    value: '0.25'
+                }
+            ]);
 
             testExchangeAdapter = new ExchangeAdapter('huobi', 'Huobi',
                 'com.gazbert.bxbot.adapter.HuobiExchangeAdapter', expectedNetworkConfig, expectedOptionalConfig);
@@ -208,6 +207,16 @@ function overrideExchangeAdapterServiceSetup() {
         expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1]).toBeNull();
     });
 
+    it('should remove Error Code when user deletes one', () => {
+
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
+
+        click(page.deleteErrorCodeBtn);
+
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(0);
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0]).not.toBeDefined();
+    });
+
     it('should create new Error Message when user adds one', () => {
 
         expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(1);
@@ -217,16 +226,6 @@ function overrideExchangeAdapterServiceSetup() {
         expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(2);
         expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages[1]).toBeDefined();
         expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages[1]).toBe('');
-    });
-
-    it('should remove Error Code when user deletes one', () => {
-
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
-
-        click(page.deleteErrorCodeBtn);
-
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(0);
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0]).not.toBeDefined();
     });
 
     it('should remove Error Message when user deletes one', () => {
@@ -239,20 +238,19 @@ function overrideExchangeAdapterServiceSetup() {
         expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages[0]).not.toBeDefined();
     });
 
-    // FIXME - test broken!
-    xit('should create new Optional Config Item when user adds one', fakeAsync(() => {
+    it('should create new Optional Config Item when user adds one', () => {
 
         expect(testExchangeAdapter.optionalConfig.configItems.length).toBe(2);
 
         click(page.addNewConfigItemLink);
 
         expect(testExchangeAdapter.optionalConfig.configItems.length).toBe(3);
-        expect(testExchangeAdapter.optionalConfig.configItems[2].name).toBeDefined();
-        expect(testExchangeAdapter.optionalConfig.configItems[2].value).toBeDefined();
-    }));
+        expect(testExchangeAdapter.optionalConfig.configItems[2].name).toBe('');
+        expect(testExchangeAdapter.optionalConfig.configItems[2].value).toBe('');
+    });
 
-    // FIXME - test broken!
-    xit('should remove Optional Config Item when user deletes one', fakeAsync(() => {
+    // FIXME - Broken test!
+    xit('should remove Optional Config Item when user deletes one', () => {
 
         expect(testExchangeAdapter.optionalConfig.configItems.length).toBe(2);
 
@@ -260,7 +258,7 @@ function overrideExchangeAdapterServiceSetup() {
 
         expect(testExchangeAdapter.optionalConfig.configItems.length).toBe(1);
         expect(testExchangeAdapter.optionalConfig.configItems[1]).not.toBeDefined();
-    }));
+    });
 }
 
 /**
@@ -305,8 +303,10 @@ function fakeExchangeAdapterServiceSetup() {
 
             expect(page.errorCode_0Input.value).toBe('' + // hack to turn it into a String for comparison ;-)
                 expectedExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0]);
-
             expect(page.errorMessage_0Input.value).toBe(expectedExchangeAdapter.networkConfig.nonFatalErrorMessages[0]);
+
+            expect(page.configItemName_0Input.value).toBe(expectedExchangeAdapter.optionalConfig.configItems[0].name);
+            expect(page.configItemValue_0Input.value).toBe(expectedExchangeAdapter.optionalConfig.configItems[0].value);
         });
 
         it('should save and navigate to Dashboard when user clicks Save for valid input', fakeAsync(() => {
@@ -397,28 +397,27 @@ function fakeExchangeAdapterServiceSetup() {
             expect(expectedExchangeAdapter.networkConfig.nonFatalErrorMessages[3]).not.toBeDefined();
         });
 
-        // FIXME - Test broken!
-        xit('should create new Optional Config Item when user adds one', fakeAsync(() => {
+        it('should create new Optional Config Item when user adds one', () => {
 
             expect(expectedExchangeAdapter.optionalConfig.configItems.length).toBe(2);
 
             click(page.addNewConfigItemLink);
 
             expect(expectedExchangeAdapter.optionalConfig.configItems.length).toBe(3);
-            expect(expectedExchangeAdapter.optionalConfig.configItems[2].name).toBeDefined();
+            expect(expectedExchangeAdapter.optionalConfig.configItems[2].name).toBe('');
             expect(expectedExchangeAdapter.optionalConfig.configItems[2].value).toBe('');
-        }));
+        });
 
-        // FIXME - Test broken!
-        xit('should remove Optional Config Item when user deletes one', fakeAsync(() => {
+        // FIXME - Broken test!
+        xit('should remove Optional Config Item when user deletes one', () => {
 
-            expect(expectedExchangeAdapter.optionalConfig.configItems.length).toBe(2);
+            expect(expectedExchangeAdapter.optionalConfig.configItems.length).toBe(3);
 
             click(page.deleteConfigItemBtn);
 
-            expect(expectedExchangeAdapter.optionalConfig.configItems.length).toBe(1);
-            expect(expectedExchangeAdapter.optionalConfig.configItems[1]).not.toBeDefined();
-        }));
+            expect(expectedExchangeAdapter.optionalConfig.configItems.length).toBe(3);
+            expect(expectedExchangeAdapter.optionalConfig.configItems[0]).not.toBeDefined();
+        });
     });
 }
 

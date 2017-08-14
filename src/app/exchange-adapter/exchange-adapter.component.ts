@@ -101,8 +101,8 @@ export class ExchangeAdapterComponent implements OnInit, AfterViewChecked {
         this.updateFormErrors();
     }
 
-    addErrorMessage(message: string): void {
-        this.exchangeAdapter.networkConfig.nonFatalErrorMessages.push(message);
+    addErrorMessage(): void {
+        this.exchangeAdapter.networkConfig.nonFatalErrorMessages.push('');
         this.updateFormErrors();
     }
 
@@ -112,8 +112,8 @@ export class ExchangeAdapterComponent implements OnInit, AfterViewChecked {
         this.updateFormErrors();
     }
 
-    addOptionalConfigItem(configItem: ConfigItem): void {
-        this.exchangeAdapter.optionalConfig.configItems.push(configItem);
+    addOptionalConfigItem(): void {
+        this.exchangeAdapter.optionalConfig.configItems.push(new ConfigItem('', ''));
         this.updateFormErrors();
     }
 
