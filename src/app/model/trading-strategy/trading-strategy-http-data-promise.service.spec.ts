@@ -1,8 +1,8 @@
 import {MockBackend, MockConnection} from '@angular/http/testing';
-import {HttpModule, Http, XHRBackend, Response, ResponseOptions} from '@angular/http';
+import {Http, HttpModule, Response, ResponseOptions, XHRBackend} from '@angular/http';
 import {async, inject, TestBed} from '@angular/core/testing';
 import {TradingStrategyHttpDataPromiseService as TradingStrategyDataService} from './trading-strategy-http-data-promise.service';
-import {TradingStrategy} from '../trading-strategy';
+import {TradingStrategy, OptionalConfig} from '../trading-strategy';
 
 /**
  * Tests the Trading Strategy HTTP Data service (Promise flavour) using a mocked HTTP backend.
@@ -24,7 +24,7 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
     it('should instantiate implementation of TradingStrategyDataService service when injected',
         inject([TradingStrategyDataService], (service: TradingStrategyDataService) => {
             expect(service instanceof TradingStrategyDataService).toBe(true);
-    }));
+        }));
 
     it('should instantiate service with "new"', inject([Http], (http: Http) => {
         expect(http).not.toBeNull('http should be provided');
@@ -36,7 +36,7 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
     it('should provide the MockBackend as XHRBackend',
         inject([XHRBackend], (backend: MockBackend) => {
             expect(backend).not.toBeNull('MockBackend backend should be provided');
-    }));
+        }));
 
     describe('when getAllTradingStrategiesForBotId() operation called with \'huobi\'', () => {
 
@@ -78,7 +78,24 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
 
             updatedTradingStrategy = new TradingStrategy('huobi_macd', 'huobi-2', 'MACD Indicator',
                 'MACD Indicator algo for deciding when to enter and exit trades.',
-                'com.gazbert.bxbot.strategies.MacdStrategy');
+                'com.gazbert.bxbot.strategies.MacdStrategy',
+
+                new OptionalConfig([
+                        {
+                            name: 'ema-short-interval',
+                            value: '12'
+                        },
+                        {
+                            name: 'ema-long-interval',
+                            value: '26'
+                        },
+                        {
+                            name: 'signal-line',
+                            value: '9'
+                        }
+                    ]
+                )
+            );
 
             backend = be;
             service = new TradingStrategyDataService(http);
@@ -137,13 +154,46 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
 
 const makeTradingStrategyData = () => [
 
-        new TradingStrategy('huobi_macd', 'huobi-2', 'MACD Indicator',
-            'MACD Indicator algo for deciding when to enter and exit trades.',
-            'com.gazbert.bxbot.strategies.MacdRsiStrategy'),
+    new TradingStrategy('huobi_macd', 'huobi-2', 'MACD Indicator',
+        'MACD Indicator algo for deciding when to enter and exit trades.',
+        'com.gazbert.bxbot.strategies.MacdRsiStrategy',
 
-        new TradingStrategy('huobi_macd', 'huobi-2', 'MACD Indicator',
-            'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy')
+        new OptionalConfig([
+                {
+                    name: 'ema-short-interval',
+                    value: '12'
+                },
+                {
+                    name: 'ema-long-interval',
+                    value: '26'
+                },
+                {
+                    name: 'signal-line',
+                    value: '9'
+                }
+            ]
+        )
+    ),
 
+    new TradingStrategy('huobi_macd', 'huobi-2', 'MACD Indicator',
+        'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy',
+
+        new OptionalConfig([
+                {
+                    name: 'ema-short-interval',
+                    value: '12'
+                },
+                {
+                    name: 'ema-long-interval',
+                    value: '26'
+                },
+                {
+                    name: 'signal-line',
+                    value: '9'
+                }
+            ]
+        )
+    )
 ] as TradingStrategy[];
 
 

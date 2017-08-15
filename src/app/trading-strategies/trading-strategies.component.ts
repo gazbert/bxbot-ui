@@ -1,8 +1,7 @@
-import {OnInit, Component, ViewChild, AfterViewChecked} from '@angular/core';
+import {AfterViewChecked, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {TradingStrategy} from '../model/trading-strategy';
-import {TradingStrategyHttpDataPromiseService} from '../model/trading-strategy';
+import {OptionalConfig, TradingStrategy, TradingStrategyHttpDataPromiseService} from '../model/trading-strategy';
 import {MarketHttpDataPromiseService} from '../model/market';
 
 /**
@@ -48,7 +47,7 @@ export class TradingStrategiesComponent implements OnInit, AfterViewChecked {
     errorModal = {
         'title': 'Trading Strategy Still In Use',
         'body': 'You cannot delete this Trading Strategy because it is still being used by a Market on the Exchange. ' +
-                'Please check your Market configuration.'
+        'Please check your Market configuration.'
     };
 
     constructor(private tradingStrategyDataService: TradingStrategyHttpDataPromiseService,
@@ -64,7 +63,8 @@ export class TradingStrategiesComponent implements OnInit, AfterViewChecked {
                     this.tradingStrategies = tradingStrategies;
                     this.updateFormErrors();
                 });
-        }).then(() => {/*done*/});
+        }).then(() => {/*done*/
+        });
     }
 
     getOtherStrategyNames(strategyId: string): string[] {
@@ -79,7 +79,7 @@ export class TradingStrategiesComponent implements OnInit, AfterViewChecked {
     }
 
     addTradingStrategy(): void {
-        this.tradingStrategies.push(new TradingStrategy(this.createUuid(), this.botId, null, null, null));
+        this.tradingStrategies.push(new TradingStrategy(this.createUuid(), this.botId, null, null, null, new OptionalConfig([])));
         this.updateFormErrors();
     }
 
@@ -100,7 +100,8 @@ export class TradingStrategiesComponent implements OnInit, AfterViewChecked {
     save(isValid: boolean): void {
         if (isValid) {
             this.deletedTradingStrategies.forEach((tradingStrategy) => {
-                this.tradingStrategyDataService.deleteTradingStrategyById(tradingStrategy.id).then(() => {/*done*/});
+                this.tradingStrategyDataService.deleteTradingStrategyById(tradingStrategy.id).then(() => {/*done*/
+                });
             });
 
             // TODO - Be more efficient: only update Strats that have changed
@@ -137,7 +138,7 @@ export class TradingStrategiesComponent implements OnInit, AfterViewChecked {
     // Server will create UUID and return in POST response object.
     // Algo by @Broofa - http://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript/2117523#2117523
     createUuid() {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
             // tslint:disable-next-line
             const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
             return v.toString(16);

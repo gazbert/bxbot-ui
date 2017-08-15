@@ -2,6 +2,7 @@ import {ActivatedRouteStub} from '../../../testing';
 import {TradingStrategiesComponent} from './trading-strategies.component';
 import {TradingStrategy} from '../model/trading-strategy';
 import {Market} from '../model/market';
+import {OptionalConfig} from '../model/trading-strategy/trading-strategy.model';
 
 /**
  * Tests the behaviour of the Trading Strategies component is as expected.
@@ -35,15 +36,56 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
     beforeEach(done => {
 
         expectedTradingStrategy_1 = new TradingStrategy('gdax_macd', 'gdax-2', 'MACD Indicator',
-            'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy');
+            'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy',
+            new OptionalConfig([
+                {
+                    name: 'ema-short-interval',
+                    value: '12'
+                },
+                {
+                    name: 'ema-long-interval',
+                    value: '26'
+                },
+                {
+                    name: 'signal-line',
+                    value: '9'
+                }
+            ]));
+
         expectedTradingStrategy_2 = new TradingStrategy('gdax_ema', 'gdax-2', 'EMA Indicator',
-            'EMA Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.EmaStrategy');
+            'EMA Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.EmaStrategy',
+            new OptionalConfig([
+                {
+                    name: 'ema-short-interval',
+                    value: '12'
+                },
+                {
+                    name: 'ema-long-interval',
+                    value: '26'
+                }
+            ]));
 
         unusedTradingStrategy = new TradingStrategy('gdax_not_used', 'gdax-2', 'EMA Indicator',
-            'EMA Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.EmaStrategy');
+            'EMA Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.EmaStrategy',
+            new OptionalConfig([
+                {
+                    name: 'ema-short-interval',
+                    value: '12'
+                },
+                {
+                    name: 'ema-long-interval',
+                    value: '26'
+                }
+            ]));
 
         expectedUpdatedTradingStrategy_2 = new TradingStrategy('gdax_scalper', 'gdax-2', 'Long Scalper',
-            'Scalper that buys low and sells high, like duh.', 'com.gazbert.bxbot.strategies.LongScalper');
+            'Scalper that buys low and sells high, like duh.', 'com.gazbert.bxbot.strategies.LongScalper',
+            new OptionalConfig([
+                {
+                    name: 'min-percentage-gain',
+                    value: '0.75'
+                }
+            ]));
 
         expectedTradingStrategies = [expectedTradingStrategy_1, expectedTradingStrategy_2, unusedTradingStrategy];
 
@@ -79,6 +121,8 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
         // paranoia ;-)
         expect(tradingStrategiesComponent.tradingStrategies.length).toBe(3);
         expect(tradingStrategiesComponent.tradingStrategies[0].id).toBe('gdax_macd');
+        expect(tradingStrategiesComponent.tradingStrategies[0].optionalConfig.configItems[0].name).toBe('ema-short-interval');
+        expect(tradingStrategiesComponent.tradingStrategies[0].optionalConfig.configItems[0].value).toBe('12');
     });
 
     it('should save and navigate to Dashboard when user clicks Save for valid input', done => {
