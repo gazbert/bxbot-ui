@@ -34,11 +34,11 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
 
         // Strat 2
-        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD Indicator');
         expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
-            .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');
+            .toBe('MACD Indicator algo for deciding when to enter and exit trades.');
         expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
-            .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
+            .toBe('com.gazbert.bxbot.strategies.MacdStrategy');
 
         // Update Strat 1 fields
         const strategyName = element(by.id('tradingStrategyName_0'));
@@ -71,11 +71,11 @@ describe('Trading Strategy Tests', function () {
         expect(element(by.id('tradingStrategyClassname_0')).getAttribute('value')).toBe(newStrategyClassName);
 
         // Strat 2 unchanged
-        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD Indicator');
         expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
-            .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');
+            .toBe('MACD Indicator algo for deciding when to enter and exit trades.');
         expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
-            .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
+            .toBe('com.gazbert.bxbot.strategies.MacdStrategy');
     });
 
     it('should NOT update Trading Strategy fields after Cancel', function () {
@@ -95,11 +95,11 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
 
         // Strat 2
-        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD Indicator');
         expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
-            .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');
+            .toBe('MACD Indicator algo for deciding when to enter and exit trades.');
         expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
-            .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
+            .toBe('com.gazbert.bxbot.strategies.MacdStrategy');
 
         // Update Strat 1 fields
         const strategyName = element(by.id('tradingStrategyName_0'));
@@ -134,11 +134,11 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
 
         // Strat 2 unchanged
-        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD Indicator');
         expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
-            .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');
+            .toBe('MACD Indicator algo for deciding when to enter and exit trades.');
         expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
-            .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
+            .toBe('com.gazbert.bxbot.strategies.MacdStrategy');
     });
 
     it('should add new Trading Strategy and save it', function () {
@@ -158,11 +158,11 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
 
         // Strat 2
-        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD Indicator');
         expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
-            .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');
+            .toBe('MACD Indicator algo for deciding when to enter and exit trades.');
         expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
-            .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
+            .toBe('com.gazbert.bxbot.strategies.MacdStrategy');
 
         // Add new Strat 3
         const addTradingStrategyLink = element(by.id('addTradingStrategyLink'));
@@ -200,11 +200,11 @@ describe('Trading Strategy Tests', function () {
             'com.gazbert.bxbot.strategies.LongScalperStrategy');
 
         // Strat 2 unchanged
-        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD Indicator');
         expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
-            .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');
+            .toBe('MACD Indicator algo for deciding when to enter and exit trades.');
         expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
-            .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
+            .toBe('com.gazbert.bxbot.strategies.MacdStrategy');
 
         // Hello Strat 3!
         expect(element(by.id('tradingStrategyName_2')).getAttribute('value')).toBe(newStrategyName);
@@ -229,11 +229,11 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
 
         // Strat 2
-        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD Indicator');
         expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
-            .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');
+            .toBe('MACD Indicator algo for deciding when to enter and exit trades.');
         expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
-            .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
+            .toBe('com.gazbert.bxbot.strategies.MacdStrategy');
 
         // Delete Strat 1
         const deleteTradingStrategyButton = element(by.id('deleteTradingStrategyButton_0'));
@@ -245,12 +245,12 @@ describe('Trading Strategy Tests', function () {
         dashboardItems.get(3).click();
         tabLinks.get(3).click();
 
-        // Original Strat 1 'Long Scalper' deleted; new Strat 1 is 'MACD RSI Indicator' (previously Strat 2).
-        expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('MACD RSI Indicator');
+        // Original Strat 1 'Long Scalper' deleted; new Strat 1 is 'MACD Indicator' (previously Strat 2).
+        expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('MACD Indicator');
         expect(element(by.id('tradingStrategyDescription_0')).getAttribute('value')).toBe(
-            'MACD Indicator and RSI algo for deciding when to enter and exit trades.');
+            'MACD Indicator algo for deciding when to enter and exit trades.');
         expect(element(by.id('tradingStrategyClassname_0')).getAttribute('value')).toBe(
-            'com.gazbert.bxbot.strategies.MacdRsiStrategy');
+            'com.gazbert.bxbot.strategies.MacdStrategy');
 
         // Original Strat 2 moved
         expect(element(by.id('tradingStrategyName_1')).isPresent()).toBe(false);
@@ -275,11 +275,11 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
 
         // Strat 2
-        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD Indicator');
         expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
-            .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');
+            .toBe('MACD Indicator algo for deciding when to enter and exit trades.');
         expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
-            .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
+            .toBe('com.gazbert.bxbot.strategies.MacdStrategy');
 
         // Delete Strat 2 - will cause error
         const deleteTradingStrategyButton = element(by.id('deleteTradingStrategyButton_1'));
@@ -301,11 +301,11 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
 
         // Strat 2 unchanged
-        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD Indicator');
         expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
-            .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');
+            .toBe('MACD Indicator algo for deciding when to enter and exit trades.');
         expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
-            .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
+            .toBe('com.gazbert.bxbot.strategies.MacdStrategy');
     });
 
     it('should NOT save Trading Strategy fields if there are validation errors', function () {
@@ -325,11 +325,11 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
 
         // Strat 2
-        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD Indicator');
         expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
-            .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');
+            .toBe('MACD Indicator algo for deciding when to enter and exit trades.');
         expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
-            .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
+            .toBe('com.gazbert.bxbot.strategies.MacdStrategy');
 
         // Update Strat 1 fields with some 'bad' values
         const strategyName = element(by.id('tradingStrategyName_0'));
@@ -366,11 +366,11 @@ describe('Trading Strategy Tests', function () {
             'Class Name must be valid Java class, e.g. com.my.MyTradingStrategyClass');
 
         // Strat 2 unchanged
-        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD Indicator');
         expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
-            .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');
+            .toBe('MACD Indicator algo for deciding when to enter and exit trades.');
         expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
-            .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
+            .toBe('com.gazbert.bxbot.strategies.MacdStrategy');
     });
 
     it('should NOT save new Trading Strategy when Strategy Name already in use', function () {
@@ -390,18 +390,18 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
 
         // Strat 2
-        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD Indicator');
         expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
-            .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');
+            .toBe('MACD Indicator algo for deciding when to enter and exit trades.');
         expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
-            .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
+            .toBe('com.gazbert.bxbot.strategies.MacdStrategy');
 
         // Add new Strat 3 with same name as Strat 2
         const addTradingStrategyLink = element(by.id('addTradingStrategyLink'));
         addTradingStrategyLink.click();
 
         const strategyName = element(by.id('tradingStrategyName_2'));
-        const newStrategyName = 'MACD RSI Indicator'; // eek!
+        const newStrategyName = 'MACD Indicator'; // eek!
         strategyName.clear();
         strategyName.sendKeys(newStrategyName);
         expect(strategyName.getAttribute('value')).toBe(newStrategyName);
@@ -438,10 +438,10 @@ describe('Trading Strategy Tests', function () {
             'com.gazbert.bxbot.strategies.LongScalperStrategy');
 
         // Strat 2 unchanged
-        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD Indicator');
         expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
-            .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');
+            .toBe('MACD Indicator algo for deciding when to enter and exit trades.');
         expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
-            .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
+            .toBe('com.gazbert.bxbot.strategies.MacdStrategy');
     });
 });

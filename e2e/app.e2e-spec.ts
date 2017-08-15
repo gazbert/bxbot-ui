@@ -42,11 +42,11 @@ describe('Miscellaneous Scenario Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
 
         // Existing Strat 2
-        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD RSI Indicator');
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD Indicator');
         expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
-            .toBe('MACD Indicator and RSI algo for deciding when to enter and exit trades.');
+            .toBe('MACD Indicator algo for deciding when to enter and exit trades.');
         expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
-            .toBe('com.gazbert.bxbot.strategies.MacdRsiStrategy');
+            .toBe('com.gazbert.bxbot.strategies.MacdStrategy');
 
         // Add new Strat 3
         const addTradingStrategyLink = element(by.id('addTradingStrategyLink'));
@@ -81,7 +81,7 @@ describe('Miscellaneous Scenario Tests', function () {
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('XBT/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('XBT');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('1: MACD RSI Indicator');
+        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('1: MACD Indicator');
 
         // Update Market's Trading Strat
         const tradingStrategy = element(by.id('tradingStrategy_0'));

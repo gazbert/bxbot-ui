@@ -409,11 +409,11 @@ export class InMemoryDataService implements InMemoryDbService {
                 baseCurrency: 'XBT',
                 counterCurrency: 'USD',
                 tradingStrategy: {
-                    id: 'itbit_ema_rsi',
+                    id: 'itbit_macd',
                     exchangeId: 'itbit',
-                    name: 'MACD RSI Indicator',
-                    description: 'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
-                    className: 'com.gazbert.bxbot.strategies.MacdRsiStrategy'
+                    name: 'MACD Indicator',
+                    description: 'MACD Indicator algo for deciding when to enter and exit trades.',
+                    className: 'com.gazbert.bxbot.strategies.MacdStrategy'
                 }
             },
             {
@@ -425,11 +425,11 @@ export class InMemoryDataService implements InMemoryDbService {
                 baseCurrency: 'BTC',
                 counterCurrency: 'USD',
                 tradingStrategy: {
-                    id: 'huobi_macd_rsi',
+                    id: 'huobi_macd',
                     exchangeId: 'huobi',
-                    name: 'MACD RSI Indicator',
-                    description: 'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
-                    className: 'com.gazbert.bxbot.strategies.MacdRsiStrategy'
+                    name: 'MACD Indicator',
+                    description: 'MACD Indicator algo for deciding when to enter and exit trades.',
+                    className: 'com.gazbert.bxbot.strategies.MacdStrategy'
                 }
             },
             {
@@ -489,11 +489,11 @@ export class InMemoryDataService implements InMemoryDbService {
                 baseCurrency: 'XXBT',
                 counterCurrency: 'ZUSD',
                 tradingStrategy: {
-                    id: 'kraken_ema_rsi',
+                    id: 'kraken_ema',
                     exchangeId: 'kraken',
-                    name: 'EMA RSI Indicator',
-                    description: 'EMA Indicator and RSI algo for deciding when to enter and exit trades.',
-                    className: 'com.gazbert.bxbot.strategies.EmaRsiStrategy'
+                    name: 'EMA Indicator',
+                    description: 'EMA Indicator algo for deciding when to enter and exit trades.',
+                    className: 'com.gazbert.bxbot.strategies.EmaStrategy'
                 }
             }
         ];
@@ -503,95 +503,239 @@ export class InMemoryDataService implements InMemoryDbService {
          */
         const trading_strategies = [
             {
-                id: 'huobi_macd_rsi',
+                id: 'huobi_macd',
                 botId: 'huobi-1',
-                name: 'MACD RSI Indicator',
-                description: 'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
-                className: 'com.gazbert.bxbot.strategies.MacdRsiStrategy'
+                name: 'MACD Indicator',
+                description: 'MACD Indicator algo for deciding when to enter and exit trades.',
+                className: 'com.gazbert.bxbot.strategies.MacdStrategy',
+                optionalConfig: {
+                    configItems: [
+                        {
+                            name: 'ema-short-interval',
+                            value: '12'
+                        },
+                        {
+                            name: 'ema-long-interval',
+                            value: '26'
+                        },
+                        {
+                            name: 'signal-line',
+                            value: '9'
+                        }
+                    ]
+                }
             },
             {
                 id: 'huobi_long-scalper',
                 botId: 'huobi-1',
                 name: 'Long Scalper',
                 description: 'Scalping strategy that buys low and sells high.',
-                className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
+                className: 'com.gazbert.bxbot.strategies.LongScalperStrategy',
+                optionalConfig: {
+                    configItems: [
+                        {
+                            name: 'min-percentage-gain',
+                            value: '0.5'
+                        }
+                    ]
+                }
             },
             {
                 id: 'huobi_short-scalper',
                 botId: 'huobi-1',
                 name: 'Short Scalper',
                 description: 'Scalping strategy that sells and buys back more units at lower price.',
-                className: 'com.gazbert.bxbot.strategies.ShortScalperStrategy'
+                className: 'com.gazbert.bxbot.strategies.ShortScalperStrategy',
+                optionalConfig: {
+                    configItems: [
+                        {
+                            name: 'min-percentage-gain',
+                            value: '0.5'
+                        }
+                    ]
+                }
             },
             {
                 id: 'gdax_long-scalper',
                 botId: 'gdax-1',
                 name: 'Long Scalper',
                 description: 'Scalping strategy that buys low and sells high.',
-                className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
+                className: 'com.gazbert.bxbot.strategies.LongScalperStrategy',
+                optionalConfig: {
+                    configItems: [
+                        {
+                            name: 'min-percentage-gain',
+                            value: '1.0'
+                        }
+                    ]
+                }
             },
             {
                 id: 'gdax_ema',
                 botId: 'gdax-1',
                 name: 'EMA Indicator',
                 description: 'EMA Indicator algo for deciding when to enter and exit trades.',
-                className: 'com.gazbert.bxbot.strategies.EmaStrategy'
+                className: 'com.gazbert.bxbot.strategies.EmaStrategy',
+                optionalConfig: {
+                    configItems: [
+                        {
+                            name: 'ema-short-interval',
+                            value: '5'
+                        },
+                        {
+                            name: 'ema-long-interval',
+                            value: '20'
+                        }
+                    ]
+                }
             },
             {
                 id: 'bitstamp_ema',
                 botId: 'bitstamp-1',
                 name: 'EMA Indicator',
                 description: 'EMA Indicator algo for deciding when to enter and exit trades.',
-                className: 'com.gazbert.bxbot.strategies.EmaStrategy'
+                className: 'com.gazbert.bxbot.strategies.EmaStrategy',
+                optionalConfig: {
+                    configItems: [
+                        {
+                            name: 'ema-short-interval',
+                            value: '10'
+                        },
+                        {
+                            name: 'ema-long-interval',
+                            value: '20'
+                        }
+                    ]
+                }
             },
             {
                 id: 'gemini_macd',
                 botId: 'gemini-1',
                 name: 'MACD Indicator',
                 description: 'MACD Indicator algo for deciding when to enter and exit trades.',
-                className: 'com.gazbert.bxbot.strategies.MacdStrategy'
+                className: 'com.gazbert.bxbot.strategies.MacdStrategy',
+                optionalConfig: {
+                    configItems: [
+                        {
+                            name: 'ema-short-interval',
+                            value: '12'
+                        },
+                        {
+                            name: 'ema-long-interval',
+                            value: '26'
+                        },
+                        {
+                            name: 'signal-line',
+                            value: '9'
+                        }
+                    ]
+                }
             },
             {
                 id: 'gemini_long-scalper',
                 botId: 'gemini-1',
                 name: 'Long Scalper',
                 description: 'Scalping strategy that buys low and sells high.',
-                className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
+                className: 'com.gazbert.bxbot.strategies.LongScalperStrategy',
+                optionalConfig: {
+                    configItems: [
+                        {
+                            name: 'min-percentage-gain',
+                            value: '0.75'
+                        }
+                    ]
+                }
             },
             {
                 id: 'okcoin_ema',
                 botId: 'okcoin-1',
                 name: 'MACD Indicator',
                 description: 'EMA Indicator algo for deciding when to enter and exit trades.',
-                className: 'com.gazbert.bxbot.strategies.EmaStrategy'
+                className: 'com.gazbert.bxbot.strategies.EmaStrategy',
+                optionalConfig: {
+                    configItems: [
+                        {
+                            name: 'ema-short-interval',
+                            value: '10'
+                        },
+                        {
+                            name: 'ema-long-interval',
+                            value: '20'
+                        }
+                    ]
+                }
             },
             {
                 id: 'bitfinex_long-scalper',
                 botId: 'bitfinex-1',
                 name: 'Long Scalper',
                 description: 'Scalping strategy that buys low and sells high.',
-                className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
+                className: 'com.gazbert.bxbot.strategies.LongScalperStrategy',
+                optionalConfig: {
+                    configItems: [
+                        {
+                            name: 'min-percentage-gain',
+                            value: '1.75'
+                        }
+                    ]
+                }
             },
             {
-                id: 'kraken_ema_rsi',
+                id: 'kraken_ema',
                 botId: 'kraken-1',
-                name: 'EMA RSI Indicator',
-                description: 'EMA Indicator and RSI algo for deciding when to enter and exit trades.',
-                className: 'com.gazbert.bxbot.strategies.EmaRsiStrategy'
+                name: 'EMA Indicator',
+                description: 'EMA Indicator algo for deciding when to enter and exit trades.',
+                className: 'com.gazbert.bxbot.strategies.EmaStrategy',
+                optionalConfig: {
+                    configItems: [
+                        {
+                            name: 'ema-short-interval',
+                            value: '10'
+                        },
+                        {
+                            name: 'ema-long-interval',
+                            value: '20'
+                        }
+                    ]
+                }
             },
             {
                 id: 'itbit_long-scalper',
                 botId: 'itbit-1',
                 name: 'Long Scalper',
                 description: 'Scalping strategy that buys low and sells high.',
-                className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
+                className: 'com.gazbert.bxbot.strategies.LongScalperStrategy',
+                optionalConfig: {
+                    configItems: [
+                        {
+                            name: 'min-percentage-gain',
+                            value: '1.0'
+                        }
+                    ]
+                }
             },
             {
-                id: 'itbit_ema_rsi',
+                id: 'itbit_macd',
                 botId: 'itbit-1',
-                name: 'MACD RSI Indicator',
-                description: 'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
-                className: 'com.gazbert.bxbot.strategies.MacdRsiStrategy'
+                name: 'MACD Indicator',
+                description: 'MACD Indicator algo for deciding when to enter and exit trades.',
+                className: 'com.gazbert.bxbot.strategies.MacdStrategy',
+                optionalConfig: {
+                    configItems: [
+                        {
+                            name: 'ema-short-interval',
+                            value: '12'
+                        },
+                        {
+                            name: 'ema-long-interval',
+                            value: '26'
+                        },
+                        {
+                            name: 'signal-line',
+                            value: '9'
+                        }
+                    ]
+                }
             },
         ];
 

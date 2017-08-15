@@ -76,7 +76,7 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
 
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
 
-            updatedTradingStrategy = new TradingStrategy('huobi_macd_rsi', 'huobi-2', 'MACD Indicator',
+            updatedTradingStrategy = new TradingStrategy('huobi_macd', 'huobi-2', 'MACD Indicator',
                 'MACD Indicator algo for deciding when to enter and exit trades.',
                 'com.gazbert.bxbot.strategies.MacdStrategy');
 
@@ -107,7 +107,7 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
         })));
     });
 
-    describe('when deleteTradingStrategyById() operation called with \'huobi_macd_rsi\'', () => {
+    describe('when deleteTradingStrategyById() operation called with \'huobi_macd\'', () => {
 
         let backend: MockBackend;
         let service: TradingStrategyDataService;
@@ -122,7 +122,7 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
 
         it('should return status response of \'true\' if successful', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.deleteTradingStrategyById('huobi_macd_rsi')
+            service.deleteTradingStrategyById('huobi_macd')
                 .then(status => expect(status).toBe(true));
         })));
 
@@ -137,8 +137,8 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
 
 const makeTradingStrategyData = () => [
 
-        new TradingStrategy('huobi_macd_rsi', 'huobi-2', 'MACD RSI Indicator',
-            'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
+        new TradingStrategy('huobi_macd', 'huobi-2', 'MACD Indicator',
+            'MACD Indicator algo for deciding when to enter and exit trades.',
             'com.gazbert.bxbot.strategies.MacdRsiStrategy'),
 
         new TradingStrategy('huobi_macd', 'huobi-2', 'MACD Indicator',

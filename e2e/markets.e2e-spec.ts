@@ -32,7 +32,7 @@ describe('Market Screen Tests', function () {
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD RSI Indicator');
+        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD Indicator');
 
         // Market 2
         expect(element(by.id('marketEnabled_1')).getAttribute('ng-reflect-model')).toBe('true');
@@ -110,7 +110,7 @@ describe('Market Screen Tests', function () {
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD RSI Indicator');
+        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD Indicator');
 
         // Update market fields
         const marketEnabled = element(by.id('marketEnabled_0'));
@@ -158,7 +158,7 @@ describe('Market Screen Tests', function () {
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD RSI Indicator');
+        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD Indicator');
 
         // Market 2 unchanged
         expect(element(by.id('marketEnabled_1')).getAttribute('ng-reflect-model')).toBe('true');
@@ -182,7 +182,7 @@ describe('Market Screen Tests', function () {
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD RSI Indicator');
+        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD Indicator');
 
         // Market 2
         expect(element(by.id('marketEnabled_1')).getAttribute('ng-reflect-model')).toBe('true');
@@ -240,7 +240,7 @@ describe('Market Screen Tests', function () {
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD RSI Indicator');
+        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD Indicator');
 
         // Market 2 unchanged
         expect(element(by.id('marketEnabled_1')).getAttribute('ng-reflect-model')).toBe('true');
@@ -271,7 +271,7 @@ describe('Market Screen Tests', function () {
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD RSI Indicator');
+        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD Indicator');
 
         // Market 2
         expect(element(by.id('marketEnabled_1')).getAttribute('ng-reflect-model')).toBe('true');
@@ -318,7 +318,7 @@ describe('Market Screen Tests', function () {
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD RSI Indicator');
+        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD Indicator');
 
         // Update Market 1 fields with some 'bad' values
         const marketEnabled = element(by.id('marketEnabled_0'));
@@ -391,7 +391,7 @@ describe('Market Screen Tests', function () {
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD RSI Indicator');
+        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD Indicator');
 
         // Market 2
         expect(element(by.id('marketEnabled_1')).getAttribute('ng-reflect-model')).toBe('true');
@@ -452,7 +452,7 @@ describe('Market Screen Tests', function () {
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD RSI Indicator');
+        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD Indicator');
 
         // Market 2 unchanged
         expect(element(by.id('marketEnabled_1')).getAttribute('ng-reflect-model')).toBe('true');

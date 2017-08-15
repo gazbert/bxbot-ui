@@ -146,8 +146,8 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
 const makeMarketData = () => [
 
     new Market('huobi_btc_usd', 'huobi-1', 'BTC/USD', true, 'BTC', 'USD',
-        new TradingStrategy('huobi_macd_rsi', 'huobi-1', 'MACD RSI Indicator',
-            'MACD Indicator and RSI algo for deciding when to enter and exit trades.',
+        new TradingStrategy('huobi_macd', 'huobi-1', 'MACD Indicator',
+            'MACD Indicator algo for deciding when to enter and exit trades.',
             'com.gazbert.bxbot.strategies.MacdRsiStrategy')),
 
     new Market('huobi_ltc_usd', 'huobi-1', 'LTC/USD', true, 'LTC', 'USD',
