@@ -349,7 +349,19 @@ export class InMemoryDataService implements InMemoryDbService {
                     exchangeId: 'bitstamp',
                     name: 'EMA Indicator',
                     description: 'EMA Indicator algo for deciding when to enter and exit trades.',
-                    className: 'com.gazbert.bxbot.strategies.EmaStrategy'
+                    className: 'com.gazbert.bxbot.strategies.EmaStrategy',
+                    optionalConfig: {
+                        configItems: [
+                            {
+                                name: 'ema-short-interval',
+                                value: '10'
+                            },
+                            {
+                                name: 'ema-long-interval',
+                                value: '20'
+                            }
+                        ]
+                    }
                 }
             },
             {
@@ -365,7 +377,19 @@ export class InMemoryDataService implements InMemoryDbService {
                     exchangeId: 'gdax',
                     name: 'EMA Indicator',
                     description: 'EMA Indicator algo for deciding when to enter and exit trades.',
-                    className: 'com.gazbert.bxbot.strategies.EmaStrategy'
+                    className: 'com.gazbert.bxbot.strategies.EmaStrategy',
+                    optionalConfig: {
+                        configItems: [
+                            {
+                                name: 'ema-short-interval',
+                                value: '5'
+                            },
+                            {
+                                name: 'ema-long-interval',
+                                value: '20'
+                            }
+                        ]
+                    }
                 }
             },
             {
@@ -381,7 +405,15 @@ export class InMemoryDataService implements InMemoryDbService {
                     exchangeId: 'gdax',
                     name: 'Long Scalper',
                     description: 'Scalping strategy that buys low and sells high.',
-                    className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
+                    className: 'com.gazbert.bxbot.strategies.LongScalperStrategy',
+                    optionalConfig: {
+                        configItems: [
+                            {
+                                name: 'min-percentage-gain',
+                                value: '1.0'
+                            }
+                        ]
+                    }
                 }
             },
             {
@@ -397,7 +429,23 @@ export class InMemoryDataService implements InMemoryDbService {
                     exchangeId: 'gemini',
                     name: 'MACD Indicator',
                     description: 'MACD Indicator algo for deciding when to enter and exit trades.',
-                    className: 'com.gazbert.bxbot.strategies.MacdStrategy'
+                    className: 'com.gazbert.bxbot.strategies.MacdStrategy',
+                    optionalConfig: {
+                        configItems: [
+                            {
+                                name: 'ema-short-interval',
+                                value: '12'
+                            },
+                            {
+                                name: 'ema-long-interval',
+                                value: '26'
+                            },
+                            {
+                                name: 'signal-line',
+                                value: '9'
+                            }
+                        ]
+                    }
                 }
             },
             {
@@ -413,7 +461,23 @@ export class InMemoryDataService implements InMemoryDbService {
                     exchangeId: 'itbit',
                     name: 'MACD Indicator',
                     description: 'MACD Indicator algo for deciding when to enter and exit trades.',
-                    className: 'com.gazbert.bxbot.strategies.MacdStrategy'
+                    className: 'com.gazbert.bxbot.strategies.MacdStrategy',
+                    optionalConfig: {
+                        configItems: [
+                            {
+                                name: 'ema-short-interval',
+                                value: '12'
+                            },
+                            {
+                                name: 'ema-long-interval',
+                                value: '26'
+                            },
+                            {
+                                name: 'signal-line',
+                                value: '9'
+                            }
+                        ]
+                    }
                 }
             },
             {
@@ -429,7 +493,23 @@ export class InMemoryDataService implements InMemoryDbService {
                     exchangeId: 'huobi',
                     name: 'MACD Indicator',
                     description: 'MACD Indicator algo for deciding when to enter and exit trades.',
-                    className: 'com.gazbert.bxbot.strategies.MacdStrategy'
+                    className: 'com.gazbert.bxbot.strategies.MacdStrategy',
+                    optionalConfig: {
+                        configItems: [
+                            {
+                                name: 'ema-short-interval',
+                                value: '12'
+                            },
+                            {
+                                name: 'ema-long-interval',
+                                value: '26'
+                            },
+                            {
+                                name: 'signal-line',
+                                value: '9'
+                            }
+                        ]
+                    }
                 }
             },
             {
@@ -445,7 +525,15 @@ export class InMemoryDataService implements InMemoryDbService {
                     exchangeId: 'huobi',
                     name: 'Long Scalper',
                     description: 'Scalping strategy that buys low and sells high.',
-                    className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
+                    className: 'com.gazbert.bxbot.strategies.LongScalperStrategy',
+                    optionalConfig: {
+                        configItems: [
+                            {
+                                name: 'min-percentage-gain',
+                                value: '0.5'
+                            }
+                        ]
+                    }
                 }
             },
             {
@@ -461,7 +549,19 @@ export class InMemoryDataService implements InMemoryDbService {
                     exchangeId: 'okcoin',
                     name: 'MACD Indicator',
                     description: 'EMA Indicator algo for deciding when to enter and exit trades.',
-                    className: 'com.gazbert.bxbot.strategies.EmaStrategy'
+                    className: 'com.gazbert.bxbot.strategies.EmaStrategy',
+                    optionalConfig: {
+                        configItems: [
+                            {
+                                name: 'ema-short-interval',
+                                value: '10'
+                            },
+                            {
+                                name: 'ema-long-interval',
+                                value: '20'
+                            }
+                        ]
+                    }
                 }
             },
             {
@@ -477,7 +577,15 @@ export class InMemoryDataService implements InMemoryDbService {
                     exchangeId: 'bitfinex',
                     name: 'Long Scalper',
                     description: 'Scalping strategy that buys low and sells high.',
-                    className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
+                    className: 'com.gazbert.bxbot.strategies.LongScalperStrategy',
+                    optionalConfig: {
+                        configItems: [
+                            {
+                                name: 'min-percentage-gain',
+                                value: '1.75'
+                            }
+                        ]
+                    }
                 }
             },
             {
@@ -493,7 +601,19 @@ export class InMemoryDataService implements InMemoryDbService {
                     exchangeId: 'kraken',
                     name: 'EMA Indicator',
                     description: 'EMA Indicator algo for deciding when to enter and exit trades.',
-                    className: 'com.gazbert.bxbot.strategies.EmaStrategy'
+                    className: 'com.gazbert.bxbot.strategies.EmaStrategy',
+                    optionalConfig: {
+                        configItems: [
+                            {
+                                name: 'ema-short-interval',
+                                value: '10'
+                            },
+                            {
+                                name: 'ema-long-interval',
+                                value: '20'
+                            }
+                        ]
+                    }
                 }
             }
         ];
