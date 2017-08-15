@@ -74,7 +74,7 @@
                             <div class="col-sm-6 form-group">
                                 <label for="tradingStrategy_{{i}}">Trading Strategy</label>
                                 <select name="tradingStrategy_{{i}}" id="tradingStrategy_{{i}}" class="form-control" required
-                                        [(ngModel)]="markets[i].tradingStrategy.name" #strategy="ngModel">
+                                        [(ngModel)]="tradingStrategies[markets[i].tradingStrategyId]" #strategy="ngModel">
                                     <option *ngFor="let tradingStrategy of tradingStrategies" [ngValue]="tradingStrategy.name">
                                         {{tradingStrategy.name}}
                                     </option>

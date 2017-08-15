@@ -2,7 +2,6 @@ import {MockBackend, MockConnection} from '@angular/http/testing';
 import {HttpModule, Http, XHRBackend, Response, ResponseOptions} from '@angular/http';
 import {async, inject, TestBed} from '@angular/core/testing';
 import {MarketHttpDataPromiseService as MarketDataService} from './market-http-data-promise.service';
-import {TradingStrategy} from '../trading-strategy';
 import {Market} from './market.model';
 
 /**
@@ -83,10 +82,7 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
 
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
 
-            updatedMarket = new Market('huobi_btc_usd', 'huobi-1', 'BTC/USD', true, 'BTC', 'USD',
-                new TradingStrategy('huobi_macd', 'huobi-1', 'MACD Indicator',
-                    'MACD Indicator for deciding when to enter and exit trades.',
-                    'com.gazbert.bxbot.strategies.MacdStrategy'));
+            updatedMarket = new Market('huobi_btc_usd', 'huobi-1', 'BTC/USD', true, 'BTC', 'USD', 'huobi_macd');
 
             backend = be;
             service = new MarketDataService(http);
@@ -101,9 +97,7 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
                     expect(market).toBe(updatedMarket);
 
                     // paranoia!
-                    expect(market.tradingStrategy.id).toBe(updatedMarket.tradingStrategy.id);
-                    expect(market.tradingStrategy.name).toBe(updatedMarket.tradingStrategy.name);
-                    expect(market.tradingStrategy.className).toBe(updatedMarket.tradingStrategy.className);
+                    expect(market.tradingStrategyId).toBe(updatedMarket.tradingStrategyId);
                 });
         })));
 
@@ -144,16 +138,8 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
 });
 
 const makeMarketData = () => [
-
-    new Market('huobi_btc_usd', 'huobi-1', 'BTC/USD', true, 'BTC', 'USD',
-        new TradingStrategy('huobi_macd', 'huobi-1', 'MACD Indicator',
-            'MACD Indicator algo for deciding when to enter and exit trades.',
-            'com.gazbert.bxbot.strategies.MacdRsiStrategy')),
-
-    new Market('huobi_ltc_usd', 'huobi-1', 'LTC/USD', true, 'LTC', 'USD',
-        new TradingStrategy('huobi_macd', 'huobi-1', 'MACD Indicator',
-            'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy')),
-
+    new Market('huobi_btc_usd', 'huobi-1', 'BTC/USD', true, 'BTC', 'USD', 'huobi_macd'),
+    new Market('huobi_ltc_usd', 'huobi-1', 'LTC/USD', true, 'LTC', 'USD', 'huobi_macd'),
 ] as Market[];
 
 
