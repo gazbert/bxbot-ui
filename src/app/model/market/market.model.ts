@@ -1,3 +1,5 @@
+import {TradingStrategy} from '../trading-strategy/trading-strategy.model';
+
 /**
  * Encapsulates a Market.
  *
@@ -11,11 +13,11 @@ export class Market {
                 public enabled: boolean,
                 public baseCurrency: string,
                 public counterCurrency: string,
-                public tradingStrategyId: string) {
+                public tradingStrategy: TradingStrategy) {
     }
 
     clone() {
         return new Market(this.id, this.botId, this.name, this.enabled, this.baseCurrency, this.counterCurrency,
-            this.tradingStrategyId);
+            this.tradingStrategy);
     }
 }

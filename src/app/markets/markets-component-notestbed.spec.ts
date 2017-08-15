@@ -1,6 +1,7 @@
 import {ActivatedRouteStub} from '../../../testing';
 import {MarketsComponent} from './markets.component';
 import {Market} from '../model/market';
+import {TradingStrategy} from '../model/trading-strategy';
 
 /**
  * Tests the behaviour of the Markets component is as expected.
@@ -23,17 +24,26 @@ describe('MarketsComponent tests without TestBed', () => {
 
     let expectedUpdatedMarket_2: Market;
 
+    let expectedTradingStrategy_1: TradingStrategy;
+    let expectedTradingStrategy_2: TradingStrategy;
+
     let spyMarketDataService: any;
     let spyTradingStrategyDataService: any;
     let router: any;
 
     beforeEach(done => {
 
-        expectedMarket_1 = new Market('gdax_btc_usd', 'gdax-2', 'BTC/USD', true, 'BTC', 'USD', 'gdax_macd');
-        expectedMarket_2 = new Market('gdax_btc_gbp', 'gdax-2', 'BTC/GBP', true, 'BTC', 'GBP', 'gdax_ema');
+        expectedTradingStrategy_1 = new TradingStrategy('gdax_macd', 'gdax-2', 'MACD Indicator',
+            'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy');
+        expectedMarket_1 = new Market('gdax_btc_usd', 'gdax-2', 'BTC/USD', true, 'BTC', 'USD', expectedTradingStrategy_1);
+
+        expectedTradingStrategy_2 = new TradingStrategy('gdax_ema', 'gdax-2', 'MACD Indicator',
+            'EMA Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.EmaStrategy');
+        expectedMarket_2 = new Market('gdax_btc_gbp', 'gdax-2', 'BTC/GBP', true, 'BTC', 'GBP', expectedTradingStrategy_2);
+
         expectedMarkets = [expectedMarket_1, expectedMarket_2];
 
-        expectedUpdatedMarket_2 = new Market('gdax_btc_gbp', 'gdax-2', 'ETH/USD', true, 'ETH', 'USD', 'gdax_ema');
+        expectedUpdatedMarket_2 = new Market('gdax_btc_gbp', 'gdax-2', 'ETH/USD', true, 'ETH', 'USD', expectedTradingStrategy_2);
 
         activatedRoute = new ActivatedRouteStub();
         activatedRoute.testParams = {id: expectedMarket_1.botId};

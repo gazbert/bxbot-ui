@@ -344,7 +344,13 @@ export class InMemoryDataService implements InMemoryDbService {
                 enabled: false,
                 baseCurrency: 'BTC',
                 counterCurrency: 'USD',
-                tradingStrategyId: 'bitstamp_ema'
+                tradingStrategy: {
+                    id: 'bitstamp_ema',
+                    exchangeId: 'bitstamp',
+                    name: 'EMA Indicator',
+                    description: 'EMA Indicator algo for deciding when to enter and exit trades.',
+                    className: 'com.gazbert.bxbot.strategies.EmaStrategy'
+                }
             },
             {
                 id: 'gdax_btc_usd',
@@ -354,7 +360,13 @@ export class InMemoryDataService implements InMemoryDbService {
                 enabled: false,
                 baseCurrency: 'BTC',
                 counterCurrency: 'USD',
-                tradingStrategyId: 'gdax_ema'
+                tradingStrategy: {
+                    id: 'gdax_ema',
+                    exchangeId: 'gdax',
+                    name: 'EMA Indicator',
+                    description: 'EMA Indicator algo for deciding when to enter and exit trades.',
+                    className: 'com.gazbert.bxbot.strategies.EmaStrategy'
+                }
             },
             {
                 id: 'gdax_btc_gbp',
@@ -364,7 +376,13 @@ export class InMemoryDataService implements InMemoryDbService {
                 enabled: true,
                 baseCurrency: 'BTC',
                 counterCurrency: 'GBP',
-                tradingStrategyId: 'gdax_long-scalper'
+                tradingStrategy: {
+                    id: 'gdax_long-scalper',
+                    exchangeId: 'gdax',
+                    name: 'Long Scalper',
+                    description: 'Scalping strategy that buys low and sells high.',
+                    className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
+                }
             },
             {
                 id: 'gemini_eth_btc',
@@ -374,7 +392,13 @@ export class InMemoryDataService implements InMemoryDbService {
                 enabled: false,
                 baseCurrency: 'ETH',
                 counterCurrency: 'BTC',
-                tradingStrategyId: 'gemini_macd'
+                tradingStrategy: {
+                    id: 'gemini_macd',
+                    exchangeId: 'gemini',
+                    name: 'MACD Indicator',
+                    description: 'MACD Indicator algo for deciding when to enter and exit trades.',
+                    className: 'com.gazbert.bxbot.strategies.MacdStrategy'
+                }
             },
             {
                 id: 'itbit_xbt_usd',
@@ -384,7 +408,13 @@ export class InMemoryDataService implements InMemoryDbService {
                 enabled: false,
                 baseCurrency: 'XBT',
                 counterCurrency: 'USD',
-                tradingStrategyId: 'itbit_macd'
+                tradingStrategy: {
+                    id: 'itbit_macd',
+                    exchangeId: 'itbit',
+                    name: 'MACD Indicator',
+                    description: 'MACD Indicator algo for deciding when to enter and exit trades.',
+                    className: 'com.gazbert.bxbot.strategies.MacdStrategy'
+                }
             },
             {
                 id: 'huobi_btc_usd',
@@ -394,7 +424,13 @@ export class InMemoryDataService implements InMemoryDbService {
                 enabled: false,
                 baseCurrency: 'BTC',
                 counterCurrency: 'USD',
-                tradingStrategyId: 'huobi_macd'
+                tradingStrategy: {
+                    id: 'huobi_macd',
+                    exchangeId: 'huobi',
+                    name: 'MACD Indicator',
+                    description: 'MACD Indicator algo for deciding when to enter and exit trades.',
+                    className: 'com.gazbert.bxbot.strategies.MacdStrategy'
+                }
             },
             {
                 id: 'huobi_ltc_usd',
@@ -404,7 +440,13 @@ export class InMemoryDataService implements InMemoryDbService {
                 enabled: true,
                 baseCurrency: 'LTC',
                 counterCurrency: 'USD',
-                tradingStrategyId:  'huobi_long-scalper'
+                tradingStrategy: {
+                    id: 'huobi_long-scalper',
+                    exchangeId: 'huobi',
+                    name: 'Long Scalper',
+                    description: 'Scalping strategy that buys low and sells high.',
+                    className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
+                }
             },
             {
                 id: 'okcoin_btc_usd',
@@ -414,7 +456,13 @@ export class InMemoryDataService implements InMemoryDbService {
                 enabled: false,
                 baseCurrency: 'BTC',
                 counterCurrency: 'USD',
-                tradingStrategyId: 'okcoin_ema'
+                tradingStrategy: {
+                    id: 'okcoin_ema',
+                    exchangeId: 'okcoin',
+                    name: 'MACD Indicator',
+                    description: 'EMA Indicator algo for deciding when to enter and exit trades.',
+                    className: 'com.gazbert.bxbot.strategies.EmaStrategy'
+                }
             },
             {
                 id: 'bitfinex_btc_usd',
@@ -424,7 +472,13 @@ export class InMemoryDataService implements InMemoryDbService {
                 enabled: false,
                 baseCurrency: 'BTC',
                 counterCurrency: 'USD',
-                tradingStrategyId: 'bitfinex_long-scalper'
+                tradingStrategy: {
+                    id: 'bitfinex_long-scalper',
+                    exchangeId: 'bitfinex',
+                    name: 'Long Scalper',
+                    description: 'Scalping strategy that buys low and sells high.',
+                    className: 'com.gazbert.bxbot.strategies.LongScalperStrategy'
+                }
             },
             {
                 id: 'kraken_xbt_usd',
@@ -434,7 +488,13 @@ export class InMemoryDataService implements InMemoryDbService {
                 enabled: false,
                 baseCurrency: 'XXBT',
                 counterCurrency: 'ZUSD',
-                tradingStrategyId: 'kraken_ema'
+                tradingStrategy: {
+                    id: 'kraken_ema',
+                    exchangeId: 'kraken',
+                    name: 'EMA Indicator',
+                    description: 'EMA Indicator algo for deciding when to enter and exit trades.',
+                    className: 'com.gazbert.bxbot.strategies.EmaStrategy'
+                }
             }
         ];
 

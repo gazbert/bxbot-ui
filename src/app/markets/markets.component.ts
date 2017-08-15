@@ -79,7 +79,8 @@ export class MarketsComponent implements OnInit, AfterViewChecked {
     }
 
     addMarket(): void {
-        this.markets.push(new Market(this.createUuid(), this.botId, null, false, null, null, null));
+        const tradingStrategy = new TradingStrategy(this.createUuid(), this.botId, null, null, null);
+        this.markets.push(new Market(this.createUuid(), this.botId, null, false, null, null, tradingStrategy));
         this.updateFormErrors();
     }
 

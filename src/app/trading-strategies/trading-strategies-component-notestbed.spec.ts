@@ -47,8 +47,8 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
 
         expectedTradingStrategies = [expectedTradingStrategy_1, expectedTradingStrategy_2, unusedTradingStrategy];
 
-        expectedMarket_1 = new Market('gdax_btc_usd', 'gdax-2', 'BTC/USD', true, 'BTC', 'USD', 'gdax_macd');
-        expectedMarket_2 = new Market('gdax_btc_gbp', 'gdax-2', 'BTC/GBP', true, 'BTC', 'GBP', 'gdax_ema');
+        expectedMarket_1 = new Market('gdax_btc_usd', 'gdax-2', 'BTC/USD', true, 'BTC', 'USD', expectedTradingStrategy_1);
+        expectedMarket_2 = new Market('gdax_btc_gbp', 'gdax-2', 'BTC/GBP', true, 'BTC', 'GBP', expectedTradingStrategy_2);
         expectedMarkets = [expectedMarket_1, expectedMarket_2];
 
         activatedRoute = new ActivatedRouteStub();
@@ -110,8 +110,10 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
             .then((markets) => {
                 // paranoia ;-)
                 expect(markets.length).toBe(2);
-                expect(markets[0].tradingStrategyId).toBe('gdax_macd');
-                expect(markets[1].tradingStrategyId).toBe('gdax_ema');
+                expect(markets[0].tradingStrategy.id).toBe('gdax_macd');
+                expect(markets[0].tradingStrategy.name).toBe('MACD Indicator');
+                expect(markets[1].tradingStrategy.id).toBe('gdax_ema');
+                expect(markets[1].tradingStrategy.name).toBe('EMA Indicator');
 
                 expect(tradingStrategiesComponent.tradingStrategies.length).toBe(3);
                 expect(tradingStrategiesComponent.deletedTradingStrategies.length).toBe(0);
@@ -126,8 +128,10 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
             .then((markets) => {
                 // paranoia ;-)
                 expect(markets.length).toBe(2);
-                expect(markets[0].tradingStrategyId).toBe('gdax_macd');
-                expect(markets[1].tradingStrategyId).toBe('gdax_ema');
+                expect(markets[0].tradingStrategy.id).toBe('gdax_macd');
+                expect(markets[0].tradingStrategy.name).toBe('MACD Indicator');
+                expect(markets[1].tradingStrategy.id).toBe('gdax_ema');
+                expect(markets[1].tradingStrategy.name).toBe('EMA Indicator');
 
                 expect(tradingStrategiesComponent.tradingStrategies.length).toBe(2);
                 expect(tradingStrategiesComponent.deletedTradingStrategies.length).toBe(1);
