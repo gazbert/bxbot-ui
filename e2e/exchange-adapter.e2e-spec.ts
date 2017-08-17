@@ -12,7 +12,7 @@ import {browser, by, element, protractor} from 'protractor';
  *
  * @author gazbert
  */
-fdescribe('Exchange Adapter Tests', function () {
+describe('Exchange Adapter Tests', function () {
 
     beforeEach(function () {
         browser.get('');
