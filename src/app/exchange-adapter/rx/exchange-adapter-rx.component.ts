@@ -66,12 +66,12 @@ export class ExchangeAdapterRxComponent implements OnInit {
             'required': 'Message must not be empty.',
             'maxlength': 'Message length cannot be more than 120 characters long.'
         },
-        'optionalConfigItemName': {
+        'exchangeConfigItemName': {
             'required': 'Name is required.',
             'maxlength': 'Name max length is 50 characters.',
             'pattern': 'Name must be alphanumeric and can only include the following special characters: _ -'
         },
-        'optionalConfigItemValue': {
+        'exchangeConfigItemValue': {
             'required': 'Value is required.',
             'maxlength': 'Value max length is 120 characters.'
         }
@@ -327,11 +327,11 @@ export class ExchangeAdapterRxComponent implements OnInit {
         configItemsControl.controls.forEach((item) => {
             const configItemNameControl = item['controls'].configItemName;
             if (configItemNameControl && !configItemNameControl.valid) {
-                this.formErrors['optionalConfigItemName'] = '';
-                const configItemNames = this.validationMessages['optionalConfigItemName'];
+                this.formErrors['exchangeConfigItemName'] = '';
+                const configItemNames = this.validationMessages['exchangeConfigItemName'];
                 for (const key in configItemNameControl.errors) {
                     if (configItemNameControl.errors.hasOwnProperty(key)) {
-                        this.formErrors['optionalConfigItemName'] += configItemNames[key] + ' ';
+                        this.formErrors['exchangeConfigItemName'] += configItemNames[key] + ' ';
                     }
                 }
             }
@@ -340,11 +340,11 @@ export class ExchangeAdapterRxComponent implements OnInit {
         configItemsControl.controls.forEach((item) => {
             const configItemValueControl = item['controls'].configItemValue;
             if (configItemValueControl && !configItemValueControl.valid) {
-                this.formErrors['optionalConfigItemValue'] = '';
-                const configItemValues = this.validationMessages['optionalConfigItemValue'];
+                this.formErrors['exchangeConfigItemValue'] = '';
+                const configItemValues = this.validationMessages['exchangeConfigItemValue'];
                 for (const key in configItemValueControl.errors) {
                     if (configItemValueControl.errors.hasOwnProperty(key)) {
-                        this.formErrors['optionalConfigItemValue'] += configItemValues[key] + ' ';
+                        this.formErrors['exchangeConfigItemValue'] += configItemValues[key] + ' ';
                     }
                 }
             }
