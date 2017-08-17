@@ -25,7 +25,8 @@
                                        required maxlength="50" pattern="[a-zA-Z0-9_\- ]*"
                                        appBxbotUiDuplicateName="{{getOtherStrategyNames(tradingStrategies[i].id)}}"/>
                                 <div id="invalidTradingStrategyName_{{i}}"
-                                     *ngIf="formErrors['tradingStrategyName_' + i].length > 0" class="alert alert-danger">
+                                     *ngIf="formErrors['tradingStrategyName_' + i].length > 0"
+                                     class="alert alert-danger">
                                     {{ formErrors['tradingStrategyName_' + i] }}
                                 </div>
                             </div>
@@ -40,7 +41,8 @@
                                        name="tradingStrategyDescription_{{i}}" #tradingStrategyDescription="ngModel"
                                        maxlength="121"/>
                                 <div id="invalidTradingStrategyDescription_{{i}}"
-                                     *ngIf="formErrors['tradingStrategyDescription_' + i].length > 0" class="alert alert-danger">
+                                     *ngIf="formErrors['tradingStrategyDescription_' + i].length > 0"
+                                     class="alert alert-danger">
                                     {{ formErrors['tradingStrategyDescription_' + i] }}
                                 </div>
                             </div>
@@ -50,34 +52,92 @@
                         <div class="row">
                             <div class="col-sm-6 form-group">
                                 <label for="tradingStrategyClassname_{{i}}">Class Name</label>
-                                <input [(ngModel)]="tradingStrategies[i].className" name="tradingStrategyClassname_{{i}}"
+                                <input [(ngModel)]="tradingStrategies[i].className"
+                                       name="tradingStrategyClassname_{{i}}"
                                        placeholder="com.my.MyTradingStrategyClass" id="tradingStrategyClassname_{{i}}"
                                        class="form-control" required maxlength="120"
-                                       #tradingStrategyClassname ="ngModel"
+                                       #tradingStrategyClassname="ngModel"
                                        pattern="([a-zA-Z_$][a-zA-Z0-9_$]*\.)*[a-zA-Z_$][a-zA-Z0-9_$]*"/>
                                 <div id="invalidTradingStrategyClassname_{{i}}"
-                                     *ngIf="formErrors['tradingStrategyClassname_' + i].length > 0" class="alert alert-danger">
+                                     *ngIf="formErrors['tradingStrategyClassname_' + i].length > 0"
+                                     class="alert alert-danger">
                                     {{ formErrors['tradingStrategyClassname_' + i] }}
                                 </div>
                             </div>
                         </div>
 
-                        <!-- TODO - Prototype Collapsible for adding optional Strategy config -->
+                        <!-- Optional Strategy Config -->
                         <div>
                             <hr>
                         </div>
-                        <a class="btn btn-primary bottom-margin-10" data-toggle="collapse" href="#optionalStrategyConfig_{{i}}"
+                        <a class="btn btn-primary bottom-margin-10" data-toggle="collapse"
+                           href="#optionalStrategyConfig_{{i}}"
                            aria-expanded="false" aria-controls="optionalStrategyConfig">
                             <i class="glyphicon glyphicon-triangle-right pull-left glyphicon-padding"></i>
                             <i class="glyphicon glyphicon-triangle-bottom pull-left glyphicon-padding"></i>
                             Optional Config
                         </a>
+
+                        <!--
+                        Optional Config Items
+                        -->
                         <div class="collapse" id="optionalStrategyConfig_{{i}}">
-                            <div class="well">
-                                A new panel for adding/deleting optional Strategy config will go here.
+                            <div class="row">
+                                <div class="col-sm-12">
+
+                                    <div *ngFor="let optionalConfigItem of tradingStrategies[i].optionalConfig.configItems; let i=index; trackBy:trackByIndex"
+                                         class="panel panel-default">
+
+                                        <div class="panel-heading">
+                                            <span>Config Item {{i + 1}}</span>
+                                            <!--<span id="deleteConfigItemButton_{{i}}"-->
+                                                  <!--class="glyphicon glyphicon-remove pull-right"-->
+                                                  <!--*ngIf="tradingStrategies[i].optionalConfig.configItems.length > 0"-->
+                                                  <!--(click)="deleteOptionalConfigItem(optionalConfigItem)"></span>-->
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="form-group col-sm-12">
+                                                    <label for="strategyConfigItemName_{{i}}" class="col-sm-4">Name</label>
+                                                    <input [(ngModel)]="optionalConfigItem.name"
+                                                           id="strategyConfigItemName_{{i}}" name="strategyConfigItemName_{{i}}"
+                                                           class="form-control"
+                                                           maxlength="121" placeholder="but-fee" minLength="1" required
+                                                           #configItemName="ngModel" pattern="[a-zA-Z0-9/_\- ]*">
+                                                    <!--<div id="invalidConfigItemName_{{i}}"-->
+                                                         <!--*ngIf="formErrors['configItemName_' + i].length > 0"-->
+                                                         <!--class="alert alert-danger">-->
+                                                        <!--{{ formErrors['configItemName_' + i] }}-->
+                                                    <!--</div>-->
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-sm-12">
+                                                    <label for="strategyConfigItemValue_{{i}}" class="col-sm-4">Value</label>
+                                                    <input [(ngModel)]="optionalConfigItem.value"
+                                                           id="strategyConfigItemValue_{{i}}" name="strategyConfigItemValue_{{i}}"
+                                                           class="form-control"
+                                                           maxlength="121" placeholder="0.25" minLength="1" required
+                                                           #configItemValue="ngModel">
+                                                    <!--<div id="invalidConfigItemValue_{{i}}"-->
+                                                         <!--*ngIf="formErrors['configItemValue_' + i].length > 0"-->
+                                                         <!--class="alert alert-danger">-->
+                                                        <!--{{ formErrors['configItemValue_' + i] }}-->
+                                                    <!--</div>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="margin-20">
+                                        <i class="glyphicon glyphicon-plus pull-left glyphicon-padding"></i>
+                                        <a id="addNewStrategyConfigItemLink" (click)="addOptionalConfigItem()"
+                                           style="cursor: default">
+                                            Add new Config Item
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="margin-20">
@@ -115,7 +175,8 @@
             </div>
             <div class="modal-footer">
                 <button id="cannotDeleteStrategyModalCloseButton" type="button" class="btn btn-primary"
-                        (click)="hideCannotDeleteStrategyModal()">Close</button>
+                        (click)="hideCannotDeleteStrategyModal()">Close
+                </button>
             </div>
         </div>
     </div>

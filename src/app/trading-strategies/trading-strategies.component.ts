@@ -1,7 +1,7 @@
 import {AfterViewChecked, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {OptionalConfig, TradingStrategy, TradingStrategyHttpDataPromiseService} from '../model/trading-strategy';
+import {OptionalConfig, TradingStrategy, ConfigItem, TradingStrategyHttpDataPromiseService} from '../model/trading-strategy';
 import {MarketHttpDataPromiseService} from '../model/market';
 
 /**
@@ -41,6 +41,15 @@ export class TradingStrategiesComponent implements OnInit, AfterViewChecked {
             'required': 'Class Name is required.',
             'maxlength': 'Class Name max length is 50 characters.',
             'pattern': 'Class Name must be valid Java class, e.g. com.my.MyTradingStrategyClass'
+        },
+        'strategyConfigItemName': {
+            'required': 'Name is required.',
+            'maxlength': 'Name max length is 50 characters.',
+            'pattern': 'Name must be alphanumeric and can only include the following special characters: _ -'
+        },
+        'strategyConfigItemValue': {
+            'required': 'Value is required.',
+            'maxlength': 'Value max length is 120 characters.'
         }
     };
 
@@ -63,8 +72,7 @@ export class TradingStrategiesComponent implements OnInit, AfterViewChecked {
                     this.tradingStrategies = tradingStrategies;
                     this.updateFormErrors();
                 });
-        }).then(() => {/*done*/
-        });
+        }).then(() => {/*done*/});
     }
 
     getOtherStrategyNames(strategyId: string): string[] {
@@ -134,6 +142,17 @@ export class TradingStrategiesComponent implements OnInit, AfterViewChecked {
         this.canDeleteStrategy = true;
     }
 
+    addOptionalConfigItem(): void {
+        // this.exchangeAdapter.optionalConfig.configItems.push(new ConfigItem('', ''));
+        // this.updateFormErrors();
+    }
+
+    deleteOptionalConfigItem(configItem: ConfigItem): void {
+        // this.exchangeAdapter.optionalConfig.configItems =
+        //     this.exchangeAdapter.optionalConfig.configItems.filter(c => c !== configItem);
+        // this.updateFormErrors();
+    }
+
     // TODO - Only here temporarily for use with angular-in-memory-web-api until server side wired up.
     // Server will create UUID and return in POST response object.
     // Algo by @Broofa - http://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript/2117523#2117523
@@ -151,6 +170,14 @@ export class TradingStrategiesComponent implements OnInit, AfterViewChecked {
             this.formErrors['tradingStrategyDescription_' + i] = '';
             this.formErrors['tradingStrategyClassname_' + i] = '';
         }
+    }
+
+    /**
+     * Need this because we iterate over primitive arrays for errorCode and errorMessage:
+     * https://stackoverflow.com/questions/42322968/angular2-dynamic-input-field-lose-focus-when-input-changes
+     */
+    trackByIndex(index: any, item: any) {
+        return index;
     }
 
     // ------------------------------------------------------------------------
