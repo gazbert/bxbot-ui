@@ -473,8 +473,8 @@ class Page {
             this.deleteErrorCodeBtn = fixture.debugElement.query(By.css('#deleteErrorCodeButton_0'));
             this.deleteErrorMessageBtn = fixture.debugElement.query(By.css('#deleteErrorMessageButton_0'));
 
-            this.addNewConfigItemLink = fixture.debugElement.query(By.css('#addNewConfigItemLink'));
-            this.deleteConfigItemBtn = fixture.debugElement.query(By.css('#deleteConfigItemButton_0'));
+            this.addNewConfigItemLink = fixture.debugElement.query(By.css('#addNewExchangeConfigItemLink'));
+            this.deleteConfigItemBtn = fixture.debugElement.query(By.css('#deleteExchangeConfigItemButton_0'));
 
             this.adapterNameInput = fixture.debugElement.query(By.css('#adapterName')).nativeElement;
             this.classNameInput = fixture.debugElement.query(By.css('#className')).nativeElement;
@@ -482,8 +482,8 @@ class Page {
             this.errorCode_0Input = fixture.debugElement.query(By.css('#errorCode_0')).nativeElement;
             this.errorMessage_0Input = fixture.debugElement.query(By.css('#errorMessage_0')).nativeElement;
 
-            this.configItemName_0Input = fixture.debugElement.query(By.css('#configItemName_0')).nativeElement;
-            this.configItemValue_0Input = fixture.debugElement.query(By.css('#configItemValue_0')).nativeElement;
+            this.configItemName_0Input = fixture.debugElement.query(By.css('#exchangeConfigItemName_0')).nativeElement;
+            this.configItemValue_0Input = fixture.debugElement.query(By.css('#exchangeConfigItemValue_0')).nativeElement;
         }
     }
 }

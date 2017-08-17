@@ -12,7 +12,7 @@ import {browser, by, element, protractor} from 'protractor';
  *
  * @author gazbert
  */
-describe('Exchange Adapter Tests', function () {
+fdescribe('Exchange Adapter Tests', function () {
 
     beforeEach(function () {
         browser.get('');
@@ -373,29 +373,29 @@ describe('Exchange Adapter Tests', function () {
         expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe('Connection refused');
 
         // Add new Config Item
-        const optionalConfigButton = element(by.id('optionalConfigButton'));
-        optionalConfigButton.click();
+        const optionalExchangeConfigButton = element(by.id('optionalExchangeConfigButton'));
+        optionalExchangeConfigButton.click();
 
         // Need to wait for link to become visible...
         const EC = protractor.ExpectedConditions;
-        const addConfigItemLink = element(by.id('addNewConfigItemLink'));
+        const addConfigItemLink = element(by.id('addNewExchangeConfigItemLink'));
         browser.wait(EC.visibilityOf(addConfigItemLink), 1000);
         addConfigItemLink.click();
 
         // Wait for new item to panel to become visible...
-        const configItemName = element(by.id('configItemName_0'));
-        browser.wait(EC.visibilityOf(configItemName), 1000);
+        const exchangeConfigItemName = element(by.id('exchangeConfigItemName_0'));
+        browser.wait(EC.visibilityOf(exchangeConfigItemName), 1000);
 
         const newConfigItemName = 'buy-fee';
-        configItemName.clear();
-        configItemName.sendKeys(newConfigItemName);
-        expect(configItemName.getAttribute('value')).toBe(newConfigItemName);
+        exchangeConfigItemName.clear();
+        exchangeConfigItemName.sendKeys(newConfigItemName);
+        expect(exchangeConfigItemName.getAttribute('value')).toBe(newConfigItemName);
 
-        const configItemValue = element(by.id('configItemValue_0'));
+        const exchangeConfigItemValue = element(by.id('exchangeConfigItemValue_0'));
         const newConfigItemValue = '0.25';
-        configItemValue.clear();
-        configItemValue.sendKeys(newConfigItemValue);
-        expect(configItemValue.getAttribute('value')).toBe(newConfigItemValue);
+        exchangeConfigItemValue.clear();
+        exchangeConfigItemValue.sendKeys(newConfigItemValue);
+        expect(exchangeConfigItemValue.getAttribute('value')).toBe(newConfigItemValue);
 
         // Save and check the update worked
         const saveButton = element(by.id('exchangeAdapterSaveButton'));
@@ -414,8 +414,8 @@ describe('Exchange Adapter Tests', function () {
         expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe('Connection refused');
 
         // Hello new Config Item!
-        expect(element(by.id('configItemName_0')).getAttribute('value')).toBe('buy-fee');
-        expect(element(by.id('configItemValue_0')).getAttribute('value')).toBe('0.25');
+        expect(element(by.id('exchangeConfigItemName_0')).getAttribute('value')).toBe('buy-fee');
+        expect(element(by.id('exchangeConfigItemValue_0')).getAttribute('value')).toBe('0.25');
     });
 
     it('should delete Optional Config Item and save change', function () {
@@ -437,20 +437,20 @@ describe('Exchange Adapter Tests', function () {
         expect(element(by.id('errorMessage_0')).getAttribute('value')).toBe('Connection reset');
         expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe('Connection refused');
 
-        const optionalConfigButton = element(by.id('optionalConfigButton'));
-        optionalConfigButton.click();
+        const optionalExchangeConfigButton = element(by.id('optionalExchangeConfigButton'));
+        optionalExchangeConfigButton.click();
 
         // Delete Config Item 2
         // Need to wait for link + config items to become visible...
         const EC = protractor.ExpectedConditions;
-        const deleteConfigItemButton = element(by.id('deleteConfigItemButton_1'));
+        const deleteConfigItemButton = element(by.id('deleteExchangeConfigItemButton_1'));
         browser.wait(EC.visibilityOf(deleteConfigItemButton), 3000);
 
-        expect(element(by.id('configItemName_0')).getAttribute('value')).toBe('buy-fee');
-        expect(element(by.id('configItemValue_0')).getAttribute('value')).toBe('0.25');
+        expect(element(by.id('exchangeConfigItemName_0')).getAttribute('value')).toBe('buy-fee');
+        expect(element(by.id('exchangeConfigItemValue_0')).getAttribute('value')).toBe('0.25');
 
-        expect(element(by.id('configItemName_1')).getAttribute('value')).toBe('sell-fee');
-        expect(element(by.id('configItemValue_1')).getAttribute('value')).toBe('0.25');
+        expect(element(by.id('exchangeConfigItemName_1')).getAttribute('value')).toBe('sell-fee');
+        expect(element(by.id('exchangeConfigItemValue_1')).getAttribute('value')).toBe('0.25');
 
         deleteConfigItemButton.click();
 
@@ -467,10 +467,10 @@ describe('Exchange Adapter Tests', function () {
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
         expect(element(by.id('errorCode_1')).getAttribute('value')).toBe('522');
 
-        expect(element(by.id('configItemName_0')).getAttribute('value')).toBe('buy-fee');
-        expect(element(by.id('configItemValue_0')).getAttribute('value')).toBe('0.25');
-        expect(element(by.id('configItemName_1')).isPresent()).toBe(false); // gone!
-        expect(element(by.id('configItemValue_1')).isPresent()).toBe(false); // gone!
+        expect(element(by.id('exchangeConfigItemName_0')).getAttribute('value')).toBe('buy-fee');
+        expect(element(by.id('exchangeConfigItemValue_0')).getAttribute('value')).toBe('0.25');
+        expect(element(by.id('exchangeConfigItemName_1')).isPresent()).toBe(false); // gone!
+        expect(element(by.id('exchangeConfigItemValue_1')).isPresent()).toBe(false); // gone!
     });
 
     it('should NOT save Exchange Adapter fields if there are validation errors', function () {
@@ -536,29 +536,29 @@ describe('Exchange Adapter Tests', function () {
         expect(errorMessage_1.getAttribute('value')).toBe(newErrorMessage_1);
 
         // Add new Config Item
-        const optionalConfigButton = element(by.id('optionalConfigButton'));
-        optionalConfigButton.click();
+        const optionalExchangeConfigButton = element(by.id('optionalExchangeConfigButton'));
+        optionalExchangeConfigButton.click();
 
         // Need to wait for link to become visible...
         const EC = protractor.ExpectedConditions;
-        const addConfigItemLink = element(by.id('addNewConfigItemLink'));
+        const addConfigItemLink = element(by.id('addNewExchangeConfigItemLink'));
         browser.wait(EC.visibilityOf(addConfigItemLink), 3000);
         addConfigItemLink.click();
 
         // Wait for new item to panel to become visible...
-        const configItemName = element(by.id('configItemName_0'));
-        browser.wait(EC.visibilityOf(configItemName), 3000);
+        const exchangeConfigItemName = element(by.id('exchangeConfigItemName_0'));
+        browser.wait(EC.visibilityOf(exchangeConfigItemName), 3000);
 
         const newConfigItemName = 'buy-fee!';
-        configItemName.clear();
-        configItemName.sendKeys(newConfigItemName);
-        expect(configItemName.getAttribute('value')).toBe(newConfigItemName);
+        exchangeConfigItemName.clear();
+        exchangeConfigItemName.sendKeys(newConfigItemName);
+        expect(exchangeConfigItemName.getAttribute('value')).toBe(newConfigItemName);
 
-        const configItemValue = element(by.id('configItemValue_0'));
+        const exchangeConfigItemValue = element(by.id('exchangeConfigItemValue_0'));
         const newConfigItemValue = '';
-        configItemValue.clear();
-        configItemValue.sendKeys(newConfigItemValue);
-        expect(configItemValue.getAttribute('value')).toBe(newConfigItemValue);
+        exchangeConfigItemValue.clear();
+        exchangeConfigItemValue.sendKeys(newConfigItemValue);
+        expect(exchangeConfigItemValue.getAttribute('value')).toBe(newConfigItemValue);
 
         // Save and check the update did not persist
         const saveButton = element(by.id('exchangeAdapterSaveButton'));
@@ -586,11 +586,11 @@ describe('Exchange Adapter Tests', function () {
         expect(element(by.id('errorMessage_0')).getAttribute('value')).toBe(newErrorMessage_0);
         expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe(newErrorMessage_1);
 
-        expect(element(by.id('configItemName_0')).getAttribute('value')).toBe('buy-fee!');
-        expect(element(by.id('invalidConfigItemName_0')).getText()).toContain(
+        expect(element(by.id('exchangeConfigItemName_0')).getAttribute('value')).toBe('buy-fee!');
+        expect(element(by.id('invalidExchangeConfigItemName_0')).getText()).toContain(
             'Name must be alphanumeric and can only include the following special characters: _ -');
 
-        expect(element(by.id('configItemValue_0')).getAttribute('value')).toBe('');
-        expect(element(by.id('invalidConfigItemValue_0')).getText()).toContain('Value is required');
+        expect(element(by.id('exchangeConfigItemValue_0')).getAttribute('value')).toBe('');
+        expect(element(by.id('invalidExchangeConfigItemValue_0')).getText()).toContain('Value is required');
     });
 });
