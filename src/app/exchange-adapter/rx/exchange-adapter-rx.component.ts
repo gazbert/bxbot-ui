@@ -38,8 +38,8 @@ export class ExchangeAdapterRxComponent implements OnInit {
         'connectionTimeout': '',
         'nonFatalErrorHttpStatusCode': '',
         'nonFatalErrorMessage': '',
-        'optionalConfigItemName': '',
-        'optionalConfigItemValue': ''
+        'exchangeConfigItemName': '',
+        'exchangeConfigItemValue': ''
     };
 
     validationMessages = {

@@ -143,7 +143,7 @@
                                          [hidden]="optionalConfigItems.controls[i]['controls'].configItemName.valid ||
                                          (optionalConfigItems.controls[i]['controls'].configItemName.pristine && !isFormSaved())"
                                          class="alert alert-danger col-sm-8">
-                                        {{formErrors.optionalConfigItemName}}
+                                        {{formErrors.exchangeConfigItemName}}
                                     </div>
                                 </div>
                             </div>
@@ -152,11 +152,11 @@
                                     <label for="exchangeConfigItemValue_{{i}}" class="col-sm-4">Value</label>
                                     <input id="exchangeConfigItemValue_{{i}}" class="col-sm-8" formControlName="configItemValue"
                                            maxlength="121" required>
-                                    <div id="invalidExchangeConfigItemValue__{{i}}"
+                                    <div id="invalidExchangeConfigItemValue_{{i}}"
                                          [hidden]="optionalConfigItems.controls[i]['controls'].configItemValue.valid ||
                                          (optionalConfigItems.controls[i]['controls'].configItemValue.pristine && !isFormSaved())"
                                          class="alert alert-danger col-sm-8">
-                                        {{formErrors.optionalConfigItemValue}}
+                                        {{formErrors.exchangeConfigItemValue}}
                                     </div>
                                 </div>
                             </div>
