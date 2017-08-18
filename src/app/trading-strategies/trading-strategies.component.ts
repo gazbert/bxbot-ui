@@ -174,8 +174,8 @@ export class TradingStrategiesComponent implements OnInit, AfterViewChecked {
             this.formErrors['tradingStrategyClassname_' + i] = '';
 
             for (let j = 0; j < this.tradingStrategies[i].optionalConfig.configItems.length; j++) {
-                this.formErrors['exchangeConfigItemName_' + j] = '';
-                this.formErrors['exchangeConfigItemValue_' + j] = '';
+                this.formErrors['strategyConfigItemName_' + j] = '';
+                this.formErrors['strategyConfigItemValue_' + j] = '';
             }
         }
     }

@@ -104,11 +104,11 @@
                                                            class="form-control"
                                                            maxlength="121" placeholder="buy-fee" minLength="1" required
                                                            #configItemName="ngModel" pattern="[a-zA-Z0-9/_\- ]*">
-                                                    <!--<div id="invalidConfigItemName_{{i}}"-->
-                                                         <!--*ngIf="formErrors['configItemName_' + i].length > 0"-->
-                                                         <!--class="alert alert-danger">-->
-                                                        <!--{{ formErrors['configItemName_' + i] }}-->
-                                                    <!--</div>-->
+                                                    <div id="invalidStrategyConfigItemName_{{j}}"
+                                                         *ngIf="formErrors['strategyConfigItemName_' + j].length > 0"
+                                                         class="alert alert-danger">
+                                                        {{ formErrors['strategyConfigItemName_' + j] }}
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -119,11 +119,11 @@
                                                            class="form-control"
                                                            maxlength="121" placeholder="0.25" minLength="1" required
                                                            #configItemValue="ngModel">
-                                                    <!--<div id="invalidConfigItemValue_{{i}}"-->
-                                                         <!--*ngIf="formErrors['configItemValue_' + i].length > 0"-->
-                                                         <!--class="alert alert-danger">-->
-                                                        <!--{{ formErrors['configItemValue_' + i] }}-->
-                                                    <!--</div>-->
+                                                    <div id="invalidStrategyConfigItemValue_{{j}}"
+                                                         *ngIf="formErrors['strategyConfigItemValue_' + j].length > 0"
+                                                         class="alert alert-danger">
+                                                        {{ formErrors['strategyConfigItemValue_' + j] }}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
