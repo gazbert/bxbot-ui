@@ -142,15 +142,18 @@ export class TradingStrategiesComponent implements OnInit, AfterViewChecked {
         this.canDeleteStrategy = true;
     }
 
-    addOptionalConfigItem(): void {
-        // this.exchangeAdapter.optionalConfig.configItems.push(new ConfigItem('', ''));
-        // this.updateFormErrors();
+    addOptionalConfigItem(strategy: TradingStrategy): void {
+        strategy.optionalConfig.configItems.push(new ConfigItem('', ''));
+        this.updateFormErrors();
     }
 
-    deleteOptionalConfigItem(configItem: ConfigItem): void {
-        // this.exchangeAdapter.optionalConfig.configItems =
-        //     this.exchangeAdapter.optionalConfig.configItems.filter(c => c !== configItem);
-        // this.updateFormErrors();
+    deleteOptionalConfigItem(selectedStrategy: TradingStrategy, configItem: ConfigItem): void {
+        this.tradingStrategies.forEach((s) => {
+            if (s.id === selectedStrategy.id) {
+                s.optionalConfig.configItems = s.optionalConfig.configItems.filter(c => c !== configItem);
+            }
+        });
+        this.updateFormErrors();
     }
 
     // TODO - Only here temporarily for use with angular-in-memory-web-api until server side wired up.
@@ -169,6 +172,11 @@ export class TradingStrategiesComponent implements OnInit, AfterViewChecked {
             this.formErrors['tradingStrategyName_' + i] = '';
             this.formErrors['tradingStrategyDescription_' + i] = '';
             this.formErrors['tradingStrategyClassname_' + i] = '';
+
+            for (let j = 0; j < this.tradingStrategies[i].optionalConfig.configItems.length; j++) {
+                this.formErrors['exchangeConfigItemName_' + j] = '';
+                this.formErrors['exchangeConfigItemValue_' + j] = '';
+            }
         }
     }
 

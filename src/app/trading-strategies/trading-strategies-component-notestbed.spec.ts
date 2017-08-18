@@ -1,8 +1,7 @@
 import {ActivatedRouteStub} from '../../../testing';
 import {TradingStrategiesComponent} from './trading-strategies.component';
-import {TradingStrategy} from '../model/trading-strategy';
+import {TradingStrategy, OptionalConfig, ConfigItem} from '../model/trading-strategy';
 import {Market} from '../model/market';
-import {OptionalConfig} from '../model/trading-strategy/trading-strategy.model';
 
 /**
  * Tests the behaviour of the Trading Strategies component is as expected.
@@ -18,6 +17,8 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
 
     let activatedRoute: ActivatedRouteStub;
     let tradingStrategiesComponent: TradingStrategiesComponent;
+
+    const configItemToDelete = new ConfigItem('item-to-delete', 'some-value');
 
     let expectedTradingStrategies = [];
     let expectedTradingStrategy_1: TradingStrategy;
@@ -46,10 +47,7 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
                     name: 'ema-long-interval',
                     value: '26'
                 },
-                {
-                    name: 'signal-line',
-                    value: '9'
-                }
+                configItemToDelete
             ]));
 
         expectedTradingStrategy_2 = new TradingStrategy('gdax_ema', 'gdax-2', 'EMA Indicator',
@@ -192,5 +190,22 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
         expect(tradingStrategiesComponent.tradingStrategies[3].id).not.toBeNull();
         expect(tradingStrategiesComponent.tradingStrategies[3].botId).toBe('gdax-2');
         expect(tradingStrategiesComponent.tradingStrategies[3].name).toBe(null);
+    });
+
+    it('should create new Config Item when user adds one', () => {
+        expect(tradingStrategiesComponent.tradingStrategies[0].optionalConfig.configItems.length).toBe(3);
+        expect(tradingStrategiesComponent.tradingStrategies[0].optionalConfig.configItems[3]).not.toBeDefined();
+
+        tradingStrategiesComponent.addOptionalConfigItem(expectedTradingStrategy_1);
+        expect(tradingStrategiesComponent.tradingStrategies[0].optionalConfig.configItems.length).toBe(4);
+        expect(tradingStrategiesComponent.tradingStrategies[0].optionalConfig.configItems[3].name).toBe('');
+        expect(tradingStrategiesComponent.tradingStrategies[0].optionalConfig.configItems[3].value).toBe('');
+    });
+
+    it('should remove Config Item when user deletes one', () => {
+        expect(tradingStrategiesComponent.tradingStrategies[0].optionalConfig.configItems.length).toBe(3);
+        tradingStrategiesComponent.deleteOptionalConfigItem(expectedTradingStrategy_1, configItemToDelete);
+        expect(tradingStrategiesComponent.tradingStrategies[0].optionalConfig.configItems.length).toBe(2);
+        expect(tradingStrategiesComponent.tradingStrategies[0].optionalConfig.configItems[3]).not.toBeDefined();
     });
 });

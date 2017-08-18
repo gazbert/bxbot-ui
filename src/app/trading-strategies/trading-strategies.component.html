@@ -85,24 +85,24 @@
                             <div class="row">
                                 <div class="col-sm-12">
 
-                                    <div *ngFor="let optionalConfigItem of tradingStrategies[i].optionalConfig.configItems; let i=index; trackBy:trackByIndex"
+                                    <div *ngFor="let optionalConfigItem of tradingStrategies[i].optionalConfig.configItems; let j=index; trackBy:trackByIndex"
                                          class="panel panel-default">
 
                                         <div class="panel-heading">
-                                            <span>Config Item {{i + 1}}</span>
-                                            <!--<span id="deleteConfigItemButton_{{i}}"-->
-                                                  <!--class="glyphicon glyphicon-remove pull-right"-->
-                                                  <!--*ngIf="tradingStrategies[i].optionalConfig.configItems.length > 0"-->
-                                                  <!--(click)="deleteOptionalConfigItem(optionalConfigItem)"></span>-->
+                                            <span>Config Item {{j + 1}}</span>
+                                            <span id="deleteConfigItemButton_{{j}}"
+                                                  class="glyphicon glyphicon-remove pull-right"
+                                                  *ngIf="tradingStrategies[i].optionalConfig.configItems.length > 0"
+                                                  (click)="deleteOptionalConfigItem(tradingStrategies[i], optionalConfigItem)"></span>
                                         </div>
                                         <div class="panel-body">
                                             <div class="row">
                                                 <div class="form-group col-sm-12">
-                                                    <label for="strategyConfigItemName_{{i}}" class="col-sm-4">Name</label>
+                                                    <label for="strategyConfigItemName_{{j}}" class="col-sm-4">Name</label>
                                                     <input [(ngModel)]="optionalConfigItem.name"
-                                                           id="strategyConfigItemName_{{i}}" name="strategyConfigItemName_{{i}}"
+                                                           id="strategyConfigItemName_{{j}}" name="strategyConfigItemName_{{j}}"
                                                            class="form-control"
-                                                           maxlength="121" placeholder="but-fee" minLength="1" required
+                                                           maxlength="121" placeholder="buy-fee" minLength="1" required
                                                            #configItemName="ngModel" pattern="[a-zA-Z0-9/_\- ]*">
                                                     <!--<div id="invalidConfigItemName_{{i}}"-->
                                                          <!--*ngIf="formErrors['configItemName_' + i].length > 0"-->
@@ -113,9 +113,9 @@
                                             </div>
                                             <div class="row">
                                                 <div class="form-group col-sm-12">
-                                                    <label for="strategyConfigItemValue_{{i}}" class="col-sm-4">Value</label>
+                                                    <label for="strategyConfigItemValue_{{j}}" class="col-sm-4">Value</label>
                                                     <input [(ngModel)]="optionalConfigItem.value"
-                                                           id="strategyConfigItemValue_{{i}}" name="strategyConfigItemValue_{{i}}"
+                                                           id="strategyConfigItemValue_{{j}}" name="strategyConfigItemValue_{{j}}"
                                                            class="form-control"
                                                            maxlength="121" placeholder="0.25" minLength="1" required
                                                            #configItemValue="ngModel">
@@ -130,8 +130,8 @@
                                     </div>
                                     <div class="margin-20">
                                         <i class="glyphicon glyphicon-plus pull-left glyphicon-padding"></i>
-                                        <a id="addNewStrategyConfigItemLink" (click)="addOptionalConfigItem()"
-                                           style="cursor: default">
+                                        <a id="addNewStrategyConfigItemLink"
+                                           (click)="addOptionalConfigItem(tradingStrategies[i])" style="cursor: default">
                                             Add new Config Item
                                         </a>
                                     </div>
