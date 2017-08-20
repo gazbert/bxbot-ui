@@ -11,7 +11,7 @@ import {browser, element, by, protractor} from 'protractor';
  *
  * @author gazbert
  */
-describe('Trading Strategy Tests', function () {
+fdescribe('Trading Strategy Tests', function () {
 
     beforeEach(function () {
         browser.get('');
@@ -338,12 +338,12 @@ describe('Trading Strategy Tests', function () {
         // Need to wait for link to become visible...
         const EC = protractor.ExpectedConditions;
         const addConfigItemLink = element(by.id('addNewStrategyConfigItemLink_0'));
-        browser.wait(EC.visibilityOf(addConfigItemLink), 1000);
+        browser.wait(EC.visibilityOf(addConfigItemLink), 5000);
         addConfigItemLink.click();
 
         // Wait for new item to panel to become visible...
         const strategyConfigItemName = element(by.id('strategyConfigItemName_0_1'));
-        browser.wait(EC.visibilityOf(strategyConfigItemName), 1000);
+        browser.wait(EC.visibilityOf(strategyConfigItemName), 5000);
 
         const newConfigItemName = 'stop-loss-percentage-trigger';
         strategyConfigItemName.clear();
