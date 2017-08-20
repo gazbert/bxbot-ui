@@ -420,7 +420,7 @@ describe('Trading Strategy Tests', function () {
         // Need to wait for link + config items to become visible...
         const EC = protractor.ExpectedConditions;
         const deleteConfigItemButton = element(by.id('deleteConfigItemButton_1_1'));
-        browser.wait(EC.visibilityOf(deleteConfigItemButton), 3000);
+        browser.wait(EC.visibilityOf(deleteConfigItemButton), 5000);
         deleteConfigItemButton.click();
 
         // Save and check the update worked
