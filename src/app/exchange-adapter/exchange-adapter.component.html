@@ -147,7 +147,7 @@
                                     <input [(ngModel)]="optionalConfigItem.name"
                                            id="exchangeConfigItemName_{{i}}" name="exchangeConfigItemName_{{i}}" class="form-control"
                                            maxlength="121" placeholder="but-fee" minLength="1" required
-                                           #exchangeConfigItemName="ngModel" pattern="[a-zA-Z0-9/_\- ]*">
+                                           #exchangeConfigItemName="ngModel" pattern="[a-zA-Z0-9/_\-]*">
                                     <div id="invalidExchangeConfigItemName_{{i}}"
                                          *ngIf="formErrors['exchangeConfigItemName_' + i].length > 0" class="alert alert-danger">
                                         {{ formErrors['exchangeConfigItemName_' + i] }}

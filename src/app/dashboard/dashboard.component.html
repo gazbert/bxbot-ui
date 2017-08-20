@@ -1,11 +1,14 @@
 <div id="dashboard">
     <div id="dashboard-item-filter">
-        <input #searchBox id="search-box" class="form-control center" (keyup)="search(searchBox.value)"
-               placeholder=" Search..."/>
+        <div class="input-group center">
+            <span class="input-group-addon" id="sizing-addon2"><i class="glyphicon glyphicon-search glyphicon-padding"></i></span>
+            <input #searchBox id="search-box" class="form-control" placeholder="Search for bot..."
+                   aria-describedby="sizing-addon2" (keyup)="search(searchBox.value)">
+        </div>
     </div>
     <div id="dashboard-grid" class="grid grid-pad">
         <app-bxbot-ui-dashboard-item *ngFor="let bot of bots | async" class="col-1-4"
-                           [bot]=bot (selected)="gotoBotDetails($event)">
+                                     [bot]=bot (selected)="gotoBotDetails($event)">
         </app-bxbot-ui-dashboard-item>
     </div>
 </div>

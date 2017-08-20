@@ -90,15 +90,15 @@ h4 {
     cursor: pointer;
 }
 #search-box {
-    width: 175px;
-    height: 25px;
+    /*width: 175px;*/
+    /*height: 25px;*/
 
-    border-bottom: 1px solid gray;
-    border-left: 1px solid gray;
-    border-right: 1px solid gray;
+    /*border-bottom: 1px solid gray;*/
+    /*border-left: 1px solid gray;*/
+    /*border-right: 1px solid gray;*/
 
-    padding-left: 10px;
-    border-radius: 10px;
+    /*padding-left: 10px;*/
+    /*border-radius: 10px;*/
 }
 
 #dashboard-item-filter {
@@ -111,5 +111,11 @@ h4 {
 .center {
     margin: auto;
     width: 50%;
+    /*text-align: center;*/
+}
+
+.center_25 {
+    margin: auto;
+    width: 25%;
     /*text-align: center;*/
 }

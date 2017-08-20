@@ -71,7 +71,7 @@
                             <hr>
                         </div>
                         <a class="btn btn-primary bottom-margin-10" data-toggle="collapse"
-                           href="#optionalStrategyConfig_{{i}}"
+                           href="#optionalStrategyConfig_{{i}}" id="optionalStrategyConfigButton_{{i}}"
                            aria-expanded="false" aria-controls="optionalStrategyConfig">
                             <i class="glyphicon glyphicon-triangle-right pull-left glyphicon-padding"></i>
                             <i class="glyphicon glyphicon-triangle-bottom pull-left glyphicon-padding"></i>
@@ -90,7 +90,7 @@
 
                                         <div class="panel-heading">
                                             <span>Config Item {{j + 1}}</span>
-                                            <span id="deleteConfigItemButton_{{j}}"
+                                            <span id="deleteConfigItemButton_{{i}}_{{j}}"
                                                   class="glyphicon glyphicon-remove pull-right"
                                                   *ngIf="tradingStrategies[i].optionalConfig.configItems.length > 0"
                                                   (click)="deleteOptionalConfigItem(tradingStrategies[i], optionalConfigItem)"></span>
@@ -98,31 +98,31 @@
                                         <div class="panel-body">
                                             <div class="row">
                                                 <div class="form-group col-sm-12">
-                                                    <label for="strategyConfigItemName_{{j}}" class="col-sm-4">Name</label>
+                                                    <label for="strategyConfigItemName_{{i}}_{{j}}" class="col-sm-4">Name</label>
                                                     <input [(ngModel)]="optionalConfigItem.name"
-                                                           id="strategyConfigItemName_{{j}}" name="strategyConfigItemName_{{j}}"
+                                                           id="strategyConfigItemName_{{i}}_{{j}}" name="strategyConfigItemName_{{i}}_{{j}}"
                                                            class="form-control"
                                                            maxlength="121" placeholder="buy-fee" minLength="1" required
-                                                           #configItemName="ngModel" pattern="[a-zA-Z0-9/_\- ]*">
-                                                    <div id="invalidStrategyConfigItemName_{{j}}"
-                                                         *ngIf="formErrors['strategyConfigItemName_' + j].length > 0"
+                                                           #configItemName="ngModel" pattern="[a-zA-Z0-9/_\-]*">
+                                                    <div id="invalidStrategyConfigItemName_{{i}}_{{j}}"
+                                                         *ngIf="formErrors['strategyConfigItemName_' + i + '_' + j].length > 0"
                                                          class="alert alert-danger">
-                                                        {{ formErrors['strategyConfigItemName_' + j] }}
+                                                        {{ formErrors['strategyConfigItemName_' + i + '_' + j] }}
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="form-group col-sm-12">
-                                                    <label for="strategyConfigItemValue_{{j}}" class="col-sm-4">Value</label>
+                                                    <label for="strategyConfigItemValue_{{i}}_{{j}}" class="col-sm-4">Value</label>
                                                     <input [(ngModel)]="optionalConfigItem.value"
-                                                           id="strategyConfigItemValue_{{j}}" name="strategyConfigItemValue_{{j}}"
+                                                           id="strategyConfigItemValue_{{i}}_{{j}}" name="strategyConfigItemValue_{{i}}_{{j}}"
                                                            class="form-control"
                                                            maxlength="121" placeholder="0.25" minLength="1" required
                                                            #configItemValue="ngModel">
-                                                    <div id="invalidStrategyConfigItemValue_{{j}}"
-                                                         *ngIf="formErrors['strategyConfigItemValue_' + j].length > 0"
+                                                    <div id="invalidStrategyConfigItemValue_{{i}}_{{j}}"
+                                                         *ngIf="formErrors['strategyConfigItemValue_' + i + '_' + j].length > 0"
                                                          class="alert alert-danger">
-                                                        {{ formErrors['strategyConfigItemValue_' + j] }}
+                                                        {{ formErrors['strategyConfigItemValue_' + i + '_' + j] }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -130,7 +130,7 @@
                                     </div>
                                     <div class="margin-20">
                                         <i class="glyphicon glyphicon-plus pull-left glyphicon-padding"></i>
-                                        <a id="addNewStrategyConfigItemLink"
+                                        <a id="addNewStrategyConfigItemLink_{{i}}"
                                            (click)="addOptionalConfigItem(tradingStrategies[i])" style="cursor: default">
                                             Add new Config Item
                                         </a>

@@ -1,4 +1,4 @@
-import {browser, element, by} from 'protractor';
+import {browser, element, by, protractor} from 'protractor';
 
 /**
  * Trading Strategy screen tests.
@@ -308,6 +308,152 @@ describe('Trading Strategy Tests', function () {
             .toBe('com.gazbert.bxbot.strategies.MacdStrategy');
     });
 
+    it('should add new Optional Config Item and save it', function () {
+
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+        dashboardItems.get(3).click();
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
+
+        const tabLinks = element.all(by.css('li'));
+        tabLinks.get(3).click();
+
+        // Strat 1
+        expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');
+        expect(element(by.id('tradingStrategyDescription_0')).getAttribute('value'))
+            .toBe('Scalping strategy that buys low and sells high.');
+        expect(element(by.id('tradingStrategyClassname_0')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
+
+        // Strat 2
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD Indicator');
+        expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
+            .toBe('MACD Indicator algo for deciding when to enter and exit trades.');
+        expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.MacdStrategy');
+
+        // Add new Config Item to Strat 1
+        const optionalStrategyConfigButton = element(by.id('optionalStrategyConfigButton_0'));
+        optionalStrategyConfigButton.click();
+
+        // Need to wait for link to become visible...
+        const EC = protractor.ExpectedConditions;
+        const addConfigItemLink = element(by.id('addNewStrategyConfigItemLink_0'));
+        browser.wait(EC.visibilityOf(addConfigItemLink), 1000);
+        addConfigItemLink.click();
+
+        // Wait for new item to panel to become visible...
+        const strategyConfigItemName = element(by.id('strategyConfigItemName_0_1'));
+        browser.wait(EC.visibilityOf(strategyConfigItemName), 1000);
+
+        const newConfigItemName = 'stop-loss-percentage-trigger';
+        strategyConfigItemName.clear();
+        strategyConfigItemName.sendKeys(newConfigItemName);
+        expect(strategyConfigItemName.getAttribute('value')).toBe(newConfigItemName);
+
+        const strategyConfigItemValue = element(by.id('strategyConfigItemValue_0_1'));
+        const newConfigItemValue = '8.0';
+        strategyConfigItemValue.clear();
+        strategyConfigItemValue.sendKeys(newConfigItemValue);
+        expect(strategyConfigItemValue.getAttribute('value')).toBe(newConfigItemValue);
+
+        // Save and check the update worked
+        const saveButton = element(by.id('strategySaveButton'));
+        saveButton.click();
+        dashboardItems.get(3).click();
+        tabLinks.get(3).click();
+
+        // Strat 1 - the same + 1 new config item
+        expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');
+        expect(element(by.id('tradingStrategyDescription_0')).getAttribute('value'))
+            .toBe('Scalping strategy that buys low and sells high.');
+        expect(element(by.id('tradingStrategyClassname_0')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
+        expect(element(by.id('strategyConfigItemName_0_0')).getAttribute('value')).toBe('min-percentage-gain');
+        expect(element(by.id('strategyConfigItemValue_0_0')).getAttribute('value')).toBe('1.0');
+
+        // New Config Item present
+        expect(element(by.id('strategyConfigItemName_0_1')).getAttribute('value')).toBe('stop-loss-percentage-trigger');
+        expect(element(by.id('strategyConfigItemValue_0_1')).getAttribute('value')).toBe('8.0');
+
+        // Strat 2 - unchanged
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD Indicator');
+        expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
+            .toBe('MACD Indicator algo for deciding when to enter and exit trades.');
+        expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.MacdStrategy');
+        expect(element(by.id('strategyConfigItemName_1_0')).getAttribute('value')).toBe('ema-short-interval');
+        expect(element(by.id('strategyConfigItemValue_1_0')).getAttribute('value')).toBe('12');
+        expect(element(by.id('strategyConfigItemName_1_1')).getAttribute('value')).toBe('ema-long-interval');
+        expect(element(by.id('strategyConfigItemValue_1_1')).getAttribute('value')).toBe('26');
+        expect(element(by.id('strategyConfigItemName_1_2')).getAttribute('value')).toBe('signal-line');
+        expect(element(by.id('strategyConfigItemValue_1_2')).getAttribute('value')).toBe('9');
+    });
+
+    it('should delete Optional Config Item and save change', function () {
+
+        const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+        dashboardItems.get(3).click();
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
+
+        const tabLinks = element.all(by.css('li'));
+        tabLinks.get(3).click();
+
+        // Strat 1
+        expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');
+        expect(element(by.id('tradingStrategyDescription_0')).getAttribute('value'))
+            .toBe('Scalping strategy that buys low and sells high.');
+        expect(element(by.id('tradingStrategyClassname_0')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
+
+        // Strat 2
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD Indicator');
+        expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
+            .toBe('MACD Indicator algo for deciding when to enter and exit trades.');
+        expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.MacdStrategy');
+
+        // Access Strat 2 optional config
+        const optionalStrategyConfigButton = element(by.id('optionalStrategyConfigButton_1'));
+        optionalStrategyConfigButton.click();
+
+        // Delete Config Item 2 from Strat 2
+        // Need to wait for link + config items to become visible...
+        const EC = protractor.ExpectedConditions;
+        const deleteConfigItemButton = element(by.id('deleteConfigItemButton_1_1'));
+        browser.wait(EC.visibilityOf(deleteConfigItemButton), 3000);
+        deleteConfigItemButton.click();
+
+        // Save and check the update worked
+        const saveButton = element(by.id('strategySaveButton'));
+        saveButton.click();
+        dashboardItems.get(3).click();
+        tabLinks.get(3).click();
+
+        // Strat 1 - the same + 1 new config item
+        expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');
+        expect(element(by.id('tradingStrategyDescription_0')).getAttribute('value'))
+            .toBe('Scalping strategy that buys low and sells high.');
+        expect(element(by.id('tradingStrategyClassname_0')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
+        expect(element(by.id('strategyConfigItemName_0_0')).getAttribute('value')).toBe('min-percentage-gain');
+        expect(element(by.id('strategyConfigItemValue_0_0')).getAttribute('value')).toBe('1.0');
+
+        // Strat 2 - unchanged
+        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD Indicator');
+        expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
+            .toBe('MACD Indicator algo for deciding when to enter and exit trades.');
+        expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
+            .toBe('com.gazbert.bxbot.strategies.MacdStrategy');
+
+        expect(element(by.id('strategyConfigItemName_1_0')).getAttribute('value')).toBe('ema-short-interval');
+        expect(element(by.id('strategyConfigItemValue_1_0')).getAttribute('value')).toBe('12');
+
+        // ema-long-interval deleted
+
+        expect(element(by.id('strategyConfigItemName_1_1')).getAttribute('value')).toBe('signal-line');
+        expect(element(by.id('strategyConfigItemValue_1_1')).getAttribute('value')).toBe('9');
+    });
+
     it('should NOT save Trading Strategy fields if there are validation errors', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
@@ -350,6 +496,31 @@ describe('Trading Strategy Tests', function () {
         strategyClassName.sendKeys(newStrategyClassName);
         expect(strategyClassName.getAttribute('value')).toBe(newStrategyClassName);
 
+        // Add new invalid Config Item to Strat 1
+        const optionalStrategyConfigButton = element(by.id('optionalStrategyConfigButton_0'));
+        optionalStrategyConfigButton.click();
+
+        // Need to wait for link to become visible...
+        const EC = protractor.ExpectedConditions;
+        const addConfigItemLink = element(by.id('addNewStrategyConfigItemLink_0'));
+        browser.wait(EC.visibilityOf(addConfigItemLink), 5000);
+        addConfigItemLink.click();
+
+        // Wait for new item to panel to become visible...
+        const strategyConfigItemName = element(by.id('strategyConfigItemName_0_1'));
+        browser.wait(EC.visibilityOf(strategyConfigItemName), 5000);
+
+        const newConfigItemName = 'stop-loss-percentage-tr igger'; // space in name
+        strategyConfigItemName.clear();
+        strategyConfigItemName.sendKeys(newConfigItemName);
+        expect(strategyConfigItemName.getAttribute('value')).toBe(newConfigItemName);
+
+        const strategyConfigItemValue = element(by.id('strategyConfigItemValue_0_1'));
+        const newConfigItemValue = ''; // left empty
+        strategyConfigItemValue.clear();
+        strategyConfigItemValue.sendKeys(newConfigItemValue);
+        expect(strategyConfigItemValue.getAttribute('value')).toBe(newConfigItemValue);
+
         // Save and check the update did not persist
         const saveButton = element(by.id('strategySaveButton'));
         saveButton.click();
@@ -364,6 +535,13 @@ describe('Trading Strategy Tests', function () {
         expect(element(by.id('tradingStrategyClassname_0')).getAttribute('value')).toBe(newStrategyClassName);
         expect(element(by.id('invalidTradingStrategyClassname_0')).getText()).toBe(
             'Class Name must be valid Java class, e.g. com.my.MyTradingStrategyClass');
+
+        expect(element(by.id('strategyConfigItemName_0_1')).getAttribute('value')).toBe('stop-loss-percentage-tr igger');
+        expect(element(by.id('invalidStrategyConfigItemName_0_1')).getText()).toContain(
+            'Name must be alphanumeric and can only include the following special characters: _ -');
+
+        expect(element(by.id('strategyConfigItemValue_0_1')).getAttribute('value')).toBe('');
+        expect(element(by.id('invalidStrategyConfigItemValue_0_1')).getText()).toContain('Value is required');
 
         // Strat 2 unchanged
         expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD Indicator');
