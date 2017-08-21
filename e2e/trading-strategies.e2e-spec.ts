@@ -11,7 +11,7 @@ import {browser, element, by, protractor} from 'protractor';
  *
  * @author gazbert
  */
-fdescribe('Trading Strategy Tests', function () {
+describe('Trading Strategy Tests', function () {
 
     beforeEach(function () {
         browser.get('');
