@@ -9,6 +9,109 @@ export class InMemoryDataService implements InMemoryDbService {
 
     createDb() {
 
+        const new_bots = [
+            {
+                id: 'bitstamp-1',
+                name: 'Muh',
+                status: 'Running',
+                exchange: {
+                    id: 'bitstamp-1',
+                    botName: 'Bitstamp',
+                    tradingCycleInterval: 30,
+                    emergencyStopCurrency: 'BTC', emergencyStopBalance: 0.5
+                },
+                engine: {
+                    id: 'bitstamp-1',
+                    botName: 'Bitstamp',
+                    tradingCycleInterval: 30,
+                    emergencyStopCurrency: 'BTC',
+                    emergencyStopBalance: 0.5
+                },
+                exchange_adapter: {
+                    id: 'bitstamp-1',
+                    name: 'Bitstamp REST API Adapter',
+                    className: 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
+                    networkConfig: {
+                        connectionTimeout: 60,
+                        nonFatalErrorHttpStatusCodes: [
+                            503,
+                            522
+                        ],
+                        nonFatalErrorMessages: [
+                            'Connection reset',
+                            'Connection refused'
+                        ]
+                    },
+                    optionalConfig: {
+                        configItems: []
+                    }
+                },
+                markets: [
+                    {
+                        id: 'bitstamp_btc_usd',
+                        botId: 'bitstamp-1',
+                        marketId: 'btcusd',
+                        name: 'BTC/USD',
+                        enabled: false,
+                        baseCurrency: 'BTC',
+                        counterCurrency: 'USD',
+                        tradingStrategy: {
+                            id: 'bitstamp_ema',
+                            exchangeId: 'bitstamp',
+                            name: 'EMA Indicator',
+                            description: 'EMA Indicator algo for deciding when to enter and exit trades.',
+                            className: 'com.gazbert.bxbot.strategies.EmaStrategy',
+                            optionalConfig: {
+                                configItems: [
+                                    {
+                                        name: 'ema-short-interval',
+                                        value: '10'
+                                    },
+                                    {
+                                        name: 'ema-long-interval',
+                                        value: '20'
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        id: 'gdax_btc_usd',
+                        botId: 'gdax-1',
+                        marketId: 'BTC-USD',
+                        name: 'BTC/USD',
+                        enabled: false,
+                        baseCurrency: 'BTC',
+                        counterCurrency: 'USD',
+                        tradingStrategy: {
+                            id: 'gdax_ema',
+                            exchangeId: 'gdax',
+                            name: 'EMA Indicator',
+                            description: 'EMA Indicator algo for deciding when to enter and exit trades.',
+                            className: 'com.gazbert.bxbot.strategies.EmaStrategy',
+                            optionalConfig: {
+                                configItems: [
+                                    {
+                                        name: 'ema-short-interval',
+                                        value: '5'
+                                    },
+                                    {
+                                        name: 'ema-long-interval',
+                                        value: '20'
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                ]
+            },
+            {
+                id: 'gdax-1',
+                name: 'GDAX',
+                status: 'Running'
+            }
+        ];
+
         /**
          * The Bots.
          */
@@ -946,6 +1049,6 @@ export class InMemoryDataService implements InMemoryDbService {
             }
         ];
 
-        return {bots, engines, exchange_adapters, markets, trading_strategies, email_alerts};
+        return {bots, engines, exchange_adapters, markets, trading_strategies, email_alerts, new_bots};
     }
 }

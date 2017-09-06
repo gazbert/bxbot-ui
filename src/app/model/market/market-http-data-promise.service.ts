@@ -24,19 +24,27 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class MarketHttpDataPromiseService implements MarketDataPromiseService {
 
-    private marketsUrl = AppComponent.REST_API_BASE_URL + '/markets';
+    private marketsUrl = AppComponent.REST_API_BASE_URL + '/new_bots/';
     private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private http: Http) {
     }
 
     getAllMarketsForBotId(botId: string): Promise<Market[]> {
-        const url = this.marketsUrl + '?botId=' + botId;
+        const url = this.marketsUrl + botId + '/markets';
         return this.http.get(url)
             .toPromise()
-            .then(response => response.json().data as Market[])
+            .then(response => response.json().data.markets as Market[])
             .catch(this.handleError);
     }
+
+    // getAllMarketsForBotId(botId: string): Promise<Market[]> {
+    //     const url = this.marketsUrl + '?botId=' + botId;
+    //     return this.http.get(url)
+    //         .toPromise()
+    //         .then(response => response.json().data as Market[])
+    //         .catch(this.handleError);
+    // }
 
     updateMarket(market: Market): Promise<Market> {
         const url = this.marketsUrl + '/' + market.id;
