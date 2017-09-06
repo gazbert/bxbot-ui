@@ -24,25 +24,39 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class MarketHttpDataPromiseService implements MarketDataPromiseService {
 
-    private marketsUrl = AppComponent.REST_API_BASE_URL + '/new_bots/';
+    // TODO - for new REST model
+    // private marketsUrl = AppComponent.REST_API_BASE_URL + '/new_bots/';
+    private marketsUrl = AppComponent.REST_API_BASE_URL + '/markets';
+
     private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private http: Http) {
     }
 
+    // TODO - for new REST model
+    // getAllMarketsForBotId(botId: string): Promise<Market[]> {
+    //     const url = this.marketsUrl + botId + '/markets';
+    //     return this.http.get(url)
+    //         .toPromise()
+    //         .then(response => response.json().data.markets as Market[])
+    //         .catch(this.handleError);
+    // }
+
     getAllMarketsForBotId(botId: string): Promise<Market[]> {
-        const url = this.marketsUrl + botId + '/markets';
+        const url = this.marketsUrl + '?botId=' + botId;
         return this.http.get(url)
             .toPromise()
-            .then(response => response.json().data.markets as Market[])
+            .then(response => response.json().data as Market[])
             .catch(this.handleError);
     }
 
-    // getAllMarketsForBotId(botId: string): Promise<Market[]> {
-    //     const url = this.marketsUrl + '?botId=' + botId;
-    //     return this.http.get(url)
+    // TODO - for new REST model
+    // updateMarket(market: Market): Promise<Market> {
+    //     const url = this.marketsUrl + 'bitstamp-1' + '/markets/' + market.id;
+    //     return this.http
+    //         .put(url, JSON.stringify(market), {headers: this.headers})
     //         .toPromise()
-    //         .then(response => response.json().data as Market[])
+    //         .then(response => response.json().data as Market)
     //         .catch(this.handleError);
     // }
 

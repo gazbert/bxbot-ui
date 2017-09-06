@@ -75,34 +75,6 @@ export class InMemoryDataService implements InMemoryDbService {
                             }
                         }
                     },
-                    {
-                        id: 'gdax_btc_usd',
-                        botId: 'gdax-1',
-                        marketId: 'BTC-USD',
-                        name: 'BTC/USD',
-                        enabled: false,
-                        baseCurrency: 'BTC',
-                        counterCurrency: 'USD',
-                        tradingStrategy: {
-                            id: 'gdax_ema',
-                            exchangeId: 'gdax',
-                            name: 'EMA Indicator',
-                            description: 'EMA Indicator algo for deciding when to enter and exit trades.',
-                            className: 'com.gazbert.bxbot.strategies.EmaStrategy',
-                            optionalConfig: {
-                                configItems: [
-                                    {
-                                        name: 'ema-short-interval',
-                                        value: '5'
-                                    },
-                                    {
-                                        name: 'ema-long-interval',
-                                        value: '20'
-                                    }
-                                ]
-                            }
-                        }
-                    },
                 ]
             },
             {
