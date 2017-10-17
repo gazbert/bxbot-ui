@@ -3,6 +3,7 @@ import {Http, Headers} from '@angular/http';
 import {AppComponent} from '../../app.component';
 import {Market} from './market.model';
 import {MarketDataPromiseService} from './market-data-promise.service';
+import {AuthenticationService} from '../../shared/authentication.service';
 
 // Don't forget this else you get runtime error:
 // zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function
@@ -28,8 +29,6 @@ export class MarketHttpDataPromiseService implements MarketDataPromiseService {
     // private marketsUrl = AppComponent.REST_API_BASE_URL + '/new_bots/';
     private marketsUrl = AppComponent.REST_API_BASE_URL + '/markets';
 
-    private headers = new Headers({'Content-Type': 'application/json'});
-
     constructor(private http: Http) {
     }
 
@@ -43,8 +42,13 @@ export class MarketHttpDataPromiseService implements MarketDataPromiseService {
     // }
 
     getAllMarketsForBotId(botId: string): Promise<Market[]> {
-        const url = this.marketsUrl + '?botId=' + botId;
-        return this.http.get(url)
+
+        const headers = new Headers({
+            'Authorization': 'Bearer ' + AuthenticationService.getToken()
+        });
+
+        const url = this.marketsUrl + '/?botId=' + botId;
+        return this.http.get(url, {headers: headers})
             .toPromise()
             .then(response => response.json().data as Market[])
             .catch(this.handleError);
@@ -61,18 +65,29 @@ export class MarketHttpDataPromiseService implements MarketDataPromiseService {
     // }
 
     updateMarket(market: Market): Promise<Market> {
+
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + AuthenticationService.getToken()
+        });
+
         const url = this.marketsUrl + '/' + market.id;
         return this.http
-            .put(url, JSON.stringify(market), {headers: this.headers})
+            .put(url, JSON.stringify(market), {headers: headers})
             .toPromise()
             .then(response => response.json().data as Market)
             .catch(this.handleError);
     }
 
     deleteMarketById(marketId: string): Promise<boolean> {
+
+        const headers = new Headers({
+            'Authorization': 'Bearer ' + AuthenticationService.getToken()
+        });
+
         const url = this.marketsUrl + '/' + marketId;
         return this.http
-            .delete(url, {headers: this.headers})
+            .delete(url, {headers: headers})
             .toPromise()
             .then(response => response.status === 200)
             .catch(this.handleError);

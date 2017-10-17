@@ -3,6 +3,7 @@ import {Http, Headers} from '@angular/http';
 import {AppComponent} from '../../app.component';
 import {TradingStrategy} from './trading-strategy.model';
 import {TradingStrategyDataPromiseService} from './trading-strategy-data-promise.service';
+import {AuthenticationService} from '../../shared/authentication.service';
 
 // Don't forget this else you get runtime error:
 // zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function
@@ -24,33 +25,48 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class TradingStrategyHttpDataPromiseService implements TradingStrategyDataPromiseService {
 
-    private tradingStrategiesUrl = AppComponent.REST_API_BASE_URL + '/trading_strategies';
-    private headers = new Headers({'Content-Type': 'application/json'});
+    private tradingStrategiesUrl = AppComponent.REST_API_BASE_URL + '/strategies';
 
     constructor(private http: Http) {
     }
 
     getAllTradingStrategiesForBotId(botId: string): Promise<TradingStrategy[]> {
+
+        const headers = new Headers({
+            'Authorization': 'Bearer ' + AuthenticationService.getToken()
+        });
+
         const url = this.tradingStrategiesUrl + '?botId=' + botId;
-        return this.http.get(url)
+        return this.http.get(url, {headers: headers})
             .toPromise()
             .then(response => response.json().data as TradingStrategy[])
             .catch(this.handleError);
     }
 
     updateTradingStrategy(tradingStrategy: TradingStrategy): Promise<TradingStrategy> {
+
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + AuthenticationService.getToken()
+        });
+
         const url = this.tradingStrategiesUrl + '/' + tradingStrategy.id;
         return this.http
-            .put(url, JSON.stringify(tradingStrategy), {headers: this.headers})
+            .put(url, JSON.stringify(tradingStrategy), {headers: headers})
             .toPromise()
             .then(response => response.json().data as TradingStrategy)
             .catch(this.handleError);
     }
 
     deleteTradingStrategyById(tradingStrategyId: string): Promise<boolean> {
+
+        const headers = new Headers({
+            'Authorization': 'Bearer ' + AuthenticationService.getToken()
+        });
+
         const url = this.tradingStrategiesUrl + '/' + tradingStrategyId;
         return this.http
-            .delete(url, {headers: this.headers})
+            .delete(url, {headers: headers})
             .toPromise()
             .then(response => response.status === 200)
             .catch(this.handleError);

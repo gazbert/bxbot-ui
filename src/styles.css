@@ -35,7 +35,7 @@ body {
 body, input[text], button {
     color: #888;
     font-family: Cambria, Georgia;
-    /*background: url('/assets/pexels-1.jpg') no-repeat;*/
+    background: url('/assets/pexels-1.jpg') no-repeat;
     background-attachment: fixed;
     background-size: cover
 }

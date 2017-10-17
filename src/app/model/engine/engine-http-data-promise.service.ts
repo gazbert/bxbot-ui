@@ -35,8 +35,13 @@ export class EngineHttpDataPromiseService implements EngineDataPromiseService {
     }
 
     getEngineByBotId(botId: string): Promise<Engine> {
-        const url = this.engineUrl + '/' + botId;
-        return this.http.get(url)
+
+        const headers = new Headers({
+            'Authorization': 'Bearer ' + AuthenticationService.getToken()
+        });
+
+        const url = this.engineUrl + '/?botId=' + botId;
+        return this.http.get(url, {headers: headers})
             .toPromise()
             .then(response => response.json().data as Engine)
             .catch(EngineHttpDataPromiseService.handleError);

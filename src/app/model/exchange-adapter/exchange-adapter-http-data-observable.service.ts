@@ -32,7 +32,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class ExchangeAdapterHttpDataObservableService implements ExchangeAdapterDataObservableService {
 
-    private exchangeAdaptersUrl = AppComponent.REST_API_BASE_URL + '/exchange_adapters';
+    private exchangeAdaptersUrl = AppComponent.REST_API_BASE_URL + '/exchanges';
 
     constructor(private http: Http) {
     }
@@ -62,11 +62,10 @@ export class ExchangeAdapterHttpDataObservableService implements ExchangeAdapter
     getExchangeAdapterByBotId(botId: string): Observable<ExchangeAdapter> {
 
         const headers = new Headers({
-            'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        const url = this.exchangeAdaptersUrl + '/' + botId;
+        const url = this.exchangeAdaptersUrl + '/?botId=' + botId;
         return this.http.get(url, {headers: headers})
             .map(ExchangeAdapterHttpDataObservableService.extractData)
             .catch(ExchangeAdapterHttpDataObservableService.handleError);
@@ -79,7 +78,7 @@ export class ExchangeAdapterHttpDataObservableService implements ExchangeAdapter
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        const url = this.exchangeAdaptersUrl + '/' + exchangeAdapter.id;
+        const url = this.exchangeAdaptersUrl + '/?botId=' + exchangeAdapter.id;
         const body = JSON.stringify(exchangeAdapter);
         const options = new RequestOptions({headers: headers});
 

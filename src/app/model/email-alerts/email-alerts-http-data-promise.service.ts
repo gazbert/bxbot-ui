@@ -3,6 +3,7 @@ import {Http, Headers} from '@angular/http';
 import {AppComponent} from '../../app.component';
 import {EmailAlertsConfig} from './email-alerts.model';
 import {EmailAlertsDataPromiseService} from './email-alerts-data-promise.service';
+import {AuthenticationService} from '../../shared/authentication.service';
 
 // Don't forget this else you get runtime error:
 // zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function
@@ -25,7 +26,6 @@ import 'rxjs/add/operator/toPromise';
 export class EmailAlertsHttpDataPromiseService implements EmailAlertsDataPromiseService {
 
     private emailAlertsUrl = AppComponent.REST_API_BASE_URL + '/email_alerts';
-    private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private http: Http) {
     }
@@ -36,17 +36,28 @@ export class EmailAlertsHttpDataPromiseService implements EmailAlertsDataPromise
     }
 
     getEmailAlertsConfigByBotId(botId: string): Promise<EmailAlertsConfig> {
-        const url = this.emailAlertsUrl + '/' + botId;
-        return this.http.get(url)
+
+        const headers = new Headers({
+            'Authorization': 'Bearer ' + AuthenticationService.getToken()
+        });
+
+        const url = this.emailAlertsUrl + '/?botId=' + botId;
+        return this.http.get(url, {headers: headers})
             .toPromise()
             .then(response => response.json().data as EmailAlertsConfig)
             .catch(EmailAlertsHttpDataPromiseService.handleError);
     }
 
     updateEmailAlertsConfig(emailAlertsConfig: EmailAlertsConfig): Promise<EmailAlertsConfig> {
-        const url = this.emailAlertsUrl + '/' + emailAlertsConfig.id;
+
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + AuthenticationService.getToken()
+        });
+
+        const url = this.emailAlertsUrl + '/?botId=' + emailAlertsConfig.id;
         return this.http
-            .put(url, JSON.stringify(emailAlertsConfig), {headers: this.headers})
+            .put(url, JSON.stringify(emailAlertsConfig), {headers: headers})
             .toPromise()
             .then(response => response.json().data as EmailAlertsConfig)
             .catch(EmailAlertsHttpDataPromiseService.handleError);
