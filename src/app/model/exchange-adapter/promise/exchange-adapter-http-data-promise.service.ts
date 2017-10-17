@@ -25,7 +25,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class ExchangeAdapterHttpDataPromiseService implements ExchangeAdapterDataPromiseService {
 
-    private exchangeAdaptersUrl = AppComponent.REST_API_BASE_URL + '/exchange_adapters';
+    private exchangeAdaptersUrl = AppComponent.REST_API_BASE_URL + '/exchanges';
 
     constructor(private http: Http) {
     }

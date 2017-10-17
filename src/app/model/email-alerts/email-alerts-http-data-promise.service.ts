@@ -8,6 +8,7 @@ import {AuthenticationService} from '../../shared/authentication.service';
 // Don't forget this else you get runtime error:
 // zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function
 import 'rxjs/add/operator/toPromise';
+import {isArray, isObject} from 'util';
 
 /**
  * HTTP implementation of the Email Alerts Data Service.
@@ -44,7 +45,18 @@ export class EmailAlertsHttpDataPromiseService implements EmailAlertsDataPromise
         const url = this.emailAlertsUrl + '/?botId=' + botId;
         return this.http.get(url, {headers: headers})
             .toPromise()
-            .then(response => response.json().data as EmailAlertsConfig)
+            // .then(response => response.json().data as EmailAlertsConfig)
+            .then(response => {
+                const payload = response.json().data;
+                if (isArray(payload)) {
+                    return payload[0] as EmailAlertsConfig; // for in-memory-data-service response
+                } else if (isObject(payload)) {
+                    return payload as EmailAlertsConfig || {};
+                } else {
+                    console.error('Unexpected return body.data type: ' + payload);
+                    return {};
+                }
+            })
             .catch(EmailAlertsHttpDataPromiseService.handleError);
     }
 

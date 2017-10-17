@@ -15,6 +15,7 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/toPromise';
+import {isArray} from 'util';
 
 /**
  * HTTP implementation of the Exchange Adapter Data Service.
@@ -37,7 +38,7 @@ export class ExchangeAdapterHttpDataObservableService implements ExchangeAdapter
     constructor(private http: Http) {
     }
 
-    private static handleError (error: any) {
+    private static handleError(error: any) {
         // In a real world app, we might use a remote logging infrastructure
         // We'd also dig deeper into the error to get a better message
         const errMsg = (error.message) ? error.message :
@@ -52,9 +53,17 @@ export class ExchangeAdapterHttpDataObservableService implements ExchangeAdapter
         }
         const body = res.json();
 
-        if (isObject(body)) { // vs // if (body !== undefined && body !== null) {
-            return body.data || {};
+        if (isObject(body)) {
+            if (isArray(body.data)) {
+                return body.data[0]; // for in-memory-data-service response
+            } else if (isObject(body.data)) {
+                return body.data || {};
+            } else {
+                console.error('Unexpected return body.data type: ' + body.data);
+                return {};
+            }
         } else {
+            console.error('Unexpected return body type: ' + body);
             return {};
         }
     }

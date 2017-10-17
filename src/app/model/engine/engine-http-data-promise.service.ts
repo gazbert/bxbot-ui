@@ -7,6 +7,7 @@ import {AuthenticationService} from '../../shared/authentication.service';
 import 'rxjs/add/operator/toPromise';
 import {EngineDataPromiseService} from './engine-data-promise.service';
 import {Engine} from './engine.model';
+import {isArray, isObject} from 'util';
 
 /**
  * HTTP implementation of the Engine Data Service.
@@ -43,7 +44,18 @@ export class EngineHttpDataPromiseService implements EngineDataPromiseService {
         const url = this.engineUrl + '/?botId=' + botId;
         return this.http.get(url, {headers: headers})
             .toPromise()
-            .then(response => response.json().data as Engine)
+            // .then(response => response.json().data as Engine)
+            .then(response => {
+                const payload = response.json().data;
+                if (isArray(payload)) {
+                    return payload[0] as Engine; // for in-memory-data-service response
+                } else if (isObject(payload)) {
+                    return payload as Engine || {};
+                } else {
+                    console.error('Unexpected return body.data type: ' + payload);
+                    return {};
+                }
+            })
             .catch(EngineHttpDataPromiseService.handleError);
     }
 
