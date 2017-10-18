@@ -87,7 +87,7 @@ export class ExchangeAdapterHttpDataObservableService implements ExchangeAdapter
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        const url = this.exchangeAdaptersUrl + '/?botId=' + exchangeAdapter.id;
+        const url = this.exchangeAdaptersUrl + '/' + exchangeAdapter.id + '/?botId=' + exchangeAdapter.id;
         const body = JSON.stringify(exchangeAdapter);
         const options = new RequestOptions({headers: headers});
 

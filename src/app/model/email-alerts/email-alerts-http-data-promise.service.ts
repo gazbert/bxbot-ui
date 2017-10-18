@@ -67,7 +67,7 @@ export class EmailAlertsHttpDataPromiseService implements EmailAlertsDataPromise
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        const url = this.emailAlertsUrl + '/?botId=' + emailAlertsConfig.id;
+        const url = this.emailAlertsUrl + '/' + emailAlertsConfig.id + '/?botId=' + emailAlertsConfig.id;
         return this.http
             .put(url, JSON.stringify(emailAlertsConfig), {headers: headers})
             .toPromise()

@@ -18,8 +18,7 @@ describe('Exchange Adapter Tests', function () {
         browser.get('');
     });
 
-    // FIXME!
-    xit('should update Exchange Adapter fields after Save', function () {
+    it('should update Exchange Adapter fields after Save', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
@@ -175,8 +174,7 @@ describe('Exchange Adapter Tests', function () {
         expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe('Connection refused');
     });
 
-    // FIXME!
-    xit('should add new Error Code and save it', function () {
+    it('should add new Error Code and save it', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
@@ -225,8 +223,7 @@ describe('Exchange Adapter Tests', function () {
         expect(element(by.id('errorCode_2')).getAttribute('value')).toBe('504');
     });
 
-    // FIXME!
-    xit('should delete Error Code and save change', function () {
+    it('should delete Error Code and save change', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
@@ -267,8 +264,7 @@ describe('Exchange Adapter Tests', function () {
         expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe('Connection refused');
     });
 
-    // FIXME!
-    xit('should add new Error Message and save it', function () {
+    it('should add new Error Message and save it', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
@@ -317,8 +313,7 @@ describe('Exchange Adapter Tests', function () {
         expect(element(by.id('errorMessage_2')).getAttribute('value')).toBe('Connection reset by peer');
     });
 
-    // FIXME!
-    xit('should delete Error Message and save change', function () {
+    it('should delete Error Message and save change', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
@@ -358,8 +353,7 @@ describe('Exchange Adapter Tests', function () {
         expect(element(by.id('errorMessage_1')).isPresent()).toBe(false); // gone!
     });
 
-    // FIXME!
-    xit('should add new Optional Config Item and save it', function () {
+    it('should add new Optional Config Item and save it', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
@@ -424,8 +418,7 @@ describe('Exchange Adapter Tests', function () {
         expect(element(by.id('exchangeConfigItemValue_0')).getAttribute('value')).toBe('0.25');
     });
 
-    // FIXME!
-    xit('should delete Optional Config Item and save change', function () {
+    it('should delete Optional Config Item and save change', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(1).click();
