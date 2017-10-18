@@ -16,6 +16,8 @@ import 'rxjs/add/operator/map';
 /**
  * Tests the Exchange Adapter HTTP Data service (Observable flavour) using a mocked HTTP backend.
  *
+ * TODO - test non 200 OK responses etc from bxbot-ui-server - UI should handle scenario gracefully!
+ *
  * @author gazbert
  */
 describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HTTP backend', () => {
@@ -95,12 +97,11 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
             // .toPromise();
         })));
 
-        // FIXME!
-        xit('should handle returning no Exchange Adapter', async(inject([], () => {
+        it('should handle returning no Exchange Adapter', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getExchangeAdapterByBotId('unknown')
-                .subscribe(exchangeAdapter => expect(exchangeAdapter.id).not.toBeDefined('should have no Exchange Adapter'));
+                .subscribe(exchangeAdapter => expect(exchangeAdapter).not.toBeDefined('should have no Exchange Adapter'));
             // .toPromise();
         })));
 

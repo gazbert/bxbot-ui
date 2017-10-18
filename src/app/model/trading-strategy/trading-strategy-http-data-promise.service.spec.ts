@@ -7,6 +7,8 @@ import {TradingStrategy, OptionalConfig} from '../trading-strategy';
 /**
  * Tests the Trading Strategy HTTP Data service (Promise flavour) using a mocked HTTP backend.
  *
+ * TODO - test non 200 OK responses etc from bxbot-ui-server - UI should handle scenario gracefully!
+ *
  * @author gazbert
  */
 describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP backend', () => {

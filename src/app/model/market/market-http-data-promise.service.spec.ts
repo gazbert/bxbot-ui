@@ -8,6 +8,8 @@ import {Market} from './market.model';
 /**
  * Tests the Market HTTP Data service (Promise flavour) using a mocked HTTP backend.
  *
+ * TODO - test non 200 OK responses etc from bxbot-ui-server - UI should handle scenario gracefully!
+ *
  * @author gazbert
  */
 describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend', () => {

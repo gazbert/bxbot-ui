@@ -7,6 +7,8 @@ import {ExchangeAdapter, NetworkConfig, OptionalConfig} from '../exchange-adapte
 /**
  * Tests the Exchange Adapter HTTP Data service (Promise flavour) using a Mock HTTP backend.
  *
+ * TODO - test non 200 OK responses etc from bxbot-ui-server - UI should handle scenario gracefully!
+ *
  * @author gazbert
  */
 describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP backend', () => {

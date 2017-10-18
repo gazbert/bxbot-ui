@@ -17,6 +17,8 @@ import 'rxjs/add/operator/map';
 /**
  * Tests the Bot HTTP Data Service (Observables) using a mocked HTTP backend.
  *
+ * TODO - test non 200 OK responses etc from bxbot-ui-server - UI should handle scenario gracefully!
+ *
  * @author gazbert
  */
 describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend', () => {

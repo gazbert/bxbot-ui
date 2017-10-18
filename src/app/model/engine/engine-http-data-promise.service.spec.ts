@@ -7,6 +7,8 @@ import {Engine} from './engine.model';
 /**
  * Tests the Engine HTTP Data service (Promise flavour) using a Mock HTTP backend.
  *
+ * TODO - test non 200 OK responses etc from bxbot-ui-server - UI should handle scenario gracefully!
+ *
  * @author gazbert
  */
 describe('EngineHttpDataPromiseService tests using TestBed + Mock HTTP backend', () => {
@@ -66,12 +68,11 @@ describe('EngineHttpDataPromiseService tests using TestBed + Mock HTTP backend',
                 });
         })));
 
-        // FIXME!
-        xit('should handle returning no Engine', async(inject([], () => {
+        it('should handle returning no Engine', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getEngineByBotId('unknown')
-                .then(engine => expect(engine.id).not.toBeDefined('should have no Engine'));
+                .then(engine => expect(engine).not.toBeDefined('should have no Engine'));
         })));
     });
 

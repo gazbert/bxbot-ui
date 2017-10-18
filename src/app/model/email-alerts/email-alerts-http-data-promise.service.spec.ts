@@ -1,11 +1,13 @@
 import {MockBackend, MockConnection} from '@angular/http/testing';
-import {HttpModule, Http, XHRBackend, Response, ResponseOptions} from '@angular/http';
+import {Http, HttpModule, Response, ResponseOptions, XHRBackend} from '@angular/http';
 import {async, inject, TestBed} from '@angular/core/testing';
 import {EmailAlertsHttpDataPromiseService as EmailAlertsDataService} from './email-alerts-http-data-promise.service';
 import {EmailAlertsConfig} from './email-alerts.model';
 
 /**
  * Tests the Email Alerts HTTP Data service (Promise flavour) using a mocked HTTP backend.
+ *
+ * TODO - test non 200 OK responses etc from bxbot-ui-server - UI should handle scenario gracefully!
  *
  * @author gazbert
  */
@@ -19,13 +21,14 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed + Mock HTTP back
                 {provide: XHRBackend, useClass: MockBackend}
             ]
         })
-            .compileComponents().then(() => {/*done*/});
+            .compileComponents().then(() => {/*done*/
+        });
     }));
 
     it('should instantiate implementation of EmailAlertsDataService when injected',
         inject([EmailAlertsDataService], (service: EmailAlertsDataService) => {
             expect(service instanceof EmailAlertsDataService).toBe(true);
-    }));
+        }));
 
     it('should instantiate service with "new"', inject([Http], (http: Http) => {
         expect(http).not.toBeNull('http should be provided');
@@ -37,7 +40,7 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed + Mock HTTP back
     it('should provide the MockBackend as XHRBackend',
         inject([XHRBackend], (backend: MockBackend) => {
             expect(backend).not.toBeNull('MockBackend backend should be provided');
-    }));
+        }));
 
     describe('when getEmailAlertsConfigByBotId() operation called with \'1\'', () => {
 
@@ -69,12 +72,11 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed + Mock HTTP back
                 });
         })));
 
-        // FIXME!
-        xit('should handle returning no matching Email Alerts config', async(inject([], () => {
-            const resp = new Response(new ResponseOptions({status: 200, body: {undefined}}));
+        it('should handle returning no matching Email Alerts config', async(inject([], () => {
+            const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getEmailAlertsConfigByBotId('unknown')
-                .then(emailAlertsConfig => expect(emailAlertsConfig).toBe(undefined, 'should have no Email Alerts config'));
+                .then(emailAlertsConfig => expect(emailAlertsConfig).not.toBeDefined('should have no Email Alerts config'));
         })));
     });
 
