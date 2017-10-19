@@ -44,7 +44,6 @@ export class EngineHttpDataPromiseService implements EngineDataPromiseService {
         const url = this.engineUrl + '/?botId=' + botId;
         return this.http.get(url, {headers: headers})
             .toPromise()
-            // .then(response => response.json().data as Engine)
             .then(response => {
                 const payload = response.json().data;
                 if (isArray(payload)) {
@@ -59,14 +58,14 @@ export class EngineHttpDataPromiseService implements EngineDataPromiseService {
             .catch(EngineHttpDataPromiseService.handleError);
     }
 
-    update(engine: Engine): Promise<Engine> {
+    update(botId: string, engine: Engine): Promise<Engine> {
 
         const headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        const url = this.engineUrl + '/' + engine.id;
+        const url = this.engineUrl + '/' + engine.id + '?botId=' + botId;
         return this.http
             .put(url, JSON.stringify(engine), {headers: headers})
             .toPromise()

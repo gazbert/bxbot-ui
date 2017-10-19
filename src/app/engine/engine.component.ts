@@ -16,6 +16,7 @@ import {BotHttpDataObservableService} from '../model/bot';
 })
 export class EngineComponent implements OnInit, AfterViewChecked {
 
+    botId: string;
     engine: Engine;
     active = true;
 
@@ -53,8 +54,8 @@ export class EngineComponent implements OnInit, AfterViewChecked {
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
-            const botId = params['id'];
-            this.engineDataService.getEngineByBotId(botId)
+            this.botId = params['id'];
+            this.engineDataService.getEngineByBotId(this.botId)
                 .then(engine => {
                     this.engine = engine;
                     this.updateFormErrors();
@@ -72,7 +73,7 @@ export class EngineComponent implements OnInit, AfterViewChecked {
 
     save(isValid: boolean): void {
         if (isValid) {
-            this.engineDataService.update(this.engine)
+            this.engineDataService.update(this.botId, this.engine)
                 .then(() => {
                     this.botDataService.getBot(this.engine.id).subscribe((bot) => {
                             bot.name = this.engine.botName;

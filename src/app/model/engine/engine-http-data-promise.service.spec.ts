@@ -93,7 +93,7 @@ describe('EngineHttpDataPromiseService tests using TestBed + Mock HTTP backend',
 
         it('should return updated Bitstamp Engine on success', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.update(updatedEngine)
+            service.update('bitstamp', updatedEngine)
                 .then(engine => {
                     expect(engine).toBe(updatedEngine);
 
@@ -110,7 +110,7 @@ describe('EngineHttpDataPromiseService tests using TestBed + Mock HTTP backend',
         it('should NOT return Bot Engine for 401 response', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 401, body: {data: ['Bad request - unknown id']}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.update(updatedEngine)
+            service.update('unknownBotId', updatedEngine)
                 .then(engine => expect(engine.id).not.toBeDefined('should have no Engine'));
         })));
     });

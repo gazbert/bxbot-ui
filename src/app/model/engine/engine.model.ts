@@ -4,7 +4,7 @@
  * @author gazbert
  */
 export class Engine {
-    constructor(public id: string, // this maps to the botId server side
+    constructor(public id: string,
                 public botName: string,
                 public tradingCycleInterval: number,
                 public emergencyStopCurrency: string,

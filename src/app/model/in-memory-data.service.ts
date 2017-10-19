@@ -3,6 +3,9 @@ import {InMemoryDbService} from 'angular-in-memory-web-api';
 /**
  * An in-memory data store for testing the app without the 'real' REST backend.
  *
+ * Note: The botId attribute is only used for testing with the InMemory data model.
+ * The responses from the real backend (bxbot-ui-server) will not have a botId attribute in the objects returned.
+ *
  * @author gazbert
  */
 export class InMemoryDataService implements InMemoryDbService {
@@ -57,7 +60,9 @@ export class InMemoryDataService implements InMemoryDbService {
 
         /**
          * The Trading Engines.
-         * There is a 1-1 relationship with the bot - backend server will always set 'id' to the same as the Bot 'id'.
+         *
+         * The botId and the id attributes must have the same value.
+         * This is hack to use the InMemory data store API with multiple bots.
          */
         const engines = [
             {
@@ -128,7 +133,9 @@ export class InMemoryDataService implements InMemoryDbService {
 
         /**
          * The Exchanges.
-         * There is a 1-1 relationship with the bot - backend server will always set 'id' to the same as the Bot 'id'.
+         *
+         * The botId and the id attributes must have the same value.
+         * This is hack to use the InMemory data store API with multiple bots.
          */
         const exchanges = [
             {
@@ -348,8 +355,9 @@ export class InMemoryDataService implements InMemoryDbService {
 
         /**
          * The Markets being trading on.
-         * The 'id' field is required because we cannot rely on the marketId being unique across different Exchanges -
-         * it is often the same. e.g. btcusd
+         *
+         * The botId and the id attributes must have the same value.
+         * This is hack to use the InMemory data store API with multiple bots.
          */
         const markets = [
             {
@@ -636,6 +644,9 @@ export class InMemoryDataService implements InMemoryDbService {
 
         /**
          * The Trading Strategies being executed.
+         *
+         * The botId and the id attributes must have the same value.
+         * This is hack to use the InMemory data store API with multiple bots.
          */
         const strategies = [
             {
@@ -877,7 +888,9 @@ export class InMemoryDataService implements InMemoryDbService {
 
         /**
          * The Email Alerts config for bots to send alert messages.
-         * There is a 1-1 relationship with the bot - backend server will always set 'id' to the same as the Bot 'id'.
+         *
+         * The botId and the id attributes must have the same value.
+         * This is hack to use the InMemory data store API with multiple bots.
          */
         const email_alerts = [
             {

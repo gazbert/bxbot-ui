@@ -9,7 +9,7 @@ import {Engine} from './engine.model';
  */
 export interface EngineDataPromiseService {
 
-    getEngineByBotId(id: string): Promise<Engine>;
+    getEngineByBotId(botId: string): Promise<Engine>;
 
-    update(engine: Engine): Promise<Engine>;
+    update(botId: string, engine: Engine): Promise<Engine>;
 }

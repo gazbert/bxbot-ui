@@ -11,12 +11,12 @@ export class FakeEngineDataPromiseService implements EngineDataPromiseService {
     engines = SOME_FAKE_PROMISE_ENGINES.map(e => e.clone());
     lastPromise: Promise<any>;  // remember so we can spy on promise calls
 
-    getEngineByBotId(id: string) {
-        const engine = this.engines.find(e => e.id === id);
+    getEngineByBotId(botId: string) {
+        const engine = this.engines.find(e => e.id === botId); // hack for testing!
         return this.lastPromise = Promise.resolve(engine);
     }
 
-    update(engine: Engine): Promise<Engine> {
+    update(botId: string, engine: Engine): Promise<Engine> {
         return this.lastPromise = this.getEngineByBotId(engine.id).then(e => {
             return e ?
                 Object.assign(e, engine) :
