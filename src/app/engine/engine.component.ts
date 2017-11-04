@@ -76,7 +76,7 @@ export class EngineComponent implements OnInit, AfterViewChecked {
             this.engineDataService.update(this.botId, this.engine)
                 .then(() => {
                     this.botDataService.getBot(this.engine.id).subscribe((bot) => {
-                            bot.name = this.engine.botName;
+                            bot.displayName = this.engine.botName;
                             this.botDataService.update(bot).toPromise()
                                 .then(() => this.goToDashboard());
                         },

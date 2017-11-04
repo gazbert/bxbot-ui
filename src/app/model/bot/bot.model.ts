@@ -1,16 +1,16 @@
 /**
- * Encapsulates a Bot.
+ * Encapsulates a Bot's status.
  *
  * @author gazbert
  */
-export class Bot {
+export class BotStatus {
 
     constructor(public id: string,
-                public name: string,
+                public displayName: string,
                 public status: string) {
     }
 
     clone() {
-        return new Bot(this.id, this.name, this.status);
+        return new BotStatus(this.id, this.displayName, this.status);
     }
 }

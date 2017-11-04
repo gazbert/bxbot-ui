@@ -1,7 +1,7 @@
 import {ActivatedRouteStub} from '../../../testing';
 import {EngineComponent} from './engine.component';
 import {Engine} from '../model/engine';
-import {Bot} from '../model/bot';
+import {BotStatus} from '../model/bot';
 
 /**
  * Tests the behaviour of the Engine component (Template version) is as expected.
@@ -25,8 +25,8 @@ describe('EngineComponent tests without TestBed', () => {
 
     let expectedEngine: Engine;
     let expectedUpdatedEngine: Engine;
-    let expectedBot: Bot;
-    let expectedUpdatedBot: Bot;
+    let expectedBot: BotStatus;
+    let expectedUpdatedBot: BotStatus;
 
     let spyEngineDataService: any;
     let spyBotDataService: any;
@@ -36,8 +36,8 @@ describe('EngineComponent tests without TestBed', () => {
 
         expectedEngine = new Engine('gdax-1', 'GDAX', 21, 'BTC', 0.7);
         expectedUpdatedEngine = new Engine('gdax-1', 'GDAX V2', 30, 'BTC', 0.4);
-        expectedBot = new Bot('gdax-1', 'GDAX', 'Running');
-        expectedUpdatedBot = new Bot('gdax-1', 'GDAX V2', 'Running');
+        expectedBot = new BotStatus('gdax-1', 'GDAX', 'Running');
+        expectedUpdatedBot = new BotStatus('gdax-1', 'GDAX V2', 'Running');
 
         activatedRoute = new ActivatedRouteStub();
         activatedRoute.testParams = {id: expectedEngine.id};

@@ -1,9 +1,9 @@
 import {BotHttpDataObservableService} from '../bot-http-data-observable.service';
-import {Bot} from '../bot.model';
+import {BotStatus} from '../bot.model';
 import {Observable} from 'rxjs/Observable';
 
 /**
- * Fake Bot data service (Observable flavour) backend for testing.
+ * Fake BotStatus data service (Observable flavour) backend for testing.
  *
  * Constructor is inherited from BotHttpDataObservableService - calling code should pass null when creating this object.
  *
@@ -17,7 +17,7 @@ export class FakeBotDataObservableService extends BotHttpDataObservableService {
 
     bots = SOME_FAKE_OBSERVABLE_BOTS.map(e => e.clone());
 
-    getBots(): Observable<Bot[]> {
+    getBots(): Observable<BotStatus[]> {
         return Observable.create(observer => {
             observer.next(this.bots);
             // call complete if you want to close this stream (like a promise)
@@ -25,7 +25,7 @@ export class FakeBotDataObservableService extends BotHttpDataObservableService {
         });
     }
 
-    getBot(id: string): Observable<Bot> {
+    getBot(id: string): Observable<BotStatus> {
         const bot = this.bots.find(e => e.id === id);
         return Observable.create(observer => {
             observer.next(bot);
@@ -34,8 +34,8 @@ export class FakeBotDataObservableService extends BotHttpDataObservableService {
         });
     }
 
-    getBotByName(name: string): Observable<Bot[]> {
-        const bot = this.bots.find(e => e.name === name);
+    getBotByName(name: string): Observable<BotStatus[]> {
+        const bot = this.bots.find(e => e.displayName === name);
         return Observable.create(observer => {
             observer.next(bot);
             // call complete if you want to close this stream (like a promise)
@@ -44,8 +44,8 @@ export class FakeBotDataObservableService extends BotHttpDataObservableService {
     }
 }
 
-export const SOME_FAKE_OBSERVABLE_BOTS: Bot[] = [
-    new Bot('bitstamp-1', 'Bitstamp', 'Running'),
-    new Bot('gdax-2', 'GDAX', 'Running'),
-    new Bot('gemini-3', 'Gemini', 'Stopped')
+export const SOME_FAKE_OBSERVABLE_BOTS: BotStatus[] = [
+    new BotStatus('bitstamp-1', 'Bitstamp', 'Running'),
+    new BotStatus('gdax-2', 'GDAX', 'Running'),
+    new BotStatus('gemini-3', 'Gemini', 'Stopped')
 ];

@@ -1,5 +1,5 @@
 import {ActivatedRouteStub} from '../../../testing';
-import {Bot} from '../model/bot';
+import {BotStatus} from '../model/bot';
 import {BotDetailsComponent} from './bot-details.component';
 import {Observable} from 'rxjs/Observable';
 
@@ -15,13 +15,13 @@ describe('BotDetailsComponent tests without TestBed', () => {
 
     let activatedRoute: ActivatedRouteStub;
     let botDetailsComponent: BotDetailsComponent;
-    let expectedBot_1: Bot;
+    let expectedBot_1: BotStatus;
     let spyBotDataService: any;
     let router: any;
 
     beforeEach(done => {
 
-        expectedBot_1 = new Bot('bitstamp-1', 'Bitstamp', 'Running');
+        expectedBot_1 = new BotStatus('bitstamp-1', 'Bitstamp', 'Running');
 
         activatedRoute = new ActivatedRouteStub();
         activatedRoute.testParams = {id: expectedBot_1.id};
@@ -44,7 +44,7 @@ describe('BotDetailsComponent tests without TestBed', () => {
 
         // paranoia ;-)
         expect(botDetailsComponent.bot.id).toBe('bitstamp-1');
-        expect(botDetailsComponent.bot.name).toBe('Bitstamp');
+        expect(botDetailsComponent.bot.displayName).toBe('Bitstamp');
         expect(botDetailsComponent.bot.status).toBe('Running');
     });
 });

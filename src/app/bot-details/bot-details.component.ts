@@ -1,6 +1,6 @@
 import {OnInit, Component} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
-import {Bot, BotHttpDataObservableService} from '../model/bot';
+import {BotStatus, BotHttpDataObservableService} from '../model/bot';
 
 /**
  * Container for holding the Bot config and status screens.
@@ -14,7 +14,7 @@ import {Bot, BotHttpDataObservableService} from '../model/bot';
 })
 export class BotDetailsComponent implements OnInit {
 
-    bot: Bot;
+    bot: BotStatus;
     active = true;
     errorMessage: string;
 

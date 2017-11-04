@@ -2,7 +2,7 @@ import {Router} from '@angular/router';
 import {AfterViewInit, Component, OnChanges, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
-import {Bot, BotHttpDataObservableService} from '../model/bot';
+import {BotStatus, BotHttpDataObservableService} from '../model/bot';
 
 // Most RxJS operators are not included in Angular's base Observable implementation.
 // The base implementation includes only what Angular itself requires.
@@ -33,13 +33,13 @@ import 'rxjs/add/operator/startWith';
 export class DashboardComponent implements OnInit, AfterViewInit, OnChanges {
 
     /**
-     * The Bot Observable is a stream of Bot events that can be processed with array-like operators.
+     * The BotStatus Observable is a stream of BotStatus events that can be processed with array-like operators.
      */
-    bots: Observable<Bot[]>;
+    bots: Observable<BotStatus[]>;
 
     /**
      * A Subject is a producer of an Observable event stream.
-     * 'searchTerms' produces an Observable of strings, the filter criteria for the name search.
+     * 'searchTerms' produces an Observable of strings, the filter criteria for the displayName search.
      * Each call to search puts a new string into this Subject's Observable stream by calling next.
      */
     private searchTerms = new Subject<string>();
@@ -51,7 +51,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnChanges {
     /**
      * Our ngOnInit sets up the Observable Bots.
      *
-     * It turns the stream of search terms into a stream of Bot arrays and assigns the result to the
+     * It turns the stream of search terms into a stream of BotStatus arrays and assigns the result to the
      * bots property.
      *
      * Based off Observable example in the main Angular tutorial:
@@ -88,7 +88,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnChanges {
                 this.errorMessage = error;
                 console.log('TODO - Barf! : ' + error);
                 this.router.navigateByUrl('/login').then();
-                return Observable.of<Bot[]>([]);
+                return Observable.of<BotStatus[]>([]);
             });
     }
 
@@ -106,7 +106,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnChanges {
         this.searchTerms.next(term);
     }
 
-    gotoBotDetails(bot: Bot): void {
+    gotoBotDetails(bot: BotStatus): void {
         // TODO - when to use navigate vs navigateByUrl ?
         // let link = ['/bot', bot.id];
         // this.router.navigate(link);

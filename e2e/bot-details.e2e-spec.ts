@@ -3,7 +3,7 @@ import {browser, element, by} from 'protractor';
 /**
  * Bot Details screen tests.
  *
- * End 2 End Protractor tests (using Jasmine) for testing Exchange Details screen.
+ * End 2 End Protractor tests (using Jasmine) for testing Bot Details screen.
  * See: http://www.protractortest.org/#/tutorial
  *
  * TODO - Use by.repeater()/model() instead of by.css() once Angular implement it for lists:

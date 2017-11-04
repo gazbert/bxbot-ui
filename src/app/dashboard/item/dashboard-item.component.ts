@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Bot} from '../../model/bot';
+import {BotStatus} from '../../model/bot';
 
 /**
  * Represents a Dashboard Item component.
@@ -13,8 +13,8 @@ import {Bot} from '../../model/bot';
     styleUrls: ['dashboard-item.component.css']
 })
 export class DashboardItemComponent {
-    @Input() bot: Bot;
-    @Output() selected = new EventEmitter<Bot>();
+    @Input() bot: BotStatus;
+    @Output() selected = new EventEmitter<BotStatus>();
 
     click() {
         this.selected.next(this.bot);

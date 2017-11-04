@@ -1,7 +1,7 @@
 import {Router} from '@angular/router';
 import {DashboardComponent} from './dashboard.component';
 import {FakeBotDataObservableService} from '../model/bot/testing';
-import {Bot} from '../model/bot';
+import {BotStatus} from '../model/bot';
 import {addMatchers} from '../../../testing/';
 
 class FakeRouter {
@@ -64,7 +64,7 @@ describe('DashboardComponent tests without TestBed', () => {
         comp.bots.subscribe((bots) => {
             expect(bots.length).toBe(1, 'should have 1 Gemini Bot item');
             expect(bots[0].id).toBe('gemini-3');
-            expect(bots[0].name).toBe('Gemini');
+            expect(bots[0].displayName).toBe('Gemini');
             done(); // https://github.com/jasmine/jasmine/issues/694
         });
         // comp.ngAfterViewInit();
@@ -72,7 +72,7 @@ describe('DashboardComponent tests without TestBed', () => {
     });
 
     it('should tell Router to navigate by BotId when Bot item selected', () => {
-        const testBot = new Bot('gdax-1', 'GDAX', 'Running');
+        const testBot = new BotStatus('gdax-1', 'GDAX', 'Running');
         const spy = spyOn(router, 'navigateByUrl');
         comp.gotoBotDetails(testBot);
         const navArgs = spy.calls.mostRecent().args[0];

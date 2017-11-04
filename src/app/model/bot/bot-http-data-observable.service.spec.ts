@@ -1,7 +1,7 @@
 import {MockBackend, MockConnection} from '@angular/http/testing';
 import {HttpModule, Http, XHRBackend, Response, ResponseOptions} from '@angular/http';
 import {async, inject, TestBed} from '@angular/core/testing';
-import {Bot} from './bot.model';
+import {BotStatus} from './bot.model';
 import {BotHttpDataObservableService as BotDataService} from './bot-http-data-observable.service';
 import {Observable} from 'rxjs/Observable';
 
@@ -15,7 +15,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 /**
- * Tests the Bot HTTP Data Service (Observables) using a mocked HTTP backend.
+ * Tests the BotStatus HTTP Data Service (Observables) using a mocked HTTP backend.
  *
  * TODO - test non 200 OK responses etc from bxbot-ui-server - UI should handle scenario gracefully!
  *
@@ -56,7 +56,7 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
 
         let backend: MockBackend;
         let service: BotDataService;
-        let fakeBots: Bot[];
+        let fakeBots: BotStatus[];
         let response: Response;
 
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
@@ -107,7 +107,7 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
 
         let backend: MockBackend;
         let service: BotDataService;
-        let fakeBots: Bot[];
+        let fakeBots: BotStatus[];
         let response: Response;
         const GDAX_BOT = 1;
 
@@ -119,21 +119,21 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
             response = new Response(options);
         }));
 
-        it('should have returned GDAX Bot', async(inject([], () => {
+        it('should have returned GDAX BotStatus', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.getBot('gdax-2')
                 .subscribe(bot => {
                     expect(bot.id).toBe('gdax-2');
-                    expect(bot.name).toBe('GDAX');
+                    expect(bot.displayName).toBe('GDAX');
                     expect(bot.status).toBe('Stopped');
                 });
         })));
 
-        it('should handle returning no Bot', async(inject([], () => {
+        it('should handle returning no BotStatus', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getBot('unknown')
-                .subscribe(bot => expect(bot.id).not.toBeDefined('should have no Bot'));
+                .subscribe(bot => expect(bot.id).not.toBeDefined('should have no BotStatus'));
         })));
 
         it('should treat 404 as an Observable error', async(inject([], () => {
@@ -141,7 +141,7 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getBot('unknown')
                 .do(() => {
-                    fail('should not respond with Bot');
+                    fail('should not respond with BotStatus');
                 })
                 .catch(err => {
                     expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
@@ -154,7 +154,7 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
 
         let backend: MockBackend;
         let service: BotDataService;
-        let fakeBots: Bot[];
+        let fakeBots: BotStatus[];
         let response: Response;
         const GDAX_BOT = 1;
 
@@ -166,20 +166,20 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
             response = new Response(options);
         }));
 
-        it('should have returned GDAX Bot', async(inject([], () => {
+        it('should have returned GDAX BotStatus', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.getBotByName('GDAX')
                 .subscribe(bots => {
-                    expect(bots.length).toBe(1, 'should have no Bot');
+                    expect(bots.length).toBe(1, 'should have no BotStatus');
                     expect(bots[0]).toBe(fakeBots[GDAX_BOT]);
                 });
         })));
 
-        it('should handle returning no Bot', async(inject([], () => {
+        it('should handle returning no BotStatus', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getBotByName('unknown')
-                .subscribe(bots => expect(bots.length).toBe(0, 'should have no Bot'));
+                .subscribe(bots => expect(bots.length).toBe(0, 'should have no BotStatus'));
         })));
 
         it('should treat 404 as an Observable error', async(inject([], () => {
@@ -187,7 +187,7 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getBotByName('unknown')
                 .do(() => {
-                    fail('should not respond with Bot');
+                    fail('should not respond with BotStatus');
                 })
                 .catch(err => {
                     expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
@@ -198,7 +198,7 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
 });
 
 const makeBotData = () => [
-    new Bot('bitstamp-1', 'Bitstamp', 'Running'),
-    new Bot('gdax-2', 'GDAX', 'Stopped'),
-    new Bot('gemini-3', 'Gemini', 'Running')
-] as Bot[];
+    new BotStatus('bitstamp-1', 'Bitstamp', 'Running'),
+    new BotStatus('gdax-2', 'GDAX', 'Stopped'),
+    new BotStatus('gemini-3', 'Gemini', 'Running')
+] as BotStatus[];

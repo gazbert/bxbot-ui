@@ -3,7 +3,7 @@ import {Headers, Http, RequestOptions, Response} from '@angular/http';
 import {AppComponent} from '../../app.component';
 import {BotDataObservableService} from './bot-data-observable.service';
 import {AuthenticationService} from '../../shared';
-import {Bot} from './bot.model';
+import {BotStatus} from './bot.model';
 import {Observable} from 'rxjs/Observable';
 import {isObject} from 'rxjs/util/isObject';
 // Most RxJS operators are not included in Angular's base Observable implementation.
@@ -16,7 +16,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/toPromise';
 
 /**
- * HTTP implementation of the Bot Data Service.
+ * HTTP implementation of the BotStatus Data Service.
  *
  * It demonstrates use of Observables in call responses.
  *
@@ -59,7 +59,7 @@ export class BotHttpDataObservableService implements BotDataObservableService {
         }
     }
 
-    getBots(): Observable<Bot[]> {
+    getBots(): Observable<BotStatus[]> {
 
         const headers = new Headers({
             'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ export class BotHttpDataObservableService implements BotDataObservableService {
             .catch(BotHttpDataObservableService.handleError);
     }
 
-    getBot(id: string): Observable<Bot> {
+    getBot(id: string): Observable<BotStatus> {
 
         const headers = new Headers({
             'Content-Type': 'application/json',
@@ -80,12 +80,12 @@ export class BotHttpDataObservableService implements BotDataObservableService {
 
         return this.http
             .get(this.botUrl + '/' + id, {headers: headers})
-            .map((r: Response) => r.json().data as Bot)
+            .map((r: Response) => r.json().data as BotStatus)
             // .map(this.extractData)
             .catch(BotHttpDataObservableService.handleError);
     }
 
-    getBotByName(name: string): Observable<Bot[]> {
+    getBotByName(name: string): Observable<BotStatus[]> {
 
         const headers = new Headers({
             'Content-Type': 'application/json',
@@ -93,13 +93,13 @@ export class BotHttpDataObservableService implements BotDataObservableService {
         });
 
         return this.http
-            .get(this.botUrl + '/?name=' + name, {headers: headers})
+            .get(this.botUrl + '/?displayName=' + name, {headers: headers})
             .map(BotHttpDataObservableService.extractData)
-            // .map((r: Response) => r.json().data as Bot[])
+            // .map((r: Response) => r.json().data as BotStatus[])
             .catch(BotHttpDataObservableService.handleError);
     }
 
-    update(bot: Bot): Observable<Bot> {
+    update(bot: BotStatus): Observable<BotStatus> {
 
         const headers = new Headers({
             'Content-Type': 'application/json',
