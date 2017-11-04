@@ -1,5 +1,5 @@
-import {BotHttpDataObservableService} from '../bot-http-data-observable.service';
-import {BotStatus} from '../bot.model';
+import {BotHttpDataObservableService} from '../bot-status-http-data-observable.service';
+import {BotStatus} from '../bot-status.model';
 import {Observable} from 'rxjs/Observable';
 
 /**

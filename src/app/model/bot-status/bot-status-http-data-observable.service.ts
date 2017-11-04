@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, RequestOptions, Response} from '@angular/http';
 import {AppComponent} from '../../app.component';
-import {BotDataObservableService} from './bot-data-observable.service';
+import {BotDataObservableService} from './bot-status-data-observable.service';
 import {AuthenticationService} from '../../shared';
-import {BotStatus} from './bot.model';
+import {BotStatus} from './bot-status.model';
 import {Observable} from 'rxjs/Observable';
 import {isObject} from 'rxjs/util/isObject';
 // Most RxJS operators are not included in Angular's base Observable implementation.

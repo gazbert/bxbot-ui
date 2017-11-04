@@ -1,8 +1,8 @@
 import {MockBackend, MockConnection} from '@angular/http/testing';
 import {HttpModule, Http, XHRBackend, Response, ResponseOptions} from '@angular/http';
 import {async, inject, TestBed} from '@angular/core/testing';
-import {BotStatus} from './bot.model';
-import {BotHttpDataObservableService as BotDataService} from './bot-http-data-observable.service';
+import {BotStatus} from './bot-status.model';
+import {BotHttpDataObservableService as BotDataService} from './bot-status-http-data-observable.service';
 import {Observable} from 'rxjs/Observable';
 
 // Most RxJS operators are not included in Angular's base Observable implementation.

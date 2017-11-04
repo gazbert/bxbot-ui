@@ -1,4 +1,4 @@
-import {BotStatus} from './bot.model';
+import {BotStatus} from './bot-status.model';
 
 /**
  * Tests the BotStatus model behaves as expected.

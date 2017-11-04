@@ -1,6 +1,6 @@
 import 'rxjs/add/operator/toPromise';
 import {Observable} from 'rxjs/Observable';
-import {BotStatus} from './bot.model';
+import {BotStatus} from './bot-status.model';
 
 /**
  * The BotStatus Data Service provides operations to fetch BotStatus details.

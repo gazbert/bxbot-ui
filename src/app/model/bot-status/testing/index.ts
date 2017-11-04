@@ -1,1 +1,1 @@
-export * from './fake-bot-data-observable.service';
+export * from './fake-bot-status-data-observable.service';

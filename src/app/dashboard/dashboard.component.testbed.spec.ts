@@ -8,7 +8,7 @@ import {DashboardComponent} from './dashboard.component';
 import {DashboardModule} from './dashboard.module';
 import {FakeBotDataObservableService} from '../model/bot-status/testing';
 import {BotHttpDataObservableService} from '../model/bot-status';
-import {SOME_FAKE_OBSERVABLE_BOTS} from '../model/bot-status/testing/fake-bot-data-observable.service';
+import {SOME_FAKE_OBSERVABLE_BOTS} from '../model/bot-status/testing/fake-bot-status-data-observable.service';
 import {addMatchers, click} from '../../../testing';
 
 class RouterStub {
