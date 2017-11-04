@@ -1,7 +1,7 @@
 import {Router} from '@angular/router';
 import {DashboardComponent} from './dashboard.component';
-import {FakeBotDataObservableService} from '../model/bot/testing';
-import {BotStatus} from '../model/bot';
+import {FakeBotDataObservableService} from '../model/bot-status/testing';
+import {BotStatus} from '../model/bot-status';
 import {addMatchers} from '../../../testing/';
 
 class FakeRouter {

@@ -1,5 +1,5 @@
 import {ActivatedRouteStub} from '../../../testing';
-import {BotStatus} from '../model/bot';
+import {BotStatus} from '../model/bot-status';
 import {BotDetailsComponent} from './bot-details.component';
 import {Observable} from 'rxjs/Observable';
 

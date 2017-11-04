@@ -1,7 +1,7 @@
 import {ActivatedRouteStub} from '../../../testing';
 import {EngineComponent} from './engine.component';
 import {Engine} from '../model/engine';
-import {BotStatus} from '../model/bot';
+import {BotStatus} from '../model/bot-status';
 
 /**
  * Tests the behaviour of the Engine component (Template version) is as expected.

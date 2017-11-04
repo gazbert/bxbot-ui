@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {BotStatus} from '../../model/bot';
+import {BotStatus} from '../../model/bot-status';
 
 /**
  * Represents a Dashboard Item component.

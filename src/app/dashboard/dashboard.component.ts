@@ -2,7 +2,7 @@ import {Router} from '@angular/router';
 import {AfterViewInit, Component, OnChanges, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
-import {BotStatus, BotHttpDataObservableService} from '../model/bot';
+import {BotStatus, BotHttpDataObservableService} from '../model/bot-status';
 
 // Most RxJS operators are not included in Angular's base Observable implementation.
 // The base implementation includes only what Angular itself requires.

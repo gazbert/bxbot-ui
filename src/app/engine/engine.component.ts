@@ -2,7 +2,7 @@ import {AfterViewChecked, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {Engine, EngineHttpDataPromiseService} from '../model/engine';
-import {BotHttpDataObservableService} from '../model/bot';
+import {BotHttpDataObservableService} from '../model/bot-status';
 
 /**
  * Template-driven version of the Engine form.

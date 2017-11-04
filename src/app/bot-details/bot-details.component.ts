@@ -1,6 +1,6 @@
 import {OnInit, Component} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
-import {BotStatus, BotHttpDataObservableService} from '../model/bot';
+import {BotStatus, BotHttpDataObservableService} from '../model/bot-status';
 
 /**
  * Container for holding the Bot config and status screens.
