@@ -3,8 +3,8 @@ import {InMemoryDbService} from 'angular-in-memory-web-api';
 /**
  * An in-memory data store for testing the app without the 'real' REST backend.
  *
- * Note: The botId attribute is only used for testing with the InMemory data model.
- * The responses from the real backend (bxbot-ui-server) will not have a botId attribute in the objects returned.
+ * The 'botId' attribute is only used for testing with the InMemory data model - it's a hack for testing.
+ * The objects returned in the responses from the real backend (bxbot-ui-server) will not include a 'botId' attribute.
  *
  * @author gazbert
  */
@@ -13,9 +13,9 @@ export class InMemoryDataService implements InMemoryDbService {
     createDb() {
 
         /**
-         * The Bots.
+         * The Bot statuses.
          */
-        const bots = [
+        const status = [
             {
                 id: 'bitstamp-1',
                 displayName: 'Bitstamp',
@@ -983,6 +983,6 @@ export class InMemoryDataService implements InMemoryDbService {
             }
         ];
 
-        return {bots, engines, exchanges, markets, strategies, email_alerts};
+        return {status, engines, exchanges, markets, strategies, email_alerts};
     }
 }

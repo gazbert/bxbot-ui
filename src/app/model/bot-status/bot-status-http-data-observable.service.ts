@@ -31,7 +31,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class BotHttpDataObservableService implements BotDataObservableService {
 
-    private botUrl = AppComponent.REST_API_BASE_URL + '/bots';
+    private botUrl = AppComponent.REST_API_RUNTIME_BASE_URL + '/status';
 
     constructor(private http: Http) {
     }

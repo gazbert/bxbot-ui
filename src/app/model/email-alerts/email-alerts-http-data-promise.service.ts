@@ -26,7 +26,7 @@ import {isArray, isObject} from 'util';
 @Injectable()
 export class EmailAlertsHttpDataPromiseService implements EmailAlertsDataPromiseService {
 
-    private emailAlertsUrl = AppComponent.REST_API_BASE_URL + '/email_alerts';
+    private emailAlertsUrl = AppComponent.REST_API_CONFIG_BASE_URL + '/email_alerts';
 
     constructor(private http: Http) {
     }

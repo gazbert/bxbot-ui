@@ -25,7 +25,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class TradingStrategyHttpDataPromiseService implements TradingStrategyDataPromiseService {
 
-    private tradingStrategiesUrl = AppComponent.REST_API_BASE_URL + '/strategies';
+    private tradingStrategiesUrl = AppComponent.REST_API_CONFIG_BASE_URL + '/strategies';
 
     constructor(private http: Http) {
     }

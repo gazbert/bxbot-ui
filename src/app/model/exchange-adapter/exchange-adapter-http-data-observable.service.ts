@@ -33,7 +33,7 @@ import {isArray} from 'util';
 @Injectable()
 export class ExchangeAdapterHttpDataObservableService implements ExchangeAdapterDataObservableService {
 
-    private exchangeAdaptersUrl = AppComponent.REST_API_BASE_URL + '/exchanges';
+    private exchangeAdaptersUrl = AppComponent.REST_API_CONFIG_BASE_URL + '/exchanges';
 
     constructor(private http: Http) {
     }

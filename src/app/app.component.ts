@@ -33,22 +33,34 @@ export class AppComponent {
     public static TITLE = 'BX-bot Admin Console';
 
     /**
-     * Base URL to real server's authentication endpoint.
+     * Base URL to bxbot-ui-server authentication endpoint.
      * This is ignored when using in-memory web API.
      */
     public static AUTH_ENDPOINT_BASE_URL = 'http://localhost:8080';
 
     /**
-     * Base URL to real server's REST API endpoints.
+     * Base URL to bxbot-ui-server REST API runtime endpoints.
      * Uncomment this to use the 'real' backend.
      */
-    // public static REST_API_BASE_URL = 'http://localhost:8080/api';
+    // public static REST_API_RUNTIME_BASE_URL = 'http://localhost:8080/api/v1/runtime/bots';
+
+    /**
+     * Base URL to bxbot-ui-server REST API config endpoints.
+     * Uncomment this to use the 'real' backend.
+     */
+    // public static REST_API_RUNTIME_BASE_URL = 'http://localhost:8080/api/v1/config/bots';
 
     /**
      * Base URL to Angular's in-memory web API endpoints.
      * Uncomment this to use for dev/testing/demos.
      */
-    public static REST_API_BASE_URL = 'app';
+    public static REST_API_RUNTIME_BASE_URL = 'app';
+
+    /**
+     * Base URL to Angular's in-memory web API endpoints.
+     * Uncomment this to use for dev/testing/demos.
+     */
+    public static REST_API_CONFIG_BASE_URL = 'app';
 
 
     isLoggedIn(): boolean {
