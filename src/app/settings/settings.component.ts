@@ -66,7 +66,7 @@ export class SettingsComponent implements OnInit, AfterViewChecked {
 
     updateFormErrors(): void {
         this.formErrors['botName'] = '';
-        this.formErrors['tradingCycleInterval'] = '';
+        this.formErrors['tradeCycleInterval'] = '';
         this.formErrors['emergencyStopCurrency'] = '';
         this.formErrors['emergencyStopBalance'] = '';
     }

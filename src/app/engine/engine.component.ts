@@ -31,9 +31,9 @@ export class EngineComponent implements OnInit, AfterViewChecked {
             'maxlength': 'Name max length is 50 characters.',
             'pattern': 'Name must be alphanumeric and can only include the following special characters: _ -'
         },
-        'tradingCycleInterval': {
-            'required': 'Trading Cycle Interval is required.',
-            'pattern': 'Trading Cycle Interval must be a whole number.'
+        'tradeCycleInterval': {
+            'required': 'Trade Cycle Interval is required.',
+            'pattern': 'Trade Cycle Interval must be a whole number.'
         },
         'emergencyStopCurrency': {
             'required': 'Emergency Stop Currency is required.',
@@ -89,7 +89,7 @@ export class EngineComponent implements OnInit, AfterViewChecked {
 
     updateFormErrors(): void {
         this.formErrors['botName'] = '';
-        this.formErrors['tradingCycleInterval'] = '';
+        this.formErrors['tradeCycleInterval'] = '';
         this.formErrors['emergencyStopCurrency'] = '';
         this.formErrors['emergencyStopBalance'] = '';
     }

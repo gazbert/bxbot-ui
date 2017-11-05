@@ -17,7 +17,7 @@
         <div class="row">
             <div class="form-group col-sm-6">
                 <label for="accountUsername">Account Username</label>
-                <input class="form-control" name="accountUsername" [(ngModel)]="emailAlertsConfig.accountUsername"
+                <input class="form-control" name="accountUsername" [(ngModel)]="emailAlertsConfig.smtpConfig.accountUsername"
                        required minlength="1" maxlength="50" #username="ngModel" id="accountUsername"
                        pattern="[a-zA-Z0-9_\- ]*">
                 <div id="invalidAccountUsername"
@@ -31,7 +31,7 @@
         <div class="row">
             <div class="form-group col-sm-6">
                 <label for="accountPassword">Account Password</label>
-                <input type="password" class="form-control" name="password" [(ngModel)]="emailAlertsConfig.accountPassword"
+                <input type="password" class="form-control" name="password" [(ngModel)]="emailAlertsConfig.smtpConfig.accountPassword"
                        required appBxBotUiValidateEqual="confirmPassword" reverse="true" #password="ngModel" id="accountPassword"
                        maxlength="50" pattern="[a-zA-Z0-9_\-,.@£$ ]*">
                 <div id="invalidAccountPassword"
@@ -45,7 +45,7 @@
         <div class="row">
             <div class="form-group col-sm-6">
                 <label for="retypeAccountPassword">Retype Password</label>
-                <input type="password" class="form-control" name="confirmPassword" [ngModel]="emailAlertsConfig.confirmPassword"
+                <input type="password" class="form-control" name="confirmPassword" [ngModel]="emailAlertsConfig.smtpConfig.confirmPassword"
                        required appBxBotUiValidateEqual="password" reverse="false" #confirmPassword="ngModel" pattern="[a-zA-Z0-9_\-,.@£$ ]*"
                        id="retypeAccountPassword" maxlength="50">
                 <div id="invalidRetypeAccountPassword"
@@ -59,7 +59,7 @@
         <div class="row">
             <div class="form-group col-sm-6">
                 <label for="toAddress">To:</label>
-                <input type="email" class="form-control" name="toAddress" [(ngModel)]="emailAlertsConfig.toAddress"
+                <input type="email" class="form-control" name="toAddress" [(ngModel)]="emailAlertsConfig.smtpConfig.toAddress"
                        required #toAddress="ngModel" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"
                        id="toAddress" placeholder="solo@falcon.com" maxlength="50">
                 <div id="invalidToAddress"
@@ -73,7 +73,7 @@
         <div class="row">
             <div class="form-group col-sm-6">
                 <label for="fromAddress">From:</label>
-                <input type="email" class="form-control" name="fromAddress" [(ngModel)]="emailAlertsConfig.fromAddress"
+                <input type="email" class="form-control" name="fromAddress" [(ngModel)]="emailAlertsConfig.smtpConfig.fromAddress"
                        required #fromAddress="ngModel" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"
                        id="fromAddress" placeholder="boba@hoth.com" maxlength="50">
                 <div id="invalidFromAddress"

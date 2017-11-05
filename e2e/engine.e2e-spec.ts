@@ -29,7 +29,7 @@ describe('Engine Tests', function () {
 
         expect(element(by.id('botId')).getAttribute('value')).toBe('bitstamp-1');
         expect(element(by.id('botName')).getAttribute('value')).toBe('Bitstamp');
-        expect(element(by.id('tradingCycleInterval')).getAttribute('value')).toBe('30');
+        expect(element(by.id('tradeCycleInterval')).getAttribute('value')).toBe('30');
         expect(element(by.id('emergencyStopCurrency')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('emergencyStopBalance')).getAttribute('value')).toBe('0.5');
 
@@ -40,11 +40,11 @@ describe('Engine Tests', function () {
         botName.sendKeys(newBotName);
         expect(botName.getAttribute('value')).toBe(newBotName);
 
-        const tradingCycleInterval = element(by.id('tradingCycleInterval'));
+        const tradeCycleInterval = element(by.id('tradeCycleInterval'));
         const newTradingCycleInterval = '10';
-        tradingCycleInterval.clear();
-        tradingCycleInterval.sendKeys(newTradingCycleInterval);
-        expect(tradingCycleInterval.getAttribute('value')).toBe(newTradingCycleInterval);
+        tradeCycleInterval.clear();
+        tradeCycleInterval.sendKeys(newTradingCycleInterval);
+        expect(tradeCycleInterval.getAttribute('value')).toBe(newTradingCycleInterval);
 
         const emergencyStopCurrency = element(by.id('emergencyStopCurrency'));
         const newEmergencyStopCurrency = 'USD';
@@ -64,7 +64,7 @@ describe('Engine Tests', function () {
         dashboardItems.get(0).click();
 
         expect(element(by.id('botName')).getAttribute('value')).toBe(newBotName);
-        expect(element(by.id('tradingCycleInterval')).getAttribute('value')).toBe(newTradingCycleInterval);
+        expect(element(by.id('tradeCycleInterval')).getAttribute('value')).toBe(newTradingCycleInterval);
         expect(element(by.id('emergencyStopCurrency')).getAttribute('value')).toBe(newEmergencyStopCurrency);
         expect(element(by.id('emergencyStopBalance')).getAttribute('value')).toBe(newEmergencyStopBalance);
     });
@@ -80,7 +80,7 @@ describe('Engine Tests', function () {
 
         expect(element(by.id('botId')).getAttribute('value')).toBe('bitstamp-1');
         expect(element(by.id('botName')).getAttribute('value')).toBe('Bitstamp');
-        expect(element(by.id('tradingCycleInterval')).getAttribute('value')).toBe('30');
+        expect(element(by.id('tradeCycleInterval')).getAttribute('value')).toBe('30');
         expect(element(by.id('emergencyStopCurrency')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('emergencyStopBalance')).getAttribute('value')).toBe('0.5');
 
@@ -91,11 +91,11 @@ describe('Engine Tests', function () {
         botName.sendKeys(newBotName);
         expect(botName.getAttribute('value')).toBe(newBotName);
 
-        const tradingCycleInterval = element(by.id('tradingCycleInterval'));
+        const tradeCycleInterval = element(by.id('tradeCycleInterval'));
         const newTradingCycleInterval = '10';
-        tradingCycleInterval.clear();
-        tradingCycleInterval.sendKeys(newTradingCycleInterval);
-        expect(tradingCycleInterval.getAttribute('value')).toBe(newTradingCycleInterval);
+        tradeCycleInterval.clear();
+        tradeCycleInterval.sendKeys(newTradingCycleInterval);
+        expect(tradeCycleInterval.getAttribute('value')).toBe(newTradingCycleInterval);
 
         const emergencyStopCurrency = element(by.id('emergencyStopCurrency'));
         const newEmergencyStopCurrency = 'USD';
@@ -116,7 +116,7 @@ describe('Engine Tests', function () {
 
         expect(element(by.id('botId')).getAttribute('value')).toBe('bitstamp-1');
         expect(element(by.id('botName')).getAttribute('value')).toBe('Bitstamp');
-        expect(element(by.id('tradingCycleInterval')).getAttribute('value')).toBe('30');
+        expect(element(by.id('tradeCycleInterval')).getAttribute('value')).toBe('30');
         expect(element(by.id('emergencyStopCurrency')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('emergencyStopBalance')).getAttribute('value')).toBe('0.5');
     });
@@ -132,7 +132,7 @@ describe('Engine Tests', function () {
 
         expect(element(by.id('botId')).getAttribute('value')).toBe('bitstamp-1');
         expect(element(by.id('botName')).getAttribute('value')).toBe('Bitstamp');
-        expect(element(by.id('tradingCycleInterval')).getAttribute('value')).toBe('30');
+        expect(element(by.id('tradeCycleInterval')).getAttribute('value')).toBe('30');
         expect(element(by.id('emergencyStopCurrency')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('emergencyStopBalance')).getAttribute('value')).toBe('0.5');
 
@@ -143,11 +143,11 @@ describe('Engine Tests', function () {
         botName.sendKeys(newBotName);
         expect(botName.getAttribute('value')).toBe(newBotName);
 
-        const tradingCycleInterval = element(by.id('tradingCycleInterval'));
+        const tradeCycleInterval = element(by.id('tradeCycleInterval'));
         const newTradingCycleInterval = 'a10';
-        tradingCycleInterval.clear();
-        tradingCycleInterval.sendKeys(newTradingCycleInterval);
-        expect(tradingCycleInterval.getAttribute('value')).toBe(newTradingCycleInterval);
+        tradeCycleInterval.clear();
+        tradeCycleInterval.sendKeys(newTradingCycleInterval);
+        expect(tradeCycleInterval.getAttribute('value')).toBe(newTradingCycleInterval);
 
         const emergencyStopCurrency = element(by.id('emergencyStopCurrency'));
         const newEmergencyStopCurrency = 'US_';
@@ -172,9 +172,9 @@ describe('Engine Tests', function () {
         expect(element(by.id('invalidBotName')).getText()).toBe(
             'Name must be alphanumeric and can only include the following special characters: _ -');
 
-        expect(element(by.id('tradingCycleInterval')).getAttribute('value')).toBe(newTradingCycleInterval);
-        expect(element(by.id('invalidTradingCycleInterval')).getText()).toBe(
-            'Trading Cycle Interval must be a whole number.');
+        expect(element(by.id('tradeCycleInterval')).getAttribute('value')).toBe(newTradingCycleInterval);
+        expect(element(by.id('invalidTradeCycleInterval')).getText()).toBe(
+            'Trade Cycle Interval must be a whole number.');
 
         expect(element(by.id('emergencyStopCurrency')).getAttribute('value')).toBe(newEmergencyStopCurrency);
         expect(element(by.id('invalidEmergencyStopCurrency')).getText()).toBe(

@@ -69,7 +69,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 botId: 'bitstamp-1',
                 id: 'bitstamp-1',
                 botName: 'Bitstamp',
-                tradingCycleInterval: 30,
+                tradeCycleInterval: 30,
                 emergencyStopCurrency: 'BTC',
                 emergencyStopBalance: 0.5
             },
@@ -77,7 +77,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 botId: 'gdax-1',
                 id: 'gdax-1',
                 botName: 'GDAX',
-                tradingCycleInterval: 10,
+                tradeCycleInterval: 10,
                 emergencyStopCurrency: 'BTC',
                 emergencyStopBalance: 0.8
             },
@@ -85,7 +85,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 botId: 'gemini-1',
                 id: 'gemini-1',
                 botName: 'Gemini',
-                tradingCycleInterval: 30,
+                tradeCycleInterval: 30,
                 emergencyStopCurrency: 'ETH',
                 emergencyStopBalance: 10.5
             },
@@ -93,7 +93,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 botId: 'itbit-1',
                 id: 'itbit-1',
                 botName: 'ItBit',
-                tradingCycleInterval: 10,
+                tradeCycleInterval: 10,
                 emergencyStopCurrency: 'XBT',
                 emergencyStopBalance: 3.1
             },
@@ -101,7 +101,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 botId: 'huobi-1',
                 id: 'huobi-1',
                 botName: 'Huobi',
-                tradingCycleInterval: 120,
+                tradeCycleInterval: 120,
                 emergencyStopCurrency: 'BTC',
                 emergencyStopBalance: 0.9
             },
@@ -109,7 +109,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 botId: 'okcoin-1',
                 id: 'okcoin-1',
                 botName: 'OKCoin',
-                tradingCycleInterval: 60,
+                tradeCycleInterval: 60,
                 emergencyStopCurrency: 'BTC',
                 emergencyStopBalance: 2.1
             },
@@ -117,7 +117,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 botId: 'bitfinex-1',
                 id: 'bitfinex-1',
                 botName: 'Bitfinex',
-                tradingCycleInterval: 3600,
+                tradeCycleInterval: 3600,
                 emergencyStopCurrency: 'BTC',
                 emergencyStopBalance: 5.5
             },
@@ -125,7 +125,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 botId: 'kraken-1',
                 id: 'kraken-1',
                 botName: 'Kraken',
-                tradingCycleInterval: 360,
+                tradeCycleInterval: 360,
                 emergencyStopCurrency: 'XBT',
                 emergencyStopBalance: 7.5
             }
@@ -897,89 +897,105 @@ export class InMemoryDataService implements InMemoryDbService {
                 botId: 'bitstamp-1',
                 id: 'bitstamp-1',
                 enabled: false,
-                smtpHost: 'smtp.gmail.com',
-                smtpPort: 587,
-                accountUsername: 'bobfett',
-                accountPassword: 'iLoveHoth',
-                toAddress: 'jabba@tatooine.space',
-                fromAddress: 'boba.fett@hoth.space'
+                smtpConfig: {
+                    smtpHost: 'smtp.gmail.com',
+                    smtpPort: 587,
+                    accountUsername: 'bobfett',
+                    accountPassword: 'iLoveHoth',
+                    toAddress: 'jabba@tatooine.space',
+                    fromAddress: 'boba.fett@hoth.space'
+                }
             },
             {
                 botId: 'gdax-1',
                 id: 'gdax-1',
                 enabled: true,
-                smtpHost: 'smtp.gmail.com',
-                smtpPort: 587,
-                accountUsername: 'solo',
-                accountPassword: 'NeverTellMeTheOdds_',
-                toAddress: 'lando@cloudcity.space',
-                fromAddress: 'han.solo@falcon.space'
+                smtpConfig: {
+                    smtpHost: 'smtp.gmail.com',
+                    smtpPort: 587,
+                    accountUsername: 'solo',
+                    accountPassword: 'NeverTellMeTheOdds_',
+                    toAddress: 'lando@cloudcity.space',
+                    fromAddress: 'han.solo@falcon.space'
+                }
             },
             {
                 botId: 'gemini-1',
                 id: 'gemini-1',
                 enabled: true,
-                smtpHost: 'smtp.gmail.com',
-                smtpPort: 587,
-                accountUsername: 'c3po',
-                accountPassword: 'ohMy',
-                toAddress: 'bb-8@jakku.space',
-                fromAddress: 'c-3p0@naboo.space',
+                smtpConfig: {
+                    smtpHost: 'smtp.gmail.com',
+                    smtpPort: 587,
+                    accountUsername: 'c3po',
+                    accountPassword: 'ohMy',
+                    toAddress: 'bb-8@jakku.space',
+                    fromAddress: 'c-3p0@naboo.space'
+                }
             },
             {
                 botId: 'itbit-1',
                 id: 'itbit-1',
                 enabled: true,
-                smtpHost: 'smtp.gmail.com',
-                smtpPort: 587,
-                accountUsername: 'gold5',
-                accountPassword: 'stayOnTarget',
-                toAddress: 'chewy@kashyyyk.space',
-                fromAddress: 'gold5@x-wing.space'
+                smtpConfig: {
+                    smtpHost: 'smtp.gmail.com',
+                    smtpPort: 587,
+                    accountUsername: 'gold5',
+                    accountPassword: 'stayOnTarget',
+                    toAddress: 'chewy@kashyyyk.space',
+                    fromAddress: 'gold5@x-wing.space'
+                }
             },
             {
                 botId: 'huobi-1',
                 id: 'huobi-1',
                 enabled: false,
-                smtpHost: 'smtp.gmail.com',
-                smtpPort: 587,
-                accountUsername: 'ackbar-1',
-                accountPassword: 'ItsATrap#',
-                toAddress: 'leia@alderaan.space',
-                fromAddress: 'admiral.ackbar@some-one.space'
+                smtpConfig: {
+                    smtpHost: 'smtp.gmail.com',
+                    smtpPort: 587,
+                    accountUsername: 'ackbar-1',
+                    accountPassword: 'ItsATrap#',
+                    toAddress: 'leia@alderaan.space',
+                    fromAddress: 'admiral.ackbar@some-one.space'
+                }
             },
             {
                 botId: 'okcoin-1',
                 id: 'okcoin-1',
                 enabled: true,
-                smtpHost: 'smtp.gmail.com',
-                smtpPort: 587,
-                accountUsername: 'yoda',
-                accountPassword: 'DoOrDoNotThereIsNoTry£',
-                toAddress: 'r2d2@naboo.space',
-                fromAddress: 'master.yoda@dagobah.space',
+                smtpConfig: {
+                    smtpHost: 'smtp.gmail.com',
+                    smtpPort: 587,
+                    accountUsername: 'yoda',
+                    accountPassword: 'DoOrDoNotThereIsNoTry£',
+                    toAddress: 'r2d2@naboo.space',
+                    fromAddress: 'master.yoda@dagobah.space'
+                }
             },
             {
                 botId: 'bitfinex-1',
                 id: 'bitfinex-1',
                 enabled: true,
-                smtpHost: 'smtp.gmail.com',
-                smtpPort: 587,
-                accountUsername: 'obiwan',
-                accountPassword: '@UseTheForceLuke',
-                toAddress: 'luke.skywalker@tatooine.space',
-                fromAddress: 'Obi.Wan@coruscant.space',
+                smtpConfig: {
+                    smtpHost: 'smtp.gmail.com',
+                    smtpPort: 587,
+                    accountUsername: 'obiwan',
+                    accountPassword: '@UseTheForceLuke',
+                    toAddress: 'luke.skywalker@tatooine.space',
+                    fromAddress: 'Obi.Wan@coruscant.space'
+                }
             },
             {
                 botId: 'kraken-1',
                 id: 'kraken-1',
                 enabled: true,
-                smtpHost: 'smtp.gmail.com',
-                smtpPort: 587,
-                accountUsername: 'darthvader',
-                accountPassword: 'TheForceIsStrongWithThisOne',
-                toAddress: 'boba.fett@hoth.space',
-                fromAddress: 'darth@deathstar.space'
+                smtpConfig: {
+                    smtpHost: 'smtp.gmail.com',
+                    smtpPort: 587,
+                    accountUsername: 'darthvader',
+                    accountPassword: 'TheForceIsStrongWithThisOne',
+                    toAddress: 'boba.fett@hoth.space',
+                    fromAddress: 'darth@deathstar.space'
+                }
             }
         ];
 

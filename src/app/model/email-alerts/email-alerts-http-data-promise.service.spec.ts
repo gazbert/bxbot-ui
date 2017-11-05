@@ -2,7 +2,7 @@ import {MockBackend, MockConnection} from '@angular/http/testing';
 import {Http, HttpModule, Response, ResponseOptions, XHRBackend} from '@angular/http';
 import {async, inject, TestBed} from '@angular/core/testing';
 import {EmailAlertsHttpDataPromiseService as EmailAlertsDataService} from './email-alerts-http-data-promise.service';
-import {EmailAlertsConfig} from './email-alerts.model';
+import {EmailAlertsConfig, SmtpConfig} from './email-alerts.model';
 
 /**
  * Tests the Email Alerts HTTP Data service (Promise flavour) using a mocked HTTP backend.
@@ -63,12 +63,12 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed + Mock HTTP back
                 .then(emailAlertsConfig => {
                     expect(emailAlertsConfig.id).toBe('gdax-1');
                     expect(emailAlertsConfig.enabled).toBe(true);
-                    expect(emailAlertsConfig.smtpHost).toBe('smtp.gmail.com');
-                    expect(emailAlertsConfig.smtpPort).toBe(587);
-                    expect(emailAlertsConfig.accountUsername).toBe('bobfett');
-                    expect(emailAlertsConfig.accountPassword).toBe('iLoveHoth');
-                    expect(emailAlertsConfig.fromAddress).toBe('boba.fett@hoth.space');
-                    expect(emailAlertsConfig.toAddress).toBe('jabba@tatooine.space');
+                    expect(emailAlertsConfig.smtpConfig.smtpHost).toBe('smtp.gmail.com');
+                    expect(emailAlertsConfig.smtpConfig.smtpPort).toBe(587);
+                    expect(emailAlertsConfig.smtpConfig.accountUsername).toBe('bobfett');
+                    expect(emailAlertsConfig.smtpConfig.accountPassword).toBe('iLoveHoth');
+                    expect(emailAlertsConfig.smtpConfig.fromAddress).toBe('boba.fett@hoth.space');
+                    expect(emailAlertsConfig.smtpConfig.toAddress).toBe('jabba@tatooine.space');
                 });
         })));
 
@@ -90,8 +90,8 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed + Mock HTTP back
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
 
             updatedEmailAlertsConfig = new EmailAlertsConfig('gdax-1', true,
-                'new.smtp.gmail.com', 589, 'new_bobfett', 'new_iLoveHoth',
-                'new_jabba@tatooine.space', 'new_boba.fett@hoth.space');
+                new SmtpConfig('new.smtp.gmail.com', 589, 'new_bobfett', 'new_iLoveHoth',
+                    'new_jabba@tatooine.space', 'new_boba.fett@hoth.space'));
 
             backend = be;
             service = new EmailAlertsDataService(http);
@@ -107,7 +107,7 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed + Mock HTTP back
 
                     // paranoia!
                     expect(emailAlertsConfig.id).toBe('gdax-1');
-                    expect(emailAlertsConfig.smtpHost).toBe('new.smtp.gmail.com');
+                    expect(emailAlertsConfig.smtpConfig.smtpHost).toBe('new.smtp.gmail.com');
                 });
         })));
 
@@ -121,8 +121,8 @@ describe('EmailAlertsHttpDataPromiseService tests using TestBed + Mock HTTP back
 });
 
 function makeEmailAlertsData() {
-    return new EmailAlertsConfig('gdax-1', true, 'smtp.gmail.com', 587, 'bobfett', 'iLoveHoth',
-        'jabba@tatooine.space', 'boba.fett@hoth.space');
+    return new EmailAlertsConfig('gdax-1', true,
+        new SmtpConfig('smtp.gmail.com', 587, 'bobfett', 'iLoveHoth', 'jabba@tatooine.space', 'boba.fett@hoth.space'));
 }
 
 

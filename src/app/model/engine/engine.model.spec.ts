@@ -12,7 +12,7 @@ describe('Engine model tests', () => {
 
         expect(engine.id).toBe('gdax');
         expect(engine.botName).toBe('GDAX');
-        expect(engine.tradingCycleInterval).toBe(30);
+        expect(engine.tradeCycleInterval).toBe(30);
         expect(engine.emergencyStopCurrency).toBe('BTC');
         expect(engine.emergencyStopBalance).toBe(0.54);
     });

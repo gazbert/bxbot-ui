@@ -6,12 +6,12 @@
 export class Engine {
     constructor(public id: string,
                 public botName: string,
-                public tradingCycleInterval: number,
+                public tradeCycleInterval: number,
                 public emergencyStopCurrency: string,
                 public emergencyStopBalance: number) {
     }
 
     clone() {
-        return new Engine(this.id, this.botName, this.tradingCycleInterval, this.emergencyStopCurrency, this.emergencyStopBalance);
+        return new Engine(this.id, this.botName, this.tradeCycleInterval, this.emergencyStopCurrency, this.emergencyStopBalance);
     }
 }

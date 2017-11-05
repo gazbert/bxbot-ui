@@ -64,7 +64,7 @@ describe('EngineComponent tests without TestBed', () => {
         // paranoia ;-)
         expect(engineComponent.engine.id).toBe('gdax-1');
         expect(engineComponent.engine.botName).toBe('GDAX');
-        expect(engineComponent.engine.tradingCycleInterval).toBe(21);
+        expect(engineComponent.engine.tradeCycleInterval).toBe(21);
         expect(engineComponent.engine.emergencyStopCurrency).toBe('BTC');
         expect(engineComponent.engine.emergencyStopBalance).toBe(0.7);
     });

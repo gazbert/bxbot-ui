@@ -44,7 +44,7 @@ describe('Bot Details Tests', function () {
 
         expect(element(by.id('botId')).getAttribute('value')).toBe('gdax-1');
         expect(element(by.id('botName')).getAttribute('value')).toBe('GDAX');
-        expect(element(by.id('tradingCycleInterval')).getAttribute('value')).toBe('10');
+        expect(element(by.id('tradeCycleInterval')).getAttribute('value')).toBe('10');
         expect(element(by.id('emergencyStopCurrency')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('emergencyStopBalance')).getAttribute('value')).toBe('0.8');
     });

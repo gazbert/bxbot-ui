@@ -1,6 +1,6 @@
 import {ActivatedRouteStub} from '../../../testing';
 import {EmailAlertsComponent} from './email-alerts.component';
-import {EmailAlertsConfig} from '../model/email-alerts';
+import {EmailAlertsConfig, SmtpConfig} from '../model/email-alerts';
 
 /**
  * Tests the behaviour of the Email Alerts component is as expected.
@@ -25,11 +25,13 @@ describe('EmailAlertsComponent tests without TestBed', () => {
 
     beforeEach(done => {
 
-        expectedEmailAlertsConfig = new EmailAlertsConfig('gdax-2', true, 'smtp.gmail.com', 587,
-            'yoda', 'DoOrDoNotThereIsNoTry', 'r2d2@naboo.space', 'master.yoda@dagobah.space');
+        expectedEmailAlertsConfig = new EmailAlertsConfig('gdax-2', true,
+            new SmtpConfig('smtp.gmail.com', 587,
+            'yoda', 'DoOrDoNotThereIsNoTry', 'r2d2@naboo.space', 'master.yoda@dagobah.space'));
 
-        expectedUpdatedEmailAlertsConfig = new EmailAlertsConfig('gdax-2', true, 'smtp.gmail.com', 587,
-            'yoda', 'aNewPassword', 'r2d2@naboo.space', 'yoda.the.boss@dagobah.space');
+        expectedUpdatedEmailAlertsConfig = new EmailAlertsConfig('gdax-2', true,
+            new SmtpConfig('smtp.gmail.com', 587,
+            'yoda', 'aNewPassword', 'r2d2@naboo.space', 'yoda.the.boss@dagobah.space'));
 
         activatedRoute = new ActivatedRouteStub();
         activatedRoute.testParams = {id: expectedEmailAlertsConfig.id};
@@ -52,7 +54,7 @@ describe('EmailAlertsComponent tests without TestBed', () => {
 
         // paranoia ;-)
         expect(emailAlertsComponent.emailAlertsConfig.id).toBe('gdax-2');
-        expect(emailAlertsComponent.emailAlertsConfig.fromAddress).toBe('master.yoda@dagobah.space');
+        expect(emailAlertsComponent.emailAlertsConfig.smtpConfig.fromAddress).toBe('master.yoda@dagobah.space');
     });
 
     it('should save and navigate to Dashboard when user clicks Save for valid input', done => {

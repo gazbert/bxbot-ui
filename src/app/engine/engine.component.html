@@ -27,16 +27,16 @@
             </div>
         </div>
 
-        <!-- Trading Cycle Interval -->
+        <!-- Trade Cycle Interval -->
         <div class="row">
             <div class="form-group col-sm-6">
-                <label for="tradingCycleInterval">Trading Cycle Interval (secs)</label>
-                <input [(ngModel)]="engine.tradingCycleInterval" id="tradingCycleInterval"
-                       name="tradingCycleInterval" class="form-control" placeholder="60" required
-                       pattern="\d+" #tradingCycleInterval="ngModel"/>
-                <div id="invalidTradingCycleInterval"
-                     *ngIf="formErrors['tradingCycleInterval'].length > 0" class="alert alert-danger">
-                    {{ formErrors['tradingCycleInterval']}}
+                <label for="tradeCycleInterval">Trade Cycle Interval (secs)</label>
+                <input [(ngModel)]="engine.tradeCycleInterval" id="tradeCycleInterval"
+                       name="tradeCycleInterval" class="form-control" placeholder="60" required
+                       pattern="\d+" #tradeCycleInterval="ngModel"/>
+                <div id="invalidTradeCycleInterval"
+                     *ngIf="formErrors['tradeCycleInterval'].length > 0" class="alert alert-danger">
+                    {{ formErrors['tradeCycleInterval']}}
                 </div>
             </div>
         </div>

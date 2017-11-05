@@ -62,7 +62,7 @@ describe('EngineHttpDataPromiseService tests using TestBed + Mock HTTP backend',
                 .then(engine => {
                     expect(engine.id).toBe('gdax');
                     expect(engine.botName).toBe('GDAX');
-                    expect(engine.tradingCycleInterval).toBe(30);
+                    expect(engine.tradeCycleInterval).toBe(30);
                     expect(engine.emergencyStopCurrency).toBe('BTC');
                     expect(engine.emergencyStopBalance).toBe(0.54);
                 });
@@ -100,7 +100,7 @@ describe('EngineHttpDataPromiseService tests using TestBed + Mock HTTP backend',
                     // paranoia!
                     expect(engine.id).toBe('bitstamp');
                     expect(engine.botName).toBe('Bitstamp v2');
-                    expect(engine.tradingCycleInterval).toBe(10);
+                    expect(engine.tradeCycleInterval).toBe(10);
                     expect(engine.emergencyStopCurrency).toBe('BTC');
                     expect(engine.emergencyStopBalance).toBe(1.54);
 
