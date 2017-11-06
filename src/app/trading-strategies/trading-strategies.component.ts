@@ -1,7 +1,7 @@
 import {AfterViewChecked, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {OptionalConfig, Strategy, ConfigItem, TradingStrategyHttpDataPromiseService} from '../model/strategy';
+import {OptionalConfig, Strategy, ConfigItem, StrategyHttpDataPromiseService} from '../model/strategy';
 import {MarketHttpDataPromiseService} from '../model/market';
 
 /**
@@ -59,7 +59,7 @@ export class TradingStrategiesComponent implements OnInit, AfterViewChecked {
         'Please check your Market configuration.'
     };
 
-    constructor(private tradingStrategyDataService: TradingStrategyHttpDataPromiseService,
+    constructor(private tradingStrategyDataService: StrategyHttpDataPromiseService,
                 private marketDataService: MarketHttpDataPromiseService, private route: ActivatedRoute,
                 private router: Router) {
     }

@@ -1,7 +1,7 @@
 import {MockBackend, MockConnection} from '@angular/http/testing';
 import {Http, HttpModule, Response, ResponseOptions, XHRBackend} from '@angular/http';
 import {async, inject, TestBed} from '@angular/core/testing';
-import {TradingStrategyHttpDataPromiseService as TradingStrategyDataService} from './trading-strategy-http-data-promise.service';
+import {StrategyHttpDataPromiseService as TradingStrategyDataService} from './trading-strategy-http-data-promise.service';
 import {Strategy, OptionalConfig} from './';
 
 /**
@@ -11,7 +11,7 @@ import {Strategy, OptionalConfig} from './';
  *
  * @author gazbert
  */
-describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP backend', () => {
+describe('StrategyHttpDataPromiseService tests using TestBed + Mock HTTP backend', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({

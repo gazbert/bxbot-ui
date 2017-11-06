@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import {AppComponent} from '../../app.component';
 import {Strategy} from './trading-strategy.model';
-import {TradingStrategyDataPromiseService} from './trading-strategy-data-promise.service';
+import {StrategyDataPromiseService} from './trading-strategy-data-promise.service';
 import {AuthenticationService} from '../../shared/authentication.service';
 
 // Don't forget this else you get runtime error:
@@ -10,7 +10,7 @@ import {AuthenticationService} from '../../shared/authentication.service';
 import 'rxjs/add/operator/toPromise';
 
 /**
- * HTTP implementation of the Trading Strategy Data Service.
+ * HTTP implementation of the Strategy Data Service.
  *
  * It demonstrates use of Promises in call responses.
  *
@@ -23,7 +23,7 @@ import 'rxjs/add/operator/toPromise';
  * @author gazbert
  */
 @Injectable()
-export class TradingStrategyHttpDataPromiseService implements TradingStrategyDataPromiseService {
+export class StrategyHttpDataPromiseService implements StrategyDataPromiseService {
 
     private tradingStrategiesUrl = AppComponent.REST_API_CONFIG_BASE_URL + '/strategies';
 
