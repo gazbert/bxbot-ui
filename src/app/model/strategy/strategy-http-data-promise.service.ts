@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import {AppComponent} from '../../app.component';
-import {Strategy} from './trading-strategy.model';
-import {StrategyDataPromiseService} from './trading-strategy-data-promise.service';
+import {Strategy} from './strategy.model';
+import {StrategyDataPromiseService} from './strategy-data-promise.service';
 import {AuthenticationService} from '../../shared/authentication.service';
 
 // Don't forget this else you get runtime error:

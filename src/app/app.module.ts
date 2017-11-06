@@ -17,7 +17,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {EmailAlertsHttpDataPromiseService} from './model/email-alerts';
 import {EngineHttpDataPromiseService} from './model/engine';
 import {TradingStrategiesModule} from './trading-strategies/trading-strategies.module';
-import {StrategyHttpDataPromiseService} from './model/strategy/trading-strategy-http-data-promise.service';
+import {StrategyHttpDataPromiseService} from './model/strategy/strategy-http-data-promise.service';
 import {LoginModule} from './login/login.module';
 import {AuthenticationService, CanActivateAuthGuard} from './shared';
 import {EngineModule} from './engine/engine.module';

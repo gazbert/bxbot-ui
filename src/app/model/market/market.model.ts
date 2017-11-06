@@ -1,4 +1,4 @@
-import {Strategy} from '../strategy/trading-strategy.model';
+import {Strategy} from '../strategy/strategy.model';
 
 /**
  * Encapsulates a Market.
