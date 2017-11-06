@@ -22,7 +22,7 @@ If you want to just play around with the UI, Docker is the way to go.
 1. Open a browser and go to: `http://localhost:4200`
 1. You can stop the container using `CTRL-c`
    
-The current Docker image on [Docker Hub](https://hub.docker.com/r/gazbert/bxbot-ui/tags/) is not a release, but rather a 
+The current [Docker image](https://hub.docker.com/r/gazbert/bxbot-ui/tags/) is not a release, but rather a 
 rolling development version of the UI...
   
 ### The manual way
