@@ -1,6 +1,6 @@
 import {ActivatedRouteStub} from '../../../testing';
 import {TradingStrategiesComponent} from './trading-strategies.component';
-import {TradingStrategy, OptionalConfig, ConfigItem} from '../model/trading-strategy';
+import {TradingStrategy, OptionalConfig, ConfigItem} from '../model/strategy';
 import {Market} from '../model/market';
 
 /**

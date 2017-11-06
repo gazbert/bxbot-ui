@@ -1,7 +1,7 @@
 import {AfterViewChecked, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {OptionalConfig, TradingStrategy, ConfigItem, TradingStrategyHttpDataPromiseService} from '../model/trading-strategy';
+import {OptionalConfig, TradingStrategy, ConfigItem, TradingStrategyHttpDataPromiseService} from '../model/strategy';
 import {MarketHttpDataPromiseService} from '../model/market';
 
 /**

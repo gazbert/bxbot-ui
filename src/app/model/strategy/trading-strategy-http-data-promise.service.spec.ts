@@ -2,7 +2,7 @@ import {MockBackend, MockConnection} from '@angular/http/testing';
 import {Http, HttpModule, Response, ResponseOptions, XHRBackend} from '@angular/http';
 import {async, inject, TestBed} from '@angular/core/testing';
 import {TradingStrategyHttpDataPromiseService as TradingStrategyDataService} from './trading-strategy-http-data-promise.service';
-import {TradingStrategy, OptionalConfig} from '../trading-strategy';
+import {TradingStrategy, OptionalConfig} from './';
 
 /**
  * Tests the Trading Strategy HTTP Data service (Promise flavour) using a mocked HTTP backend.

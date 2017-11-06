@@ -2,8 +2,7 @@ import {OnInit, Component, ViewChild, AfterViewChecked} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {Market, MarketHttpDataPromiseService} from '../model/market/';
-import {TradingStrategy, TradingStrategyHttpDataPromiseService} from '../model/trading-strategy';
-import {OptionalConfig} from '../model/trading-strategy/trading-strategy.model';
+import {TradingStrategy, OptionalConfig, TradingStrategyHttpDataPromiseService} from '../model/strategy';
 
 /**
  * Template-driven version of the Markets form.

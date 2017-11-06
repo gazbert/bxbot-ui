@@ -1,8 +1,7 @@
 import {ActivatedRouteStub} from '../../../testing';
 import {MarketsComponent} from './markets.component';
 import {Market} from '../model/market';
-import {TradingStrategy} from '../model/trading-strategy';
-import {OptionalConfig} from '../model/trading-strategy/trading-strategy.model';
+import {TradingStrategy, OptionalConfig} from '../model/strategy';
 
 /**
  * Tests the behaviour of the Markets component is as expected.
