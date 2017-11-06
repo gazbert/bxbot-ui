@@ -55,7 +55,7 @@ describe('MarketsComponent tests without TestBed', () => {
         router = jasmine.createSpyObj('router', ['navigate']);
 
         // Just mock this out, not testing it here, has it's own tests suite.
-        spyTradingStrategyDataService = jasmine.createSpyObj('StrategyHttpDataPromiseService',
+        spyTradingStrategyDataService = jasmine.createSpyObj('StrategyHttpDataService',
             ['getAllStrategiesForBotId']);
         spyTradingStrategyDataService.getAllStrategiesForBotId.and.returnValues(Promise.resolve([]));
 

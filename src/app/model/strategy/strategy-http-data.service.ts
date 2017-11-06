@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import {AppComponent} from '../../app.component';
 import {Strategy} from './strategy.model';
-import {StrategyDataPromiseService} from './strategy-data-promise.service';
+import {StrategyDataService} from './strategy-data.service';
 import {AuthenticationService} from '../../shared/authentication.service';
 
 // Don't forget this else you get runtime error:
@@ -23,7 +23,7 @@ import 'rxjs/add/operator/toPromise';
  * @author gazbert
  */
 @Injectable()
-export class StrategyHttpDataPromiseService implements StrategyDataPromiseService {
+export class StrategyHttpDataService implements StrategyDataService {
 
     private tradingStrategiesUrl = AppComponent.REST_API_CONFIG_BASE_URL + '/strategies';
 

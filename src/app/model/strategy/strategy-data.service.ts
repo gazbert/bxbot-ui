@@ -7,12 +7,12 @@ import {Strategy} from './strategy.model';
  *
  * @author gazbert
  */
-export interface StrategyDataPromiseService {
+export interface StrategyDataService {
 
     /**
-     * Returns all the strategies for a given bot id.
+     * Returns all the Strategies for a given bot id.
      *
-     * @param {string} botId the id of the bot to fetch the strategies for.
+     * @param {string} botId the id of the bot to fetch the Strategies for.
      * @returns {Promise<Strategy[]>} a Promise containing an array of Strategy objects.
      */
     getAllStrategiesForBotId(botId: string): Promise<Strategy[]>;

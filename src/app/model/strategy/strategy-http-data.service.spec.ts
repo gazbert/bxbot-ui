@@ -1,17 +1,17 @@
 import {MockBackend, MockConnection} from '@angular/http/testing';
 import {Http, HttpModule, Response, ResponseOptions, XHRBackend} from '@angular/http';
 import {async, inject, TestBed} from '@angular/core/testing';
-import {StrategyHttpDataPromiseService as TradingStrategyDataService} from './strategy-http-data-promise.service';
+import {StrategyHttpDataService as TradingStrategyDataService} from './strategy-http-data.service';
 import {Strategy, OptionalConfig} from './';
 
 /**
- * Tests the Strategy HTTP Data service (Promise flavour) using a mocked HTTP backend.
+ * Tests the Strategy HTTP Data service using a mocked HTTP backend.
  *
  * TODO - test non 200 OK responses etc from bxbot-ui-server - UI should handle scenario gracefully!
  *
  * @author gazbert
  */
-describe('StrategyHttpDataPromiseService tests using TestBed + Mock HTTP backend', () => {
+describe('StrategyHttpDataService tests using TestBed + Mock HTTP backend', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
