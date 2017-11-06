@@ -22,8 +22,8 @@ If you want to just play around with the UI, Docker is the way to go.
 1. Open a browser and go to: `http://localhost:4200`
 1. You can stop the container using `CTRL-c`
    
-A Docker image is available on [Docker Hub](https://hub.docker.com/r/gazbert/bxbot-ui/tags/) - it is not a release, 
-but rather a rolling development version of the UI.
+The current Docker image on [Docker Hub](https://hub.docker.com/r/gazbert/bxbot-ui/tags/) is not a release, but rather a 
+rolling development version of the UI...
   
 ### The manual way
 You'll need [node.js](https://nodejs.org/en/download/) (at least node 6.9.x) installed to build and run the app.
