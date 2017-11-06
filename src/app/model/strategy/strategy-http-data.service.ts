@@ -25,7 +25,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class StrategyHttpDataService implements StrategyDataService {
 
-    private tradingStrategiesUrl = AppComponent.REST_API_CONFIG_BASE_URL + '/strategies';
+    private strategiesUrl = AppComponent.REST_API_CONFIG_BASE_URL + '/strategies';
 
     constructor(private http: Http) {
     }
@@ -36,35 +36,35 @@ export class StrategyHttpDataService implements StrategyDataService {
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        const url = this.tradingStrategiesUrl + '?botId=' + botId;
+        const url = this.strategiesUrl + '?botId=' + botId;
         return this.http.get(url, {headers: headers})
             .toPromise()
             .then(response => response.json().data as Strategy[])
             .catch(this.handleError);
     }
 
-    updateStrategy(tradingStrategy: Strategy): Promise<Strategy> {
+    updateStrategy(strategy: Strategy): Promise<Strategy> {
 
         const headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        const url = this.tradingStrategiesUrl + '/' + tradingStrategy.id;
+        const url = this.strategiesUrl + '/' + strategy.id;
         return this.http
-            .put(url, JSON.stringify(tradingStrategy), {headers: headers})
+            .put(url, JSON.stringify(strategy), {headers: headers})
             .toPromise()
             .then(response => response.json().data as Strategy)
             .catch(this.handleError);
     }
 
-    deleteStrategyById(tradingStrategyId: string): Promise<boolean> {
+    deleteStrategyById(strategyId: string): Promise<boolean> {
 
         const headers = new Headers({
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        const url = this.tradingStrategiesUrl + '/' + tradingStrategyId;
+        const url = this.strategiesUrl + '/' + strategyId;
         return this.http
             .delete(url, {headers: headers})
             .toPromise()

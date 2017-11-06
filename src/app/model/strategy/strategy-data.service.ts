@@ -3,7 +3,7 @@ import {Strategy} from './strategy.model';
 
 /**
  * The Strategy Data Service provides operations to update Strategy configuration.
- * It demonstrates use of Promises in the operation responses.
+ * It uses Promises in the operation responses.
  *
  * @author gazbert
  */

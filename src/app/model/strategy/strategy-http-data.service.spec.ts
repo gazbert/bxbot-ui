@@ -1,7 +1,7 @@
 import {MockBackend, MockConnection} from '@angular/http/testing';
 import {Http, HttpModule, Response, ResponseOptions, XHRBackend} from '@angular/http';
 import {async, inject, TestBed} from '@angular/core/testing';
-import {StrategyHttpDataService as TradingStrategyDataService} from './strategy-http-data.service';
+import {StrategyHttpDataService as StrategyDataService} from './strategy-http-data.service';
 import {Strategy, OptionalConfig} from './';
 
 /**
@@ -17,22 +17,22 @@ describe('StrategyHttpDataService tests using TestBed + Mock HTTP backend', () =
         TestBed.configureTestingModule({
             imports: [HttpModule],
             providers: [
-                TradingStrategyDataService,
+                StrategyDataService,
                 {provide: XHRBackend, useClass: MockBackend}
             ]
         }).compileComponents().then(() => {/*done*/});
     }));
 
-    it('should instantiate implementation of TradingStrategyDataService service when injected',
-        inject([TradingStrategyDataService], (service: TradingStrategyDataService) => {
-            expect(service instanceof TradingStrategyDataService).toBe(true);
+    it('should instantiate implementation of StrategyDataService service when injected',
+        inject([StrategyDataService], (service: StrategyDataService) => {
+            expect(service instanceof StrategyDataService).toBe(true);
         }));
 
     it('should instantiate service with "new"', inject([Http], (http: Http) => {
         expect(http).not.toBeNull('http should be provided');
-        const service = new TradingStrategyDataService(http);
-        expect(service instanceof TradingStrategyDataService).toBe(true,
-            'new service should be instance of TradingStrategyDataService');
+        const service = new StrategyDataService(http);
+        expect(service instanceof StrategyDataService).toBe(true,
+            'new service should be instance of StrategyDataService');
     }));
 
     it('should provide the MockBackend as XHRBackend',
@@ -43,42 +43,42 @@ describe('StrategyHttpDataService tests using TestBed + Mock HTTP backend', () =
     describe('when getAllStrategiesForBotId() operation called with \'huobi\'', () => {
 
         let backend: MockBackend;
-        let service: TradingStrategyDataService;
-        let fakeTradingStrategies: Strategy[];
+        let service: StrategyDataService;
+        let fakeStrategies: Strategy[];
         let response: Response;
 
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
             backend = be;
-            service = new TradingStrategyDataService(http);
-            fakeTradingStrategies = makeTradingStrategyData();
-            const options = new ResponseOptions({status: 200, body: {data: fakeTradingStrategies}});
+            service = new StrategyDataService(http);
+            fakeStrategies = makeStrategyData();
+            const options = new ResponseOptions({status: 200, body: {data: fakeStrategies}});
             response = new Response(options);
         }));
 
-        it('should return 2 Huobi Trading Strategies', async(inject([], () => {
+        it('should return 2 Huobi Strategies', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.getAllStrategiesForBotId('huobi-2')
-                .then(tradingStrategies => expect(tradingStrategies.length).toBe(2, 'should return 2 Huobi Trading Strategies'));
+                .then(strategies => expect(strategies.length).toBe(2, 'should return 2 Huobi Strategies'));
         })));
 
-        it('should handle returning no matching Trading Strategies', async(inject([], () => {
+        it('should handle returning no matching Strategies', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getAllStrategiesForBotId('unknown')
-                .then(tradingStrategies => expect(tradingStrategies.length).toBe(0, 'should have no Trading Strategies'));
+                .then(strategies => expect(strategies.length).toBe(0, 'should have no Strategies'));
         })));
     });
 
     describe('when updateStrategy() operation called for Huobi', () => {
 
         let backend: MockBackend;
-        let service: TradingStrategyDataService;
+        let service: StrategyDataService;
         let response: Response;
-        let updatedTradingStrategy: Strategy;
+        let updatedStrategy: Strategy;
 
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
 
-            updatedTradingStrategy = new Strategy('huobi_macd', 'huobi-2', 'MACD Indicator',
+            updatedStrategy = new Strategy('huobi_macd', 'huobi-2', 'MACD Indicator',
                 'MACD Indicator algo for deciding when to enter and exit trades.',
                 'com.gazbert.bxbot.strategies.MacdStrategy',
 
@@ -100,41 +100,41 @@ describe('StrategyHttpDataService tests using TestBed + Mock HTTP backend', () =
             );
 
             backend = be;
-            service = new TradingStrategyDataService(http);
-            const options = new ResponseOptions({status: 200, body: {data: updatedTradingStrategy}});
+            service = new StrategyDataService(http);
+            const options = new ResponseOptions({status: 200, body: {data: updatedStrategy}});
             response = new Response(options);
         }));
 
-        it('should return updated Huobi Trading Strategy on success', async(inject([], () => {
+        it('should return updated Huobi Strategy on success', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.updateStrategy(updatedTradingStrategy)
-                .then(tradingStrategy => {
-                    expect(tradingStrategy).toBe(updatedTradingStrategy);
+            service.updateStrategy(updatedStrategy)
+                .then(strategy => {
+                    expect(strategy).toBe(updatedStrategy);
 
                     // paranoia!
-                    expect(tradingStrategy.id).toBe(updatedTradingStrategy.id);
-                    expect(tradingStrategy.name).toBe(updatedTradingStrategy.name);
-                    expect(tradingStrategy.className).toBe(updatedTradingStrategy.className);
+                    expect(strategy.id).toBe(updatedStrategy.id);
+                    expect(strategy.name).toBe(updatedStrategy.name);
+                    expect(strategy.className).toBe(updatedStrategy.className);
                 });
         })));
 
         it('should NOT return Market for 401 response', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 401, body: {data: ['Bad request - unknown id']}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.updateStrategy(updatedTradingStrategy)
-                .then(tradingStrategy => expect(tradingStrategy.id).not.toBeDefined('should have no Trading Strategy'));
+            service.updateStrategy(updatedStrategy)
+                .then(strategy => expect(strategy.id).not.toBeDefined('should have no Strategy'));
         })));
     });
 
     describe('when deleteStrategyById() operation called with \'huobi_macd\'', () => {
 
         let backend: MockBackend;
-        let service: TradingStrategyDataService;
+        let service: StrategyDataService;
         let response: Response;
 
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
             backend = be;
-            service = new TradingStrategyDataService(http);
+            service = new StrategyDataService(http);
             const options = new ResponseOptions({status: 200});
             response = new Response(options);
         }));
@@ -154,7 +154,7 @@ describe('StrategyHttpDataService tests using TestBed + Mock HTTP backend', () =
     });
 });
 
-const makeTradingStrategyData = () => [
+const makeStrategyData = () => [
 
     new Strategy('huobi_macd', 'huobi-2', 'MACD Indicator',
         'MACD Indicator algo for deciding when to enter and exit trades.',
@@ -197,5 +197,3 @@ const makeTradingStrategyData = () => [
         )
     )
 ] as Strategy[];
-
-
