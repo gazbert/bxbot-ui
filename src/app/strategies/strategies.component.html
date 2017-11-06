@@ -1,33 +1,33 @@
 <!--
  Template-driven version of the Strategies form.
  -->
-<div *ngIf="tradingStrategies">
-    <form *ngIf="active" #tradingStrategiesForm="ngForm" novalidate (ngSubmit)="save(tradingStrategiesForm.valid)">
+<div *ngIf="strategies">
+    <form *ngIf="active" #strategiesForm="ngForm" novalidate (ngSubmit)="save(strategiesForm.valid)">
         <div class="row">
             <div class="col-sm-12">
-                <div *ngFor="let tradingStrategy of tradingStrategies; let i=index;"
+                <div *ngFor="let strategy of strategies; let i=index;"
                      class="panel panel-default">
                     <div class="panel-heading">
                         <span>Strategy {{i + 1}}</span>
-                        <span id="deleteTradingStrategyButton_{{i}}" class="glyphicon glyphicon-remove pull-right"
+                        <span id="deleteStrategyButton_{{i}}" class="glyphicon glyphicon-remove pull-right"
                               *ngIf="canBeDeleted()"
-                              (click)="deleteTradingStrategy(tradingStrategies[i])"></span>
+                              (click)="deleteStrategy(strategies[i])"></span>
                     </div>
                     <div class="panel-body">
 
                         <!-- Strategy Name -->
                         <div class="row">
                             <div class="col-sm-6 form-group">
-                                <label for="tradingStrategyName_{{i}}">Name</label>
-                                <input [(ngModel)]="tradingStrategies[i].name"
-                                       class="form-control" id="tradingStrategyName_{{i}}"
-                                       name="tradingStrategyName_{{i}}" #tradingStrategyName="ngModel"
+                                <label for="strategyName_{{i}}">Name</label>
+                                <input [(ngModel)]="strategies[i].name"
+                                       class="form-control" id="strategyName_{{i}}"
+                                       name="strategyName_{{i}}" #strategyName="ngModel"
                                        required maxlength="50" pattern="[a-zA-Z0-9_\- ]*"
-                                       appBxbotUiDuplicateName="{{getOtherStrategyNames(tradingStrategies[i].id)}}"/>
-                                <div id="invalidTradingStrategyName_{{i}}"
-                                     *ngIf="formErrors['tradingStrategyName_' + i].length > 0"
+                                       appBxbotUiDuplicateName="{{getOtherStrategyNames(strategies[i].id)}}"/>
+                                <div id="invalidStrategyName_{{i}}"
+                                     *ngIf="formErrors['strategyName_' + i].length > 0"
                                      class="alert alert-danger">
-                                    {{ formErrors['tradingStrategyName_' + i] }}
+                                    {{ formErrors['strategyName_' + i] }}
                                 </div>
                             </div>
                         </div>
@@ -35,15 +35,15 @@
                         <!-- Strategy Description -->
                         <div class="row">
                             <div class="col-sm-6 form-group">
-                                <label for="tradingStrategyDescription_{{i}}">Description</label>
-                                <input [(ngModel)]="tradingStrategies[i].description"
-                                       class="form-control" id="tradingStrategyDescription_{{i}}"
-                                       name="tradingStrategyDescription_{{i}}" #tradingStrategyDescription="ngModel"
+                                <label for="strategyDescription_{{i}}">Description</label>
+                                <input [(ngModel)]="strategies[i].description"
+                                       class="form-control" id="strategyDescription_{{i}}"
+                                       name="strategyDescription_{{i}}" #strategyDescription="ngModel"
                                        maxlength="121"/>
-                                <div id="invalidTradingStrategyDescription_{{i}}"
-                                     *ngIf="formErrors['tradingStrategyDescription_' + i].length > 0"
+                                <div id="invalidStrategyDescription_{{i}}"
+                                     *ngIf="formErrors['strategyDescription_' + i].length > 0"
                                      class="alert alert-danger">
-                                    {{ formErrors['tradingStrategyDescription_' + i] }}
+                                    {{ formErrors['strategyDescription_' + i] }}
                                 </div>
                             </div>
                         </div>
@@ -51,17 +51,17 @@
                         <!-- Strategy Class Name -->
                         <div class="row">
                             <div class="col-sm-6 form-group">
-                                <label for="tradingStrategyClassname_{{i}}">Class Name</label>
-                                <input [(ngModel)]="tradingStrategies[i].className"
-                                       name="tradingStrategyClassname_{{i}}"
-                                       placeholder="com.my.MyTradingStrategyClass" id="tradingStrategyClassname_{{i}}"
+                                <label for="strategyClassname_{{i}}">Class Name</label>
+                                <input [(ngModel)]="strategies[i].className"
+                                       name="strategyClassname_{{i}}"
+                                       placeholder="com.my.MyTradingStrategyClass" id="strategyClassname_{{i}}"
                                        class="form-control" required maxlength="120"
-                                       #tradingStrategyClassname="ngModel"
+                                       #strategyClassname="ngModel"
                                        pattern="([a-zA-Z_$][a-zA-Z0-9_$]*\.)*[a-zA-Z_$][a-zA-Z0-9_$]*"/>
-                                <div id="invalidTradingStrategyClassname_{{i}}"
-                                     *ngIf="formErrors['tradingStrategyClassname_' + i].length > 0"
+                                <div id="invalidStrategyClassname_{{i}}"
+                                     *ngIf="formErrors['strategyClassname_' + i].length > 0"
                                      class="alert alert-danger">
-                                    {{ formErrors['tradingStrategyClassname_' + i] }}
+                                    {{ formErrors['strategyClassname_' + i] }}
                                 </div>
                             </div>
                         </div>
@@ -85,15 +85,15 @@
                             <div class="row">
                                 <div class="col-sm-12">
 
-                                    <div *ngFor="let optionalConfigItem of tradingStrategies[i].optionalConfig.configItems; let j=index; trackBy:trackByIndex"
+                                    <div *ngFor="let optionalConfigItem of strategies[i].optionalConfig.configItems; let j=index; trackBy:trackByIndex"
                                          class="panel panel-default">
 
                                         <div class="panel-heading">
                                             <span>Config Item {{j + 1}}</span>
                                             <span id="deleteConfigItemButton_{{i}}_{{j}}"
                                                   class="glyphicon glyphicon-remove pull-right"
-                                                  *ngIf="tradingStrategies[i].optionalConfig.configItems.length > 0"
-                                                  (click)="deleteOptionalConfigItem(tradingStrategies[i], optionalConfigItem)"></span>
+                                                  *ngIf="strategies[i].optionalConfig.configItems.length > 0"
+                                                  (click)="deleteOptionalConfigItem(strategies[i], optionalConfigItem)"></span>
                                         </div>
                                         <div class="panel-body">
                                             <div class="row">
@@ -131,7 +131,7 @@
                                     <div class="margin-20">
                                         <i class="glyphicon glyphicon-plus pull-left glyphicon-padding"></i>
                                         <a id="addNewStrategyConfigItemLink_{{i}}"
-                                           (click)="addOptionalConfigItem(tradingStrategies[i])" style="cursor: default">
+                                           (click)="addOptionalConfigItem(strategies[i])" style="cursor: default">
                                             Add new Config Item
                                         </a>
                                     </div>
@@ -142,8 +142,8 @@
                 </div>
                 <div class="margin-20">
                     <i class="glyphicon glyphicon-plus pull-left glyphicon-padding"></i>
-                    <a id="addTradingStrategyLink" (click)="addTradingStrategy()" style="cursor: default">
-                        Add Trading Strategy
+                    <a id="addStrategyLink" (click)="addStrategy()" style="cursor: default">
+                        Add Strategy
                     </a>
                 </div>
             </div>

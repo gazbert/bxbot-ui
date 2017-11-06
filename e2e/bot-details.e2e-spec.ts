@@ -101,17 +101,17 @@ describe('Bot Details Tests', function () {
         tabLinks.get(3).click();
 
         // Strat 1
-        expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');
-        expect(element(by.id('tradingStrategyDescription_0')).getAttribute('value'))
+        expect(element(by.id('strategyName_0')).getAttribute('value')).toBe('Long Scalper');
+        expect(element(by.id('strategyDescription_0')).getAttribute('value'))
             .toBe('Scalping strategy that buys low and sells high.');
-        expect(element(by.id('tradingStrategyClassname_0')).getAttribute('value'))
+        expect(element(by.id('strategyClassname_0')).getAttribute('value'))
             .toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
 
         // Strat 2
-        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('EMA Indicator');
-        expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
+        expect(element(by.id('strategyName_1')).getAttribute('value')).toBe('EMA Indicator');
+        expect(element(by.id('strategyDescription_1')).getAttribute('value'))
             .toBe('EMA Indicator algo for deciding when to enter and exit trades.');
-        expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
+        expect(element(by.id('strategyClassname_1')).getAttribute('value'))
             .toBe('com.gazbert.bxbot.strategies.EmaStrategy');
     });
 

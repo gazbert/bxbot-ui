@@ -20,7 +20,7 @@ describe('Miscellaneous Scenario Tests', function () {
         browser.get('');
     });
 
-    it('should add new Trading Strategy and be able to select it for existing Market', function () {
+    it('should add new Strategy and be able to select it for existing Market', function () {
 
         const searchBox = element.all(by.id('search-box'));
         searchBox.sendKeys('ItBit');
@@ -35,36 +35,33 @@ describe('Miscellaneous Scenario Tests', function () {
         tabLinks.get(3).click();
 
         // Existing Strat 1
-        expect(element(by.id('tradingStrategyName_0')).getAttribute('value')).toBe('Long Scalper');
-        expect(element(by.id('tradingStrategyDescription_0')).getAttribute('value'))
-            .toBe('Scalping strategy that buys low and sells high.');
-        expect(element(by.id('tradingStrategyClassname_0')).getAttribute('value'))
-            .toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
+        expect(element(by.id('strategyName_0')).getAttribute('value')).toBe('Long Scalper');
+        expect(element(by.id('strategyDescription_0')).getAttribute('value')).toBe('Scalping strategy that buys low and sells high.');
+        expect(element(by.id('strategyClassname_0')).getAttribute('value')).toBe('com.gazbert.bxbot.strategies.LongScalperStrategy');
 
         // Existing Strat 2
-        expect(element(by.id('tradingStrategyName_1')).getAttribute('value')).toBe('MACD Indicator');
-        expect(element(by.id('tradingStrategyDescription_1')).getAttribute('value'))
+        expect(element(by.id('strategyName_1')).getAttribute('value')).toBe('MACD Indicator');
+        expect(element(by.id('strategyDescription_1')).getAttribute('value'))
             .toBe('MACD Indicator algo for deciding when to enter and exit trades.');
-        expect(element(by.id('tradingStrategyClassname_1')).getAttribute('value'))
-            .toBe('com.gazbert.bxbot.strategies.MacdStrategy');
+        expect(element(by.id('strategyClassname_1')).getAttribute('value')).toBe('com.gazbert.bxbot.strategies.MacdStrategy');
 
         // Add new Strat 3
-        const addTradingStrategyLink = element(by.id('addTradingStrategyLink'));
-        addTradingStrategyLink.click();
+        const addStrategyLink = element(by.id('addStrategyLink'));
+        addStrategyLink.click();
 
-        const strategyName = element(by.id('tradingStrategyName_2'));
+        const strategyName = element(by.id('strategyName_2'));
         const newStrategyName = 'EMA Indicator';
         strategyName.clear();
         strategyName.sendKeys(newStrategyName);
         expect(strategyName.getAttribute('value')).toBe(newStrategyName);
 
-        const strategyDescription = element(by.id('tradingStrategyDescription_2'));
+        const strategyDescription = element(by.id('strategyDescription_2'));
         const newStrategyDescription = 'EMA Indicator algo for deciding when to enter and exit trades.';
         strategyDescription.clear();
         strategyDescription.sendKeys(newStrategyDescription);
         expect(strategyDescription.getAttribute('value')).toBe(newStrategyDescription);
 
-        const strategyClassName = element(by.id('tradingStrategyClassname_2'));
+        const strategyClassName = element(by.id('strategyClassname_2'));
         const newStrategyClassName = 'com.gazbert.bxbot.strategies.EmaIndicator';
         strategyClassName.clear();
         strategyClassName.sendKeys(newStrategyClassName);
