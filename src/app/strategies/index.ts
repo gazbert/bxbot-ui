@@ -1,1 +1,1 @@
-export * from './trading-strategies.component';
+export * from './strategies.component';

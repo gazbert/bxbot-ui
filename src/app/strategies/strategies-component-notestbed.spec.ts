@@ -1,10 +1,10 @@
 import {ActivatedRouteStub} from '../../../testing';
-import {TradingStrategiesComponent} from './trading-strategies.component';
+import {TradingStrategiesComponent} from './strategies.component';
 import {Strategy, OptionalConfig, ConfigItem} from '../model/strategy';
 import {Market} from '../model/market';
 
 /**
- * Tests the behaviour of the Trading Strategies component is as expected.
+ * Tests the behaviour of the Strategies component is as expected.
  *
  * Based off the main Angular tutorial:
  * https://angular.io/resources/live-examples/testing/ts/app-specs.plnkr.html

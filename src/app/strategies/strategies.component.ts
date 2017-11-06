@@ -5,14 +5,14 @@ import {OptionalConfig, Strategy, ConfigItem, StrategyHttpDataService} from '../
 import {MarketHttpDataPromiseService} from '../model/market';
 
 /**
- * Template-driven version of the Trading Strategies form.
+ * Template-driven version of the Strategies form.
  *
  * @author gazbert
  */
 @Component({
     selector: 'app-bxbot-ui-trading-strategies',
-    templateUrl: 'trading-strategies.component.html',
-    styleUrls: ['trading-strategies.component.css']
+    templateUrl: 'strategies.component.html',
+    styleUrls: ['strategies.component.css']
 })
 export class TradingStrategiesComponent implements OnInit, AfterViewChecked {
 
