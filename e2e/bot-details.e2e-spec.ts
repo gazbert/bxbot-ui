@@ -29,7 +29,7 @@ describe('Bot Details Tests', function () {
         expect(tabLinks.first().getText()).toEqual('Engine');
         expect(tabLinks.get(1).getText()).toEqual('Exchange Adapter');
         expect(tabLinks.get(2).getText()).toEqual('Markets');
-        expect(tabLinks.get(3).getText()).toEqual('Trading Strategies');
+        expect(tabLinks.get(3).getText()).toEqual('Strategies');
         expect(tabLinks.last().getText()).toEqual('Email Alerts');
 
         const tabItems = element.all(by.css('app-bxbot-ui-tab'));
