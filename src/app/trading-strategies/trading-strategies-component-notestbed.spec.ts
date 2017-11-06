@@ -1,6 +1,6 @@
 import {ActivatedRouteStub} from '../../../testing';
 import {TradingStrategiesComponent} from './trading-strategies.component';
-import {TradingStrategy, OptionalConfig, ConfigItem} from '../model/strategy';
+import {Strategy, OptionalConfig, ConfigItem} from '../model/strategy';
 import {Market} from '../model/market';
 
 /**
@@ -21,10 +21,10 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
     const configItemToDelete = new ConfigItem('item-to-delete', 'some-value');
 
     let expectedTradingStrategies = [];
-    let expectedTradingStrategy_1: TradingStrategy;
-    let expectedTradingStrategy_2: TradingStrategy;
-    let expectedUpdatedTradingStrategy_2: TradingStrategy;
-    let unusedTradingStrategy: TradingStrategy;
+    let expectedTradingStrategy_1: Strategy;
+    let expectedTradingStrategy_2: Strategy;
+    let expectedUpdatedTradingStrategy_2: Strategy;
+    let unusedTradingStrategy: Strategy;
 
     let expectedMarkets = [];
     let expectedMarket_1: Market;
@@ -36,7 +36,7 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
 
     beforeEach(done => {
 
-        expectedTradingStrategy_1 = new TradingStrategy('gdax_macd', 'gdax-2', 'MACD Indicator',
+        expectedTradingStrategy_1 = new Strategy('gdax_macd', 'gdax-2', 'MACD Indicator',
             'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy',
             new OptionalConfig([
                 {
@@ -50,7 +50,7 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
                 configItemToDelete
             ]));
 
-        expectedTradingStrategy_2 = new TradingStrategy('gdax_ema', 'gdax-2', 'EMA Indicator',
+        expectedTradingStrategy_2 = new Strategy('gdax_ema', 'gdax-2', 'EMA Indicator',
             'EMA Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.EmaStrategy',
             new OptionalConfig([
                 {
@@ -63,7 +63,7 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
                 }
             ]));
 
-        unusedTradingStrategy = new TradingStrategy('gdax_not_used', 'gdax-2', 'EMA Indicator',
+        unusedTradingStrategy = new Strategy('gdax_not_used', 'gdax-2', 'EMA Indicator',
             'EMA Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.EmaStrategy',
             new OptionalConfig([
                 {
@@ -76,7 +76,7 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
                 }
             ]));
 
-        expectedUpdatedTradingStrategy_2 = new TradingStrategy('gdax_scalper', 'gdax-2', 'Long Scalper',
+        expectedUpdatedTradingStrategy_2 = new Strategy('gdax_scalper', 'gdax-2', 'Long Scalper',
             'Scalper that buys low and sells high, like duh.', 'com.gazbert.bxbot.strategies.LongScalper',
             new OptionalConfig([
                 {

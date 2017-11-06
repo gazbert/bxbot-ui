@@ -2,7 +2,7 @@ import {OnInit, Component, ViewChild, AfterViewChecked} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {Market, MarketHttpDataPromiseService} from '../model/market/';
-import {TradingStrategy, OptionalConfig, TradingStrategyHttpDataPromiseService} from '../model/strategy';
+import {Strategy, OptionalConfig, TradingStrategyHttpDataPromiseService} from '../model/strategy';
 
 /**
  * Template-driven version of the Markets form.
@@ -18,7 +18,7 @@ export class MarketsComponent implements OnInit, AfterViewChecked {
 
     markets: Market[] = [];
     deletedMarkets: Market[] = [];
-    tradingStrategies: TradingStrategy[] = [];
+    tradingStrategies: Strategy[] = [];
     botId;
     active = true;
 
@@ -79,7 +79,7 @@ export class MarketsComponent implements OnInit, AfterViewChecked {
     }
 
     addMarket(): void {
-        const tradingStrategy = new TradingStrategy(this.createUuid(), this.botId, null, null, null, new OptionalConfig([]));
+        const tradingStrategy = new Strategy(this.createUuid(), this.botId, null, null, null, new OptionalConfig([]));
         this.markets.push(new Market(this.createUuid(), this.botId, null, false, null, null, tradingStrategy));
         this.updateFormErrors();
     }

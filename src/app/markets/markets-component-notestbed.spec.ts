@@ -1,7 +1,7 @@
 import {ActivatedRouteStub} from '../../../testing';
 import {MarketsComponent} from './markets.component';
 import {Market} from '../model/market';
-import {TradingStrategy, OptionalConfig} from '../model/strategy';
+import {Strategy, OptionalConfig} from '../model/strategy';
 
 /**
  * Tests the behaviour of the Markets component is as expected.
@@ -24,8 +24,8 @@ describe('MarketsComponent tests without TestBed', () => {
 
     let expectedUpdatedMarket_2: Market;
 
-    let expectedTradingStrategy_1: TradingStrategy;
-    let expectedTradingStrategy_2: TradingStrategy;
+    let expectedTradingStrategy_1: Strategy;
+    let expectedTradingStrategy_2: Strategy;
 
     let spyMarketDataService: any;
     let spyTradingStrategyDataService: any;
@@ -33,13 +33,13 @@ describe('MarketsComponent tests without TestBed', () => {
 
     beforeEach(done => {
 
-        expectedTradingStrategy_1 = new TradingStrategy('gdax_macd', 'gdax-2', 'MACD Indicator',
+        expectedTradingStrategy_1 = new Strategy('gdax_macd', 'gdax-2', 'MACD Indicator',
             'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy',
             new OptionalConfig([]));
 
         expectedMarket_1 = new Market('gdax_btc_usd', 'gdax-2', 'BTC/USD', true, 'BTC', 'USD', expectedTradingStrategy_1);
 
-        expectedTradingStrategy_2 = new TradingStrategy('gdax_ema', 'gdax-2', 'MACD Indicator',
+        expectedTradingStrategy_2 = new Strategy('gdax_ema', 'gdax-2', 'MACD Indicator',
             'EMA Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.EmaStrategy',
             new OptionalConfig([]));
 

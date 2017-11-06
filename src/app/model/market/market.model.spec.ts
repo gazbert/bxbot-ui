@@ -1,5 +1,5 @@
 import {Market} from './market.model';
-import {OptionalConfig, TradingStrategy} from '../strategy/trading-strategy.model';
+import {OptionalConfig, Strategy} from '../strategy/trading-strategy.model';
 
 /**
  * Tests the Market model behaves as expected.
@@ -10,7 +10,7 @@ describe('Market model tests', () => {
 
     it('should have correct initial values', () => {
 
-        const tradingStrategy = new TradingStrategy('gdax_macd', 'gdax-2', 'MACD Indicator',
+        const tradingStrategy = new Strategy('gdax_macd', 'gdax-2', 'MACD Indicator',
             'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy',
             new OptionalConfig([]));
 
@@ -27,7 +27,7 @@ describe('Market model tests', () => {
 
     it('should clone itself', () => {
 
-        const tradingStrategy = new TradingStrategy('gdax_macd', 'gdax-2', 'MACD Indicator',
+        const tradingStrategy = new Strategy('gdax_macd', 'gdax-2', 'MACD Indicator',
             'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy',
             new OptionalConfig([]));
 

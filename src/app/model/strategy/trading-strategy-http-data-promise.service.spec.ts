@@ -2,7 +2,7 @@ import {MockBackend, MockConnection} from '@angular/http/testing';
 import {Http, HttpModule, Response, ResponseOptions, XHRBackend} from '@angular/http';
 import {async, inject, TestBed} from '@angular/core/testing';
 import {TradingStrategyHttpDataPromiseService as TradingStrategyDataService} from './trading-strategy-http-data-promise.service';
-import {TradingStrategy, OptionalConfig} from './';
+import {Strategy, OptionalConfig} from './';
 
 /**
  * Tests the Trading Strategy HTTP Data service (Promise flavour) using a mocked HTTP backend.
@@ -44,7 +44,7 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
 
         let backend: MockBackend;
         let service: TradingStrategyDataService;
-        let fakeTradingStrategies: TradingStrategy[];
+        let fakeTradingStrategies: Strategy[];
         let response: Response;
 
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
@@ -74,11 +74,11 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
         let backend: MockBackend;
         let service: TradingStrategyDataService;
         let response: Response;
-        let updatedTradingStrategy: TradingStrategy;
+        let updatedTradingStrategy: Strategy;
 
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
 
-            updatedTradingStrategy = new TradingStrategy('huobi_macd', 'huobi-2', 'MACD Indicator',
+            updatedTradingStrategy = new Strategy('huobi_macd', 'huobi-2', 'MACD Indicator',
                 'MACD Indicator algo for deciding when to enter and exit trades.',
                 'com.gazbert.bxbot.strategies.MacdStrategy',
 
@@ -156,7 +156,7 @@ describe('TradingStrategyHttpDataPromiseService tests using TestBed + Mock HTTP 
 
 const makeTradingStrategyData = () => [
 
-    new TradingStrategy('huobi_macd', 'huobi-2', 'MACD Indicator',
+    new Strategy('huobi_macd', 'huobi-2', 'MACD Indicator',
         'MACD Indicator algo for deciding when to enter and exit trades.',
         'com.gazbert.bxbot.strategies.MacdRsiStrategy',
 
@@ -177,7 +177,7 @@ const makeTradingStrategyData = () => [
         )
     ),
 
-    new TradingStrategy('huobi_macd', 'huobi-2', 'MACD Indicator',
+    new Strategy('huobi_macd', 'huobi-2', 'MACD Indicator',
         'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy',
 
         new OptionalConfig([
@@ -196,6 +196,6 @@ const makeTradingStrategyData = () => [
             ]
         )
     )
-] as TradingStrategy[];
+] as Strategy[];
 
 

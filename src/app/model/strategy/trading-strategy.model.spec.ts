@@ -1,14 +1,14 @@
-import {OptionalConfig, TradingStrategy} from './trading-strategy.model';
+import {OptionalConfig, Strategy} from './trading-strategy.model';
 
 /**
- * Tests the Trading Strategy model behaves as expected.
+ * Tests the Strategy model behaves as expected.
  *
  * @author gazbert
  */
-describe('Trading Strategy model tests', () => {
+describe('Strategy model tests', () => {
 
     it('should have correct initial values', () => {
-        const tradingStrategy = new TradingStrategy('gdax_macd', 'gdax-2', 'MACD Indicator',
+        const strategy = new Strategy('gdax_macd', 'gdax-2', 'MACD Indicator',
             'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy',
             new OptionalConfig([
                     {
@@ -27,15 +27,15 @@ describe('Trading Strategy model tests', () => {
             )
         );
 
-        expect(tradingStrategy.id).toBe('gdax_macd');
-        expect(tradingStrategy.botId).toBe('gdax-2');
-        expect(tradingStrategy.name).toBe('MACD Indicator');
-        expect(tradingStrategy.description).toBe('MACD Indicator for deciding when to enter and exit trades.');
-        expect(tradingStrategy.className).toBe('com.gazbert.bxbot.strategies.MacdStrategy');
+        expect(strategy.id).toBe('gdax_macd');
+        expect(strategy.botId).toBe('gdax-2');
+        expect(strategy.name).toBe('MACD Indicator');
+        expect(strategy.description).toBe('MACD Indicator for deciding when to enter and exit trades.');
+        expect(strategy.className).toBe('com.gazbert.bxbot.strategies.MacdStrategy');
     });
 
     it('should clone itself', () => {
-        const tradingStrategy = new TradingStrategy('gdax_macd', 'gdax-1', 'MACD Indicator',
+        const strategy = new Strategy('gdax_macd', 'gdax-1', 'MACD Indicator',
             'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy',
             new OptionalConfig([
                     {
@@ -54,7 +54,7 @@ describe('Trading Strategy model tests', () => {
             )
         );
 
-        const clone = tradingStrategy.clone();
-        expect(tradingStrategy).toEqual(clone);
+        const clone = strategy.clone();
+        expect(strategy).toEqual(clone);
     });
 });

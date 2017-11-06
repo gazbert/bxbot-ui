@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/toPromise';
-import {TradingStrategy} from './trading-strategy.model';
+import {Strategy} from './trading-strategy.model';
 
 /**
  * The Trading Strategy Data Service provides operations to update Trading Strategy configuration.
@@ -9,9 +9,9 @@ import {TradingStrategy} from './trading-strategy.model';
  */
 export interface TradingStrategyDataPromiseService {
 
-    getAllTradingStrategiesForBotId(botId: string): Promise<TradingStrategy[]>;
+    getAllTradingStrategiesForBotId(botId: string): Promise<Strategy[]>;
 
-    updateTradingStrategy(tradingStrategy: TradingStrategy): Promise<TradingStrategy>;
+    updateTradingStrategy(tradingStrategy: Strategy): Promise<Strategy>;
 
     deleteTradingStrategyById(tradingStrategyId: string): Promise<boolean>;
 }

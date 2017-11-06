@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import {AppComponent} from '../../app.component';
-import {TradingStrategy} from './trading-strategy.model';
+import {Strategy} from './trading-strategy.model';
 import {TradingStrategyDataPromiseService} from './trading-strategy-data-promise.service';
 import {AuthenticationService} from '../../shared/authentication.service';
 
@@ -30,7 +30,7 @@ export class TradingStrategyHttpDataPromiseService implements TradingStrategyDat
     constructor(private http: Http) {
     }
 
-    getAllTradingStrategiesForBotId(botId: string): Promise<TradingStrategy[]> {
+    getAllTradingStrategiesForBotId(botId: string): Promise<Strategy[]> {
 
         const headers = new Headers({
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
@@ -39,11 +39,11 @@ export class TradingStrategyHttpDataPromiseService implements TradingStrategyDat
         const url = this.tradingStrategiesUrl + '?botId=' + botId;
         return this.http.get(url, {headers: headers})
             .toPromise()
-            .then(response => response.json().data as TradingStrategy[])
+            .then(response => response.json().data as Strategy[])
             .catch(this.handleError);
     }
 
-    updateTradingStrategy(tradingStrategy: TradingStrategy): Promise<TradingStrategy> {
+    updateTradingStrategy(tradingStrategy: Strategy): Promise<Strategy> {
 
         const headers = new Headers({
             'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ export class TradingStrategyHttpDataPromiseService implements TradingStrategyDat
         return this.http
             .put(url, JSON.stringify(tradingStrategy), {headers: headers})
             .toPromise()
-            .then(response => response.json().data as TradingStrategy)
+            .then(response => response.json().data as Strategy)
             .catch(this.handleError);
     }
 

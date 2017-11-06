@@ -1,4 +1,4 @@
-import {TradingStrategy} from '../strategy/trading-strategy.model';
+import {Strategy} from '../strategy/trading-strategy.model';
 
 /**
  * Encapsulates a Market.
@@ -13,7 +13,7 @@ export class Market {
                 public enabled: boolean,
                 public baseCurrency: string,
                 public counterCurrency: string,
-                public tradingStrategy: TradingStrategy) {
+                public tradingStrategy: Strategy) {
     }
 
     clone() {

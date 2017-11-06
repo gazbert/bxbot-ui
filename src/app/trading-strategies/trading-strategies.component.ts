@@ -1,7 +1,7 @@
 import {AfterViewChecked, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {OptionalConfig, TradingStrategy, ConfigItem, TradingStrategyHttpDataPromiseService} from '../model/strategy';
+import {OptionalConfig, Strategy, ConfigItem, TradingStrategyHttpDataPromiseService} from '../model/strategy';
 import {MarketHttpDataPromiseService} from '../model/market';
 
 /**
@@ -16,8 +16,8 @@ import {MarketHttpDataPromiseService} from '../model/market';
 })
 export class TradingStrategiesComponent implements OnInit, AfterViewChecked {
 
-    tradingStrategies: TradingStrategy[] = [];
-    deletedTradingStrategies: TradingStrategy[] = [];
+    tradingStrategies: Strategy[] = [];
+    deletedTradingStrategies: Strategy[] = [];
     botId;
     active = true;
     canDeleteStrategy = true;
@@ -87,11 +87,11 @@ export class TradingStrategiesComponent implements OnInit, AfterViewChecked {
     }
 
     addTradingStrategy(): void {
-        this.tradingStrategies.push(new TradingStrategy(this.createUuid(), this.botId, null, null, null, new OptionalConfig([])));
+        this.tradingStrategies.push(new Strategy(this.createUuid(), this.botId, null, null, null, new OptionalConfig([])));
         this.updateFormErrors();
     }
 
-    deleteTradingStrategy(tradingStrategy: TradingStrategy): void {
+    deleteTradingStrategy(tradingStrategy: Strategy): void {
         this.marketDataService.getAllMarketsForBotId(this.botId)
             .then((markets) => {
                 const marketsUsingTheStrategy = markets.filter(m => m.tradingStrategy.id === tradingStrategy.id);
@@ -142,12 +142,12 @@ export class TradingStrategiesComponent implements OnInit, AfterViewChecked {
         this.canDeleteStrategy = true;
     }
 
-    addOptionalConfigItem(strategy: TradingStrategy): void {
+    addOptionalConfigItem(strategy: Strategy): void {
         strategy.optionalConfig.configItems.push(new ConfigItem('', ''));
         this.updateFormErrors();
     }
 
-    deleteOptionalConfigItem(selectedStrategy: TradingStrategy, configItem: ConfigItem): void {
+    deleteOptionalConfigItem(selectedStrategy: Strategy, configItem: ConfigItem): void {
         this.tradingStrategies.forEach((s) => {
             if (s.id === selectedStrategy.id) {
                 s.optionalConfig.configItems = s.optionalConfig.configItems.filter(c => c !== configItem);

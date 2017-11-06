@@ -1,9 +1,9 @@
 /**
- * Encapsulates a Trading Strategy.
+ * Encapsulates a Strategy.
  *
  * @author gazbert
  */
-export class TradingStrategy {
+export class Strategy {
 
     constructor(public id: string,
                 public botId: string,
@@ -14,7 +14,7 @@ export class TradingStrategy {
     }
 
     clone() {
-        return new TradingStrategy(this.id, this.botId, this.name, this.description, this.className, this.optionalConfig);
+        return new Strategy(this.id, this.botId, this.name, this.description, this.className, this.optionalConfig);
     }
 }
 
