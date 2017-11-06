@@ -67,7 +67,7 @@ export class TradingStrategiesComponent implements OnInit, AfterViewChecked {
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
             this.botId = params['id'];
-            this.tradingStrategyDataService.getAllTradingStrategiesForBotId(this.botId)
+            this.tradingStrategyDataService.getAllStrategiesForBotId(this.botId)
                 .then(tradingStrategies => {
                     this.tradingStrategies = tradingStrategies;
                     this.updateFormErrors();
@@ -108,13 +108,13 @@ export class TradingStrategiesComponent implements OnInit, AfterViewChecked {
     save(isValid: boolean): void {
         if (isValid) {
             this.deletedTradingStrategies.forEach((tradingStrategy) => {
-                this.tradingStrategyDataService.deleteTradingStrategyById(tradingStrategy.id).then(() => {/*done*/
+                this.tradingStrategyDataService.deleteStrategyById(tradingStrategy.id).then(() => {/*done*/
                 });
             });
 
             // TODO - Be more efficient: only update Strats that have changed
             this.tradingStrategies.forEach((tradingStrategy) => {
-                this.tradingStrategyDataService.updateTradingStrategy(tradingStrategy)
+                this.tradingStrategyDataService.updateStrategy(tradingStrategy)
                     .then(() => this.goToDashboard());
             });
         } else {

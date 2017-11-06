@@ -30,7 +30,7 @@ export class StrategyHttpDataPromiseService implements StrategyDataPromiseServic
     constructor(private http: Http) {
     }
 
-    getAllTradingStrategiesForBotId(botId: string): Promise<Strategy[]> {
+    getAllStrategiesForBotId(botId: string): Promise<Strategy[]> {
 
         const headers = new Headers({
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
@@ -43,7 +43,7 @@ export class StrategyHttpDataPromiseService implements StrategyDataPromiseServic
             .catch(this.handleError);
     }
 
-    updateTradingStrategy(tradingStrategy: Strategy): Promise<Strategy> {
+    updateStrategy(tradingStrategy: Strategy): Promise<Strategy> {
 
         const headers = new Headers({
             'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ export class StrategyHttpDataPromiseService implements StrategyDataPromiseServic
             .catch(this.handleError);
     }
 
-    deleteTradingStrategyById(tradingStrategyId: string): Promise<boolean> {
+    deleteStrategyById(tradingStrategyId: string): Promise<boolean> {
 
         const headers = new Headers({
             'Authorization': 'Bearer ' + AuthenticationService.getToken()

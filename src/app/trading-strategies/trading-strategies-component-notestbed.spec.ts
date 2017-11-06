@@ -97,9 +97,9 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
         router = jasmine.createSpyObj('router', ['navigate']);
 
         spyTradingStrategyDataService = jasmine.createSpyObj('TradingStrategiesHttpDataPromiseService',
-            ['getAllTradingStrategiesForBotId', 'updateTradingStrategy', 'deleteTradingStrategyById']);
-        spyTradingStrategyDataService.getAllTradingStrategiesForBotId.and.returnValue(Promise.resolve(expectedTradingStrategies));
-        spyTradingStrategyDataService.updateTradingStrategy.and.returnValue(Promise.resolve(expectedUpdatedTradingStrategy_2));
+            ['getAllStrategiesForBotId', 'updateStrategy', 'deleteStrategyById']);
+        spyTradingStrategyDataService.getAllStrategiesForBotId.and.returnValue(Promise.resolve(expectedTradingStrategies));
+        spyTradingStrategyDataService.updateStrategy.and.returnValue(Promise.resolve(expectedUpdatedTradingStrategy_2));
 
         spyMarketDataService = jasmine.createSpyObj('MarketHttpDataPromiseService', ['getAllMarketsForBotId']);
         spyMarketDataService.getAllMarketsForBotId.and.returnValue(Promise.resolve(expectedMarkets));
@@ -110,7 +110,7 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
         tradingStrategiesComponent.ngOnInit();
 
         // OnInit calls TradingStrategiesComponent.getAllTradingStrategiesForExchange; wait for it to get the exchanges
-        spyTradingStrategyDataService.getAllTradingStrategiesForBotId.calls.first().returnValue.then(done);
+        spyTradingStrategyDataService.getAllStrategiesForBotId.calls.first().returnValue.then(done);
     });
 
     it('should expose Trading Strategies retrieved from TradingStrategyDataService', () => {
@@ -125,7 +125,7 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
 
     it('should save and navigate to Dashboard when user clicks Save for valid input', done => {
         tradingStrategiesComponent.save(true);
-        spyTradingStrategyDataService.updateTradingStrategy.calls.first().returnValue
+        spyTradingStrategyDataService.updateStrategy.calls.first().returnValue
             .then((updatedStrategy) => {
                 expect(updatedStrategy).toBe(expectedUpdatedTradingStrategy_2);
                 expect(router.navigate).toHaveBeenCalledWith(['dashboard']);
@@ -135,13 +135,13 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
 
     it('should NOT save and navigate to Dashboard when user clicks Cancel', () => {
         tradingStrategiesComponent.cancel();
-        expect(spyTradingStrategyDataService.updateTradingStrategy.calls.any()).toEqual(false);
+        expect(spyTradingStrategyDataService.updateStrategy.calls.any()).toEqual(false);
         expect(router.navigate).toHaveBeenCalledWith(['dashboard']);
     });
 
     it('should NOT save or navigate to Dashboard when user clicks Save for invalid input', () => {
         tradingStrategiesComponent.save(false);
-        expect(spyTradingStrategyDataService.updateTradingStrategy.calls.any()).toEqual(false);
+        expect(spyTradingStrategyDataService.updateStrategy.calls.any()).toEqual(false);
         expect(router.navigate.calls.any()).toBe(false, 'router.navigate should not have been called');
     });
 

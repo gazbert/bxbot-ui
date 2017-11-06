@@ -62,7 +62,7 @@ export class MarketsComponent implements OnInit, AfterViewChecked {
                 });
         }).then(() => {/*done*/});
 
-        this.tradingStrategyDataService.getAllTradingStrategiesForBotId(this.botId)
+        this.tradingStrategyDataService.getAllStrategiesForBotId(this.botId)
             .then(tradingStrategies => this.tradingStrategies = tradingStrategies);
 
     }
