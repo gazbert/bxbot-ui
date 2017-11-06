@@ -16,7 +16,7 @@ import {EmailAlertsModule} from './email-alerts/email-alerts.module';
 import {AppRoutingModule} from './app-routing.module';
 import {EmailAlertsHttpDataPromiseService} from './model/email-alerts';
 import {EngineHttpDataPromiseService} from './model/engine';
-import {TradingStrategiesModule} from './trading-strategies/trading-strategies.module';
+import {TradingStrategiesModule} from './strategies/trading-strategies.module';
 import {StrategyHttpDataService} from './model/strategy/strategy-http-data.service';
 import {LoginModule} from './login/login.module';
 import {AuthenticationService, CanActivateAuthGuard} from './shared';
