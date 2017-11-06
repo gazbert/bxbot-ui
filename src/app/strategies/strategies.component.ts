@@ -14,7 +14,7 @@ import {MarketHttpDataPromiseService} from '../model/market';
     templateUrl: 'strategies.component.html',
     styleUrls: ['strategies.component.css']
 })
-export class TradingStrategiesComponent implements OnInit, AfterViewChecked {
+export class StrategiesComponent implements OnInit, AfterViewChecked {
 
     tradingStrategies: Strategy[] = [];
     deletedTradingStrategies: Strategy[] = [];

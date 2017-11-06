@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
-import {TradingStrategiesComponent} from './strategies.component';
+import {StrategiesComponent} from './strategies.component';
 import {SharedModule} from '../shared/shared.module';
 
 /**
- * Encapsulates the Strategies config management.
+ * Module encapsulates the Strategies config management.
  *
  * @author gazbert
  */
@@ -15,8 +15,8 @@ import {SharedModule} from '../shared/shared.module';
         FormsModule,
         SharedModule
     ],
-    exports: [TradingStrategiesComponent],
-    declarations: [TradingStrategiesComponent]
+    exports: [StrategiesComponent],
+    declarations: [StrategiesComponent]
 })
-export class TradingStrategiesModule {
+export class StrategiesModule {
 }

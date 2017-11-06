@@ -1,5 +1,5 @@
 import {ActivatedRouteStub} from '../../../testing';
-import {TradingStrategiesComponent} from './strategies.component';
+import {StrategiesComponent} from './strategies.component';
 import {Strategy, OptionalConfig, ConfigItem} from '../model/strategy';
 import {Market} from '../model/market';
 
@@ -13,10 +13,10 @@ import {Market} from '../model/market';
  *
  * @author gazbert
  */
-describe('TradingStrategiesComponent tests without TestBed', () => {
+describe('StrategiesComponent tests without TestBed', () => {
 
     let activatedRoute: ActivatedRouteStub;
-    let tradingStrategiesComponent: TradingStrategiesComponent;
+    let tradingStrategiesComponent: StrategiesComponent;
 
     const configItemToDelete = new ConfigItem('item-to-delete', 'some-value');
 
@@ -104,7 +104,7 @@ describe('TradingStrategiesComponent tests without TestBed', () => {
         spyMarketDataService = jasmine.createSpyObj('MarketHttpDataPromiseService', ['getAllMarketsForBotId']);
         spyMarketDataService.getAllMarketsForBotId.and.returnValue(Promise.resolve(expectedMarkets));
 
-        tradingStrategiesComponent = new TradingStrategiesComponent(spyTradingStrategyDataService, spyMarketDataService,
+        tradingStrategiesComponent = new StrategiesComponent(spyTradingStrategyDataService, spyMarketDataService,
             <any> activatedRoute, router);
 
         tradingStrategiesComponent.ngOnInit();
