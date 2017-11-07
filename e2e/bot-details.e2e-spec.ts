@@ -81,17 +81,17 @@ describe('Bot Details Tests', function () {
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('1: EMA Indicator');
+        expect(element(by.id('strategy_0')).getAttribute('value')).toBe('1: EMA Indicator');
 
         // Market 2
         expect(element(by.id('marketEnabled_1')).getAttribute('ng-reflect-model')).toBe('true');
         expect(element(by.id('marketName_1')).getAttribute('value')).toBe('BTC/GBP');
         expect(element(by.id('baseCurrency_1')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_1')).getAttribute('value')).toBe('GBP');
-        expect(element(by.id('tradingStrategy_1')).getAttribute('value')).toBe('0: Long Scalper');
+        expect(element(by.id('strategy_1')).getAttribute('value')).toBe('0: Long Scalper');
     });
 
-    it('should render GDAX Trading Strategies', function () {
+    it('should render GDAX Strategies', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(1).click();

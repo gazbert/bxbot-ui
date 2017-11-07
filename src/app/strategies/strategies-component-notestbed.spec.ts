@@ -152,10 +152,10 @@ describe('StrategiesComponent tests without TestBed', () => {
             .then((markets) => {
                 // paranoia ;-)
                 expect(markets.length).toBe(2);
-                expect(markets[0].tradingStrategy.id).toBe('gdax_macd');
-                expect(markets[0].tradingStrategy.name).toBe('MACD Indicator');
-                expect(markets[1].tradingStrategy.id).toBe('gdax_ema');
-                expect(markets[1].tradingStrategy.name).toBe('EMA Indicator');
+                expect(markets[0].strategy.id).toBe('gdax_macd');
+                expect(markets[0].strategy.name).toBe('MACD Indicator');
+                expect(markets[1].strategy.id).toBe('gdax_ema');
+                expect(markets[1].strategy.name).toBe('EMA Indicator');
 
                 expect(strategiesComponent.strategies.length).toBe(3);
                 expect(strategiesComponent.deletedStrategies.length).toBe(0);
@@ -170,10 +170,10 @@ describe('StrategiesComponent tests without TestBed', () => {
             .then((markets) => {
                 // paranoia ;-)
                 expect(markets.length).toBe(2);
-                expect(markets[0].tradingStrategy.id).toBe('gdax_macd');
-                expect(markets[0].tradingStrategy.name).toBe('MACD Indicator');
-                expect(markets[1].tradingStrategy.id).toBe('gdax_ema');
-                expect(markets[1].tradingStrategy.name).toBe('EMA Indicator');
+                expect(markets[0].strategy.id).toBe('gdax_macd');
+                expect(markets[0].strategy.name).toBe('MACD Indicator');
+                expect(markets[1].strategy.id).toBe('gdax_ema');
+                expect(markets[1].strategy.name).toBe('EMA Indicator');
 
                 expect(strategiesComponent.strategies.length).toBe(2);
                 expect(strategiesComponent.deletedStrategies.length).toBe(1);

@@ -103,9 +103,9 @@ describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend',
                     expect(market).toBe(updatedMarket);
 
                     // paranoia!
-                    expect(market.tradingStrategy.id).toBe(updatedMarket.tradingStrategy.id);
-                    expect(market.tradingStrategy.name).toBe(updatedMarket.tradingStrategy.name);
-                    expect(market.tradingStrategy.className).toBe(updatedMarket.tradingStrategy.className);
+                    expect(market.strategy.id).toBe(updatedMarket.strategy.id);
+                    expect(market.strategy.name).toBe(updatedMarket.strategy.name);
+                    expect(market.strategy.className).toBe(updatedMarket.strategy.className);
                 });
         })));
 

@@ -78,13 +78,13 @@ describe('Miscellaneous Scenario Tests', function () {
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('XBT/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('XBT');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('1: MACD Indicator');
+        expect(element(by.id('strategy_0')).getAttribute('value')).toBe('1: MACD Indicator');
 
-        // Update Market's Trading Strat
-        const tradingStrategy = element(by.id('tradingStrategy_0'));
-        const newTradingStrategy = '2: EMA Indicator';
-        element(by.id('tradingStrategy_0')).sendKeys('EMA Indicator');
-        expect(tradingStrategy.getAttribute('value')).toBe(newTradingStrategy);
+        // Update Market's Strat
+        const strategy = element(by.id('strategy_0'));
+        const newStrategy = '2: EMA Indicator';
+        element(by.id('strategy_0')).sendKeys('EMA Indicator');
+        expect(strategy.getAttribute('value')).toBe(newStrategy);
 
         // Save and check the update worked
         saveButton = element(by.id('marketSaveButton'));
@@ -97,6 +97,6 @@ describe('Miscellaneous Scenario Tests', function () {
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('XBT/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('XBT');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe(newTradingStrategy);
+        expect(element(by.id('strategy_0')).getAttribute('value')).toBe(newStrategy);
     });
 });

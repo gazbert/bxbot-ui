@@ -18,7 +18,7 @@ export class MarketsComponent implements OnInit, AfterViewChecked {
 
     markets: Market[] = [];
     deletedMarkets: Market[] = [];
-    tradingStrategies: Strategy[] = [];
+    strategies: Strategy[] = [];
     botId;
     active = true;
 
@@ -42,13 +42,13 @@ export class MarketsComponent implements OnInit, AfterViewChecked {
             'required': 'Base Currency is required.',
             'pattern': 'Base Currency must be valid 3 character currency id, e.g. USD'
         },
-        'tradingStrategy': {
-            'required': 'Trading Strategy is required.'
+        'strategy': {
+            'required': 'Strategy is required.'
         }
     };
 
     constructor(private marketDataService: MarketHttpDataPromiseService,
-                private tradingStrategyDataService: StrategyHttpDataService, private route: ActivatedRoute,
+                private strategyDataService: StrategyHttpDataService, private route: ActivatedRoute,
                 private router: Router) {
     }
 
@@ -62,8 +62,8 @@ export class MarketsComponent implements OnInit, AfterViewChecked {
                 });
         }).then(() => {/*done*/});
 
-        this.tradingStrategyDataService.getAllStrategiesForBotId(this.botId)
-            .then(tradingStrategies => this.tradingStrategies = tradingStrategies);
+        this.strategyDataService.getAllStrategiesForBotId(this.botId)
+            .then(strategies => this.strategies = strategies);
 
     }
 
@@ -79,8 +79,8 @@ export class MarketsComponent implements OnInit, AfterViewChecked {
     }
 
     addMarket(): void {
-        const tradingStrategy = new Strategy(this.createUuid(), this.botId, null, null, null, new OptionalConfig([]));
-        this.markets.push(new Market(this.createUuid(), this.botId, null, false, null, null, tradingStrategy));
+        const strategy = new Strategy(this.createUuid(), this.botId, null, null, null, new OptionalConfig([]));
+        this.markets.push(new Market(this.createUuid(), this.botId, null, false, null, null, strategy));
         this.updateFormErrors();
     }
 
@@ -130,7 +130,7 @@ export class MarketsComponent implements OnInit, AfterViewChecked {
             this.formErrors['marketName_' + i] = '';
             this.formErrors['baseCurrency_' + i] = '';
             this.formErrors['counterCurrency_' + i] = '';
-            this.formErrors['tradingStrategy_' + i] = '';
+            this.formErrors['strategy_' + i] = '';
         }
     }
 

@@ -94,7 +94,7 @@ export class StrategiesComponent implements OnInit, AfterViewChecked {
     deleteStrategy(strategy: Strategy): void {
         this.marketDataService.getAllMarketsForBotId(this.botId)
             .then((markets) => {
-                const marketsUsingTheStrategy = markets.filter(m => m.tradingStrategy.id === strategy.id);
+                const marketsUsingTheStrategy = markets.filter(m => m.strategy.id === strategy.id);
                 if (marketsUsingTheStrategy.length > 0) {
                     this.showCannotDeleteStrategyModal();
                 } else {

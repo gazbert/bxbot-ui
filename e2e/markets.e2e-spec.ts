@@ -32,14 +32,14 @@ describe('Market Tests', function () {
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD Indicator');
+        expect(element(by.id('strategy_0')).getAttribute('value')).toBe('0: MACD Indicator');
 
         // Market 2
         expect(element(by.id('marketEnabled_1')).getAttribute('ng-reflect-model')).toBe('true');
         expect(element(by.id('marketName_1')).getAttribute('value')).toBe('LTC/USD');
         expect(element(by.id('baseCurrency_1')).getAttribute('value')).toBe('LTC');
         expect(element(by.id('counterCurrency_1')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_1')).getAttribute('value')).toBe('1: Long Scalper');
+        expect(element(by.id('strategy_1')).getAttribute('value')).toBe('1: Long Scalper');
 
         // Update market fields
         const marketEnabled = element(by.id('marketEnabled_0'));
@@ -64,17 +64,17 @@ describe('Market Tests', function () {
         counterCurrency.sendKeys(newCounterCurrency);
         expect(counterCurrency.getAttribute('value')).toBe(newCounterCurrency);
 
-        const tradingStrategy = element(by.id('tradingStrategy_0'));
-        const newTradingStrategy = '1: Long Scalper';
+        const strategy = element(by.id('strategy_0'));
+        const newStrategy = '1: Long Scalper';
 
         // TODO not supported with Angular 2 yet
-        // element(by.model('tradingStrategy_0')).sendKeys('Long Scalper');
+        // element(by.model('strategy_0')).sendKeys('Long Scalper');
 
         // Both alts below work...
-        element(by.id('tradingStrategy_0')).sendKeys('Long Scalper');
+        element(by.id('strategy_0')).sendKeys('Long Scalper');
         // element(by.cssContainingText('option', 'Long Scalper')).click();
 
-        expect(tradingStrategy.getAttribute('value')).toBe(newTradingStrategy);
+        expect(strategy.getAttribute('value')).toBe(newStrategy);
 
         // Save and check the update worked
         const saveButton = element(by.id('marketSaveButton'));
@@ -87,14 +87,14 @@ describe('Market Tests', function () {
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe(newMarketName);
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe(newBaseCurrency);
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe(newCounterCurrency);
-        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe(newTradingStrategy);
+        expect(element(by.id('strategy_0')).getAttribute('value')).toBe(newStrategy);
 
         // Market 2 unchanged
         expect(element(by.id('marketEnabled_1')).getAttribute('ng-reflect-model')).toBe('true');
         expect(element(by.id('marketName_1')).getAttribute('value')).toBe('LTC/USD');
         expect(element(by.id('baseCurrency_1')).getAttribute('value')).toBe('LTC');
         expect(element(by.id('counterCurrency_1')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_1')).getAttribute('value')).toBe('1: Long Scalper');
+        expect(element(by.id('strategy_1')).getAttribute('value')).toBe('1: Long Scalper');
     });
 
     it('should NOT update Market fields after Cancel', function () {
@@ -110,7 +110,7 @@ describe('Market Tests', function () {
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD Indicator');
+        expect(element(by.id('strategy_0')).getAttribute('value')).toBe('0: MACD Indicator');
 
         // Update market fields
         const marketEnabled = element(by.id('marketEnabled_0'));
@@ -135,17 +135,17 @@ describe('Market Tests', function () {
         counterCurrency.sendKeys(newCounterCurrency);
         expect(counterCurrency.getAttribute('value')).toBe(newCounterCurrency);
 
-        const tradingStrategy = element(by.id('tradingStrategy_0'));
-        const newTradingStrategy = '1: Long Scalper';
+        const strategy = element(by.id('strategy_0'));
+        const newStrategy = '1: Long Scalper';
 
         // TODO not supported with Angular 2 yet
-        // element(by.model('tradingStrategy_0')).sendKeys('Long Scalper');
+        // element(by.model('strategy_0')).sendKeys('Long Scalper');
 
         // Both alts below work...
-        element(by.id('tradingStrategy_0')).sendKeys('Long Scalper');
+        element(by.id('strategy_0')).sendKeys('Long Scalper');
         // element(by.cssContainingText('option', 'Long Scalper')).click();
 
-        expect(tradingStrategy.getAttribute('value')).toBe(newTradingStrategy);
+        expect(strategy.getAttribute('value')).toBe(newStrategy);
 
         // Cancel and check the update did not persist
         const cancelButton = element(by.id('marketCancelButton'));
@@ -158,14 +158,14 @@ describe('Market Tests', function () {
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD Indicator');
+        expect(element(by.id('strategy_0')).getAttribute('value')).toBe('0: MACD Indicator');
 
         // Market 2 unchanged
         expect(element(by.id('marketEnabled_1')).getAttribute('ng-reflect-model')).toBe('true');
         expect(element(by.id('marketName_1')).getAttribute('value')).toBe('LTC/USD');
         expect(element(by.id('baseCurrency_1')).getAttribute('value')).toBe('LTC');
         expect(element(by.id('counterCurrency_1')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_1')).getAttribute('value')).toBe('1: Long Scalper');
+        expect(element(by.id('strategy_1')).getAttribute('value')).toBe('1: Long Scalper');
     });
 
     it('should add new Market and save it', function () {
@@ -182,14 +182,14 @@ describe('Market Tests', function () {
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD Indicator');
+        expect(element(by.id('strategy_0')).getAttribute('value')).toBe('0: MACD Indicator');
 
         // Market 2
         expect(element(by.id('marketEnabled_1')).getAttribute('ng-reflect-model')).toBe('true');
         expect(element(by.id('marketName_1')).getAttribute('value')).toBe('LTC/USD');
         expect(element(by.id('baseCurrency_1')).getAttribute('value')).toBe('LTC');
         expect(element(by.id('counterCurrency_1')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_1')).getAttribute('value')).toBe('1: Long Scalper');
+        expect(element(by.id('strategy_1')).getAttribute('value')).toBe('1: Long Scalper');
 
         // Add new Market 3
         const addMarketLink = element(by.id('addMarketLink'));
@@ -217,17 +217,17 @@ describe('Market Tests', function () {
         counterCurrency.sendKeys(newCounterCurrency);
         expect(counterCurrency.getAttribute('value')).toBe(newCounterCurrency);
 
-        const tradingStrategy = element(by.id('tradingStrategy_2'));
-        const newTradingStrategy = '1: Long Scalper';
+        const strategy = element(by.id('strategy_2'));
+        const newStrategy = '1: Long Scalper';
 
         // TODO not supported with Angular 2 yet
-        // element(by.model('tradingStrategy_0')).sendKeys('Long Scalper');
+        // element(by.model('strategy_0')).sendKeys('Long Scalper');
 
         // Both alts below work...
-        element(by.id('tradingStrategy_2')).sendKeys('Long Scalper');
+        element(by.id('strategy_2')).sendKeys('Long Scalper');
         // element(by.cssContainingText('option', 'Long Scalper')).click();
 
-        expect(tradingStrategy.getAttribute('value')).toBe(newTradingStrategy);
+        expect(strategy.getAttribute('value')).toBe(newStrategy);
 
         // Save and check the update worked
         const saveButton = element(by.id('marketSaveButton'));
@@ -240,21 +240,21 @@ describe('Market Tests', function () {
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD Indicator');
+        expect(element(by.id('strategy_0')).getAttribute('value')).toBe('0: MACD Indicator');
 
         // Market 2 unchanged
         expect(element(by.id('marketEnabled_1')).getAttribute('ng-reflect-model')).toBe('true');
         expect(element(by.id('marketName_1')).getAttribute('value')).toBe('LTC/USD');
         expect(element(by.id('baseCurrency_1')).getAttribute('value')).toBe('LTC');
         expect(element(by.id('counterCurrency_1')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_1')).getAttribute('value')).toBe('1: Long Scalper');
+        expect(element(by.id('strategy_1')).getAttribute('value')).toBe('1: Long Scalper');
 
         // Hello Market 3!
         expect(element(by.id('marketEnabled_2')).getAttribute('ng-reflect-model')).toBe('true');
         expect(element(by.id('marketName_2')).getAttribute('value')).toBe(newMarketName);
         expect(element(by.id('baseCurrency_2')).getAttribute('value')).toBe(newBaseCurrency);
         expect(element(by.id('counterCurrency_2')).getAttribute('value')).toBe(newCounterCurrency);
-        expect(element(by.id('tradingStrategy_2')).getAttribute('value')).toBe('1: Long Scalper');
+        expect(element(by.id('strategy_2')).getAttribute('value')).toBe('1: Long Scalper');
     });
 
     it('should delete Market and save change', function () {
@@ -271,14 +271,14 @@ describe('Market Tests', function () {
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD Indicator');
+        expect(element(by.id('strategy_0')).getAttribute('value')).toBe('0: MACD Indicator');
 
         // Market 2
         expect(element(by.id('marketEnabled_1')).getAttribute('ng-reflect-model')).toBe('true');
         expect(element(by.id('marketName_1')).getAttribute('value')).toBe('LTC/USD');
         expect(element(by.id('baseCurrency_1')).getAttribute('value')).toBe('LTC');
         expect(element(by.id('counterCurrency_1')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_1')).getAttribute('value')).toBe('1: Long Scalper');
+        expect(element(by.id('strategy_1')).getAttribute('value')).toBe('1: Long Scalper');
 
         // Delete Market 1
         const deleteMarketButton = element(by.id('deleteMarketButton_0'));
@@ -295,14 +295,14 @@ describe('Market Tests', function () {
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('LTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('LTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('1: Long Scalper');
+        expect(element(by.id('strategy_0')).getAttribute('value')).toBe('1: Long Scalper');
 
         // Original Market 2 moved
         expect(element(by.id('marketEnabled_1')).isPresent()).toBe(false);
         expect(element(by.id('marketName_1')).isPresent()).toBe(false);
         expect(element(by.id('baseCurrency_1')).isPresent()).toBe(false);
         expect(element(by.id('counterCurrency_1')).isPresent()).toBe(false);
-        expect(element(by.id('tradingStrategy_1')).isPresent()).toBe(false);
+        expect(element(by.id('strategy_1')).isPresent()).toBe(false);
     });
 
     it('should NOT save Market fields if there are validation errors', function () {
@@ -318,7 +318,7 @@ describe('Market Tests', function () {
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD Indicator');
+        expect(element(by.id('strategy_0')).getAttribute('value')).toBe('0: MACD Indicator');
 
         // Update Market 1 fields with some 'bad' values
         const marketEnabled = element(by.id('marketEnabled_0'));
@@ -343,10 +343,10 @@ describe('Market Tests', function () {
         counterCurrency.sendKeys(newCounterCurrency);
         expect(counterCurrency.getAttribute('value')).toBe(newCounterCurrency);
 
-        const tradingStrategy = element(by.id('tradingStrategy_0'));
-        const newTradingStrategy = '1: Long Scalper';
-        element(by.id('tradingStrategy_0')).sendKeys('Long Scalper');
-        expect(tradingStrategy.getAttribute('value')).toBe(newTradingStrategy);
+        const strategy = element(by.id('strategy_0'));
+        const newStrategy = '1: Long Scalper';
+        element(by.id('strategy_0')).sendKeys('Long Scalper');
+        expect(strategy.getAttribute('value')).toBe(newStrategy);
 
         // Save and check the update did not persist
         const saveButton = element(by.id('marketSaveButton'));
@@ -367,14 +367,14 @@ describe('Market Tests', function () {
         expect(element(by.id('invalidCounterCurrency_0')).getText()).toBe(
             'Counter Currency must be valid 3 character currency id, e.g. BTC');
 
-        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe(newTradingStrategy);
+        expect(element(by.id('strategy_0')).getAttribute('value')).toBe(newStrategy);
 
         // Market 2 unchanged
         expect(element(by.id('marketEnabled_1')).getAttribute('ng-reflect-model')).toBe('true');
         expect(element(by.id('marketName_1')).getAttribute('value')).toBe('LTC/USD');
         expect(element(by.id('baseCurrency_1')).getAttribute('value')).toBe('LTC');
         expect(element(by.id('counterCurrency_1')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_1')).getAttribute('value')).toBe('1: Long Scalper');
+        expect(element(by.id('strategy_1')).getAttribute('value')).toBe('1: Long Scalper');
     });
 
     it('should NOT save new Market when Market Name already in use', function () {
@@ -391,14 +391,14 @@ describe('Market Tests', function () {
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD Indicator');
+        expect(element(by.id('strategy_0')).getAttribute('value')).toBe('0: MACD Indicator');
 
         // Market 2
         expect(element(by.id('marketEnabled_1')).getAttribute('ng-reflect-model')).toBe('true');
         expect(element(by.id('marketName_1')).getAttribute('value')).toBe('LTC/USD');
         expect(element(by.id('baseCurrency_1')).getAttribute('value')).toBe('LTC');
         expect(element(by.id('counterCurrency_1')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_1')).getAttribute('value')).toBe('1: Long Scalper');
+        expect(element(by.id('strategy_1')).getAttribute('value')).toBe('1: Long Scalper');
 
         // Add new Market 3 with existing Market 2 name
         const addMarketLink = element(by.id('addMarketLink'));
@@ -426,11 +426,11 @@ describe('Market Tests', function () {
         counterCurrency.sendKeys(newCounterCurrency);
         expect(counterCurrency.getAttribute('value')).toBe(newCounterCurrency);
 
-        const tradingStrategy = element(by.id('tradingStrategy_2'));
-        const newTradingStrategy = '1: Long Scalper';
-        element(by.id('tradingStrategy_2')).sendKeys('Long Scalper');
+        const strategy = element(by.id('strategy_2'));
+        const newStrategy = '1: Long Scalper';
+        element(by.id('strategy_2')).sendKeys('Long Scalper');
 
-        expect(tradingStrategy.getAttribute('value')).toBe(newTradingStrategy);
+        expect(strategy.getAttribute('value')).toBe(newStrategy);
 
         // Save and check the update failed
         const saveButton = element(by.id('marketSaveButton'));
@@ -445,20 +445,20 @@ describe('Market Tests', function () {
 
         expect(element(by.id('baseCurrency_2')).getAttribute('value')).toBe(newBaseCurrency);
         expect(element(by.id('counterCurrency_2')).getAttribute('value')).toBe(newCounterCurrency);
-        expect(element(by.id('tradingStrategy_2')).getAttribute('value')).toBe(newTradingStrategy);
+        expect(element(by.id('strategy_2')).getAttribute('value')).toBe(newStrategy);
 
         // Market 1 unchanged
         expect(element(by.id('marketEnabled_0')).getAttribute('ng-reflect-model')).toBe('false'); // must be better way?
         expect(element(by.id('marketName_0')).getAttribute('value')).toBe('BTC/USD');
         expect(element(by.id('baseCurrency_0')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('counterCurrency_0')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_0')).getAttribute('value')).toBe('0: MACD Indicator');
+        expect(element(by.id('strategy_0')).getAttribute('value')).toBe('0: MACD Indicator');
 
         // Market 2 unchanged
         expect(element(by.id('marketEnabled_1')).getAttribute('ng-reflect-model')).toBe('true');
         expect(element(by.id('marketName_1')).getAttribute('value')).toBe('LTC/USD');
         expect(element(by.id('baseCurrency_1')).getAttribute('value')).toBe('LTC');
         expect(element(by.id('counterCurrency_1')).getAttribute('value')).toBe('USD');
-        expect(element(by.id('tradingStrategy_1')).getAttribute('value')).toBe('1: Long Scalper');
+        expect(element(by.id('strategy_1')).getAttribute('value')).toBe('1: Long Scalper');
     });
 });

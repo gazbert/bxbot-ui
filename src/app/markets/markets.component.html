@@ -69,19 +69,19 @@
                             </div>
                         </div>
 
-                        <!-- Trading Strategy -->
+                        <!-- Strategy -->
                         <div class="row">
                             <div class="col-sm-6 form-group">
-                                <label for="tradingStrategy_{{i}}">Trading Strategy</label>
-                                <select name="tradingStrategy_{{i}}" id="tradingStrategy_{{i}}" class="form-control" required
-                                        [(ngModel)]="markets[i].tradingStrategy.name" #strategy="ngModel">
-                                    <option *ngFor="let tradingStrategy of tradingStrategies" [ngValue]="tradingStrategy.name">
-                                        {{tradingStrategy.name}}
+                                <label for="strategy_{{i}}">Strategy</label>
+                                <select name="strategy_{{i}}" id="strategy_{{i}}" class="form-control" required
+                                        [(ngModel)]="markets[i].strategy.name" #strategy="ngModel">
+                                    <option *ngFor="let strategy of strategies" [ngValue]="strategy.name">
+                                        {{strategy.name}}
                                     </option>
                                 </select>
-                                <div id="invalidTradingStrategy_{{i}}"
-                                     *ngIf="formErrors['tradingStrategy_' + i].length > 0" class="alert alert-danger">
-                                    {{ formErrors['tradingStrategy_' + i] }}
+                                <div id="invalidStrategy_{{i}}"
+                                     *ngIf="formErrors['strategy_' + i].length > 0" class="alert alert-danger">
+                                    {{ formErrors['strategy_' + i] }}
                                 </div>
                             </div>
                         </div>

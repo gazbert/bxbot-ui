@@ -24,30 +24,30 @@ describe('MarketsComponent tests without TestBed', () => {
 
     let expectedUpdatedMarket_2: Market;
 
-    let expectedTradingStrategy_1: Strategy;
-    let expectedTradingStrategy_2: Strategy;
+    let expectedStrategy_1: Strategy;
+    let expectedStrategy_2: Strategy;
 
     let spyMarketDataService: any;
-    let spyTradingStrategyDataService: any;
+    let spyStrategyDataService: any;
     let router: any;
 
     beforeEach(done => {
 
-        expectedTradingStrategy_1 = new Strategy('gdax_macd', 'gdax-2', 'MACD Indicator',
+        expectedStrategy_1 = new Strategy('gdax_macd', 'gdax-2', 'MACD Indicator',
             'MACD Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.MacdStrategy',
             new OptionalConfig([]));
 
-        expectedMarket_1 = new Market('gdax_btc_usd', 'gdax-2', 'BTC/USD', true, 'BTC', 'USD', expectedTradingStrategy_1);
+        expectedMarket_1 = new Market('gdax_btc_usd', 'gdax-2', 'BTC/USD', true, 'BTC', 'USD', expectedStrategy_1);
 
-        expectedTradingStrategy_2 = new Strategy('gdax_ema', 'gdax-2', 'MACD Indicator',
+        expectedStrategy_2 = new Strategy('gdax_ema', 'gdax-2', 'MACD Indicator',
             'EMA Indicator for deciding when to enter and exit trades.', 'com.gazbert.bxbot.strategies.EmaStrategy',
             new OptionalConfig([]));
 
-        expectedMarket_2 = new Market('gdax_btc_gbp', 'gdax-2', 'BTC/GBP', true, 'BTC', 'GBP', expectedTradingStrategy_2);
+        expectedMarket_2 = new Market('gdax_btc_gbp', 'gdax-2', 'BTC/GBP', true, 'BTC', 'GBP', expectedStrategy_2);
 
         expectedMarkets = [expectedMarket_1, expectedMarket_2];
 
-        expectedUpdatedMarket_2 = new Market('gdax_btc_gbp', 'gdax-2', 'ETH/USD', true, 'ETH', 'USD', expectedTradingStrategy_2);
+        expectedUpdatedMarket_2 = new Market('gdax_btc_gbp', 'gdax-2', 'ETH/USD', true, 'ETH', 'USD', expectedStrategy_2);
 
         activatedRoute = new ActivatedRouteStub();
         activatedRoute.testParams = {id: expectedMarket_1.botId};
@@ -55,9 +55,9 @@ describe('MarketsComponent tests without TestBed', () => {
         router = jasmine.createSpyObj('router', ['navigate']);
 
         // Just mock this out, not testing it here, has it's own tests suite.
-        spyTradingStrategyDataService = jasmine.createSpyObj('StrategyHttpDataService',
+        spyStrategyDataService = jasmine.createSpyObj('StrategyHttpDataService',
             ['getAllStrategiesForBotId']);
-        spyTradingStrategyDataService.getAllStrategiesForBotId.and.returnValues(Promise.resolve([]));
+        spyStrategyDataService.getAllStrategiesForBotId.and.returnValues(Promise.resolve([]));
 
         // We are testing this tho...
         spyMarketDataService = jasmine.createSpyObj('MarketHttpDataPromiseService',
@@ -65,7 +65,7 @@ describe('MarketsComponent tests without TestBed', () => {
         spyMarketDataService.getAllMarketsForBotId.and.returnValue(Promise.resolve(expectedMarkets));
         spyMarketDataService.updateMarket.and.returnValue(Promise.resolve(expectedUpdatedMarket_2));
 
-        marketsComponent = new MarketsComponent(spyMarketDataService, spyTradingStrategyDataService, <any> activatedRoute, router);
+        marketsComponent = new MarketsComponent(spyMarketDataService, spyStrategyDataService, <any> activatedRoute, router);
         marketsComponent.ngOnInit();
 
         spyMarketDataService.getAllMarketsForBotId.calls.first().returnValue.then(done);

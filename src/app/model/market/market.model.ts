@@ -13,11 +13,11 @@ export class Market {
                 public enabled: boolean,
                 public baseCurrency: string,
                 public counterCurrency: string,
-                public tradingStrategy: Strategy) {
+                public strategy: Strategy) {
     }
 
     clone() {
         return new Market(this.id, this.botId, this.name, this.enabled, this.baseCurrency, this.counterCurrency,
-            this.tradingStrategy);
+            this.strategy);
     }
 }

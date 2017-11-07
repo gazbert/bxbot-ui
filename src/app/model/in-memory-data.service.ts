@@ -368,7 +368,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 enabled: false,
                 baseCurrency: 'BTC',
                 counterCurrency: 'USD',
-                tradingStrategy: {
+                strategy: {
                     id: 'bitstamp_ema',
                     exchangeId: 'bitstamp',
                     name: 'EMA Indicator',
@@ -396,7 +396,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 enabled: false,
                 baseCurrency: 'BTC',
                 counterCurrency: 'USD',
-                tradingStrategy: {
+                strategy: {
                     id: 'gdax_ema',
                     exchangeId: 'gdax',
                     name: 'EMA Indicator',
@@ -424,7 +424,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 enabled: true,
                 baseCurrency: 'BTC',
                 counterCurrency: 'GBP',
-                tradingStrategy: {
+                strategy: {
                     id: 'gdax_long-scalper',
                     exchangeId: 'gdax',
                     name: 'Long Scalper',
@@ -448,7 +448,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 enabled: false,
                 baseCurrency: 'ETH',
                 counterCurrency: 'BTC',
-                tradingStrategy: {
+                strategy: {
                     id: 'gemini_macd',
                     exchangeId: 'gemini',
                     name: 'MACD Indicator',
@@ -480,7 +480,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 enabled: false,
                 baseCurrency: 'XBT',
                 counterCurrency: 'USD',
-                tradingStrategy: {
+                strategy: {
                     id: 'itbit_macd',
                     exchangeId: 'itbit',
                     name: 'MACD Indicator',
@@ -512,7 +512,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 enabled: false,
                 baseCurrency: 'BTC',
                 counterCurrency: 'USD',
-                tradingStrategy: {
+                strategy: {
                     id: 'huobi_macd',
                     exchangeId: 'huobi',
                     name: 'MACD Indicator',
@@ -544,7 +544,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 enabled: true,
                 baseCurrency: 'LTC',
                 counterCurrency: 'USD',
-                tradingStrategy: {
+                strategy: {
                     id: 'huobi_long-scalper',
                     exchangeId: 'huobi',
                     name: 'Long Scalper',
@@ -568,7 +568,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 enabled: false,
                 baseCurrency: 'BTC',
                 counterCurrency: 'USD',
-                tradingStrategy: {
+                strategy: {
                     id: 'okcoin_ema',
                     exchangeId: 'okcoin',
                     name: 'MACD Indicator',
@@ -596,7 +596,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 enabled: false,
                 baseCurrency: 'BTC',
                 counterCurrency: 'USD',
-                tradingStrategy: {
+                strategy: {
                     id: 'bitfinex_long-scalper',
                     exchangeId: 'bitfinex',
                     name: 'Long Scalper',
@@ -620,7 +620,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 enabled: false,
                 baseCurrency: 'XXBT',
                 counterCurrency: 'ZUSD',
-                tradingStrategy: {
+                strategy: {
                     id: 'kraken_ema',
                     exchangeId: 'kraken',
                     name: 'EMA Indicator',
