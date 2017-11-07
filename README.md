@@ -75,7 +75,7 @@ To communicate with the bots for real, the app will need configuring to use
 
 ## Coming Soon
 * Integration with [BX-bot UI Server](https://github.com/gazbert/bxbot-ui-server).
-* A new 'Runtime' screen tab for displaying the bot's status, stopping/restarting, and downloading the latest log file.
+* A new 'Runtime' screen tab for displaying the bot's status, stopping/restarting, and viewing/downloading the latest log file.
 
 ## Credits
 This app started life as the [Angular 4 QuickStart](https://github.com/angular/quickstart) app and was later migrated to use 
