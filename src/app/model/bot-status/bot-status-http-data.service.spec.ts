@@ -52,7 +52,7 @@ describe('BotStatusHttpDataService tests using TestBed + Mock HTTP backend', () 
             expect(backend).not.toBeNull('MockBackend backend should be provided');
         }));
 
-    describe('when getBots() operation called', () => {
+    describe('when getAllBotStatus() operation called', () => {
 
         let backend: MockBackend;
         let service: BotDataService;
@@ -69,7 +69,7 @@ describe('BotStatusHttpDataService tests using TestBed + Mock HTTP backend', () 
 
         it('should have returned 3 Bots ', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.getBots()
+            service.getAllBotStatus()
                 .subscribe(bots => {
                     expect(bots.length).toBe(fakeBots.length,
                         'should have returned 3 Bots');
@@ -84,7 +84,7 @@ describe('BotStatusHttpDataService tests using TestBed + Mock HTTP backend', () 
         it('should handle returning no Bots', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.getBots()
+            service.getAllBotStatus()
                 .subscribe(bots => expect(bots.length).toBe(0, 'should have no Bots'));
             // .toPromise();
         })));
@@ -92,7 +92,7 @@ describe('BotStatusHttpDataService tests using TestBed + Mock HTTP backend', () 
         it('should treat 404 as an Observable error', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 404}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.getBots()
+            service.getAllBotStatus()
                 .do(() => {
                     fail('should not respond with Bots');
                 })
@@ -103,7 +103,7 @@ describe('BotStatusHttpDataService tests using TestBed + Mock HTTP backend', () 
         })));
     });
 
-    describe('when getBot() operation called with \'2\'', () => {
+    describe('when getBotStatusById() operation called with \'2\'', () => {
 
         let backend: MockBackend;
         let service: BotDataService;
@@ -121,7 +121,7 @@ describe('BotStatusHttpDataService tests using TestBed + Mock HTTP backend', () 
 
         it('should have returned GDAX BotStatus', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.getBot('gdax-2')
+            service.getBotStatusById('gdax-2')
                 .subscribe(bot => {
                     expect(bot.id).toBe('gdax-2');
                     expect(bot.displayName).toBe('GDAX');
@@ -132,14 +132,14 @@ describe('BotStatusHttpDataService tests using TestBed + Mock HTTP backend', () 
         it('should handle returning no BotStatus', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.getBot('unknown')
+            service.getBotStatusById('unknown')
                 .subscribe(bot => expect(bot.id).not.toBeDefined('should have no BotStatus'));
         })));
 
         it('should treat 404 as an Observable error', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 404}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.getBot('unknown')
+            service.getBotStatusById('unknown')
                 .do(() => {
                     fail('should not respond with BotStatus');
                 })
@@ -150,7 +150,7 @@ describe('BotStatusHttpDataService tests using TestBed + Mock HTTP backend', () 
         })));
     });
 
-    describe('when getBotByName() operation called with \'GDAX\'', () => {
+    describe('when getBotStatusByBotName() operation called with \'GDAX\'', () => {
 
         let backend: MockBackend;
         let service: BotDataService;
@@ -168,7 +168,7 @@ describe('BotStatusHttpDataService tests using TestBed + Mock HTTP backend', () 
 
         it('should have returned GDAX BotStatus', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.getBotByName('GDAX')
+            service.getBotStatusByBotName('GDAX')
                 .subscribe(bots => {
                     expect(bots.length).toBe(1, 'should have no BotStatus');
                     expect(bots[0]).toBe(fakeBots[GDAX_BOT]);
@@ -178,14 +178,14 @@ describe('BotStatusHttpDataService tests using TestBed + Mock HTTP backend', () 
         it('should handle returning no BotStatus', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.getBotByName('unknown')
+            service.getBotStatusByBotName('unknown')
                 .subscribe(bots => expect(bots.length).toBe(0, 'should have no BotStatus'));
         })));
 
         it('should treat 404 as an Observable error', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 404}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.getBotByName('unknown')
+            service.getBotStatusByBotName('unknown')
                 .do(() => {
                     fail('should not respond with BotStatus');
                 })

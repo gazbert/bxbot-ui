@@ -59,7 +59,7 @@ export class BotStatusHttpDataService implements BotStatusDataService {
         }
     }
 
-    getBots(): Observable<BotStatus[]> {
+    getAllBotStatus(): Observable<BotStatus[]> {
 
         const headers = new Headers({
             'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ export class BotStatusHttpDataService implements BotStatusDataService {
             .catch(BotStatusHttpDataService.handleError);
     }
 
-    getBot(id: string): Observable<BotStatus> {
+    getBotStatusById(id: string): Observable<BotStatus> {
 
         const headers = new Headers({
             'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ export class BotStatusHttpDataService implements BotStatusDataService {
             .catch(BotStatusHttpDataService.handleError);
     }
 
-    getBotByName(name: string): Observable<BotStatus[]> {
+    getBotStatusByBotName(name: string): Observable<BotStatus[]> {
 
         const headers = new Headers({
             'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ export class BotStatusHttpDataService implements BotStatusDataService {
             .catch(BotStatusHttpDataService.handleError);
     }
 
-    update(bot: BotStatus): Observable<BotStatus> {
+    updateBotStatus(bot: BotStatus): Observable<BotStatus> {
 
         const headers = new Headers({
             'Content-Type': 'application/json',

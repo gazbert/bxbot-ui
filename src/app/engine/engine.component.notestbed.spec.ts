@@ -49,7 +49,7 @@ describe('EngineComponent tests without TestBed', () => {
         spyEngineDataService.getEngineByBotId.and.returnValue(Promise.resolve(expectedEngine));
         spyEngineDataService.update.and.returnValue(Promise.resolve(expectedUpdatedEngine));
 
-        spyBotStatusDataService = jasmine.createSpyObj('BotStatusHttpDataService', ['getBot', 'update']);
+        spyBotStatusDataService = jasmine.createSpyObj('BotStatusHttpDataService', ['getBotStatusById', 'update']);
         spyBotStatusDataService.update.and.returnValue(Promise.resolve(expectedUpdatedEngine));
 
         engineComponent = new EngineComponent(spyEngineDataService, spyBotStatusDataService, <any> activatedRoute, router);

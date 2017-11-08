@@ -75,9 +75,9 @@ export class EngineComponent implements OnInit, AfterViewChecked {
         if (isValid) {
             this.engineDataService.update(this.botId, this.engine)
                 .then(() => {
-                    this.botStatusDataService.getBot(this.engine.id).subscribe((bot) => {
+                    this.botStatusDataService.getBotStatusById(this.engine.id).subscribe((bot) => {
                             bot.displayName = this.engine.botName;
-                            this.botStatusDataService.update(bot).toPromise()
+                            this.botStatusDataService.updateBotStatus(bot).toPromise()
                                 .then(() => this.goToDashboard());
                         },
                         error => this.errorMessage = <any>error); // TODO - Show meaningful error to user?

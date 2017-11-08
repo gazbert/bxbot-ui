@@ -16,7 +16,7 @@ describe('BotDetailsComponent tests without TestBed', () => {
     let activatedRoute: ActivatedRouteStub;
     let botDetailsComponent: BotDetailsComponent;
     let expectedBot_1: BotStatus;
-    let spyBotDataService: any;
+    let spyBotStatusDataService: any;
     let router: any;
 
     beforeEach(done => {
@@ -28,15 +28,15 @@ describe('BotDetailsComponent tests without TestBed', () => {
 
         router = jasmine.createSpyObj('router', ['navigate']);
 
-        spyBotDataService = jasmine.createSpyObj('BotStatusHttpDataService', ['getBot']);
-        spyBotDataService.getBot.and.returnValue(Observable.of(expectedBot_1));
+        spyBotStatusDataService = jasmine.createSpyObj('BotStatusHttpDataService', ['getBotStatusById']);
+        spyBotStatusDataService.getBotStatusById.and.returnValue(Observable.of(expectedBot_1));
 
-        botDetailsComponent = new BotDetailsComponent(spyBotDataService, <any> activatedRoute);
+        botDetailsComponent = new BotDetailsComponent(spyBotStatusDataService, <any> activatedRoute);
         botDetailsComponent.ngOnInit();
 
         // OnInit calls BotDetailsComponent.getBot; wait for it to get the bot details
         botDetailsComponent.ngOnInit();
-        spyBotDataService.getBot.calls.first().returnValue.subscribe(done); // tell the spy how to process Observable
+        spyBotStatusDataService.getBotStatusById.calls.first().returnValue.subscribe(done); // tell the spy how to process Observable
     });
 
     it('should expose Bot Details retrieved from BotDataService', () => {

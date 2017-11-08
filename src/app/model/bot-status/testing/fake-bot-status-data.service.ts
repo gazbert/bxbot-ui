@@ -17,7 +17,7 @@ export class FakeBotStatusDataService extends BotStatusHttpDataService {
 
     bots = SOME_FAKE_OBSERVABLE_BOTS.map(e => e.clone());
 
-    getBots(): Observable<BotStatus[]> {
+    getAllBotStatus(): Observable<BotStatus[]> {
         return Observable.create(observer => {
             observer.next(this.bots);
             // call complete if you want to close this stream (like a promise)
@@ -25,7 +25,7 @@ export class FakeBotStatusDataService extends BotStatusHttpDataService {
         });
     }
 
-    getBot(id: string): Observable<BotStatus> {
+    getBotStatusById(id: string): Observable<BotStatus> {
         const bot = this.bots.find(e => e.id === id);
         return Observable.create(observer => {
             observer.next(bot);
@@ -34,7 +34,7 @@ export class FakeBotStatusDataService extends BotStatusHttpDataService {
         });
     }
 
-    getBotByName(name: string): Observable<BotStatus[]> {
+    getBotStatusByBotName(name: string): Observable<BotStatus[]> {
         const bot = this.bots.find(e => e.displayName === name);
         return Observable.create(observer => {
             observer.next(bot);

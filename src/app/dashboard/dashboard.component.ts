@@ -80,9 +80,9 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnChanges {
             .distinctUntilChanged()   // ignore if next search term is same as previous
             .switchMap(term => term   // switch to new Observable each time the term changes
                 // return the http search Observable
-                ? this.botStatusDataService.getBotByName(term)
+                ? this.botStatusDataService.getBotStatusByBotName(term)
                 // or all of the Bots if there was no search term entered by user
-                : this.botStatusDataService.getBots().toPromise())
+                : this.botStatusDataService.getAllBotStatus().toPromise())
             .catch(error => {
                 // TODO - Show meaningful error to user? Redirect to friendly error page?
                 this.errorMessage = error;

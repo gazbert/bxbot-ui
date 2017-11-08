@@ -108,7 +108,7 @@ function tests(botClick: Function) {
         expect(dashboardComponent.bots).not.toBeDefined('should not have Bots items before ngOnInit called');
     });
 
-    describe('After BotStatusDataService getBots() Observable is subscribed to', () => {
+    describe('After BotStatusDataService getAllBotStatus() Observable is subscribed to', () => {
 
         /*
          * Hack to prevent runtime test error:
@@ -126,7 +126,7 @@ function tests(botClick: Function) {
 
         // Trigger component so it gets bots and binds to them the UI bits
         beforeEach(async(() => {
-            fixture.detectChanges(); // runs ngOnInit + ngAfterViewInit -> getBots()
+            fixture.detectChanges(); // runs ngOnInit + ngAfterViewInit -> getAllBotStatus()
             fixture.whenStable().then(() => fixture.detectChanges()); // bind to bots
         }));
 

@@ -10,11 +10,11 @@ import {BotStatus} from './bot-status.model';
  */
 export interface BotStatusDataService {
 
-    getBots(): Observable<BotStatus[]>;
+    getAllBotStatus(): Observable<BotStatus[]>;
 
-    getBot(id: string): Observable<BotStatus>;
+    getBotStatusById(id: string): Observable<BotStatus>;
 
-    getBotByName(name: string): Observable<BotStatus[]>;
+    getBotStatusByBotName(name: string): Observable<BotStatus[]>;
 
-    update(bot: BotStatus): Observable<BotStatus>;
+    updateBotStatus(bot: BotStatus): Observable<BotStatus>;
 }
