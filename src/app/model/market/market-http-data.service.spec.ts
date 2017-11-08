@@ -1,7 +1,7 @@
 import {MockBackend, MockConnection} from '@angular/http/testing';
 import {HttpModule, Http, XHRBackend, Response, ResponseOptions} from '@angular/http';
 import {async, inject, TestBed} from '@angular/core/testing';
-import {MarketHttpDataPromiseService as MarketDataService} from './market-http-data-promise.service';
+import {MarketHttpDataService as MarketDataService} from './market-http-data.service';
 import {Strategy, OptionalConfig} from '../strategy';
 import {Market} from './market.model';
 
@@ -12,7 +12,7 @@ import {Market} from './market.model';
  *
  * @author gazbert
  */
-describe('MarketHttpDataPromiseService tests using TestBed + Mock HTTP backend', () => {
+describe('MarketHttpDataService tests using TestBed + Mock HTTP backend', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({

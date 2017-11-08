@@ -101,7 +101,7 @@ describe('StrategiesComponent tests without TestBed', () => {
         spyStrategyDataService.getAllStrategiesForBotId.and.returnValue(Promise.resolve(expectedStrategies));
         spyStrategyDataService.updateStrategy.and.returnValue(Promise.resolve(expectedUpdatedStrategy_2));
 
-        spyMarketDataService = jasmine.createSpyObj('MarketHttpDataPromiseService', ['getAllMarketsForBotId']);
+        spyMarketDataService = jasmine.createSpyObj('MarketHttpDataService', ['getAllMarketsForBotId']);
         spyMarketDataService.getAllMarketsForBotId.and.returnValue(Promise.resolve(expectedMarkets));
 
         strategiesComponent = new StrategiesComponent(spyStrategyDataService, spyMarketDataService,

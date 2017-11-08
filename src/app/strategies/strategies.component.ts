@@ -2,7 +2,7 @@ import {AfterViewChecked, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {OptionalConfig, Strategy, ConfigItem, StrategyHttpDataService} from '../model/strategy';
-import {MarketHttpDataPromiseService} from '../model/market';
+import {MarketHttpDataService} from '../model/market';
 
 /**
  * Template-driven version of the Strategies form.
@@ -60,7 +60,7 @@ export class StrategiesComponent implements OnInit, AfterViewChecked {
     };
 
     constructor(private strategyDataService: StrategyHttpDataService,
-                private marketDataService: MarketHttpDataPromiseService, private route: ActivatedRoute,
+                private marketDataService: MarketHttpDataService, private route: ActivatedRoute,
                 private router: Router) {
     }
 

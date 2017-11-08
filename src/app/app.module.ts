@@ -8,7 +8,7 @@ import {InMemoryDataService} from './model';
 import {BotHttpDataObservableService} from './model/bot-status';
 import {ExchangeAdapterHttpDataObservableService} from './model/exchange-adapter';
 import {ExchangeAdapterHttpDataPromiseService} from './model/exchange-adapter/promise';
-import {MarketHttpDataPromiseService} from './model/market';
+import {MarketHttpDataService} from './model/market';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {BotDetailsModule} from './bot-details/bot-details.module';
 import {ExchangeAdapterModule} from './exchange-adapter/exchange-adapter.module';
@@ -55,7 +55,7 @@ import {SettingsModule} from './settings/settings.module';
         BotHttpDataObservableService,
         ExchangeAdapterHttpDataPromiseService,
         ExchangeAdapterHttpDataObservableService,
-        MarketHttpDataPromiseService,
+        MarketHttpDataService,
         StrategyHttpDataService,
         EmailAlertsHttpDataPromiseService,
         EngineHttpDataPromiseService,

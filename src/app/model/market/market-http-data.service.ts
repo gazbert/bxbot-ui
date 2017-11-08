@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import {AppComponent} from '../../app.component';
 import {Market} from './market.model';
-import {MarketDataPromiseService} from './market-data-promise.service';
+import {MarketDataService} from './market-data.service';
 import {AuthenticationService} from '../../shared/authentication.service';
 
 // Don't forget this else you get runtime error:
@@ -23,7 +23,7 @@ import 'rxjs/add/operator/toPromise';
  * @author gazbert
  */
 @Injectable()
-export class MarketHttpDataPromiseService implements MarketDataPromiseService {
+export class MarketHttpDataService implements MarketDataService {
 
     private marketsUrl = AppComponent.REST_API_CONFIG_BASE_URL + '/markets';
 

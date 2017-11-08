@@ -3,11 +3,11 @@ import {Market} from './market.model';
 
 /**
  * The Market Data Service provides operations to update Market configuration.
- * It demonstrates use of Promises in the operation responses.
+ * It uses Promises in the operation responses.
  *
  * @author gazbert
  */
-export interface MarketDataPromiseService {
+export interface MarketDataService {
 
     getAllMarketsForBotId(botId: string): Promise<Market[]>;
 
