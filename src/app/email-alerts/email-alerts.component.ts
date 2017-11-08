@@ -1,7 +1,7 @@
 import {OnInit, Component, ViewChild, AfterViewChecked} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {EmailAlertsConfig, EmailAlertsHttpDataPromiseService} from '../model/email-alerts';
+import {EmailAlertsConfig, EmailAlertsHttpDataService} from '../model/email-alerts';
 
 /**
  * Template-driven version of the Email Alerts config form.
@@ -55,7 +55,7 @@ export class EmailAlertsComponent implements OnInit, AfterViewChecked {
         }
     };
 
-    constructor(private emailAlertsService: EmailAlertsHttpDataPromiseService, private route: ActivatedRoute,
+    constructor(private emailAlertsService: EmailAlertsHttpDataService, private route: ActivatedRoute,
                 private router: Router) {
     }
 

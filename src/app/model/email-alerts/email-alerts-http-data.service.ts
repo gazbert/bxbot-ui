@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import {AppComponent} from '../../app.component';
 import {EmailAlertsConfig} from './email-alerts.model';
-import {EmailAlertsDataPromiseService} from './email-alerts-data-promise.service';
+import {EmailAlertsDataService} from './email-alerts-data.service';
 import {AuthenticationService} from '../../shared/authentication.service';
 
 // Don't forget this else you get runtime error:
@@ -24,7 +24,7 @@ import {isArray, isObject} from 'util';
  * @author gazbert
  */
 @Injectable()
-export class EmailAlertsHttpDataPromiseService implements EmailAlertsDataPromiseService {
+export class EmailAlertsHttpDataService implements EmailAlertsDataService {
 
     private emailAlertsUrl = AppComponent.REST_API_CONFIG_BASE_URL + '/email_alerts';
 
@@ -57,7 +57,7 @@ export class EmailAlertsHttpDataPromiseService implements EmailAlertsDataPromise
                     return {};
                 }
             })
-            .catch(EmailAlertsHttpDataPromiseService.handleError);
+            .catch(EmailAlertsHttpDataService.handleError);
     }
 
     updateEmailAlertsConfig(emailAlertsConfig: EmailAlertsConfig): Promise<EmailAlertsConfig> {
@@ -72,6 +72,6 @@ export class EmailAlertsHttpDataPromiseService implements EmailAlertsDataPromise
             .put(url, JSON.stringify(emailAlertsConfig), {headers: headers})
             .toPromise()
             .then(response => response.json().data as EmailAlertsConfig)
-            .catch(EmailAlertsHttpDataPromiseService.handleError);
+            .catch(EmailAlertsHttpDataService.handleError);
     }
 }

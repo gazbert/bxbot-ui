@@ -1,17 +1,17 @@
 import {MockBackend, MockConnection} from '@angular/http/testing';
 import {Http, HttpModule, Response, ResponseOptions, XHRBackend} from '@angular/http';
 import {async, inject, TestBed} from '@angular/core/testing';
-import {EmailAlertsHttpDataPromiseService as EmailAlertsDataService} from './email-alerts-http-data-promise.service';
+import {EmailAlertsHttpDataService as EmailAlertsDataService} from './email-alerts-http-data.service';
 import {EmailAlertsConfig, SmtpConfig} from './email-alerts.model';
 
 /**
- * Tests the Email Alerts HTTP Data service (Promise flavour) using a mocked HTTP backend.
+ * Tests the Email Alerts HTTP Data service using a mocked HTTP backend.
  *
  * TODO - test non 200 OK responses etc from bxbot-ui-server - UI should handle scenario gracefully!
  *
  * @author gazbert
  */
-describe('EmailAlertsHttpDataPromiseService tests using TestBed + Mock HTTP backend', () => {
+describe('EmailAlertsHttpDataService tests using TestBed + Mock HTTP backend', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
