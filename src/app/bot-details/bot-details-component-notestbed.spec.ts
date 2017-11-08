@@ -28,7 +28,7 @@ describe('BotDetailsComponent tests without TestBed', () => {
 
         router = jasmine.createSpyObj('router', ['navigate']);
 
-        spyBotDataService = jasmine.createSpyObj('BotHttpDataObservableService', ['getBot']);
+        spyBotDataService = jasmine.createSpyObj('BotStatusHttpDataService', ['getBot']);
         spyBotDataService.getBot.and.returnValue(Observable.of(expectedBot_1));
 
         botDetailsComponent = new BotDetailsComponent(spyBotDataService, <any> activatedRoute);

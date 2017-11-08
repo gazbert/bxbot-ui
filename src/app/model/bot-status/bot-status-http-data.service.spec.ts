@@ -2,7 +2,7 @@ import {MockBackend, MockConnection} from '@angular/http/testing';
 import {HttpModule, Http, XHRBackend, Response, ResponseOptions} from '@angular/http';
 import {async, inject, TestBed} from '@angular/core/testing';
 import {BotStatus} from './bot-status.model';
-import {BotHttpDataObservableService as BotDataService} from './bot-status-http-data-observable.service';
+import {BotStatusHttpDataService as BotDataService} from './bot-status-http-data.service';
 import {Observable} from 'rxjs/Observable';
 
 // Most RxJS operators are not included in Angular's base Observable implementation.
@@ -15,13 +15,13 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 /**
- * Tests the BotStatus HTTP Data Service (Observables) using a mocked HTTP backend.
+ * Tests the BotStatus HTTP Data Service using a mocked HTTP backend.
  *
  * TODO - test non 200 OK responses etc from bxbot-ui-server - UI should handle scenario gracefully!
  *
  * @author gazbert
  */
-describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend', () => {
+describe('BotStatusHttpDataService tests using TestBed + Mock HTTP backend', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -35,7 +35,7 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
         });
     }));
 
-    it('should instantiate implementation of BotDataService when injected',
+    it('should instantiate implementation of BotStatusDataService when injected',
         inject([BotDataService], (service: BotDataService) => {
             expect(service instanceof BotDataService).toBe(true);
         }));
@@ -44,7 +44,7 @@ describe('BotHttpDataObservableService tests using TestBed + Mock HTTP backend',
         expect(http).not.toBeNull('http should be provided');
         const service = new BotDataService(http);
         expect(service instanceof BotDataService).toBe(true,
-            'new service should be instance of BotDataService');
+            'new service should be instance of BotStatusDataService');
     }));
 
     it('should provide the MockBackend as XHRBackend',

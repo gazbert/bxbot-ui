@@ -2,7 +2,7 @@ import {Router} from '@angular/router';
 import {AfterViewInit, Component, OnChanges, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
-import {BotStatus, BotHttpDataObservableService} from '../model/bot-status';
+import {BotStatus, BotStatusHttpDataService} from '../model/bot-status';
 
 // Most RxJS operators are not included in Angular's base Observable implementation.
 // The base implementation includes only what Angular itself requires.
@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnChanges {
     private searchTerms = new Subject<string>();
     private errorMessage: string;
 
-    constructor(private router: Router, private botDataService: BotHttpDataObservableService) {
+    constructor(private router: Router, private botStatusDataService: BotStatusHttpDataService) {
     }
 
     /**
@@ -80,9 +80,9 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnChanges {
             .distinctUntilChanged()   // ignore if next search term is same as previous
             .switchMap(term => term   // switch to new Observable each time the term changes
                 // return the http search Observable
-                ? this.botDataService.getBotByName(term)
+                ? this.botStatusDataService.getBotByName(term)
                 // or all of the Bots if there was no search term entered by user
-                : this.botDataService.getBots().toPromise())
+                : this.botStatusDataService.getBots().toPromise())
             .catch(error => {
                 // TODO - Show meaningful error to user? Redirect to friendly error page?
                 this.errorMessage = error;

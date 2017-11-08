@@ -8,7 +8,7 @@ import {BotStatus} from '../model/bot-status';
  *
  * Learning ground for writing Jasmine tests without using the TestBed.
  *
- * I think I prefer not using the TestBed - less code to write, less API to lean, more intuitive using pure Jasmine,
+ * I think I prefer not using the TestBed - less code to write, less API to learn, more intuitive using pure Jasmine,
  * and you're decoupled from UI changes by accessing the model directly.
  *
  * Based off the main Angular tutorial:
@@ -29,7 +29,7 @@ describe('EngineComponent tests without TestBed', () => {
     let expectedUpdatedBot: BotStatus;
 
     let spyEngineDataService: any;
-    let spyBotDataService: any;
+    let spyBotStatusDataService: any;
     let router: any;
 
     beforeEach(done => {
@@ -49,10 +49,10 @@ describe('EngineComponent tests without TestBed', () => {
         spyEngineDataService.getEngineByBotId.and.returnValue(Promise.resolve(expectedEngine));
         spyEngineDataService.update.and.returnValue(Promise.resolve(expectedUpdatedEngine));
 
-        spyBotDataService = jasmine.createSpyObj('BotHttpDataObservableService', ['getBot', 'update']);
-        spyBotDataService.update.and.returnValue(Promise.resolve(expectedUpdatedEngine));
+        spyBotStatusDataService = jasmine.createSpyObj('BotStatusHttpDataService', ['getBot', 'update']);
+        spyBotStatusDataService.update.and.returnValue(Promise.resolve(expectedUpdatedEngine));
 
-        engineComponent = new EngineComponent(spyEngineDataService, spyBotDataService, <any> activatedRoute, router);
+        engineComponent = new EngineComponent(spyEngineDataService, spyBotStatusDataService, <any> activatedRoute, router);
         engineComponent.ngOnInit();
 
         spyEngineDataService.getEngineByBotId.calls.first().returnValue.then(done);

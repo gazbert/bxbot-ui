@@ -4,11 +4,11 @@ import {BotStatus} from './bot-status.model';
 
 /**
  * The BotStatus Data Service provides operations to fetch BotStatus details.
- * It demonstrates use of Observables in the operation responses.
+ * It uses Observables in the operation responses.
  *
  * @author gazbert
  */
-export interface BotDataObservableService {
+export interface BotStatusDataService {
 
     getBots(): Observable<BotStatus[]>;
 

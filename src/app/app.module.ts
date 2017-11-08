@@ -5,7 +5,7 @@ import {HttpModule} from '@angular/http';
 import {AppComponent} from './app.component';
 import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {InMemoryDataService} from './model';
-import {BotHttpDataObservableService} from './model/bot-status';
+import {BotStatusHttpDataService} from './model/bot-status';
 import {ExchangeAdapterHttpDataObservableService} from './model/exchange-adapter';
 import {ExchangeAdapterHttpDataPromiseService} from './model/exchange-adapter/promise';
 import {MarketHttpDataService} from './model/market';
@@ -52,7 +52,7 @@ import {SettingsModule} from './settings/settings.module';
         AppComponent
     ],
     providers: [
-        BotHttpDataObservableService,
+        BotStatusHttpDataService,
         ExchangeAdapterHttpDataPromiseService,
         ExchangeAdapterHttpDataObservableService,
         MarketHttpDataService,

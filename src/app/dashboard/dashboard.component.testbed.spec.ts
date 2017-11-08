@@ -6,9 +6,9 @@ import {async, inject, ComponentFixture, TestBed} from '@angular/core/testing';
 import {Observable} from 'rxjs/Observable';
 import {DashboardComponent} from './dashboard.component';
 import {DashboardModule} from './dashboard.module';
-import {FakeBotDataObservableService} from '../model/bot-status/testing';
-import {BotHttpDataObservableService} from '../model/bot-status';
-import {SOME_FAKE_OBSERVABLE_BOTS} from '../model/bot-status/testing/fake-bot-status-data-observable.service';
+import {FakeBotStatusDataService} from '../model/bot-status/testing';
+import {BotStatusHttpDataService} from '../model/bot-status';
+import {SOME_FAKE_OBSERVABLE_BOTS} from '../model/bot-status/testing/fake-bot-status-data.service';
 import {addMatchers, click} from '../../../testing';
 
 class RouterStub {
@@ -20,7 +20,7 @@ class RouterStub {
 /**
  * Tests the behaviour of the Dashboard component is as expected.
  *
- * It uses the Angular TestBed and a stubbed FakeBotDataObservableService.
+ * It uses the Angular TestBed and a stubbed FakeBotStatusDataService.
  *
  * I think I prefer the notestbed approach - less code and accessing just the model, i.e. no By.css stuff...
  * But, TestBed useful if you need to test the UI rendering?
@@ -45,10 +45,10 @@ function compileAndCreate() {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             providers: [
-                {provide: BotHttpDataObservableService, useClass: FakeBotDataObservableService},
+                {provide: BotStatusHttpDataService, useClass: FakeBotStatusDataService},
                 {provide: Router, useClass: RouterStub},
-                {provide: Http, useValue: {}} // need this because the FakeBotDataObservableService extends
-                                              // BotHttpDataObservableService
+                {provide: Http, useValue: {}} // need this because the FakeBotStatusDataService extends
+                                              // BotStatusHttpDataService
             ]
         }).compileComponents().then(() => {
             fixture = TestBed.createComponent(DashboardComponent);
@@ -108,7 +108,7 @@ function tests(botClick: Function) {
         expect(dashboardComponent.bots).not.toBeDefined('should not have Bots items before ngOnInit called');
     });
 
-    describe('After BotDataService getBots() Observable is subscribed to', () => {
+    describe('After BotStatusDataService getBots() Observable is subscribed to', () => {
 
         /*
          * Hack to prevent runtime test error:

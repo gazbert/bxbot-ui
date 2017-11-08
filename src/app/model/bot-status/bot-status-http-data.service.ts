@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, RequestOptions, Response} from '@angular/http';
 import {AppComponent} from '../../app.component';
-import {BotDataObservableService} from './bot-status-data-observable.service';
+import {BotStatusDataService} from './bot-status-data.service';
 import {AuthenticationService} from '../../shared';
 import {BotStatus} from './bot-status.model';
 import {Observable} from 'rxjs/Observable';
@@ -29,7 +29,7 @@ import 'rxjs/add/operator/toPromise';
  * @author gazbert
  */
 @Injectable()
-export class BotHttpDataObservableService implements BotDataObservableService {
+export class BotStatusHttpDataService implements BotStatusDataService {
 
     private botUrl = AppComponent.REST_API_RUNTIME_BASE_URL + '/status';
 
@@ -67,8 +67,8 @@ export class BotHttpDataObservableService implements BotDataObservableService {
         });
 
         return this.http.get(this.botUrl, {headers: headers})
-            .map(BotHttpDataObservableService.extractData)
-            .catch(BotHttpDataObservableService.handleError);
+            .map(BotStatusHttpDataService.extractData)
+            .catch(BotStatusHttpDataService.handleError);
     }
 
     getBot(id: string): Observable<BotStatus> {
@@ -82,7 +82,7 @@ export class BotHttpDataObservableService implements BotDataObservableService {
             .get(this.botUrl + '/' + id, {headers: headers})
             .map((r: Response) => r.json().data as BotStatus)
             // .map(this.extractData)
-            .catch(BotHttpDataObservableService.handleError);
+            .catch(BotStatusHttpDataService.handleError);
     }
 
     getBotByName(name: string): Observable<BotStatus[]> {
@@ -94,9 +94,9 @@ export class BotHttpDataObservableService implements BotDataObservableService {
 
         return this.http
             .get(this.botUrl + '/?displayName=' + name, {headers: headers})
-            .map(BotHttpDataObservableService.extractData)
+            .map(BotStatusHttpDataService.extractData)
             // .map((r: Response) => r.json().data as BotStatus[])
-            .catch(BotHttpDataObservableService.handleError);
+            .catch(BotStatusHttpDataService.handleError);
     }
 
     update(bot: BotStatus): Observable<BotStatus> {
@@ -111,7 +111,7 @@ export class BotHttpDataObservableService implements BotDataObservableService {
         const options = new RequestOptions({headers: headers});
 
         return this.http.put(url, body, options)
-            .map(BotHttpDataObservableService.extractData)
-            .catch(BotHttpDataObservableService.handleError);
+            .map(BotStatusHttpDataService.extractData)
+            .catch(BotStatusHttpDataService.handleError);
     }
 }

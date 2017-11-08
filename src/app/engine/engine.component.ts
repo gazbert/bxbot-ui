@@ -2,7 +2,7 @@ import {AfterViewChecked, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {Engine, EngineHttpDataService} from '../model/engine';
-import {BotHttpDataObservableService} from '../model/bot-status';
+import {BotStatusHttpDataService} from '../model/bot-status';
 
 /**
  * Template-driven version of the Engine form.
@@ -48,7 +48,7 @@ export class EngineComponent implements OnInit, AfterViewChecked {
     private errorMessage: string;
 
     constructor(private engineDataService: EngineHttpDataService,
-                private botDataService: BotHttpDataObservableService, private route: ActivatedRoute,
+                private botStatusDataService: BotStatusHttpDataService, private route: ActivatedRoute,
                 private router: Router) {
     }
 
@@ -75,9 +75,9 @@ export class EngineComponent implements OnInit, AfterViewChecked {
         if (isValid) {
             this.engineDataService.update(this.botId, this.engine)
                 .then(() => {
-                    this.botDataService.getBot(this.engine.id).subscribe((bot) => {
+                    this.botStatusDataService.getBot(this.engine.id).subscribe((bot) => {
                             bot.displayName = this.engine.botName;
-                            this.botDataService.update(bot).toPromise()
+                            this.botStatusDataService.update(bot).toPromise()
                                 .then(() => this.goToDashboard());
                         },
                         error => this.errorMessage = <any>error); // TODO - Show meaningful error to user?

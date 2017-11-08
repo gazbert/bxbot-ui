@@ -1,19 +1,19 @@
-import {BotHttpDataObservableService} from '../bot-status-http-data-observable.service';
+import {BotStatusHttpDataService} from '../bot-status-http-data.service';
 import {BotStatus} from '../bot-status.model';
 import {Observable} from 'rxjs/Observable';
 
 /**
- * Fake BotStatus data service (Observable flavour) backend for testing.
+ * Fake BotStatus data service backend for testing.
  *
- * Constructor is inherited from BotHttpDataObservableService - calling code should pass null when creating this object.
+ * Constructor is inherited from BotStatusHttpDataService - calling code should pass null when creating this object.
  *
- * This seems very hacky using extending BotHttpDataObservableService instead of implementing BotDataObservableService interface?
+ * This seems very hacky using extending BotStatusHttpDataService instead of implementing BotStatusDataService interface?
  *
  * Must be better way of doing this, but we have to inject concrete service classes into the DashboardComponent constructor.
  *
  * @author gazbert
  */
-export class FakeBotDataObservableService extends BotHttpDataObservableService {
+export class FakeBotStatusDataService extends BotStatusHttpDataService {
 
     bots = SOME_FAKE_OBSERVABLE_BOTS.map(e => e.clone());
 

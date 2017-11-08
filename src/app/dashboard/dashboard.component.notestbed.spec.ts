@@ -1,6 +1,6 @@
 import {Router} from '@angular/router';
 import {DashboardComponent} from './dashboard.component';
-import {FakeBotDataObservableService} from '../model/bot-status/testing';
+import {FakeBotStatusDataService} from '../model/bot-status/testing';
 import {BotStatus} from '../model/bot-status';
 import {addMatchers} from '../../../testing/';
 
@@ -29,14 +29,14 @@ class FakeRouter {
 describe('DashboardComponent tests without TestBed', () => {
 
     let comp: DashboardComponent;
-    let botDataService: FakeBotDataObservableService;
+    let botStatusDataService: FakeBotStatusDataService;
     let router: Router;
 
     beforeEach(() => {
         addMatchers();
         router = new FakeRouter() as any as Router;
-        botDataService = new FakeBotDataObservableService(null);
-        comp = new DashboardComponent(router, botDataService);
+        botStatusDataService = new FakeBotStatusDataService(null);
+        comp = new DashboardComponent(router, botStatusDataService);
     });
 
     it('should NOT have Bot items before calling ngOnInit', () => {
@@ -72,9 +72,9 @@ describe('DashboardComponent tests without TestBed', () => {
     });
 
     it('should tell Router to navigate by BotId when Bot item selected', () => {
-        const testBot = new BotStatus('gdax-1', 'GDAX', 'Running');
+        const botStatus = new BotStatus('gdax-1', 'GDAX', 'Running');
         const spy = spyOn(router, 'navigateByUrl');
-        comp.gotoBotDetails(testBot);
+        comp.gotoBotDetails(botStatus);
         const navArgs = spy.calls.mostRecent().args[0];
         expect(navArgs).toBe('/bot/gdax-1', 'should navigate to GDAX Bot Details for selected Bot');
     });
