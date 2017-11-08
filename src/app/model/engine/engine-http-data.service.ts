@@ -5,7 +5,7 @@ import {AuthenticationService} from '../../shared/authentication.service';
 // Don't forget this else you get runtime error:
 // zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function
 import 'rxjs/add/operator/toPromise';
-import {EngineDataPromiseService} from './engine-data-promise.service';
+import {EngineDataService} from './engine-data.service';
 import {Engine} from './engine.model';
 import {isArray, isObject} from 'util';
 
@@ -23,7 +23,7 @@ import {isArray, isObject} from 'util';
  * @author gazbert
  */
 @Injectable()
-export class EngineHttpDataPromiseService implements EngineDataPromiseService {
+export class EngineHttpDataService implements EngineDataService {
 
     private engineUrl = AppComponent.REST_API_CONFIG_BASE_URL + '/engines';
 
@@ -55,7 +55,7 @@ export class EngineHttpDataPromiseService implements EngineDataPromiseService {
                     return {};
                 }
             })
-            .catch(EngineHttpDataPromiseService.handleError);
+            .catch(EngineHttpDataService.handleError);
     }
 
     update(botId: string, engine: Engine): Promise<Engine> {
@@ -70,6 +70,6 @@ export class EngineHttpDataPromiseService implements EngineDataPromiseService {
             .put(url, JSON.stringify(engine), {headers: headers})
             .toPromise()
             .then(response => response.json().data as Engine)
-            .catch(EngineHttpDataPromiseService.handleError);
+            .catch(EngineHttpDataService.handleError);
     }
 }

@@ -1,12 +1,12 @@
-import {EngineDataPromiseService} from '../engine-data-promise.service';
+import {EngineDataService} from '../engine-data.service';
 import {Engine} from '../engine.model';
 
 /**
- * Fake Engine data service (Promise flavour) backend for testing.
+ * Fake Engine data service backend for testing.
  *
  * @author gazbert
  */
-export class FakeEngineDataPromiseService implements EngineDataPromiseService {
+export class FakeEngineDataService implements EngineDataService {
 
     engines = SOME_FAKE_PROMISE_ENGINES.map(e => e.clone());
     lastPromise: Promise<any>;  // remember so we can spy on promise calls

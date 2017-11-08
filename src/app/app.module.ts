@@ -15,7 +15,7 @@ import {ExchangeAdapterModule} from './exchange-adapter/exchange-adapter.module'
 import {EmailAlertsModule} from './email-alerts/email-alerts.module';
 import {AppRoutingModule} from './app-routing.module';
 import {EmailAlertsHttpDataPromiseService} from './model/email-alerts';
-import {EngineHttpDataPromiseService} from './model/engine';
+import {EngineHttpDataService} from './model/engine';
 import {StrategiesModule} from './strategies/strategies.module';
 import {StrategyHttpDataService} from './model/strategy/strategy-http-data.service';
 import {LoginModule} from './login/login.module';
@@ -58,7 +58,7 @@ import {SettingsModule} from './settings/settings.module';
         MarketHttpDataService,
         StrategyHttpDataService,
         EmailAlertsHttpDataPromiseService,
-        EngineHttpDataPromiseService,
+        EngineHttpDataService,
         AuthenticationService,
         CanActivateAuthGuard
     ],

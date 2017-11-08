@@ -1,7 +1,7 @@
 import {AfterViewChecked, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {Engine, EngineHttpDataPromiseService} from '../model/engine';
+import {Engine, EngineHttpDataService} from '../model/engine';
 import {BotHttpDataObservableService} from '../model/bot-status';
 
 /**
@@ -47,7 +47,7 @@ export class EngineComponent implements OnInit, AfterViewChecked {
 
     private errorMessage: string;
 
-    constructor(private engineDataService: EngineHttpDataPromiseService,
+    constructor(private engineDataService: EngineHttpDataService,
                 private botDataService: BotHttpDataObservableService, private route: ActivatedRoute,
                 private router: Router) {
     }

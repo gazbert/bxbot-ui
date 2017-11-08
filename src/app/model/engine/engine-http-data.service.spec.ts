@@ -1,17 +1,17 @@
 import {MockBackend, MockConnection} from '@angular/http/testing';
 import {HttpModule, Http, XHRBackend, Response, ResponseOptions} from '@angular/http';
 import {async, inject, TestBed} from '@angular/core/testing';
-import {EngineHttpDataPromiseService as EngineDataService} from './engine-http-data-promise.service';
+import {EngineHttpDataService as EngineDataService} from './engine-http-data.service';
 import {Engine} from './engine.model';
 
 /**
- * Tests the Engine HTTP Data service (Promise flavour) using a Mock HTTP backend.
- *
+ * Tests the Engine HTTP Data service using a Mock HTTP backend.
+ *§
  * TODO - test non 200 OK responses etc from bxbot-ui-server - UI should handle scenario gracefully!
  *
  * @author gazbert
  */
-describe('EngineHttpDataPromiseService tests using TestBed + Mock HTTP backend', () => {
+describe('EngineHttpDataService tests using TestBed + Mock HTTP backend', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
