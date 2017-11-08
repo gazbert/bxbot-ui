@@ -11,5 +11,5 @@ export interface EngineDataService {
 
     getEngineByBotId(botId: string): Promise<Engine>;
 
-    update(botId: string, engine: Engine): Promise<Engine>;
+    updateEngine(botId: string, engine: Engine): Promise<Engine>;
 }

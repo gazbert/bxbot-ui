@@ -73,7 +73,7 @@ export class EngineComponent implements OnInit, AfterViewChecked {
 
     save(isValid: boolean): void {
         if (isValid) {
-            this.engineDataService.update(this.botId, this.engine)
+            this.engineDataService.updateEngine(this.botId, this.engine)
                 .then(() => {
                     this.botStatusDataService.getBotStatusById(this.engine.id).subscribe((bot) => {
                             bot.displayName = this.engine.botName;

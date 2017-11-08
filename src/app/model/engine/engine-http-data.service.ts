@@ -58,7 +58,7 @@ export class EngineHttpDataService implements EngineDataService {
             .catch(EngineHttpDataService.handleError);
     }
 
-    update(botId: string, engine: Engine): Promise<Engine> {
+    updateEngine(botId: string, engine: Engine): Promise<Engine> {
 
         const headers = new Headers({
             'Content-Type': 'application/json',

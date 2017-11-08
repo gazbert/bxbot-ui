@@ -16,7 +16,7 @@ export class FakeEngineDataService implements EngineDataService {
         return this.lastPromise = Promise.resolve(engine);
     }
 
-    update(botId: string, engine: Engine): Promise<Engine> {
+    updateEngine(botId: string, engine: Engine): Promise<Engine> {
         return this.lastPromise = this.getEngineByBotId(engine.id).then(e => { // hack for testing!
             return e ?
                 Object.assign(e, engine) :
