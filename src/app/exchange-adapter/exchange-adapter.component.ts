@@ -1,9 +1,9 @@
 import {OnInit, Component, ViewChild, AfterViewChecked} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {ExchangeAdapter} from '../model/exchange-adapter';
-import {ExchangeAdapterHttpDataPromiseService} from '../model/exchange-adapter/promise';
-import {ConfigItem} from '../model/exchange-adapter/exchange-adapter.model';
+import {ExchangeAdapter} from '../model/exchange';
+import {ExchangeAdapterHttpDataPromiseService} from '../model/exchange/promise';
+import {ConfigItem} from '../model/exchange/exchange-adapter.model';
 
 /**
  * Template-driven version of the Exchange Adapter form.

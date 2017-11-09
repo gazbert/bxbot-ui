@@ -5,17 +5,17 @@ import {DebugElement} from '@angular/core';
 import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {ActivatedRoute, ActivatedRouteStub, click, newEvent, Router, RouterStub} from '../../../../testing';
-import {FakeExchangeAdapterDataObservableService, SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS} from '../../model/exchange-adapter/testing';
+import {FakeExchangeAdapterDataObservableService, SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS} from '../../model/exchange/testing';
 import {SharedModule} from '../../shared/shared.module';
 import {
     ExchangeAdapter,
     ExchangeAdapterDataObservableService,
     ExchangeAdapterHttpDataObservableService,
     NetworkConfig
-} from '../../model/exchange-adapter';
+} from '../../model/exchange';
 import {ExchangeAdapterModule} from '../exchange-adapter.module';
 import {ExchangeAdapterRxComponent} from './exchange-adapter-rx.component';
-import {OptionalConfig} from '../../model/exchange-adapter/exchange-adapter.model';
+import {OptionalConfig} from '../../model/exchange/exchange-adapter.model';
 
 /**
  * Tests the behaviour of the Exchange Adapter component (RxJS version) is as expected.
