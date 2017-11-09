@@ -11,7 +11,7 @@ import {ExchangeAdapterHttpDataPromiseService} from './model/exchange/promise';
 import {MarketHttpDataService} from './model/market';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {BotDetailsModule} from './bot-details/bot-details.module';
-import {ExchangeAdapterModule} from './exchange-adapter/exchange-adapter.module';
+import {ExchangeAdapterModule} from './exchange/exchange-adapter.module';
 import {EmailAlertsModule} from './email-alerts/email-alerts.module';
 import {AppRoutingModule} from './app-routing.module';
 import {EmailAlertsHttpDataService} from './model/email-alerts';
