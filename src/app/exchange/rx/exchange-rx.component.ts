@@ -21,8 +21,8 @@ import 'rxjs/add/operator/map';
  */
 @Component({
     selector: 'app-bxbot-ui-exchange-adapter-rx',
-    templateUrl: 'exchange-adapter-rx.component.html',
-    styleUrls: ['exchange-adapter-rx.component.css']
+    templateUrl: 'exchange-rx.component.html',
+    styleUrls: ['exchange-rx.component.css']
 })
 export class ExchangeAdapterRxComponent implements OnInit {
 

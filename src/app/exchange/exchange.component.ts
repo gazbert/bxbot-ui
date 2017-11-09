@@ -12,8 +12,8 @@ import {ConfigItem} from '../model/exchange/exchange.model';
  */
 @Component({
     selector: 'app-bxbot-ui-exchange-adapter',
-    templateUrl: 'exchange-adapter.component.html',
-    styleUrls: ['exchange-adapter.component.css']
+    templateUrl: 'exchange.component.html',
+    styleUrls: ['exchange.component.css']
 })
 export class ExchangeAdapterComponent implements OnInit, AfterViewChecked {
 

@@ -1,1 +1,1 @@
-export * from './exchange-adapter-rx.component';
+export * from './exchange-rx.component';

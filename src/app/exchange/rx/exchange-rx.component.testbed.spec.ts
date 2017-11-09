@@ -1,21 +1,27 @@
+import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {By} from '@angular/platform-browser';
 import {DebugElement} from '@angular/core';
-import {FormsModule} from '@angular/forms';
 import {Http} from '@angular/http';
-import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
-import {ActivatedRoute, ActivatedRouteStub, click, newEvent, Router, RouterStub} from '../../../testing';
-import {SharedModule} from '../shared/shared.module';
-import {ExchangeAdapter, NetworkConfig} from '../model/exchange';
-import {FakeExchangeAdapterDataPromiseService, SOME_FAKE_PROMISE_EXCHANGE_ADAPTERS} from '../model/exchange/testing';
-import {ExchangeAdapterModule} from './exchange-adapter.module';
-import {ExchangeAdapterComponent} from './exchange-adapter.component';
-import {ExchangeAdapterDataPromiseService, ExchangeAdapterHttpDataPromiseService} from '../model/exchange/promise';
-import {ConfigItem, OptionalConfig} from '../model/exchange/exchange.model';
+import {Observable} from 'rxjs/Observable';
+import {ActivatedRoute, ActivatedRouteStub, click, newEvent, Router, RouterStub} from '../../../../testing';
+import {FakeExchangeAdapterDataObservableService, SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS} from '../../model/exchange/testing';
+import {SharedModule} from '../../shared/shared.module';
+import {
+    ExchangeAdapter,
+    ExchangeAdapterDataObservableService,
+    ExchangeAdapterHttpDataObservableService,
+    NetworkConfig
+} from '../../model/exchange';
+import {ExchangeAdapterModule} from '../exchange.module';
+import {ExchangeAdapterRxComponent} from './exchange-rx.component';
+import {OptionalConfig} from '../../model/exchange/exchange.model';
 
 /**
- * Tests the behaviour of the Exchange Adapter component (Template version) is as expected.
+ * Tests the behaviour of the Exchange Adapter component (RxJS version) is as expected.
  *
  * Learning ground for writing Jasmine tests using the TestBed.
+ * (Trying to write the equivalent tests for a Reactive form without the TestBed is proving VERY difficult!)
  *
  * Using TestBed seems to need a lot more code compared to using non-TestBed method. It also couples the test to the
  * UI elements, whereas the non-TestBed approach asserts the model directly.
@@ -28,11 +34,11 @@ import {ConfigItem, OptionalConfig} from '../model/exchange/exchange.model';
  * @author gazbert
  */
 let activatedRoute: ActivatedRouteStub;
-let comp: ExchangeAdapterComponent;
-let fixture: ComponentFixture<ExchangeAdapterComponent>;
+let comp: ExchangeAdapterRxComponent;
+let fixture: ComponentFixture<ExchangeAdapterRxComponent>;
 let page: Page;
 
-describe('ExchangeAdapterComponent tests using TestBed', () => {
+describe('ExchangeAdapterRxComponent tests with TestBed', () => {
 
     beforeEach(() => {
         activatedRoute = new ActivatedRouteStub();
@@ -43,7 +49,7 @@ describe('ExchangeAdapterComponent tests using TestBed', () => {
 });
 
 /**
- * This test setup overrides ExchangeAdapterComponent ExchangeAdapterService provider with a
+ * This test setup overrides ExchangeAdapterRxComponent ExchangeAdapterService provider with a
  * stubbed ExchangeAdapterService.
  */
 function overrideExchangeAdapterServiceSetup() {
@@ -51,33 +57,45 @@ function overrideExchangeAdapterServiceSetup() {
     let expectedNetworkConfig: NetworkConfig;
     let expectedErrorCodes: number[];
     let expectedErrorMsgs: string[];
-
-    let expectedBuyFeeConfigItem: ConfigItem;
-    let expectedSellFeeConfigItem: ConfigItem;
     let expectedOptionalConfig: OptionalConfig;
-
     let testExchangeAdapter: ExchangeAdapter;
 
-    class StubExchangeAdapterHttpDataService implements ExchangeAdapterDataPromiseService {
+    class StubExchangeAdapterHttpDataService implements ExchangeAdapterDataObservableService {
 
         constructor() {
-            expectedErrorCodes = [501];
-            expectedErrorMsgs = ['Connection timeout'];
+            expectedErrorCodes = [501, 502];
+            expectedErrorMsgs = ['Connection timeout', 'Connection reset'];
             expectedNetworkConfig = new NetworkConfig(60, expectedErrorCodes, expectedErrorMsgs);
-            expectedBuyFeeConfigItem = new ConfigItem('buy-fee', '0.2');
-            expectedSellFeeConfigItem = new ConfigItem('sell-fee', '0.25');
-            expectedOptionalConfig = new OptionalConfig([expectedBuyFeeConfigItem, expectedSellFeeConfigItem]);
+            expectedOptionalConfig = new OptionalConfig([
+                    {
+                        name: 'buy-fee',
+                        value: '0.2'
+                    },
+                    {
+                        name: 'sell-fee',
+                        value: '0.25'
+                    }
+                ]
+            );
 
             testExchangeAdapter = new ExchangeAdapter('huobi', 'Huobi',
                 'com.gazbert.bxbot.adapter.HuobiExchangeAdapter', expectedNetworkConfig, expectedOptionalConfig);
         }
 
-        getExchangeAdapterByBotId(id: string): Promise<ExchangeAdapter> {
-            return Promise.resolve(true).then(() => Object.assign({}, testExchangeAdapter));
+        getExchangeAdapterByBotId(id: string): Observable<ExchangeAdapter> {
+            return Observable.create(observer => {
+                observer.next(testExchangeAdapter);
+                // call complete if you want to close this stream (like a promise)
+                observer.complete();
+            });
         }
 
-        update(exchangeAdapter: ExchangeAdapter): Promise<ExchangeAdapter> {
-            return Promise.resolve(true).then(() => Object.assign(testExchangeAdapter, exchangeAdapter));
+        update(exchangeAdapter: ExchangeAdapter): Observable<ExchangeAdapter> {
+            return Observable.create(observer => {
+                observer.next(exchangeAdapter);
+                // call complete if you want to close this stream (like a promise)
+                observer.complete();
+            });
         }
     }
 
@@ -86,21 +104,24 @@ function overrideExchangeAdapterServiceSetup() {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [ExchangeAdapterModule, FormsModule, SharedModule],
+            imports: [ExchangeAdapterModule, ReactiveFormsModule, FormsModule, SharedModule],
             providers: [
                 {provide: ActivatedRoute, useValue: activatedRoute},
                 {provide: Router, useClass: RouterStub},
 
-                // providing ExchangeAdapterHttpDataPromiseService at this level is irrelevant because
+                // providing ExchangeAdapterHttpDataObservableService at this level is irrelevant because
                 // we use a stub just for testing stuff within out component.
-                {provide: ExchangeAdapterHttpDataPromiseService, useValue: {}}
+                {provide: ExchangeAdapterHttpDataObservableService, useValue: {}}
             ]
         })
         // Override component's own provider and use our stubbed ExchangeAdapterService
-            .overrideComponent(ExchangeAdapterComponent, {
+            .overrideComponent(ExchangeAdapterRxComponent, {
                 set: {
                     providers: [
-                        {provide: ExchangeAdapterHttpDataPromiseService, useClass: StubExchangeAdapterHttpDataService}
+                        {
+                            provide: ExchangeAdapterHttpDataObservableService,
+                            useClass: StubExchangeAdapterHttpDataService
+                        }
                     ]
                 }
             })
@@ -111,14 +132,15 @@ function overrideExchangeAdapterServiceSetup() {
     let stubExchangeAdapterDataService: StubExchangeAdapterHttpDataService;
 
     beforeEach(async(() => {
-        createComponent().then(() => {/*done*/});
+        createComponent().then(() => {/*done*/
+        });
 
         // Get hold of component's injected ExchangeAdapterService stub.
-        stubExchangeAdapterDataService = fixture.debugElement.injector.get(ExchangeAdapterHttpDataPromiseService);
+        stubExchangeAdapterDataService = fixture.debugElement.injector.get(ExchangeAdapterHttpDataObservableService);
     }));
 
     it('should inject the stubbed Exchange Adapter service',
-        inject([ExchangeAdapterHttpDataPromiseService], (service: ExchangeAdapterHttpDataPromiseService) => {
+        inject([ExchangeAdapterHttpDataObservableService], (service: ExchangeAdapterHttpDataObservableService) => {
             expect(service).toBeDefined('service injected from fixture');
             expect(stubExchangeAdapterDataService).toBeTruthy('service injected into component is the stub');
     }));
@@ -152,8 +174,9 @@ function overrideExchangeAdapterServiceSetup() {
         page.adapterNameInput.value = newName;
         page.adapterNameInput.dispatchEvent(newEvent('input')); // tell Angular
 
-        expect(comp.exchangeAdapter.name).toBe(newName, 'Exchange Adapter Name updated');
-        expect(testExchangeAdapter.name).toBe(origName, 'ExchangeAdapterService Exchange Adapter Name unchanged before save');
+        expect(comp.exchangeAdapter.name).toBe(origName, 'Exchange Adapter Name model not to be updated before save');
+        expect(testExchangeAdapter.name).toBe(origName,
+            'ExchangeAdapterService Exchange Adapter Name model NOT to be updated before save');
 
         click(page.saveBtn);
         comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
@@ -174,12 +197,11 @@ function overrideExchangeAdapterServiceSetup() {
 
     it('should NOT save or navigate to Dashboard when user clicks Save for invalid input', () => {
         const origName = testExchangeAdapter.name;
-        const newName = '!NewHuobi'; // ! is invalid char
-
-        page.adapterNameInput.value = newName;
+        // ! is invalid char
+        page.adapterNameInput.value = '!NewHuobi';
         page.adapterNameInput.dispatchEvent(newEvent('input')); // tell Angular
 
-        expect(comp.exchangeAdapter.name).toBe(newName, 'Exchange Adapter Name updated');
+        expect(comp.exchangeAdapter.name).toBe(origName, 'Exchange Adapter Name in model not to be updated');
         expect(testExchangeAdapter.name).toBe(origName,
             'ExchangeAdapterService Exchange Adapter Name unchanged before save');
 
@@ -193,90 +215,110 @@ function overrideExchangeAdapterServiceSetup() {
         expect(page.navSpy.calls.any()).toBe(false, 'router.navigate should not have been called');
     });
 
-    it('should create new Error Code when user adds one', () => {
-
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
-
-        click(page.addNewErrorCodeLink);
+    it('should create new Error Code when user adds one', fakeAsync(() => {
 
         expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(2);
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1]).toBeDefined();
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1]).toBeNull();
-    });
 
-    it('should remove Error Code when user deletes one', () => {
+        click(page.addNewErrorCodeLink);
+        click(page.saveBtn);
+        comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
+        tick(); // wait for async save to complete
 
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(3);
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[2]).toBeDefined();
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[2]).toBeNaN();
+    }));
+
+    it('should remove Error Code when user deletes one', fakeAsync(() => {
+
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(2);
 
         click(page.deleteErrorCodeBtn);
+        click(page.saveBtn);
+        comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
+        tick(); // wait for async save to complete
 
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(0);
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0]).not.toBeDefined();
-    });
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1]).not.toBeDefined();
+    }));
 
-    it('should create new Error Message when user adds one', () => {
-
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(1);
-
-        click(page.addNewErrorMessageLink);
+    it('should create new Error Message when user adds one', fakeAsync(() => {
 
         expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(2);
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages[1]).toBeDefined();
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages[1]).toBe('');
-    });
 
-    it('should remove Error Message when user deletes one', () => {
+        click(page.addNewErrorMessageLink);
+        click(page.saveBtn);
+        comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
+        tick(); // wait for async save to complete
 
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(1);
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(3);
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages[2]).toBeDefined();
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages[2]).toBe('');
+    }));
+
+    it('should remove Error Message when user deletes one', fakeAsync(() => {
+
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(2);
 
         click(page.deleteErrorMessageBtn);
+        click(page.saveBtn);
+        comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
+        tick(); // wait for async save to complete
 
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(0);
-        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages[0]).not.toBeDefined();
-    });
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(1);
+        expect(testExchangeAdapter.networkConfig.nonFatalErrorMessages[1]).not.toBeDefined();
+    }));
 
-    it('should create new Optional Config Item when user adds one', () => {
+    it('should create new Optional Config Item when user adds one', fakeAsync(() => {
 
         expect(testExchangeAdapter.optionalConfig.configItems.length).toBe(2);
 
         click(page.addNewConfigItemLink);
+        click(page.saveBtn);
+        comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
+        tick(); // wait for async save to complete
 
         expect(testExchangeAdapter.optionalConfig.configItems.length).toBe(3);
-        expect(testExchangeAdapter.optionalConfig.configItems[2].name).toBe('');
-        expect(testExchangeAdapter.optionalConfig.configItems[2].value).toBe('');
-    });
+        expect(testExchangeAdapter.optionalConfig.configItems[2].name).toBeDefined();
+        expect(testExchangeAdapter.optionalConfig.configItems[2].value).toBeDefined();
+    }));
 
-    it('should remove Optional Config Item when user deletes one', () => {
+    it('should remove Optional Config Item when user deletes one', fakeAsync(() => {
 
         expect(testExchangeAdapter.optionalConfig.configItems.length).toBe(2);
 
         click(page.deleteConfigItemBtn);
+        click(page.saveBtn);
+        comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
+        tick(); // wait for async save to complete
 
         expect(testExchangeAdapter.optionalConfig.configItems.length).toBe(1);
         expect(testExchangeAdapter.optionalConfig.configItems[1]).not.toBeDefined();
-    });
+    }));
 }
 
 /**
  * This test setup uses a fake ExchangeAdapterService.
  */
 const BITSTAMP = 0;
-const firstExchangeAdapter = SOME_FAKE_PROMISE_EXCHANGE_ADAPTERS[BITSTAMP];
+const firstExchangeAdapter = SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS[BITSTAMP];
+
 function fakeExchangeAdapterServiceSetup() {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [ExchangeAdapterModule, FormsModule, SharedModule],
+            imports: [ExchangeAdapterModule, FormsModule, ReactiveFormsModule, SharedModule],
             providers: [
                 {provide: ActivatedRoute, useValue: activatedRoute},
-                {provide: ExchangeAdapterHttpDataPromiseService, useClass: FakeExchangeAdapterDataPromiseService},
+                {provide: ExchangeAdapterHttpDataObservableService, useClass: FakeExchangeAdapterDataObservableService},
                 {provide: Router, useClass: RouterStub},
 
-                // need this because the FakeExchangeAdapterDataPromiseService extends ExchangeAdapterHttpDataPromiseService
+                // need this because the FakeExchangeAdapterDataObservableService extends ExchangeAdapterHttpDataObservableService
                 {provide: Http, useValue: {}}
             ]
         })
-            .compileComponents().then(() => {/*done*/});
+            .compileComponents().then(() => {/*done*/
+        });
     }));
 
     describe('when user navigates to existing Exchange Adapter', () => {
@@ -286,7 +328,8 @@ function fakeExchangeAdapterServiceSetup() {
         beforeEach(async(() => {
             expectedExchangeAdapter = firstExchangeAdapter;
             activatedRoute.testParams = {id: expectedExchangeAdapter.id};
-            createComponent().then(() => {/*done*/});
+            createComponent().then(() => {/*done*/
+            });
         }));
 
         it('should expose ExchangeAdapter config retrieved from ExchangeAdapterDataService', () => {
@@ -299,10 +342,8 @@ function fakeExchangeAdapterServiceSetup() {
 
             expect(page.errorCode_0Input.value).toBe('' + // hack to turn it into a String for comparison ;-)
                 expectedExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0]);
-            expect(page.errorMessage_0Input.value).toBe(expectedExchangeAdapter.networkConfig.nonFatalErrorMessages[0]);
 
-            expect(page.configItemName_0Input.value).toBe(expectedExchangeAdapter.optionalConfig.configItems[0].name);
-            expect(page.configItemValue_0Input.value).toBe(expectedExchangeAdapter.optionalConfig.configItems[0].value);
+            expect(page.errorMessage_0Input.value).toBe(expectedExchangeAdapter.networkConfig.nonFatalErrorMessages[0]);
         });
 
         it('should save and navigate to Dashboard when user clicks Save for valid input', fakeAsync(() => {
@@ -313,13 +354,15 @@ function fakeExchangeAdapterServiceSetup() {
             page.adapterNameInput.value = newName;
             page.adapterNameInput.dispatchEvent(newEvent('input')); // tell Angular
 
-            expect(comp.exchangeAdapter.name).toBe(newName, 'Exchange Adapter Name updated');
+            expect(comp.exchangeAdapter.name).toBe(origName, 'Exchange Adapter Name not to be updated before save');
             expect(expectedExchangeAdapter.name).toBe(origName,
                 'ExchangeAdapterService Exchange Adapter Name unchanged before save');
 
             click(page.saveBtn);
             comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
             tick(); // wait for async save to complete
+
+            expect(comp.exchangeAdapter.name).toBe(newName, 'Exchange Adapter Name to be updated after save');
             expect(page.saveSpy.calls.any()).toBe(true, 'ExchangeAdapterService update() called');
             expect(page.navSpy).toHaveBeenCalledWith(['dashboard']);
         }));
@@ -337,7 +380,7 @@ function fakeExchangeAdapterServiceSetup() {
             page.adapterNameInput.value = newName;
             page.adapterNameInput.dispatchEvent(newEvent('input')); // tell Angular
 
-            expect(comp.exchangeAdapter.name).toBe(newName, 'Exchange Adapter Name updated');
+            expect(comp.exchangeAdapter.name).toBe(origName, 'Exchange Adapter Name updated');
             expect(expectedExchangeAdapter.name).toBe(origName,
                 'ExchangeAdapterService Exchange Adapter Name unchanged before save');
 
@@ -351,74 +394,110 @@ function fakeExchangeAdapterServiceSetup() {
             expect(page.navSpy.calls.any()).toBe(false, 'router.navigate should not have been called');
         });
 
-        it('should create new Error Code when user adds one', () => {
+        it('should create new Error Code when user adds one', fakeAsync(() => {
 
             expect(expectedExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(3);
 
             click(page.addNewErrorCodeLink);
+            click(page.saveBtn);
+            comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
+            tick(); // wait for async save to complete
 
             expect(expectedExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(4);
             expect(expectedExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[3]).toBeDefined();
-            expect(expectedExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[3]).toBeNull();
-        });
+            expect(expectedExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[3]).toBeNaN();
+        }));
 
-        it('should remove Error Code when user deletes one', () => {
+        it('should remove Error Code when user deletes one', fakeAsync(() => {
 
             expect(expectedExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(4);
 
             click(page.deleteErrorCodeBtn);
+            click(page.saveBtn);
+            comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
+            tick(); // wait for async save to complete
 
             expect(expectedExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(3);
             expect(expectedExchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[3]).not.toBeDefined();
-        });
+        }));
 
-        it('should create new Error Message when user adds one', () => {
+        it('should create new Error Message when user adds one', fakeAsync(() => {
 
             expect(expectedExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(3);
 
             click(page.addNewErrorMessageLink);
+            click(page.saveBtn);
+            comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
+            tick(); // wait for async save to complete
 
             expect(expectedExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(4);
             expect(expectedExchangeAdapter.networkConfig.nonFatalErrorMessages[3]).toBeDefined();
             expect(expectedExchangeAdapter.networkConfig.nonFatalErrorMessages[3]).toBe('');
-        });
+        }));
 
-        it('should remove Error Message when user deletes one', () => {
+        it('should remove Error Message when user deletes one', fakeAsync(() => {
 
             expect(expectedExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(4);
 
             click(page.deleteErrorMessageBtn);
+            click(page.saveBtn);
+            comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
+            tick(); // wait for async save to complete
 
             expect(expectedExchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(3);
             expect(expectedExchangeAdapter.networkConfig.nonFatalErrorMessages[3]).not.toBeDefined();
-        });
+        }));
 
-        it('should create new Optional Config Item when user adds one', () => {
+        it('should create new Optional Config Item when user adds one', fakeAsync(() => {
 
             expect(expectedExchangeAdapter.optionalConfig.configItems.length).toBe(2);
 
             click(page.addNewConfigItemLink);
+            click(page.saveBtn);
+            comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
+            tick(); // wait for async save to complete
 
             expect(expectedExchangeAdapter.optionalConfig.configItems.length).toBe(3);
-            expect(expectedExchangeAdapter.optionalConfig.configItems[2].name).toBe('');
+            expect(expectedExchangeAdapter.optionalConfig.configItems[2].name).toBeDefined();
             expect(expectedExchangeAdapter.optionalConfig.configItems[2].value).toBe('');
-        });
+        }));
 
-        it('should remove Optional Config Item when user deletes one', () => {
+        it('should remove Optional Config Item when user deletes one', fakeAsync(() => {
 
             expect(expectedExchangeAdapter.optionalConfig.configItems.length).toBe(3);
 
             click(page.deleteConfigItemBtn);
+            click(page.saveBtn);
+            comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
+            tick(); // wait for async save to complete
 
             expect(expectedExchangeAdapter.optionalConfig.configItems.length).toBe(2);
             expect(expectedExchangeAdapter.optionalConfig.configItems[2]).not.toBeDefined();
-        });
+        }));
     });
 }
 
 // ----------------------------------------------------------------------------
 // Test Helpers
 // ----------------------------------------------------------------------------
+
+/**
+ * Creates the ExchangeAdapterComponent, initialize it, sets test variables.
+ */
+function createComponent() {
+
+    fixture = TestBed.createComponent(ExchangeAdapterRxComponent);
+    comp = fixture.componentInstance;
+    page = new Page();
+
+    // 1st change detection triggers ngOnInit which gets an Exchange Adapter config
+    fixture.detectChanges();
+    return fixture.whenStable().then(() => {
+        // 2nd change detection displays the async-fetched Exchange Adapter config
+        fixture.detectChanges();
+        page.addPageElements();
+    });
+}
 
 /**
  * This helper class represents the Exchange Adapter screen.
@@ -432,9 +511,9 @@ class Page {
     cancelBtn: DebugElement;
 
     addNewErrorCodeLink: DebugElement;
-    addNewErrorMessageLink: DebugElement;
-
     deleteErrorCodeBtn: DebugElement;
+
+    addNewErrorMessageLink: DebugElement;
     deleteErrorMessageBtn: DebugElement;
 
     addNewConfigItemLink: DebugElement;
@@ -443,6 +522,7 @@ class Page {
     adapterNameInput: HTMLInputElement;
     classNameInput: HTMLInputElement;
     connectionTimeoutInput: HTMLInputElement;
+
     errorCode_0Input: HTMLInputElement;
     errorMessage_0Input: HTMLInputElement;
 
@@ -452,7 +532,7 @@ class Page {
     constructor() {
         // Use component's injector to see the services it injected.
         const compInjector = fixture.debugElement.injector;
-        const exchangeAdapterDataService = compInjector.get(ExchangeAdapterHttpDataPromiseService);
+        const exchangeAdapterDataService = compInjector.get(ExchangeAdapterHttpDataObservableService);
         const router = compInjector.get(Router);
 
         this.navSpy = spyOn(router, 'navigate');
@@ -468,9 +548,9 @@ class Page {
             this.cancelBtn = fixture.debugElement.query(By.css('#exchangeAdapterCancelButton'));
 
             this.addNewErrorCodeLink = fixture.debugElement.query(By.css('#addNewErrorCodeLink'));
-            this.addNewErrorMessageLink = fixture.debugElement.query(By.css('#addNewErrorMessageLink'));
-
             this.deleteErrorCodeBtn = fixture.debugElement.query(By.css('#deleteErrorCodeButton_0'));
+
+            this.addNewErrorMessageLink = fixture.debugElement.query(By.css('#addNewErrorMessageLink'));
             this.deleteErrorMessageBtn = fixture.debugElement.query(By.css('#deleteErrorMessageButton_0'));
 
             this.addNewConfigItemLink = fixture.debugElement.query(By.css('#addNewExchangeConfigItemLink'));
@@ -487,22 +567,3 @@ class Page {
         }
     }
 }
-
-/**
- * Creates the ExchangeAdapterComponent, initialize it, sets test variables.
- */
-function createComponent() {
-
-    fixture = TestBed.createComponent(ExchangeAdapterComponent);
-    comp = fixture.componentInstance;
-    page = new Page();
-
-    // 1st change detection triggers ngOnInit which gets an Exchange Adapter config
-    fixture.detectChanges();
-    return fixture.whenStable().then(() => {
-        // 2nd change detection displays the async-fetched Exchange Adapter config
-        fixture.detectChanges();
-        page.addPageElements();
-    });
-}
-
