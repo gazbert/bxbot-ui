@@ -1,8 +1,8 @@
 import {MockBackend, MockConnection} from '@angular/http/testing';
 import {Http, HttpModule, Response, ResponseOptions, XHRBackend} from '@angular/http';
 import {async, inject, TestBed} from '@angular/core/testing';
-import {ExchangeAdapterHttpDataPromiseService as ExchangeAdapterDataService} from './exchange-adapter-http-data-promise.service';
-import {ExchangeAdapter, NetworkConfig, OptionalConfig} from '../exchange-adapter.model';
+import {ExchangeAdapterHttpDataPromiseService as ExchangeAdapterDataService} from './exchange-http-data-promise.service';
+import {ExchangeAdapter, NetworkConfig, OptionalConfig} from '../exchange.model';
 
 /**
  * Tests the Exchange Adapter HTTP Data service (Promise flavour) using a Mock HTTP backend.

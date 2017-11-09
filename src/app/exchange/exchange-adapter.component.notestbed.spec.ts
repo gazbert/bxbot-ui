@@ -1,7 +1,7 @@
 import {ActivatedRouteStub} from '../../../testing';
 import {ExchangeAdapterComponent} from './exchange-adapter.component';
 import {ExchangeAdapter, NetworkConfig} from '../model/exchange';
-import {ConfigItem, OptionalConfig} from '../model/exchange/exchange-adapter.model';
+import {ConfigItem, OptionalConfig} from '../model/exchange/exchange.model';
 
 /**
  * Tests the behaviour of the Exchange Adapter component (Template version) is as expected.

@@ -15,7 +15,7 @@ import {
 } from '../../model/exchange';
 import {ExchangeAdapterModule} from '../exchange-adapter.module';
 import {ExchangeAdapterRxComponent} from './exchange-adapter-rx.component';
-import {OptionalConfig} from '../../model/exchange/exchange-adapter.model';
+import {OptionalConfig} from '../../model/exchange/exchange.model';
 
 /**
  * Tests the behaviour of the Exchange Adapter component (RxJS version) is as expected.

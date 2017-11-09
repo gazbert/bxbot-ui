@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import {AppComponent} from '../../../app.component';
-import {ExchangeAdapter} from '../exchange-adapter.model';
-import {ExchangeAdapterDataPromiseService} from './exchange-adapter-data-promise.service';
+import {ExchangeAdapter} from '../exchange.model';
+import {ExchangeAdapterDataPromiseService} from './exchange-data-promise.service';
 import {AuthenticationService} from '../../../shared/authentication.service';
 
 // Don't forget this else you get runtime error:

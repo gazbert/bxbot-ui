@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, Response, RequestOptions} from '@angular/http';
 import {AppComponent} from '../../app.component';
-import {ExchangeAdapter} from './exchange-adapter.model';
-import {ExchangeAdapterDataObservableService} from './exchange-adapter-data-observable.service';
+import {ExchangeAdapter} from './exchange.model';
+import {ExchangeAdapterDataObservableService} from './exchange-data-observable.service';
 import {AuthenticationService} from '../../shared/authentication.service';
 import {Observable} from 'rxjs/Observable';
 import {isObject} from 'rxjs/util/isObject';

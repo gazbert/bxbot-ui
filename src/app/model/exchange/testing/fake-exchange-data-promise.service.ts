@@ -1,35 +1,31 @@
-import {Observable} from 'rxjs/Observable';
-import {ExchangeAdapter, NetworkConfig, OptionalConfig} from '../exchange-adapter.model';
-import {ExchangeAdapterDataObservableService} from '../exchange-adapter-data-observable.service';
+import {ExchangeAdapter, NetworkConfig, OptionalConfig} from '../exchange.model';
+import {ExchangeAdapterDataPromiseService} from '../promise/exchange-data-promise.service';
 
 /**
- * Fake Exchange Adapter data service (Observable flavour) backend for testing.
+ * Fake Exchange Adapter data service (Promise flavour) backend for testing.
  *
  * @author gazbert
  */
-export class FakeExchangeAdapterDataObservableService implements ExchangeAdapterDataObservableService {
+export class FakeExchangeAdapterDataPromiseService implements ExchangeAdapterDataPromiseService {
 
-    exchangeAdapters = SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS.map(e => e.clone());
+    exchangeAdapters = SOME_FAKE_PROMISE_EXCHANGE_ADAPTERS.map(e => e.clone());
+    lastPromise: Promise<any>;  // remember so we can spy on promise calls
 
-    getExchangeAdapterByBotId(id: string): Observable<ExchangeAdapter> {
+    getExchangeAdapterByBotId(id: string) {
         const exchangeAdapter = this.exchangeAdapters.find(e => e.id === id);
-        return Observable.create(observer => {
-            observer.next(exchangeAdapter);
-            // call complete if you want to close this stream (like a promise)
-            observer.complete();
-        });
+        return this.lastPromise = Promise.resolve(exchangeAdapter);
     }
 
-    update(exchangeAdapter: ExchangeAdapter): Observable<ExchangeAdapter> {
-        return Observable.create(observer => {
-            observer.next(exchangeAdapter);
-            // call complete if you want to close this stream (like a promise)
-            observer.complete();
+    update(exchangeAdapter: ExchangeAdapter): Promise<ExchangeAdapter> {
+        return this.lastPromise = this.getExchangeAdapterByBotId(exchangeAdapter.id).then(e => {
+            return e ?
+                Object.assign(e, exchangeAdapter) :
+                Promise.reject(`Exchange Adapter ${exchangeAdapter.id} not found`) as any as Promise<ExchangeAdapter>;
         });
     }
 }
 
-export const SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
+export const SOME_FAKE_PROMISE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
     new ExchangeAdapter('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
         new NetworkConfig(60,
             [
@@ -101,5 +97,5 @@ export const SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
                     value: '0.25'
                 }
             ]
-        ))
+        )),
 ];

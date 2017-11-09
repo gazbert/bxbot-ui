@@ -1,8 +1,8 @@
 import {MockBackend, MockConnection} from '@angular/http/testing';
 import {Http, HttpModule, Response, ResponseOptions, XHRBackend} from '@angular/http';
 import {async, inject, TestBed} from '@angular/core/testing';
-import {ExchangeAdapterHttpDataObservableService as ExchangeAdapterDataService} from './exchange-adapter-http-data-observable.service';
-import {ExchangeAdapter, NetworkConfig, OptionalConfig} from './exchange-adapter.model';
+import {ExchangeAdapterHttpDataObservableService as ExchangeAdapterDataService} from './exchange-http-data-observable.service';
+import {ExchangeAdapter, NetworkConfig, OptionalConfig} from './exchange.model';
 import {Observable} from 'rxjs/Observable';
 // Most RxJS operators are not included in Angular's base Observable implementation.
 // The base implementation includes only what Angular itself requires.

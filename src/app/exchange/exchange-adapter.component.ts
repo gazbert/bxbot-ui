@@ -3,7 +3,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {ExchangeAdapter} from '../model/exchange';
 import {ExchangeAdapterHttpDataPromiseService} from '../model/exchange/promise';
-import {ConfigItem} from '../model/exchange/exchange-adapter.model';
+import {ConfigItem} from '../model/exchange/exchange.model';
 
 /**
  * Template-driven version of the Exchange Adapter form.

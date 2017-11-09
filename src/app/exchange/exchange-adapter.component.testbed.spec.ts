@@ -10,7 +10,7 @@ import {FakeExchangeAdapterDataPromiseService, SOME_FAKE_PROMISE_EXCHANGE_ADAPTE
 import {ExchangeAdapterModule} from './exchange-adapter.module';
 import {ExchangeAdapterComponent} from './exchange-adapter.component';
 import {ExchangeAdapterDataPromiseService, ExchangeAdapterHttpDataPromiseService} from '../model/exchange/promise';
-import {ConfigItem, OptionalConfig} from '../model/exchange/exchange-adapter.model';
+import {ConfigItem, OptionalConfig} from '../model/exchange/exchange.model';
 
 /**
  * Tests the behaviour of the Exchange Adapter component (Template version) is as expected.

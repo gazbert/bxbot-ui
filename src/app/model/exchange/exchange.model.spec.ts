@@ -1,4 +1,4 @@
-import {ExchangeAdapter, NetworkConfig, OptionalConfig} from './exchange-adapter.model';
+import {ExchangeAdapter, NetworkConfig, OptionalConfig} from './exchange.model';
 
 /**
  * Tests the Exchange Adapter model behaves as expected.

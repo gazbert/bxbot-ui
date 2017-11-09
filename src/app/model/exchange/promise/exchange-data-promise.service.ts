@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/toPromise';
-import {ExchangeAdapter} from '../exchange-adapter.model';
+import {ExchangeAdapter} from '../exchange.model';
 
 /**
  * The Exchange Adapter Data Service provides operations to update Exchange Adapter configuration.
