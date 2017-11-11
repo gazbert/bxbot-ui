@@ -11,7 +11,7 @@ import {ExchangeHttpDataPromiseService} from './model/exchange/promise';
 import {MarketHttpDataService} from './model/market';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {BotDetailsModule} from './bot-details/bot-details.module';
-import {ExchangeAdapterModule} from './exchange/exchange.module';
+import {ExchangeModule} from './exchange/exchange.module';
 import {EmailAlertsModule} from './email-alerts/email-alerts.module';
 import {AppRoutingModule} from './app-routing.module';
 import {EmailAlertsHttpDataService} from './model/email-alerts';
@@ -22,6 +22,7 @@ import {LoginModule} from './login/login.module';
 import {AuthenticationService, CanActivateAuthGuard} from './shared';
 import {EngineModule} from './engine/engine.module';
 import {SettingsModule} from './settings/settings.module';
+import {MarketsModule} from './markets/markets.module';
 
 /**
  * BX-bot UI main module.
@@ -39,10 +40,11 @@ import {SettingsModule} from './settings/settings.module';
         InMemoryWebApiModule.forRoot(InMemoryDataService,  {put204: false, delete404: true}),
 
         DashboardModule,
-        ExchangeAdapterModule,
+        ExchangeModule,
         EmailAlertsModule,
         BotDetailsModule,
         StrategiesModule,
+        MarketsModule,
         EngineModule,
         AppRoutingModule,
         LoginModule,

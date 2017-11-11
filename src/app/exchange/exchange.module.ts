@@ -5,7 +5,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ExchangeComponent} from './exchange.component';
 
 /**
- * Encapsulates Exchange Adapter config management.
+ * Encapsulates Exchange config management.
  *
  * @author gazbert
  */
@@ -18,5 +18,5 @@ import {ExchangeComponent} from './exchange.component';
     exports: [ExchangeRxComponent, ExchangeComponent],
     declarations: [ExchangeRxComponent, ExchangeComponent]
 })
-export class ExchangeAdapterModule {
+export class ExchangeModule {
 }

@@ -3,7 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {BrowserModule} from '@angular/platform-browser';
 import {BotDetailsComponent} from './bot-details.component';
 import {TabsComponent, TabComponent} from './tabs/';
-import {ExchangeAdapterModule} from '../exchange/exchange.module';
+import {ExchangeModule} from '../exchange/exchange.module';
 import {MarketsModule} from '../markets/markets.module';
 import {EmailAlertsModule} from '../email-alerts/email-alerts.module';
 import {SharedModule} from '../shared/shared.module';
@@ -24,7 +24,7 @@ const routes: Routes = [
 @NgModule({
     imports: [
         BrowserModule,
-        ExchangeAdapterModule,
+        ExchangeModule,
         EmailAlertsModule,
         MarketsModule,
         StrategiesModule,

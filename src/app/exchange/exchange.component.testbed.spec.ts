@@ -7,7 +7,7 @@ import {ActivatedRoute, ActivatedRouteStub, click, newEvent, Router, RouterStub}
 import {SharedModule} from '../shared/shared.module';
 import {Exchange, NetworkConfig, ConfigItem, OptionalConfig} from '../model/exchange';
 import {FakeExchangeDataPromiseService, SOME_FAKE_PROMISE_EXCHANGES} from '../model/exchange/testing';
-import {ExchangeAdapterModule} from './exchange.module';
+import {ExchangeModule} from './exchange.module';
 import {ExchangeComponent} from './exchange.component';
 import {ExchangeDataPromiseService, ExchangeHttpDataPromiseService} from '../model/exchange/promise';
 
@@ -85,7 +85,7 @@ function overrideExchangeDataPromiseServiceSetup() {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [ExchangeAdapterModule, FormsModule, SharedModule],
+            imports: [ExchangeModule, FormsModule, SharedModule],
             providers: [
                 {provide: ActivatedRoute, useValue: activatedRoute},
                 {provide: Router, useClass: RouterStub},
@@ -261,7 +261,7 @@ function fakeExchangeDataPromiseServiceSetup() {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [ExchangeAdapterModule, FormsModule, SharedModule],
+            imports: [ExchangeModule, FormsModule, SharedModule],
             providers: [
                 {provide: ActivatedRoute, useValue: activatedRoute},
                 {provide: ExchangeHttpDataPromiseService, useClass: FakeExchangeDataPromiseService},

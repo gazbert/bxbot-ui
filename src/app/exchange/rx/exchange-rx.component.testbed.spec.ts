@@ -14,7 +14,7 @@ import {
     ExchangeDataObservableService,
     ExchangeHttpDataObservableService,
 } from '../../model/exchange';
-import {ExchangeAdapterModule} from '../exchange.module';
+import {ExchangeModule} from '../exchange.module';
 import {ExchangeRxComponent} from './exchange-rx.component';
 
 /**
@@ -104,7 +104,7 @@ function overrideExchangeDataObservableServiceSetup() {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [ExchangeAdapterModule, ReactiveFormsModule, FormsModule, SharedModule],
+            imports: [ExchangeModule, ReactiveFormsModule, FormsModule, SharedModule],
             providers: [
                 {provide: ActivatedRoute, useValue: activatedRoute},
                 {provide: Router, useClass: RouterStub},
@@ -303,7 +303,7 @@ function fakeExchangeDataObservableServiceSetup() {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [ExchangeAdapterModule, FormsModule, ReactiveFormsModule, SharedModule],
+            imports: [ExchangeModule, FormsModule, ReactiveFormsModule, SharedModule],
             providers: [
                 {provide: ActivatedRoute, useValue: activatedRoute},
                 {provide: ExchangeHttpDataObservableService, useClass: FakeExchangeDataObservableService},
