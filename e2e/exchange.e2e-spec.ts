@@ -1,9 +1,9 @@
 import {browser, by, element, protractor} from 'protractor';
 
 /**
- * Exchange Adapter screen tests.
+ * Exchange screen tests.
  *
- * End 2 End Protractor tests (using Jasmine) for testing Exchange Adapter screen.
+ * End 2 End Protractor tests (using Jasmine) for testing Exchange screen.
  * See: http://www.protractortest.org/#/tutorial
  *
  * TODO - Use by.repeater()/model() instead of by.css() once Angular implement it for lists:
@@ -12,13 +12,13 @@ import {browser, by, element, protractor} from 'protractor';
  *
  * @author gazbert
  */
-describe('Exchange Adapter Tests', function () {
+describe('Exchange Tests', function () {
 
     beforeEach(function () {
         browser.get('');
     });
 
-    it('should update Exchange Adapter fields after Save', function () {
+    it('should update Exchange fields after Save', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
@@ -27,7 +27,7 @@ describe('Exchange Adapter Tests', function () {
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
 
-        expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
@@ -38,11 +38,11 @@ describe('Exchange Adapter Tests', function () {
         expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe('Connection refused');
 
         // Update fields
-        const adapterName = element(by.id('adapterName'));
-        const newAdapterName = 'Bitstamp REST API v2 Adapter';
-        adapterName.clear();
-        adapterName.sendKeys(newAdapterName);
-        expect(adapterName.getAttribute('value')).toBe(newAdapterName);
+        const exchangeName = element(by.id('exchangeName'));
+        const newExchangeName = 'Bitstamp REST API v2 Adapter';
+        exchangeName.clear();
+        exchangeName.sendKeys(newExchangeName);
+        expect(exchangeName.getAttribute('value')).toBe(newExchangeName);
 
         const className = element(by.id('className'));
         const newClassName = 'my.new2.BitstampExchangeAdapterV2';
@@ -81,11 +81,11 @@ describe('Exchange Adapter Tests', function () {
         expect(errorMessage_1.getAttribute('value')).toBe(newErrorMessage_1);
 
         // Save and check the update worked
-        const saveButton = element(by.id('exchangeAdapterSaveButton'));
+        const saveButton = element(by.id('exchangeSaveButton'));
         saveButton.click();
         dashboardItems.get(0).click();
 
-        expect(element(by.id('adapterName')).getAttribute('value')).toBe(newAdapterName);
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe(newExchangeName);
         expect(element(by.id('className')).getAttribute('value')).toBe(newClassName);
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe(newConnectionTimeout);
 
@@ -96,7 +96,7 @@ describe('Exchange Adapter Tests', function () {
         expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe(newErrorMessage_1);
     });
 
-    it('should NOT update Exchange Adapter fields after Cancel', function () {
+    it('should NOT update Exchange fields after Cancel', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
@@ -105,7 +105,7 @@ describe('Exchange Adapter Tests', function () {
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
 
-        expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
@@ -116,11 +116,11 @@ describe('Exchange Adapter Tests', function () {
         expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe('Connection refused');
 
         // Update fields
-        const adapterName = element(by.id('adapterName'));
-        const newAdapterName = 'Bitstamp REST API v2 Adapter';
-        adapterName.clear();
-        adapterName.sendKeys(newAdapterName);
-        expect(adapterName.getAttribute('value')).toBe(newAdapterName);
+        const exchangeName = element(by.id('exchangeName'));
+        const newExchangeName = 'Bitstamp REST API v2 Adapter';
+        exchangeName.clear();
+        exchangeName.sendKeys(newExchangeName);
+        expect(exchangeName.getAttribute('value')).toBe(newExchangeName);
 
         const className = element(by.id('className'));
         const newClassName = 'my.new.BitstampExchangeAdapterV2';
@@ -159,11 +159,11 @@ describe('Exchange Adapter Tests', function () {
         expect(errorMessage_1.getAttribute('value')).toBe(newErrorMessage_1);
 
         // Cancel and check the update was not persisted
-        const cancelButton = element(by.id('exchangeAdapterCancelButton'));
+        const cancelButton = element(by.id('exchangeCancelButton'));
         cancelButton.click();
         dashboardItems.get(0).click();
 
-        expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
@@ -183,7 +183,7 @@ describe('Exchange Adapter Tests', function () {
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
 
-        expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
@@ -204,12 +204,12 @@ describe('Exchange Adapter Tests', function () {
         expect(errorCode.getAttribute('value')).toBe(newErrorCode);
 
         // Save and check the update worked
-        const saveButton = element(by.id('exchangeAdapterSaveButton'));
+        const saveButton = element(by.id('exchangeSaveButton'));
         saveButton.click();
         dashboardItems.get(0).click();
 
         // Same as before
-        expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
@@ -232,7 +232,7 @@ describe('Exchange Adapter Tests', function () {
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
 
-        expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
@@ -247,12 +247,12 @@ describe('Exchange Adapter Tests', function () {
         deleteErrorCodeButton.click();
 
         // Save and check the update worked
-        const saveButton = element(by.id('exchangeAdapterSaveButton'));
+        const saveButton = element(by.id('exchangeSaveButton'));
         saveButton.click();
         dashboardItems.get(0).click();
 
         // Same as before
-        expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
@@ -273,7 +273,7 @@ describe('Exchange Adapter Tests', function () {
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
 
-        expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
@@ -294,12 +294,12 @@ describe('Exchange Adapter Tests', function () {
         expect(errorMessage.getAttribute('value')).toBe(newErrorMessage);
 
         // Save and check the update worked
-        const saveButton = element(by.id('exchangeAdapterSaveButton'));
+        const saveButton = element(by.id('exchangeSaveButton'));
         saveButton.click();
         dashboardItems.get(0).click();
 
         // Same as before
-        expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
@@ -322,7 +322,7 @@ describe('Exchange Adapter Tests', function () {
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
 
-        expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
@@ -337,12 +337,12 @@ describe('Exchange Adapter Tests', function () {
         deleteErrorMessageButton.click();
 
         // Save and check the update worked
-        const saveButton = element(by.id('exchangeAdapterSaveButton'));
+        const saveButton = element(by.id('exchangeSaveButton'));
         saveButton.click();
         dashboardItems.get(0).click();
 
         // Same as before
-        expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
@@ -362,7 +362,7 @@ describe('Exchange Adapter Tests', function () {
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
 
-        expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
@@ -398,12 +398,12 @@ describe('Exchange Adapter Tests', function () {
         expect(exchangeConfigItemValue.getAttribute('value')).toBe(newConfigItemValue);
 
         // Save and check the update worked
-        const saveButton = element(by.id('exchangeAdapterSaveButton'));
+        const saveButton = element(by.id('exchangeSaveButton'));
         saveButton.click();
         dashboardItems.get(0).click();
 
         // Same as before
-        expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
@@ -427,7 +427,7 @@ describe('Exchange Adapter Tests', function () {
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
 
-        expect(element(by.id('adapterName')).getAttribute('value')).toBe('GDAX REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('GDAX REST API Adapter');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('120');
 
@@ -455,12 +455,12 @@ describe('Exchange Adapter Tests', function () {
         deleteConfigItemButton.click();
 
         // Save and check the update worked
-        const saveButton = element(by.id('exchangeAdapterSaveButton'));
+        const saveButton = element(by.id('exchangeSaveButton'));
         saveButton.click();
         dashboardItems.get(1).click();
 
         // Same as before
-        expect(element(by.id('adapterName')).getAttribute('value')).toBe('GDAX REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('GDAX REST API Adapter');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('120');
 
@@ -473,7 +473,7 @@ describe('Exchange Adapter Tests', function () {
         expect(element(by.id('exchangeConfigItemValue_1')).isPresent()).toBe(false); // gone!
     });
 
-    it('should NOT save Exchange Adapter fields if there are validation errors', function () {
+    it('should NOT save Exchange fields if there are validation errors', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
@@ -482,7 +482,7 @@ describe('Exchange Adapter Tests', function () {
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
 
-        expect(element(by.id('adapterName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
@@ -493,11 +493,11 @@ describe('Exchange Adapter Tests', function () {
         expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe('Connection refused');
 
         // Update fields with some 'bad' values
-        const adapterName = element(by.id('adapterName'));
-        const newAdapterName = 'Bitstamp REST API v2 Adapter!';
-        adapterName.clear();
-        adapterName.sendKeys(newAdapterName);
-        expect(adapterName.getAttribute('value')).toBe(newAdapterName);
+        const exchangeName = element(by.id('exchangeName'));
+        const newExchangeName = 'Bitstamp REST API v2 Adapter!';
+        exchangeName.clear();
+        exchangeName.sendKeys(newExchangeName);
+        expect(exchangeName.getAttribute('value')).toBe(newExchangeName);
 
         const className = element(by.id('className'));
         const newClassName = 'my.1new.BitstampExchangeAdapterV2';
@@ -561,13 +561,13 @@ describe('Exchange Adapter Tests', function () {
         expect(exchangeConfigItemValue.getAttribute('value')).toBe(newConfigItemValue);
 
         // Save and check the update did not persist
-        const saveButton = element(by.id('exchangeAdapterSaveButton'));
+        const saveButton = element(by.id('exchangeSaveButton'));
         saveButton.click();
 
         // Check for validation errors
-        expect(element(by.id('adapterName')).getAttribute('value')).toBe(newAdapterName);
-        expect(element(by.id('invalidAdapterName')).getText()).toBe(
-            'Name must be alphanumeric and can only include the following special characters: _ -');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe(newExchangeName);
+        expect(element(by.id('invalidExchangeName')).getText()).toBe(
+            'Exchange Name must be alphanumeric and can only include the following special characters: _ -');
 
         expect(element(by.id('className')).getAttribute('value')).toBe(newClassName);
         expect(element(by.id('invalidClassName')).getText()).toBe(

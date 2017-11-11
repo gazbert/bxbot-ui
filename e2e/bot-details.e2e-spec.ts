@@ -58,7 +58,7 @@ describe('Bot Details Tests', function () {
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
 
-        expect(element(by.id('adapterName')).getAttribute('value')).toBe('GDAX REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('GDAX REST API Adapter');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('120');
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');

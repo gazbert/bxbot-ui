@@ -37,15 +37,15 @@ describe('ExchangeComponent tests using TestBed', () => {
         activatedRoute = new ActivatedRouteStub();
     });
 
-    describe('with overridden (stubbed) ExchangeDataPromiseService', overrideExchangeDataServiceSetup);
-    describe('with fake ExchangeDataPromiseService setup', fakeExchangeDataServiceSetup);
+    describe('with overridden (stubbed) ExchangeDataPromiseService', overrideExchangeDataPromiseServiceSetup);
+    describe('with fake ExchangeDataPromiseService setup', fakeExchangeDataPromiseServiceSetup);
 });
 
 /**
  * This test setup overrides ExchangeComponent ExchangeDataPromiseService provider with a
  * stubbed ExchangeDataPromiseService.
  */
-function overrideExchangeDataServiceSetup() {
+function overrideExchangeDataPromiseServiceSetup() {
 
     let expectedNetworkConfig: NetworkConfig;
     let expectedErrorCodes: number[];
@@ -152,13 +152,13 @@ function overrideExchangeDataServiceSetup() {
         page.adapterNameInput.dispatchEvent(newEvent('input')); // tell Angular
 
         expect(comp.exchange.name).toBe(newName, 'Exchange Name updated');
-        expect(testExchange.name).toBe(origName, 'Exchange Name unchanged before save');
+        expect(testExchange.name).toBe(origName, 'ExchangeHttpDataPromiseService Exchange Name unchanged before save');
 
         click(page.saveBtn);
         comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
         tick(); // wait for async save to complete
 
-        expect(testExchange.name).toBe(newName, 'Exchange Name changes after save');
+        expect(testExchange.name).toBe(newName, 'ExchangeHttpDataPromiseService Exchange Name changes after save');
         expect(page.saveSpy.calls.any()).toBe(true, 'ExchangeHttpDataPromiseService updateExchange() called');
         expect(page.navSpy).toHaveBeenCalledWith(['dashboard']);
     }));
@@ -177,12 +177,12 @@ function overrideExchangeDataServiceSetup() {
         page.adapterNameInput.dispatchEvent(newEvent('input')); // tell Angular
 
         expect(comp.exchange.name).toBe(newName, 'Exchange Name updated');
-        expect(testExchange.name).toBe(origName, 'Exchange Name unchanged before save');
+        expect(testExchange.name).toBe(origName, 'ExchangeHttpDataPromiseService Exchange Name unchanged before save');
 
         click(page.saveBtn);
         comp.save(false); // TODO hack to tell Angular form is invalid - is there a better way?
 
-        expect(testExchange.name).toBe(origName, 'Exchange Name not changed after save');
+        expect(testExchange.name).toBe(origName, 'ExchangeHttpDataPromiseService Exchange Name not changed after save');
 
         expect(page.saveSpy.calls.any()).toBe(false, 'ExchangeHttpDataPromiseService updateExchange() not called');
         expect(page.navSpy.calls.any()).toBe(false, 'router.navigate should not have been called');
@@ -257,7 +257,7 @@ function overrideExchangeDataServiceSetup() {
  */
 const BITSTAMP = 0;
 const firstExchangeAdapter = SOME_FAKE_PROMISE_EXCHANGES[BITSTAMP];
-function fakeExchangeDataServiceSetup() {
+function fakeExchangeDataPromiseServiceSetup() {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -309,7 +309,7 @@ function fakeExchangeDataServiceSetup() {
             page.adapterNameInput.dispatchEvent(newEvent('input')); // tell Angular
 
             expect(comp.exchange.name).toBe(newName, 'Exchange Name updated');
-            expect(expectedExchange.name).toBe(origName, 'Exchange Name unchanged before save');
+            expect(expectedExchange.name).toBe(origName, 'ExchangeHttpDataPromiseService Exchange Name unchanged before save');
 
             click(page.saveBtn);
             comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
@@ -332,12 +332,12 @@ function fakeExchangeDataServiceSetup() {
             page.adapterNameInput.dispatchEvent(newEvent('input')); // tell Angular
 
             expect(comp.exchange.name).toBe(newName, 'Exchange Name updated');
-            expect(expectedExchange.name).toBe(origName, 'Exchange Name unchanged before save');
+            expect(expectedExchange.name).toBe(origName, 'ExchangeHttpDataPromiseService Exchange Name unchanged before save');
 
             click(page.saveBtn);
             comp.save(false); // TODO hack to tell Angular form is invalid - is there a better way?
 
-            expect(expectedExchange.name).toBe(origName, 'Exchange Name not changed after save');
+            expect(expectedExchange.name).toBe(origName, 'ExchangeHttpDataPromiseService Exchange Name not changed after save');
 
             expect(page.saveSpy.calls.any()).toBe(false, 'ExchangeHttpDataPromiseService updateExchange() not called');
             expect(page.navSpy.calls.any()).toBe(false, 'router.navigate should not have been called');

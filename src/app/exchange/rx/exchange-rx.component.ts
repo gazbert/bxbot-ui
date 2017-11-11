@@ -33,7 +33,7 @@ export class ExchangeRxComponent implements OnInit {
     formSaved = false;
 
     formErrors = {
-        'adapterName': '',
+        'exchangeName': '',
         'className': '',
         'connectionTimeout': '',
         'nonFatalErrorHttpStatusCode': '',
@@ -43,10 +43,10 @@ export class ExchangeRxComponent implements OnInit {
     };
 
     validationMessages = {
-        'adapterName': {
-            'required': 'Name is required.',
-            'maxlength': 'Name max length is 50 characters.',
-            'pattern': 'Name must be alphanumeric and can only include the following special characters: _ -'
+        'exchangeName': {
+            'required': 'Exchange Name is required.',
+            'maxlength': 'Exchange Name max length is 50 characters.',
+            'pattern': 'Exchange Name must be alphanumeric and can only include the following special characters: _ -'
         },
         'className': {
             'required': 'Class Name is required.',
@@ -104,7 +104,7 @@ export class ExchangeRxComponent implements OnInit {
 
             // TODO - Must be better way to adapt domain model <-> form UI model?
             this.exchange.id = this.exchangeForm.get('botId').value;
-            this.exchange.name = this.exchangeForm.get('adapterName').value;
+            this.exchange.name = this.exchangeForm.get('exchangeName').value;
             this.exchange.className = this.exchangeForm.get('className').value;
             this.exchange.networkConfig.connectionTimeout = this.exchangeForm.get('connectionTimeout').value;
 
@@ -176,7 +176,7 @@ export class ExchangeRxComponent implements OnInit {
 
         this.exchangeForm = this.fb.group({
             botId: new FormControl({value: this.exchange.id, disabled: true}, Validators.required),
-            adapterName: [this.exchange.name, [
+            exchangeName: [this.exchange.name, [
                 Validators.required,
                 Validators.minLength(1),
                 Validators.maxLength(50),

@@ -1,18 +1,18 @@
 <!--
-    Reactive (RxJS) version of Exchange Adapter form.
+    Reactive (RxJS) version of Exchange form.
     See: https://angular.io/docs/ts/latest/guide/reactive-forms.html
  -->
 <div *ngIf="exchange">
     <form *ngIf="active" novalidate [formGroup]="exchangeForm" (ngSubmit)="save(exchangeForm.valid)">
 
-        <!-- Adapter Name -->
+        <!-- Exchange Name -->
         <div class="row">
             <div class="form-group col-sm-6">
-                <label for="adapterName">Name</label>
-                <input formControlName="adapterName" placeholder="My REST API Adapter" id="adapterName"
+                <label for="exchangeName">Name</label>
+                <input formControlName="exchangeName" placeholder="GDAX Exchange" id="exchangeName"
                        class="form-control" maxlength="121" required/>
-                <div id="invalidAdapterName"
-                     *ngIf="formErrors.adapterName" class="alert alert-danger">{{ formErrors.adapterName }}
+                <div id="invalidExchangeName"
+                     *ngIf="formErrors.exchangeName" class="alert alert-danger">{{ formErrors.exchangeName }}
                 </div>
             </div>
         </div>
@@ -179,9 +179,9 @@
             <!-- Must have type for button else Chrome reloads entire app on Cancel click!
                  http://stackoverflow.com/questions/38120756/angular2-router-navigate-refresh-page
              -->
-            <button id="exchangeAdapterCancelButton" type="button" (click)="cancel()" class="btn btn-default">Cancel
+            <button id="exchangeCancelButton" type="button" (click)="cancel()" class="btn btn-default">Cancel
             </button>
-            <button id="exchangeAdapterSaveButton" class="btn btn-primary">Save</button>
+            <button id="exchangeSaveButton" class="btn btn-primary">Save</button>
         </div>
     </form>
 </div>
