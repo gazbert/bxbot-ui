@@ -29,7 +29,7 @@ describe('Miscellaneous Scenario Tests', function () {
         expect(dashboardItems.count()).toBe(1);
 
         dashboardItems.get(0).click();
-        expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Bot Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(3).click();

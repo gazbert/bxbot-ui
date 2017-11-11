@@ -21,7 +21,7 @@ describe('Strategy Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(3).click();
-        expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Bot Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(3).click();
@@ -82,7 +82,7 @@ describe('Strategy Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(3).click();
-        expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Bot Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(3).click();
@@ -145,7 +145,7 @@ describe('Strategy Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(3).click();
-        expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Bot Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(3).click();
@@ -216,7 +216,7 @@ describe('Strategy Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(3).click();
-        expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Bot Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(3).click();
@@ -262,7 +262,7 @@ describe('Strategy Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(3).click();
-        expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Bot Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(3).click();
@@ -312,7 +312,7 @@ describe('Strategy Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(3).click();
-        expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Bot Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(3).click();
@@ -394,7 +394,7 @@ describe('Strategy Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(3).click();
-        expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Bot Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(3).click();
@@ -460,7 +460,7 @@ describe('Strategy Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(3).click();
-        expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Bot Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(3).click();
@@ -557,7 +557,7 @@ describe('Strategy Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(3).click();
-        expect(element(by.css('h2')).getText()).toEqual('ItBit Details');
+        expect(element(by.css('h2')).getText()).toEqual('ItBit Bot Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(3).click();

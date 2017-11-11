@@ -22,7 +22,7 @@ describe('Email Alerts Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(2).click();
-        expect(element(by.css('h2')).getText()).toEqual('Gemini Details');
+        expect(element(by.css('h2')).getText()).toEqual('Gemini Bot Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(4).click();
@@ -85,7 +85,7 @@ describe('Email Alerts Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(2).click();
-        expect(element(by.css('h2')).getText()).toEqual('Gemini Details');
+        expect(element(by.css('h2')).getText()).toEqual('Gemini Bot Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(4).click();
@@ -148,7 +148,7 @@ describe('Email Alerts Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(2).click();
-        expect(element(by.css('h2')).getText()).toEqual('Gemini Details');
+        expect(element(by.css('h2')).getText()).toEqual('Gemini Bot Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(4).click();

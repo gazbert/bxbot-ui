@@ -47,12 +47,12 @@ describe('Dashboard Tests', function () {
 
     it('should display Bitstamp as first Dashboard Bot item', function () {
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
-        expect(dashboardItems.get(0).getText()).toContain('Bitstamp');
+        expect(dashboardItems.get(0).getText()).toContain('Bitstamp Bot');
     });
 
     it('should display Kraken as last Dashboard Bot item', function () {
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
-        expect(dashboardItems.get(7).getText()).toContain('Kraken');
+        expect(dashboardItems.get(7).getText()).toContain('Kraken Bot');
     });
 
     it('should render Gemini Bot specific link', function () {

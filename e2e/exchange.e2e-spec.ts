@@ -22,7 +22,7 @@ describe('Exchange Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
-        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
+        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Bot Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
@@ -100,7 +100,7 @@ describe('Exchange Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
-        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
+        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Bot Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
@@ -178,7 +178,7 @@ describe('Exchange Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
-        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
+        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Bot Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
@@ -227,7 +227,7 @@ describe('Exchange Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
-        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
+        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Bot Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
@@ -268,7 +268,7 @@ describe('Exchange Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
-        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
+        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Bot Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
@@ -317,7 +317,7 @@ describe('Exchange Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
-        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
+        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Bot Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
@@ -357,7 +357,7 @@ describe('Exchange Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
-        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
+        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Bot Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
@@ -422,7 +422,7 @@ describe('Exchange Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(1).click();
-        expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
+        expect(element(by.css('h2')).getText()).toEqual('GDAX Bot Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
@@ -477,7 +477,7 @@ describe('Exchange Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(0).click();
-        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Details');
+        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Bot Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();

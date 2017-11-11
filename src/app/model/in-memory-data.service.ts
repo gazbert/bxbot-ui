@@ -18,42 +18,42 @@ export class InMemoryDataService implements InMemoryDbService {
         const status = [
             {
                 id: 'bitstamp-1',
-                displayName: 'Bitstamp',
+                displayName: 'Bitstamp Bot',
                 status: 'Running'
             },
             {
                 id: 'gdax-1',
-                displayName: 'GDAX',
+                displayName: 'GDAX Bot',
                 status: 'Running'
             },
             {
                 id: 'gemini-1',
-                displayName: 'Gemini',
+                displayName: 'Gemini Bot',
                 status: 'Stopped'
             },
             {
                 id: 'itbit-1',
-                displayName: 'ItBit',
+                displayName: 'ItBit Bot',
                 status: 'Running'
             },
             {
                 id: 'huobi-1',
-                displayName: 'Huobi',
+                displayName: 'Huobi Bot',
                 status: 'Running'
             },
             {
                 id: 'okcoin-1',
-                displayName: 'OKCoin',
+                displayName: 'OKCoin Bot',
                 status: 'Running'
             },
             {
                 id: 'bitfinex-1',
-                displayName: 'Bitfinex',
+                displayName: 'Bitfinex Bot',
                 status: 'Stopped'
             },
             {
                 id: 'kraken-1',
-                displayName: 'Kraken',
+                displayName: 'Kraken Bot',
                 status: 'Running'
             }
         ];

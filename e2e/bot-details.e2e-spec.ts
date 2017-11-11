@@ -22,7 +22,7 @@ describe('Bot Details Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(1).click();
-        expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
+        expect(element(by.css('h2')).getText()).toEqual('GDAX Bot Details');
 
         const tabLinks = element.all(by.css('li'));
         expect(tabLinks.count()).toBe(5);
@@ -40,7 +40,7 @@ describe('Bot Details Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(1).click();
-        expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
+        expect(element(by.css('h2')).getText()).toEqual('GDAX Bot Details');
 
         expect(element(by.id('botId')).getAttribute('value')).toBe('gdax-1');
         expect(element(by.id('botName')).getAttribute('value')).toBe('GDAX');
@@ -53,7 +53,7 @@ describe('Bot Details Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(1).click();
-        expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
+        expect(element(by.css('h2')).getText()).toEqual('GDAX Bot Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
@@ -71,7 +71,7 @@ describe('Bot Details Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(1).click();
-        expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
+        expect(element(by.css('h2')).getText()).toEqual('GDAX Bot Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(2).click();
@@ -95,7 +95,7 @@ describe('Bot Details Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(1).click();
-        expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
+        expect(element(by.css('h2')).getText()).toEqual('GDAX Bot Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(3).click();
@@ -119,7 +119,7 @@ describe('Bot Details Tests', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(1).click();
-        expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
+        expect(element(by.css('h2')).getText()).toEqual('GDAX Bot Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(4).click();
@@ -137,7 +137,7 @@ describe('Bot Details Tests', function () {
 
             const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
             dashboardItems.get(1).click();
-            expect(element(by.css('h2')).getText()).toEqual('GDAX Details');
+            expect(element(by.css('h2')).getText()).toEqual('GDAX Bot Details');
 
             const dashboardButton = element.all(by.css('dashboardButton'));
             dashboardButton.click();
