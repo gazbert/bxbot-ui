@@ -15,10 +15,10 @@ import {
     ExchangeHttpDataObservableService,
 } from '../../model/exchange';
 import {ExchangeAdapterModule} from '../exchange.module';
-import {ExchangeAdapterRxComponent} from './exchange-rx.component';
+import {ExchangeRxComponent} from './exchange-rx.component';
 
 /**
- * Tests the behaviour of the Exchange Adapter component (RxJS version) is as expected.
+ * Tests the behaviour of the Exchange component (RxJS version) is as expected.
  *
  * Learning ground for writing Jasmine tests using the TestBed.
  * (Trying to write the equivalent tests for a Reactive form without the TestBed is proving VERY difficult!)
@@ -34,11 +34,11 @@ import {ExchangeAdapterRxComponent} from './exchange-rx.component';
  * @author gazbert
  */
 let activatedRoute: ActivatedRouteStub;
-let comp: ExchangeAdapterRxComponent;
-let fixture: ComponentFixture<ExchangeAdapterRxComponent>;
+let comp: ExchangeRxComponent;
+let fixture: ComponentFixture<ExchangeRxComponent>;
 let page: Page;
 
-describe('ExchangeAdapterRxComponent tests with TestBed', () => {
+describe('ExchangeRxComponent tests with TestBed', () => {
 
     beforeEach(() => {
         activatedRoute = new ActivatedRouteStub();
@@ -49,7 +49,7 @@ describe('ExchangeAdapterRxComponent tests with TestBed', () => {
 });
 
 /**
- * This test setup overrides ExchangeAdapterRxComponent ExchangeAdapterService provider with a
+ * This test setup overrides ExchangeRxComponent ExchangeAdapterService provider with a
  * stubbed ExchangeAdapterService.
  */
 function overrideExchangeAdapterServiceSetup() {
@@ -115,7 +115,7 @@ function overrideExchangeAdapterServiceSetup() {
             ]
         })
         // Override component's own provider and use our stubbed ExchangeAdapterService
-            .overrideComponent(ExchangeAdapterRxComponent, {
+            .overrideComponent(ExchangeRxComponent, {
                 set: {
                     providers: [
                         {
@@ -174,7 +174,7 @@ function overrideExchangeAdapterServiceSetup() {
         page.adapterNameInput.value = newName;
         page.adapterNameInput.dispatchEvent(newEvent('input')); // tell Angular
 
-        expect(comp.exchangeAdapter.name).toBe(origName, 'Exchange Adapter Name model not to be updated before save');
+        expect(comp.exchange.name).toBe(origName, 'Exchange Adapter Name model not to be updated before save');
         expect(testExchangeAdapter.name).toBe(origName,
             'ExchangeAdapterService Exchange Adapter Name model NOT to be updated before save');
 
@@ -201,7 +201,7 @@ function overrideExchangeAdapterServiceSetup() {
         page.adapterNameInput.value = '!NewHuobi';
         page.adapterNameInput.dispatchEvent(newEvent('input')); // tell Angular
 
-        expect(comp.exchangeAdapter.name).toBe(origName, 'Exchange Adapter Name in model not to be updated');
+        expect(comp.exchange.name).toBe(origName, 'Exchange Adapter Name in model not to be updated');
         expect(testExchangeAdapter.name).toBe(origName,
             'ExchangeAdapterService Exchange Adapter Name unchanged before save');
 
@@ -354,7 +354,7 @@ function fakeExchangeAdapterServiceSetup() {
             page.adapterNameInput.value = newName;
             page.adapterNameInput.dispatchEvent(newEvent('input')); // tell Angular
 
-            expect(comp.exchangeAdapter.name).toBe(origName, 'Exchange Adapter Name not to be updated before save');
+            expect(comp.exchange.name).toBe(origName, 'Exchange Adapter Name not to be updated before save');
             expect(expectedExchangeAdapter.name).toBe(origName,
                 'ExchangeAdapterService Exchange Adapter Name unchanged before save');
 
@@ -362,7 +362,7 @@ function fakeExchangeAdapterServiceSetup() {
             comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
             tick(); // wait for async save to complete
 
-            expect(comp.exchangeAdapter.name).toBe(newName, 'Exchange Adapter Name to be updated after save');
+            expect(comp.exchange.name).toBe(newName, 'Exchange Adapter Name to be updated after save');
             expect(page.saveSpy.calls.any()).toBe(true, 'ExchangeAdapterService update() called');
             expect(page.navSpy).toHaveBeenCalledWith(['dashboard']);
         }));
@@ -380,7 +380,7 @@ function fakeExchangeAdapterServiceSetup() {
             page.adapterNameInput.value = newName;
             page.adapterNameInput.dispatchEvent(newEvent('input')); // tell Angular
 
-            expect(comp.exchangeAdapter.name).toBe(origName, 'Exchange Adapter Name updated');
+            expect(comp.exchange.name).toBe(origName, 'Exchange Adapter Name updated');
             expect(expectedExchangeAdapter.name).toBe(origName,
                 'ExchangeAdapterService Exchange Adapter Name unchanged before save');
 
@@ -486,7 +486,7 @@ function fakeExchangeAdapterServiceSetup() {
  */
 function createComponent() {
 
-    fixture = TestBed.createComponent(ExchangeAdapterRxComponent);
+    fixture = TestBed.createComponent(ExchangeRxComponent);
     comp = fixture.componentInstance;
     page = new Page();
 
@@ -541,7 +541,7 @@ class Page {
 
     addPageElements() {
 
-        if (comp.exchangeAdapter) {
+        if (comp.exchange) {
 
             // We have a Exchange Adapter so these elements are now in the DOM...
             this.saveBtn = fixture.debugElement.query(By.css('#exchangeAdapterSaveButton'));

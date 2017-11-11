@@ -2,8 +2,8 @@
     Reactive (RxJS) version of Exchange Adapter form.
     See: https://angular.io/docs/ts/latest/guide/reactive-forms.html
  -->
-<div *ngIf="exchangeAdapter">
-    <form *ngIf="active" novalidate [formGroup]="exchangeAdapterForm" (ngSubmit)="save(exchangeAdapterForm.valid)">
+<div *ngIf="exchange">
+    <form *ngIf="active" novalidate [formGroup]="exchangeForm" (ngSubmit)="save(exchangeForm.valid)">
 
         <!-- Adapter Name -->
         <div class="row">

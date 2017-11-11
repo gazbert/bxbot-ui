@@ -9,26 +9,26 @@ import {ConfigItem, Exchange, ExchangeHttpDataObservableService, OptionalConfig}
 import 'rxjs/add/operator/map';
 
 /**
- * Reactive (RxJS) version of the Exchange Adapter form.
+ * Reactive (RxJS) version of the Exchange form.
  * See: https://angular.io/docs/ts/latest/guide/reactive-forms.html
  *
  * I'm still not convinced the Reactive form approach is better than the (far) simpler Template form approach -
  * there's so much more code to write... or am I being a noob and missing something here? ;-/
  *
- * For demo purposes, it uses the Observable implementation of the Exchange Adapter HTTP Data service.
+ * For demo purposes, it uses the Observable implementation of the Exchange HTTP Data service.
  *
  * @author gazbert
  */
 @Component({
-    selector: 'app-bxbot-ui-exchange-adapter-rx',
+    selector: 'app-bxbot-ui-exchange-rx',
     templateUrl: 'exchange-rx.component.html',
     styleUrls: ['exchange-rx.component.css']
 })
-export class ExchangeAdapterRxComponent implements OnInit {
+export class ExchangeRxComponent implements OnInit {
 
-    exchangeAdapter: Exchange;
+    exchange: Exchange;
     active = true;
-    public exchangeAdapterForm: FormGroup;
+    public exchangeForm: FormGroup;
     errorMessage: string;
     formSaved = false;
 
@@ -77,16 +77,16 @@ export class ExchangeAdapterRxComponent implements OnInit {
         }
     };
 
-    constructor(private exchangeAdapterDataService: ExchangeHttpDataObservableService, private route: ActivatedRoute,
+    constructor(private exchangeDataService: ExchangeHttpDataObservableService, private route: ActivatedRoute,
                 private fb: FormBuilder, private router: Router) {
     }
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
             const botId = params['id'];
-            this.exchangeAdapterDataService.getExchangeByBotId(botId)
-                .subscribe(exchangeAdapter => {
-                        this.exchangeAdapter = exchangeAdapter;
+            this.exchangeDataService.getExchangeByBotId(botId)
+                .subscribe(exchange => {
+                        this.exchange = exchange;
                         this.buildForm();
                     },
                     error => this.errorMessage = <any>error); // TODO - Show meaningful error to user?
@@ -103,27 +103,27 @@ export class ExchangeAdapterRxComponent implements OnInit {
         if (isValid) {
 
             // TODO - Must be better way to adapt domain model <-> form UI model?
-            this.exchangeAdapter.id = this.exchangeAdapterForm.get('botId').value;
-            this.exchangeAdapter.name = this.exchangeAdapterForm.get('adapterName').value;
-            this.exchangeAdapter.className = this.exchangeAdapterForm.get('className').value;
-            this.exchangeAdapter.networkConfig.connectionTimeout = this.exchangeAdapterForm.get('connectionTimeout').value;
+            this.exchange.id = this.exchangeForm.get('botId').value;
+            this.exchange.name = this.exchangeForm.get('adapterName').value;
+            this.exchange.className = this.exchangeForm.get('className').value;
+            this.exchange.networkConfig.connectionTimeout = this.exchangeForm.get('connectionTimeout').value;
 
-            this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length = 0;
-            this.exchangeAdapterForm.get('nonFatalErrorHttpStatusCodes').value.forEach(
-                (c) => this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.push(parseInt(c, 10)));
+            this.exchange.networkConfig.nonFatalErrorHttpStatusCodes.length = 0;
+            this.exchangeForm.get('nonFatalErrorHttpStatusCodes').value.forEach(
+                (c) => this.exchange.networkConfig.nonFatalErrorHttpStatusCodes.push(parseInt(c, 10)));
 
-            this.exchangeAdapter.networkConfig.nonFatalErrorMessages.length = 0;
-            this.exchangeAdapterForm.get('nonFatalErrorMessages').value.forEach(
-                (m) => this.exchangeAdapter.networkConfig.nonFatalErrorMessages.push(m));
+            this.exchange.networkConfig.nonFatalErrorMessages.length = 0;
+            this.exchangeForm.get('nonFatalErrorMessages').value.forEach(
+                (m) => this.exchange.networkConfig.nonFatalErrorMessages.push(m));
 
-            this.exchangeAdapter.optionalConfig.configItems.length = 0;
-            this.exchangeAdapterForm.get('optionalConfigItems').value.forEach(
+            this.exchange.optionalConfig.configItems.length = 0;
+            this.exchangeForm.get('optionalConfigItems').value.forEach(
                 (i) => {
                     const configItem = new ConfigItem(i.configItemName, i.configItemValue);
-                    this.exchangeAdapter.optionalConfig.configItems.push(configItem);
+                    this.exchange.optionalConfig.configItems.push(configItem);
                 });
 
-            this.exchangeAdapterDataService.updateExchange(this.exchangeAdapter)
+            this.exchangeDataService.updateExchange(this.exchange)
                 .subscribe(
                     () => this.goToDashboard(),
                     error => this.errorMessage = <any>error); // TODO - Show meaningful error to user?
@@ -139,32 +139,32 @@ export class ExchangeAdapterRxComponent implements OnInit {
     }
 
     addErrorCode(): void {
-        const control = <FormArray>this.exchangeAdapterForm.controls['nonFatalErrorHttpStatusCodes'];
+        const control = <FormArray>this.exchangeForm.controls['nonFatalErrorHttpStatusCodes'];
         control.push(this.createErrorCodeGroup(null));
     }
 
     deleteErrorCode(i: number): void {
-        const control = <FormArray>this.exchangeAdapterForm.controls['nonFatalErrorHttpStatusCodes'];
+        const control = <FormArray>this.exchangeForm.controls['nonFatalErrorHttpStatusCodes'];
         control.removeAt(i);
     }
 
     addErrorMessage(): void {
-        const control = <FormArray>this.exchangeAdapterForm.controls['nonFatalErrorMessages'];
+        const control = <FormArray>this.exchangeForm.controls['nonFatalErrorMessages'];
         control.push(this.createErrorMessageGroup(''));
     }
 
     deleteErrorMessage(i: number): void {
-        const control = <FormArray>this.exchangeAdapterForm.controls['nonFatalErrorMessages'];
+        const control = <FormArray>this.exchangeForm.controls['nonFatalErrorMessages'];
         control.removeAt(i);
     }
 
     addOptionalConfigItem(): void {
-        const control = <FormArray>this.exchangeAdapterForm.controls['optionalConfigItems'];
+        const control = <FormArray>this.exchangeForm.controls['optionalConfigItems'];
         control.push(this.createOptionalConfigItemGroup(new ConfigItem('', '')));
     }
 
     deleteOptionalConfigItem(i: number): void {
-        const control = <FormArray>this.exchangeAdapterForm.controls['optionalConfigItems'];
+        const control = <FormArray>this.exchangeForm.controls['optionalConfigItems'];
         control.removeAt(i);
     }
 
@@ -174,21 +174,21 @@ export class ExchangeAdapterRxComponent implements OnInit {
 
     buildForm(): void {
 
-        this.exchangeAdapterForm = this.fb.group({
-            botId: new FormControl({value: this.exchangeAdapter.id, disabled: true}, Validators.required),
-            adapterName: [this.exchangeAdapter.name, [
+        this.exchangeForm = this.fb.group({
+            botId: new FormControl({value: this.exchange.id, disabled: true}, Validators.required),
+            adapterName: [this.exchange.name, [
                 Validators.required,
                 Validators.minLength(1),
                 Validators.maxLength(50),
                 Validators.pattern('[a-zA-Z0-9_\\- ]*')
             ]],
-            className: [this.exchangeAdapter.className, [
+            className: [this.exchange.className, [
                 Validators.required,
                 Validators.minLength(1),
                 Validators.maxLength(120),
                 Validators.pattern('([a-zA-Z_$][a-zA-Z0-9_$]*\.)*[a-zA-Z_$][a-zA-Z0-9_$]*')
             ]],
-            connectionTimeout: [this.exchangeAdapter.networkConfig.connectionTimeout, [
+            connectionTimeout: [this.exchange.networkConfig.connectionTimeout, [
                 Validators.required,
                 Validators.pattern('\\d+')
             ]],
@@ -198,25 +198,25 @@ export class ExchangeAdapterRxComponent implements OnInit {
         });
 
         // TODO - Must be better way to automatically init the arrays from the model?
-        this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.forEach(
+        this.exchange.networkConfig.nonFatalErrorHttpStatusCodes.forEach(
             (code) => this.nonFatalErrorHttpStatusCodes.push(this.createErrorCodeGroup(code))
         );
 
         // TODO - Must be better way to automatically init the arrays from the model?
-        this.exchangeAdapter.networkConfig.nonFatalErrorMessages.forEach(
+        this.exchange.networkConfig.nonFatalErrorMessages.forEach(
             (msg) => this.nonFatalErrorMessages.push(this.createErrorMessageGroup(msg))
         );
 
         // TODO - Must be better way to automatically init the arrays from the model?
-        if (this.exchangeAdapter.optionalConfig != null) {
-            this.exchangeAdapter.optionalConfig.configItems.forEach(
+        if (this.exchange.optionalConfig != null) {
+            this.exchange.optionalConfig.configItems.forEach(
                 (item) => this.optionalConfigItems.push(this.createOptionalConfigItemGroup(item))
             );
         } else {
-            this.exchangeAdapter.optionalConfig = new OptionalConfig([]);
+            this.exchange.optionalConfig = new OptionalConfig([]);
         }
 
-        this.exchangeAdapterForm.valueChanges.subscribe(data => this.onValueChanged(data));
+        this.exchangeForm.valueChanges.subscribe(data => this.onValueChanged(data));
         this.onValueChanged(); // (re)set validation messages now
     }
 
@@ -258,24 +258,24 @@ export class ExchangeAdapterRxComponent implements OnInit {
     }
 
     get nonFatalErrorHttpStatusCodes(): FormArray {
-        return this.exchangeAdapterForm.get('nonFatalErrorHttpStatusCodes') as FormArray;
+        return this.exchangeForm.get('nonFatalErrorHttpStatusCodes') as FormArray;
     }
 
     get nonFatalErrorMessages(): FormArray {
-        return this.exchangeAdapterForm.get('nonFatalErrorMessages') as FormArray;
+        return this.exchangeForm.get('nonFatalErrorMessages') as FormArray;
     }
 
     get optionalConfigItems(): FormArray {
-        return this.exchangeAdapterForm.get('optionalConfigItems') as FormArray;
+        return this.exchangeForm.get('optionalConfigItems') as FormArray;
     }
 
     onValueChanged(data?: any) {
 
-        if (!this.exchangeAdapterForm) {
+        if (!this.exchangeForm) {
             return;
         }
 
-        const form = this.exchangeAdapterForm;
+        const form = this.exchangeForm;
         for (const field in this.formErrors) {
 
             if (this.formErrors.hasOwnProperty(field)) {
@@ -295,7 +295,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
         }
 
         // Set errors for any invalid Error Codes
-        const errorCodeControl = <FormArray>this.exchangeAdapterForm.controls['nonFatalErrorHttpStatusCodes'];
+        const errorCodeControl = <FormArray>this.exchangeForm.controls['nonFatalErrorHttpStatusCodes'];
         errorCodeControl.controls.forEach((code) => {
             if (code && !code.valid) {
                 this.formErrors['nonFatalErrorHttpStatusCode'] = '';
@@ -309,7 +309,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
         });
 
         // Set errors for any invalid Error Messages
-        const errorMessageControl = <FormArray>this.exchangeAdapterForm.controls['nonFatalErrorMessages'];
+        const errorMessageControl = <FormArray>this.exchangeForm.controls['nonFatalErrorMessages'];
         errorMessageControl.controls.forEach((msg) => {
             if (msg && !msg.valid) {
                 this.formErrors['nonFatalErrorMessage'] = '';
@@ -323,7 +323,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
         });
 
         // Set errors for any invalid Config Items - this is horrible...
-        const configItemsControl = <FormArray>this.exchangeAdapterForm.controls['optionalConfigItems'];
+        const configItemsControl = <FormArray>this.exchangeForm.controls['optionalConfigItems'];
 
         configItemsControl.controls.forEach((item) => {
             const configItemNameControl = item['controls'].configItemName;

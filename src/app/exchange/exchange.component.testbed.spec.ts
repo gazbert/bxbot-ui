@@ -455,7 +455,7 @@ class Page {
         const router = compInjector.get(Router);
 
         this.navSpy = spyOn(router, 'navigate');
-        this.saveSpy = spyOn(exchangeAdapterDataService, 'update').and.callThrough();
+        this.saveSpy = spyOn(exchangeAdapterDataService, 'updateExchange').and.callThrough();
     }
 
     addPageElements() {

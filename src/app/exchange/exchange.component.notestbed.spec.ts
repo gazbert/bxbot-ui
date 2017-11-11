@@ -58,9 +58,9 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
         router = jasmine.createSpyObj('router', ['navigate']);
 
         spyExchangeAdapterDataService = jasmine.createSpyObj('ExchangeHttpDataPromiseService',
-            ['getExchangeByBotId', 'update']);
+            ['getExchangeByBotId', 'updateExchange']);
         spyExchangeAdapterDataService.getExchangeByBotId.and.returnValue(Promise.resolve(expectedExchangeAdapter));
-        spyExchangeAdapterDataService.update.and.returnValue(Promise.resolve(expectedUpdatedExchangeAdapter));
+        spyExchangeAdapterDataService.updateExchange.and.returnValue(Promise.resolve(expectedUpdatedExchangeAdapter));
 
         exchangeAdapterComponent = new ExchangeAdapterComponent(spyExchangeAdapterDataService, <any> activatedRoute, router);
         exchangeAdapterComponent.ngOnInit();
@@ -79,7 +79,7 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
 
     it('should save and navigate to Dashboard when user clicks Save for valid input', done => {
         exchangeAdapterComponent.save(true);
-        spyExchangeAdapterDataService.update.calls.first().returnValue
+        spyExchangeAdapterDataService.updateExchange.calls.first().returnValue
             .then((updatedAdapter) => {
                 expect(updatedAdapter).toBe(expectedUpdatedExchangeAdapter);
                 expect(router.navigate).toHaveBeenCalledWith(['dashboard']);
@@ -89,13 +89,13 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
 
     it('should NOT save and navigate to Dashboard when user clicks Cancel', () => {
         exchangeAdapterComponent.cancel();
-        expect(spyExchangeAdapterDataService.update.calls.any()).toEqual(false);
+        expect(spyExchangeAdapterDataService.updateExchange.calls.any()).toEqual(false);
         expect(router.navigate).toHaveBeenCalledWith(['dashboard']);
     });
 
     it('should NOT save or navigate to Dashboard when user clicks Save for invalid input', () => {
         exchangeAdapterComponent.save(false);
-        expect(spyExchangeAdapterDataService.update.calls.any()).toEqual(false);
+        expect(spyExchangeAdapterDataService.updateExchange.calls.any()).toEqual(false);
         expect(router.navigate.calls.any()).toBe(false, 'router.navigate should not have been called');
     });
 
