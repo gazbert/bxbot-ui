@@ -482,7 +482,7 @@ function fakeExchangeAdapterServiceSetup() {
 // ----------------------------------------------------------------------------
 
 /**
- * Creates the ExchangeAdapterComponent, initialize it, sets test variables.
+ * Creates the ExchangeComponent, initialize it, sets test variables.
  */
 function createComponent() {
 

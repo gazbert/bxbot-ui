@@ -1,5 +1,5 @@
 import {ActivatedRouteStub} from '../../../testing';
-import {ExchangeAdapterComponent} from './exchange.component';
+import {ExchangeComponent} from './exchange.component';
 import {Exchange, NetworkConfig, ConfigItem, OptionalConfig} from '../model/exchange';
 
 /**
@@ -7,7 +7,7 @@ import {Exchange, NetworkConfig, ConfigItem, OptionalConfig} from '../model/exch
  *
  * Learning ground for writing Jasmine tests without using the TestBed.
  *
- * I think I prefer not using the TestBed - less code to write, less API to lean, more intuitive using pure Jasmine,
+ * I think I prefer not using the TestBed - less code to write, less API to learn, more intuitive using pure Jasmine,
  * and you're decoupled from UI changes by accessing the model directly.
  *
  * Based off the main Angular tutorial:
@@ -17,10 +17,10 @@ import {Exchange, NetworkConfig, ConfigItem, OptionalConfig} from '../model/exch
  *
  * @author gazbert
  */
-describe('ExchangeAdapterComponent tests without TestBed', () => {
+describe('ExchangeComponent tests without TestBed', () => {
 
     let activatedRoute: ActivatedRouteStub;
-    let exchangeAdapterComponent: ExchangeAdapterComponent;
+    let exchangeAdapterComponent: ExchangeComponent;
 
     let expectedExchangeAdapter: Exchange;
     let expectedNetworkConfig: NetworkConfig;
@@ -62,19 +62,19 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
         spyExchangeAdapterDataService.getExchangeByBotId.and.returnValue(Promise.resolve(expectedExchangeAdapter));
         spyExchangeAdapterDataService.updateExchange.and.returnValue(Promise.resolve(expectedUpdatedExchangeAdapter));
 
-        exchangeAdapterComponent = new ExchangeAdapterComponent(spyExchangeAdapterDataService, <any> activatedRoute, router);
+        exchangeAdapterComponent = new ExchangeComponent(spyExchangeAdapterDataService, <any> activatedRoute, router);
         exchangeAdapterComponent.ngOnInit();
 
         spyExchangeAdapterDataService.getExchangeByBotId.calls.first().returnValue.then(done);
     });
 
     it('should expose ExchangeAdapter config retrieved from ExchangeAdapterDataService', () => {
-        expect(exchangeAdapterComponent.exchangeAdapter).toBe(expectedExchangeAdapter);
+        expect(exchangeAdapterComponent.exchange).toBe(expectedExchangeAdapter);
 
         // paranoia ;-)
-        expect(exchangeAdapterComponent.exchangeAdapter.id).toBe('huobi');
-        expect(exchangeAdapterComponent.exchangeAdapter.name).toBe('Huobi');
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0]).toBe(501);
+        expect(exchangeAdapterComponent.exchange.id).toBe('huobi');
+        expect(exchangeAdapterComponent.exchange.name).toBe('Huobi');
+        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes[0]).toBe(501);
     });
 
     it('should save and navigate to Dashboard when user clicks Save for valid input', done => {
@@ -100,49 +100,49 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
     });
 
     it('should create new Error Code when user adds one', () => {
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1]).not.toBeDefined();
+        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
+        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes[1]).not.toBeDefined();
         exchangeAdapterComponent.addErrorCode();
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(2);
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1]).toBeDefined();
+        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(2);
+        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes[1]).toBeDefined();
     });
 
     it('should remove Error Code when user deletes one', () => {
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
+        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
         exchangeAdapterComponent.deleteErrorCode(expectedErrorCodes[0]);
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(0);
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0]).not.toBeDefined();
+        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(0);
+        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes[0]).not.toBeDefined();
     });
 
     it('should create new Error Message when user adds one', () => {
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(1);
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages[1]).not.toBeDefined();
+        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorMessages.length).toBe(1);
+        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorMessages[1]).not.toBeDefined();
         exchangeAdapterComponent.addErrorMessage();
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(2);
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages[1]).toBe('');
+        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorMessages.length).toBe(2);
+        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorMessages[1]).toBe('');
     });
 
     it('should remove Error Message when user deletes one', () => {
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(1);
+        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorMessages.length).toBe(1);
         exchangeAdapterComponent.deleteErrorMessage(expectedErrorMsgs[0]);
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(0);
-        expect(exchangeAdapterComponent.exchangeAdapter.networkConfig.nonFatalErrorMessages[0]).not.toBeDefined();
+        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorMessages.length).toBe(0);
+        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorMessages[0]).not.toBeDefined();
     });
 
     it('should create new Config Item when user adds one', () => {
-        expect(exchangeAdapterComponent.exchangeAdapter.optionalConfig.configItems.length).toBe(2);
-        expect(exchangeAdapterComponent.exchangeAdapter.optionalConfig.configItems[2]).not.toBeDefined();
+        expect(exchangeAdapterComponent.exchange.optionalConfig.configItems.length).toBe(2);
+        expect(exchangeAdapterComponent.exchange.optionalConfig.configItems[2]).not.toBeDefined();
 
         exchangeAdapterComponent.addOptionalConfigItem();
-        expect(exchangeAdapterComponent.exchangeAdapter.optionalConfig.configItems.length).toBe(3);
-        expect(exchangeAdapterComponent.exchangeAdapter.optionalConfig.configItems[2].name).toBe('');
-        expect(exchangeAdapterComponent.exchangeAdapter.optionalConfig.configItems[2].value).toBe('');
+        expect(exchangeAdapterComponent.exchange.optionalConfig.configItems.length).toBe(3);
+        expect(exchangeAdapterComponent.exchange.optionalConfig.configItems[2].name).toBe('');
+        expect(exchangeAdapterComponent.exchange.optionalConfig.configItems[2].value).toBe('');
     });
 
     it('should remove Config Item when user deletes one', () => {
-        expect(exchangeAdapterComponent.exchangeAdapter.optionalConfig.configItems.length).toBe(2);
+        expect(exchangeAdapterComponent.exchange.optionalConfig.configItems.length).toBe(2);
         exchangeAdapterComponent.deleteOptionalConfigItem(expectedBuyFeeConfigItem);
-        expect(exchangeAdapterComponent.exchangeAdapter.optionalConfig.configItems.length).toBe(1);
-        expect(exchangeAdapterComponent.exchangeAdapter.optionalConfig.configItems[1]).not.toBeDefined();
+        expect(exchangeAdapterComponent.exchange.optionalConfig.configItems.length).toBe(1);
+        expect(exchangeAdapterComponent.exchange.optionalConfig.configItems[1]).not.toBeDefined();
     });
 });

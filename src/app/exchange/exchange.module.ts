@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {ExchangeRxComponent} from './rx/exchange-rx.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {ExchangeAdapterComponent} from './exchange.component';
+import {ExchangeComponent} from './exchange.component';
 
 /**
  * Encapsulates Exchange Adapter config management.
@@ -15,8 +15,8 @@ import {ExchangeAdapterComponent} from './exchange.component';
         FormsModule,
         ReactiveFormsModule
     ],
-    exports: [ExchangeRxComponent, ExchangeAdapterComponent],
-    declarations: [ExchangeRxComponent, ExchangeAdapterComponent]
+    exports: [ExchangeRxComponent, ExchangeComponent],
+    declarations: [ExchangeRxComponent, ExchangeComponent]
 })
 export class ExchangeAdapterModule {
 }

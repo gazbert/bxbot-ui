@@ -1,14 +1,14 @@
 <!--
     Template-driven version of Exchange Adapter form.
  -->
-<div *ngIf="exchangeAdapter">
+<div *ngIf="exchange">
     <form *ngIf="active" #exchangeAdapterForm="ngForm" novalidate (ngSubmit)="save(exchangeAdapterForm.valid)">
 
         <!-- Adapter Name -->
         <div class="row">
             <div class="form-group col-sm-6">
                 <label for="adapterName">Name</label>
-                <input [(ngModel)]="exchangeAdapter.name" name="adapterName" placeholder="My Adapter Name"
+                <input [(ngModel)]="exchange.name" name="adapterName" placeholder="My Adapter Name"
                        id="adapterName" class="form-control" required maxlength="120" #adapterName="ngModel"
                        pattern="[a-zA-Z0-9_\- ]*">
                 <div id="invalidAdapterName"
@@ -22,7 +22,7 @@
         <div class="row">
             <div class="form-group col-sm-6">
                 <label for="className">Class Name</label>
-                <input [(ngModel)]="exchangeAdapter.className" name="className" placeholder="com.my.MyExchangeAdapter"
+                <input [(ngModel)]="exchange.className" name="className" placeholder="com.my.MyExchangeAdapter"
                        id="className" class="form-control" required maxlength="120" #adapterClassName="ngModel"
                        pattern="([a-zA-Z_$][a-zA-Z0-9_$]*\.)*[a-zA-Z_$][a-zA-Z0-9_$]*"/>
                 <div id="invalidClassName"
@@ -36,7 +36,7 @@
         <div class="row">
             <div class="form-group col-sm-6">
                 <label for="connectionTimeout">Connection Timeout (secs)</label>
-                <input [(ngModel)]="exchangeAdapter.networkConfig.connectionTimeout" id="connectionTimeout"
+                <input [(ngModel)]="exchange.networkConfig.connectionTimeout" id="connectionTimeout"
                        name="connectionTimeout" class="form-control" placeholder="60" required
                        pattern="\d+" #connectionTimeout="ngModel"/>
                 <div id="invalidConnectionTimeout"
@@ -50,18 +50,18 @@
         <div class="row">
             <div class="col-sm-6">
                 <h4>Non Fatal HTTP Status Codes</h4>
-                <div *ngFor="let errorCode of exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes;
+                <div *ngFor="let errorCode of exchange.networkConfig.nonFatalErrorHttpStatusCodes;
                      let i=index; trackBy:trackByIndex" class="panel panel-default">
                     <div class="panel-heading">
                         <span>Code {{i + 1}}</span>
                         <span id="deleteErrorCodeButton_{{i}}" class="glyphicon glyphicon-remove pull-right"
-                              *ngIf="exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length > 0"
-                              (click)="deleteErrorCode(exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[i])"></span>
+                              *ngIf="exchange.networkConfig.nonFatalErrorHttpStatusCodes.length > 0"
+                              (click)="deleteErrorCode(exchange.networkConfig.nonFatalErrorHttpStatusCodes[i])"></span>
                     </div>
                     <div class="panel-body">
                         <div class="form-group">
                             <label for="errorCode_{{i}}">HTTP Status Code</label>
-                            <input [(ngModel)]="exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[i]"
+                            <input [(ngModel)]="exchange.networkConfig.nonFatalErrorHttpStatusCodes[i]"
                                    class="form-control" id="errorCode_{{i}}"
                                    name="errorCode_{{i}}" required #errorCode="ngModel" pattern="\d{3}"
                                    placeholder="502">
@@ -82,18 +82,18 @@
             <!-- Error Messages -->
             <div class="col-sm-6">
                 <h4>Non Fatal Error Messages</h4>
-                <div *ngFor="let errorMsg of exchangeAdapter.networkConfig.nonFatalErrorMessages; let i=index; trackBy:trackByIndex"
+                <div *ngFor="let errorMsg of exchange.networkConfig.nonFatalErrorMessages; let i=index; trackBy:trackByIndex"
                      class="panel panel-default">
                     <div class="panel-heading">
                         <span>Message {{i + 1}}</span>
                         <span id="deleteErrorMessageButton_{{i}}" class="glyphicon glyphicon-remove pull-right"
-                              *ngIf="exchangeAdapter.networkConfig.nonFatalErrorMessages.length > 0"
-                              (click)="deleteErrorMessage(exchangeAdapter.networkConfig.nonFatalErrorMessages[i])"></span>
+                              *ngIf="exchange.networkConfig.nonFatalErrorMessages.length > 0"
+                              (click)="deleteErrorMessage(exchange.networkConfig.nonFatalErrorMessages[i])"></span>
                     </div>
                     <div class="panel-body">
                         <div class="form-group">
                             <label for="errorMessage_{{i}}">Error Message</label>
-                            <input [(ngModel)]="exchangeAdapter.networkConfig.nonFatalErrorMessages[i]"
+                            <input [(ngModel)]="exchange.networkConfig.nonFatalErrorMessages[i]"
                                    class="form-control" id="errorMessage_{{i}}"
                                    name="errorMessage_{{i}}" required #errorMsg="ngModel"
                                    placeholder="My error message...">
@@ -131,14 +131,14 @@
             <div class="row">
                 <div class="col-sm-12">
 
-                    <div *ngFor="let optionalConfigItem of exchangeAdapter.optionalConfig.configItems; let i=index; trackBy:trackByIndex"
+                    <div *ngFor="let optionalConfigItem of exchange.optionalConfig.configItems; let i=index; trackBy:trackByIndex"
                          class="panel panel-default">
 
                         <div class="panel-heading">
                             <span>Config Item {{i + 1}}</span>
                             <span id="deleteExchangeConfigItemButton_{{i}}" class="glyphicon glyphicon-remove pull-right"
-                                  *ngIf="exchangeAdapter.optionalConfig.configItems.length > 0"
-                                  (click)="deleteOptionalConfigItem(exchangeAdapter.optionalConfig.configItems[i])"></span>
+                                  *ngIf="exchange.optionalConfig.configItems.length > 0"
+                                  (click)="deleteOptionalConfigItem(exchange.optionalConfig.configItems[i])"></span>
                         </div>
                         <div class="panel-body">
                             <div class="row">

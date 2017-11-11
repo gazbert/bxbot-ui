@@ -5,22 +5,22 @@ import {Exchange, ConfigItem} from '../model/exchange';
 import {ExchangeHttpDataPromiseService} from '../model/exchange/promise';
 
 /**
- * Template-driven version of the Exchange Adapter form.
+ * Template-driven version of the Exchange form.
  *
  * @author gazbert
  */
 @Component({
-    selector: 'app-bxbot-ui-exchange-adapter',
+    selector: 'app-bxbot-ui-exchange',
     templateUrl: 'exchange.component.html',
     styleUrls: ['exchange.component.css']
 })
-export class ExchangeAdapterComponent implements OnInit, AfterViewChecked {
+export class ExchangeComponent implements OnInit, AfterViewChecked {
 
-    exchangeAdapter: Exchange;
+    exchange: Exchange;
     active = true;
 
-    @ViewChild('exchangeAdapterForm') currentForm: NgForm;
-    exchangeAdapterForm: NgForm;
+    @ViewChild('exchangeForm') currentForm: NgForm;
+    exchangeForm: NgForm;
 
     formErrors = {};
 
@@ -57,16 +57,16 @@ export class ExchangeAdapterComponent implements OnInit, AfterViewChecked {
         }
     };
 
-    constructor(private exchangeAdapterDataService: ExchangeHttpDataPromiseService, private route: ActivatedRoute,
+    constructor(private exchangeDataService: ExchangeHttpDataPromiseService, private route: ActivatedRoute,
                 private router: Router) {
     }
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
             const botId = params['id'];
-            this.exchangeAdapterDataService.getExchangeByBotId(botId)
-                .then(exchangeAdapter => {
-                    this.exchangeAdapter = exchangeAdapter;
+            this.exchangeDataService.getExchangeByBotId(botId)
+                .then(exchange => {
+                    this.exchange = exchange;
                     this.updateFormErrors();
                 });
         }).then(() => {/*done*/});
@@ -82,7 +82,7 @@ export class ExchangeAdapterComponent implements OnInit, AfterViewChecked {
 
     save(isValid: boolean): void {
         if (isValid) {
-            this.exchangeAdapterDataService.updateExchange(this.exchangeAdapter)
+            this.exchangeDataService.updateExchange(this.exchange)
                 .then(() => this.goToDashboard());
         } else {
             this.onValueChanged(); // force validation for new untouched error codes/messages
@@ -90,35 +90,35 @@ export class ExchangeAdapterComponent implements OnInit, AfterViewChecked {
     }
 
     addErrorCode(): void {
-        this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.push(null);
+        this.exchange.networkConfig.nonFatalErrorHttpStatusCodes.push(null);
         this.updateFormErrors();
     }
 
     deleteErrorCode(code: number): void {
-        this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes =
-            this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.filter(c => c !== code);
+        this.exchange.networkConfig.nonFatalErrorHttpStatusCodes =
+            this.exchange.networkConfig.nonFatalErrorHttpStatusCodes.filter(c => c !== code);
         this.updateFormErrors();
     }
 
     addErrorMessage(): void {
-        this.exchangeAdapter.networkConfig.nonFatalErrorMessages.push('');
+        this.exchange.networkConfig.nonFatalErrorMessages.push('');
         this.updateFormErrors();
     }
 
     deleteErrorMessage(message: string): void {
-        this.exchangeAdapter.networkConfig.nonFatalErrorMessages =
-            this.exchangeAdapter.networkConfig.nonFatalErrorMessages.filter(m => m !== message);
+        this.exchange.networkConfig.nonFatalErrorMessages =
+            this.exchange.networkConfig.nonFatalErrorMessages.filter(m => m !== message);
         this.updateFormErrors();
     }
 
     addOptionalConfigItem(): void {
-        this.exchangeAdapter.optionalConfig.configItems.push(new ConfigItem('', ''));
+        this.exchange.optionalConfig.configItems.push(new ConfigItem('', ''));
         this.updateFormErrors();
     }
 
     deleteOptionalConfigItem(configItem: ConfigItem): void {
-        this.exchangeAdapter.optionalConfig.configItems =
-            this.exchangeAdapter.optionalConfig.configItems.filter(c => c !== configItem);
+        this.exchange.optionalConfig.configItems =
+            this.exchange.optionalConfig.configItems.filter(c => c !== configItem);
         this.updateFormErrors();
     }
 
@@ -127,14 +127,14 @@ export class ExchangeAdapterComponent implements OnInit, AfterViewChecked {
         this.formErrors['className'] = '';
         this.formErrors['connectionTimeout'] = '';
 
-        for (let i = 0; i < this.exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length; i++) {
+        for (let i = 0; i < this.exchange.networkConfig.nonFatalErrorHttpStatusCodes.length; i++) {
             this.formErrors['errorCode_' + i] = '';
         }
-        for (let i = 0; i < this.exchangeAdapter.networkConfig.nonFatalErrorMessages.length; i++) {
+        for (let i = 0; i < this.exchange.networkConfig.nonFatalErrorMessages.length; i++) {
             this.formErrors['errorMessage_' + i] = '';
         }
 
-        for (let i = 0; i < this.exchangeAdapter.optionalConfig.configItems.length; i++) {
+        for (let i = 0; i < this.exchange.optionalConfig.configItems.length; i++) {
             this.formErrors['exchangeConfigItemName_' + i] = '';
             this.formErrors['exchangeConfigItemValue_' + i] = '';
         }
@@ -159,24 +159,24 @@ export class ExchangeAdapterComponent implements OnInit, AfterViewChecked {
 
     formChanged() {
 
-        if (this.currentForm === this.exchangeAdapterForm) {
+        if (this.currentForm === this.exchangeForm) {
             return;
         }
 
-        this.exchangeAdapterForm = this.currentForm;
-        if (this.exchangeAdapterForm) {
-            this.exchangeAdapterForm.valueChanges
+        this.exchangeForm = this.currentForm;
+        if (this.exchangeForm) {
+            this.exchangeForm.valueChanges
                 .subscribe(data => this.onValueChanged(data));
         }
     }
 
     onValueChanged(data?: any) {
 
-        if (!this.exchangeAdapterForm) {
+        if (!this.exchangeForm) {
             return;
         }
 
-        const form = this.exchangeAdapterForm.form;
+        const form = this.exchangeForm.form;
 
         for (const field in this.formErrors) {
             if (this.formErrors.hasOwnProperty(field)) {
@@ -186,7 +186,7 @@ export class ExchangeAdapterComponent implements OnInit, AfterViewChecked {
 
                 // 1st condition validates existing strat; 2nd condition validates new strat.
                 if ((control && control.dirty && !control.valid) ||
-                    (control && control.pristine && !control.valid && this.exchangeAdapterForm.submitted)) {
+                    (control && control.pristine && !control.valid && this.exchangeForm.submitted)) {
 
                     let messages;
                     if (field.indexOf('_') === -1) {
