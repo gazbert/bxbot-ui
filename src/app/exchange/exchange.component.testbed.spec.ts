@@ -75,8 +75,8 @@ function overrideExchangeAdapterServiceSetup() {
             return Promise.resolve(true).then(() => Object.assign({}, testExchangeAdapter));
         }
 
-        update(exchangeAdapter: Exchange): Promise<Exchange> {
-            return Promise.resolve(true).then(() => Object.assign(testExchangeAdapter, exchangeAdapter));
+        updateExchange(exchange: Exchange): Promise<Exchange> {
+            return Promise.resolve(true).then(() => Object.assign(testExchangeAdapter, exchange));
         }
     }
 

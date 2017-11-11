@@ -82,7 +82,7 @@ export class ExchangeAdapterComponent implements OnInit, AfterViewChecked {
 
     save(isValid: boolean): void {
         if (isValid) {
-            this.exchangeAdapterDataService.update(this.exchangeAdapter)
+            this.exchangeAdapterDataService.updateExchange(this.exchangeAdapter)
                 .then(() => this.goToDashboard());
         } else {
             this.onValueChanged(); // force validation for new untouched error codes/messages

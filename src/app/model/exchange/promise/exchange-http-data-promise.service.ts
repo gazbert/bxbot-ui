@@ -43,7 +43,7 @@ export class ExchangeHttpDataPromiseService implements ExchangeDataPromiseServic
             .catch(ExchangeHttpDataPromiseService.handleError);
     }
 
-    update(exchange: Exchange): Promise<Exchange> {
+    updateExchange(exchange: Exchange): Promise<Exchange> {
 
         const headers = new Headers({
             'Content-Type': 'application/json',
