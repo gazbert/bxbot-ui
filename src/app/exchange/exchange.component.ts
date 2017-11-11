@@ -1,7 +1,7 @@
 import {OnInit, Component, ViewChild, AfterViewChecked} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {ExchangeAdapter} from '../model/exchange';
+import {Exchange} from '../model/exchange';
 import {ExchangeAdapterHttpDataPromiseService} from '../model/exchange/promise';
 import {ConfigItem} from '../model/exchange/exchange.model';
 
@@ -17,7 +17,7 @@ import {ConfigItem} from '../model/exchange/exchange.model';
 })
 export class ExchangeAdapterComponent implements OnInit, AfterViewChecked {
 
-    exchangeAdapter: ExchangeAdapter;
+    exchangeAdapter: Exchange;
     active = true;
 
     @ViewChild('exchangeAdapterForm') currentForm: NgForm;

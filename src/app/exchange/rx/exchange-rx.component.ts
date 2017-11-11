@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {ConfigItem, OptionalConfig, ExchangeAdapter, ExchangeAdapterHttpDataObservableService} from '../../model/exchange';
+import {ConfigItem, OptionalConfig, Exchange, ExchangeAdapterHttpDataObservableService} from '../../model/exchange';
 // Most RxJS operators are not included in Angular's base Observable implementation.
 // The base implementation includes only what Angular itself requires.
 // If you want more RxJS features, you need to explicitly import rxjs operators, else you get runtime error, e.g.
@@ -26,7 +26,7 @@ import 'rxjs/add/operator/map';
 })
 export class ExchangeAdapterRxComponent implements OnInit {
 
-    exchangeAdapter: ExchangeAdapter;
+    exchangeAdapter: Exchange;
     active = true;
     public exchangeAdapterForm: FormGroup;
     errorMessage: string;

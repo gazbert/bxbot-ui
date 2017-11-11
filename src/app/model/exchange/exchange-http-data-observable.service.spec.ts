@@ -2,7 +2,7 @@ import {MockBackend, MockConnection} from '@angular/http/testing';
 import {Http, HttpModule, Response, ResponseOptions, XHRBackend} from '@angular/http';
 import {async, inject, TestBed} from '@angular/core/testing';
 import {ExchangeAdapterHttpDataObservableService as ExchangeAdapterDataService} from './exchange-http-data-observable.service';
-import {ExchangeAdapter, NetworkConfig, OptionalConfig} from './exchange.model';
+import {Exchange, NetworkConfig, OptionalConfig} from './exchange.model';
 import {Observable} from 'rxjs/Observable';
 // Most RxJS operators are not included in Angular's base Observable implementation.
 // The base implementation includes only what Angular itself requires.
@@ -14,7 +14,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 /**
- * Tests the Exchange Adapter HTTP Data service (Observable flavour) using a mocked HTTP backend.
+ * Tests the Exchange HTTP Data service using a mocked HTTP backend.
  *
  * TODO - test non 200 OK responses etc from bxbot-ui-server - UI should handle scenario gracefully!
  *
@@ -55,7 +55,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
 
         let backend: MockBackend;
         let service: ExchangeAdapterDataService;
-        let fakeExchangeAdapters: ExchangeAdapter[];
+        let fakeExchangeAdapters: Exchange[];
         let response: Response;
         const GDAX_EXCHANGE = 1;
 
@@ -125,11 +125,11 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
         let backend: MockBackend;
         let service: ExchangeAdapterDataService;
         let response: Response;
-        let updatedExchangeAdapter: ExchangeAdapter;
+        let updatedExchangeAdapter: Exchange;
 
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
 
-            updatedExchangeAdapter = new ExchangeAdapter('bitstamp', 'Bitstamp v2',
+            updatedExchangeAdapter = new Exchange('bitstamp', 'Bitstamp v2',
                 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapterV2',
                 new NetworkConfig(90,
                     [
@@ -205,7 +205,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
 });
 
 const makeExchangeAdapterData = () => [
-    new ExchangeAdapter('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
+    new Exchange('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
         new NetworkConfig(60,
             [
                 503,
@@ -229,7 +229,7 @@ const makeExchangeAdapterData = () => [
                 }
             ]
         )),
-    new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
+    new Exchange('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
         new NetworkConfig(60,
             [
                 503,
@@ -253,7 +253,7 @@ const makeExchangeAdapterData = () => [
                 }
             ]
         )),
-    new ExchangeAdapter('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
+    new Exchange('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
         new NetworkConfig(60,
             [
                 503,
@@ -277,4 +277,4 @@ const makeExchangeAdapterData = () => [
                 }
             ]
         )),
-] as ExchangeAdapter[];
+] as Exchange[];

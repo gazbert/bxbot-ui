@@ -1,4 +1,4 @@
-import {ExchangeAdapter, NetworkConfig, OptionalConfig} from '../exchange.model';
+import {Exchange, NetworkConfig, OptionalConfig} from '../exchange.model';
 import {ExchangeAdapterDataPromiseService} from '../promise/exchange-data-promise.service';
 
 /**
@@ -16,17 +16,17 @@ export class FakeExchangeAdapterDataPromiseService implements ExchangeAdapterDat
         return this.lastPromise = Promise.resolve(exchangeAdapter);
     }
 
-    update(exchangeAdapter: ExchangeAdapter): Promise<ExchangeAdapter> {
+    update(exchangeAdapter: Exchange): Promise<Exchange> {
         return this.lastPromise = this.getExchangeAdapterByBotId(exchangeAdapter.id).then(e => {
             return e ?
                 Object.assign(e, exchangeAdapter) :
-                Promise.reject(`Exchange Adapter ${exchangeAdapter.id} not found`) as any as Promise<ExchangeAdapter>;
+                Promise.reject(`Exchange Adapter ${exchangeAdapter.id} not found`) as any as Promise<Exchange>;
         });
     }
 }
 
-export const SOME_FAKE_PROMISE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
-    new ExchangeAdapter('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
+export const SOME_FAKE_PROMISE_EXCHANGE_ADAPTERS: Exchange[] = [
+    new Exchange('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
         new NetworkConfig(60,
             [
                 503,
@@ -50,7 +50,7 @@ export const SOME_FAKE_PROMISE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
                 }
             ]
         )),
-    new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
+    new Exchange('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
         new NetworkConfig(60,
             [
                 503,
@@ -74,7 +74,7 @@ export const SOME_FAKE_PROMISE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
                 }
             ]
         )),
-    new ExchangeAdapter('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
+    new Exchange('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
         new NetworkConfig(60,
             [
                 503,

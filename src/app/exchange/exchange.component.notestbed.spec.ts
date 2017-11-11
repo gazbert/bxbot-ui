@@ -1,6 +1,6 @@
 import {ActivatedRouteStub} from '../../../testing';
 import {ExchangeAdapterComponent} from './exchange.component';
-import {ExchangeAdapter, NetworkConfig} from '../model/exchange';
+import {Exchange, NetworkConfig} from '../model/exchange';
 import {ConfigItem, OptionalConfig} from '../model/exchange/exchange.model';
 
 /**
@@ -23,7 +23,7 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
     let activatedRoute: ActivatedRouteStub;
     let exchangeAdapterComponent: ExchangeAdapterComponent;
 
-    let expectedExchangeAdapter: ExchangeAdapter;
+    let expectedExchangeAdapter: Exchange;
     let expectedNetworkConfig: NetworkConfig;
     let expectedErrorCodes: number[];
     let expectedErrorMsgs: string[];
@@ -32,7 +32,7 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
     let expectedSellFeeConfigItem: ConfigItem;
     let expectedOptionalConfig: OptionalConfig;
 
-    let expectedUpdatedExchangeAdapter: ExchangeAdapter;
+    let expectedUpdatedExchangeAdapter: Exchange;
 
     let spyExchangeAdapterDataService: any;
     let router: any;
@@ -47,10 +47,10 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
         expectedSellFeeConfigItem = new ConfigItem('sell-fee', '0.25');
         expectedOptionalConfig = new OptionalConfig([expectedBuyFeeConfigItem, expectedSellFeeConfigItem]);
 
-        expectedExchangeAdapter = new ExchangeAdapter('huobi', 'Huobi', 'com.gazbert.bxbot.adapter.HuobiExchangeAdapter',
+        expectedExchangeAdapter = new Exchange('huobi', 'Huobi', 'com.gazbert.bxbot.adapter.HuobiExchangeAdapter',
             expectedNetworkConfig, expectedOptionalConfig);
 
-        expectedUpdatedExchangeAdapter = new ExchangeAdapter('huobi', 'Huobi', 'com.gazbert.bxbot.adapter.NewHuobiExchangeAdapter',
+        expectedUpdatedExchangeAdapter = new Exchange('huobi', 'Huobi', 'com.gazbert.bxbot.adapter.NewHuobiExchangeAdapter',
             expectedNetworkConfig, expectedOptionalConfig);
 
         activatedRoute = new ActivatedRouteStub();

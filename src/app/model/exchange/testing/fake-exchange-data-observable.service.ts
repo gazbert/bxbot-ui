@@ -1,5 +1,5 @@
 import {Observable} from 'rxjs/Observable';
-import {ExchangeAdapter, NetworkConfig, OptionalConfig} from '../exchange.model';
+import {Exchange, NetworkConfig, OptionalConfig} from '../exchange.model';
 import {ExchangeAdapterDataObservableService} from '../exchange-data-observable.service';
 
 /**
@@ -11,7 +11,7 @@ export class FakeExchangeAdapterDataObservableService implements ExchangeAdapter
 
     exchangeAdapters = SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS.map(e => e.clone());
 
-    getExchangeAdapterByBotId(id: string): Observable<ExchangeAdapter> {
+    getExchangeAdapterByBotId(id: string): Observable<Exchange> {
         const exchangeAdapter = this.exchangeAdapters.find(e => e.id === id);
         return Observable.create(observer => {
             observer.next(exchangeAdapter);
@@ -20,7 +20,7 @@ export class FakeExchangeAdapterDataObservableService implements ExchangeAdapter
         });
     }
 
-    update(exchangeAdapter: ExchangeAdapter): Observable<ExchangeAdapter> {
+    update(exchangeAdapter: Exchange): Observable<Exchange> {
         return Observable.create(observer => {
             observer.next(exchangeAdapter);
             // call complete if you want to close this stream (like a promise)
@@ -29,8 +29,8 @@ export class FakeExchangeAdapterDataObservableService implements ExchangeAdapter
     }
 }
 
-export const SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
-    new ExchangeAdapter('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
+export const SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS: Exchange[] = [
+    new Exchange('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
         new NetworkConfig(60,
             [
                 503,
@@ -54,7 +54,7 @@ export const SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
                 }
             ]
         )),
-    new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
+    new Exchange('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
         new NetworkConfig(60,
             [
                 503,
@@ -78,7 +78,7 @@ export const SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS: ExchangeAdapter[] = [
                 }
             ]
         )),
-    new ExchangeAdapter('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
+    new Exchange('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
         new NetworkConfig(60,
             [
                 503,

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import {AppComponent} from '../../../app.component';
-import {ExchangeAdapter} from '../exchange.model';
+import {Exchange} from '../exchange.model';
 import {ExchangeAdapterDataPromiseService} from './exchange-data-promise.service';
 import {AuthenticationService} from '../../../shared/authentication.service';
 
@@ -35,15 +35,15 @@ export class ExchangeAdapterHttpDataPromiseService implements ExchangeAdapterDat
         return Promise.reject(error.message || error);
     }
 
-    getExchangeAdapterByBotId(botId: string): Promise<ExchangeAdapter> {
+    getExchangeAdapterByBotId(botId: string): Promise<Exchange> {
         const url = this.exchangeAdaptersUrl + '/' + botId;
         return this.http.get(url)
             .toPromise()
-            .then(response => response.json().data as ExchangeAdapter)
+            .then(response => response.json().data as Exchange)
             .catch(ExchangeAdapterHttpDataPromiseService.handleError);
     }
 
-    update(exchangeAdapter: ExchangeAdapter): Promise<ExchangeAdapter> {
+    update(exchangeAdapter: Exchange): Promise<Exchange> {
 
         const headers = new Headers({
             'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ export class ExchangeAdapterHttpDataPromiseService implements ExchangeAdapterDat
         return this.http
             .put(url, JSON.stringify(exchangeAdapter), {headers: headers})
             .toPromise()
-            .then(response => response.json().data as ExchangeAdapter)
+            .then(response => response.json().data as Exchange)
             .catch(ExchangeAdapterHttpDataPromiseService.handleError);
     }
 }

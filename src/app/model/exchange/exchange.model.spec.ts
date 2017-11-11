@@ -1,14 +1,14 @@
-import {ExchangeAdapter, NetworkConfig, OptionalConfig} from './exchange.model';
+import {Exchange, NetworkConfig, OptionalConfig} from './exchange.model';
 
 /**
- * Tests the Exchange Adapter model behaves as expected.
+ * Tests the Exchange model behaves as expected.
  *
  * @author gazbert
  */
-describe('Exchange Adapter model tests', () => {
+describe('Exchange model tests', () => {
 
     it('should have correct initial values', () => {
-        const exchangeAdapter = new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
+        const exchange = new Exchange('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
             new NetworkConfig(60,
                 [
                     503,
@@ -33,27 +33,27 @@ describe('Exchange Adapter model tests', () => {
                 ]
             ));
 
-        expect(exchangeAdapter.id).toBe('gdax');
-        expect(exchangeAdapter.name).toBe('GDAX');
-        expect(exchangeAdapter.className).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
-        expect(exchangeAdapter.networkConfig.connectionTimeout).toBe(60);
+        expect(exchange.id).toBe('gdax');
+        expect(exchange.name).toBe('GDAX');
+        expect(exchange.className).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
+        expect(exchange.networkConfig.connectionTimeout).toBe(60);
 
-        expect(exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0]).toBe(503);
-        expect(exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1]).toBe(504);
-        expect(exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[2]).toBe(522);
+        expect(exchange.networkConfig.nonFatalErrorHttpStatusCodes[0]).toBe(503);
+        expect(exchange.networkConfig.nonFatalErrorHttpStatusCodes[1]).toBe(504);
+        expect(exchange.networkConfig.nonFatalErrorHttpStatusCodes[2]).toBe(522);
 
-        expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[0]).toBe('Connection reset');
-        expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[1]).toBe('Connection refused');
-        expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[2]).toBe('Remote host closed connection during handshake');
+        expect(exchange.networkConfig.nonFatalErrorMessages[0]).toBe('Connection reset');
+        expect(exchange.networkConfig.nonFatalErrorMessages[1]).toBe('Connection refused');
+        expect(exchange.networkConfig.nonFatalErrorMessages[2]).toBe('Remote host closed connection during handshake');
 
-        expect(exchangeAdapter.optionalConfig.configItems[0].name).toBe('buy-fee');
-        expect(exchangeAdapter.optionalConfig.configItems[0].value).toBe('0.2');
-        expect(exchangeAdapter.optionalConfig.configItems[1].name).toBe('sell-fee');
-        expect(exchangeAdapter.optionalConfig.configItems[1].value).toBe('0.25');
+        expect(exchange.optionalConfig.configItems[0].name).toBe('buy-fee');
+        expect(exchange.optionalConfig.configItems[0].value).toBe('0.2');
+        expect(exchange.optionalConfig.configItems[1].name).toBe('sell-fee');
+        expect(exchange.optionalConfig.configItems[1].value).toBe('0.25');
     });
 
     it('should clone itself', () => {
-        const exchangeAdapter = new ExchangeAdapter('huobi', 'Huobi', 'com.gazbert.bxbot.exchanges.HuobiExchangeAdapter',
+        const exchange = new Exchange('huobi', 'Huobi', 'com.gazbert.bxbot.exchanges.HuobiExchangeAdapter',
             new NetworkConfig(60,
                 [
                     503,
@@ -78,7 +78,7 @@ describe('Exchange Adapter model tests', () => {
                 ]
             ));
 
-        const clone = exchangeAdapter.clone();
-        expect(exchangeAdapter).toEqual(clone);
+        const clone = exchange.clone();
+        expect(exchange).toEqual(clone);
     });
 });

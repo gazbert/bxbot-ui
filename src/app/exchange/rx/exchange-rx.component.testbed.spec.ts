@@ -8,7 +8,7 @@ import {ActivatedRoute, ActivatedRouteStub, click, newEvent, Router, RouterStub}
 import {FakeExchangeAdapterDataObservableService, SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS} from '../../model/exchange/testing';
 import {SharedModule} from '../../shared/shared.module';
 import {
-    ExchangeAdapter,
+    Exchange,
     ExchangeAdapterDataObservableService,
     ExchangeAdapterHttpDataObservableService,
     NetworkConfig
@@ -58,7 +58,7 @@ function overrideExchangeAdapterServiceSetup() {
     let expectedErrorCodes: number[];
     let expectedErrorMsgs: string[];
     let expectedOptionalConfig: OptionalConfig;
-    let testExchangeAdapter: ExchangeAdapter;
+    let testExchangeAdapter: Exchange;
 
     class StubExchangeAdapterHttpDataService implements ExchangeAdapterDataObservableService {
 
@@ -78,11 +78,11 @@ function overrideExchangeAdapterServiceSetup() {
                 ]
             );
 
-            testExchangeAdapter = new ExchangeAdapter('huobi', 'Huobi',
+            testExchangeAdapter = new Exchange('huobi', 'Huobi',
                 'com.gazbert.bxbot.adapter.HuobiExchangeAdapter', expectedNetworkConfig, expectedOptionalConfig);
         }
 
-        getExchangeAdapterByBotId(id: string): Observable<ExchangeAdapter> {
+        getExchangeAdapterByBotId(id: string): Observable<Exchange> {
             return Observable.create(observer => {
                 observer.next(testExchangeAdapter);
                 // call complete if you want to close this stream (like a promise)
@@ -90,7 +90,7 @@ function overrideExchangeAdapterServiceSetup() {
             });
         }
 
-        update(exchangeAdapter: ExchangeAdapter): Observable<ExchangeAdapter> {
+        update(exchangeAdapter: Exchange): Observable<Exchange> {
             return Observable.create(observer => {
                 observer.next(exchangeAdapter);
                 // call complete if you want to close this stream (like a promise)
@@ -145,7 +145,7 @@ function overrideExchangeAdapterServiceSetup() {
             expect(stubExchangeAdapterDataService).toBeTruthy('service injected into component is the stub');
     }));
 
-    it('should expose ExchangeAdapter config retrieved from ExchangeAdapterDataService', () => {
+    it('should expose Exchange config retrieved from ExchangeAdapterDataService', () => {
 
         expect(page.adapterNameInput.value).toBe(testExchangeAdapter.name);
         expect(page.classNameInput.value).toBe(testExchangeAdapter.className);
@@ -323,7 +323,7 @@ function fakeExchangeAdapterServiceSetup() {
 
     describe('when user navigates to existing Exchange Adapter', () => {
 
-        let expectedExchangeAdapter: ExchangeAdapter;
+        let expectedExchangeAdapter: Exchange;
 
         beforeEach(async(() => {
             expectedExchangeAdapter = firstExchangeAdapter;
@@ -332,7 +332,7 @@ function fakeExchangeAdapterServiceSetup() {
             });
         }));
 
-        it('should expose ExchangeAdapter config retrieved from ExchangeAdapterDataService', () => {
+        it('should expose Exchange config retrieved from ExchangeAdapterDataService', () => {
 
             expect(page.adapterNameInput.value).toBe(expectedExchangeAdapter.name);
             expect(page.classNameInput.value).toBe(expectedExchangeAdapter.className);

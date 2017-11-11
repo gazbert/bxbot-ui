@@ -2,7 +2,7 @@ import {MockBackend, MockConnection} from '@angular/http/testing';
 import {Http, HttpModule, Response, ResponseOptions, XHRBackend} from '@angular/http';
 import {async, inject, TestBed} from '@angular/core/testing';
 import {ExchangeAdapterHttpDataPromiseService as ExchangeAdapterDataService} from './exchange-http-data-promise.service';
-import {ExchangeAdapter, NetworkConfig, OptionalConfig} from '../exchange.model';
+import {Exchange, NetworkConfig, OptionalConfig} from '../exchange.model';
 
 /**
  * Tests the Exchange Adapter HTTP Data service (Promise flavour) using a Mock HTTP backend.
@@ -45,7 +45,7 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
 
         let backend: MockBackend;
         let service: ExchangeAdapterDataService;
-        let fakeExchangeAdapters: ExchangeAdapter[];
+        let fakeExchangeAdapters: Exchange[];
         let response: Response;
         const GDAX_EXCHANGE_INDEX = 2;
 
@@ -98,11 +98,11 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
         let backend: MockBackend;
         let service: ExchangeAdapterDataService;
         let response: Response;
-        let updatedExchangeAdapter: ExchangeAdapter;
+        let updatedExchangeAdapter: Exchange;
 
         beforeEach(inject([Http, XHRBackend], (http: Http, mockBackend: MockBackend) => {
 
-            updatedExchangeAdapter = new ExchangeAdapter('bitstamp', 'Bitstamp v2',
+            updatedExchangeAdapter = new Exchange('bitstamp', 'Bitstamp v2',
                 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapterV2',
                 new NetworkConfig(90,
                     [
@@ -157,7 +157,7 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
 });
 
 const makeExchangeAdapterData = () => [
-    new ExchangeAdapter('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
+    new Exchange('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
         new NetworkConfig(60,
             [
                 501,
@@ -182,7 +182,7 @@ const makeExchangeAdapterData = () => [
             ]
         )
     ),
-    new ExchangeAdapter('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
+    new Exchange('gemini', 'Gemini', 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
         new NetworkConfig(60,
             [
                 504,
@@ -207,7 +207,7 @@ const makeExchangeAdapterData = () => [
             ]
         )
     ),
-    new ExchangeAdapter('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
+    new Exchange('gdax', 'GDAX', 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
         new NetworkConfig(60,
             [
                 503,
@@ -232,5 +232,5 @@ const makeExchangeAdapterData = () => [
             ]
         )
     )
-] as ExchangeAdapter[];
+] as Exchange[];
 

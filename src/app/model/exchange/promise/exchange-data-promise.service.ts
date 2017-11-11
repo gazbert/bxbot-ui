@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/toPromise';
-import {ExchangeAdapter} from '../exchange.model';
+import {Exchange} from '../exchange.model';
 
 /**
  * The Exchange Adapter Data Service provides operations to update Exchange Adapter configuration.
@@ -9,7 +9,7 @@ import {ExchangeAdapter} from '../exchange.model';
  */
 export interface ExchangeAdapterDataPromiseService {
 
-    getExchangeAdapterByBotId(id: string): Promise<ExchangeAdapter>;
+    getExchangeAdapterByBotId(id: string): Promise<Exchange>;
 
-    update(exchangeAdapter: ExchangeAdapter): Promise<ExchangeAdapter>;
+    update(exchangeAdapter: Exchange): Promise<Exchange>;
 }
