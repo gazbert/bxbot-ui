@@ -12,8 +12,8 @@ export class FakeExchangeDataPromiseService implements ExchangeDataPromiseServic
     lastPromise: Promise<any>;  // remember so we can spy on promise calls
 
     getExchangeByBotId(id: string) {
-        const exchangeAdapter = this.exchanges.find(e => e.id === id);
-        return this.lastPromise = Promise.resolve(exchangeAdapter);
+        const exchange = this.exchanges.find(e => e.id === id);
+        return this.lastPromise = Promise.resolve(exchange);
     }
 
     updateExchange(exchange: Exchange): Promise<Exchange> {
