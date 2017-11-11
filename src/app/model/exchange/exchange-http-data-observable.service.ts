@@ -80,7 +80,7 @@ export class ExchangeHttpDataObservableService implements ExchangeDataObservable
             .catch(ExchangeHttpDataObservableService.handleError);
     }
 
-    update(exchange: Exchange): Observable<Exchange> {
+    updateExchange(exchange: Exchange): Observable<Exchange> {
 
         const headers = new Headers({
             'Content-Type': 'application/json',

@@ -12,5 +12,5 @@ export interface ExchangeDataObservableService {
 
     getExchangeByBotId(botId: string): Observable<Exchange>;
 
-    update(exchange: Exchange): Observable<Exchange>;
+    updateExchange(exchange: Exchange): Observable<Exchange>;
 }

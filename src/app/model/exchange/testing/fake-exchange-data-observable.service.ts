@@ -20,7 +20,7 @@ export class FakeExchangeDataObservableService implements ExchangeDataObservable
         });
     }
 
-    update(exchange: Exchange): Observable<Exchange> {
+    updateExchange(exchange: Exchange): Observable<Exchange> {
         return Observable.create(observer => {
             observer.next(exchange);
             // call complete if you want to close this stream (like a promise)

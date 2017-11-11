@@ -90,9 +90,9 @@ function overrideExchangeAdapterServiceSetup() {
             });
         }
 
-        update(exchangeAdapter: Exchange): Observable<Exchange> {
+        updateExchange(exchange: Exchange): Observable<Exchange> {
             return Observable.create(observer => {
-                observer.next(exchangeAdapter);
+                observer.next(exchange);
                 // call complete if you want to close this stream (like a promise)
                 observer.complete();
             });
@@ -536,7 +536,7 @@ class Page {
         const router = compInjector.get(Router);
 
         this.navSpy = spyOn(router, 'navigate');
-        this.saveSpy = spyOn(exchangeAdapterDataService, 'update').and.callThrough();
+        this.saveSpy = spyOn(exchangeAdapterDataService, 'updateExchange').and.callThrough();
     }
 
     addPageElements() {

@@ -123,7 +123,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
                     this.exchangeAdapter.optionalConfig.configItems.push(configItem);
                 });
 
-            this.exchangeAdapterDataService.update(this.exchangeAdapter)
+            this.exchangeAdapterDataService.updateExchange(this.exchangeAdapter)
                 .subscribe(
                     () => this.goToDashboard(),
                     error => this.errorMessage = <any>error); // TODO - Show meaningful error to user?
