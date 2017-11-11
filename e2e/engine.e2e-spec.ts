@@ -28,7 +28,7 @@ describe('Engine Tests', function () {
         tabLinks.get(0).click();
 
         expect(element(by.id('botId')).getAttribute('value')).toBe('bitstamp-1');
-        expect(element(by.id('botName')).getAttribute('value')).toBe('Bitstamp');
+        expect(element(by.id('botName')).getAttribute('value')).toBe('Bitstamp Bot');
         expect(element(by.id('tradeCycleInterval')).getAttribute('value')).toBe('30');
         expect(element(by.id('emergencyStopCurrency')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('emergencyStopBalance')).getAttribute('value')).toBe('0.5');
@@ -79,7 +79,7 @@ describe('Engine Tests', function () {
         tabLinks.get(0).click();
 
         expect(element(by.id('botId')).getAttribute('value')).toBe('bitstamp-1');
-        expect(element(by.id('botName')).getAttribute('value')).toBe('Bitstamp');
+        expect(element(by.id('botName')).getAttribute('value')).toBe('Bitstamp Bot');
         expect(element(by.id('tradeCycleInterval')).getAttribute('value')).toBe('30');
         expect(element(by.id('emergencyStopCurrency')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('emergencyStopBalance')).getAttribute('value')).toBe('0.5');
@@ -115,7 +115,7 @@ describe('Engine Tests', function () {
         dashboardItems.get(0).click();
 
         expect(element(by.id('botId')).getAttribute('value')).toBe('bitstamp-1');
-        expect(element(by.id('botName')).getAttribute('value')).toBe('Bitstamp');
+        expect(element(by.id('botName')).getAttribute('value')).toBe('Bitstamp Bot');
         expect(element(by.id('tradeCycleInterval')).getAttribute('value')).toBe('30');
         expect(element(by.id('emergencyStopCurrency')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('emergencyStopBalance')).getAttribute('value')).toBe('0.5');
@@ -131,7 +131,7 @@ describe('Engine Tests', function () {
         tabLinks.get(0).click();
 
         expect(element(by.id('botId')).getAttribute('value')).toBe('bitstamp-1');
-        expect(element(by.id('botName')).getAttribute('value')).toBe('Bitstamp');
+        expect(element(by.id('botName')).getAttribute('value')).toBe('Bitstamp Bot');
         expect(element(by.id('tradeCycleInterval')).getAttribute('value')).toBe('30');
         expect(element(by.id('emergencyStopCurrency')).getAttribute('value')).toBe('BTC');
         expect(element(by.id('emergencyStopBalance')).getAttribute('value')).toBe('0.5');

@@ -68,7 +68,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 botId: 'bitstamp-1',
                 id: 'bitstamp-1',
-                botName: 'Bitstamp',
+                botName: 'Bitstamp Bot',
                 tradeCycleInterval: 30,
                 emergencyStopCurrency: 'BTC',
                 emergencyStopBalance: 0.5
@@ -76,7 +76,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 botId: 'gdax-1',
                 id: 'gdax-1',
-                botName: 'GDAX',
+                botName: 'GDAX Bot',
                 tradeCycleInterval: 10,
                 emergencyStopCurrency: 'BTC',
                 emergencyStopBalance: 0.8
@@ -84,7 +84,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 botId: 'gemini-1',
                 id: 'gemini-1',
-                botName: 'Gemini',
+                botName: 'Gemini Bot',
                 tradeCycleInterval: 30,
                 emergencyStopCurrency: 'ETH',
                 emergencyStopBalance: 10.5
@@ -92,7 +92,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 botId: 'itbit-1',
                 id: 'itbit-1',
-                botName: 'ItBit',
+                botName: 'ItBit Bot',
                 tradeCycleInterval: 10,
                 emergencyStopCurrency: 'XBT',
                 emergencyStopBalance: 3.1
@@ -100,7 +100,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 botId: 'huobi-1',
                 id: 'huobi-1',
-                botName: 'Huobi',
+                botName: 'Huobi Bot',
                 tradeCycleInterval: 120,
                 emergencyStopCurrency: 'BTC',
                 emergencyStopBalance: 0.9
@@ -108,7 +108,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 botId: 'okcoin-1',
                 id: 'okcoin-1',
-                botName: 'OKCoin',
+                botName: 'OKCoin Bot',
                 tradeCycleInterval: 60,
                 emergencyStopCurrency: 'BTC',
                 emergencyStopBalance: 2.1
@@ -116,7 +116,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 botId: 'bitfinex-1',
                 id: 'bitfinex-1',
-                botName: 'Bitfinex',
+                botName: 'Bitfinex Bot',
                 tradeCycleInterval: 3600,
                 emergencyStopCurrency: 'BTC',
                 emergencyStopBalance: 5.5
@@ -124,7 +124,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 botId: 'kraken-1',
                 id: 'kraken-1',
-                botName: 'Kraken',
+                botName: 'Kraken Bot',
                 tradeCycleInterval: 360,
                 emergencyStopCurrency: 'XBT',
                 emergencyStopBalance: 7.5
