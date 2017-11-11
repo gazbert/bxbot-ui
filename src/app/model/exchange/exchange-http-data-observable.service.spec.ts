@@ -51,7 +51,7 @@ describe('ExchangeHttpDataObservableService tests using TestBed + Mock HTTP back
             expect(backend).not.toBeNull('MockBackend backend should be provided');
         }));
 
-    describe('when getExchangeAdapterByBotId() operation called with \'2\'', () => {
+    describe('when getExchangeByBotId() operation called with \'2\'', () => {
 
         let backend: MockBackend;
         let service: ExchangeDataService;
@@ -69,7 +69,7 @@ describe('ExchangeHttpDataObservableService tests using TestBed + Mock HTTP back
 
         it('should return GDAX Exchange', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.getExchangeAdapterByBotId('gdax')
+            service.getExchangeByBotId('gdax')
                 .subscribe(exchange => {
                     expect(exchange.id).toBe('gdax');
                     expect(exchange.name).toBe('GDAX');
@@ -100,7 +100,7 @@ describe('ExchangeHttpDataObservableService tests using TestBed + Mock HTTP back
         it('should handle returning no Exchange', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.getExchangeAdapterByBotId('unknown')
+            service.getExchangeByBotId('unknown')
                 .subscribe(exchange => expect(exchange).not.toBeDefined('should have no Exchange'));
             // .toPromise();
         })));
@@ -108,7 +108,7 @@ describe('ExchangeHttpDataObservableService tests using TestBed + Mock HTTP back
         it('should treat 404 as an Observable error', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 404}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.getExchangeAdapterByBotId('unknown')
+            service.getExchangeByBotId('unknown')
                 .do(() => {
                     fail('should not respond with Exchange');
                 })

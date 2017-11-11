@@ -10,7 +10,7 @@ import {Exchange} from './exchange.model';
  */
 export interface ExchangeDataObservableService {
 
-    getExchangeAdapterByBotId(botId: string): Observable<Exchange>;
+    getExchangeByBotId(botId: string): Observable<Exchange>;
 
     update(exchange: Exchange): Observable<Exchange>;
 }

@@ -82,7 +82,7 @@ function overrideExchangeAdapterServiceSetup() {
                 'com.gazbert.bxbot.adapter.HuobiExchangeAdapter', expectedNetworkConfig, expectedOptionalConfig);
         }
 
-        getExchangeAdapterByBotId(id: string): Observable<Exchange> {
+        getExchangeByBotId(id: string): Observable<Exchange> {
             return Observable.create(observer => {
                 observer.next(testExchangeAdapter);
                 // call complete if you want to close this stream (like a promise)

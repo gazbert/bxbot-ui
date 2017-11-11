@@ -68,7 +68,7 @@ export class ExchangeHttpDataObservableService implements ExchangeDataObservable
         }
     }
 
-    getExchangeAdapterByBotId(botId: string): Observable<Exchange> {
+    getExchangeByBotId(botId: string): Observable<Exchange> {
 
         const headers = new Headers({
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
