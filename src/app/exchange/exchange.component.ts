@@ -64,7 +64,7 @@ export class ExchangeAdapterComponent implements OnInit, AfterViewChecked {
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
             const botId = params['id'];
-            this.exchangeAdapterDataService.getExchangeAdapterByBotId(botId)
+            this.exchangeAdapterDataService.getExchangeByBotId(botId)
                 .then(exchangeAdapter => {
                     this.exchangeAdapter = exchangeAdapter;
                     this.updateFormErrors();

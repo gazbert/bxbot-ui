@@ -71,7 +71,7 @@ function overrideExchangeAdapterServiceSetup() {
                 'com.gazbert.bxbot.adapter.HuobiExchangeAdapter', expectedNetworkConfig, expectedOptionalConfig);
         }
 
-        getExchangeAdapterByBotId(id: string): Promise<Exchange> {
+        getExchangeByBotId(id: string): Promise<Exchange> {
             return Promise.resolve(true).then(() => Object.assign({}, testExchangeAdapter));
         }
 

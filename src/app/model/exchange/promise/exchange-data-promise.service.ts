@@ -9,7 +9,7 @@ import {Exchange} from '../exchange.model';
  */
 export interface ExchangeDataPromiseService {
 
-    getExchangeAdapterByBotId(id: string): Promise<Exchange>;
+    getExchangeByBotId(id: string): Promise<Exchange>;
 
     update(exchange: Exchange): Promise<Exchange>;
 }

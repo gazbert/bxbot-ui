@@ -11,13 +11,13 @@ export class FakeExchangeDataPromiseService implements ExchangeDataPromiseServic
     exchanges = SOME_FAKE_PROMISE_EXCHANGES.map(e => e.clone());
     lastPromise: Promise<any>;  // remember so we can spy on promise calls
 
-    getExchangeAdapterByBotId(id: string) {
+    getExchangeByBotId(id: string) {
         const exchangeAdapter = this.exchanges.find(e => e.id === id);
         return this.lastPromise = Promise.resolve(exchangeAdapter);
     }
 
     update(exchange: Exchange): Promise<Exchange> {
-        return this.lastPromise = this.getExchangeAdapterByBotId(exchange.id).then(e => {
+        return this.lastPromise = this.getExchangeByBotId(exchange.id).then(e => {
             return e ?
                 Object.assign(e, exchange) :
                 Promise.reject(`Exchange ${exchange.id} not found`) as any as Promise<Exchange>;

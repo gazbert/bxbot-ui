@@ -35,7 +35,7 @@ export class ExchangeHttpDataPromiseService implements ExchangeDataPromiseServic
         return Promise.reject(error.message || error);
     }
 
-    getExchangeAdapterByBotId(botId: string): Promise<Exchange> {
+    getExchangeByBotId(botId: string): Promise<Exchange> {
         const url = this.exchangesUrl + '/' + botId;
         return this.http.get(url)
             .toPromise()

@@ -41,7 +41,7 @@ describe('ExchangeHttpDataPromiseService tests using TestBed + Mock HTTP backend
             expect(backend).not.toBeNull('MockBackend should be provided');
         }));
 
-    describe('when getExchangeAdapterByBotId() operation called with \'gdax\'', () => {
+    describe('when getExchangeByBotId() operation called with \'gdax\'', () => {
 
         let backend: MockBackend;
         let service: ExchangeDataService;
@@ -59,7 +59,7 @@ describe('ExchangeHttpDataPromiseService tests using TestBed + Mock HTTP backend
 
         it('should return GDAX Exchange', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.getExchangeAdapterByBotId('gdax')
+            service.getExchangeByBotId('gdax')
                 .then(exchange => {
                     expect(exchange.id).toBe('gdax');
                     expect(exchange.name).toBe('GDAX');
@@ -88,7 +88,7 @@ describe('ExchangeHttpDataPromiseService tests using TestBed + Mock HTTP backend
         it('should handle returning no Exchange', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.getExchangeAdapterByBotId('unknown')
+            service.getExchangeByBotId('unknown')
                 .then(exchange => expect(exchange.id).not.toBeDefined('should have no Exchange'));
         })));
     });
