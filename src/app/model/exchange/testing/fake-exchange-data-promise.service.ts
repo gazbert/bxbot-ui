@@ -1,31 +1,31 @@
 import {Exchange, NetworkConfig, OptionalConfig} from '../exchange.model';
-import {ExchangeAdapterDataPromiseService} from '../promise/exchange-data-promise.service';
+import {ExchangeDataPromiseService} from '../promise/exchange-data-promise.service';
 
 /**
- * Fake Exchange Adapter data service (Promise flavour) backend for testing.
+ * Fake Exchange data service (Promise flavour) backend for testing.
  *
  * @author gazbert
  */
-export class FakeExchangeAdapterDataPromiseService implements ExchangeAdapterDataPromiseService {
+export class FakeExchangeDataPromiseService implements ExchangeDataPromiseService {
 
-    exchangeAdapters = SOME_FAKE_PROMISE_EXCHANGE_ADAPTERS.map(e => e.clone());
+    exchanges = SOME_FAKE_PROMISE_EXCHANGES.map(e => e.clone());
     lastPromise: Promise<any>;  // remember so we can spy on promise calls
 
     getExchangeAdapterByBotId(id: string) {
-        const exchangeAdapter = this.exchangeAdapters.find(e => e.id === id);
+        const exchangeAdapter = this.exchanges.find(e => e.id === id);
         return this.lastPromise = Promise.resolve(exchangeAdapter);
     }
 
-    update(exchangeAdapter: Exchange): Promise<Exchange> {
-        return this.lastPromise = this.getExchangeAdapterByBotId(exchangeAdapter.id).then(e => {
+    update(exchange: Exchange): Promise<Exchange> {
+        return this.lastPromise = this.getExchangeAdapterByBotId(exchange.id).then(e => {
             return e ?
-                Object.assign(e, exchangeAdapter) :
-                Promise.reject(`Exchange Adapter ${exchangeAdapter.id} not found`) as any as Promise<Exchange>;
+                Object.assign(e, exchange) :
+                Promise.reject(`Exchange ${exchange.id} not found`) as any as Promise<Exchange>;
         });
     }
 }
 
-export const SOME_FAKE_PROMISE_EXCHANGE_ADAPTERS: Exchange[] = [
+export const SOME_FAKE_PROMISE_EXCHANGES: Exchange[] = [
     new Exchange('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
         new NetworkConfig(60,
             [

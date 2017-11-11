@@ -2,7 +2,7 @@ import {OnInit, Component, ViewChild, AfterViewChecked} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {Exchange, ConfigItem} from '../model/exchange';
-import {ExchangeAdapterHttpDataPromiseService} from '../model/exchange/promise';
+import {ExchangeHttpDataPromiseService} from '../model/exchange/promise';
 
 /**
  * Template-driven version of the Exchange Adapter form.
@@ -57,7 +57,7 @@ export class ExchangeAdapterComponent implements OnInit, AfterViewChecked {
         }
     };
 
-    constructor(private exchangeAdapterDataService: ExchangeAdapterHttpDataPromiseService, private route: ActivatedRoute,
+    constructor(private exchangeAdapterDataService: ExchangeHttpDataPromiseService, private route: ActivatedRoute,
                 private router: Router) {
     }
 

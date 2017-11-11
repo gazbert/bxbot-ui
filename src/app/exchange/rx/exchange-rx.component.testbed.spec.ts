@@ -9,13 +9,13 @@ import {FakeExchangeDataObservableService, SOME_FAKE_EXCHANGES} from '../../mode
 import {SharedModule} from '../../shared/shared.module';
 import {
     Exchange,
+    NetworkConfig,
+    OptionalConfig,
     ExchangeDataObservableService,
     ExchangeHttpDataObservableService,
-    NetworkConfig
 } from '../../model/exchange';
 import {ExchangeAdapterModule} from '../exchange.module';
 import {ExchangeAdapterRxComponent} from './exchange-rx.component';
-import {OptionalConfig} from '../../model/exchange/exchange.model';
 
 /**
  * Tests the behaviour of the Exchange Adapter component (RxJS version) is as expected.

@@ -57,7 +57,7 @@ describe('ExchangeAdapterComponent tests without TestBed', () => {
 
         router = jasmine.createSpyObj('router', ['navigate']);
 
-        spyExchangeAdapterDataService = jasmine.createSpyObj('ExchangeAdapterHttpDataPromiseService',
+        spyExchangeAdapterDataService = jasmine.createSpyObj('ExchangeHttpDataPromiseService',
             ['getExchangeAdapterByBotId', 'update']);
         spyExchangeAdapterDataService.getExchangeAdapterByBotId.and.returnValue(Promise.resolve(expectedExchangeAdapter));
         spyExchangeAdapterDataService.update.and.returnValue(Promise.resolve(expectedUpdatedExchangeAdapter));

@@ -7,7 +7,7 @@ import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {InMemoryDataService} from './model';
 import {BotStatusHttpDataService} from './model/bot-status';
 import {ExchangeHttpDataObservableService} from './model/exchange';
-import {ExchangeAdapterHttpDataPromiseService} from './model/exchange/promise';
+import {ExchangeHttpDataPromiseService} from './model/exchange/promise';
 import {MarketHttpDataService} from './model/market';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {BotDetailsModule} from './bot-details/bot-details.module';
@@ -53,7 +53,7 @@ import {SettingsModule} from './settings/settings.module';
     ],
     providers: [
         BotStatusHttpDataService,
-        ExchangeAdapterHttpDataPromiseService,
+        ExchangeHttpDataPromiseService,
         ExchangeHttpDataObservableService,
         MarketHttpDataService,
         StrategyHttpDataService,

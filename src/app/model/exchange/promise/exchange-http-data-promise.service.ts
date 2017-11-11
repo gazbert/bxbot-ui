@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import {AppComponent} from '../../../app.component';
 import {Exchange} from '../exchange.model';
-import {ExchangeAdapterDataPromiseService} from './exchange-data-promise.service';
+import {ExchangeDataPromiseService} from './exchange-data-promise.service';
 import {AuthenticationService} from '../../../shared/authentication.service';
 
 // Don't forget this else you get runtime error:
@@ -10,7 +10,7 @@ import {AuthenticationService} from '../../../shared/authentication.service';
 import 'rxjs/add/operator/toPromise';
 
 /**
- * HTTP implementation of the Exchange Adapter Data Service.
+ * HTTP implementation of the Exchange Data Service.
  *
  * It demonstrates use of Promises in call responses.
  *
@@ -23,9 +23,9 @@ import 'rxjs/add/operator/toPromise';
  * @author gazbert
  */
 @Injectable()
-export class ExchangeAdapterHttpDataPromiseService implements ExchangeAdapterDataPromiseService {
+export class ExchangeHttpDataPromiseService implements ExchangeDataPromiseService {
 
-    private exchangeAdaptersUrl = AppComponent.REST_API_CONFIG_BASE_URL + '/exchanges';
+    private exchangesUrl = AppComponent.REST_API_CONFIG_BASE_URL + '/exchanges';
 
     constructor(private http: Http) {
     }
@@ -36,25 +36,25 @@ export class ExchangeAdapterHttpDataPromiseService implements ExchangeAdapterDat
     }
 
     getExchangeAdapterByBotId(botId: string): Promise<Exchange> {
-        const url = this.exchangeAdaptersUrl + '/' + botId;
+        const url = this.exchangesUrl + '/' + botId;
         return this.http.get(url)
             .toPromise()
             .then(response => response.json().data as Exchange)
-            .catch(ExchangeAdapterHttpDataPromiseService.handleError);
+            .catch(ExchangeHttpDataPromiseService.handleError);
     }
 
-    update(exchangeAdapter: Exchange): Promise<Exchange> {
+    update(exchange: Exchange): Promise<Exchange> {
 
         const headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        const url = this.exchangeAdaptersUrl + '/' + exchangeAdapter.id;
+        const url = this.exchangesUrl + '/' + exchange.id;
         return this.http
-            .put(url, JSON.stringify(exchangeAdapter), {headers: headers})
+            .put(url, JSON.stringify(exchange), {headers: headers})
             .toPromise()
             .then(response => response.json().data as Exchange)
-            .catch(ExchangeAdapterHttpDataPromiseService.handleError);
+            .catch(ExchangeHttpDataPromiseService.handleError);
     }
 }

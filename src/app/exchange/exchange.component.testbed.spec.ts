@@ -6,10 +6,10 @@ import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angula
 import {ActivatedRoute, ActivatedRouteStub, click, newEvent, Router, RouterStub} from '../../../testing';
 import {SharedModule} from '../shared/shared.module';
 import {Exchange, NetworkConfig, ConfigItem, OptionalConfig} from '../model/exchange';
-import {FakeExchangeAdapterDataPromiseService, SOME_FAKE_PROMISE_EXCHANGE_ADAPTERS} from '../model/exchange/testing';
+import {FakeExchangeDataPromiseService, SOME_FAKE_PROMISE_EXCHANGES} from '../model/exchange/testing';
 import {ExchangeAdapterModule} from './exchange.module';
 import {ExchangeAdapterComponent} from './exchange.component';
-import {ExchangeAdapterDataPromiseService, ExchangeAdapterHttpDataPromiseService} from '../model/exchange/promise';
+import {ExchangeDataPromiseService, ExchangeHttpDataPromiseService} from '../model/exchange/promise';
 
 /**
  * Tests the behaviour of the Exchange Adapter component (Template version) is as expected.
@@ -57,7 +57,7 @@ function overrideExchangeAdapterServiceSetup() {
 
     let testExchangeAdapter: Exchange;
 
-    class StubExchangeAdapterHttpDataService implements ExchangeAdapterDataPromiseService {
+    class StubExchangeAdapterHttpDataService implements ExchangeDataPromiseService {
 
         constructor() {
             expectedErrorCodes = [501];
@@ -90,16 +90,16 @@ function overrideExchangeAdapterServiceSetup() {
                 {provide: ActivatedRoute, useValue: activatedRoute},
                 {provide: Router, useClass: RouterStub},
 
-                // providing ExchangeAdapterHttpDataPromiseService at this level is irrelevant because
+                // providing ExchangeHttpDataPromiseService at this level is irrelevant because
                 // we use a stub just for testing stuff within out component.
-                {provide: ExchangeAdapterHttpDataPromiseService, useValue: {}}
+                {provide: ExchangeHttpDataPromiseService, useValue: {}}
             ]
         })
         // Override component's own provider and use our stubbed ExchangeAdapterService
             .overrideComponent(ExchangeAdapterComponent, {
                 set: {
                     providers: [
-                        {provide: ExchangeAdapterHttpDataPromiseService, useClass: StubExchangeAdapterHttpDataService}
+                        {provide: ExchangeHttpDataPromiseService, useClass: StubExchangeAdapterHttpDataService}
                     ]
                 }
             })
@@ -113,11 +113,11 @@ function overrideExchangeAdapterServiceSetup() {
         createComponent().then(() => {/*done*/});
 
         // Get hold of component's injected ExchangeAdapterService stub.
-        stubExchangeAdapterDataService = fixture.debugElement.injector.get(ExchangeAdapterHttpDataPromiseService);
+        stubExchangeAdapterDataService = fixture.debugElement.injector.get(ExchangeHttpDataPromiseService);
     }));
 
     it('should inject the stubbed Exchange Adapter service',
-        inject([ExchangeAdapterHttpDataPromiseService], (service: ExchangeAdapterHttpDataPromiseService) => {
+        inject([ExchangeHttpDataPromiseService], (service: ExchangeHttpDataPromiseService) => {
             expect(service).toBeDefined('service injected from fixture');
             expect(stubExchangeAdapterDataService).toBeTruthy('service injected into component is the stub');
     }));
@@ -260,7 +260,7 @@ function overrideExchangeAdapterServiceSetup() {
  * This test setup uses a fake ExchangeAdapterService.
  */
 const BITSTAMP = 0;
-const firstExchangeAdapter = SOME_FAKE_PROMISE_EXCHANGE_ADAPTERS[BITSTAMP];
+const firstExchangeAdapter = SOME_FAKE_PROMISE_EXCHANGES[BITSTAMP];
 function fakeExchangeAdapterServiceSetup() {
 
     beforeEach(async(() => {
@@ -268,10 +268,10 @@ function fakeExchangeAdapterServiceSetup() {
             imports: [ExchangeAdapterModule, FormsModule, SharedModule],
             providers: [
                 {provide: ActivatedRoute, useValue: activatedRoute},
-                {provide: ExchangeAdapterHttpDataPromiseService, useClass: FakeExchangeAdapterDataPromiseService},
+                {provide: ExchangeHttpDataPromiseService, useClass: FakeExchangeDataPromiseService},
                 {provide: Router, useClass: RouterStub},
 
-                // need this because the FakeExchangeAdapterDataPromiseService extends ExchangeAdapterHttpDataPromiseService
+                // need this because the FakeExchangeDataPromiseService extends ExchangeHttpDataPromiseService
                 {provide: Http, useValue: {}}
             ]
         })
@@ -451,7 +451,7 @@ class Page {
     constructor() {
         // Use component's injector to see the services it injected.
         const compInjector = fixture.debugElement.injector;
-        const exchangeAdapterDataService = compInjector.get(ExchangeAdapterHttpDataPromiseService);
+        const exchangeAdapterDataService = compInjector.get(ExchangeHttpDataPromiseService);
         const router = compInjector.get(Router);
 
         this.navSpy = spyOn(router, 'navigate');

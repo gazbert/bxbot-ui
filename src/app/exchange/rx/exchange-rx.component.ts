@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {ConfigItem, OptionalConfig, Exchange, ExchangeHttpDataObservableService} from '../../model/exchange';
+import {ConfigItem, Exchange, ExchangeHttpDataObservableService, OptionalConfig} from '../../model/exchange';
 // Most RxJS operators are not included in Angular's base Observable implementation.
 // The base implementation includes only what Angular itself requires.
 // If you want more RxJS features, you need to explicitly import rxjs operators, else you get runtime error, e.g.
@@ -90,7 +90,8 @@ export class ExchangeAdapterRxComponent implements OnInit {
                         this.buildForm();
                     },
                     error => this.errorMessage = <any>error); // TODO - Show meaningful error to user?
-        }).then(() => {/*done*/});
+        }).then(() => {/*done*/
+        });
     }
 
     goToDashboard(): void {
@@ -117,7 +118,7 @@ export class ExchangeAdapterRxComponent implements OnInit {
 
             this.exchangeAdapter.optionalConfig.configItems.length = 0;
             this.exchangeAdapterForm.get('optionalConfigItems').value.forEach(
-                    (i) => {
+                (i) => {
                     const configItem = new ConfigItem(i.configItemName, i.configItemValue);
                     this.exchangeAdapter.optionalConfig.configItems.push(configItem);
                 });
