@@ -1,7 +1,7 @@
 import {browser, element, by} from 'protractor';
 
 /**
- * Email Alert Config screen tests.
+ * Email Alert screen tests.
  *
  * End 2 End Protractor tests (using Jasmine) for testing Email Alerts screen.
  * See: http://www.protractortest.org/#/tutorial
@@ -12,7 +12,7 @@ import {browser, element, by} from 'protractor';
  *
  * @author gazbert
  */
-describe('Email Alerts Config Tests', function () {
+describe('Email Alerts Tests', function () {
 
     beforeEach(function () {
         browser.get('');
@@ -144,7 +144,7 @@ describe('Email Alerts Config Tests', function () {
         expect(element(by.id('fromAddress')).getAttribute('value')).toBe('c-3p0@naboo.space');
     });
 
-    it('should NOT save Email Alerts config fields if there are validation errors', function () {
+    it('should NOT save Email Alerts fields if there are validation errors', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(2).click();
