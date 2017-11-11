@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http, Headers, Response, RequestOptions} from '@angular/http';
 import {AppComponent} from '../../app.component';
 import {Exchange} from './exchange.model';
-import {ExchangeAdapterDataObservableService} from './exchange-data-observable.service';
+import {ExchangeDataObservableService} from './exchange-data-observable.service';
 import {AuthenticationService} from '../../shared/authentication.service';
 import {Observable} from 'rxjs/Observable';
 import {isObject} from 'rxjs/util/isObject';
@@ -18,7 +18,7 @@ import 'rxjs/add/operator/toPromise';
 import {isArray} from 'util';
 
 /**
- * HTTP implementation of the Exchange Adapter Data Service.
+ * HTTP implementation of the Exchange Data Service.
  *
  * It demonstrates use of Observables in call responses.
  *
@@ -31,9 +31,9 @@ import {isArray} from 'util';
  * @author gazbert
  */
 @Injectable()
-export class ExchangeAdapterHttpDataObservableService implements ExchangeAdapterDataObservableService {
+export class ExchangeHttpDataObservableService implements ExchangeDataObservableService {
 
-    private exchangeAdaptersUrl = AppComponent.REST_API_CONFIG_BASE_URL + '/exchanges';
+    private exchangesUrl = AppComponent.REST_API_CONFIG_BASE_URL + '/exchanges';
 
     constructor(private http: Http) {
     }
@@ -74,25 +74,25 @@ export class ExchangeAdapterHttpDataObservableService implements ExchangeAdapter
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        const url = this.exchangeAdaptersUrl + '/?botId=' + botId;
+        const url = this.exchangesUrl + '/?botId=' + botId;
         return this.http.get(url, {headers: headers})
-            .map(ExchangeAdapterHttpDataObservableService.extractData)
-            .catch(ExchangeAdapterHttpDataObservableService.handleError);
+            .map(ExchangeHttpDataObservableService.extractData)
+            .catch(ExchangeHttpDataObservableService.handleError);
     }
 
-    update(exchangeAdapter: Exchange): Observable<Exchange> {
+    update(exchange: Exchange): Observable<Exchange> {
 
         const headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        const url = this.exchangeAdaptersUrl + '/' + exchangeAdapter.id + '/?botId=' + exchangeAdapter.id;
-        const body = JSON.stringify(exchangeAdapter);
+        const url = this.exchangesUrl + '/' + exchange.id + '/?botId=' + exchange.id;
+        const body = JSON.stringify(exchange);
         const options = new RequestOptions({headers: headers});
 
         return this.http.put(url, body, options)
-            .map(ExchangeAdapterHttpDataObservableService.extractData)
-            .catch(ExchangeAdapterHttpDataObservableService.handleError);
+            .map(ExchangeHttpDataObservableService.extractData)
+            .catch(ExchangeHttpDataObservableService.handleError);
     }
 }

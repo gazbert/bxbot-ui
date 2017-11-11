@@ -24,7 +24,7 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
         });
     }));
 
-    it('should instantiate implementation of ExchangeAdapterDataService when injected',
+    it('should instantiate implementation of ExchangeDataService when injected',
         inject([ExchangeAdapterDataService], (service: ExchangeAdapterDataService) => {
             expect(service instanceof ExchangeAdapterDataService).toBe(true);
         }));
@@ -33,7 +33,7 @@ describe('ExchangeAdapterHttpDataPromiseService tests using TestBed + Mock HTTP 
         expect(http).not.toBeNull('http should be provided');
         const service = new ExchangeAdapterDataService(http);
         expect(service instanceof ExchangeAdapterDataService).toBe(true,
-            'new service should be instance of ExchangeAdapterDataService');
+            'new service should be instance of ExchangeDataService');
     }));
 
     it('should provide MockBackend as replacement for XHRBackend',

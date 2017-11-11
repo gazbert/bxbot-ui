@@ -8,7 +8,7 @@ import {Exchange} from './exchange.model';
  *
  * @author gazbert
  */
-export interface ExchangeAdapterDataObservableService {
+export interface ExchangeDataObservableService {
 
     getExchangeAdapterByBotId(botId: string): Observable<Exchange>;
 

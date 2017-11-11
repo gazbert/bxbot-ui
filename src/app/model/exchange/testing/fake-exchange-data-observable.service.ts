@@ -1,35 +1,35 @@
 import {Observable} from 'rxjs/Observable';
 import {Exchange, NetworkConfig, OptionalConfig} from '../exchange.model';
-import {ExchangeAdapterDataObservableService} from '../exchange-data-observable.service';
+import {ExchangeDataObservableService} from '../exchange-data-observable.service';
 
 /**
- * Fake Exchange Adapter data service (Observable flavour) backend for testing.
+ * Fake Exchange Data Service backend for testing.
  *
  * @author gazbert
  */
-export class FakeExchangeAdapterDataObservableService implements ExchangeAdapterDataObservableService {
+export class FakeExchangeDataObservableService implements ExchangeDataObservableService {
 
-    exchangeAdapters = SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS.map(e => e.clone());
+    exchanges = SOME_FAKE_EXCHANGES.map(e => e.clone());
 
     getExchangeAdapterByBotId(id: string): Observable<Exchange> {
-        const exchangeAdapter = this.exchangeAdapters.find(e => e.id === id);
+        const exchange = this.exchanges.find(e => e.id === id);
         return Observable.create(observer => {
-            observer.next(exchangeAdapter);
+            observer.next(exchange);
             // call complete if you want to close this stream (like a promise)
             observer.complete();
         });
     }
 
-    update(exchangeAdapter: Exchange): Observable<Exchange> {
+    update(exchange: Exchange): Observable<Exchange> {
         return Observable.create(observer => {
-            observer.next(exchangeAdapter);
+            observer.next(exchange);
             // call complete if you want to close this stream (like a promise)
             observer.complete();
         });
     }
 }
 
-export const SOME_FAKE_OBSERVABLE_EXCHANGE_ADAPTERS: Exchange[] = [
+export const SOME_FAKE_EXCHANGES: Exchange[] = [
     new Exchange('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
         new NetworkConfig(60,
             [

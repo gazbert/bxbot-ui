@@ -5,12 +5,11 @@ import {Http} from '@angular/http';
 import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
 import {ActivatedRoute, ActivatedRouteStub, click, newEvent, Router, RouterStub} from '../../../testing';
 import {SharedModule} from '../shared/shared.module';
-import {Exchange, NetworkConfig} from '../model/exchange';
+import {Exchange, NetworkConfig, ConfigItem, OptionalConfig} from '../model/exchange';
 import {FakeExchangeAdapterDataPromiseService, SOME_FAKE_PROMISE_EXCHANGE_ADAPTERS} from '../model/exchange/testing';
 import {ExchangeAdapterModule} from './exchange.module';
 import {ExchangeAdapterComponent} from './exchange.component';
 import {ExchangeAdapterDataPromiseService, ExchangeAdapterHttpDataPromiseService} from '../model/exchange/promise';
-import {ConfigItem, OptionalConfig} from '../model/exchange/exchange.model';
 
 /**
  * Tests the behaviour of the Exchange Adapter component (Template version) is as expected.
@@ -123,7 +122,7 @@ function overrideExchangeAdapterServiceSetup() {
             expect(stubExchangeAdapterDataService).toBeTruthy('service injected into component is the stub');
     }));
 
-    it('should expose Exchange config retrieved from ExchangeAdapterDataService', () => {
+    it('should expose Exchange config retrieved from ExchangeDataService', () => {
 
         expect(page.adapterNameInput.value).toBe(testExchangeAdapter.name);
         expect(page.classNameInput.value).toBe(testExchangeAdapter.className);
@@ -289,7 +288,7 @@ function fakeExchangeAdapterServiceSetup() {
             createComponent().then(() => {/*done*/});
         }));
 
-        it('should expose Exchange config retrieved from ExchangeAdapterDataService', () => {
+        it('should expose Exchange config retrieved from ExchangeDataService', () => {
 
             expect(page.adapterNameInput.value).toBe(expectedExchangeAdapter.name);
             expect(page.classNameInput.value).toBe(expectedExchangeAdapter.className);

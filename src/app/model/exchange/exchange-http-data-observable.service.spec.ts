@@ -1,7 +1,7 @@
 import {MockBackend, MockConnection} from '@angular/http/testing';
 import {Http, HttpModule, Response, ResponseOptions, XHRBackend} from '@angular/http';
 import {async, inject, TestBed} from '@angular/core/testing';
-import {ExchangeAdapterHttpDataObservableService as ExchangeAdapterDataService} from './exchange-http-data-observable.service';
+import {ExchangeHttpDataObservableService as ExchangeDataService} from './exchange-http-data-observable.service';
 import {Exchange, NetworkConfig, OptionalConfig} from './exchange.model';
 import {Observable} from 'rxjs/Observable';
 // Most RxJS operators are not included in Angular's base Observable implementation.
@@ -20,13 +20,13 @@ import 'rxjs/add/operator/map';
  *
  * @author gazbert
  */
-describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HTTP backend', () => {
+describe('ExchangeHttpDataObservableService tests using TestBed + Mock HTTP backend', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [HttpModule],
             providers: [
-                ExchangeAdapterDataService,
+                ExchangeDataService,
                 {provide: XHRBackend, useClass: MockBackend}
             ]
         })
@@ -34,16 +34,16 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
         });
     }));
 
-    it('should instantiate implementation of ExchangeAdapterDataService when injected',
-        inject([ExchangeAdapterDataService], (service: ExchangeAdapterDataService) => {
-            expect(service instanceof ExchangeAdapterDataService).toBe(true);
+    it('should instantiate implementation of ExchangeDataService when injected',
+        inject([ExchangeDataService], (service: ExchangeDataService) => {
+            expect(service instanceof ExchangeDataService).toBe(true);
         }));
 
     it('should instantiate service with "new"', inject([Http], (http: Http) => {
         expect(http).not.toBeNull('http should be provided');
-        const service = new ExchangeAdapterDataService(http);
-        expect(service instanceof ExchangeAdapterDataService).toBe(true,
-            'new service should be instance of ExchangeAdapterDataService');
+        const service = new ExchangeDataService(http);
+        expect(service instanceof ExchangeDataService).toBe(true,
+            'new service should be instance of ExchangeDataService');
     }));
 
     it('should provide MockBackend as replacement for XHRBackend',
@@ -54,41 +54,41 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
     describe('when getExchangeAdapterByBotId() operation called with \'2\'', () => {
 
         let backend: MockBackend;
-        let service: ExchangeAdapterDataService;
-        let fakeExchangeAdapters: Exchange[];
+        let service: ExchangeDataService;
+        let fakeExchanges: Exchange[];
         let response: Response;
         const GDAX_EXCHANGE = 1;
 
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
             backend = be;
-            service = new ExchangeAdapterDataService(http);
-            fakeExchangeAdapters = makeExchangeAdapterData();
-            const options = new ResponseOptions({status: 200, body: {data: fakeExchangeAdapters[GDAX_EXCHANGE]}});
+            service = new ExchangeDataService(http);
+            fakeExchanges = makeExchangesData();
+            const options = new ResponseOptions({status: 200, body: {data: fakeExchanges[GDAX_EXCHANGE]}});
             response = new Response(options);
         }));
 
-        it('should return GDAX Exchange Adapter', async(inject([], () => {
+        it('should return GDAX Exchange', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
             service.getExchangeAdapterByBotId('gdax')
-                .subscribe(exchangeAdapter => {
-                    expect(exchangeAdapter.id).toBe('gdax');
-                    expect(exchangeAdapter.name).toBe('GDAX');
-                    expect(exchangeAdapter.className).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
-                    expect(exchangeAdapter.networkConfig.connectionTimeout).toBe(60);
+                .subscribe(exchange => {
+                    expect(exchange.id).toBe('gdax');
+                    expect(exchange.name).toBe('GDAX');
+                    expect(exchange.className).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
+                    expect(exchange.networkConfig.connectionTimeout).toBe(60);
 
-                    expect(exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(3);
-                    expect(exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[0]).toBe(503);
-                    expect(exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[1]).toBe(504);
-                    expect(exchangeAdapter.networkConfig.nonFatalErrorHttpStatusCodes[2]).toBe(522);
+                    expect(exchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(3);
+                    expect(exchange.networkConfig.nonFatalErrorHttpStatusCodes[0]).toBe(503);
+                    expect(exchange.networkConfig.nonFatalErrorHttpStatusCodes[1]).toBe(504);
+                    expect(exchange.networkConfig.nonFatalErrorHttpStatusCodes[2]).toBe(522);
 
-                    expect(exchangeAdapter.networkConfig.nonFatalErrorMessages.length).toBe(3);
-                    expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[0]).toBe(
+                    expect(exchange.networkConfig.nonFatalErrorMessages.length).toBe(3);
+                    expect(exchange.networkConfig.nonFatalErrorMessages[0]).toBe(
                         'Connection reset'
                     );
-                    expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[1]).toBe(
+                    expect(exchange.networkConfig.nonFatalErrorMessages[1]).toBe(
                         'Connection refused'
                     );
-                    expect(exchangeAdapter.networkConfig.nonFatalErrorMessages[2]).toBe(
+                    expect(exchange.networkConfig.nonFatalErrorMessages[2]).toBe(
                         'Remote host closed connection during handshake'
                     );
 
@@ -97,11 +97,11 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
             // .toPromise();
         })));
 
-        it('should handle returning no Exchange Adapter', async(inject([], () => {
+        it('should handle returning no Exchange', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getExchangeAdapterByBotId('unknown')
-                .subscribe(exchangeAdapter => expect(exchangeAdapter).not.toBeDefined('should have no Exchange Adapter'));
+                .subscribe(exchange => expect(exchange).not.toBeDefined('should have no Exchange'));
             // .toPromise();
         })));
 
@@ -110,7 +110,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.getExchangeAdapterByBotId('unknown')
                 .do(() => {
-                    fail('should not respond with Exchange Adapter');
+                    fail('should not respond with Exchange');
                 })
                 .catch(err => {
                     expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
@@ -123,13 +123,13 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
     describe('when update() operation called for Bitstamp', () => {
 
         let backend: MockBackend;
-        let service: ExchangeAdapterDataService;
+        let service: ExchangeDataService;
         let response: Response;
-        let updatedExchangeAdapter: Exchange;
+        let updatedExchange: Exchange;
 
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
 
-            updatedExchangeAdapter = new Exchange('bitstamp', 'Bitstamp v2',
+            updatedExchange = new Exchange('bitstamp', 'Bitstamp v2',
                 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapterV2',
                 new NetworkConfig(90,
                     [
@@ -156,30 +156,30 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
                 ));
 
             backend = be;
-            service = new ExchangeAdapterDataService(http);
-            const options = new ResponseOptions({status: 200, body: {data: updatedExchangeAdapter}});
+            service = new ExchangeDataService(http);
+            const options = new ResponseOptions({status: 200, body: {data: updatedExchange}});
             response = new Response(options);
         }));
 
-        it('should return updated Bitstamp Exchange Adapter on success', async(inject([], () => {
+        it('should return updated Bitstamp Exchange on success', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.update(updatedExchangeAdapter)
-                .subscribe(exchangeAdapter => {
-                    expect(exchangeAdapter).toBe(updatedExchangeAdapter);
+            service.update(updatedExchange)
+                .subscribe(exchange => {
+                    expect(exchange).toBe(updatedExchange);
 
                     // paranoia!
-                    expect(exchangeAdapter.id).toBe('bitstamp');
-                    expect(exchangeAdapter.name).toBe('Bitstamp v2');
+                    expect(exchange.id).toBe('bitstamp');
+                    expect(exchange.name).toBe('Bitstamp v2');
                 });
             // .toPromise();
         })));
 
-        it('should NOT return Exchange Adapter for 401 response', async(inject([], () => {
+        it('should NOT return Exchange for 401 response', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 401}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.update(updatedExchangeAdapter)
+            service.update(updatedExchange)
                 .do(() => {
-                    fail('should not respond with Exchange Adapter');
+                    fail('should not respond with Exchange');
                 })
                 .catch(err => {
                     expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
@@ -191,9 +191,9 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
         it('should treat 404 as an Observable error', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 404}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.update(updatedExchangeAdapter)
+            service.update(updatedExchange)
                 .do(() => {
-                    fail('should not respond with Exchange Adapter');
+                    fail('should not respond with Exchange');
                 })
                 .catch(err => {
                     expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
@@ -204,7 +204,7 @@ describe('ExchangeAdapterHttpDataObservableService tests using TestBed + Mock HT
     });
 });
 
-const makeExchangeAdapterData = () => [
+const makeExchangesData = () => [
     new Exchange('bitstamp', 'Bitstamp', 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
         new NetworkConfig(60,
             [
