@@ -27,7 +27,7 @@ describe('Exchange Tests', function () {
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
 
-        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
@@ -39,7 +39,7 @@ describe('Exchange Tests', function () {
 
         // Update fields
         const exchangeName = element(by.id('exchangeName'));
-        const newExchangeName = 'Bitstamp REST API v2 Adapter';
+        const newExchangeName = 'Bitstamp 2';
         exchangeName.clear();
         exchangeName.sendKeys(newExchangeName);
         expect(exchangeName.getAttribute('value')).toBe(newExchangeName);
@@ -105,7 +105,7 @@ describe('Exchange Tests', function () {
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
 
-        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
@@ -117,7 +117,7 @@ describe('Exchange Tests', function () {
 
         // Update fields
         const exchangeName = element(by.id('exchangeName'));
-        const newExchangeName = 'Bitstamp REST API v2 Adapter';
+        const newExchangeName = 'Bitstamp 2';
         exchangeName.clear();
         exchangeName.sendKeys(newExchangeName);
         expect(exchangeName.getAttribute('value')).toBe(newExchangeName);
@@ -163,7 +163,7 @@ describe('Exchange Tests', function () {
         cancelButton.click();
         dashboardItems.get(0).click();
 
-        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
@@ -183,7 +183,7 @@ describe('Exchange Tests', function () {
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
 
-        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
@@ -209,7 +209,7 @@ describe('Exchange Tests', function () {
         dashboardItems.get(0).click();
 
         // Same as before
-        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
@@ -232,7 +232,7 @@ describe('Exchange Tests', function () {
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
 
-        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
@@ -252,7 +252,7 @@ describe('Exchange Tests', function () {
         dashboardItems.get(0).click();
 
         // Same as before
-        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
@@ -273,7 +273,7 @@ describe('Exchange Tests', function () {
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
 
-        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
@@ -299,7 +299,7 @@ describe('Exchange Tests', function () {
         dashboardItems.get(0).click();
 
         // Same as before
-        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
@@ -322,7 +322,7 @@ describe('Exchange Tests', function () {
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
 
-        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
@@ -342,7 +342,7 @@ describe('Exchange Tests', function () {
         dashboardItems.get(0).click();
 
         // Same as before
-        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
@@ -362,7 +362,7 @@ describe('Exchange Tests', function () {
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
 
-        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
@@ -403,7 +403,7 @@ describe('Exchange Tests', function () {
         dashboardItems.get(0).click();
 
         // Same as before
-        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
@@ -427,7 +427,7 @@ describe('Exchange Tests', function () {
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
 
-        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('GDAX REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('GDAX');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('120');
 
@@ -460,7 +460,7 @@ describe('Exchange Tests', function () {
         dashboardItems.get(1).click();
 
         // Same as before
-        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('GDAX REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('GDAX');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('120');
 
@@ -482,7 +482,7 @@ describe('Exchange Tests', function () {
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
 
-        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
@@ -494,7 +494,7 @@ describe('Exchange Tests', function () {
 
         // Update fields with some 'bad' values
         const exchangeName = element(by.id('exchangeName'));
-        const newExchangeName = 'Bitstamp REST API v2 Adapter!';
+        const newExchangeName = 'Bitstamp!';
         exchangeName.clear();
         exchangeName.sendKeys(newExchangeName);
         expect(exchangeName.getAttribute('value')).toBe(newExchangeName);

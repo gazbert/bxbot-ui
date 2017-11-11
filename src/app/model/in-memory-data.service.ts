@@ -141,7 +141,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 botId: 'bitstamp-1',
                 id: 'bitstamp-1',
-                name: 'Bitstamp REST API Adapter',
+                name: 'Bitstamp',
                 className: 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 60,
@@ -161,7 +161,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 botId: 'gdax-1',
                 id: 'gdax-1',
-                name: 'GDAX REST API Adapter',
+                name: 'GDAX',
                 className: 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 120,
@@ -190,7 +190,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 botId: 'gemini-1',
                 id: 'gemini-1',
-                name: 'Gemini REST API Adapter',
+                name: 'Gemini',
                 className: 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 90,
@@ -219,7 +219,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 botId: 'itbit-1',
                 id: 'itbit-1',
-                name: 'ItBit REST API Adapter',
+                name: 'ItBit',
                 className: 'com.gazbert.bxbot.exchanges.ItBitExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 30,
@@ -248,7 +248,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 botId: 'huobi-1',
                 id: 'huobi-1',
-                name: 'Huobi API Adapter',
+                name: 'Huobi',
                 className: 'com.gazbert.bxbot.exchanges.HuobiExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 45,
@@ -277,7 +277,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 botId: 'okcoin-1',
                 id: 'okcoin-1',
-                name: 'OKCoin REST API Adapter',
+                name: 'OKCoin',
                 className: 'com.gazbert.bxbot.exchanges.OkCoinExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 50,
@@ -306,7 +306,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 botId: 'bitfinex-1',
                 id: 'bitfinex-1',
-                name: 'Bitfinex REST API Adapter',
+                name: 'Bitfinex',
                 className: 'com.gazbert.bxbot.exchanges.BitfinexExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 20,
@@ -326,7 +326,7 @@ export class InMemoryDataService implements InMemoryDbService {
             {
                 botId: 'kraken-1',
                 id: 'kraken-1',
-                name: 'Kraken REST API Adapter',
+                name: 'Kraken',
                 className: 'com.gazbert.bxbot.exchanges.KrakenExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 60,

@@ -49,7 +49,7 @@ describe('Bot Details Tests', function () {
         expect(element(by.id('emergencyStopBalance')).getAttribute('value')).toBe('0.8');
     });
 
-    it('should render GDAX Exchange Adapter Details', function () {
+    it('should render GDAX Exchange Details', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
         dashboardItems.get(1).click();
@@ -58,7 +58,7 @@ describe('Bot Details Tests', function () {
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(1).click();
 
-        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('GDAX REST API Adapter');
+        expect(element(by.id('exchangeName')).getAttribute('value')).toBe('GDAX');
         expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('120');
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
