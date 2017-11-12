@@ -28,7 +28,7 @@ describe('Exchange Tests', function () {
         tabLinks.get(1).click();
 
         expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('adapterClass')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
@@ -44,11 +44,11 @@ describe('Exchange Tests', function () {
         exchangeName.sendKeys(newExchangeName);
         expect(exchangeName.getAttribute('value')).toBe(newExchangeName);
 
-        const className = element(by.id('className'));
+        const adapterClass = element(by.id('adapterClass'));
         const newClassName = 'my.new2.BitstampExchangeAdapterV2';
-        className.clear();
-        className.sendKeys(newClassName);
-        expect(className.getAttribute('value')).toBe(newClassName);
+        adapterClass.clear();
+        adapterClass.sendKeys(newClassName);
+        expect(adapterClass.getAttribute('value')).toBe(newClassName);
 
         const connectionTimeout = element(by.id('connectionTimeout'));
         const newConnectionTimeout = '120';
@@ -86,7 +86,7 @@ describe('Exchange Tests', function () {
         dashboardItems.get(0).click();
 
         expect(element(by.id('exchangeName')).getAttribute('value')).toBe(newExchangeName);
-        expect(element(by.id('className')).getAttribute('value')).toBe(newClassName);
+        expect(element(by.id('adapterClass')).getAttribute('value')).toBe(newClassName);
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe(newConnectionTimeout);
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe(newErrorCode_0);
@@ -106,7 +106,7 @@ describe('Exchange Tests', function () {
         tabLinks.get(1).click();
 
         expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('adapterClass')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
@@ -122,11 +122,11 @@ describe('Exchange Tests', function () {
         exchangeName.sendKeys(newExchangeName);
         expect(exchangeName.getAttribute('value')).toBe(newExchangeName);
 
-        const className = element(by.id('className'));
+        const adapterClass = element(by.id('adapterClass'));
         const newClassName = 'my.new.BitstampExchangeAdapterV2';
-        className.clear();
-        className.sendKeys(newClassName);
-        expect(className.getAttribute('value')).toBe(newClassName);
+        adapterClass.clear();
+        adapterClass.sendKeys(newClassName);
+        expect(adapterClass.getAttribute('value')).toBe(newClassName);
 
         const connectionTimeout = element(by.id('connectionTimeout'));
         const newConnectionTimeout = '120';
@@ -164,7 +164,7 @@ describe('Exchange Tests', function () {
         dashboardItems.get(0).click();
 
         expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('adapterClass')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
@@ -184,7 +184,7 @@ describe('Exchange Tests', function () {
         tabLinks.get(1).click();
 
         expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('adapterClass')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
@@ -210,7 +210,7 @@ describe('Exchange Tests', function () {
 
         // Same as before
         expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('adapterClass')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
@@ -233,7 +233,7 @@ describe('Exchange Tests', function () {
         tabLinks.get(1).click();
 
         expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('adapterClass')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
@@ -253,7 +253,7 @@ describe('Exchange Tests', function () {
 
         // Same as before
         expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('adapterClass')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
         // Original Error Code 2 (522) moved
@@ -274,7 +274,7 @@ describe('Exchange Tests', function () {
         tabLinks.get(1).click();
 
         expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('adapterClass')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
@@ -300,7 +300,7 @@ describe('Exchange Tests', function () {
 
         // Same as before
         expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('adapterClass')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
@@ -323,7 +323,7 @@ describe('Exchange Tests', function () {
         tabLinks.get(1).click();
 
         expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('adapterClass')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
@@ -343,7 +343,7 @@ describe('Exchange Tests', function () {
 
         // Same as before
         expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('adapterClass')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
@@ -363,7 +363,7 @@ describe('Exchange Tests', function () {
         tabLinks.get(1).click();
 
         expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('adapterClass')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
@@ -404,7 +404,7 @@ describe('Exchange Tests', function () {
 
         // Same as before
         expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('adapterClass')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
@@ -428,7 +428,7 @@ describe('Exchange Tests', function () {
         tabLinks.get(1).click();
 
         expect(element(by.id('exchangeName')).getAttribute('value')).toBe('GDAX');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
+        expect(element(by.id('adapterClass')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('120');
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
@@ -461,7 +461,7 @@ describe('Exchange Tests', function () {
 
         // Same as before
         expect(element(by.id('exchangeName')).getAttribute('value')).toBe('GDAX');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
+        expect(element(by.id('adapterClass')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('120');
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
@@ -483,7 +483,7 @@ describe('Exchange Tests', function () {
         tabLinks.get(1).click();
 
         expect(element(by.id('exchangeName')).getAttribute('value')).toBe('Bitstamp');
-        expect(element(by.id('className')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
+        expect(element(by.id('adapterClass')).getAttribute('value')).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapter');
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe('60');
 
         expect(element(by.id('errorCode_0')).getAttribute('value')).toBe('503');
@@ -499,11 +499,11 @@ describe('Exchange Tests', function () {
         exchangeName.sendKeys(newExchangeName);
         expect(exchangeName.getAttribute('value')).toBe(newExchangeName);
 
-        const className = element(by.id('className'));
+        const adapterClass = element(by.id('adapterClass'));
         const newClassName = 'my.1new.BitstampExchangeAdapterV2';
-        className.clear();
-        className.sendKeys(newClassName);
-        expect(className.getAttribute('value')).toBe(newClassName);
+        adapterClass.clear();
+        adapterClass.sendKeys(newClassName);
+        expect(adapterClass.getAttribute('value')).toBe(newClassName);
 
         const connectionTimeout = element(by.id('connectionTimeout'));
         const newConnectionTimeout = 'ab1';
@@ -569,9 +569,9 @@ describe('Exchange Tests', function () {
         expect(element(by.id('invalidExchangeName')).getText()).toBe(
             'Exchange Name must be alphanumeric and can only include the following special characters: _ -');
 
-        expect(element(by.id('className')).getAttribute('value')).toBe(newClassName);
-        expect(element(by.id('invalidClassName')).getText()).toBe(
-            'Class Name must be valid Java class, e.g. com.my.MyExchangeAdapterClass');
+        expect(element(by.id('adapterClass')).getAttribute('value')).toBe(newClassName);
+        expect(element(by.id('invalidAdapterClass')).getText()).toBe(
+            'Adapter Class name must be valid Java class, e.g. com.my.MyExchangeAdapterClass');
 
         expect(element(by.id('connectionTimeout')).getAttribute('value')).toBe(newConnectionTimeout);
         expect(element(by.id('invalidConnectionTimeout')).getText()).toBe(

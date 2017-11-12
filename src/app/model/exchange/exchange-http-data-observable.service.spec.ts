@@ -73,7 +73,7 @@ describe('ExchangeHttpDataObservableService tests using TestBed + Mock HTTP back
                 .subscribe(exchange => {
                     expect(exchange.id).toBe('gdax');
                     expect(exchange.name).toBe('GDAX');
-                    expect(exchange.className).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
+                    expect(exchange.adapterClass).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
                     expect(exchange.networkConfig.connectionTimeout).toBe(60);
 
                     expect(exchange.networkConfig.nonFatalHttpStatusCodes.length).toBe(3);

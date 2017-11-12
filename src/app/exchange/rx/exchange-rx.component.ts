@@ -34,7 +34,7 @@ export class ExchangeRxComponent implements OnInit {
 
     formErrors = {
         'exchangeName': '',
-        'className': '',
+        'adapterClass': '',
         'connectionTimeout': '',
         'nonFatalHttpStatusCode': '',
         'nonFatalErrorMessage': '',
@@ -48,10 +48,10 @@ export class ExchangeRxComponent implements OnInit {
             'maxlength': 'Exchange Name max length is 50 characters.',
             'pattern': 'Exchange Name must be alphanumeric and can only include the following special characters: _ -'
         },
-        'className': {
-            'required': 'Class Name is required.',
-            'maxlength': 'Class Name max length is 120 characters.',
-            'pattern': 'Class Name must be valid Java class, e.g. com.my.MyExchangeAdapterClass'
+        'adapterClass': {
+            'required': 'Adapter Class name is required.',
+            'maxlength': 'Adapter Class name max length is 120 characters.',
+            'pattern': 'Adapter Class name must be valid Java class, e.g. com.my.MyExchangeAdapterClass'
         },
         'connectionTimeout': {
             'required': 'Connection timeout is required.',
@@ -105,7 +105,7 @@ export class ExchangeRxComponent implements OnInit {
             // TODO - Must be better way to adapt domain model <-> form UI model?
             this.exchange.id = this.exchangeForm.get('botId').value;
             this.exchange.name = this.exchangeForm.get('exchangeName').value;
-            this.exchange.className = this.exchangeForm.get('className').value;
+            this.exchange.adapterClass = this.exchangeForm.get('adapterClass').value;
             this.exchange.networkConfig.connectionTimeout = this.exchangeForm.get('connectionTimeout').value;
 
             this.exchange.networkConfig.nonFatalHttpStatusCodes.length = 0;
@@ -182,7 +182,7 @@ export class ExchangeRxComponent implements OnInit {
                 Validators.maxLength(50),
                 Validators.pattern('[a-zA-Z0-9_\\- ]*')
             ]],
-            className: [this.exchange.className, [
+            adapterClass: [this.exchange.adapterClass, [
                 Validators.required,
                 Validators.minLength(1),
                 Validators.maxLength(120),

@@ -18,16 +18,16 @@
             </div>
         </div>
 
-        <!-- Adapter Class Name -->
+        <!-- Adapter Class -->
         <div class="row">
             <div class="form-group col-sm-6">
-                <label for="className">Class Name</label>
-                <input [(ngModel)]="exchange.className" name="className" placeholder="com.my.MyExchangeAdapter"
-                       id="className" class="form-control" required maxlength="120" #adapterClassName="ngModel"
+                <label for="adapterClass">Adapter Class</label>
+                <input [(ngModel)]="exchange.adapterClass" name="adapterClass" placeholder="com.my.MyExchangeAdapter"
+                       id="adapterClass" class="form-control" required maxlength="120" #adapterClassName="ngModel"
                        pattern="([a-zA-Z_$][a-zA-Z0-9_$]*\.)*[a-zA-Z_$][a-zA-Z0-9_$]*"/>
-                <div id="invalidClassName"
-                     *ngIf="formErrors['className'].length > 0" class="alert alert-danger">
-                    {{ formErrors['className']}}
+                <div id="invalidAdapterClass"
+                     *ngIf="formErrors['adapterClass'].length > 0" class="alert alert-danger">
+                    {{ formErrors['adapterClass']}}
                 </div>
             </div>
         </div>

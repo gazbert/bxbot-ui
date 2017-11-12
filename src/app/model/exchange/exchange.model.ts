@@ -9,13 +9,13 @@
 export class Exchange {
     constructor(public id: string,
                 public name: string,
-                public className: string,
+                public adapterClass: string,
                 public networkConfig: NetworkConfig,
                 public optionalConfig: OptionalConfig) {
     }
 
     clone() {
-        return new Exchange(this.id, this.name, this.className, this.networkConfig, this.optionalConfig);
+        return new Exchange(this.id, this.name, this.adapterClass, this.networkConfig, this.optionalConfig);
     }
 }
 

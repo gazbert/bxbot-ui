@@ -30,10 +30,10 @@ export class ExchangeComponent implements OnInit, AfterViewChecked {
             'maxlength': 'Exchange Name max length is 50 characters.',
             'pattern': 'Exchange Name must be alphanumeric and can only include the following special characters: _ -'
         },
-        'className': {
-            'required': 'Class Name is required.',
-            'maxlength': 'Class Name max length is 120 characters.',
-            'pattern': 'Class Name must be valid Java class, e.g. com.my.MyExchangeAdapterClass'
+        'adapterClass': {
+            'required': 'Adapter Class name is required.',
+            'maxlength': 'Adapter Class name max length is 120 characters.',
+            'pattern': 'Adapter Class name must be valid Java class, e.g. com.my.MyExchangeAdapterClass'
         },
         'connectionTimeout': {
             'required': 'Connection timeout is required.',
@@ -124,7 +124,7 @@ export class ExchangeComponent implements OnInit, AfterViewChecked {
 
     updateFormErrors(): void {
         this.formErrors['exchangeName'] = '';
-        this.formErrors['className'] = '';
+        this.formErrors['adapterClass'] = '';
         this.formErrors['connectionTimeout'] = '';
 
         for (let i = 0; i < this.exchange.networkConfig.nonFatalHttpStatusCodes.length; i++) {

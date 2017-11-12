@@ -125,7 +125,7 @@ function overrideExchangeDataPromiseServiceSetup() {
     it('should expose Exchange config retrieved from ExchangeHttpDataPromiseService', () => {
 
         expect(page.exchangeNameInput.value).toBe(testExchange.name);
-        expect(page.classNameInput.value).toBe(testExchange.className);
+        expect(page.adapterClassInput.value).toBe(testExchange.adapterClass);
 
         expect(page.connectionTimeoutInput.value).toBe('' + // hack to turn it into a String for comparison ;-)
             testExchange.networkConfig.connectionTimeout);
@@ -287,7 +287,7 @@ function fakeExchangeDataPromiseServiceSetup() {
         it('should expose Exchange config retrieved from ExchangeHttpDataPromiseService', () => {
 
             expect(page.exchangeNameInput.value).toBe(expectedExchange.name);
-            expect(page.classNameInput.value).toBe(expectedExchange.className);
+            expect(page.adapterClassInput.value).toBe(expectedExchange.adapterClass);
 
             expect(page.connectionTimeoutInput.value).toBe('' + // hack to turn it into a String for comparison ;-)
                 expectedExchange.networkConfig.connectionTimeout);
@@ -433,7 +433,7 @@ class Page {
     deleteConfigItemBtn: DebugElement;
 
     exchangeNameInput: HTMLInputElement;
-    classNameInput: HTMLInputElement;
+    adapterClassInput: HTMLInputElement;
     connectionTimeoutInput: HTMLInputElement;
     errorCode_0Input: HTMLInputElement;
     errorMessage_0Input: HTMLInputElement;
@@ -469,7 +469,7 @@ class Page {
             this.deleteConfigItemBtn = fixture.debugElement.query(By.css('#deleteExchangeConfigItemButton_0'));
 
             this.exchangeNameInput = fixture.debugElement.query(By.css('#exchangeName')).nativeElement;
-            this.classNameInput = fixture.debugElement.query(By.css('#className')).nativeElement;
+            this.adapterClassInput = fixture.debugElement.query(By.css('#adapterClass')).nativeElement;
             this.connectionTimeoutInput = fixture.debugElement.query(By.css('#connectionTimeout')).nativeElement;
             this.errorCode_0Input = fixture.debugElement.query(By.css('#errorCode_0')).nativeElement;
             this.errorMessage_0Input = fixture.debugElement.query(By.css('#errorMessage_0')).nativeElement;

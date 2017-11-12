@@ -63,7 +63,7 @@ describe('ExchangeHttpDataPromiseService tests using TestBed + Mock HTTP backend
                 .then(exchange => {
                     expect(exchange.id).toBe('gdax');
                     expect(exchange.name).toBe('GDAX');
-                    expect(exchange.className).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
+                    expect(exchange.adapterClass).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
                     expect(exchange.networkConfig.connectionTimeout).toBe(60);
 
                     expect(exchange.networkConfig.nonFatalHttpStatusCodes.length).toBe(3);
@@ -143,7 +143,7 @@ describe('ExchangeHttpDataPromiseService tests using TestBed + Mock HTTP backend
                     // paranoia!
                     expect(exchange.id).toBe('bitstamp');
                     expect(exchange.name).toBe('Bitstamp v2');
-                    expect(exchange.className).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapterV2');
+                    expect(exchange.adapterClass).toBe('com.gazbert.bxbot.exchanges.BitstampExchangeAdapterV2');
                 });
         })));
 
