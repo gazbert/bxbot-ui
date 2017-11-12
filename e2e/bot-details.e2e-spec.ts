@@ -27,7 +27,7 @@ describe('Bot Details Tests', function () {
         const tabLinks = element.all(by.css('li'));
         expect(tabLinks.count()).toBe(5);
         expect(tabLinks.first().getText()).toEqual('Engine');
-        expect(tabLinks.get(1).getText()).toEqual('Exchange Adapter');
+        expect(tabLinks.get(1).getText()).toEqual('Exchange');
         expect(tabLinks.get(2).getText()).toEqual('Markets');
         expect(tabLinks.get(3).getText()).toEqual('Strategies');
         expect(tabLinks.last().getText()).toEqual('Email Alerts');
