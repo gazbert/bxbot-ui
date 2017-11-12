@@ -43,24 +43,24 @@
 
         <!-- Error Codes -->
         <div class="row">
-            <div class="col-sm-6" formArrayName="nonFatalErrorHttpStatusCodes">
+            <div class="col-sm-6" formArrayName="nonFatalHttpStatusCodes">
                 <h4>Non Fatal HTTP Status Codes</h4>
-                <div *ngFor="let nonFatalErrorHttpStatusCode of nonFatalErrorHttpStatusCodes.controls; let i=index"
+                <div *ngFor="let nonFatalHttpStatusCode of nonFatalHttpStatusCodes.controls; let i=index"
                      class="panel panel-default">
                     <div class="panel-heading">
                         <span>Code {{i + 1}}</span>
                         <span id="deleteErrorCodeButton_{{i}}" class="glyphicon glyphicon-remove pull-right"
-                              *ngIf="nonFatalErrorHttpStatusCodes.controls.length > 0"
+                              *ngIf="nonFatalHttpStatusCodes.controls.length > 0"
                               (click)="deleteErrorCode(i)"></span>
                     </div>
                     <div class="panel-body">
                         <div class="form-group">
                             <label for="errorCode_{{i}}" class="col-sm-6">HTTP Status Code</label>
                             <input id="errorCode_{{i}}" class="col-sm-6" [formControlName]="i" maxlength="3" required>
-                            <div id="invalidErrorCode_{{i}}" [hidden]="nonFatalErrorHttpStatusCodes.controls[i].valid ||
-                                 (nonFatalErrorHttpStatusCodes.controls[i].pristine && !isFormSaved())"
+                            <div id="invalidErrorCode_{{i}}" [hidden]="nonFatalHttpStatusCodes.controls[i].valid ||
+                                 (nonFatalHttpStatusCodes.controls[i].pristine && !isFormSaved())"
                                  class="alert alert-danger col-sm-6">
-                                {{ formErrors.nonFatalErrorHttpStatusCode}}
+                                {{ formErrors.nonFatalHttpStatusCode}}
                             </div>
                         </div>
                     </div>

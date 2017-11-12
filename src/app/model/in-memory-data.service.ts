@@ -145,7 +145,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 className: 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 60,
-                    nonFatalErrorHttpStatusCodes: [
+                    nonFatalHttpStatusCodes: [
                         503,
                         522
                     ],
@@ -165,7 +165,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 className: 'com.gazbert.bxbot.exchanges.GdaxExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 120,
-                    nonFatalErrorHttpStatusCodes: [
+                    nonFatalHttpStatusCodes: [
                         503,
                         522
                     ],
@@ -194,7 +194,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 className: 'com.gazbert.bxbot.exchanges.GeminiExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 90,
-                    nonFatalErrorHttpStatusCodes: [
+                    nonFatalHttpStatusCodes: [
                         503,
                         504
                     ],
@@ -223,7 +223,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 className: 'com.gazbert.bxbot.exchanges.ItBitExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 30,
-                    nonFatalErrorHttpStatusCodes: [
+                    nonFatalHttpStatusCodes: [
                         503,
                         522
                     ],
@@ -252,7 +252,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 className: 'com.gazbert.bxbot.exchanges.HuobiExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 45,
-                    nonFatalErrorHttpStatusCodes: [
+                    nonFatalHttpStatusCodes: [
                         504,
                         522
                     ],
@@ -281,7 +281,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 className: 'com.gazbert.bxbot.exchanges.OkCoinExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 50,
-                    nonFatalErrorHttpStatusCodes: [
+                    nonFatalHttpStatusCodes: [
                         503,
                         504
                     ],
@@ -310,7 +310,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 className: 'com.gazbert.bxbot.exchanges.BitfinexExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 20,
-                    nonFatalErrorHttpStatusCodes: [
+                    nonFatalHttpStatusCodes: [
                         504,
                         522
                     ],
@@ -330,7 +330,7 @@ export class InMemoryDataService implements InMemoryDbService {
                 className: 'com.gazbert.bxbot.exchanges.KrakenExchangeAdapter',
                 networkConfig: {
                     connectionTimeout: 60,
-                    nonFatalErrorHttpStatusCodes: [
+                    nonFatalHttpStatusCodes: [
                         504,
                         522
                     ],

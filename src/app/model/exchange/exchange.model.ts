@@ -21,7 +21,7 @@ export class Exchange {
 
 export class NetworkConfig {
     constructor(public connectionTimeout: number,
-                public nonFatalErrorHttpStatusCodes: number[],
+                public nonFatalHttpStatusCodes: number[],
                 public nonFatalErrorMessages: string[]) {
     }
 }

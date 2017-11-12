@@ -66,10 +66,10 @@ describe('ExchangeHttpDataPromiseService tests using TestBed + Mock HTTP backend
                     expect(exchange.className).toBe('com.gazbert.bxbot.exchanges.GdaxExchangeAdapter');
                     expect(exchange.networkConfig.connectionTimeout).toBe(60);
 
-                    expect(exchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(3);
-                    expect(exchange.networkConfig.nonFatalErrorHttpStatusCodes[0]).toBe(503);
-                    expect(exchange.networkConfig.nonFatalErrorHttpStatusCodes[1]).toBe(504);
-                    expect(exchange.networkConfig.nonFatalErrorHttpStatusCodes[2]).toBe(522);
+                    expect(exchange.networkConfig.nonFatalHttpStatusCodes.length).toBe(3);
+                    expect(exchange.networkConfig.nonFatalHttpStatusCodes[0]).toBe(503);
+                    expect(exchange.networkConfig.nonFatalHttpStatusCodes[1]).toBe(504);
+                    expect(exchange.networkConfig.nonFatalHttpStatusCodes[2]).toBe(522);
 
                     expect(exchange.networkConfig.nonFatalErrorMessages.length).toBe(3);
                     expect(exchange.networkConfig.nonFatalErrorMessages[0]).toBe('Connection reset');

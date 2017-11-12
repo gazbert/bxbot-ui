@@ -36,7 +36,7 @@ export class ExchangeRxComponent implements OnInit {
         'exchangeName': '',
         'className': '',
         'connectionTimeout': '',
-        'nonFatalErrorHttpStatusCode': '',
+        'nonFatalHttpStatusCode': '',
         'nonFatalErrorMessage': '',
         'exchangeConfigItemName': '',
         'exchangeConfigItemValue': ''
@@ -57,7 +57,7 @@ export class ExchangeRxComponent implements OnInit {
             'required': 'Connection timeout is required.',
             'pattern': 'Connection timeout must be a whole number.'
         },
-        'nonFatalErrorHttpStatusCode': {
+        'nonFatalHttpStatusCode': {
             'required': 'Connection timeout is required.',
             'pattern': 'HTTP Status Code must be a 3 digit number.',
             'httpCodeWhitelistChecker': 'HTTP Status Code not in whitelist.'
@@ -108,9 +108,9 @@ export class ExchangeRxComponent implements OnInit {
             this.exchange.className = this.exchangeForm.get('className').value;
             this.exchange.networkConfig.connectionTimeout = this.exchangeForm.get('connectionTimeout').value;
 
-            this.exchange.networkConfig.nonFatalErrorHttpStatusCodes.length = 0;
-            this.exchangeForm.get('nonFatalErrorHttpStatusCodes').value.forEach(
-                (c) => this.exchange.networkConfig.nonFatalErrorHttpStatusCodes.push(parseInt(c, 10)));
+            this.exchange.networkConfig.nonFatalHttpStatusCodes.length = 0;
+            this.exchangeForm.get('nonFatalHttpStatusCodes').value.forEach(
+                (c) => this.exchange.networkConfig.nonFatalHttpStatusCodes.push(parseInt(c, 10)));
 
             this.exchange.networkConfig.nonFatalErrorMessages.length = 0;
             this.exchangeForm.get('nonFatalErrorMessages').value.forEach(
@@ -139,12 +139,12 @@ export class ExchangeRxComponent implements OnInit {
     }
 
     addErrorCode(): void {
-        const control = <FormArray>this.exchangeForm.controls['nonFatalErrorHttpStatusCodes'];
+        const control = <FormArray>this.exchangeForm.controls['nonFatalHttpStatusCodes'];
         control.push(this.createErrorCodeGroup(null));
     }
 
     deleteErrorCode(i: number): void {
-        const control = <FormArray>this.exchangeForm.controls['nonFatalErrorHttpStatusCodes'];
+        const control = <FormArray>this.exchangeForm.controls['nonFatalHttpStatusCodes'];
         control.removeAt(i);
     }
 
@@ -192,14 +192,14 @@ export class ExchangeRxComponent implements OnInit {
                 Validators.required,
                 Validators.pattern('\\d+')
             ]],
-            nonFatalErrorHttpStatusCodes: new FormArray([]),
+            nonFatalHttpStatusCodes: new FormArray([]),
             nonFatalErrorMessages: new FormArray([]),
             optionalConfigItems: this.fb.array([])
         });
 
         // TODO - Must be better way to automatically init the arrays from the model?
-        this.exchange.networkConfig.nonFatalErrorHttpStatusCodes.forEach(
-            (code) => this.nonFatalErrorHttpStatusCodes.push(this.createErrorCodeGroup(code))
+        this.exchange.networkConfig.nonFatalHttpStatusCodes.forEach(
+            (code) => this.nonFatalHttpStatusCodes.push(this.createErrorCodeGroup(code))
         );
 
         // TODO - Must be better way to automatically init the arrays from the model?
@@ -257,8 +257,8 @@ export class ExchangeRxComponent implements OnInit {
         ]);
     }
 
-    get nonFatalErrorHttpStatusCodes(): FormArray {
-        return this.exchangeForm.get('nonFatalErrorHttpStatusCodes') as FormArray;
+    get nonFatalHttpStatusCodes(): FormArray {
+        return this.exchangeForm.get('nonFatalHttpStatusCodes') as FormArray;
     }
 
     get nonFatalErrorMessages(): FormArray {
@@ -295,14 +295,14 @@ export class ExchangeRxComponent implements OnInit {
         }
 
         // Set errors for any invalid Error Codes
-        const errorCodeControl = <FormArray>this.exchangeForm.controls['nonFatalErrorHttpStatusCodes'];
+        const errorCodeControl = <FormArray>this.exchangeForm.controls['nonFatalHttpStatusCodes'];
         errorCodeControl.controls.forEach((code) => {
             if (code && !code.valid) {
-                this.formErrors['nonFatalErrorHttpStatusCode'] = '';
-                const messages = this.validationMessages['nonFatalErrorHttpStatusCode'];
+                this.formErrors['nonFatalHttpStatusCode'] = '';
+                const messages = this.validationMessages['nonFatalHttpStatusCode'];
                 for (const key in code.errors) {
                     if (code.errors.hasOwnProperty(key)) {
-                        this.formErrors['nonFatalErrorHttpStatusCode'] += messages[key] + ' ';
+                        this.formErrors['nonFatalHttpStatusCode'] += messages[key] + ' ';
                     }
                 }
             }

@@ -90,13 +90,13 @@ export class ExchangeComponent implements OnInit, AfterViewChecked {
     }
 
     addErrorCode(): void {
-        this.exchange.networkConfig.nonFatalErrorHttpStatusCodes.push(null);
+        this.exchange.networkConfig.nonFatalHttpStatusCodes.push(null);
         this.updateFormErrors();
     }
 
     deleteErrorCode(code: number): void {
-        this.exchange.networkConfig.nonFatalErrorHttpStatusCodes =
-            this.exchange.networkConfig.nonFatalErrorHttpStatusCodes.filter(c => c !== code);
+        this.exchange.networkConfig.nonFatalHttpStatusCodes =
+            this.exchange.networkConfig.nonFatalHttpStatusCodes.filter(c => c !== code);
         this.updateFormErrors();
     }
 
@@ -127,7 +127,7 @@ export class ExchangeComponent implements OnInit, AfterViewChecked {
         this.formErrors['className'] = '';
         this.formErrors['connectionTimeout'] = '';
 
-        for (let i = 0; i < this.exchange.networkConfig.nonFatalErrorHttpStatusCodes.length; i++) {
+        for (let i = 0; i < this.exchange.networkConfig.nonFatalHttpStatusCodes.length; i++) {
             this.formErrors['errorCode_' + i] = '';
         }
         for (let i = 0; i < this.exchange.networkConfig.nonFatalErrorMessages.length; i++) {

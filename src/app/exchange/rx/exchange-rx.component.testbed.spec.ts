@@ -154,7 +154,7 @@ function overrideExchangeDataObservableServiceSetup() {
             testExchange.networkConfig.connectionTimeout);
 
         expect(page.errorCode_0Input.value).toBe('' + // hack to turn it into a String for comparison ;-)
-            testExchange.networkConfig.nonFatalErrorHttpStatusCodes[0]);
+            testExchange.networkConfig.nonFatalHttpStatusCodes[0]);
 
         expect(page.errorMessage_0Input.value).toBe(
             testExchange.networkConfig.nonFatalErrorMessages[0]);
@@ -213,29 +213,29 @@ function overrideExchangeDataObservableServiceSetup() {
 
     it('should create new Error Code when user adds one', fakeAsync(() => {
 
-        expect(testExchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(2);
+        expect(testExchange.networkConfig.nonFatalHttpStatusCodes.length).toBe(2);
 
         click(page.addNewErrorCodeLink);
         click(page.saveBtn);
         comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
         tick(); // wait for async save to complete
 
-        expect(testExchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(3);
-        expect(testExchange.networkConfig.nonFatalErrorHttpStatusCodes[2]).toBeDefined();
-        expect(testExchange.networkConfig.nonFatalErrorHttpStatusCodes[2]).toBeNaN();
+        expect(testExchange.networkConfig.nonFatalHttpStatusCodes.length).toBe(3);
+        expect(testExchange.networkConfig.nonFatalHttpStatusCodes[2]).toBeDefined();
+        expect(testExchange.networkConfig.nonFatalHttpStatusCodes[2]).toBeNaN();
     }));
 
     it('should remove Error Code when user deletes one', fakeAsync(() => {
 
-        expect(testExchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(2);
+        expect(testExchange.networkConfig.nonFatalHttpStatusCodes.length).toBe(2);
 
         click(page.deleteErrorCodeBtn);
         click(page.saveBtn);
         comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
         tick(); // wait for async save to complete
 
-        expect(testExchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
-        expect(testExchange.networkConfig.nonFatalErrorHttpStatusCodes[1]).not.toBeDefined();
+        expect(testExchange.networkConfig.nonFatalHttpStatusCodes.length).toBe(1);
+        expect(testExchange.networkConfig.nonFatalHttpStatusCodes[1]).not.toBeDefined();
     }));
 
     it('should create new Error Message when user adds one', fakeAsync(() => {
@@ -337,7 +337,7 @@ function fakeExchangeDataObservableServiceSetup() {
                 expectedExchange.networkConfig.connectionTimeout);
 
             expect(page.errorCode_0Input.value).toBe('' + // hack to turn it into a String for comparison ;-)
-                expectedExchange.networkConfig.nonFatalErrorHttpStatusCodes[0]);
+                expectedExchange.networkConfig.nonFatalHttpStatusCodes[0]);
 
             expect(page.errorMessage_0Input.value).toBe(expectedExchange.networkConfig.nonFatalErrorMessages[0]);
         });
@@ -390,29 +390,29 @@ function fakeExchangeDataObservableServiceSetup() {
 
         it('should create new Error Code when user adds one', fakeAsync(() => {
 
-            expect(expectedExchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(3);
+            expect(expectedExchange.networkConfig.nonFatalHttpStatusCodes.length).toBe(3);
 
             click(page.addNewErrorCodeLink);
             click(page.saveBtn);
             comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
             tick(); // wait for async save to complete
 
-            expect(expectedExchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(4);
-            expect(expectedExchange.networkConfig.nonFatalErrorHttpStatusCodes[3]).toBeDefined();
-            expect(expectedExchange.networkConfig.nonFatalErrorHttpStatusCodes[3]).toBeNaN();
+            expect(expectedExchange.networkConfig.nonFatalHttpStatusCodes.length).toBe(4);
+            expect(expectedExchange.networkConfig.nonFatalHttpStatusCodes[3]).toBeDefined();
+            expect(expectedExchange.networkConfig.nonFatalHttpStatusCodes[3]).toBeNaN();
         }));
 
         it('should remove Error Code when user deletes one', fakeAsync(() => {
 
-            expect(expectedExchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(4);
+            expect(expectedExchange.networkConfig.nonFatalHttpStatusCodes.length).toBe(4);
 
             click(page.deleteErrorCodeBtn);
             click(page.saveBtn);
             comp.save(true); // TODO hack to tell Angular form is valid - is there a better way?
             tick(); // wait for async save to complete
 
-            expect(expectedExchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(3);
-            expect(expectedExchange.networkConfig.nonFatalErrorHttpStatusCodes[3]).not.toBeDefined();
+            expect(expectedExchange.networkConfig.nonFatalHttpStatusCodes.length).toBe(3);
+            expect(expectedExchange.networkConfig.nonFatalHttpStatusCodes[3]).not.toBeDefined();
         }));
 
         it('should create new Error Message when user adds one', fakeAsync(() => {

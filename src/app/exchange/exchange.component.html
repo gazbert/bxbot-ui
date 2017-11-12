@@ -50,18 +50,18 @@
         <div class="row">
             <div class="col-sm-6">
                 <h4>Non Fatal HTTP Status Codes</h4>
-                <div *ngFor="let errorCode of exchange.networkConfig.nonFatalErrorHttpStatusCodes;
+                <div *ngFor="let errorCode of exchange.networkConfig.nonFatalHttpStatusCodes;
                      let i=index; trackBy:trackByIndex" class="panel panel-default">
                     <div class="panel-heading">
                         <span>Code {{i + 1}}</span>
                         <span id="deleteErrorCodeButton_{{i}}" class="glyphicon glyphicon-remove pull-right"
-                              *ngIf="exchange.networkConfig.nonFatalErrorHttpStatusCodes.length > 0"
-                              (click)="deleteErrorCode(exchange.networkConfig.nonFatalErrorHttpStatusCodes[i])"></span>
+                              *ngIf="exchange.networkConfig.nonFatalHttpStatusCodes.length > 0"
+                              (click)="deleteErrorCode(exchange.networkConfig.nonFatalHttpStatusCodes[i])"></span>
                     </div>
                     <div class="panel-body">
                         <div class="form-group">
                             <label for="errorCode_{{i}}">HTTP Status Code</label>
-                            <input [(ngModel)]="exchange.networkConfig.nonFatalErrorHttpStatusCodes[i]"
+                            <input [(ngModel)]="exchange.networkConfig.nonFatalHttpStatusCodes[i]"
                                    class="form-control" id="errorCode_{{i}}"
                                    name="errorCode_{{i}}" required #errorCode="ngModel" pattern="\d{3}"
                                    placeholder="502">

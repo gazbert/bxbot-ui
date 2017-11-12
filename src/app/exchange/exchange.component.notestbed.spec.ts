@@ -73,7 +73,7 @@ describe('ExchangeComponent tests without TestBed', () => {
         // paranoia ;-)
         expect(exchangeComponent.exchange.id).toBe('huobi');
         expect(exchangeComponent.exchange.name).toBe('Huobi');
-        expect(exchangeComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes[0]).toBe(501);
+        expect(exchangeComponent.exchange.networkConfig.nonFatalHttpStatusCodes[0]).toBe(501);
     });
 
     it('should save and navigate to Dashboard when user clicks Save for valid input', done => {
@@ -99,18 +99,18 @@ describe('ExchangeComponent tests without TestBed', () => {
     });
 
     it('should create new Error Code when user adds one', () => {
-        expect(exchangeComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
-        expect(exchangeComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes[1]).not.toBeDefined();
+        expect(exchangeComponent.exchange.networkConfig.nonFatalHttpStatusCodes.length).toBe(1);
+        expect(exchangeComponent.exchange.networkConfig.nonFatalHttpStatusCodes[1]).not.toBeDefined();
         exchangeComponent.addErrorCode();
-        expect(exchangeComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(2);
-        expect(exchangeComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes[1]).toBeDefined();
+        expect(exchangeComponent.exchange.networkConfig.nonFatalHttpStatusCodes.length).toBe(2);
+        expect(exchangeComponent.exchange.networkConfig.nonFatalHttpStatusCodes[1]).toBeDefined();
     });
 
     it('should remove Error Code when user deletes one', () => {
-        expect(exchangeComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
+        expect(exchangeComponent.exchange.networkConfig.nonFatalHttpStatusCodes.length).toBe(1);
         exchangeComponent.deleteErrorCode(expectedErrorCodes[0]);
-        expect(exchangeComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(0);
-        expect(exchangeComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes[0]).not.toBeDefined();
+        expect(exchangeComponent.exchange.networkConfig.nonFatalHttpStatusCodes.length).toBe(0);
+        expect(exchangeComponent.exchange.networkConfig.nonFatalHttpStatusCodes[0]).not.toBeDefined();
     });
 
     it('should create new Error Message when user adds one', () => {

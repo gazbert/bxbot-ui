@@ -131,7 +131,7 @@ function overrideExchangeDataPromiseServiceSetup() {
             testExchange.networkConfig.connectionTimeout);
 
         expect(page.errorCode_0Input.value).toBe('' + // hack to turn it into a String for comparison ;-)
-            testExchange.networkConfig.nonFatalErrorHttpStatusCodes[0]);
+            testExchange.networkConfig.nonFatalHttpStatusCodes[0]);
 
         expect(page.errorMessage_0Input.value).toBe(
             testExchange.networkConfig.nonFatalErrorMessages[0]);
@@ -190,23 +190,23 @@ function overrideExchangeDataPromiseServiceSetup() {
 
     it('should create new Error Code when user adds one', () => {
 
-        expect(testExchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
+        expect(testExchange.networkConfig.nonFatalHttpStatusCodes.length).toBe(1);
 
         click(page.addNewErrorCodeLink);
 
-        expect(testExchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(2);
-        expect(testExchange.networkConfig.nonFatalErrorHttpStatusCodes[1]).toBeDefined();
-        expect(testExchange.networkConfig.nonFatalErrorHttpStatusCodes[1]).toBeNull();
+        expect(testExchange.networkConfig.nonFatalHttpStatusCodes.length).toBe(2);
+        expect(testExchange.networkConfig.nonFatalHttpStatusCodes[1]).toBeDefined();
+        expect(testExchange.networkConfig.nonFatalHttpStatusCodes[1]).toBeNull();
     });
 
     it('should remove Error Code when user deletes one', () => {
 
-        expect(testExchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
+        expect(testExchange.networkConfig.nonFatalHttpStatusCodes.length).toBe(1);
 
         click(page.deleteErrorCodeBtn);
 
-        expect(testExchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(0);
-        expect(testExchange.networkConfig.nonFatalErrorHttpStatusCodes[0]).not.toBeDefined();
+        expect(testExchange.networkConfig.nonFatalHttpStatusCodes.length).toBe(0);
+        expect(testExchange.networkConfig.nonFatalHttpStatusCodes[0]).not.toBeDefined();
     });
 
     it('should create new Error Message when user adds one', () => {
@@ -293,7 +293,7 @@ function fakeExchangeDataPromiseServiceSetup() {
                 expectedExchange.networkConfig.connectionTimeout);
 
             expect(page.errorCode_0Input.value).toBe('' + // hack to turn it into a String for comparison ;-)
-                expectedExchange.networkConfig.nonFatalErrorHttpStatusCodes[0]);
+                expectedExchange.networkConfig.nonFatalHttpStatusCodes[0]);
             expect(page.errorMessage_0Input.value).toBe(expectedExchange.networkConfig.nonFatalErrorMessages[0]);
 
             expect(page.configItemName_0Input.value).toBe(expectedExchange.optionalConfig.configItems[0].name);
@@ -345,23 +345,23 @@ function fakeExchangeDataPromiseServiceSetup() {
 
         it('should create new Error Code when user adds one', () => {
 
-            expect(expectedExchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(3);
+            expect(expectedExchange.networkConfig.nonFatalHttpStatusCodes.length).toBe(3);
 
             click(page.addNewErrorCodeLink);
 
-            expect(expectedExchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(4);
-            expect(expectedExchange.networkConfig.nonFatalErrorHttpStatusCodes[3]).toBeDefined();
-            expect(expectedExchange.networkConfig.nonFatalErrorHttpStatusCodes[3]).toBeNull();
+            expect(expectedExchange.networkConfig.nonFatalHttpStatusCodes.length).toBe(4);
+            expect(expectedExchange.networkConfig.nonFatalHttpStatusCodes[3]).toBeDefined();
+            expect(expectedExchange.networkConfig.nonFatalHttpStatusCodes[3]).toBeNull();
         });
 
         it('should remove Error Code when user deletes one', () => {
 
-            expect(expectedExchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(4);
+            expect(expectedExchange.networkConfig.nonFatalHttpStatusCodes.length).toBe(4);
 
             click(page.deleteErrorCodeBtn);
 
-            expect(expectedExchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(3);
-            expect(expectedExchange.networkConfig.nonFatalErrorHttpStatusCodes[3]).not.toBeDefined();
+            expect(expectedExchange.networkConfig.nonFatalHttpStatusCodes.length).toBe(3);
+            expect(expectedExchange.networkConfig.nonFatalHttpStatusCodes[3]).not.toBeDefined();
         });
 
         it('should create new Error Message when user adds one', () => {
