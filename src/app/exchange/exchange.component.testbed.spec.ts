@@ -124,7 +124,7 @@ function overrideExchangeDataPromiseServiceSetup() {
 
     it('should expose Exchange config retrieved from ExchangeHttpDataPromiseService', () => {
 
-        expect(page.adapterNameInput.value).toBe(testExchange.name);
+        expect(page.exchangeNameInput.value).toBe(testExchange.name);
         expect(page.classNameInput.value).toBe(testExchange.className);
 
         expect(page.connectionTimeoutInput.value).toBe('' + // hack to turn it into a String for comparison ;-)
@@ -148,8 +148,8 @@ function overrideExchangeDataPromiseServiceSetup() {
         const origName = testExchange.name;
         const newName = 'NewHuobi';
 
-        page.adapterNameInput.value = newName;
-        page.adapterNameInput.dispatchEvent(newEvent('input')); // tell Angular
+        page.exchangeNameInput.value = newName;
+        page.exchangeNameInput.dispatchEvent(newEvent('input')); // tell Angular
 
         expect(comp.exchange.name).toBe(newName, 'Exchange Name updated');
         expect(testExchange.name).toBe(origName, 'ExchangeHttpDataPromiseService Exchange Name unchanged before save');
@@ -173,8 +173,8 @@ function overrideExchangeDataPromiseServiceSetup() {
         const origName = testExchange.name;
         const newName = '!NewHuobi'; // ! is invalid char
 
-        page.adapterNameInput.value = newName;
-        page.adapterNameInput.dispatchEvent(newEvent('input')); // tell Angular
+        page.exchangeNameInput.value = newName;
+        page.exchangeNameInput.dispatchEvent(newEvent('input')); // tell Angular
 
         expect(comp.exchange.name).toBe(newName, 'Exchange Name updated');
         expect(testExchange.name).toBe(origName, 'ExchangeHttpDataPromiseService Exchange Name unchanged before save');
@@ -256,7 +256,7 @@ function overrideExchangeDataPromiseServiceSetup() {
  * This test setup uses a fake ExchangeHttpDataPromiseService.
  */
 const BITSTAMP = 0;
-const firstExchangeAdapter = SOME_FAKE_PROMISE_EXCHANGES[BITSTAMP];
+const firstExchange = SOME_FAKE_PROMISE_EXCHANGES[BITSTAMP];
 function fakeExchangeDataPromiseServiceSetup() {
 
     beforeEach(async(() => {
@@ -279,14 +279,14 @@ function fakeExchangeDataPromiseServiceSetup() {
         let expectedExchange: Exchange;
 
         beforeEach(async(() => {
-            expectedExchange = firstExchangeAdapter;
+            expectedExchange = firstExchange;
             activatedRoute.testParams = {id: expectedExchange.id};
             createComponent().then(() => {/*done*/});
         }));
 
         it('should expose Exchange config retrieved from ExchangeHttpDataPromiseService', () => {
 
-            expect(page.adapterNameInput.value).toBe(expectedExchange.name);
+            expect(page.exchangeNameInput.value).toBe(expectedExchange.name);
             expect(page.classNameInput.value).toBe(expectedExchange.className);
 
             expect(page.connectionTimeoutInput.value).toBe('' + // hack to turn it into a String for comparison ;-)
@@ -305,8 +305,8 @@ function fakeExchangeDataPromiseServiceSetup() {
             const origName = expectedExchange.name;
             const newName = 'NewBitstamp';
 
-            page.adapterNameInput.value = newName;
-            page.adapterNameInput.dispatchEvent(newEvent('input')); // tell Angular
+            page.exchangeNameInput.value = newName;
+            page.exchangeNameInput.dispatchEvent(newEvent('input')); // tell Angular
 
             expect(comp.exchange.name).toBe(newName, 'Exchange Name updated');
             expect(expectedExchange.name).toBe(origName, 'ExchangeHttpDataPromiseService Exchange Name unchanged before save');
@@ -328,8 +328,8 @@ function fakeExchangeDataPromiseServiceSetup() {
             const origName = expectedExchange.name;
             const newName = '!NewHuobi'; // ! is invalid char
 
-            page.adapterNameInput.value = newName;
-            page.adapterNameInput.dispatchEvent(newEvent('input')); // tell Angular
+            page.exchangeNameInput.value = newName;
+            page.exchangeNameInput.dispatchEvent(newEvent('input')); // tell Angular
 
             expect(comp.exchange.name).toBe(newName, 'Exchange Name updated');
             expect(expectedExchange.name).toBe(origName, 'ExchangeHttpDataPromiseService Exchange Name unchanged before save');
@@ -432,7 +432,7 @@ class Page {
     addNewConfigItemLink: DebugElement;
     deleteConfigItemBtn: DebugElement;
 
-    adapterNameInput: HTMLInputElement;
+    exchangeNameInput: HTMLInputElement;
     classNameInput: HTMLInputElement;
     connectionTimeoutInput: HTMLInputElement;
     errorCode_0Input: HTMLInputElement;
@@ -444,20 +444,20 @@ class Page {
     constructor() {
         // Use component's injector to see the services it injected.
         const compInjector = fixture.debugElement.injector;
-        const exchangeAdapterDataService = compInjector.get(ExchangeHttpDataPromiseService);
+        const exchangeDataService = compInjector.get(ExchangeHttpDataPromiseService);
         const router = compInjector.get(Router);
 
         this.navSpy = spyOn(router, 'navigate');
-        this.saveSpy = spyOn(exchangeAdapterDataService, 'updateExchange').and.callThrough();
+        this.saveSpy = spyOn(exchangeDataService, 'updateExchange').and.callThrough();
     }
 
     addPageElements() {
 
         if (comp.exchange) {
 
-            // We have a Exchange Adapter so these elements are now in the DOM...
-            this.saveBtn = fixture.debugElement.query(By.css('#exchangeAdapterSaveButton'));
-            this.cancelBtn = fixture.debugElement.query(By.css('#exchangeAdapterCancelButton'));
+            // We have a Exchange so these elements are now in the DOM...
+            this.saveBtn = fixture.debugElement.query(By.css('#exchangeSaveButton'));
+            this.cancelBtn = fixture.debugElement.query(By.css('#exchangeCancelButton'));
 
             this.addNewErrorCodeLink = fixture.debugElement.query(By.css('#addNewErrorCodeLink'));
             this.addNewErrorMessageLink = fixture.debugElement.query(By.css('#addNewErrorMessageLink'));
@@ -468,7 +468,7 @@ class Page {
             this.addNewConfigItemLink = fixture.debugElement.query(By.css('#addNewExchangeConfigItemLink'));
             this.deleteConfigItemBtn = fixture.debugElement.query(By.css('#deleteExchangeConfigItemButton_0'));
 
-            this.adapterNameInput = fixture.debugElement.query(By.css('#adapterName')).nativeElement;
+            this.exchangeNameInput = fixture.debugElement.query(By.css('#exchangeName')).nativeElement;
             this.classNameInput = fixture.debugElement.query(By.css('#className')).nativeElement;
             this.connectionTimeoutInput = fixture.debugElement.query(By.css('#connectionTimeout')).nativeElement;
             this.errorCode_0Input = fixture.debugElement.query(By.css('#errorCode_0')).nativeElement;

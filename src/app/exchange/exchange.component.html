@@ -1,19 +1,19 @@
 <!--
-    Template-driven version of Exchange Adapter form.
+    Template-driven version of Exchange form.
  -->
 <div *ngIf="exchange">
-    <form *ngIf="active" #exchangeAdapterForm="ngForm" novalidate (ngSubmit)="save(exchangeAdapterForm.valid)">
+    <form *ngIf="active" #exchangeForm="ngForm" novalidate (ngSubmit)="save(exchangeForm.valid)">
 
-        <!-- Adapter Name -->
+        <!-- Exchange Name -->
         <div class="row">
             <div class="form-group col-sm-6">
-                <label for="adapterName">Name</label>
-                <input [(ngModel)]="exchange.name" name="adapterName" placeholder="My Adapter Name"
-                       id="adapterName" class="form-control" required maxlength="120" #adapterName="ngModel"
+                <label for="exchangeName">Name</label>
+                <input [(ngModel)]="exchange.name" name="exchangeName" placeholder="My Adapter Name"
+                       id="exchangeName" class="form-control" required maxlength="120" #exchangeName="ngModel"
                        pattern="[a-zA-Z0-9_\- ]*">
-                <div id="invalidAdapterName"
-                     *ngIf="formErrors['adapterName'].length > 0" class="alert alert-danger">
-                    {{ formErrors['adapterName']}}
+                <div id="invalidExchangeName"
+                     *ngIf="formErrors['exchangeName'].length > 0" class="alert alert-danger">
+                    {{ formErrors['exchangeName']}}
                 </div>
             </div>
         </div>
@@ -185,8 +185,8 @@
             <!-- Must have type for button else Chrome reloads entire app on Cancel click!
                  http://stackoverflow.com/questions/38120756/angular2-router-navigate-refresh-page
              -->
-            <button id="exchangeAdapterCancelButton" type="button" (click)="cancel()" class="btn btn-default">Cancel</button>
-            <button id="exchangeAdapterSaveButton" class="btn btn-primary">Save</button>
+            <button id="exchangeCancelButton" type="button" (click)="cancel()" class="btn btn-default">Cancel</button>
+            <button id="exchangeSaveButton" class="btn btn-primary">Save</button>
         </div>
     </form>
 </div>

@@ -25,10 +25,10 @@ export class ExchangeComponent implements OnInit, AfterViewChecked {
     formErrors = {};
 
     validationMessages = {
-        'adapterName': {
-            'required': 'Name is required.',
-            'maxlength': 'Name max length is 50 characters.',
-            'pattern': 'Name must be alphanumeric and can only include the following special characters: _ -'
+        'exchangeName': {
+            'required': 'Exchange Name is required.',
+            'maxlength': 'Exchange Name max length is 50 characters.',
+            'pattern': 'Exchange Name must be alphanumeric and can only include the following special characters: _ -'
         },
         'className': {
             'required': 'Class Name is required.',
@@ -123,7 +123,7 @@ export class ExchangeComponent implements OnInit, AfterViewChecked {
     }
 
     updateFormErrors(): void {
-        this.formErrors['adapterName'] = '';
+        this.formErrors['exchangeName'] = '';
         this.formErrors['className'] = '';
         this.formErrors['connectionTimeout'] = '';
 

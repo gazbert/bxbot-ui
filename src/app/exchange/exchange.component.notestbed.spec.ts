@@ -3,7 +3,7 @@ import {ExchangeComponent} from './exchange.component';
 import {Exchange, NetworkConfig, ConfigItem, OptionalConfig} from '../model/exchange';
 
 /**
- * Tests the behaviour of the Exchange Adapter component (Template version) is as expected.
+ * Tests the behaviour of the Exchange  component (Template version) is as expected.
  *
  * Learning ground for writing Jasmine tests without using the TestBed.
  *
@@ -20,9 +20,9 @@ import {Exchange, NetworkConfig, ConfigItem, OptionalConfig} from '../model/exch
 describe('ExchangeComponent tests without TestBed', () => {
 
     let activatedRoute: ActivatedRouteStub;
-    let exchangeAdapterComponent: ExchangeComponent;
+    let exchangeComponent: ExchangeComponent;
 
-    let expectedExchangeAdapter: Exchange;
+    let expectedExchange: Exchange;
     let expectedNetworkConfig: NetworkConfig;
     let expectedErrorCodes: number[];
     let expectedErrorMsgs: string[];
@@ -31,9 +31,9 @@ describe('ExchangeComponent tests without TestBed', () => {
     let expectedSellFeeConfigItem: ConfigItem;
     let expectedOptionalConfig: OptionalConfig;
 
-    let expectedUpdatedExchangeAdapter: Exchange;
+    let expectedUpdatedExchange: Exchange;
 
-    let spyExchangeAdapterDataService: any;
+    let spyExchangeDataService: any;
     let router: any;
 
     beforeEach(done => {
@@ -46,103 +46,102 @@ describe('ExchangeComponent tests without TestBed', () => {
         expectedSellFeeConfigItem = new ConfigItem('sell-fee', '0.25');
         expectedOptionalConfig = new OptionalConfig([expectedBuyFeeConfigItem, expectedSellFeeConfigItem]);
 
-        expectedExchangeAdapter = new Exchange('huobi', 'Huobi', 'com.gazbert.bxbot.adapter.HuobiExchangeAdapter',
+        expectedExchange = new Exchange('huobi', 'Huobi', 'com.gazbert.bxbot.adapter.HuobiExchangeAdapter',
             expectedNetworkConfig, expectedOptionalConfig);
 
-        expectedUpdatedExchangeAdapter = new Exchange('huobi', 'Huobi', 'com.gazbert.bxbot.adapter.NewHuobiExchangeAdapter',
+        expectedUpdatedExchange = new Exchange('huobi', 'Huobi', 'com.gazbert.bxbot.adapter.NewHuobiExchangeAdapter',
             expectedNetworkConfig, expectedOptionalConfig);
 
         activatedRoute = new ActivatedRouteStub();
-        activatedRoute.testParams = {id: expectedExchangeAdapter.id};
+        activatedRoute.testParams = {id: expectedExchange.id};
 
         router = jasmine.createSpyObj('router', ['navigate']);
 
-        spyExchangeAdapterDataService = jasmine.createSpyObj('ExchangeHttpDataPromiseService',
-            ['getExchangeByBotId', 'updateExchange']);
-        spyExchangeAdapterDataService.getExchangeByBotId.and.returnValue(Promise.resolve(expectedExchangeAdapter));
-        spyExchangeAdapterDataService.updateExchange.and.returnValue(Promise.resolve(expectedUpdatedExchangeAdapter));
+        spyExchangeDataService = jasmine.createSpyObj('ExchangeHttpDataPromiseService', ['getExchangeByBotId', 'updateExchange']);
+        spyExchangeDataService.getExchangeByBotId.and.returnValue(Promise.resolve(expectedExchange));
+        spyExchangeDataService.updateExchange.and.returnValue(Promise.resolve(expectedUpdatedExchange));
 
-        exchangeAdapterComponent = new ExchangeComponent(spyExchangeAdapterDataService, <any> activatedRoute, router);
-        exchangeAdapterComponent.ngOnInit();
+        exchangeComponent = new ExchangeComponent(spyExchangeDataService, <any> activatedRoute, router);
+        exchangeComponent.ngOnInit();
 
-        spyExchangeAdapterDataService.getExchangeByBotId.calls.first().returnValue.then(done);
+        spyExchangeDataService.getExchangeByBotId.calls.first().returnValue.then(done);
     });
 
-    it('should expose ExchangeAdapter config retrieved from ExchangeAdapterDataService', () => {
-        expect(exchangeAdapterComponent.exchange).toBe(expectedExchangeAdapter);
+    it('should expose Exchange config retrieved from ExchangeHttpDataPromiseService', () => {
+        expect(exchangeComponent.exchange).toBe(expectedExchange);
 
         // paranoia ;-)
-        expect(exchangeAdapterComponent.exchange.id).toBe('huobi');
-        expect(exchangeAdapterComponent.exchange.name).toBe('Huobi');
-        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes[0]).toBe(501);
+        expect(exchangeComponent.exchange.id).toBe('huobi');
+        expect(exchangeComponent.exchange.name).toBe('Huobi');
+        expect(exchangeComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes[0]).toBe(501);
     });
 
     it('should save and navigate to Dashboard when user clicks Save for valid input', done => {
-        exchangeAdapterComponent.save(true);
-        spyExchangeAdapterDataService.updateExchange.calls.first().returnValue
-            .then((updatedAdapter) => {
-                expect(updatedAdapter).toBe(expectedUpdatedExchangeAdapter);
+        exchangeComponent.save(true);
+        spyExchangeDataService.updateExchange.calls.first().returnValue
+            .then((updatedExchange) => {
+                expect(updatedExchange).toBe(expectedUpdatedExchange);
                 expect(router.navigate).toHaveBeenCalledWith(['dashboard']);
                 done();
             });
     });
 
     it('should NOT save and navigate to Dashboard when user clicks Cancel', () => {
-        exchangeAdapterComponent.cancel();
-        expect(spyExchangeAdapterDataService.updateExchange.calls.any()).toEqual(false);
+        exchangeComponent.cancel();
+        expect(spyExchangeDataService.updateExchange.calls.any()).toEqual(false);
         expect(router.navigate).toHaveBeenCalledWith(['dashboard']);
     });
 
     it('should NOT save or navigate to Dashboard when user clicks Save for invalid input', () => {
-        exchangeAdapterComponent.save(false);
-        expect(spyExchangeAdapterDataService.updateExchange.calls.any()).toEqual(false);
+        exchangeComponent.save(false);
+        expect(spyExchangeDataService.updateExchange.calls.any()).toEqual(false);
         expect(router.navigate.calls.any()).toBe(false, 'router.navigate should not have been called');
     });
 
     it('should create new Error Code when user adds one', () => {
-        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
-        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes[1]).not.toBeDefined();
-        exchangeAdapterComponent.addErrorCode();
-        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(2);
-        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes[1]).toBeDefined();
+        expect(exchangeComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
+        expect(exchangeComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes[1]).not.toBeDefined();
+        exchangeComponent.addErrorCode();
+        expect(exchangeComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(2);
+        expect(exchangeComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes[1]).toBeDefined();
     });
 
     it('should remove Error Code when user deletes one', () => {
-        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
-        exchangeAdapterComponent.deleteErrorCode(expectedErrorCodes[0]);
-        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(0);
-        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes[0]).not.toBeDefined();
+        expect(exchangeComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(1);
+        exchangeComponent.deleteErrorCode(expectedErrorCodes[0]);
+        expect(exchangeComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes.length).toBe(0);
+        expect(exchangeComponent.exchange.networkConfig.nonFatalErrorHttpStatusCodes[0]).not.toBeDefined();
     });
 
     it('should create new Error Message when user adds one', () => {
-        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorMessages.length).toBe(1);
-        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorMessages[1]).not.toBeDefined();
-        exchangeAdapterComponent.addErrorMessage();
-        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorMessages.length).toBe(2);
-        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorMessages[1]).toBe('');
+        expect(exchangeComponent.exchange.networkConfig.nonFatalErrorMessages.length).toBe(1);
+        expect(exchangeComponent.exchange.networkConfig.nonFatalErrorMessages[1]).not.toBeDefined();
+        exchangeComponent.addErrorMessage();
+        expect(exchangeComponent.exchange.networkConfig.nonFatalErrorMessages.length).toBe(2);
+        expect(exchangeComponent.exchange.networkConfig.nonFatalErrorMessages[1]).toBe('');
     });
 
     it('should remove Error Message when user deletes one', () => {
-        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorMessages.length).toBe(1);
-        exchangeAdapterComponent.deleteErrorMessage(expectedErrorMsgs[0]);
-        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorMessages.length).toBe(0);
-        expect(exchangeAdapterComponent.exchange.networkConfig.nonFatalErrorMessages[0]).not.toBeDefined();
+        expect(exchangeComponent.exchange.networkConfig.nonFatalErrorMessages.length).toBe(1);
+        exchangeComponent.deleteErrorMessage(expectedErrorMsgs[0]);
+        expect(exchangeComponent.exchange.networkConfig.nonFatalErrorMessages.length).toBe(0);
+        expect(exchangeComponent.exchange.networkConfig.nonFatalErrorMessages[0]).not.toBeDefined();
     });
 
     it('should create new Config Item when user adds one', () => {
-        expect(exchangeAdapterComponent.exchange.optionalConfig.configItems.length).toBe(2);
-        expect(exchangeAdapterComponent.exchange.optionalConfig.configItems[2]).not.toBeDefined();
+        expect(exchangeComponent.exchange.optionalConfig.configItems.length).toBe(2);
+        expect(exchangeComponent.exchange.optionalConfig.configItems[2]).not.toBeDefined();
 
-        exchangeAdapterComponent.addOptionalConfigItem();
-        expect(exchangeAdapterComponent.exchange.optionalConfig.configItems.length).toBe(3);
-        expect(exchangeAdapterComponent.exchange.optionalConfig.configItems[2].name).toBe('');
-        expect(exchangeAdapterComponent.exchange.optionalConfig.configItems[2].value).toBe('');
+        exchangeComponent.addOptionalConfigItem();
+        expect(exchangeComponent.exchange.optionalConfig.configItems.length).toBe(3);
+        expect(exchangeComponent.exchange.optionalConfig.configItems[2].name).toBe('');
+        expect(exchangeComponent.exchange.optionalConfig.configItems[2].value).toBe('');
     });
 
     it('should remove Config Item when user deletes one', () => {
-        expect(exchangeAdapterComponent.exchange.optionalConfig.configItems.length).toBe(2);
-        exchangeAdapterComponent.deleteOptionalConfigItem(expectedBuyFeeConfigItem);
-        expect(exchangeAdapterComponent.exchange.optionalConfig.configItems.length).toBe(1);
-        expect(exchangeAdapterComponent.exchange.optionalConfig.configItems[1]).not.toBeDefined();
+        expect(exchangeComponent.exchange.optionalConfig.configItems.length).toBe(2);
+        exchangeComponent.deleteOptionalConfigItem(expectedBuyFeeConfigItem);
+        expect(exchangeComponent.exchange.optionalConfig.configItems.length).toBe(1);
+        expect(exchangeComponent.exchange.optionalConfig.configItems[1]).not.toBeDefined();
     });
 });
