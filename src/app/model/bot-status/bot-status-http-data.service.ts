@@ -93,7 +93,7 @@ export class BotStatusHttpDataService implements BotStatusDataService {
         });
 
         return this.http
-            .get(this.botUrl + '/?displayName=' + name, {headers: headers})
+            .get(this.botUrl + '/?name=' + name, {headers: headers})
             .map(BotStatusHttpDataService.extractData)
             // .map((r: Response) => r.json().data as BotStatus[])
             .catch(BotStatusHttpDataService.handleError);

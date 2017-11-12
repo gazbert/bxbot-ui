@@ -44,7 +44,7 @@ describe('BotDetailsComponent tests without TestBed', () => {
 
         // paranoia ;-)
         expect(botDetailsComponent.bot.id).toBe('bitstamp-1');
-        expect(botDetailsComponent.bot.displayName).toBe('Bitstamp');
+        expect(botDetailsComponent.bot.name).toBe('Bitstamp');
         expect(botDetailsComponent.bot.status).toBe('Running');
     });
 });

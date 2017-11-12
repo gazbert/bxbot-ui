@@ -64,7 +64,7 @@ describe('DashboardComponent tests without TestBed', () => {
         comp.bots.subscribe((bots) => {
             expect(bots.length).toBe(1, 'should have 1 Gemini Bot item');
             expect(bots[0].id).toBe('gemini-3');
-            expect(bots[0].displayName).toBe('Gemini');
+            expect(bots[0].name).toBe('Gemini');
             done(); // https://github.com/jasmine/jasmine/issues/694
         });
         // comp.ngAfterViewInit();

@@ -35,7 +35,7 @@ export class FakeBotStatusDataService extends BotStatusHttpDataService {
     }
 
     getBotStatusByBotName(name: string): Observable<BotStatus[]> {
-        const bot = this.bots.find(e => e.displayName === name);
+        const bot = this.bots.find(e => e.name === name);
         return Observable.create(observer => {
             observer.next(bot);
             // call complete if you want to close this stream (like a promise)

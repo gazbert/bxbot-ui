@@ -124,7 +124,7 @@ describe('BotStatusHttpDataService tests using TestBed + Mock HTTP backend', () 
             service.getBotStatusById('gdax-2')
                 .subscribe(bot => {
                     expect(bot.id).toBe('gdax-2');
-                    expect(bot.displayName).toBe('GDAX');
+                    expect(bot.name).toBe('GDAX');
                     expect(bot.status).toBe('Stopped');
                 });
         })));

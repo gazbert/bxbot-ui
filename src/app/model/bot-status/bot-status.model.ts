@@ -6,11 +6,11 @@
 export class BotStatus {
 
     constructor(public id: string,
-                public displayName: string,
+                public name: string,
                 public status: string) {
     }
 
     clone() {
-        return new BotStatus(this.id, this.displayName, this.status);
+        return new BotStatus(this.id, this.name, this.status);
     }
 }
