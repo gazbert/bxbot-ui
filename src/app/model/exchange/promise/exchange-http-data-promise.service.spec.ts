@@ -136,7 +136,7 @@ describe('ExchangeHttpDataPromiseService tests using TestBed + Mock HTTP backend
 
         it('should return updated Bitstamp Exchange on success', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.updateExchange(updatedExchange)
+            service.updateExchange('bitstamp', updatedExchange)
                 .then(exchange => {
                     expect(exchange).toBe(updatedExchange);
 
@@ -150,7 +150,7 @@ describe('ExchangeHttpDataPromiseService tests using TestBed + Mock HTTP backend
         it('should NOT return Exchange for 401 response', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 401, body: {data: ['Bad request - unknown id']}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.updateExchange(updatedExchange)
+            service.updateExchange('unknown', updatedExchange)
                 .then(exchange => expect(exchange.id).not.toBeDefined('should have no Exchange'));
         })));
     });

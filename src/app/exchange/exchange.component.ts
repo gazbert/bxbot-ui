@@ -16,6 +16,7 @@ import {ExchangeHttpDataPromiseService} from '../model/exchange/promise';
 })
 export class ExchangeComponent implements OnInit, AfterViewChecked {
 
+    botId: string;
     exchange: Exchange;
     active = true;
 
@@ -63,8 +64,8 @@ export class ExchangeComponent implements OnInit, AfterViewChecked {
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
-            const botId = params['id'];
-            this.exchangeDataService.getExchangeByBotId(botId)
+            this.botId = params['id'];
+            this.exchangeDataService.getExchangeByBotId(this.botId)
                 .then(exchange => {
                     this.exchange = exchange;
                     this.updateFormErrors();
@@ -82,7 +83,7 @@ export class ExchangeComponent implements OnInit, AfterViewChecked {
 
     save(isValid: boolean): void {
         if (isValid) {
-            this.exchangeDataService.updateExchange(this.exchange)
+            this.exchangeDataService.updateExchange(this.botId, this.exchange)
                 .then(() => this.goToDashboard());
         } else {
             this.onValueChanged(); // force validation for new untouched error codes/messages

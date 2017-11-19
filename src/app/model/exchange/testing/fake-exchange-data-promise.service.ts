@@ -16,7 +16,7 @@ export class FakeExchangeDataPromiseService implements ExchangeDataPromiseServic
         return this.lastPromise = Promise.resolve(exchange);
     }
 
-    updateExchange(exchange: Exchange): Promise<Exchange> {
+    updateExchange(botId: string, exchange: Exchange): Promise<Exchange> {
         return this.lastPromise = this.getExchangeByBotId(exchange.id).then(e => {
             return e ?
                 Object.assign(e, exchange) :

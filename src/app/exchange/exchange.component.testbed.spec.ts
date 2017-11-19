@@ -75,7 +75,7 @@ function overrideExchangeDataPromiseServiceSetup() {
             return Promise.resolve(true).then(() => Object.assign({}, testExchange));
         }
 
-        updateExchange(exchange: Exchange): Promise<Exchange> {
+        updateExchange(botId: string, exchange: Exchange): Promise<Exchange> {
             return Promise.resolve(true).then(() => Object.assign(testExchange, exchange));
         }
     }

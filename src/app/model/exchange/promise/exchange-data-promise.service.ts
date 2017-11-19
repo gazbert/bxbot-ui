@@ -11,5 +11,5 @@ export interface ExchangeDataPromiseService {
 
     getExchangeByBotId(id: string): Promise<Exchange>;
 
-    updateExchange(exchange: Exchange): Promise<Exchange>;
+    updateExchange(botId: string, exchange: Exchange): Promise<Exchange>;
 }

@@ -34,7 +34,6 @@ import 'rxjs/add/operator/toPromise';
 export class ExchangeHttpDataObservableService implements ExchangeDataObservableService {
 
     private static ENDPOINT_PATH = '/exchange';
-    // private exchangesUrl = AppComponent.REST_API_CONFIG_BASE_URL + '/exchanges';
 
     constructor(private http: Http) {
     }

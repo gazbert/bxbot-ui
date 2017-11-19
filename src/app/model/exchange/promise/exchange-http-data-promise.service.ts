@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
-import {AppComponent} from '../../../app.component';
 import {Exchange} from '../exchange.model';
 import {ExchangeDataPromiseService} from './exchange-data-promise.service';
 import {AuthenticationService} from '../../../shared/authentication.service';
+import {RestApiUrlService} from '../../../shared/rest-api-url.service';
 
 // Don't forget this else you get runtime error:
 // zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function
@@ -25,7 +25,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class ExchangeHttpDataPromiseService implements ExchangeDataPromiseService {
 
-    private exchangesUrl = AppComponent.REST_API_CONFIG_BASE_URL + '/exchanges';
+    private static ENDPOINT_PATH = '/exchange';
 
     constructor(private http: Http) {
     }
@@ -36,21 +36,21 @@ export class ExchangeHttpDataPromiseService implements ExchangeDataPromiseServic
     }
 
     getExchangeByBotId(botId: string): Promise<Exchange> {
-        const url = this.exchangesUrl + '/' + botId;
+        const url = RestApiUrlService.buildGetConfigEndpointUrl(botId, ExchangeHttpDataPromiseService.ENDPOINT_PATH);
         return this.http.get(url)
             .toPromise()
             .then(response => response.json().data as Exchange)
             .catch(ExchangeHttpDataPromiseService.handleError);
     }
 
-    updateExchange(exchange: Exchange): Promise<Exchange> {
+    updateExchange(botId: string, exchange: Exchange): Promise<Exchange> {
 
         const headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        const url = this.exchangesUrl + '/' + exchange.id;
+        const url = RestApiUrlService.buildUpdateConfigEndpointUrl(botId, exchange.id, ExchangeHttpDataPromiseService.ENDPOINT_PATH);
         return this.http
             .put(url, JSON.stringify(exchange), {headers: headers})
             .toPromise()
