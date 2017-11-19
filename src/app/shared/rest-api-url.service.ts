@@ -29,12 +29,12 @@ export class RestApiUrlService {
         return configEndpointUri;
     }
 
-    public static buildUpdateConfigEndpointUrl(botId: string, endpoint: string): string {
+    public static buildUpdateConfigEndpointUrl(botId: string, entityId: string, endpoint: string): string {
         let configEndpointUri;
         if (environment.production) {
             configEndpointUri = environment.restApiBaseUrl + RestApiUrlService.REST_API_CONFIG_URL_PATH + botId + endpoint;
         } else {
-            configEndpointUri = environment.restApiBaseUrl + endpoint;
+            configEndpointUri = environment.restApiBaseUrl + endpoint + '/' + entityId;
         }
         return configEndpointUri;
     }

@@ -67,7 +67,7 @@ export class EngineHttpDataService implements EngineDataService {
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        const url = RestApiUrlService.buildUpdateConfigEndpointUrl(botId, EngineHttpDataService.ENDPOINT_PATH) + '/' + engine.id;
+        const url = RestApiUrlService.buildUpdateConfigEndpointUrl(botId, engine.id, EngineHttpDataService.ENDPOINT_PATH);
         return this.http
             .put(url, JSON.stringify(engine), {headers: headers})
             .toPromise()
