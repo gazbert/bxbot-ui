@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http} from '@angular/http';
-import {AppComponent} from '../../app.component';
 import {AuthenticationService} from '../../shared/authentication.service';
-// Don't forget this else you get runtime error:
-// zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function
-import 'rxjs/add/operator/toPromise';
 import {EngineDataService} from './engine-data.service';
 import {Engine} from './engine.model';
 import {isArray, isObject} from 'util';
+import {RestApiUrlService} from '../../shared/rest-api-url.service';
+// Don't forget this else you get runtime error:
+// zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function
+import 'rxjs/add/operator/toPromise';
 
 /**
  * HTTP implementation of the Engine Data Service.
@@ -25,7 +25,7 @@ import {isArray, isObject} from 'util';
 @Injectable()
 export class EngineHttpDataService implements EngineDataService {
 
-    private engineUrl = AppComponent.REST_API_CONFIG_BASE_URL + '/engines';
+    private static ENDPOINT_PATH = '/engine';
 
     constructor(private http: Http) {
     }
@@ -41,10 +41,12 @@ export class EngineHttpDataService implements EngineDataService {
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        const url = this.engineUrl + '/?botId=' + botId;
+        const url = RestApiUrlService.buildGetConfigEndpointUrl(botId, EngineHttpDataService.ENDPOINT_PATH);
         return this.http.get(url, {headers: headers})
             .toPromise()
             .then(response => {
+
+                // TODO - upgrade HTTP to get rid of json() stuff + upgrade in-memory-data-service to get rid of data wrapper
                 const payload = response.json().data;
                 if (isArray(payload)) {
                     return payload[0] as Engine; // for in-memory-data-service response
@@ -65,10 +67,11 @@ export class EngineHttpDataService implements EngineDataService {
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        const url = this.engineUrl + '/' + engine.id + '?botId=' + botId;
+        const url = RestApiUrlService.buildUpdateConfigEndpointUrl(botId, EngineHttpDataService.ENDPOINT_PATH) + '/' + engine.id;
         return this.http
             .put(url, JSON.stringify(engine), {headers: headers})
             .toPromise()
+            // TODO - upgrade HTTP to get rid of json() stuff + upgrade in-memory-data-service to get rid of data wrapper
             .then(response => response.json().data as Engine)
             .catch(EngineHttpDataService.handleError);
     }

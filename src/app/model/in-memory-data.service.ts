@@ -64,7 +64,7 @@ export class InMemoryDataService implements InMemoryDbService {
          * The botId and the id attributes must have the same value.
          * This is hack to use the InMemory data store API with multiple bots.
          */
-        const engines = [
+        const engine = [
             {
                 botId: 'bitstamp-1',
                 id: 'bitstamp-1',
@@ -999,6 +999,6 @@ export class InMemoryDataService implements InMemoryDbService {
             }
         ];
 
-        return {status, engines, exchanges, markets, strategies, email_alerts};
+        return {status, engine, exchanges, markets, strategies, email_alerts};
     }
 }

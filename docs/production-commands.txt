@@ -1,0 +1,5 @@
+https://github.com/angular/angular-cli/issues/7643
+ng serve --prod # works
+
+https://github.com/angular/angular-cli/issues/4843
+ng serve --environment=prod --target=production # also works
