@@ -163,7 +163,7 @@ describe('ExchangeHttpDataObservableService tests using TestBed + Mock HTTP back
 
         it('should return updated Bitstamp Exchange on success', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.updateExchange(updatedExchange)
+            service.updateExchange('bitstamp', updatedExchange)
                 .subscribe(exchange => {
                     expect(exchange).toBe(updatedExchange);
 
@@ -177,7 +177,7 @@ describe('ExchangeHttpDataObservableService tests using TestBed + Mock HTTP back
         it('should NOT return Exchange for 401 response', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 401}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.updateExchange(updatedExchange)
+            service.updateExchange('unknown', updatedExchange)
                 .do(() => {
                     fail('should not respond with Exchange');
                 })
@@ -191,7 +191,7 @@ describe('ExchangeHttpDataObservableService tests using TestBed + Mock HTTP back
         it('should treat 404 as an Observable error', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 404}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.updateExchange(updatedExchange)
+            service.updateExchange('unknown', updatedExchange)
                 .do(() => {
                     fail('should not respond with Exchange');
                 })

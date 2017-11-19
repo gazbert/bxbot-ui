@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, Response, RequestOptions} from '@angular/http';
-import {AppComponent} from '../../app.component';
 import {Exchange} from './exchange.model';
 import {ExchangeDataObservableService} from './exchange-data-observable.service';
 import {AuthenticationService} from '../../shared/authentication.service';
 import {Observable} from 'rxjs/Observable';
 import {isObject} from 'rxjs/util/isObject';
+import {isArray} from 'util';
+import {RestApiUrlService} from '../../shared/rest-api-url.service';
 
 // Most RxJS operators are not included in Angular's base Observable implementation.
 // The base implementation includes only what Angular itself requires.
@@ -15,7 +16,6 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/toPromise';
-import {isArray} from 'util';
 
 /**
  * HTTP implementation of the Exchange Data Service.
@@ -33,7 +33,8 @@ import {isArray} from 'util';
 @Injectable()
 export class ExchangeHttpDataObservableService implements ExchangeDataObservableService {
 
-    private exchangesUrl = AppComponent.REST_API_CONFIG_BASE_URL + '/exchanges';
+    private static ENDPOINT_PATH = '/exchange';
+    // private exchangesUrl = AppComponent.REST_API_CONFIG_BASE_URL + '/exchanges';
 
     constructor(private http: Http) {
     }
@@ -74,20 +75,20 @@ export class ExchangeHttpDataObservableService implements ExchangeDataObservable
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        const url = this.exchangesUrl + '/?botId=' + botId;
+        const url = RestApiUrlService.buildGetConfigEndpointUrl(botId, ExchangeHttpDataObservableService.ENDPOINT_PATH);
         return this.http.get(url, {headers: headers})
             .map(ExchangeHttpDataObservableService.extractData)
             .catch(ExchangeHttpDataObservableService.handleError);
     }
 
-    updateExchange(exchange: Exchange): Observable<Exchange> {
+    updateExchange(botId: string, exchange: Exchange): Observable<Exchange> {
 
         const headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        const url = this.exchangesUrl + '/' + exchange.id + '/?botId=' + exchange.id;
+        const url = RestApiUrlService.buildUpdateConfigEndpointUrl(botId, exchange.id, ExchangeHttpDataObservableService.ENDPOINT_PATH);
         const body = JSON.stringify(exchange);
         const options = new RequestOptions({headers: headers});
 

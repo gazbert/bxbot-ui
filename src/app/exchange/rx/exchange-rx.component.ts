@@ -26,6 +26,7 @@ import 'rxjs/add/operator/map';
 })
 export class ExchangeRxComponent implements OnInit {
 
+    botId: string;
     exchange: Exchange;
     active = true;
     public exchangeForm: FormGroup;
@@ -83,8 +84,8 @@ export class ExchangeRxComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
-            const botId = params['id'];
-            this.exchangeDataService.getExchangeByBotId(botId)
+            this.botId = params['id'];
+            this.exchangeDataService.getExchangeByBotId(this.botId)
                 .subscribe(exchange => {
                         this.exchange = exchange;
                         this.buildForm();
@@ -123,7 +124,7 @@ export class ExchangeRxComponent implements OnInit {
                     this.exchange.optionalConfig.configItems.push(configItem);
                 });
 
-            this.exchangeDataService.updateExchange(this.exchange)
+            this.exchangeDataService.updateExchange(this.botId, this.exchange)
                 .subscribe(
                     () => this.goToDashboard(),
                     error => this.errorMessage = <any>error); // TODO - Show meaningful error to user?
