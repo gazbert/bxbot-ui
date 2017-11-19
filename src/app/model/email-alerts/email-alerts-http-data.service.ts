@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
-import {AppComponent} from '../../app.component';
 import {EmailAlertsConfig} from './email-alerts.model';
 import {EmailAlertsDataService} from './email-alerts-data.service';
 import {AuthenticationService} from '../../shared/authentication.service';
+import {isArray, isObject} from 'util';
+import {RestApiUrlService} from '../../shared/rest-api-url.service';
 
 // Don't forget this else you get runtime error:
 // zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function
 import 'rxjs/add/operator/toPromise';
-import {isArray, isObject} from 'util';
 
 /**
  * HTTP implementation of the Email Alerts Data Service.
@@ -26,7 +26,7 @@ import {isArray, isObject} from 'util';
 @Injectable()
 export class EmailAlertsHttpDataService implements EmailAlertsDataService {
 
-    private emailAlertsUrl = AppComponent.REST_API_CONFIG_BASE_URL + '/email_alerts';
+    private static ENDPOINT_PATH = '/email_alerts';
 
     constructor(private http: Http) {
     }
@@ -42,11 +42,12 @@ export class EmailAlertsHttpDataService implements EmailAlertsDataService {
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        const url = this.emailAlertsUrl + '/?botId=' + botId;
+        const url = RestApiUrlService.buildGetConfigEndpointUrl(botId, EmailAlertsHttpDataService.ENDPOINT_PATH);
         return this.http.get(url, {headers: headers})
             .toPromise()
             // .then(response => response.json().data as EmailAlertsConfig)
             .then(response => {
+                // TODO - upgrade HTTP to get rid of json() stuff + upgrade in-memory-data-service to get rid of data wrapper
                 const payload = response.json().data;
                 if (isArray(payload)) {
                     return payload[0] as EmailAlertsConfig; // for in-memory-data-service response
@@ -60,17 +61,18 @@ export class EmailAlertsHttpDataService implements EmailAlertsDataService {
             .catch(EmailAlertsHttpDataService.handleError);
     }
 
-    updateEmailAlertsConfig(emailAlertsConfig: EmailAlertsConfig): Promise<EmailAlertsConfig> {
+    updateEmailAlertsConfig(botId: string, emailAlertsConfig: EmailAlertsConfig): Promise<EmailAlertsConfig> {
 
         const headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        const url = this.emailAlertsUrl + '/' + emailAlertsConfig.id + '/?botId=' + emailAlertsConfig.id;
+        const url = RestApiUrlService.buildUpdateConfigEndpointUrl(botId, emailAlertsConfig.id, EmailAlertsHttpDataService.ENDPOINT_PATH);
         return this.http
             .put(url, JSON.stringify(emailAlertsConfig), {headers: headers})
             .toPromise()
+            // TODO - upgrade HTTP to get rid of json() stuff + upgrade in-memory-data-service to get rid of data wrapper
             .then(response => response.json().data as EmailAlertsConfig)
             .catch(EmailAlertsHttpDataService.handleError);
     }

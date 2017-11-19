@@ -53,6 +53,7 @@ export class ExchangeHttpDataObservableService implements ExchangeDataObservable
         }
         const body = res.json();
 
+        // TODO - upgrade HTTP to get rid of json() stuff + upgrade in-memory-data-service to get rid of data wrapper
         if (isObject(body)) {
             if (isArray(body.data)) {
                 return body.data[0]; // for in-memory-data-service response

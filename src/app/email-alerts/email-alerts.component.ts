@@ -16,8 +16,8 @@ import {EmailAlertsConfig, EmailAlertsHttpDataService} from '../model/email-aler
 })
 export class EmailAlertsComponent implements OnInit, AfterViewChecked {
 
-    emailAlertsConfig: EmailAlertsConfig;
     botId;
+    emailAlertsConfig: EmailAlertsConfig;
     active = true;
 
     @ViewChild('emailAlertsForm') currentForm: NgForm;
@@ -72,7 +72,7 @@ export class EmailAlertsComponent implements OnInit, AfterViewChecked {
 
     save(isValid: boolean): void {
         if (isValid) {
-            this.emailAlertsService.updateEmailAlertsConfig(this.emailAlertsConfig)
+            this.emailAlertsService.updateEmailAlertsConfig(this.botId, this.emailAlertsConfig)
                 .then((updatedConfig) => {
                     this.emailAlertsConfig = updatedConfig;
                     this.goToDashboard();

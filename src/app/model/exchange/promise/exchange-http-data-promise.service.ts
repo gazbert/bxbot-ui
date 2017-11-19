@@ -39,6 +39,7 @@ export class ExchangeHttpDataPromiseService implements ExchangeDataPromiseServic
         const url = RestApiUrlService.buildGetConfigEndpointUrl(botId, ExchangeHttpDataPromiseService.ENDPOINT_PATH);
         return this.http.get(url)
             .toPromise()
+            // TODO - upgrade HTTP to get rid of json() stuff + upgrade in-memory-data-service to get rid of data wrapper
             .then(response => response.json().data as Exchange)
             .catch(ExchangeHttpDataPromiseService.handleError);
     }
@@ -54,6 +55,7 @@ export class ExchangeHttpDataPromiseService implements ExchangeDataPromiseServic
         return this.http
             .put(url, JSON.stringify(exchange), {headers: headers})
             .toPromise()
+            // TODO - upgrade HTTP to get rid of json() stuff + upgrade in-memory-data-service to get rid of data wrapper
             .then(response => response.json().data as Exchange)
             .catch(ExchangeHttpDataPromiseService.handleError);
     }

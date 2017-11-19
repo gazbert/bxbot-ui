@@ -11,5 +11,5 @@ export interface EmailAlertsDataService {
 
     getEmailAlertsConfigByBotId(botId: string): Promise<EmailAlertsConfig>;
 
-    updateEmailAlertsConfig(emailAlertsConfig: EmailAlertsConfig): Promise<EmailAlertsConfig>;
+    updateEmailAlertsConfig(botId: string, emailAlertsConfig: EmailAlertsConfig): Promise<EmailAlertsConfig>;
 }

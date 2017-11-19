@@ -101,7 +101,7 @@ describe('EmailAlertsHttpDataService tests using TestBed + Mock HTTP backend', (
 
         it('should return updated GDAX Email Alerts config on success', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.updateEmailAlertsConfig(updatedEmailAlertsConfig)
+            service.updateEmailAlertsConfig('gdax', updatedEmailAlertsConfig)
                 .then(emailAlertsConfig => {
                     expect(emailAlertsConfig).toBe(updatedEmailAlertsConfig);
 
@@ -114,7 +114,7 @@ describe('EmailAlertsHttpDataService tests using TestBed + Mock HTTP backend', (
         it('should NOT return Email Alerts config for 401 response', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 401, body: {data: ['Bad request - unknown id']}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.updateEmailAlertsConfig(updatedEmailAlertsConfig)
+            service.updateEmailAlertsConfig('gdax', updatedEmailAlertsConfig)
                 .then(emailAlertsConfig => expect(emailAlertsConfig.id).not.toBeDefined('should not have Email Alerts config'));
         })));
     });
