@@ -16,10 +16,10 @@ import {Strategy, OptionalConfig, StrategyHttpDataService} from '../model/strate
 })
 export class MarketsComponent implements OnInit, AfterViewChecked {
 
+    botId: string;
     markets: Market[] = [];
     deletedMarkets: Market[] = [];
     strategies: Strategy[] = [];
-    botId;
     active = true;
 
     @ViewChild('marketsForm') currentForm: NgForm;
@@ -93,12 +93,12 @@ export class MarketsComponent implements OnInit, AfterViewChecked {
     save(isValid: boolean): void {
         if (isValid) {
             this.deletedMarkets.forEach((market) => {
-                this.marketDataService.deleteMarketById(market.id).then(() => {/*done*/});
+                this.marketDataService.deleteMarketById(this.botId, market.id).then(() => {/*done*/});
             });
 
             // TODO - Be more efficient: only update Markets that have changed
             this.markets.forEach((market) => {
-                this.marketDataService.updateMarket(market)
+                this.marketDataService.updateMarket(this.botId, market)
                     .then(() => this.goToDashboard());
             });
         } else {

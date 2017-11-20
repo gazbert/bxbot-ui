@@ -98,7 +98,7 @@ describe('MarketHttpDataService tests using TestBed + Mock HTTP backend', () => 
 
         it('should return updated Huobi Market on success', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.updateMarket(updatedMarket)
+            service.updateMarket('huobi', updatedMarket)
                 .then(market => {
                     expect(market).toBe(updatedMarket);
 
@@ -112,7 +112,7 @@ describe('MarketHttpDataService tests using TestBed + Mock HTTP backend', () => 
         it('should NOT return Market for 401 response', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 401, body: {data: ['Bad request - unknown id']}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.updateMarket(updatedMarket)
+            service.updateMarket('huobi', updatedMarket)
                 .then(market => expect(market.id).not.toBeDefined('should have no Market'));
         })));
     });
@@ -132,14 +132,14 @@ describe('MarketHttpDataService tests using TestBed + Mock HTTP backend', () => 
 
         it('should return status response of \'true\' if successful', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.deleteMarketById('huobi_btc_usd')
+            service.deleteMarketById('huobi', 'huobi_btc_usd')
                 .then(status => expect(status).toBe(true));
         })));
 
         it('should return status response of \'false\' if NOT successful', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 401}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.deleteMarketById('unknown')
+            service.deleteMarketById('huobi', 'unknown')
                 .then(status => expect(status).toBe(false));
         })));
     });

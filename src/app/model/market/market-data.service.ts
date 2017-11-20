@@ -11,7 +11,7 @@ export interface MarketDataService {
 
     getAllMarketsForBotId(botId: string): Promise<Market[]>;
 
-    updateMarket(market: Market): Promise<Market>;
+    updateMarket(botId: string, market: Market): Promise<Market>;
 
-    deleteMarketById(marketId: string): Promise<boolean>;
+    deleteMarketById(botId: string, marketId: string): Promise<boolean>;
 }

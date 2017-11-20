@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
-import {AppComponent} from '../../app.component';
 import {Market} from './market.model';
 import {MarketDataService} from './market-data.service';
 import {AuthenticationService} from '../../shared/authentication.service';
+import {RestApiUrlService} from '../../shared/rest-api-url.service';
 
 // Don't forget this else you get runtime error:
 // zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function
@@ -25,7 +25,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class MarketHttpDataService implements MarketDataService {
 
-    private marketsUrl = AppComponent.REST_API_CONFIG_BASE_URL + '/markets';
+    private static ENDPOINT_PATH = '/markets';
 
     constructor(private http: Http) {
     }
@@ -36,21 +36,21 @@ export class MarketHttpDataService implements MarketDataService {
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        const url = this.marketsUrl + '/?botId=' + botId;
+        const url = RestApiUrlService.buildGetConfigEndpointUrl(botId, MarketHttpDataService.ENDPOINT_PATH);
         return this.http.get(url, {headers: headers})
             .toPromise()
             .then(response => response.json().data as Market[])
             .catch(this.handleError);
     }
 
-    updateMarket(market: Market): Promise<Market> {
+    updateMarket(botId: string, market: Market): Promise<Market> {
 
         const headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        const url = this.marketsUrl + '/' + market.id;
+        const url = RestApiUrlService.buildUpdateConfigEndpointUrl(botId, market.id, MarketHttpDataService.ENDPOINT_PATH);
         return this.http
             .put(url, JSON.stringify(market), {headers: headers})
             .toPromise()
@@ -58,13 +58,13 @@ export class MarketHttpDataService implements MarketDataService {
             .catch(this.handleError);
     }
 
-    deleteMarketById(marketId: string): Promise<boolean> {
+    deleteMarketById(botId: string, marketId: string): Promise<boolean> {
 
         const headers = new Headers({
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        const url = this.marketsUrl + '/' + marketId;
+        const url = RestApiUrlService.buildUpdateConfigEndpointUrl(botId, marketId, MarketHttpDataService.ENDPOINT_PATH);
         return this.http
             .delete(url, {headers: headers})
             .toPromise()
