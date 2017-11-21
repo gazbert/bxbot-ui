@@ -107,7 +107,7 @@ describe('StrategyHttpDataService tests using TestBed + Mock HTTP backend', () =
 
         it('should return updated Huobi Strategy on success', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.updateStrategy(updatedStrategy)
+            service.updateStrategy('huobi', updatedStrategy)
                 .then(strategy => {
                     expect(strategy).toBe(updatedStrategy);
 
@@ -121,7 +121,7 @@ describe('StrategyHttpDataService tests using TestBed + Mock HTTP backend', () =
         it('should NOT return Market for 401 response', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 401, body: {data: ['Bad request - unknown id']}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.updateStrategy(updatedStrategy)
+            service.updateStrategy('huobi', updatedStrategy)
                 .then(strategy => expect(strategy.id).not.toBeDefined('should have no Strategy'));
         })));
     });
@@ -141,14 +141,14 @@ describe('StrategyHttpDataService tests using TestBed + Mock HTTP backend', () =
 
         it('should return status response of \'true\' if successful', async(inject([], () => {
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
-            service.deleteStrategyById('huobi_macd')
+            service.deleteStrategyById('huobi', 'huobi_macd')
                 .then(status => expect(status).toBe(true));
         })));
 
         it('should return status response of \'false\' if NOT successful', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 401}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.deleteStrategyById('unknown')
+            service.deleteStrategyById('huobi', 'unknown')
                 .then(status => expect(status).toBe(false));
         })));
     });

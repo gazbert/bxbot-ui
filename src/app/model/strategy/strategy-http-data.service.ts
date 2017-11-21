@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
-import {AppComponent} from '../../app.component';
 import {Strategy} from './strategy.model';
 import {StrategyDataService} from './strategy-data.service';
 import {AuthenticationService} from '../../shared/authentication.service';
+import {RestApiUrlService} from '../../shared/rest-api-url.service';
 
 // Don't forget this else you get runtime error:
 // zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function
@@ -25,7 +25,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class StrategyHttpDataService implements StrategyDataService {
 
-    private strategiesUrl = AppComponent.REST_API_CONFIG_BASE_URL + '/strategies';
+    private static ENDPOINT_PATH = '/strategies';
 
     constructor(private http: Http) {
     }
@@ -36,21 +36,21 @@ export class StrategyHttpDataService implements StrategyDataService {
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        const url = this.strategiesUrl + '?botId=' + botId;
+        const url = RestApiUrlService.buildGetConfigEndpointUrl(botId, StrategyHttpDataService.ENDPOINT_PATH);
         return this.http.get(url, {headers: headers})
             .toPromise()
             .then(response => response.json().data as Strategy[])
             .catch(this.handleError);
     }
 
-    updateStrategy(strategy: Strategy): Promise<Strategy> {
+    updateStrategy(botId: string, strategy: Strategy): Promise<Strategy> {
 
         const headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        const url = this.strategiesUrl + '/' + strategy.id;
+        const url = RestApiUrlService.buildUpdateConfigEndpointUrl(botId, strategy.id, StrategyHttpDataService.ENDPOINT_PATH);
         return this.http
             .put(url, JSON.stringify(strategy), {headers: headers})
             .toPromise()
@@ -58,13 +58,13 @@ export class StrategyHttpDataService implements StrategyDataService {
             .catch(this.handleError);
     }
 
-    deleteStrategyById(strategyId: string): Promise<boolean> {
+    deleteStrategyById(botId: string, strategyId: string): Promise<boolean> {
 
         const headers = new Headers({
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        const url = this.strategiesUrl + '/' + strategyId;
+        const url = RestApiUrlService.buildUpdateConfigEndpointUrl(botId, strategyId, StrategyHttpDataService.ENDPOINT_PATH);
         return this.http
             .delete(url, {headers: headers})
             .toPromise()

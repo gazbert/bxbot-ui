@@ -46,13 +46,6 @@ export class AppComponent {
      */
     public static REST_API_RUNTIME_BASE_URL = 'app';
 
-    /**
-     * Base URL to Angular's in-memory web API endpoints.
-     * Uncomment this to use for dev/testing/demos.
-     * TODO - Move to environment file
-     */
-    public static REST_API_CONFIG_BASE_URL = 'app';
-
 
     isLoggedIn(): boolean {
         return AuthenticationService.isLoggedIn();

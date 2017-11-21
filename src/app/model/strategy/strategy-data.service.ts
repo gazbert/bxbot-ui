@@ -17,7 +17,7 @@ export interface StrategyDataService {
      */
     getAllStrategiesForBotId(botId: string): Promise<Strategy[]>;
 
-    updateStrategy(strategy: Strategy): Promise<Strategy>;
+    updateStrategy(botId: string, strategy: Strategy): Promise<Strategy>;
 
-    deleteStrategyById(strategy: string): Promise<boolean>;
+    deleteStrategyById(botId: string, strategy: string): Promise<boolean>;
 }

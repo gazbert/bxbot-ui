@@ -108,13 +108,13 @@ export class StrategiesComponent implements OnInit, AfterViewChecked {
     save(isValid: boolean): void {
         if (isValid) {
             this.deletedStrategies.forEach((strategy) => {
-                this.strategyDataService.deleteStrategyById(strategy.id).then(() => {/*done*/
+                this.strategyDataService.deleteStrategyById(this.botId, strategy.id).then(() => {/*done*/
                 });
             });
 
             // TODO - Be more efficient: only update Strats that have changed
             this.strategies.forEach((strategy) => {
-                this.strategyDataService.updateStrategy(strategy)
+                this.strategyDataService.updateStrategy(this.botId, strategy)
                     .then(() => this.goToDashboard());
             });
         } else {
