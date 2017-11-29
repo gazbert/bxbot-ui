@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, RequestOptions, Response} from '@angular/http';
-import {AppComponent} from '../../app.component';
 import {BotStatusDataService} from './bot-status-data.service';
-import {AuthenticationService} from '../../shared';
+import {AuthenticationService, RestApiUrlService} from '../../shared';
 import {BotStatus} from './bot-status.model';
 import {Observable} from 'rxjs/Observable';
 import {isObject} from 'rxjs/util/isObject';
@@ -31,7 +30,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class BotStatusHttpDataService implements BotStatusDataService {
 
-    private botUrl = AppComponent.REST_API_RUNTIME_BASE_URL + '/status';
+    private static ENDPOINT_PATH = '/status';
 
     constructor(private http: Http) {
     }
@@ -66,20 +65,22 @@ export class BotStatusHttpDataService implements BotStatusDataService {
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        return this.http.get(this.botUrl, {headers: headers})
+        const url = RestApiUrlService.buildRuntimeEndpointUrl(null, BotStatusHttpDataService.ENDPOINT_PATH);
+        return this.http.get(url, {headers: headers})
             .map(BotStatusHttpDataService.extractData)
             .catch(BotStatusHttpDataService.handleError);
     }
 
-    getBotStatusById(id: string): Observable<BotStatus> {
+    getBotStatusById(botId: string): Observable<BotStatus> {
 
         const headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
+        const url = RestApiUrlService.buildRuntimeEndpointUrl(botId, BotStatusHttpDataService.ENDPOINT_PATH);
         return this.http
-            .get(this.botUrl + '/' + id, {headers: headers})
+            .get(url, {headers: headers})
             .map((r: Response) => r.json().data as BotStatus)
             // .map(this.extractData)
             .catch(BotStatusHttpDataService.handleError);
@@ -92,8 +93,9 @@ export class BotStatusHttpDataService implements BotStatusDataService {
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
+        const url = RestApiUrlService.buildRuntimeEndpointUrl(null, BotStatusHttpDataService.ENDPOINT_PATH);
         return this.http
-            .get(this.botUrl + '/?name=' + name, {headers: headers})
+            .get(url + '/?name=' + name, {headers: headers})
             .map(BotStatusHttpDataService.extractData)
             // .map((r: Response) => r.json().data as BotStatus[])
             .catch(BotStatusHttpDataService.handleError);
@@ -106,7 +108,7 @@ export class BotStatusHttpDataService implements BotStatusDataService {
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        const url = this.botUrl + '/' + bot.id;
+        const url = RestApiUrlService.buildRuntimeEndpointUrl(bot.id, BotStatusHttpDataService.ENDPOINT_PATH);
         const body = JSON.stringify(bot);
         const options = new RequestOptions({headers: headers});
 
