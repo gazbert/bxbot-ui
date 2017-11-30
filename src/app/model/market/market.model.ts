@@ -8,7 +8,7 @@ import {Strategy} from '../strategy/strategy.model';
 export class Market {
 
     constructor(public id: string,
-                public botId: string,
+                public botId: string, // only used by the in-memory-data-model
                 public name: string,
                 public enabled: boolean,
                 public baseCurrency: string,

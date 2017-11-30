@@ -6,7 +6,7 @@
 export class Strategy {
 
     constructor(public id: string,
-                public botId: string,
+                public botId: string, // only used by the in-memory-data-model
                 public name: string,
                 public description: string,
                 public className: string,

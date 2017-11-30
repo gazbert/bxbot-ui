@@ -40,12 +40,20 @@ export class RestApiUrlService {
     }
 
     public static buildRuntimeEndpointUrl(botId: string, endpoint: string): string {
-        let configEndpointUri;
+        let runtimeEndpointUri;
         if (environment.production) {
-            configEndpointUri = environment.restApiBaseUrl + RestApiUrlService.REST_API_RUNTIME_URL_PATH + botId + endpoint;
+            if (botId !== null) {
+                runtimeEndpointUri = environment.restApiBaseUrl + RestApiUrlService.REST_API_RUNTIME_URL_PATH + botId + endpoint;
+            } else {
+                runtimeEndpointUri = environment.restApiBaseUrl + RestApiUrlService.REST_API_RUNTIME_URL_PATH + endpoint;
+            }
         } else {
-            configEndpointUri = environment.restApiBaseUrl + endpoint + '?botId=' + botId;
+            if (botId !== null) {
+                runtimeEndpointUri = environment.restApiBaseUrl + endpoint + '/' + botId;
+            } else {
+                runtimeEndpointUri = environment.restApiBaseUrl + endpoint;
+            }
         }
-        return configEndpointUri;
+        return runtimeEndpointUri;
     }
 }
