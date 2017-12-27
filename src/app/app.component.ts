@@ -32,13 +32,6 @@ export class AppComponent {
 
     public static TITLE = 'BX-bot Admin Console';
 
-    /**
-     * Base URL to bxbot-ui-server authentication endpoint.
-     * This is ignored when using in-memory web API.
-     * TODO - Move to environment file
-     */
-    public static AUTH_ENDPOINT_BASE_URL = 'http://localhost:8080';
-
     isLoggedIn(): boolean {
         return AuthenticationService.isLoggedIn();
     }

@@ -4,7 +4,6 @@ import {Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-import {AppComponent} from '../app.component';
 
 /**
  * Authentication service for authenticating with the backend server.
@@ -17,7 +16,14 @@ import {AppComponent} from '../app.component';
 @Injectable()
 export class AuthenticationService {
 
-    private authUrl = AppComponent.AUTH_ENDPOINT_BASE_URL + '/auth';
+    /**
+     * Base URL to bxbot-ui-server authentication endpoint.
+     * This is ignored when using in-memory web API.
+     * TODO - Move to environment file
+     */
+    private static AUTH_ENDPOINT_BASE_URL = 'http://localhost:8080';
+
+    private authUrl = AuthenticationService.AUTH_ENDPOINT_BASE_URL + '/auth';
     private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private http: Http) {
