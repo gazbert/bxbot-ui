@@ -20,6 +20,12 @@ describe('Strategy Tests', function () {
     it('should update Strategy fields after Save', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+
+        // https://stackoverflow.com/questions/28464604/more-than-one-element-found-for-locator-warning
+        const EC = protractor.ExpectedConditions;
+        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
+        browser.wait(EC.visibilityOf(dashboard), 3000);
+
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Bot Details');
 
@@ -81,6 +87,11 @@ describe('Strategy Tests', function () {
     it('should NOT update Strategy fields after Cancel', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+
+        const EC = protractor.ExpectedConditions;
+        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
+        browser.wait(EC.visibilityOf(dashboard), 3000);
+
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Bot Details');
 
@@ -146,7 +157,7 @@ describe('Strategy Tests', function () {
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
 
         const EC = protractor.ExpectedConditions;
-        const dashboard = element(by.css('app-bxbot-ui-dashboard-item'));
+        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
         browser.wait(EC.visibilityOf(dashboard), 3000);
 
         dashboardItems.get(3).click();
@@ -220,6 +231,11 @@ describe('Strategy Tests', function () {
     it('should delete Strategy and save change', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+
+        const EC = protractor.ExpectedConditions;
+        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
+        browser.wait(EC.visibilityOf(dashboard), 3000);
+
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Bot Details');
 
@@ -266,6 +282,11 @@ describe('Strategy Tests', function () {
     it('should NOT delete Strategy if currently being used by a Market', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+
+        const EC = protractor.ExpectedConditions;
+        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
+        browser.wait(EC.visibilityOf(dashboard), 3000);
+
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Bot Details');
 
@@ -316,6 +337,11 @@ describe('Strategy Tests', function () {
     it('should add new Optional Config Item and save it', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+
+        const EC = protractor.ExpectedConditions;
+        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
+        browser.wait(EC.visibilityOf(dashboard), 3000);
+
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Bot Details');
 
@@ -341,7 +367,6 @@ describe('Strategy Tests', function () {
         optionalStrategyConfigButton.click();
 
         // Need to wait for link to become visible...
-        const EC = protractor.ExpectedConditions;
         const addConfigItemLink = element(by.id('addNewStrategyConfigItemLink_0'));
         browser.wait(EC.visibilityOf(addConfigItemLink), 5000);
         addConfigItemLink.click();
@@ -394,10 +419,14 @@ describe('Strategy Tests', function () {
         expect(element(by.id('strategyConfigItemValue_1_2')).getAttribute('value')).toBe('9');
     });
 
-    // FIXME! This fails on Travis, yet works locally... timing issue?
-    xit('should delete Optional Config Item and save change', function () {
+    it('should delete Optional Config Item and save change', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+
+        const EC = protractor.ExpectedConditions;
+        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
+        browser.wait(EC.visibilityOf(dashboard), 3000);
+
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Bot Details');
 
@@ -424,7 +453,6 @@ describe('Strategy Tests', function () {
 
         // Delete Config Item 2 from Strat 2
         // Need to wait for link + config items to become visible...
-        const EC = protractor.ExpectedConditions;
         const deleteConfigItemButton = element(by.id('deleteConfigItemButton_1_1'));
         browser.wait(EC.visibilityOf(deleteConfigItemButton), 5000);
         deleteConfigItemButton.click();
@@ -464,6 +492,11 @@ describe('Strategy Tests', function () {
     it('should NOT save Strategy fields if there are validation errors', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+
+        const EC = protractor.ExpectedConditions;
+        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
+        browser.wait(EC.visibilityOf(dashboard), 3000);
+
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Bot Details');
 
@@ -508,7 +541,6 @@ describe('Strategy Tests', function () {
         optionalStrategyConfigButton.click();
 
         // Need to wait for link to become visible...
-        const EC = protractor.ExpectedConditions;
         const addConfigItemLink = element(by.id('addNewStrategyConfigItemLink_0'));
         browser.wait(EC.visibilityOf(addConfigItemLink), 5000);
         addConfigItemLink.click();
@@ -561,6 +593,11 @@ describe('Strategy Tests', function () {
     it('should NOT save new Strategy when Strategy Name already in use', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+
+        const EC = protractor.ExpectedConditions;
+        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
+        browser.wait(EC.visibilityOf(dashboard), 3000);
+
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Bot Details');
 

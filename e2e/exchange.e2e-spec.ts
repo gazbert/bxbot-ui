@@ -21,6 +21,12 @@ describe('Exchange Tests', function () {
     it('should update Exchange fields after Save', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+
+        // https://stackoverflow.com/questions/28464604/more-than-one-element-found-for-locator-warning
+        const EC = protractor.ExpectedConditions;
+        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
+        browser.wait(EC.visibilityOf(dashboard), 3000);
+
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Bot Details');
 
@@ -99,6 +105,11 @@ describe('Exchange Tests', function () {
     it('should NOT update Exchange fields after Cancel', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+
+        const EC = protractor.ExpectedConditions;
+        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
+        browser.wait(EC.visibilityOf(dashboard), 3000);
+
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Bot Details');
 
@@ -177,6 +188,11 @@ describe('Exchange Tests', function () {
     it('should add new Error Code and save it', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+
+        const EC = protractor.ExpectedConditions;
+        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
+        browser.wait(EC.visibilityOf(dashboard), 3000);
+
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Bot Details');
 
@@ -226,6 +242,11 @@ describe('Exchange Tests', function () {
     it('should delete Error Code and save change', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+
+        const EC = protractor.ExpectedConditions;
+        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
+        browser.wait(EC.visibilityOf(dashboard), 3000);
+
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Bot Details');
 
@@ -267,6 +288,11 @@ describe('Exchange Tests', function () {
     it('should add new Error Message and save it', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+
+        const EC = protractor.ExpectedConditions;
+        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
+        browser.wait(EC.visibilityOf(dashboard), 3000);
+
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Bot Details');
 
@@ -316,6 +342,11 @@ describe('Exchange Tests', function () {
     it('should delete Error Message and save change', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+
+        const EC = protractor.ExpectedConditions;
+        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
+        browser.wait(EC.visibilityOf(dashboard), 3000);
+
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Bot Details');
 
@@ -356,6 +387,11 @@ describe('Exchange Tests', function () {
     it('should add new Optional Config Item and save it', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+
+        const EC = protractor.ExpectedConditions;
+        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
+        browser.wait(EC.visibilityOf(dashboard), 3000);
+
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Bot Details');
 
@@ -377,7 +413,6 @@ describe('Exchange Tests', function () {
         optionalExchangeConfigButton.click();
 
         // Need to wait for link to become visible...
-        const EC = protractor.ExpectedConditions;
         const addConfigItemLink = element(by.id('addNewExchangeConfigItemLink'));
         browser.wait(EC.visibilityOf(addConfigItemLink), 1000);
         addConfigItemLink.click();
@@ -423,7 +458,7 @@ describe('Exchange Tests', function () {
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
 
         const EC = protractor.ExpectedConditions;
-        const dashboard = element(by.css('app-bxbot-ui-dashboard-item'));
+        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
         browser.wait(EC.visibilityOf(dashboard), 3000);
 
         dashboardItems.get(1).click();
@@ -460,6 +495,8 @@ describe('Exchange Tests', function () {
 
         // Save and check the update worked
         const saveButton = element(by.id('exchangeSaveButton'));
+        browser.wait(EC.visibilityOf(saveButton), 3000);
+
         saveButton.click();
         dashboardItems.get(1).click();
 
@@ -480,6 +517,11 @@ describe('Exchange Tests', function () {
     it('should NOT save Exchange fields if there are validation errors', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+
+        const EC = protractor.ExpectedConditions;
+        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
+        browser.wait(EC.visibilityOf(dashboard), 3000);
+
         dashboardItems.get(0).click();
         expect(element(by.css('h2')).getText()).toEqual('Bitstamp Bot Details');
 
@@ -544,7 +586,6 @@ describe('Exchange Tests', function () {
         optionalExchangeConfigButton.click();
 
         // Need to wait for link to become visible...
-        const EC = protractor.ExpectedConditions;
         const addConfigItemLink = element(by.id('addNewExchangeConfigItemLink'));
         browser.wait(EC.visibilityOf(addConfigItemLink), 3000);
         addConfigItemLink.click();

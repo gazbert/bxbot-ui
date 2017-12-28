@@ -1,4 +1,4 @@
-import {browser, element, by} from 'protractor';
+import {browser, element, by, protractor} from 'protractor';
 
 /**
  * Market screen tests.
@@ -21,6 +21,12 @@ describe('Market Tests', function () {
     it('should update Market fields after Save', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+
+        // https://stackoverflow.com/questions/28464604/more-than-one-element-found-for-locator-warning
+        const EC = protractor.ExpectedConditions;
+        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
+        browser.wait(EC.visibilityOf(dashboard), 3000);
+
         dashboardItems.get(4).click();
         expect(element(by.css('h2')).getText()).toEqual('Huobi Bot Details');
 
@@ -100,6 +106,11 @@ describe('Market Tests', function () {
     it('should NOT update Market fields after Cancel', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+
+        const EC = protractor.ExpectedConditions;
+        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
+        browser.wait(EC.visibilityOf(dashboard), 3000);
+
         dashboardItems.get(4).click();
         expect(element(by.css('h2')).getText()).toEqual('Huobi Bot Details');
 
@@ -171,6 +182,11 @@ describe('Market Tests', function () {
     it('should add new Market and save it', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+
+        const EC = protractor.ExpectedConditions;
+        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
+        browser.wait(EC.visibilityOf(dashboard), 3000);
+
         dashboardItems.get(4).click();
         expect(element(by.css('h2')).getText()).toEqual('Huobi Bot Details');
 
@@ -260,6 +276,11 @@ describe('Market Tests', function () {
     it('should delete Market and save change', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+
+        const EC = protractor.ExpectedConditions;
+        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
+        browser.wait(EC.visibilityOf(dashboard), 3000);
+
         dashboardItems.get(4).click();
         expect(element(by.css('h2')).getText()).toEqual('Huobi Bot Details');
 
@@ -308,6 +329,11 @@ describe('Market Tests', function () {
     it('should NOT save Market fields if there are validation errors', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+
+        const EC = protractor.ExpectedConditions;
+        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
+        browser.wait(EC.visibilityOf(dashboard), 3000);
+
         dashboardItems.get(4).click();
         expect(element(by.css('h2')).getText()).toEqual('Huobi Bot Details');
 
@@ -380,6 +406,11 @@ describe('Market Tests', function () {
     it('should NOT save new Market when Market Name already in use', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+
+        const EC = protractor.ExpectedConditions;
+        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
+        browser.wait(EC.visibilityOf(dashboard), 3000);
+
         dashboardItems.get(4).click();
         expect(element(by.css('h2')).getText()).toEqual('Huobi Bot Details');
 

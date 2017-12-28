@@ -1,4 +1,4 @@
-import {browser, element, by} from 'protractor';
+import {browser, element, by, protractor} from 'protractor';
 
 /**
  * Dashboard tests.
@@ -75,6 +75,12 @@ describe('Dashboard Tests', function () {
     it('should filter displayed Bot items when user searches by Bot name', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+
+        // https://stackoverflow.com/questions/28464604/more-than-one-element-found-for-locator-warning
+        const EC = protractor.ExpectedConditions;
+        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
+        browser.wait(EC.visibilityOf(dashboard), 3000);
+
         expect(dashboardItems.count()).toBe(8);
 
         const searchBox = element.all(by.id('search-box'));
