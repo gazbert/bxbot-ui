@@ -144,6 +144,11 @@ describe('Strategy Tests', function () {
     it('should add new Strategy and save it', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+
+        const EC = protractor.ExpectedConditions;
+        const dashboard = element(by.css('app-bxbot-ui-dashboard-item'));
+        browser.wait(EC.visibilityOf(dashboard), 3000);
+
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Bot Details');
 

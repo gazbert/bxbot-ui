@@ -1,4 +1,4 @@
-import {browser, element, by} from 'protractor';
+import {browser, element, by, protractor} from 'protractor';
 
 /**
  * Bot Details screen tests.
@@ -94,6 +94,11 @@ describe('Bot Details Tests', function () {
     it('should render GDAX Strategies', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+
+        const EC = protractor.ExpectedConditions;
+        const dashboard = element(by.css('app-bxbot-ui-dashboard-item'));
+        browser.wait(EC.visibilityOf(dashboard), 3000);
+
         dashboardItems.get(1).click();
         expect(element(by.css('h2')).getText()).toEqual('GDAX Bot Details');
 

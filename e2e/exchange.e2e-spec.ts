@@ -421,6 +421,11 @@ describe('Exchange Tests', function () {
     it('should delete Optional Config Item and save change', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+
+        const EC = protractor.ExpectedConditions;
+        const dashboard = element(by.css('app-bxbot-ui-dashboard-item'));
+        browser.wait(EC.visibilityOf(dashboard), 3000);
+
         dashboardItems.get(1).click();
         expect(element(by.css('h2')).getText()).toEqual('GDAX Bot Details');
 
@@ -442,7 +447,6 @@ describe('Exchange Tests', function () {
 
         // Delete Config Item 2
         // Need to wait for link + config items to become visible...
-        const EC = protractor.ExpectedConditions;
         const deleteConfigItemButton = element(by.id('deleteExchangeConfigItemButton_1'));
         browser.wait(EC.visibilityOf(deleteConfigItemButton), 3000);
 
