@@ -25,7 +25,7 @@ describe('Bot Details Tests', function () {
         // https://stackoverflow.com/questions/28464604/more-than-one-element-found-for-locator-warning
         const EC = protractor.ExpectedConditions;
         const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
-        browser.wait(EC.visibilityOf(dashboard), 3000);
+        browser.wait(EC.visibilityOf(dashboard), 5000);
 
         dashboardItems.get(1).click();
         expect(element(by.css('h2')).getText()).toEqual('GDAX Bot Details');
@@ -48,7 +48,7 @@ describe('Bot Details Tests', function () {
 
         const EC = protractor.ExpectedConditions;
         const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
-        browser.wait(EC.visibilityOf(dashboard), 3000);
+        browser.wait(EC.visibilityOf(dashboard), 5000);
 
         dashboardItems.get(1).click();
         expect(element(by.css('h2')).getText()).toEqual('GDAX Bot Details');
@@ -66,7 +66,7 @@ describe('Bot Details Tests', function () {
 
         const EC = protractor.ExpectedConditions;
         const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
-        browser.wait(EC.visibilityOf(dashboard), 3000);
+        browser.wait(EC.visibilityOf(dashboard), 5000);
 
         dashboardItems.get(1).click();
         expect(element(by.css('h2')).getText()).toEqual('GDAX Bot Details');
@@ -89,7 +89,7 @@ describe('Bot Details Tests', function () {
 
         const EC = protractor.ExpectedConditions;
         const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
-        browser.wait(EC.visibilityOf(dashboard), 3000);
+        browser.wait(EC.visibilityOf(dashboard), 5000);
 
         dashboardItems.get(1).click();
         expect(element(by.css('h2')).getText()).toEqual('GDAX Bot Details');
@@ -118,7 +118,7 @@ describe('Bot Details Tests', function () {
 
         const EC = protractor.ExpectedConditions;
         const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
-        browser.wait(EC.visibilityOf(dashboard), 3000);
+        browser.wait(EC.visibilityOf(dashboard), 5000);
 
         dashboardItems.get(1).click();
         expect(element(by.css('h2')).getText()).toEqual('GDAX Bot Details');
@@ -147,7 +147,7 @@ describe('Bot Details Tests', function () {
 
         const EC = protractor.ExpectedConditions;
         const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
-        browser.wait(EC.visibilityOf(dashboard), 3000);
+        browser.wait(EC.visibilityOf(dashboard), 5000);
 
         dashboardItems.get(1).click();
         expect(element(by.css('h2')).getText()).toEqual('GDAX Bot Details');
@@ -170,7 +170,7 @@ describe('Bot Details Tests', function () {
 
             const EC = protractor.ExpectedConditions;
             const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
-            browser.wait(EC.visibilityOf(dashboard), 3000);
+            browser.wait(EC.visibilityOf(dashboard), 5000);
 
             dashboardItems.get(1).click();
             expect(element(by.css('h2')).getText()).toEqual('GDAX Bot Details');
