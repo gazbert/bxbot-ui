@@ -13,6 +13,8 @@ import {browser, element, by, protractor} from 'protractor';
  */
 describe('Strategy Tests', function () {
 
+    const WAIT_TIMEOUT = 10000;
+
     beforeEach(function () {
         browser.get('');
     });
@@ -24,7 +26,7 @@ describe('Strategy Tests', function () {
         // https://stackoverflow.com/questions/28464604/more-than-one-element-found-for-locator-warning
         const EC = protractor.ExpectedConditions;
         const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
-        browser.wait(EC.visibilityOf(dashboard), 5000);
+        browser.wait(EC.visibilityOf(dashboard), WAIT_TIMEOUT);
 
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Bot Details');
@@ -90,7 +92,7 @@ describe('Strategy Tests', function () {
 
         const EC = protractor.ExpectedConditions;
         const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
-        browser.wait(EC.visibilityOf(dashboard), 5000);
+        browser.wait(EC.visibilityOf(dashboard), WAIT_TIMEOUT);
 
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Bot Details');
@@ -158,7 +160,7 @@ describe('Strategy Tests', function () {
 
         const EC = protractor.ExpectedConditions;
         const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
-        browser.wait(EC.visibilityOf(dashboard), 5000);
+        browser.wait(EC.visibilityOf(dashboard), WAIT_TIMEOUT);
 
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Bot Details');
@@ -234,7 +236,7 @@ describe('Strategy Tests', function () {
 
         const EC = protractor.ExpectedConditions;
         const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
-        browser.wait(EC.visibilityOf(dashboard), 5000);
+        browser.wait(EC.visibilityOf(dashboard), WAIT_TIMEOUT);
 
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Bot Details');
@@ -285,7 +287,7 @@ describe('Strategy Tests', function () {
 
         const EC = protractor.ExpectedConditions;
         const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
-        browser.wait(EC.visibilityOf(dashboard), 5000);
+        browser.wait(EC.visibilityOf(dashboard), WAIT_TIMEOUT);
 
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Bot Details');
@@ -340,7 +342,7 @@ describe('Strategy Tests', function () {
 
         const EC = protractor.ExpectedConditions;
         const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
-        browser.wait(EC.visibilityOf(dashboard), 5000);
+        browser.wait(EC.visibilityOf(dashboard), WAIT_TIMEOUT);
 
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Bot Details');
@@ -368,12 +370,12 @@ describe('Strategy Tests', function () {
 
         // Need to wait for link to become visible...
         const addConfigItemLink = element(by.id('addNewStrategyConfigItemLink_0'));
-        browser.wait(EC.visibilityOf(addConfigItemLink), 5000);
+        browser.wait(EC.visibilityOf(addConfigItemLink), WAIT_TIMEOUT);
         addConfigItemLink.click();
 
         // Wait for new item to panel to become visible...
         const strategyConfigItemName = element(by.id('strategyConfigItemName_0_1'));
-        browser.wait(EC.visibilityOf(strategyConfigItemName), 5000);
+        browser.wait(EC.visibilityOf(strategyConfigItemName), WAIT_TIMEOUT);
 
         const newConfigItemName = 'stop-loss-percentage-trigger';
         strategyConfigItemName.clear();
@@ -425,7 +427,7 @@ describe('Strategy Tests', function () {
 
         const EC = protractor.ExpectedConditions;
         const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
-        browser.wait(EC.visibilityOf(dashboard), 5000);
+        browser.wait(EC.visibilityOf(dashboard), WAIT_TIMEOUT);
 
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Bot Details');
@@ -454,13 +456,13 @@ describe('Strategy Tests', function () {
         // Delete Config Item 2 from Strat 2
         // Need to wait for link + config items to become visible...
         const deleteConfigItemButton = element(by.id('deleteConfigItemButton_1_1'));
-        browser.wait(EC.visibilityOf(deleteConfigItemButton), 5000);
+        browser.wait(EC.visibilityOf(deleteConfigItemButton), WAIT_TIMEOUT);
         deleteConfigItemButton.click();
 
         // Save and check the update worked
         const saveButton = element(by.id('strategySaveButton'));
         saveButton.click();
-        browser.wait(EC.visibilityOf(element(by.id('dashboard'))), 5000);
+        browser.wait(EC.visibilityOf(element(by.id('dashboard'))), WAIT_TIMEOUT);
         dashboardItems.get(3).click();
         tabLinks.get(3).click();
 
@@ -495,7 +497,7 @@ describe('Strategy Tests', function () {
 
         const EC = protractor.ExpectedConditions;
         const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
-        browser.wait(EC.visibilityOf(dashboard), 5000);
+        browser.wait(EC.visibilityOf(dashboard), WAIT_TIMEOUT);
 
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Bot Details');
@@ -542,12 +544,12 @@ describe('Strategy Tests', function () {
 
         // Need to wait for link to become visible...
         const addConfigItemLink = element(by.id('addNewStrategyConfigItemLink_0'));
-        browser.wait(EC.visibilityOf(addConfigItemLink), 5000);
+        browser.wait(EC.visibilityOf(addConfigItemLink), WAIT_TIMEOUT);
         addConfigItemLink.click();
 
         // Wait for new item to panel to become visible...
         const strategyConfigItemName = element(by.id('strategyConfigItemName_0_1'));
-        browser.wait(EC.visibilityOf(strategyConfigItemName), 5000);
+        browser.wait(EC.visibilityOf(strategyConfigItemName), WAIT_TIMEOUT);
 
         const newConfigItemName = 'stop-loss-percentage-tr igger'; // space in name
         strategyConfigItemName.clear();
@@ -596,7 +598,7 @@ describe('Strategy Tests', function () {
 
         const EC = protractor.ExpectedConditions;
         const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
-        browser.wait(EC.visibilityOf(dashboard), 5000);
+        browser.wait(EC.visibilityOf(dashboard), WAIT_TIMEOUT);
 
         dashboardItems.get(3).click();
         expect(element(by.css('h2')).getText()).toEqual('ItBit Bot Details');

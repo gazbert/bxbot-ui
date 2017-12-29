@@ -16,6 +16,8 @@ import {browser, element, by, protractor} from 'protractor';
  */
 describe('Miscellaneous Scenario Tests', function () {
 
+    const WAIT_TIMEOUT = 10000;
+
     beforeEach(function () {
         browser.get('');
     });
@@ -30,7 +32,7 @@ describe('Miscellaneous Scenario Tests', function () {
         // https://stackoverflow.com/questions/28464604/more-than-one-element-found-for-locator-warning
         const EC = protractor.ExpectedConditions;
         const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
-        browser.wait(EC.visibilityOf(dashboard), 5000);
+        browser.wait(EC.visibilityOf(dashboard), WAIT_TIMEOUT);
 
         expect(dashboardItems.count()).toBe(1);
 
