@@ -15,7 +15,7 @@ import {browser, element, by, protractor} from 'protractor';
 describe('Bot Details Tests', function () {
 
     const WAIT_TIMEOUT = 10000;
-    
+
     beforeEach(function () {
         browser.get('');
     });
