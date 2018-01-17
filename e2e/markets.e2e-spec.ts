@@ -26,7 +26,7 @@ describe('Market Tests', function () {
 
         // https://stackoverflow.com/questions/28464604/more-than-one-element-found-for-locator-warning
         const EC = protractor.ExpectedConditions;
-        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
+        const dashboard = element(by.id('dashboard-grid'));
         browser.wait(EC.visibilityOf(dashboard), WAIT_TIMEOUT);
 
         dashboardItems.get(4).click();
@@ -110,7 +110,7 @@ describe('Market Tests', function () {
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
 
         const EC = protractor.ExpectedConditions;
-        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
+        const dashboard = element(by.id('dashboard-grid'));
         browser.wait(EC.visibilityOf(dashboard), WAIT_TIMEOUT);
 
         dashboardItems.get(4).click();
@@ -280,7 +280,7 @@ describe('Market Tests', function () {
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
 
         const EC = protractor.ExpectedConditions;
-        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
+        const dashboard = element(by.id('dashboard-grid'));
         browser.wait(EC.visibilityOf(dashboard), WAIT_TIMEOUT);
 
         dashboardItems.get(4).click();
@@ -333,7 +333,7 @@ describe('Market Tests', function () {
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
 
         const EC = protractor.ExpectedConditions;
-        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
+        const dashboard = element(by.id('dashboard-grid'));
         browser.wait(EC.visibilityOf(dashboard), WAIT_TIMEOUT);
 
         dashboardItems.get(4).click();
@@ -410,7 +410,7 @@ describe('Market Tests', function () {
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
 
         const EC = protractor.ExpectedConditions;
-        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
+        const dashboard = element(by.id('dashboard-grid'));
         browser.wait(EC.visibilityOf(dashboard), WAIT_TIMEOUT);
 
         dashboardItems.get(4).click();

@@ -78,7 +78,7 @@ describe('Dashboard Tests', function () {
 
         // https://stackoverflow.com/questions/28464604/more-than-one-element-found-for-locator-warning
         const EC = protractor.ExpectedConditions;
-        const dashboard = element.all(by.css('app-bxbot-ui-dashboard-item')).first();
+        const dashboard = element(by.id('dashboard-grid'));
         browser.wait(EC.visibilityOf(dashboard), WAIT_TIMEOUT);
 
         expect(dashboardItems.count()).toBe(8);
