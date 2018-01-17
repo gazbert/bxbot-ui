@@ -86,7 +86,10 @@ describe('Engine Tests', function () {
         browser.wait(EC.visibilityOf(dashboard), WAIT_TIMEOUT);
 
         dashboardItems.get(0).click();
-        expect(element(by.css('h2')).getText()).toEqual('Bitstamp Bot Details');
+
+        const title = element(by.css('h2'));
+        browser.wait(EC.visibilityOf(title), WAIT_TIMEOUT);
+        expect(title.getText()).toEqual('Bitstamp Bot Details');
 
         const tabLinks = element.all(by.css('li'));
         tabLinks.get(0).click();
