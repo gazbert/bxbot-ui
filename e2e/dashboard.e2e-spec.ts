@@ -14,7 +14,7 @@ import {browser, element, by, protractor} from 'protractor';
  */
 describe('Dashboard Tests', function () {
 
-    const WAIT_TIMEOUT = 60000;
+    const WAIT_TIMEOUT = 120000;
     const expectedMsg = 'BX-bot Admin Console';
 
     beforeEach(function () {
