@@ -74,46 +74,48 @@ export class InMemoryDataService implements InMemoryDbService {
                 alias: 'GDAX Bot',
                 baseUrl: 'https://tatooine.com/api/v1',
                 username: 'luke',
-                password: 'podrace'
+                password: 'podracer'
             },
             {
                 id: 'gemini-1',
                 alias: 'Gemini Bot',
-                baseUrl: 'https://jakku.com/api/v1',
-                username: 'rey',
-                password: 'force'
-            },            {
+                baseUrl: 'https://corellia.com/api/v1',
+                username: 'han',
+                password: 'blaster'
+            },
+            {
                 id: 'itbit-1',
                 alias: 'ItBit Bot',
-                baseUrl: 'https://jakku.com/api/v1',
-                username: 'rey',
-                password: 'force'
+                baseUrl: 'https://alderaan.com/api/v1',
+                username: 'leah',
+                password: 'rebel'
             },
             {
                 id: 'huobi-1',
                 alias: 'Huobi Bot',
-                baseUrl: 'https://jakku.com/api/v1',
-                username: 'rey',
-                password: 'force'
+                baseUrl: 'https://kashyyyk.com/api/v1',
+                username: 'chewie',
+                password: 'grrrrgghrh'
             },
             {
                 id: 'okcoin-1',
                 alias: 'OKCoin Bot',
-                baseUrl: 'https://jakku.com/api/v1',
-                username: 'rey',
-                password: 'force'
+                baseUrl: 'https://mustafar.com/api/v1',
+                username: 'vader',
+                password: 'sissssster'
             },            {
                 id: 'bitfinex-1',
                 alias: 'Bitfinex Bot',
-                baseUrl: 'https://jakku.com/api/v1',
-                username: 'rey',
-                password: 'force'
-            },            {
+                baseUrl: 'https://dagobah.com/api/v1',
+                username: 'yoda',
+                password: 'wordPassItIs'
+            },
+            {
                 id: 'kraken-1',
                 alias: 'Krkaken Bot',
-                baseUrl: 'https://jakku.com/api/v1',
-                username: 'rey',
-                password: 'force'
+                baseUrl: 'https://starkiller.base.com/api/v1',
+                username: 'finn',
+                password: 'FN-2187'
             }
         ];
 
