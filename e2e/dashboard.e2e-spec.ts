@@ -1,4 +1,4 @@
-import {browser, element, by, protractor} from 'protractor';
+import {browser, by, element, protractor} from 'protractor';
 
 /**
  * Dashboard tests.
@@ -58,11 +58,10 @@ describe('Dashboard Tests', function () {
 
     it('should render Gemini Bot specific link', function () {
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
-        dashboardItems.get(2).click();
-
-        browser.getCurrentUrl().then(function (url) {
-            expect(url).toContain('/bot/gemini-1');
-        });
+        dashboardItems.get(2).click().then(() =>
+            browser.getCurrentUrl().then(function (url) {
+                expect(url).toContain('/bot/gemini-1');
+            }));
     });
 
     it('should stay on Dashboard if user clicks on Dashboard button', function () {
