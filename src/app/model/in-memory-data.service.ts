@@ -59,6 +59,65 @@ export class InMemoryDataService implements InMemoryDbService {
         ];
 
         /**
+         * The Bot configs.
+         */
+        const bots = [
+            {
+                id: 'bitstamp-1',
+                alias: 'Bitstamp Bot',
+                baseUrl: 'https://jakku.com/api/v1',
+                username: 'rey',
+                password: 'force'
+            },
+            {
+                id: 'gdax-1',
+                alias: 'GDAX Bot',
+                baseUrl: 'https://tatooine.com/api/v1',
+                username: 'luke',
+                password: 'podrace'
+            },
+            {
+                id: 'gemini-1',
+                alias: 'Gemini Bot',
+                baseUrl: 'https://jakku.com/api/v1',
+                username: 'rey',
+                password: 'force'
+            },            {
+                id: 'itbit-1',
+                alias: 'ItBit Bot',
+                baseUrl: 'https://jakku.com/api/v1',
+                username: 'rey',
+                password: 'force'
+            },
+            {
+                id: 'huobi-1',
+                alias: 'Huobi Bot',
+                baseUrl: 'https://jakku.com/api/v1',
+                username: 'rey',
+                password: 'force'
+            },
+            {
+                id: 'okcoin-1',
+                alias: 'OKCoin Bot',
+                baseUrl: 'https://jakku.com/api/v1',
+                username: 'rey',
+                password: 'force'
+            },            {
+                id: 'bitfinex-1',
+                alias: 'Bitfinex Bot',
+                baseUrl: 'https://jakku.com/api/v1',
+                username: 'rey',
+                password: 'force'
+            },            {
+                id: 'kraken-1',
+                alias: 'Krkaken Bot',
+                baseUrl: 'https://jakku.com/api/v1',
+                username: 'rey',
+                password: 'force'
+            }
+        ];
+
+        /**
          * The Trading Engines.
          *
          * The botId and the id attributes must have the same value.
@@ -999,6 +1058,6 @@ export class InMemoryDataService implements InMemoryDbService {
             }
         ];
 
-        return {status, engine, exchange, markets, strategies, email_alerts};
+        return {status, bots, engine, exchange, markets, strategies, email_alerts};
     }
 }

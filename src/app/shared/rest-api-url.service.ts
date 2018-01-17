@@ -13,7 +13,7 @@ import {environment} from '../../environments/environment';
 @Injectable()
 export class RestApiUrlService {
 
-    private static REST_API_CONFIG_URL_PATH = '/config/bots/';
+    public static REST_API_CONFIG_URL_PATH = '/config/bots/';
     private static REST_API_RUNTIME_URL_PATH = '/runtime/bots/';
 
     constructor() {
