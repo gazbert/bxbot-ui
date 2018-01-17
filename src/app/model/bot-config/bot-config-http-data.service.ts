@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers} from '@angular/http';
+import {Headers, Http} from '@angular/http';
 import {AuthenticationService} from '../../shared/authentication.service';
 import {RestApiUrlService} from '../../shared/rest-api-url.service';
-
 // Don't forget this else you get runtime error:
 // zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function
 import 'rxjs/add/operator/toPromise';
@@ -39,6 +38,35 @@ export class BotConfigHttpDataService implements BotConfigDataService {
         return this.http.get(BotConfigHttpDataService.ENDPOINT_PATH, {headers: headers})
             .toPromise()
             .then(response => response.json().data as BotConfig[])
+            .catch(this.handleError);
+    }
+
+    updateBotConfig(botId: string, botConfig: BotConfig): Promise<BotConfig> {
+
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + AuthenticationService.getToken()
+        });
+
+        const url = BotConfigHttpDataService.ENDPOINT_PATH + '/' + botId;
+        return this.http
+            .put(url, JSON.stringify(botConfig), {headers: headers})
+            .toPromise()
+            .then(response => response.json().data as BotConfig)
+            .catch(this.handleError);
+    }
+
+    deleteBotConfigById(botId: string): Promise<boolean> {
+
+        const headers = new Headers({
+            'Authorization': 'Bearer ' + AuthenticationService.getToken()
+        });
+
+        const url = BotConfigHttpDataService.ENDPOINT_PATH + '/' + botId;
+        return this.http
+            .delete(url, {headers: headers})
+            .toPromise()
+            .then(response => response.status === 200)
             .catch(this.handleError);
     }
 

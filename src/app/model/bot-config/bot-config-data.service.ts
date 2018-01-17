@@ -10,4 +10,8 @@ import {BotConfig} from './bot-config.model';
 export interface BotConfigDataService {
 
     getAllBotConfig(): Promise<BotConfig[]>;
+
+    updateBotConfig(botId: string, botConfig: BotConfig): Promise<BotConfig>;
+
+    deleteBotConfigById(botId: string): Promise<boolean>;
 }

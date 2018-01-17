@@ -118,7 +118,7 @@ describe('StrategyHttpDataService tests using TestBed + Mock HTTP backend', () =
                 });
         })));
 
-        it('should NOT return Market for 401 response', async(inject([], () => {
+        it('should NOT return Strategy for 401 response', async(inject([], () => {
             const resp = new Response(new ResponseOptions({status: 401, body: {data: ['Bad request - unknown id']}}));
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
             service.updateStrategy('huobi', updatedStrategy)
