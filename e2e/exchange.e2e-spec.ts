@@ -14,7 +14,7 @@ import {browser, by, element, protractor} from 'protractor';
  */
 describe('Exchange Tests', function () {
 
-    const WAIT_TIMEOUT = 20000;
+    const WAIT_TIMEOUT = 30000;
 
     beforeEach(function () {
         browser.get('');

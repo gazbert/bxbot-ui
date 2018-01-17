@@ -13,7 +13,7 @@ import {browser, element, by, protractor} from 'protractor';
  */
 describe('Strategy Tests', function () {
 
-    const WAIT_TIMEOUT = 20000;
+    const WAIT_TIMEOUT = 30000;
 
     beforeEach(function () {
         browser.get('');
