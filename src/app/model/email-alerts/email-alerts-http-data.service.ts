@@ -12,14 +12,6 @@ import 'rxjs/add/operator/toPromise';
 /**
  * HTTP implementation of the Email Alerts Data Service.
  *
- * It demonstrates use of Promises in call responses.
- *
- * We chain the toPromise operator to the Observable result of http.get. It converts the Observable into a Promise
- * which is passed back to the caller.
- *
- * Converting to a promise is a good choice when asking http.get to fetch a single chunk of data - when we receive the
- * data, we're done. A single result in the form of a promise is easy for the calling component to understand/consume.
- *
  * @author gazbert
  */
 @Injectable()
@@ -31,7 +23,7 @@ export class EmailAlertsHttpDataService implements EmailAlertsDataService {
     }
 
     private static handleError(error: any): Promise<any> {
-        console.error('An error occurred', error); // for demo purposes only
+        console.error('An error occurred!', error);
         return Promise.reject(error.message || error);
     }
 
@@ -44,7 +36,6 @@ export class EmailAlertsHttpDataService implements EmailAlertsDataService {
         const url = RestApiUrlService.buildGetConfigEndpointUrl(botId, EmailAlertsHttpDataService.ENDPOINT_PATH);
         return this.http.get(url, {headers: headers})
             .toPromise()
-            // .then(response => response.json().data as EmailAlertsConfig)
             .then(response => {
                 if (isArray(response)) {
                     return response[0] as EmailAlertsConfig; // for in-memory-data-service response

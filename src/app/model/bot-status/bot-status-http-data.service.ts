@@ -17,14 +17,6 @@ import 'rxjs/add/operator/toPromise';
 /**
  * HTTP implementation of the BotStatus Data Service.
  *
- * It demonstrates use of Observables in call responses.
- *
- * An Observable is a stream of events that can be processed with array-like operators.
- * Angular uses the RxJS library to provide basic support for Observables.
- *
- * Observables are useful if you start a request, cancel it, and then make a different request before the server has
- * responded to the first request. This request-cancel-new-request sequence is difficult to implement with Promises.
- *
  * @author gazbert
  */
 @Injectable()
@@ -49,7 +41,6 @@ export class BotStatusHttpDataService implements BotStatusDataService {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Bad response status: ' + res.status);
         }
-
         if (isObject(res)) {
             return res || {};
         } else {

@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers} from '@angular/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Exchange} from '../exchange.model';
 import {ExchangeDataPromiseService} from './exchange-data-promise.service';
-import {AuthenticationService} from '../../../shared/authentication.service';
-import {RestApiUrlService} from '../../../shared/rest-api-url.service';
+import {AuthenticationService, RestApiUrlService} from '../../../shared';
 
 // Don't forget this else you get runtime error:
 // zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function
@@ -27,11 +26,11 @@ export class ExchangeHttpDataPromiseService implements ExchangeDataPromiseServic
 
     private static ENDPOINT_PATH = '/exchange';
 
-    constructor(private http: Http) {
+    constructor(private http: HttpClient) {
     }
 
     private static handleError(error: any): Promise<any> {
-        console.error('An error occurred', error); // for demo purposes only
+        console.error('An error occurred!', error);
         return Promise.reject(error.message || error);
     }
 
@@ -39,14 +38,13 @@ export class ExchangeHttpDataPromiseService implements ExchangeDataPromiseServic
         const url = RestApiUrlService.buildGetConfigEndpointUrl(botId, ExchangeHttpDataPromiseService.ENDPOINT_PATH);
         return this.http.get(url)
             .toPromise()
-            // TODO - upgrade HTTP to get rid of json() stuff + upgrade in-memory-data-service to get rid of data wrapper
-            .then(response => response.json().data as Exchange)
+            .then(response => response as Exchange)
             .catch(ExchangeHttpDataPromiseService.handleError);
     }
 
     updateExchange(botId: string, exchange: Exchange): Promise<Exchange> {
 
-        const headers = new Headers({
+        const headers = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
@@ -55,8 +53,7 @@ export class ExchangeHttpDataPromiseService implements ExchangeDataPromiseServic
         return this.http
             .put(url, JSON.stringify(exchange), {headers: headers})
             .toPromise()
-            // TODO - upgrade HTTP to get rid of json() stuff + upgrade in-memory-data-service to get rid of data wrapper
-            .then(response => response.json().data as Exchange)
+            .then(response => response as Exchange)
             .catch(ExchangeHttpDataPromiseService.handleError);
     }
 }
