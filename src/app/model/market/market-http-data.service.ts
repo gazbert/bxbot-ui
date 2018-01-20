@@ -61,10 +61,22 @@ export class MarketHttpDataService implements MarketDataService {
         });
 
         const url = RestApiUrlService.buildUpdateConfigEndpointUrl(botId, marketId, MarketHttpDataService.ENDPOINT_PATH);
-        return this.http
-            .delete(url, {headers: headers})
-            .toPromise()
-            .then(response => response.status === 200)
-            .catch(MarketHttpDataService.handleError);
+
+        let result;
+        this.http.delete(url, {observe: 'response', headers: headers})
+            .subscribe(resp => {
+                console.log(resp);
+                result = resp.ok;
+            });
+
+        return new Promise((resolve, reject) => {
+            resolve(result);
+        });
+
+        // return this.http
+        //     .delete(url, {headers: headers})
+        //     .toPromise()
+        //     .then(response => response.status === 200)
+        //     .catch(MarketHttpDataService.handleError);
     }
 }

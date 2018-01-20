@@ -91,7 +91,7 @@ export class BotStatusHttpDataService implements BotStatusDataService {
 
     updateBotStatus(bot: BotStatus): Observable<BotStatus> {
 
-        const headers = new Headers({
+        const headers = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
@@ -99,7 +99,7 @@ export class BotStatusHttpDataService implements BotStatusDataService {
         const url = RestApiUrlService.buildRuntimeEndpointUrl(bot.id, BotStatusHttpDataService.ENDPOINT_PATH);
         const body = JSON.stringify(bot);
 
-        return this.http.put(url, body, headers)
+        return this.http.put(url, body, {headers: headers})
             .map(BotStatusHttpDataService.extractData)
             .catch(BotStatusHttpDataService.handleError);
     }
