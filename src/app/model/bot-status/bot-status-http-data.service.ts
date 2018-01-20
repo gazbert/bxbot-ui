@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http, RequestOptions, Response} from '@angular/http';
+import {HttpHeaders, HttpClient} from '@angular/common/http';
 import {BotStatusDataService} from './bot-status-data.service';
 import {AuthenticationService, RestApiUrlService} from '../../shared';
 import {BotStatus} from './bot-status.model';
@@ -32,7 +32,7 @@ export class BotStatusHttpDataService implements BotStatusDataService {
 
     private static ENDPOINT_PATH = '/status';
 
-    constructor(private http: Http) {
+    constructor(private http: HttpClient) {
     }
 
     private static handleError(error: any) {
@@ -49,10 +49,10 @@ export class BotStatusHttpDataService implements BotStatusDataService {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Bad response status: ' + res.status);
         }
-        const body = res.json();
+        const body = res;
 
         if (isObject(body)) { // vs // if (body !== undefined && body !== null) {
-            return body.data || {};
+            return body || {};
         } else {
             return {};
         }
@@ -60,7 +60,7 @@ export class BotStatusHttpDataService implements BotStatusDataService {
 
     getAllBotStatus(): Observable<BotStatus[]> {
 
-        const headers = new Headers({
+        const headers = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
@@ -73,7 +73,7 @@ export class BotStatusHttpDataService implements BotStatusDataService {
 
     getBotStatusById(botId: string): Observable<BotStatus> {
 
-        const headers = new Headers({
+        const headers = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
@@ -81,14 +81,14 @@ export class BotStatusHttpDataService implements BotStatusDataService {
         const url = RestApiUrlService.buildRuntimeEndpointUrl(botId, BotStatusHttpDataService.ENDPOINT_PATH);
         return this.http
             .get(url, {headers: headers})
-            .map((r: Response) => r.json().data as BotStatus)
-            // .map(this.extractData)
+            // .map((r: Response) => r.json().data as BotStatus)
+            .map(BotStatusHttpDataService.extractData)
             .catch(BotStatusHttpDataService.handleError);
     }
 
     getBotStatusByBotName(name: string): Observable<BotStatus[]> {
 
-        const headers = new Headers({
+        const headers = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
@@ -110,9 +110,8 @@ export class BotStatusHttpDataService implements BotStatusDataService {
 
         const url = RestApiUrlService.buildRuntimeEndpointUrl(bot.id, BotStatusHttpDataService.ENDPOINT_PATH);
         const body = JSON.stringify(bot);
-        const options = new RequestOptions({headers: headers});
 
-        return this.http.put(url, body, options)
+        return this.http.put(url, body, headers)
             .map(BotStatusHttpDataService.extractData)
             .catch(BotStatusHttpDataService.handleError);
     }

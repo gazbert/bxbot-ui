@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {HttpModule} from '@angular/http';
 import {AppComponent} from './app.component';
 import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {InMemoryDataService} from './model';
@@ -35,6 +36,7 @@ import {MarketsModule} from './markets/markets.module';
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
+        HttpModule,
 
         // Comment line below out to use 'real' bxbot-ui-server Spring Boot backend
         InMemoryWebApiModule.forRoot(InMemoryDataService,  {put204: false, delete404: true}),
