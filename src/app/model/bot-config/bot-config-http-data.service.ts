@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http} from '@angular/http';
-import {AuthenticationService} from '../../shared/authentication.service';
-import {RestApiUrlService} from '../../shared/rest-api-url.service';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {AuthenticationService, RestApiUrlService} from '../../shared';
 // Don't forget this else you get runtime error:
 // zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function
 import 'rxjs/add/operator/toPromise';
@@ -26,48 +25,54 @@ export class BotConfigHttpDataService implements BotConfigDataService {
 
     private static ENDPOINT_PATH = RestApiUrlService.REST_API_CONFIG_URL_PATH;
 
-    constructor(private http: Http) {
+    constructor(private http: HttpClient) {
     }
 
     getAllBotConfig(): Promise<BotConfig[]> {
 
-        const headers = new Headers({
-            'Authorization': 'Bearer ' + AuthenticationService.getToken()
-        });
+        const headers = new HttpHeaders()
+            .set('Authorization', 'Bearer ' + AuthenticationService.getToken()
+            );
 
         return this.http.get(BotConfigHttpDataService.ENDPOINT_PATH, {headers: headers})
             .toPromise()
-            .then(response => response.json().data as BotConfig[])
+            .then(response => response as BotConfig[])
             .catch(this.handleError);
     }
 
     updateBotConfig(botId: string, botConfig: BotConfig): Promise<BotConfig> {
 
-        const headers = new Headers({
+        const headers = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        const url = BotConfigHttpDataService.ENDPOINT_PATH + '/' + botId;
+        const url = BotConfigHttpDataService.ENDPOINT_PATH + botId;
         return this.http
-            .put(url, JSON.stringify(botConfig), {headers: headers})
+            .put(url, botConfig, {headers: headers})
             .toPromise()
-            .then(response => response.json().data as BotConfig)
+            .then(response => response as BotConfig)
             .catch(this.handleError);
     }
 
     deleteBotConfigById(botId: string): Promise<boolean> {
 
-        const headers = new Headers({
+        const headers = new HttpHeaders({
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
-        const url = BotConfigHttpDataService.ENDPOINT_PATH + '/' + botId;
-        return this.http
-            .delete(url, {headers: headers})
-            .toPromise()
-            .then(response => response.status === 200)
-            .catch(this.handleError);
+        const url = BotConfigHttpDataService.ENDPOINT_PATH + botId;
+
+        let result;
+        this.http.delete(url, {observe: 'response', headers: headers})
+            .subscribe(resp => {
+                console.log(resp);
+                result = resp.ok;
+            });
+
+        return new Promise((resolve, reject) => {
+            resolve(result);
+        });
     }
 
     private handleError(error: any): Promise<any> {

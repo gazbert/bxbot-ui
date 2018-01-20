@@ -1,139 +1,152 @@
-import {MockBackend, MockConnection} from '@angular/http/testing';
-import {Http, HttpModule, Response, ResponseOptions, XHRBackend} from '@angular/http';
+import {HttpClient} from '@angular/common/http';
 import {async, inject, TestBed} from '@angular/core/testing';
 import {BotConfigHttpDataService as BotConfigDataService} from './bot-config-http-data.service';
 import {BotConfig} from './bot-config.model';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 
 /**
  * Tests the BotConfig HTTP Data service using a mocked HTTP backend.
  *
- * TODO - test non 200 OK responses etc from bxbot-ui-server - UI should handle scenario gracefully!
- *
  * @author gazbert
  */
-describe('BotConfigHttpDataService tests using TestBed + Mock HTTP backend', () => {
+describe('BotConfigHttpDataService tests using HttpClientTestingModule', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [HttpModule],
-            providers: [
-                BotConfigDataService,
-                {provide: XHRBackend, useClass: MockBackend}
-            ]
-        }).compileComponents().then(() => {/*done*/
+            imports: [HttpClientTestingModule],
+            providers: [BotConfigDataService]
         });
     }));
 
-    it('should instantiate implementation of BotConfigDataService service when injected',
-        inject([BotConfigDataService], (service: BotConfigDataService) => {
-            expect(service instanceof BotConfigDataService).toBe(true);
-        }));
-
-    it('should instantiate service with "new"', inject([Http], (http: Http) => {
-        expect(http).not.toBeNull('http should be provided');
-        const service = new BotConfigDataService(http);
-        expect(service instanceof BotConfigDataService).toBe(true,
-            'new service should be instance of BotConfigDataService');
+    afterEach(inject([HttpTestingController], (backend: HttpTestingController) => {
+        backend.verify();
     }));
-
-    it('should provide the MockBackend as XHRBackend',
-        inject([XHRBackend], (backend: MockBackend) => {
-            expect(backend).not.toBeNull('MockBackend backend should be provided');
-        }));
 
     describe('when getAllBotConfig() operation called', () => {
 
-        let backend: MockBackend;
+        let backend: HttpTestingController;
         let service: BotConfigDataService;
         let fakeBots: BotConfig[];
-        let response: Response;
 
-        beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
-            backend = be;
+        beforeEach(inject([HttpClient, HttpTestingController], (http: HttpClient, testController: HttpTestingController) => {
+            backend = testController;
             service = new BotConfigDataService(http);
             fakeBots = makeBotConfigData();
-            const options = new ResponseOptions({status: 200, body: {data: fakeBots}});
-            response = new Response(options);
         }));
 
-        it('should return 2 Bot Configs', async(inject([], () => {
-            backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
+        it('should return all Bot Configs on success', async(inject([], () => {
+
             service.getAllBotConfig()
-                .then(botConfigs => expect(botConfigs.length).toBe(2, 'should return 2 Bot Configs'));
+                .then(response => {
+                    expect(response).toBe(fakeBots);
+                });
+
+            backend.expectOne({
+                url: '/config/bots/',
+                method: 'GET'
+            }).flush(fakeBots, {status: 200, statusText: 'Ok'});
+
         })));
 
-        it('should handle returning no matching Bot Configs', async(inject([], () => {
-            const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
-            backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
+        it('should handle returning no Bot Configs', async(inject([], () => {
+
             service.getAllBotConfig()
-                .then(botConfigs => expect(botConfigs.length).toBe(0, 'should have no Bot Configs'));
+                .then(response => {
+                    expect(response).toEqual([]);
+                });
+
+            backend.expectOne({
+                url: '/config/bots/',
+                method: 'GET'
+            }).flush([], {status: 200, statusText: 'Ok'});
+
         })));
     });
 
     describe('when updateBotConfig() operation called for \'gdax-1\'', () => {
 
-        let backend: MockBackend;
+        let backend: HttpTestingController;
         let service: BotConfigDataService;
-        let response: Response;
         let updatedBotConfig: BotConfig;
 
-        beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
+        beforeEach(inject([HttpClient, HttpTestingController], (http: HttpClient, testController: HttpTestingController) => {
 
-            updatedBotConfig = new BotConfig('gdax-1', 'GDAX Bot', 'https://tatooine.com/api/v1', 'luke', 'updatedPassword');
-
-            backend = be;
+            backend = testController;
             service = new BotConfigDataService(http);
-            const options = new ResponseOptions({status: 200, body: {data: updatedBotConfig}});
-            response = new Response(options);
+            updatedBotConfig = new BotConfig('gdax-1', 'GDAX Bot', 'https://tatooine.com/api/v1', 'luke', 'updatedPassword');
         }));
 
-        it('should return updated \'gdax-1\' BotConfig on success', async(inject([], () => {
-            backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
+        it('should return updated BotConfig on success', async(inject([], () => {
+
             service.updateBotConfig('gdax-1', updatedBotConfig)
-                .then(botConfig => {
-                    expect(botConfig).toBe(updatedBotConfig);
+                .then(response => {
+                    expect(response).toBe(updatedBotConfig);
 
                     // paranoia!
-                    expect(botConfig.id).toBe(updatedBotConfig.id);
-                    expect(botConfig.alias).toBe(updatedBotConfig.alias);
-                    expect(botConfig.baseUrl).toBe(updatedBotConfig.baseUrl);
-                    expect(botConfig.username).toBe(updatedBotConfig.username);
-                    expect(botConfig.password).toBe(updatedBotConfig.password);
+                    expect(response.id).toBe(updatedBotConfig.id);
+                    expect(response.alias).toBe(updatedBotConfig.alias);
+                    expect(response.baseUrl).toBe(updatedBotConfig.baseUrl);
+                    expect(response.username).toBe(updatedBotConfig.username);
+                    expect(response.password).toBe(updatedBotConfig.password);
                 });
+
+            backend.expectOne({
+                url: '/config/bots/gdax-1',
+                method: 'PUT'
+            }).flush(updatedBotConfig, {status: 200, statusText: 'Ok'});
         })));
 
-        it('should NOT return BotConfig for 401 response', async(inject([], () => {
-            const resp = new Response(new ResponseOptions({status: 401, body: {data: ['Bad request - unknown id']}}));
-            backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.updateBotConfig('gdax-not-known', updatedBotConfig)
-                .then(botConfig => expect(botConfig.id).not.toBeDefined('should have no BotConfig'));
+        it('should not return BotConfig for unknown botId', async(inject([], () => {
+
+            service.updateBotConfig('unknown-bot-id', updatedBotConfig)
+                .then(response => {
+                    expect(response.id).toBeUndefined();
+                });
+
+            backend.expectOne({
+                url: '/config/bots/unknown-bot-id',
+                method: 'PUT'
+            }).flush({status: 400, statusText: 'Bad Request'});
+
         })));
     });
 
-    describe('when deleteBotConfigById() operation called with \'gdax-1\'', () => {
+    xdescribe('when deleteBotConfigById() operation called with \'gdax-1\'', () => {
 
-        let backend: MockBackend;
+        let backend: HttpTestingController;
         let service: BotConfigDataService;
-        let response: Response;
 
-        beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
-            backend = be;
+        beforeEach(inject([HttpClient, HttpTestingController], (http: HttpClient, testController: HttpTestingController) => {
+            backend = testController;
             service = new BotConfigDataService(http);
-            const options = new ResponseOptions({status: 200});
-            response = new Response(options);
         }));
 
         it('should return status response of \'true\' if successful', async(inject([], () => {
-            backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
+
             service.deleteBotConfigById('gdax-1')
-                .then(status => expect(status).toBe(true));
+                .then(response => {
+                    expect(response).toBe(true);
+                });
+
+            backend.expectOne({
+                url: '/config/bots/gdax-1',
+                method: 'DELETE'
+            }).flush({status: 200, statusText: 'Ok'});
+
         })));
 
-        it('should return status response of \'false\' if NOT successful', async(inject([], () => {
-            const resp = new Response(new ResponseOptions({status: 401}));
-            backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
-            service.deleteBotConfigById('gdax-1-not-known')
-                .then(status => expect(status).toBe(false));
+        it('should return status response of \'false\' if not successful', async(inject([], () => {
+
+            service.deleteBotConfigById('gdax-unknown')
+                .then(response => {
+                    expect(response).toBe(false);
+                });
+
+            backend.expectOne({
+                url: '/config/bots/gdax-unknown',
+                method: 'DELETE'
+            }).flush({status: 400, statusText: 'Bad Request'});
+
         })));
     });
 });
@@ -142,3 +155,4 @@ const makeBotConfigData = () => [
     new BotConfig('bitstamp-1', 'Bitstamp Bot', 'https://jakku.com/api/v1', 'rey', 'force'),
     new BotConfig('gdax-1', 'GDAX Bot', 'https://tatooine.com/api/v1', 'luke', 'podracer')
 ] as BotConfig[];
+
