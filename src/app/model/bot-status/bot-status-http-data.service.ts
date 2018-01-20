@@ -49,10 +49,9 @@ export class BotStatusHttpDataService implements BotStatusDataService {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Bad response status: ' + res.status);
         }
-        const body = res;
 
-        if (isObject(body)) { // vs // if (body !== undefined && body !== null) {
-            return body || {};
+        if (isObject(res)) {
+            return res || {};
         } else {
             return {};
         }
@@ -81,7 +80,6 @@ export class BotStatusHttpDataService implements BotStatusDataService {
         const url = RestApiUrlService.buildRuntimeEndpointUrl(botId, BotStatusHttpDataService.ENDPOINT_PATH);
         return this.http
             .get(url, {headers: headers})
-            // .map((r: Response) => r.json().data as BotStatus)
             .map(BotStatusHttpDataService.extractData)
             .catch(BotStatusHttpDataService.handleError);
     }
@@ -97,7 +95,6 @@ export class BotStatusHttpDataService implements BotStatusDataService {
         return this.http
             .get(url + '/?name=' + name, {headers: headers})
             .map(BotStatusHttpDataService.extractData)
-            // .map((r: Response) => r.json().data as BotStatus[])
             .catch(BotStatusHttpDataService.handleError);
     }
 

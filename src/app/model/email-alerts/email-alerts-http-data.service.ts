@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers} from '@angular/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {EmailAlertsConfig} from './email-alerts.model';
 import {EmailAlertsDataService} from './email-alerts-data.service';
-import {AuthenticationService} from '../../shared/authentication.service';
+import {AuthenticationService, RestApiUrlService} from '../../shared';
 import {isArray, isObject} from 'util';
-import {RestApiUrlService} from '../../shared/rest-api-url.service';
 
 // Don't forget this else you get runtime error:
 // zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function
@@ -28,7 +27,7 @@ export class EmailAlertsHttpDataService implements EmailAlertsDataService {
 
     private static ENDPOINT_PATH = '/email_alerts';
 
-    constructor(private http: Http) {
+    constructor(private http: HttpClient) {
     }
 
     private static handleError(error: any): Promise<any> {
@@ -38,7 +37,7 @@ export class EmailAlertsHttpDataService implements EmailAlertsDataService {
 
     getEmailAlertsConfigByBotId(botId: string): Promise<EmailAlertsConfig> {
 
-        const headers = new Headers({
+        const headers = new HttpHeaders({
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
@@ -47,14 +46,12 @@ export class EmailAlertsHttpDataService implements EmailAlertsDataService {
             .toPromise()
             // .then(response => response.json().data as EmailAlertsConfig)
             .then(response => {
-                // TODO - upgrade HTTP to get rid of json() stuff + upgrade in-memory-data-service to get rid of data wrapper
-                const payload = response.json().data;
-                if (isArray(payload)) {
-                    return payload[0] as EmailAlertsConfig; // for in-memory-data-service response
-                } else if (isObject(payload)) {
-                    return payload as EmailAlertsConfig || {};
+                if (isArray(response)) {
+                    return response[0] as EmailAlertsConfig; // for in-memory-data-service response
+                } else if (isObject(response)) {
+                    return response as EmailAlertsConfig || {};
                 } else {
-                    console.error('Unexpected return body.data type: ' + payload);
+                    console.error('Unexpected return body.data type: ' + response);
                     return {};
                 }
             })
@@ -63,7 +60,7 @@ export class EmailAlertsHttpDataService implements EmailAlertsDataService {
 
     updateEmailAlertsConfig(botId: string, emailAlertsConfig: EmailAlertsConfig): Promise<EmailAlertsConfig> {
 
-        const headers = new Headers({
+        const headers = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
@@ -72,8 +69,7 @@ export class EmailAlertsHttpDataService implements EmailAlertsDataService {
         return this.http
             .put(url, JSON.stringify(emailAlertsConfig), {headers: headers})
             .toPromise()
-            // TODO - upgrade HTTP to get rid of json() stuff + upgrade in-memory-data-service to get rid of data wrapper
-            .then(response => response.json().data as EmailAlertsConfig)
+            .then(response => response as EmailAlertsConfig)
             .catch(EmailAlertsHttpDataService.handleError);
     }
 }

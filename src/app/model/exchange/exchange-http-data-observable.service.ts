@@ -1,12 +1,11 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers, Response, RequestOptions} from '@angular/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Exchange} from './exchange.model';
 import {ExchangeDataObservableService} from './exchange-data-observable.service';
-import {AuthenticationService} from '../../shared/authentication.service';
+import {AuthenticationService, RestApiUrlService} from '../../shared';
 import {Observable} from 'rxjs/Observable';
 import {isObject} from 'rxjs/util/isObject';
 import {isArray} from 'util';
-import {RestApiUrlService} from '../../shared/rest-api-url.service';
 
 // Most RxJS operators are not included in Angular's base Observable implementation.
 // The base implementation includes only what Angular itself requires.
@@ -35,7 +34,7 @@ export class ExchangeHttpDataObservableService implements ExchangeDataObservable
 
     private static ENDPOINT_PATH = '/exchange';
 
-    constructor(private http: Http) {
+    constructor(private http: HttpClient) {
     }
 
     private static handleError(error: any) {
@@ -51,27 +50,24 @@ export class ExchangeHttpDataObservableService implements ExchangeDataObservable
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Bad response status: ' + res.status);
         }
-        const body = res.json();
-
-        // TODO - upgrade HTTP to get rid of json() stuff + upgrade in-memory-data-service to get rid of data wrapper
-        if (isObject(body)) {
-            if (isArray(body.data)) {
-                return body.data[0]; // for in-memory-data-service response
-            } else if (isObject(body.data)) {
-                return body.data || {};
+        if (isObject(res)) {
+            if (isArray(res)) {
+                return res[0]; // for in-memory-data-service response
+            } else if (isObject(res)) {
+                return res || {};
             } else {
-                console.error('Unexpected return body.data type: ' + body.data);
+                console.error('Unexpected return body.data type: ' + res);
                 return {};
             }
         } else {
-            console.error('Unexpected return body type: ' + body);
+            console.error('Unexpected return body type: ' + res);
             return {};
         }
     }
 
     getExchangeByBotId(botId: string): Observable<Exchange> {
 
-        const headers = new Headers({
+        const headers = new HttpHeaders({
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
@@ -83,16 +79,15 @@ export class ExchangeHttpDataObservableService implements ExchangeDataObservable
 
     updateExchange(botId: string, exchange: Exchange): Observable<Exchange> {
 
-        const headers = new Headers({
+        const headers = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
         const url = RestApiUrlService.buildUpdateConfigEndpointUrl(botId, exchange.id, ExchangeHttpDataObservableService.ENDPOINT_PATH);
         const body = JSON.stringify(exchange);
-        const options = new RequestOptions({headers: headers});
 
-        return this.http.put(url, body, options)
+        return this.http.put(url, body, {headers: headers})
             .map(ExchangeHttpDataObservableService.extractData)
             .catch(ExchangeHttpDataObservableService.handleError);
     }

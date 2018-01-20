@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers} from '@angular/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Strategy} from './strategy.model';
 import {StrategyDataService} from './strategy-data.service';
-import {AuthenticationService} from '../../shared/authentication.service';
-import {RestApiUrlService} from '../../shared/rest-api-url.service';
+import {AuthenticationService, RestApiUrlService} from '../../shared';
 
 // Don't forget this else you get runtime error:
 // zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function
@@ -27,25 +26,25 @@ export class StrategyHttpDataService implements StrategyDataService {
 
     private static ENDPOINT_PATH = '/strategies';
 
-    constructor(private http: Http) {
+    constructor(private http: HttpClient) {
     }
 
     getAllStrategiesForBotId(botId: string): Promise<Strategy[]> {
 
-        const headers = new Headers({
+        const headers = new HttpHeaders({
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
         const url = RestApiUrlService.buildGetConfigEndpointUrl(botId, StrategyHttpDataService.ENDPOINT_PATH);
         return this.http.get(url, {headers: headers})
             .toPromise()
-            .then(response => response.json().data as Strategy[])
+            .then(response => response as Strategy[])
             .catch(this.handleError);
     }
 
     updateStrategy(botId: string, strategy: Strategy): Promise<Strategy> {
 
-        const headers = new Headers({
+        const headers = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
@@ -54,13 +53,13 @@ export class StrategyHttpDataService implements StrategyDataService {
         return this.http
             .put(url, JSON.stringify(strategy), {headers: headers})
             .toPromise()
-            .then(response => response.json().data as Strategy)
+            .then(response => response as Strategy)
             .catch(this.handleError);
     }
 
     deleteStrategyById(botId: string, strategyId: string): Promise<boolean> {
 
-        const headers = new Headers({
+        const headers = new HttpHeaders({
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 

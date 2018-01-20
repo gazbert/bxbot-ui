@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers} from '@angular/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Market} from './market.model';
 import {MarketDataService} from './market-data.service';
-import {AuthenticationService} from '../../shared/authentication.service';
-import {RestApiUrlService} from '../../shared/rest-api-url.service';
+import {AuthenticationService, RestApiUrlService} from '../../shared';
 
 // Don't forget this else you get runtime error:
 // zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function
@@ -27,25 +26,25 @@ export class MarketHttpDataService implements MarketDataService {
 
     private static ENDPOINT_PATH = '/markets';
 
-    constructor(private http: Http) {
+    constructor(private http: HttpClient) {
     }
 
     getAllMarketsForBotId(botId: string): Promise<Market[]> {
 
-        const headers = new Headers({
+        const headers = new HttpHeaders({
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
         const url = RestApiUrlService.buildGetConfigEndpointUrl(botId, MarketHttpDataService.ENDPOINT_PATH);
         return this.http.get(url, {headers: headers})
             .toPromise()
-            .then(response => response.json().data as Market[])
+            .then(response => response as Market[])
             .catch(this.handleError);
     }
 
     updateMarket(botId: string, market: Market): Promise<Market> {
 
-        const headers = new Headers({
+        const headers = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
@@ -54,13 +53,13 @@ export class MarketHttpDataService implements MarketDataService {
         return this.http
             .put(url, JSON.stringify(market), {headers: headers})
             .toPromise()
-            .then(response => response.json().data as Market)
+            .then(response => response as Market)
             .catch(this.handleError);
     }
 
     deleteMarketById(botId: string, marketId: string): Promise<boolean> {
 
-        const headers = new Headers({
+        const headers = new HttpHeaders({
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 

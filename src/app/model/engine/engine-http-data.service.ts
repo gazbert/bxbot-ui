@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http} from '@angular/http';
-import {AuthenticationService} from '../../shared/authentication.service';
+import {HttpHeaders, HttpClient} from '@angular/common/http';
+import {AuthenticationService, RestApiUrlService} from '../../shared';
 import {EngineDataService} from './engine-data.service';
 import {Engine} from './engine.model';
 import {isArray, isObject} from 'util';
-import {RestApiUrlService} from '../../shared/rest-api-url.service';
 // Don't forget this else you get runtime error:
 // zone.js:355 Unhandled Promise rejection: this.http.get(...).toPromise is not a function
 import 'rxjs/add/operator/toPromise';
@@ -27,7 +26,7 @@ export class EngineHttpDataService implements EngineDataService {
 
     private static ENDPOINT_PATH = '/engine';
 
-    constructor(private http: Http) {
+    constructor(private http: HttpClient) {
     }
 
     private static handleError(error: any): Promise<any> {
@@ -37,7 +36,7 @@ export class EngineHttpDataService implements EngineDataService {
 
     getEngineByBotId(botId: string): Promise<Engine> {
 
-        const headers = new Headers({
+        const headers = new HttpHeaders({
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
 
@@ -45,15 +44,12 @@ export class EngineHttpDataService implements EngineDataService {
         return this.http.get(url, {headers: headers})
             .toPromise()
             .then(response => {
-
-                // TODO - upgrade HTTP to get rid of json() stuff + upgrade in-memory-data-service to get rid of data wrapper
-                const payload = response.json().data;
-                if (isArray(payload)) {
-                    return payload[0] as Engine; // for in-memory-data-service response
-                } else if (isObject(payload)) {
-                    return payload as Engine || {};
+                if (isArray(response)) {
+                    return response[0] as Engine; // for in-memory-data-service response
+                } else if (isObject(response)) {
+                    return response as Engine || {};
                 } else {
-                    console.error('Unexpected return body.data type: ' + payload);
+                    console.error('Unexpected return body.data type: ' + response);
                     return {};
                 }
             })
@@ -62,7 +58,7 @@ export class EngineHttpDataService implements EngineDataService {
 
     updateEngine(botId: string, engine: Engine): Promise<Engine> {
 
-        const headers = new Headers({
+        const headers = new HttpHeaders({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + AuthenticationService.getToken()
         });
@@ -71,8 +67,7 @@ export class EngineHttpDataService implements EngineDataService {
         return this.http
             .put(url, JSON.stringify(engine), {headers: headers})
             .toPromise()
-            // TODO - upgrade HTTP to get rid of json() stuff + upgrade in-memory-data-service to get rid of data wrapper
-            .then(response => response.json().data as Engine)
+            .then(response => response as Engine)
             .catch(EngineHttpDataService.handleError);
     }
 }
