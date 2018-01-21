@@ -13,7 +13,7 @@ import {environment} from '../../environments/environment';
 @Injectable()
 export class RestApiUrlService {
 
-    public static REST_API_CONFIG_URL_PATH = '/config/bots/';
+    private static REST_API_CONFIG_URL_PATH = '/config/bots/';
     private static REST_API_RUNTIME_URL_PATH = '/runtime/bots/';
 
     constructor() {
@@ -25,6 +25,16 @@ export class RestApiUrlService {
             configEndpointUri = environment.restApiBaseUrl + RestApiUrlService.REST_API_CONFIG_URL_PATH + botId + endpoint;
         } else {
             configEndpointUri = environment.restApiBaseUrl + endpoint + '?botId=' + botId;
+        }
+        return configEndpointUri;
+    }
+
+    public static buildGetAllConfigEndpointUrl(botId: string, endpoint: string): string {
+        let configEndpointUri;
+        if (environment.production) {
+            configEndpointUri = environment.restApiBaseUrl + RestApiUrlService.REST_API_CONFIG_URL_PATH + botId + endpoint;
+        } else {
+            configEndpointUri = environment.restApiBaseUrl + endpoint;
         }
         return configEndpointUri;
     }

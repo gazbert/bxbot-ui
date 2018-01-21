@@ -1,8 +1,8 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {async, inject, TestBed} from '@angular/core/testing';
+import {HttpClient} from '@angular/common/http';
 import {BotConfigHttpDataService as BotConfigDataService} from './bot-config-http-data.service';
 import {BotConfig} from './bot-config.model';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 
 /**
  * Tests the BotConfig HTTP Data service using a mocked HTTP backend.
@@ -42,7 +42,7 @@ describe('BotConfigHttpDataService tests using HttpClientTestingModule', () => {
                 });
 
             backend.expectOne({
-                url: '/config/bots/',
+                url: 'app/bots',
                 method: 'GET'
             }).flush(fakeBots, {status: 200, statusText: 'Ok'});
 
@@ -56,7 +56,7 @@ describe('BotConfigHttpDataService tests using HttpClientTestingModule', () => {
                 });
 
             backend.expectOne({
-                url: '/config/bots/',
+                url: 'app/bots',
                 method: 'GET'
             }).flush([], {status: 200, statusText: 'Ok'});
 
@@ -91,9 +91,10 @@ describe('BotConfigHttpDataService tests using HttpClientTestingModule', () => {
                 });
 
             backend.expectOne({
-                url: '/config/bots/gdax-1',
+                url: 'app/bots/gdax-1',
                 method: 'PUT'
             }).flush(updatedBotConfig, {status: 200, statusText: 'Ok'});
+
         })));
 
         it('should not return BotConfig for unknown botId', async(inject([], () => {
@@ -104,7 +105,7 @@ describe('BotConfigHttpDataService tests using HttpClientTestingModule', () => {
                 });
 
             backend.expectOne({
-                url: '/config/bots/unknown-bot-id',
+                url: 'app/bots/unknown-bot-id',
                 method: 'PUT'
             }).flush({status: 400, statusText: 'Bad Request'});
 
@@ -129,7 +130,7 @@ describe('BotConfigHttpDataService tests using HttpClientTestingModule', () => {
                 });
 
             backend.expectOne({
-                url: '/config/bots/gdax-1',
+                url: 'app/bots/gdax-1',
                 method: 'DELETE'
             }).flush({status: 200, statusText: 'Ok'});
 
@@ -143,7 +144,7 @@ describe('BotConfigHttpDataService tests using HttpClientTestingModule', () => {
                 });
 
             backend.expectOne({
-                url: '/config/bots/gdax-unknown',
+                url: 'app/bots/gdax-unknown',
                 method: 'DELETE'
             }).flush({status: 400, statusText: 'Bad Request'});
 
