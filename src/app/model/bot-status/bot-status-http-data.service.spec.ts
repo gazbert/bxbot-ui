@@ -26,19 +26,19 @@ describe('BotStatusHttpDataService tests using HttpClientTestingModule', () => {
 
         let backend: HttpTestingController;
         let service: BotStatusDataService;
-        let fakeBotStatuses: BotStatus[];
+        let botStatuses: BotStatus[];
 
         beforeEach(inject([HttpClient, HttpTestingController], (http: HttpClient, testController: HttpTestingController) => {
             backend = testController;
             service = new BotStatusDataService(http);
-            fakeBotStatuses = makeBotStatusData();
+            botStatuses = makeBotStatusData();
         }));
 
         it('should return all Bot Statuses ', async(inject([], () => {
 
             service.getAllBotStatus()
                 .subscribe(botStatuses => {
-                    expect(botStatuses.length).toBe(fakeBotStatuses.length, 'should have returned 3 Bots');
+                    expect(botStatuses.length).toBe(botStatuses.length, 'should have returned 3 Bots');
 
                     // paranoia!
                     expect(botStatuses[0].id).toBe('bitstamp-1');
@@ -49,7 +49,7 @@ describe('BotStatusHttpDataService tests using HttpClientTestingModule', () => {
             backend.expectOne({
                 url: 'app/status',
                 method: 'GET'
-            }).flush(fakeBotStatuses, {status: 200, statusText: 'Ok'});
+            }).flush(botStatuses, {status: 200, statusText: 'Ok'});
 
         })));
 
@@ -73,20 +73,20 @@ describe('BotStatusHttpDataService tests using HttpClientTestingModule', () => {
 
         let backend: HttpTestingController;
         let service: BotStatusDataService;
-        let fakeBotStatuses: BotStatus[];
+        let botStatuses: BotStatus[];
         const GDAX_BOT_IDX = 1;
 
         beforeEach(inject([HttpClient, HttpTestingController], (http: HttpClient, testController: HttpTestingController) => {
             backend = testController;
             service = new BotStatusDataService(http);
-            fakeBotStatuses = makeBotStatusData();
+            botStatuses = makeBotStatusData();
         }));
 
         it('should return GDAX BotStatus', async(inject([], () => {
 
             service.getBotStatusById('gdax-2')
                 .subscribe(botStatus => {
-                    expect(botStatus).toEqual(fakeBotStatuses[GDAX_BOT_IDX]);
+                    expect(botStatus).toEqual(botStatuses[GDAX_BOT_IDX]);
 
                     // paranoia!
                     expect(botStatus.id).toBe('gdax-2');
@@ -95,7 +95,7 @@ describe('BotStatusHttpDataService tests using HttpClientTestingModule', () => {
             backend.expectOne({
                 url: 'app/status/gdax-2',
                 method: 'GET'
-            }).flush(fakeBotStatuses[GDAX_BOT_IDX], {status: 200, statusText: 'Ok'});
+            }).flush(botStatuses[GDAX_BOT_IDX], {status: 200, statusText: 'Ok'});
 
         })));
 
@@ -118,13 +118,13 @@ describe('BotStatusHttpDataService tests using HttpClientTestingModule', () => {
 
         let backend: HttpTestingController;
         let service: BotStatusDataService;
-        let fakeBotStatuses: BotStatus[];
+        let botStatuses: BotStatus[];
         const GDAX_BOT_IDX = 1;
 
         beforeEach(inject([HttpClient, HttpTestingController], (http: HttpClient, testController: HttpTestingController) => {
             backend = testController;
             service = new BotStatusDataService(http);
-            fakeBotStatuses = makeBotStatusData();
+            botStatuses = makeBotStatusData();
         }));
 
         it('should have returned GDAX BotStatus', async(inject([], () => {
@@ -132,7 +132,7 @@ describe('BotStatusHttpDataService tests using HttpClientTestingModule', () => {
             service.getBotStatusByBotName('GDAX')
                 .subscribe(botStatuses => {
                     expect(botStatuses.length).toEqual(1);
-                    expect(botStatuses[0]).toEqual(fakeBotStatuses[GDAX_BOT_IDX]);
+                    expect(botStatuses[0]).toEqual(botStatuses[GDAX_BOT_IDX]);
 
                     // paranoia!
                     expect(botStatuses[0].id).toBe('gdax-2');
@@ -141,7 +141,7 @@ describe('BotStatusHttpDataService tests using HttpClientTestingModule', () => {
             backend.expectOne({
                 url: 'app/status/?name=GDAX',
                 method: 'GET'
-            }).flush([fakeBotStatuses[GDAX_BOT_IDX]], {status: 200, statusText: 'Ok'});
+            }).flush([botStatuses[GDAX_BOT_IDX]], {status: 200, statusText: 'Ok'});
 
         })));
 

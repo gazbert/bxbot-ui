@@ -26,25 +26,25 @@ describe('BotConfigHttpDataService tests using HttpClientTestingModule', () => {
 
         let backend: HttpTestingController;
         let service: BotConfigDataService;
-        let fakeBots: BotConfig[];
+        let botConfigs: BotConfig[];
 
         beforeEach(inject([HttpClient, HttpTestingController], (http: HttpClient, testController: HttpTestingController) => {
             backend = testController;
             service = new BotConfigDataService(http);
-            fakeBots = makeBotConfigData();
+            botConfigs = makeBotConfigData();
         }));
 
         it('should return all Bot Configs on success', async(inject([], () => {
 
             service.getAllBotConfig()
                 .then(response => {
-                    expect(response).toBe(fakeBots);
+                    expect(response).toBe(botConfigs);
                 });
 
             backend.expectOne({
                 url: 'app/bots',
                 method: 'GET'
-            }).flush(fakeBots, {status: 200, statusText: 'Ok'});
+            }).flush(botConfigs, {status: 200, statusText: 'Ok'});
 
         })));
 
@@ -70,7 +70,6 @@ describe('BotConfigHttpDataService tests using HttpClientTestingModule', () => {
         let updatedBotConfig: BotConfig;
 
         beforeEach(inject([HttpClient, HttpTestingController], (http: HttpClient, testController: HttpTestingController) => {
-
             backend = testController;
             service = new BotConfigDataService(http);
             updatedBotConfig = new BotConfig('gdax-1', 'GDAX Bot', 'https://tatooine.com/api/v1', 'luke', 'updatedPassword');
@@ -107,7 +106,7 @@ describe('BotConfigHttpDataService tests using HttpClientTestingModule', () => {
             backend.expectOne({
                 url: 'app/bots/unknown-bot-id',
                 method: 'PUT'
-            }).flush({status: 400, statusText: 'Bad Request'});
+            }).flush({status: 404, statusText: 'Not Found'});
 
         })));
     });
@@ -146,7 +145,7 @@ describe('BotConfigHttpDataService tests using HttpClientTestingModule', () => {
             backend.expectOne({
                 url: 'app/bots/gdax-unknown',
                 method: 'DELETE'
-            }).flush({status: 400, statusText: 'Bad Request'});
+            }).flush({status: 404, statusText: 'Not Found'});
 
         })));
     });
