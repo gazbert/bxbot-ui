@@ -1,9 +1,9 @@
-import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {HttpClient} from '@angular/common/http';
 import {async, inject, TestBed} from '@angular/core/testing';
 import {EngineHttpDataService as EngineDataService} from './engine-http-data.service';
 import {Engine} from './engine.model';
-import {BotConfigHttpDataService as BotConfigDataService} from "../bot-config";
+import {BotConfigHttpDataService as BotConfigDataService} from '../bot-config';
 
 /**
  * Tests the Engine HTTP Data service using a Mock HTTP backend.
@@ -99,7 +99,7 @@ describe('EngineHttpDataService tests using HttpClientTestingModule', () => {
 
         it('should NOT return Bot Engine for unknown engineId', async(inject([], () => {
 
-            let unknownEngine = new Engine('unknown-id', 'Bitstamp v2', 10, 'BTC', 1.54);
+            const unknownEngine = new Engine('unknown-id', 'Bitstamp v2', 10, 'BTC', 1.54);
 
             service.updateEngine('unknown-id', unknownEngine)
                 .then(response => {

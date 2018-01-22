@@ -37,13 +37,13 @@ describe('BotStatusHttpDataService tests using HttpClientTestingModule', () => {
         it('should return all Bot Statuses ', async(inject([], () => {
 
             service.getAllBotStatus()
-                .subscribe(botStatuses => {
-                    expect(botStatuses.length).toBe(botStatuses.length, 'should have returned 3 Bots');
+                .subscribe(response => {
+                    expect(response.length).toBe(botStatuses.length, 'should have returned 3 Bots');
 
                     // paranoia!
-                    expect(botStatuses[0].id).toBe('bitstamp-1');
-                    expect(botStatuses[1].id).toBe('gdax-2');
-                    expect(botStatuses[2].id).toBe('gemini-3');
+                    expect(response[0].id).toBe('bitstamp-1');
+                    expect(response[1].id).toBe('gdax-2');
+                    expect(response[2].id).toBe('gemini-3');
                 });
 
             backend.expectOne({
@@ -56,8 +56,8 @@ describe('BotStatusHttpDataService tests using HttpClientTestingModule', () => {
         it('should handle returning no Bot Statues', async(inject([], () => {
 
             service.getAllBotStatus()
-                .subscribe(botStatuses => {
-                    expect(botStatuses.length).toBe(0, 'should have returned 3 Bots');
+                .subscribe(response => {
+                    expect(response.length).toBe(0, 'should have returned 3 Bots');
                 });
 
             backend.expectOne({
@@ -148,8 +148,8 @@ describe('BotStatusHttpDataService tests using HttpClientTestingModule', () => {
         it('should handle returning no BotStatus', async(inject([], () => {
 
             service.getBotStatusByBotName('UNKNOWN')
-                .subscribe(botStatuses => {
-                    expect(botStatuses.length).toEqual(0);
+                .subscribe(response => {
+                    expect(response.length).toEqual(0);
                 });
 
             backend.expectOne({
