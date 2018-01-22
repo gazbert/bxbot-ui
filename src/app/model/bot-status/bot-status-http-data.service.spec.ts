@@ -130,12 +130,12 @@ describe('BotStatusHttpDataService tests using HttpClientTestingModule', () => {
         it('should have returned GDAX BotStatus', async(inject([], () => {
 
             service.getBotStatusByBotName('GDAX')
-                .subscribe(botStatuses => {
-                    expect(botStatuses.length).toEqual(1);
-                    expect(botStatuses[0]).toEqual(botStatuses[GDAX_BOT_IDX]);
+                .subscribe(response => {
+                    expect(response.length).toEqual(1);
+                    expect(response[0]).toEqual(botStatuses[GDAX_BOT_IDX]);
 
                     // paranoia!
-                    expect(botStatuses[0].id).toBe('gdax-2');
+                    expect(response[0].id).toBe('gdax-2');
                 });
 
             backend.expectOne({
