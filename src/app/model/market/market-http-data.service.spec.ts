@@ -1,4 +1,4 @@
-import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {async, inject, TestBed} from '@angular/core/testing';
 import {HttpClient} from '@angular/common/http';
 import {MarketHttpDataService as MarketDataService} from './market-http-data.service';
@@ -136,7 +136,7 @@ describe('MarketHttpDataService tests using HttpClientTestingModule', () => {
 
         xit('should return status response of \'true\' if successful', async(inject([], () => {
 
-            service.deleteMarketById('huobi-1','huobi_btc_usd')
+            service.deleteMarketById('huobi-1', 'huobi_btc_usd')
                 .then(response => {
                     expect(response).toEqual(true);
                 });
