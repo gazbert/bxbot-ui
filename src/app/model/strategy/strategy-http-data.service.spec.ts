@@ -28,8 +28,8 @@ describe('StrategyHttpDataService tests using HttpClientTestingModule', () => {
         let service: StrategyDataService;
         let strategies: Strategy[];
 
-        beforeEach(inject([HttpClient, HttpTestingController], (http: HttpClient, HttpTestingController: HttpTestingController) => {
-            backend = HttpTestingController;
+        beforeEach(inject([HttpClient, HttpTestingController], (http: HttpClient, httpTestingController: HttpTestingController) => {
+            backend = httpTestingController;
             service = new StrategyDataService(http);
             strategies = makeStrategyData();
         }));
