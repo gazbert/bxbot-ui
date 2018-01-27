@@ -12,7 +12,7 @@ import {browser, by, element, protractor} from 'protractor';
  *
  * @author gazbert
  */
-fdescribe('Dashboard Tests', function () {
+xdescribe('Dashboard Tests', function () {
 
     const WAIT_TIMEOUT = 300000;
     const expectedMsg = 'BX-bot Admin Console';
@@ -23,6 +23,12 @@ fdescribe('Dashboard Tests', function () {
 
     it('should redirect Dashboard if user does not enter a URL path', function () {
         browser.getCurrentUrl().then(function (url) {
+
+            // https://stackoverflow.com/questions/28464604/more-than-one-element-found-for-locator-warning
+            const EC = protractor.ExpectedConditions;
+            const dashboard = element(by.id('dashboardItems'));
+            browser.wait(EC.visibilityOf(dashboard), WAIT_TIMEOUT);
+
             expect(url).toContain('/dashboard');
         });
     });
@@ -43,6 +49,12 @@ fdescribe('Dashboard Tests', function () {
 
         // so we'll resort to CSS locator instead
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+
+        // https://stackoverflow.com/questions/28464604/more-than-one-element-found-for-locator-warning
+        const EC = protractor.ExpectedConditions;
+        const dashboard = element(by.id('dashboardItems'));
+        browser.wait(EC.visibilityOf(dashboard), WAIT_TIMEOUT);
+
         expect(dashboardItems.count()).toBe(8);
     });
 
