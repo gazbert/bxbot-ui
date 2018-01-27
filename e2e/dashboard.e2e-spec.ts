@@ -12,7 +12,7 @@ import {browser, by, element, protractor} from 'protractor';
  *
  * @author gazbert
  */
-xdescribe('Dashboard Tests', function () {
+fdescribe('Dashboard Tests', function () {
 
     const WAIT_TIMEOUT = 300000;
     const expectedMsg = 'BX-bot Admin Console';
@@ -26,7 +26,7 @@ xdescribe('Dashboard Tests', function () {
 
             // https://stackoverflow.com/questions/28464604/more-than-one-element-found-for-locator-warning
             const EC = protractor.ExpectedConditions;
-            const dashboard = element(by.id('dashboardItems'));
+            const dashboard = element(by.id('dashboard-grid'));
             browser.wait(EC.visibilityOf(dashboard), WAIT_TIMEOUT);
 
             expect(url).toContain('/dashboard');
@@ -52,7 +52,7 @@ xdescribe('Dashboard Tests', function () {
 
         // https://stackoverflow.com/questions/28464604/more-than-one-element-found-for-locator-warning
         const EC = protractor.ExpectedConditions;
-        const dashboard = element(by.id('dashboardItems'));
+        const dashboard = element(by.id('dashboard-grid'));
         browser.wait(EC.visibilityOf(dashboard), WAIT_TIMEOUT);
 
         expect(dashboardItems.count()).toBe(8);
