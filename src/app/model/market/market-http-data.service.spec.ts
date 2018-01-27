@@ -2,7 +2,7 @@ import {HttpClientTestingModule, HttpTestingController} from '@angular/common/ht
 import {async, inject, TestBed} from '@angular/core/testing';
 import {HttpClient} from '@angular/common/http';
 import {MarketHttpDataService as MarketDataService} from './market-http-data.service';
-import {Strategy, OptionalConfig} from '../strategy';
+import {OptionalConfig, Strategy} from '../strategy';
 import {Market} from './market.model';
 
 /**
@@ -134,7 +134,7 @@ describe('MarketHttpDataService tests using HttpClientTestingModule', () => {
             service = new MarketDataService(http);
         }));
 
-        xit('should return status response of \'true\' if successful', async(inject([], () => {
+        it('should return status response of \'true\' if successful', async(inject([], () => {
 
             service.deleteMarketById('huobi-1', 'huobi_btc_usd')
                 .then(response => {
@@ -148,12 +148,15 @@ describe('MarketHttpDataService tests using HttpClientTestingModule', () => {
 
         })));
 
-        xit('should return status response of \'false\' if NOT successful', async(inject([], () => {
+        it('should return status response of \'false\' if NOT successful', async(inject([], () => {
 
             service.deleteMarketById('huobi-1', 'gdax-unknown')
-                .then(response => {
-                    expect(response).toEqual(false);
-                });
+                .then(() => {
+                        fail('Should have failed with 404 response');
+                    },
+                    (error) => {
+                        expect(error).toBe('Bad response status: 404');
+                    });
 
             backend.expectOne({
                 url: 'app/markets/gdax-unknown',

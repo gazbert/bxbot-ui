@@ -26,6 +26,13 @@ export class StrategyHttpDataService implements StrategyDataService {
         return Promise.reject(error.message || error);
     }
 
+    private static extractData(res: Response) {
+        if (res.status < 200 || res.status >= 300) {
+            throw new Error('Bad response status: ' + res.status);
+        }
+        return true;
+    }
+
     getAllStrategiesForBotId(botId: string): Promise<Strategy[]> {
 
         const headers = new HttpHeaders({
@@ -48,7 +55,7 @@ export class StrategyHttpDataService implements StrategyDataService {
 
         const url = RestApiUrlService.buildUpdateConfigEndpointUrl(botId, strategy.id, StrategyHttpDataService.ENDPOINT_PATH);
         return this.http
-            .put(url, JSON.stringify(strategy), {headers: headers})
+            .put(url, strategy, {headers: headers})
             .toPromise()
             .then(response => response as Strategy)
             .catch(StrategyHttpDataService.handleError);
@@ -62,21 +69,9 @@ export class StrategyHttpDataService implements StrategyDataService {
 
         const url = RestApiUrlService.buildUpdateConfigEndpointUrl(botId, strategyId, StrategyHttpDataService.ENDPOINT_PATH);
 
-        let result;
-        this.http.delete(url, {observe: 'response', headers: headers})
-            .subscribe(resp => {
-                console.log(resp);
-                result = resp.ok;
-            });
-
-        return new Promise((resolve, reject) => {
-            resolve(result);
-        });
-
-        // return this.http
-        //     .delete(url, {headers: headers})
-        //     .toPromise()
-        //     .then(response => response.status === 200)
-        //     .catch(StrategyHttpDataService.handleError);
+        return this.http.delete(url, {headers: headers})
+            .map(StrategyHttpDataService.extractData)
+            .catch(StrategyHttpDataService.handleError)
+            .toPromise();
     }
 }
