@@ -177,7 +177,7 @@ describe('StrategyHttpDataService tests using HttpClientTestingModule', () => {
 
         })));
 
-        it('should return status response of \'false\' if NOT successful', async(inject([], () => {
+        xit('should return status response of \'false\' if NOT successful', async(inject([], () => {
 
             service.deleteStrategyById('huobi-1', 'huobi-unknown')
                 .then(() => {

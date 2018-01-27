@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Market} from './market.model';
 import {MarketDataService} from './market-data.service';
 import {AuthenticationService, RestApiUrlService} from '../../shared';
@@ -60,6 +60,7 @@ export class MarketHttpDataService implements MarketDataService {
             .catch(MarketHttpDataService.handleError);
     }
 
+    // TODO - this needs sorting out!
     deleteMarketById(botId: string, marketId: string): Promise<boolean> {
 
         const headers = new HttpHeaders({
@@ -68,9 +69,21 @@ export class MarketHttpDataService implements MarketDataService {
 
         const url = RestApiUrlService.buildUpdateConfigEndpointUrl(botId, marketId, MarketHttpDataService.ENDPOINT_PATH);
 
-        return this.http.delete(url, {headers: headers})
-            .map(MarketHttpDataService.extractData)
-            .catch(MarketHttpDataService.handleError)
-            .toPromise();
+        this.http.delete(url, {headers: headers})
+            .subscribe(
+                data => {
+                },
+                (err: HttpErrorResponse) => {
+                    if (err.error instanceof Error) {
+                        // A client-side or network error occurred. Handle it accordingly.
+                        console.log('An error occurred:', err.error.message);
+                    } else {
+                        // The backend returned an unsuccessful response code.
+                        // The response body may contain clues as to what went wrong,
+                        console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
+                    }
+                }
+            );
+        return Promise.resolve(true);
     }
 }

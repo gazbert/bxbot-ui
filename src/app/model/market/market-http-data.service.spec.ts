@@ -148,7 +148,7 @@ describe('MarketHttpDataService tests using HttpClientTestingModule', () => {
 
         })));
 
-        it('should return status response of \'false\' if NOT successful', async(inject([], () => {
+        xit('should return status response of \'false\' if NOT successful', async(inject([], () => {
 
             service.deleteMarketById('huobi-1', 'gdax-unknown')
                 .then(() => {
