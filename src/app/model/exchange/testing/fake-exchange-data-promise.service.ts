@@ -1,5 +1,5 @@
 import {Exchange, NetworkConfig, OptionalConfig} from '../exchange.model';
-import {ExchangeDataPromiseService} from '../promise/exchange-data-promise.service';
+import {ExchangeDataPromiseService} from '../promise';
 
 /**
  * Fake Exchange data service (Promise flavour) backend for testing.

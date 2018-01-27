@@ -57,7 +57,7 @@ describe('BotStatusHttpDataService tests using HttpClientTestingModule', () => {
 
             service.getAllBotStatus()
                 .subscribe(response => {
-                    expect(response.length).toBe(0, 'should have returned 3 Bots');
+                    expect(response.length).toBe(0, 'should have returned 0 Bots');
                 });
 
             backend.expectOne({
@@ -101,15 +101,18 @@ describe('BotStatusHttpDataService tests using HttpClientTestingModule', () => {
 
         it('should handle returning no BotStatus', async(inject([], () => {
 
-            service.getBotStatusById('gdax-unknown')
-                .subscribe(botStatus => {
-                    expect(botStatus.id).toBeUndefined();
-                });
+            expect(service.getBotStatusById('gdax-unknown')
+                .subscribe(() => {
+                        fail('Should have failed with 404 response');
+                    },
+                    (error) => {
+                        expect(error).toBe('Http failure response for app/status/gdax-unknown: 404 Not Found');
+                    }));
 
             backend.expectOne({
                 url: 'app/status/gdax-unknown',
                 method: 'GET'
-            }).flush([], {status: 200, statusText: 'Ok'});
+            }).flush([], {status: 404, statusText: 'Not Found'});
 
         })));
     });

@@ -56,14 +56,17 @@ describe('ExchangeHttpDataPromiseService tests using HttpClientTestingModule', (
         it('should handle returning no Exchange', async(inject([], () => {
 
             service.getExchangeByBotId('gdax-unknown')
-                .then(response => {
-                    expect(response.name).toBeUndefined();
-                });
+                .then(() => {
+                        fail('Should have failed with 404 response');
+                    },
+                    (error) => {
+                        expect(error).toBe('Http failure response for app/exchange?botId=gdax-unknown: 404 Not Found');
+                    });
 
             backend.expectOne({
                 url: 'app/exchange?botId=gdax-unknown',
                 method: 'GET'
-            }).flush([], {status: 200, statusText: 'Ok'});
+            }).flush([], {status: 404, statusText: 'Not Found'});
 
         })));
     });
@@ -123,7 +126,7 @@ describe('ExchangeHttpDataPromiseService tests using HttpClientTestingModule', (
 
         })));
 
-        it('should NOT return Exchange for unknown exchangeId', async(inject([], () => {
+        it('should NOT return updated Bitstamp Exchange for unknown exchangeId', async(inject([], () => {
 
             const unknownExchange = new Exchange('unknown-exchange-id', 'Bitstamp v2',
                 'com.gazbert.bxbot.exchanges.BitstampExchangeAdapterV2',
