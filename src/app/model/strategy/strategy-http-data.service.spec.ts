@@ -179,7 +179,7 @@ describe('StrategyHttpDataService tests using HttpClientTestingModule', () => {
 
         it('should return status response of \'false\' if NOT successful', async(inject([], () => {
 
-            service.deleteStrategyById('huobi-1', 'gdax-unknown')
+            service.deleteStrategyById('huobi-1', 'huobi-unknown')
                 .then(() => {
                         fail('Should have failed with 404 response');
                     },
@@ -188,7 +188,7 @@ describe('StrategyHttpDataService tests using HttpClientTestingModule', () => {
                     });
 
             backend.expectOne({
-                url: 'app/strategies/gdax-unknown',
+                url: 'app/strategies/huobi-unknown',
                 method: 'DELETE'
             }).flush({status: 404, statusText: 'Not Found'});
 
