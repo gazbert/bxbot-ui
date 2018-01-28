@@ -58,7 +58,7 @@ export class EmailAlertsHttpDataService implements EmailAlertsDataService {
 
         const url = RestApiUrlService.buildUpdateConfigEndpointUrl(botId, emailAlertsConfig.id, EmailAlertsHttpDataService.ENDPOINT_PATH);
         return this.http
-            .put(url, JSON.stringify(emailAlertsConfig), {headers: headers})
+            .put(url, emailAlertsConfig, {headers: headers})
             .toPromise()
             .then(response => response as EmailAlertsConfig)
             .catch(EmailAlertsHttpDataService.handleError);
