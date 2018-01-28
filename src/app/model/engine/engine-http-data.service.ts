@@ -57,7 +57,7 @@ export class EngineHttpDataService implements EngineDataService {
 
         const url = RestApiUrlService.buildUpdateConfigEndpointUrl(botId, engine.id, EngineHttpDataService.ENDPOINT_PATH);
         return this.http
-            .put(url, JSON.stringify(engine), {headers: headers})
+            .put(url, engine, {headers: headers})
             .toPromise()
             .then(response => response as Engine)
             .catch(EngineHttpDataService.handleError);

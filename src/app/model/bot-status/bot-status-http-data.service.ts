@@ -97,9 +97,8 @@ export class BotStatusHttpDataService implements BotStatusDataService {
         });
 
         const url = RestApiUrlService.buildRuntimeEndpointUrl(bot.id, BotStatusHttpDataService.ENDPOINT_PATH);
-        const body = JSON.stringify(bot);
 
-        return this.http.put(url, body, {headers: headers})
+        return this.http.put(url, bot, {headers: headers})
             .map(BotStatusHttpDataService.extractData)
             .catch(BotStatusHttpDataService.handleError);
     }
