@@ -76,6 +76,12 @@ fdescribe('Dashboard Tests', function () {
 
     it('should render Gemini Bot specific link', function () {
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
+
+        // https://stackoverflow.com/questions/28464604/more-than-one-element-found-for-locator-warning
+        const EC = protractor.ExpectedConditions;
+        const dashboard = element(by.id('dashboard-grid'));
+        browser.wait(EC.visibilityOf(dashboard), WAIT_TIMEOUT);
+
         dashboardItems.get(2).click().then(() =>
             browser.getCurrentUrl().then(function (url) {
                 expect(url).toContain('/bot/gemini-1');
