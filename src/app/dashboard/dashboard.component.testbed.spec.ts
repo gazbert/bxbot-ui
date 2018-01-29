@@ -9,9 +9,7 @@ import {DashboardModule} from './dashboard.module';
 import {FakeBotStatusDataService, SOME_FAKE_OBSERVABLE_BOTS} from '../model/bot-status/testing';
 import {BotStatusHttpDataService} from '../model/bot-status';
 import {addMatchers, click} from '../../../testing';
-import {EngineHttpDataService as EngineDataService} from "../model/engine/engine-http-data.service";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {BotConfigHttpDataService as BotConfigDataService} from "../model/bot-config";
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 class RouterStub {
     navigateByUrl(url: string) {
