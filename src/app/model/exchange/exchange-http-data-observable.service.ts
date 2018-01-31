@@ -7,15 +7,6 @@ import {Observable} from 'rxjs/Observable';
 import {isObject} from 'rxjs/util/isObject';
 import {isArray} from 'util';
 
-// Most RxJS operators are not included in Angular's base Observable implementation.
-// The base implementation includes only what Angular itself requires.
-// If you want more RxJS features, you need to explicitly import rxjs operators, else you get runtime error, e.g.
-// 'Failed: this.http.put(...).map is not a function'
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/toPromise';
-
 /**
  * HTTP implementation of the Exchange Data Service.
  *
@@ -85,9 +76,8 @@ export class ExchangeHttpDataObservableService implements ExchangeDataObservable
         });
 
         const url = RestApiUrlService.buildUpdateConfigEndpointUrl(botId, exchange.id, ExchangeHttpDataObservableService.ENDPOINT_PATH);
-        const body = JSON.stringify(exchange);
 
-        return this.http.put(url, body, {headers: headers})
+        return this.http.put(url, exchange, {headers: headers})
             .map(ExchangeHttpDataObservableService.extractData)
             .catch(ExchangeHttpDataObservableService.handleError);
     }
