@@ -11,7 +11,7 @@ import {browser, element, by, protractor} from 'protractor';
  *
  * @author gazbert
  */
-fdescribe('Strategy Tests', function () {
+describe('Strategy Tests', function () {
 
     const WAIT_TIMEOUT = 300000;
 
