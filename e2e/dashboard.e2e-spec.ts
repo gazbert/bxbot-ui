@@ -12,7 +12,7 @@ import {browser, by, element, protractor} from 'protractor';
  *
  * @author gazbert
  */
-fdescribe('Dashboard Tests', function () {
+describe('Dashboard Tests', function () {
 
     const WAIT_TIMEOUT = 300000;
     const expectedMsg = 'BX-bot Admin Console';

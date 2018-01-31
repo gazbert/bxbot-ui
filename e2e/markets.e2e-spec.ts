@@ -12,7 +12,7 @@ import {browser, element, by, protractor} from 'protractor';
  *
  * @author gazbert
  */
-fdescribe('Market Tests', function () {
+describe('Market Tests', function () {
 
     const WAIT_TIMEOUT = 300000;
 
