@@ -60,7 +60,6 @@ export class StrategyHttpDataService implements StrategyDataService {
             .catch(StrategyHttpDataService.handleError);
     }
 
-    // TODO - this needs sorting out!
     deleteStrategyById(botId: string, strategyId: string): Promise<boolean> {
 
         const headers = new HttpHeaders({
@@ -68,22 +67,9 @@ export class StrategyHttpDataService implements StrategyDataService {
         });
 
         const url = RestApiUrlService.buildUpdateConfigEndpointUrl(botId, strategyId, StrategyHttpDataService.ENDPOINT_PATH);
-
-        this.http.delete(url, {headers: headers})
-            .subscribe(
-                data => {
-                },
-                (err: HttpErrorResponse) => {
-                    if (err.error instanceof Error) {
-                        // A client-side or network error occurred. Handle it accordingly.
-                        console.log('An error occurred:', err.error.message);
-                    } else {
-                        // The backend returned an unsuccessful response code.
-                        // The response body may contain clues as to what went wrong,
-                        console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
-                    }
-                }
-            );
-        return Promise.resolve(true);
+        return this.http.delete(url, {headers: headers})
+            .toPromise()
+            .then(() => Promise.resolve(true))
+            .catch(StrategyHttpDataService.handleError);
     }
 }

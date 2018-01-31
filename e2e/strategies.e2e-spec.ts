@@ -282,8 +282,7 @@ describe('Strategy Tests', function () {
         expect(element(by.id('strategyClassname_1')).isPresent()).toBe(false);
     });
 
-    // FIXME - broken after migration to HttpClient + latest Protractor
-    xit('should NOT delete Strategy if currently being used by a Market', function () {
+    it('should NOT delete Strategy if currently being used by a Market', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
 
