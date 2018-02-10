@@ -14,7 +14,7 @@ import {browser, element, by, protractor} from 'protractor';
  *
  * @author gazbert
  */
-xdescribe('Miscellaneous Scenario Tests', function () {
+describe('Miscellaneous Scenario Tests', function () {
 
     const WAIT_TIMEOUT = 300000;
 
