@@ -15,7 +15,7 @@ exports.config = {
   capabilities: {
       'browserName': 'chrome',
       'chromeOptions': {
-          args: ['--disable-browser-side-navigation']
+          args: [ "--headless", "--disable-gpu", "--window-size=800,600" ]
       }
   },
   directConnect: true,
