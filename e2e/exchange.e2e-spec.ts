@@ -12,7 +12,7 @@ import {browser, by, element, protractor} from 'protractor';
  *
  * @author gazbert
  */
-describe('Exchange Tests', function () {
+fdescribe('Exchange Tests', function () {
 
     const WAIT_TIMEOUT = 300000;
 
@@ -188,7 +188,7 @@ describe('Exchange Tests', function () {
     });
 
     // FIXME - broken after migration to HttpClient + latest Protractor
-    xit('should add new Error Code and save it', function () {
+    it('should add new Error Code and save it', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
 
@@ -288,8 +288,7 @@ describe('Exchange Tests', function () {
         expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe('Connection refused');
     });
 
-    // FIXME - broken after migration to HttpClient + latest Protractor
-    xit('should add new Error Message and save it', function () {
+    it('should add new Error Message and save it', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
 
@@ -343,8 +342,7 @@ describe('Exchange Tests', function () {
         expect(element(by.id('errorMessage_2')).getAttribute('value')).toBe('Connection reset by peer');
     });
 
-    // FIXME - broken after migration to HttpClient + latest Protractor
-    xit('should delete Error Message and save change', function () {
+    it('should delete Error Message and save change', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
 
@@ -389,8 +387,7 @@ describe('Exchange Tests', function () {
         expect(element(by.id('errorMessage_1')).isPresent()).toBe(false); // gone!
     });
 
-    // FIXME - broken after migration to HttpClient + latest Protractor
-    xit('should add new Optional Config Item and save it', function () {
+    it('should add new Optional Config Item and save it', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
 
@@ -459,8 +456,7 @@ describe('Exchange Tests', function () {
         expect(element(by.id('exchangeConfigItemValue_0')).getAttribute('value')).toBe('0.25');
     });
 
-    // FIXME - broken after migration to HttpClient + latest Protractor
-    xit('should delete Optional Config Item and save change', function () {
+    it('should delete Optional Config Item and save change', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
 
@@ -521,8 +517,7 @@ describe('Exchange Tests', function () {
         expect(element(by.id('exchangeConfigItemValue_1')).isPresent()).toBe(false); // gone!
     });
 
-    // FIXME - broken after migration to HttpClient + latest Protractor
-    xit('should NOT save Exchange fields if there are validation errors', function () {
+    it('should NOT save Exchange fields if there are validation errors', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
 
