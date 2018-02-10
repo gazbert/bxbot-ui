@@ -421,8 +421,7 @@ describe('Strategy Tests', function () {
         expect(element(by.id('strategyConfigItemValue_1_2')).getAttribute('value')).toBe('9');
     });
 
-    // FIXME - Error: Timeout - Async callback was not invoked within timeout specified by jasmine.DEFAULT_TIMEOUT_INTERVAL.
-    xit('should delete Optional Config Item and save change', function () {
+    it('should delete Optional Config Item and save change', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
 
@@ -454,20 +453,22 @@ describe('Strategy Tests', function () {
         const optionalStrategyConfigButton = element(by.id('optionalStrategyConfigButton_1'));
         optionalStrategyConfigButton.click();
 
-        // Delete Config Item 2 from Strat 2
+        // Delete Config Item 1 from Strat 2
         // Need to wait for link + config items to become visible...
-        const deleteConfigItemButton = element(by.id('deleteConfigItemButton_1_1'));
+        const deleteConfigItemButton = element(by.id('deleteConfigItemButton_1_0'));
         browser.wait(EC.visibilityOf(deleteConfigItemButton), WAIT_TIMEOUT);
         deleteConfigItemButton.click();
 
         // Save and check the update worked
         const saveButton = element(by.id('strategySaveButton'));
+        browser.wait(EC.visibilityOf(saveButton), WAIT_TIMEOUT);
         saveButton.click();
+
         browser.wait(EC.visibilityOf(element(by.id('dashboard'))), WAIT_TIMEOUT);
         dashboardItems.get(3).click();
         tabLinks.get(3).click();
 
-        // Strat 1 - the same + 1 new config item
+        // Strat 1 - the same
         expect(element(by.id('strategyName_0')).getAttribute('value')).toBe('Long Scalper');
         expect(element(by.id('strategyDescription_0')).getAttribute('value'))
             .toBe('Scalping strategy that buys low and sells high.');
@@ -476,17 +477,19 @@ describe('Strategy Tests', function () {
         expect(element(by.id('strategyConfigItemName_0_0')).getAttribute('value')).toBe('min-percentage-gain');
         expect(element(by.id('strategyConfigItemValue_0_0')).getAttribute('value')).toBe('1.0');
 
-        // Strat 2 - unchanged
+        // Strat 2 - optional config item 1 gone
         expect(element(by.id('strategyName_1')).getAttribute('value')).toBe('MACD Indicator');
         expect(element(by.id('strategyDescription_1')).getAttribute('value'))
             .toBe('MACD Indicator algo for deciding when to enter and exit trades.');
         expect(element(by.id('strategyClassname_1')).getAttribute('value'))
             .toBe('com.gazbert.bxbot.strategies.MacdStrategy');
 
-        expect(element(by.id('strategyConfigItemName_1_0')).getAttribute('value')).toBe('ema-short-interval');
-        expect(element(by.id('strategyConfigItemValue_1_0')).getAttribute('value')).toBe('12');
+        // Deleted!
+        // expect(element(by.id('strategyConfigItemName_1_0')).getAttribute('value')).toBe('ema-short-interval');
+        // expect(element(by.id('strategyConfigItemValue_1_0')).getAttribute('value')).toBe('12');
 
-        // ema-long-interval deleted
+        expect(element(by.id('strategyConfigItemName_1_0')).getAttribute('value')).toBe('ema-long-interval');
+        expect(element(by.id('strategyConfigItemValue_1_0')).getAttribute('value')).toBe('26');
 
         expect(element(by.id('strategyConfigItemName_1_1')).getAttribute('value')).toBe('signal-line');
         expect(element(by.id('strategyConfigItemValue_1_1')).getAttribute('value')).toBe('9');
