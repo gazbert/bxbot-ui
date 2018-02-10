@@ -181,8 +181,7 @@ describe('Market Tests', function () {
         expect(element(by.id('strategy_1')).getAttribute('value')).toBe('1: Long Scalper');
     });
 
-    // FIXME - broken after migration to HttpClient + latest Protractor
-    xit('should add new Market and save it', function () {
+    it('should add new Market and save it', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
 
@@ -406,8 +405,7 @@ describe('Market Tests', function () {
         expect(element(by.id('strategy_1')).getAttribute('value')).toBe('1: Long Scalper');
     });
 
-    // FIXME - broken after migration to HttpClient + latest Protractor
-    xit('should NOT save new Market when Market Name already in use', function () {
+    it('should NOT save new Market when Market Name already in use', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
 
