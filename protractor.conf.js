@@ -1,6 +1,10 @@
 // Protractor configuration file, see link for more information
 // https://github.com/angular/protractor/blob/master/lib/config.ts
 
+// gazbert:
+// args: ['--disable-browser-side-navigation'] is needed because of:
+// https://bugs.chromium.org/p/chromedriver/issues/detail?id=2239
+
 const { SpecReporter } = require('jasmine-spec-reporter');
 
 exports.config = {
@@ -9,7 +13,10 @@ exports.config = {
     './e2e/**/*.e2e-spec.ts'
   ],
   capabilities: {
-    'browserName': 'chrome'
+      'browserName': 'chrome',
+      'chromeOptions': {
+          args: ['--disable-browser-side-navigation']
+      }
   },
   directConnect: true,
   baseUrl: 'http://localhost:4200/',

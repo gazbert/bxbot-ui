@@ -187,7 +187,6 @@ describe('Exchange Tests', function () {
         expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe('Connection refused');
     });
 
-    // FIXME - broken after migration to HttpClient + latest Protractor
     it('should add new Error Code and save it', function () {
 
         const dashboardItems = element.all(by.css('app-bxbot-ui-dashboard-item'));
