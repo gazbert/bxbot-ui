@@ -213,6 +213,7 @@ describe('Exchange Tests', function () {
 
         // Add new Error Code
         const addErrorCodeLink = element(by.id('addNewErrorCodeLink'));
+        browser.wait(EC.elementToBeClickable(addErrorCodeLink), WAIT_TIMEOUT);
         addErrorCodeLink.click();
 
         const errorCode = element(by.id('errorCode_2'));
@@ -480,6 +481,7 @@ describe('Exchange Tests', function () {
         expect(element(by.id('errorMessage_1')).getAttribute('value')).toBe('Connection refused');
 
         const optionalExchangeConfigButton = element(by.id('optionalExchangeConfigButton'));
+        browser.wait(EC.visibilityOf(optionalExchangeConfigButton), WAIT_TIMEOUT);
         optionalExchangeConfigButton.click();
 
         // Delete Config Item 2
