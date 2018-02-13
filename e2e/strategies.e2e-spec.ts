@@ -451,6 +451,7 @@ describe('Strategy Tests', function () {
 
         // Access Strat 2 optional config
         const optionalStrategyConfigButton = element(by.id('optionalStrategyConfigButton_1'));
+        browser.wait(EC.visibilityOf(optionalStrategyConfigButton), WAIT_TIMEOUT);
         optionalStrategyConfigButton.click();
 
         // Delete Config Item 1 from Strat 2
