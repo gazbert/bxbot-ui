@@ -24,6 +24,7 @@ import {AuthenticationService, CanActivateAuthGuard} from './shared';
 import {EngineModule} from './engine/engine.module';
 import {SettingsModule} from './settings/settings.module';
 import {MarketsModule} from './markets/markets.module';
+import {BotConfigHttpDataService} from './model/bot-config';
 
 /**
  * BX-bot UI main module.
@@ -63,6 +64,7 @@ import {MarketsModule} from './markets/markets.module';
         StrategyHttpDataService,
         EmailAlertsHttpDataService,
         EngineHttpDataService,
+        BotConfigHttpDataService,
         AuthenticationService,
         CanActivateAuthGuard
     ],

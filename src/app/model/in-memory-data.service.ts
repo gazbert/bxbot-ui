@@ -112,7 +112,7 @@ export class InMemoryDataService implements InMemoryDbService {
             },
             {
                 id: 'kraken-1',
-                alias: 'Krkaken Bot',
+                alias: 'Kraken Bot',
                 baseUrl: 'https://starkiller.base.com/api/v1',
                 username: 'finn',
                 password: 'FN-2187'

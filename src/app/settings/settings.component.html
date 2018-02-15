@@ -1,23 +1,77 @@
 <!--
-    Template-driven version of Settings form.
+ Template-driven version of the Settings form.
  -->
-<div *ngIf="uiVersion" class="container module-bootstrap">
-    <h2>Admin Console Settings</h2>
-    <form *ngIf="active" #settingsForm="ngForm" novalidate (ngSubmit)="save(settingsForm.valid)">
-
-        <!-- UI Version -->
+<div *ngIf="bots">
+    <form *ngIf="active" #strategiesForm="ngForm" novalidate (ngSubmit)="save(strategiesForm.valid)">
         <div class="row">
-            <div class="form-group col-sm-6">
-                <label for="uiVersion">Version</label>
-                <input [(ngModel)]="uiVersion" name="uiVersion"
-                       id="uiVersion" class="form-control" required #botName="ngModel" disabled>
-            </div>
-        </div>
+            <div class="col-sm-12">
+                <div *ngFor="let bot of bots; let i=index;"
+                     class="panel panel-default">
+                    <div class="panel-heading">
+                        <span>Bot {{i + 1}}</span>
+                        <span id="deleteBotButton_{{i}}" class="glyphicon glyphicon-remove pull-right"
+                              *ngIf="canBeDeleted()"
+                              (click)="deleteBot(bots[i])"></span>
+                    </div>
+                    <div class="panel-body">
 
-        <div class="row" id="settingsDetails">
-            <div class="form-group col-sm-6">
-                <div class="well">
-                    A new panel for managing which bots are displayed in the console will go here.
+                        <!-- Bot Id -->
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <label for="botId_{{i}}">Bot Id</label>
+                                <input [(ngModel)]="bots[i].id"
+                                       class="form-control" id="botId_{{i}}"
+                                       name="botId_{{i}}" #botId="ngModel"
+                                       required maxlength="50" pattern="[a-zA-Z0-9_\- ]*"/>
+                                <div id="invalidBotId_{{i}}"
+                                     *ngIf="formErrors['botId_' + i].length > 0"
+                                     class="alert alert-danger">
+                                    {{ formErrors['botId_' + i] }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Alias -->
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <label for="alias_{{i}}">Alias</label>
+                                <input [(ngModel)]="bots[i].alias"
+                                       class="form-control" id="alias_{{i}}"
+                                       name="alias_{{i}}" #alias="ngModel"
+                                       required maxlength="50" pattern="[a-zA-Z0-9_\- ]*"/>
+                                <div id="invalidAlias_{{i}}"
+                                     *ngIf="formErrors['alias_' + i].length > 0"
+                                     class="alert alert-danger">
+                                    {{ formErrors['alias_' + i] }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--&lt;!&ndash; Strategy Class Name &ndash;&gt;-->
+                        <!--<div class="row">-->
+                            <!--<div class="col-sm-6 form-group">-->
+                                <!--<label for="strategyClassname_{{i}}">Class Name</label>-->
+                                <!--<input [(ngModel)]="strategies[i].className"-->
+                                       <!--name="strategyClassname_{{i}}"-->
+                                       <!--placeholder="com.my.MyTradingStrategyClass" id="strategyClassname_{{i}}"-->
+                                       <!--class="form-control" required maxlength="120"-->
+                                       <!--#strategyClassname="ngModel"-->
+                                       <!--pattern="([a-zA-Z_$][a-zA-Z0-9_$]*\.)*[a-zA-Z_$][a-zA-Z0-9_$]*"/>-->
+                                <!--<div id="invalidStrategyClassname_{{i}}"-->
+                                     <!--*ngIf="formErrors['strategyClassname_' + i].length > 0"-->
+                                     <!--class="alert alert-danger">-->
+                                    <!--{{ formErrors['strategyClassname_' + i] }}-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                    </div>
+                </div>
+                <div class="margin-20">
+                    <i class="glyphicon glyphicon-plus pull-left glyphicon-padding"></i>
+                    <a id="addBotLink" (click)="addBot()" style="cursor: default">
+                        Add Bot
+                    </a>
                 </div>
             </div>
         </div>
@@ -26,10 +80,14 @@
             <hr>
         </div>
         <div>
-            <!-- Must have type for button else Chrome reloads entire app on Cancel click!
-                 http://stackoverflow.com/questions/38120756/angular2-router-navigate-refresh-page
+            <!--
+             Must have type for button else Chrome reloads entire app on Cancel click!
+             http://stackoverflow.com/questions/38120756/angular2-router-navigate-refresh-page
              -->
-            <button id="settingsCancelButton" type="button" (click)="cancel()" class="btn btn-default">Cancel</button>
+            <button id="botCancelButton" type="button" (click)="cancel()" class="btn btn-default">Cancel</button>
+            <button id="botSaveButton" class="btn btn-primary">Save</button>
         </div>
     </form>
+
 </div>
+
