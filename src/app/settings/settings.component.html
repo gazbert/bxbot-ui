@@ -47,23 +47,21 @@
                             </div>
                         </div>
 
-                        <!--&lt;!&ndash; Strategy Class Name &ndash;&gt;-->
-                        <!--<div class="row">-->
-                            <!--<div class="col-sm-6 form-group">-->
-                                <!--<label for="strategyClassname_{{i}}">Class Name</label>-->
-                                <!--<input [(ngModel)]="strategies[i].className"-->
-                                       <!--name="strategyClassname_{{i}}"-->
-                                       <!--placeholder="com.my.MyTradingStrategyClass" id="strategyClassname_{{i}}"-->
-                                       <!--class="form-control" required maxlength="120"-->
-                                       <!--#strategyClassname="ngModel"-->
-                                       <!--pattern="([a-zA-Z_$][a-zA-Z0-9_$]*\.)*[a-zA-Z_$][a-zA-Z0-9_$]*"/>-->
-                                <!--<div id="invalidStrategyClassname_{{i}}"-->
-                                     <!--*ngIf="formErrors['strategyClassname_' + i].length > 0"-->
-                                     <!--class="alert alert-danger">-->
-                                    <!--{{ formErrors['strategyClassname_' + i] }}-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
+                        <!-- Base URL -->
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <label for="baseUrl_{{i}}">Base URL</label>
+                                <input [(ngModel)]="bots[i].baseUrl"
+                                       class="form-control" id="baseUrl_{{i}}"
+                                       name="baseUrl_{{i}}" #baseUrl="ngModel"
+                                       required maxlength="100" pattern="[a-zA-Z0-9_/-:]*"/>
+                                <div id="invalidBaseUrl_{{i}}"
+                                     *ngIf="formErrors['baseUrl_' + i].length > 0"
+                                     class="alert alert-danger">
+                                    {{ formErrors['baseUrl_' + i] }}
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>

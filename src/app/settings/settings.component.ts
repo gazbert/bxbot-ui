@@ -30,13 +30,19 @@ export class SettingsComponent implements OnInit, AfterViewChecked {
             'required': 'Bot Id is required.',
             'maxlength': 'Bot Id max length is 50 characters.',
             'pattern': 'Bot Id must be alphanumeric and can only include the following special characters: _ -',
-            'duplicateId': 'Bot Id already in use. Please choose another.',
+            'duplicateId': 'Bot Id already in use. Please choose another.'
         },
         'alias': {
             'required': 'Alias is required.',
             'maxlength': 'Alias max length is 50 characters.',
             'pattern': 'Alias must be alphanumeric and can only include the following special characters: _ -',
-            'duplicateAlias': 'Alias already in use. Please choose another.',
+            'duplicateAlias': 'Alias already in use. Please choose another.'
+        },
+        'baseUrl': {
+            'required': 'Base URL is required.',
+            'maxlength': 'Base URL max length is 100 characters.',
+            'pattern': 'Base URL must be alphanumeric and can only include the following special characters: _ -',
+            'duplicateId': 'Bot Id already in use. Please choose another.'
         },
         'strategyDescription': {
             'maxlength': 'Description max length is 120 characters.'
@@ -163,7 +169,7 @@ export class SettingsComponent implements OnInit, AfterViewChecked {
         for (let i = 0; i < this.bots.length; i++) {
             this.formErrors['botId_' + i] = '';
             this.formErrors['alias_' + i] = '';
-            this.formErrors['strategyClassname_' + i] = '';
+            this.formErrors['baseUrl_' + i] = '';
         }
     }
 
