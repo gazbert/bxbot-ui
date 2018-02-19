@@ -83,7 +83,7 @@ describe('BotConfigHttpDataService tests using HttpClientTestingModule', () => {
 
                     // paranoia!
                     expect(response.id).toBe(updatedBotConfig.id);
-                    expect(response.alias).toBe(updatedBotConfig.alias);
+                    expect(response.name).toBe(updatedBotConfig.name);
                     expect(response.baseUrl).toBe(updatedBotConfig.baseUrl);
                     expect(response.username).toBe(updatedBotConfig.username);
                     expect(response.password).toBe(updatedBotConfig.password);

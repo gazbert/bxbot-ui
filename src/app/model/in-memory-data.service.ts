@@ -64,55 +64,55 @@ export class InMemoryDataService implements InMemoryDbService {
         const bots = [
             {
                 id: 'bitstamp-1',
-                alias: 'Bitstamp Bot',
+                name: 'Bitstamp Bot',
                 baseUrl: 'https://jakku.com/api/v1',
                 username: 'rey',
                 password: 'force'
             },
             {
                 id: 'gdax-1',
-                alias: 'GDAX Bot',
+                name: 'GDAX Bot',
                 baseUrl: 'https://tatooine.com/api/v1',
                 username: 'luke',
                 password: 'podracer'
             },
             {
                 id: 'gemini-1',
-                alias: 'Gemini Bot',
+                name: 'Gemini Bot',
                 baseUrl: 'https://corellia.com/api/v1',
                 username: 'han',
                 password: 'blaster'
             },
             {
                 id: 'itbit-1',
-                alias: 'ItBit Bot',
+                name: 'ItBit Bot',
                 baseUrl: 'https://alderaan.com/api/v1',
                 username: 'leah',
                 password: 'rebel'
             },
             {
                 id: 'huobi-1',
-                alias: 'Huobi Bot',
+                name: 'Huobi Bot',
                 baseUrl: 'https://kashyyyk.com/api/v1',
                 username: 'chewie',
                 password: 'grrrrgghrh'
             },
             {
                 id: 'okcoin-1',
-                alias: 'OKCoin Bot',
+                name: 'OKCoin Bot',
                 baseUrl: 'https://mustafar.com/api/v1',
                 username: 'vader',
                 password: 'sissssster'
             },            {
                 id: 'bitfinex-1',
-                alias: 'Bitfinex Bot',
+                name: 'Bitfinex Bot',
                 baseUrl: 'https://dagobah.com/api/v1',
                 username: 'yoda',
                 password: 'wordPassItIs'
             },
             {
                 id: 'kraken-1',
-                alias: 'Kraken Bot',
+                name: 'Kraken Bot',
                 baseUrl: 'https://starkiller.base.com/api/v1',
                 username: 'finn',
                 password: 'FN-2187'

@@ -22,7 +22,7 @@
                                 <input [(ngModel)]="bots[i].id"
                                        class="form-control" id="botId_{{i}}"
                                        name="botId_{{i}}" #botId="ngModel"
-                                       required maxlength="50" pattern="[a-zA-Z0-9_\- ]*"/>
+                                       required maxlength="50" pattern="[a-zA-Z0-9_-]*"/>
                                 <div id="invalidBotId_{{i}}"
                                      *ngIf="formErrors['botId_' + i].length > 0"
                                      class="alert alert-danger">
@@ -31,18 +31,18 @@
                             </div>
                         </div>
 
-                        <!-- Alias -->
+                        <!-- Name -->
                         <div class="row">
                             <div class="col-sm-6 form-group">
-                                <label for="alias_{{i}}">Alias</label>
-                                <input [(ngModel)]="bots[i].alias"
-                                       class="form-control" id="alias_{{i}}"
-                                       name="alias_{{i}}" #alias="ngModel"
+                                <label for="name_{{i}}">Name</label>
+                                <input [(ngModel)]="bots[i].name"
+                                       class="form-control" id="name_{{i}}"
+                                       name="name_{{i}}" #name="ngModel"
                                        required maxlength="50" pattern="[a-zA-Z0-9_ -]*"/>
-                                <div id="invalidAlias_{{i}}"
-                                     *ngIf="formErrors['alias_' + i].length > 0"
+                                <div id="invalidName_{{i}}"
+                                     *ngIf="formErrors['name_' + i].length > 0"
                                      class="alert alert-danger">
-                                    {{ formErrors['alias_' + i] }}
+                                    {{ formErrors['name_' + i] }}
                                 </div>
                             </div>
                         </div>
