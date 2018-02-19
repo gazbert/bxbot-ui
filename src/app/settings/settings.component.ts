@@ -44,6 +44,16 @@ export class SettingsComponent implements OnInit, AfterViewChecked {
             'pattern': 'Base URL must be alphanumeric and can only include the following special characters: _ -',
             'duplicateId': 'Bot Id already in use. Please choose another.'
         },
+        'username': {
+            'required': 'Username is required.',
+            'maxlength': 'Username max length is 50 characters.',
+            'pattern': 'Username must be alphanumeric and can only include the following special characters: _ -'
+        },
+        'password': {
+            'required': 'Password is required.',
+            'maxlength': 'Password max length is 50 characters.',
+            'pattern': 'Password must be alphanumeric and can only include the following special characters: / _ - , . @ £ $'
+        },
         'strategyDescription': {
             'maxlength': 'Description max length is 120 characters.'
         },
@@ -170,6 +180,8 @@ export class SettingsComponent implements OnInit, AfterViewChecked {
             this.formErrors['botId_' + i] = '';
             this.formErrors['alias_' + i] = '';
             this.formErrors['baseUrl_' + i] = '';
+            this.formErrors['username_' + i] = '';
+            this.formErrors['password_' + i] = '';
         }
     }
 

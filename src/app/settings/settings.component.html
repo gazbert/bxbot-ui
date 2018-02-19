@@ -38,7 +38,7 @@
                                 <input [(ngModel)]="bots[i].alias"
                                        class="form-control" id="alias_{{i}}"
                                        name="alias_{{i}}" #alias="ngModel"
-                                       required maxlength="50" pattern="[a-zA-Z0-9_\- ]*"/>
+                                       required maxlength="50" pattern="[a-zA-Z0-9_ -]*"/>
                                 <div id="invalidAlias_{{i}}"
                                      *ngIf="formErrors['alias_' + i].length > 0"
                                      class="alert alert-danger">
@@ -54,11 +54,43 @@
                                 <input [(ngModel)]="bots[i].baseUrl"
                                        class="form-control" id="baseUrl_{{i}}"
                                        name="baseUrl_{{i}}" #baseUrl="ngModel"
-                                       required maxlength="100" pattern="[a-zA-Z0-9_/-:]*"/>
+                                       required maxlength="100"/>
                                 <div id="invalidBaseUrl_{{i}}"
                                      *ngIf="formErrors['baseUrl_' + i].length > 0"
                                      class="alert alert-danger">
                                     {{ formErrors['baseUrl_' + i] }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Username -->
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <label for="username_{{i}}">Username</label>
+                                <input [(ngModel)]="bots[i].username"
+                                       class="form-control" id="username_{{i}}"
+                                       name="username_{{i}}" #alias="ngModel"
+                                       required maxlength="50" pattern="[a-zA-Z0-9_-]*"/>
+                                <div id="invalidUsername_{{i}}"
+                                     *ngIf="formErrors['username_' + i].length > 0"
+                                     class="alert alert-danger">
+                                    {{ formErrors['username_' + i] }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <label for="password_{{i}}">Password</label>
+                                <input [(ngModel)]="bots[i].password"
+                                       class="form-control" id="password_{{i}}"
+                                       name="password_{{i}}" #alias="ngModel"
+                                       required maxlength="50" pattern="[a-zA-Z0-9_\-,.@£$ ]*"/>
+                                <div id="invalidPassword_{{i}}"
+                                     *ngIf="formErrors['password_' + i].length > 0"
+                                     class="alert alert-danger">
+                                    {{ formErrors['password_' + i] }}
                                 </div>
                             </div>
                         </div>
