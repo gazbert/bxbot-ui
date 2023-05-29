@@ -30,5 +30,6 @@ jobs:
     - run: npm run lint
     - run: npm build
     - run: npm run test:once -- --watch=false --browsers=ChromeHeadless
-#    - run: npm run e2e
+    - run: npm run e2e
+
 
