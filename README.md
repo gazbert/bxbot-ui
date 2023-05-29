@@ -80,7 +80,7 @@ The application config is in JSON format and lives in the [`in-memory-data.servi
 ## Credits
 This app started life as the [Angular 4 QuickStart](https://github.com/angular/quickstart) app and was later migrated to use 
 the [Angular CLI](https://github.com/angular/angular-cli/wiki/stories-moving-into-the-cli). 
-It took (a lot of) inspiration from the following awesomeness:
+It took (a lot of) inspiration from the following:
 
 * The official [Angular Tutorial](https://angular.io/tutorial) and [Angular Style Guide](https://angular.io/docs/ts/latest/guide/style-guide.html).
 * Scotch tutorials by [Jecelyn Yeen](https://pub.scotch.io/@jecelyn).
