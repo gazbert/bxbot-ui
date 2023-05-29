@@ -2,7 +2,7 @@
 
 [![Node.js CI](https://github.com/gazbert/bxbot-ui/actions/workflows/node.js.yml/badge.svg?branch=master)](https://github.com/gazbert/bxbot-ui/actions/workflows/node.js.yml)
 
-**Note:** This project is very much work in progress and not safe for production.
+**Note:** _This project is very much work in progress and not safe for production._
 
 ## What is BX-bot UI?
 
