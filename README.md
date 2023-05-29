@@ -1,6 +1,6 @@
 # BX-bot UI
 
-[![Build Status](https://travis-ci.org/gazbert/bxbot-ui.svg?branch=master)](https://travis-ci.org/gazbert/bxbot-ui)
+[![Node.js CI](https://github.com/gazbert/bxbot-ui/actions/workflows/node.js.yml/badge.svg?branch=master)](https://github.com/gazbert/bxbot-ui/actions/workflows/node.js.yml)
 
 **Note:** This project is very much work in progress and not safe for production.
 
@@ -29,9 +29,9 @@ The current [Docker image](https://hub.docker.com/r/gazbert/bxbot-ui/tags/) is n
 rolling development version of the UI...
   
 ### The manual way
-You'll need [node.js](https://nodejs.org/en/download/) (at least node 6.9.x) installed to build and run the app.
+You'll need [node.js](https://nodejs.org/en/download/) installed to build and run the app - it's being developed on 12.22.x.
 
-1. Install the [Angular CLI](https://cli.angular.io/) globally: `npm install -g @angular/cli`
+1. Install the [Angular CLI](https://cli.angular.io/) globally: `sudo npm install -g @angular/cli`
 1. Clone this repo locally.
 1. Change directory to the root of the project.
 1. Run `npm install` to install the dependencies - you'll only need to do this once, unless the versions are updated in 
@@ -73,11 +73,8 @@ backend for development and local testing. The API config configuration options 
 
 The application config is in JSON format and lives in the [`in-memory-data.service.ts`](/src/app/model/in-memory-data.service.ts) file.
 
-To communicate with the bots for real, the app will need configuring to use 
-[BX-bot UI Server](https://github.com/gazbert/bxbot-ui-server) - currently work in progress.
-
 ## Coming Soon
-* Integration with [BX-bot UI Server](https://github.com/gazbert/bxbot-ui-server).
+* Integration with [BX-bot](https://github.com/gazbert/bxbot-ui).
 * A new 'Runtime' screen tab for displaying the bot's status, stopping/restarting, and viewing/downloading the latest log file.
 
 ## Credits
