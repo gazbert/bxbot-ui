@@ -11,7 +11,10 @@ exports.config = {
   capabilities: {
       browserName: 'chrome',
       chromeOptions: {
+          // For headless CI build
           args: ["--headless", "--disable-gpu", "window-size=1920, 1080", "--disable-browser-side-navigation"]
+          // For visual user acceptance test
+          // args: ["window-size=1920, 1080", "--disable-browser-side-navigation"]
       }
   },
   directConnect: true,
