@@ -29,6 +29,6 @@ jobs:
     - run: npm ci
     - run: npm run lint
     - run: npm build
-#    - run: npm run test:once
+    - run: npm run test:once
 #    - run: npm run e2e
 
