@@ -73,7 +73,7 @@ backend for development and local testing. The API config configuration options 
 
 The application config is in JSON format and lives in the [`in-memory-data.service.ts`](/src/app/model/in-memory-data.service.ts) file.
 
-# Contributing
+## Contributing
 Issues and new features are managed using the project [Issue Tracker](https://github.com/gazbert/bxbot-ui/issues) -
 submit bugs here.
 
